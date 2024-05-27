@@ -7,7 +7,7 @@ on:
   pull_request:
     types: [closed]
 
-obs:
+jobs:
   build:
     name: Build distribution 📦
     runs-on: ubuntu-latest
