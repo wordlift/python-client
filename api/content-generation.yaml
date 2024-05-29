@@ -1,0 +1,2427 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: hello@wordlift.io
+    name: WordLift
+    url: https://wordlift.io
+  description: Generate completions based on customized linguistic models.
+  license:
+    name: (c) copyright 2022-present WordLift
+    url: https://wordlift.io
+  termsOfService: https://wordlift.io/terms-of-service/
+  title: Content Generation
+  version: "1.0"
+servers:
+  - url: https://api.wordlift.io
+tags:
+  - description: List fields from graphql query.
+    name: Content Generation Fields
+  - description: Render the given prompt template.
+    name: Content Generation Renders
+  - description: Manage content generation syncs.
+    name: Content Generation Syncs
+  - description: Operations on Q&A smart content projects.
+    name: QuestionsAndAnswers
+  - description: Manage content generation records.
+    name: Content Generation Records
+  - description: Operations on Word biases connected to prompts.
+    name: Content Generation Word biases
+  - description: Operations on Content Generation projects.
+    name: Content Generations
+  - description: Manage validation rules for Generative AI projects.
+    name: Rules
+  - description: Generation completions.
+    name: Content Generation Completion
+  - description: List the available linguistic models.
+    name: Content Generation Models
+  - description: Export Content Generation Records in text/csv format.
+    name: Content Generation Records Export
+  - description: Manage Presets
+    name: Content Generation Presets
+  - description: Manage content generation stats.
+    name: Content Generation Stats
+paths:
+  /completions:
+    post:
+      description:
+        "[GET with body payload](https://opensource.zalando.com/restful-api-guidelines/#get-with-body)\
+        \ - no resources created"
+      operationId: createCompletion
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CompletionRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Create a completion
+      tags:
+        - Content Generation Completion
+  /content-generations:
+    get:
+      operationId: listContentGenerations
+      parameters:
+        - description: The cursor
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of results
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - description: Filter for the deleted flag
+          in: query
+          name: deleted
+          required: false
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageContentGeneration"
+          description: Found.
+        "401":
+          description: Authentication Failure
+      security:
+        - security_oauth2: []
+      summary: List
+      tags:
+        - Content Generations
+    post:
+      operationId: createContentGeneration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContentGenerationRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContentGeneration"
+          description: Created
+        "401":
+          description: Authentication Failure
+      security:
+        - security_oauth2: []
+      summary: Create
+      tags:
+        - Content Generations
+  /content-generations/renders:
+    post:
+      description:
+        "[GET with body payload](https://opensource.zalando.com/restful-api-guidelines/#get-with-body)\
+        \ - no resources created"
+      operationId: renderTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RenderRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Render
+      tags:
+        - Content Generation Renders
+  /content-generations/renders-collection:
+    post:
+      description:
+        "[GET with body payload](https://opensource.zalando.com/restful-api-guidelines/#get-with-body)\
+        \ - no resources created"
+      operationId: renderTemplateCollection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/RenderRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Render
+      tags:
+        - Content Generation Renders
+  /content-generations/{contentGenerationId}/fields:
+    get:
+      operationId: listFields
+      parameters:
+        - description: The cursor
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of results
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - description: The Content Generation id.
+          in: path
+          name: contentGenerationId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageField"
+          description: Found.
+        "401":
+          description: Authentication Failure
+      security:
+        - security_oauth2: []
+      summary: List
+      tags:
+        - Content Generation Fields
+  /content-generations/{contentGenerationId}/records:
+    get:
+      operationId: listRecords
+      parameters:
+        - description: The Content Generation id.
+          in: path
+          name: contentGenerationId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: The cursor
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of results
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - description: Search query
+          in: query
+          name: q
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageRecord"
+          description: Found.
+        "401":
+          description: Authentication Failure
+      security:
+        - security_oauth2: []
+      summary: List
+      tags:
+        - Content Generation Records
+    put:
+      operationId: updateRecords
+      parameters:
+        - description: The Content Generation id.
+          in: path
+          name: contentGenerationId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: Completion accepted
+          in: query
+          name: is_accepted
+          required: true
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateRecordsRequest"
+        required: true
+      responses:
+        "200":
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Update
+      tags:
+        - Content Generation Records
+  /content-generations/{contentGenerationId}/records-collection:
+    put:
+      operationId: updateRecordsCollection
+      parameters:
+        - description: The Content Generation id.
+          in: path
+          name: contentGenerationId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/UpdateRecordRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Record"
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Update
+      tags:
+        - Content Generation Records
+  /content-generations/{contentGenerationId}/records-sse:
+    get:
+      operationId: listRecordsAsEvents
+      parameters:
+        - description: The Content Generation id.
+          in: path
+          name: contentGenerationId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Found.
+        "401":
+          description: Authentication Failure
+      security:
+        - security_oauth2: []
+      summary: List as Events
+      tags:
+        - Content Generation Records
+  /content-generations/{contentGenerationId}/records.tsv:
+    get:
+      operationId: export
+      parameters:
+        - description: The Content Generation id.
+          in: path
+          name: contentGenerationId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          content:
+            text/tsv:
+              schema:
+                type: array
+                items:
+                  type: string
+          description: OK
+      security:
+        - security_oauth2: []
+      tags:
+        - Content Generation Records Export
+  /content-generations/{contentGenerationId}/records/{recordId}:
+    get:
+      operationId: getRecord
+      parameters:
+        - description: The Content Generation id.
+          in: path
+          name: contentGenerationId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: The Record id.
+          in: path
+          name: recordId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Record"
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Get
+      tags:
+        - Content Generation Records
+    put:
+      operationId: updateRecord
+      parameters:
+        - description: The Content Generation id.
+          in: path
+          name: contentGenerationId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: The Record id.
+          in: path
+          name: recordId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Request"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Record"
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Update
+      tags:
+        - Content Generation Records
+  /content-generations/{contentGenerationId}/stats:
+    get:
+      operationId: get
+      parameters:
+        - description: The Content Generation id.
+          in: path
+          name: contentGenerationId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContentGenerationStats"
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Get
+      tags:
+        - Content Generation Stats
+  /content-generations/{contentGenerationId}/syncs:
+    post:
+      operationId: createSync
+      parameters:
+        - description: The Content Generation id.
+          in: path
+          name: contentGenerationId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Found.
+        "401":
+          description: Authentication Failure
+      security:
+        - security_oauth2: []
+      summary: Create
+      tags:
+        - Content Generation Syncs
+  /content-generations/{contentGenerationId}/words:
+    get:
+      operationId: listWords
+      parameters:
+        - description: The Content Generation id.
+          in: path
+          name: contentGenerationId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - in: query
+          name: The cursor.
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: The maximum number of results.
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageWord"
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: List
+      tags:
+        - Content Generation Word biases
+    post:
+      operationId: createWord
+      parameters:
+        - description: The Content Generation id.
+          in: path
+          name: contentGenerationId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WordRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Word"
+          description: Created
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Create
+      tags:
+        - Content Generation Word biases
+    put:
+      description:
+        Send a list of word biases for this prompt. Existing words will
+        be deleted.
+      operationId: createWords
+      parameters:
+        - description: The Content Generation id.
+          in: path
+          name: contentGenerationId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/WordRequest"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Word"
+          description: Created
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Update for prompt
+      tags:
+        - Content Generation Word biases
+  /content-generations/{contentGenerationId}/words/imports:
+    put:
+      operationId: createWordsFromCSV
+      parameters:
+        - in: header
+          name: content-type
+          required: false
+          schema:
+            type: string
+        - description: The Content Generation id.
+          in: path
+          name: contentGenerationId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          text/csv:
+            schema:
+              type: string
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Update from CSV
+      tags:
+        - Content Generation Word biases
+  /content-generations/{contentGenerationId}/words/{id}:
+    delete:
+      operationId: deleteWord
+      parameters:
+        - description: The Content Generation id.
+          in: path
+          name: contentGenerationId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: The Word to delete.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Created
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Delete
+      tags:
+        - Content Generation Word biases
+    put:
+      operationId: updateWord
+      parameters:
+        - description: The Content Generation id.
+          in: path
+          name: contentGenerationId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: The Word bias to update.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WordRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Word"
+          description: Updated
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Update
+      tags:
+        - Content Generation Word biases
+  /content-generations/{from_content_generation_id}/duplicates:
+    post:
+      operationId: duplicateContentGeneration
+      parameters:
+        - description: The Content Generation id to duplicate from.
+          in: path
+          name: from_content_generation_id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContentGeneration"
+          description: Created
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Duplicate
+      tags:
+        - Content Generations
+  /content-generations/{id}:
+    delete:
+      operationId: deleteContentGeneration
+      parameters:
+        - description: The Content Generation id.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Deleted
+        "401":
+          description: Authentication Failure
+      security:
+        - security_oauth2: []
+      summary: Delete
+      tags:
+        - Content Generations
+    get:
+      operationId: getContentGeneration
+      parameters:
+        - description: The Content Generation id.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContentGeneration"
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Get
+      tags:
+        - Content Generations
+    put:
+      operationId: updateContentGeneration
+      parameters:
+        - description: The Content Generation id.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContentGenerationRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContentGeneration"
+          description: Update
+        "401":
+          description: Authentication Failure
+      security:
+        - security_oauth2: []
+      summary: Update
+      tags:
+        - Content Generations
+  /fields:
+    post:
+      operationId: listFieldsForGraphQlQuery
+      requestBody:
+        content:
+          application/graphql:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Field"
+          description: Found.
+        "401":
+          description: Authentication Failure
+      security:
+        - security_oauth2: []
+      summary: List for GraphQl Query
+      tags:
+        - Content Generation Fields
+  /graphql-query-presets:
+    get:
+      operationId: listPresets
+      parameters:
+        - description: The cursor
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of results
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PagePreset"
+          description: Found.
+        "401":
+          description: Authentication Failure
+      security:
+        - security_oauth2: []
+      summary: List
+      tags:
+        - Content Generation Presets
+  /models:
+    get:
+      operationId: listModels
+      parameters:
+        - description: The cursor
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of results
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageModel"
+          description: Found.
+        "401":
+          description: Authentication Failure
+      summary: List
+      tags:
+        - Content Generation Models
+  /questions-and-answers:
+    get:
+      operationId: getQuestionsAndAnswers
+      parameters:
+        - description: The account id.
+          in: query
+          name: account_id
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - description: The webpage IRI
+          in: query
+          name: iri
+          required: false
+          schema:
+            type: string
+        - description: The smart content id.
+          in: query
+          name: smart_content_id
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/QuestionAndAnswer"
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Get
+      tags:
+        - QuestionsAndAnswers
+    post:
+      operationId: createQuestionAndAnswer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuestionAndAnswerRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuestionAndAnswer"
+          description: Created
+        "401":
+          description: Authentication Failure
+      security:
+        - security_oauth2: []
+      summary: Create
+      tags:
+        - QuestionsAndAnswers
+  /questions-and-answers-collection:
+    delete:
+      operationId: deleteQuestionsAndAnswersCollection
+      parameters:
+        - in: query
+          name: smart_content_id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Authentication Failure
+      security:
+        - security_oauth2: []
+      summary: Delete
+      tags:
+        - QuestionsAndAnswers
+    post:
+      operationId: createQuestionsAndAnswersCollection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SmartContentRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SmartContent"
+          description: Created
+        "401":
+          description: Authentication Failure
+      security:
+        - security_oauth2: []
+      summary: Create
+      tags:
+        - QuestionsAndAnswers
+    put:
+      operationId: updateQuestionsAndAnswersCollection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuestionAndAnswerRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/QuestionAndAnswer"
+          description: Found.
+        "401":
+          description: Authentication Failure
+      security:
+        - security_oauth2: []
+      summary: Update
+      tags:
+        - QuestionsAndAnswers
+  /questions-and-answers/{id}:
+    delete:
+      operationId: deleteQuestionAndAnswer
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Delete
+      tags:
+        - QuestionsAndAnswers
+    put:
+      operationId: updateQuestionAndAnswer
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateQuestionAndAnswerRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuestionAndAnswer"
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Update
+      tags:
+        - QuestionsAndAnswers
+  /rules:
+    get:
+      operationId: listRules
+      parameters:
+        - description: The cursor
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of results
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - description:
+            "The project id - if provided, must also provide the project\
+            \ type"
+          in: query
+          name: project_id
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - description:
+            "The project type - if provided, must also provide the project\
+            \ id"
+          in: query
+          name: project_type
+          required: false
+          schema:
+            $ref: "#/components/schemas/ProjectType"
+        - description: The scope
+          in: query
+          name: scope
+          required: false
+          schema:
+            $ref: "#/components/schemas/Scope"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageRule"
+          description: Found.
+        "400":
+          description: Bad request
+        "401":
+          description: Authentication Failure
+      security:
+        - security_oauth2: []
+      summary: List
+      tags:
+        - Rules
+    post:
+      operationId: createRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RuleRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rule"
+          description: Created
+        "400":
+          description: Bad request
+        "401":
+          description: Authentication Failure
+      security:
+        - security_oauth2: []
+      summary: Create
+      tags:
+        - Rules
+  /rules-collection:
+    put:
+      operationId: updateRuleCollection
+      parameters:
+        - description: The project id
+          in: query
+          name: project_id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: The project type
+          in: query
+          name: project_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/ProjectType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/RuleRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Rule"
+          description: Found.
+        "400":
+          description: Bad request
+        "401":
+          description: Authentication Failure
+      security:
+        - security_oauth2: []
+      summary: Update
+      tags:
+        - Rules
+  /rules/copies:
+    post:
+      operationId: copyRules
+      parameters:
+        - description: The project type
+          in: query
+          name: project_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/ProjectType"
+        - description: The source Content Generation id.
+          in: query
+          name: from_project_id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: The target Content Generation id.
+          in: query
+          name: to_project_id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "201":
+          description: Created
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Copy
+      tags:
+        - Rules
+  /rules/{id}:
+    delete:
+      operationId: deleteRule
+      parameters:
+        - description: The id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Delete
+      tags:
+        - Rules
+    put:
+      operationId: updateRule
+      parameters:
+        - description: The id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RuleRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rule"
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+        - security_oauth2: []
+      summary: Update
+      tags:
+        - Rules
+components:
+  schemas:
+    CompletionRequest:
+      type: object
+      description: A request for a completion.
+      properties:
+        frequency_penalty:
+          type: number
+          format: double
+          exclusiveMaximum: false
+          exclusiveMinimum: false
+          maximum: 2.0
+          minimum: -2.0
+        logit_bias:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int32
+        max_tokens:
+          type: integer
+          format: int32
+          minimum: 1
+        min_words:
+          type: integer
+          format: int32
+          minimum: 0
+        model_id:
+          type: integer
+          format: int64
+          minimum: 1
+        presence_penalty:
+          type: number
+          format: double
+          exclusiveMaximum: false
+          exclusiveMinimum: false
+          maximum: 2.0
+          minimum: -2.0
+        prompt:
+          type: string
+        stop:
+          type: string
+        temperature:
+          type: number
+          format: double
+          exclusiveMaximum: false
+          exclusiveMinimum: false
+          maximum: 2.0
+          minimum: 0.0
+      required:
+        - prompt
+    ContentGeneration:
+      type: object
+      description: A Content Generation project.
+      properties:
+        account_id:
+          type: integer
+          format: int64
+          description: The Account id bound to this Content Generation.
+        created_at:
+          type: string
+          format: date-time
+          description: The create date-time.
+          readOnly: true
+        deleted:
+          type: boolean
+          default: false
+          description: True if the project has been deleted.
+        deleted_at:
+          type: string
+          format: date-time
+          description: The delete date-time.
+          readOnly: true
+        graphql_query:
+          type: string
+          description:
+            The GraphQL query which will be used to import entity data
+            from the Knowledge Graph.
+        id:
+          type: integer
+          format: int64
+          description: The unique id.
+          readOnly: true
+        max_tokens:
+          type: integer
+          format: int32
+          default: 64
+          description: The maximum number of tokens.
+          maximum: 2000
+          minimum: 0
+        min_words:
+          type: integer
+          format: int32
+          description: Minimum amount of words per completion
+        model_id:
+          type: integer
+          format: int64
+          default: 1
+          description: The model ID.
+          minimum: 1
+        modified_at:
+          type: string
+          format: date-time
+          description: The last modified date-time.
+          readOnly: true
+        name:
+          type: string
+          description: The name.
+          maxLength: 250
+          minLength: 0
+        penalty:
+          type: number
+          format: double
+          default: 0.5
+          description: The penalty score.
+          exclusiveMaximum: false
+          exclusiveMinimum: false
+          maximum: 1.9
+          minimum: 0.5
+        prompt_template:
+          type: string
+          description: The prompt template.
+        stop:
+          type: string
+          default: "###"
+          description: The stop sequence.
+        temperature:
+          type: number
+          format: double
+          default: 0.4
+          description: The temperature score.
+          exclusiveMaximum: false
+          exclusiveMinimum: false
+          maximum: 0.8
+          minimum: 0.4
+        words_to_ignore:
+          type: array
+          description: Words to ignore when checking for words not in prompt.
+          items:
+            type: string
+            description: Words to ignore when checking for words not in prompt.
+          uniqueItems: true
+      required:
+        - account_id
+        - deleted
+        - graphql_query
+        - name
+    ContentGenerationRequest:
+      type: object
+      description: The Content Generation request.
+      properties:
+        account_id:
+          type: integer
+          format: int64
+          description: The account id bound to this content generation.
+        deleted:
+          type: boolean
+          default: false
+          description: The deleted flag.
+        graphql_query:
+          type: string
+          description:
+            The GraphQL query which will be used to import entity data
+            from the Knowledge Graph.
+        max_tokens:
+          type: integer
+          format: int32
+          default: 64
+          description: The maximum number of tokens.
+          maximum: 2000
+          minimum: 0
+        min_words:
+          type: integer
+          format: int32
+          default: 0
+          description: Minimum amount of words per completion.
+        model_id:
+          type: integer
+          format: int64
+          default: 1
+          description: The model ID.
+          minimum: 1
+        name:
+          type: string
+          description: The model name.
+          maxLength: 250
+          minLength: 0
+        penalty:
+          type: number
+          format: double
+          default: 0.5
+          description: The penalty score.
+          exclusiveMaximum: false
+          exclusiveMinimum: false
+          maximum: 1.9
+          minimum: 0.5
+        prompt_template:
+          type: string
+          description: The prompt template.
+        stop:
+          type: string
+          default: "###"
+          description: The stop sequence.
+        temperature:
+          type: number
+          format: double
+          default: 0.4
+          description: The temperature score.
+          exclusiveMaximum: false
+          exclusiveMinimum: false
+          maximum: 0.8
+          minimum: 0.4
+        words_to_ignore:
+          type: array
+          description: Words to ignore when checking for words not in prompt.
+          items:
+            type: string
+            description: Words to ignore when checking for words not in prompt.
+          uniqueItems: true
+      required:
+        - account_id
+        - graphql_query
+        - name
+    ContentGenerationStats:
+      type: object
+      description: Statistics about a Content Generation Project.
+      properties:
+        accepted:
+          type: integer
+          format: int64
+          description: The number of accepted records.
+        errors:
+          type: integer
+          format: int64
+          description: The number of records with errors.
+        total:
+          type: integer
+          format: int64
+          description: The total number of records.
+        valid:
+          type: integer
+          format: int64
+          description: The number of valid records.
+        warnings:
+          type: integer
+          format: int64
+          description: The number of records with warnings.
+    Field:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    Json:
+      type: object
+      description: The data from knowledge graph after applying the graphql query.
+      readOnly: true
+    LevelEnum:
+      type: string
+      description: The rule level.
+      enum:
+        - RECOMMENDED
+        - REQUIRED
+    Model:
+      type: object
+      description: A language model.
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The unique id.
+          readOnly: true
+        name:
+          type: string
+          description: The language model name.
+        system_prompt:
+          type: string
+          description: The system prompt for the model - chat models only.
+        token_margin:
+          type: integer
+          format: int32
+          description: The upper token margin for completions.
+          maximum: 30
+      required:
+        - name
+    PageContentGeneration:
+      type: object
+      description:
+        A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: "#/components/schemas/ContentGeneration"
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
+    PageField:
+      type: object
+      description:
+        A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: "#/components/schemas/Field"
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
+    PageModel:
+      type: object
+      description:
+        A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: "#/components/schemas/Model"
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
+    PagePreset:
+      type: object
+      description:
+        A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: "#/components/schemas/Preset"
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
+    PageRecord:
+      type: object
+      description:
+        A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: "#/components/schemas/Record"
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
+    PageRule:
+      type: object
+      description:
+        A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: "#/components/schemas/Rule"
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
+    PageWord:
+      type: object
+      description:
+        A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: "#/components/schemas/Word"
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
+    Preset:
+      type: object
+      description: An array of objects.
+      properties:
+        body:
+          type: string
+          description: The predefined graphql query.
+        id:
+          type: integer
+          format: int64
+        label:
+          type: string
+          description: The label of the preset.
+      required:
+        - body
+        - label
+    ProjectType:
+      type: string
+      description: "The project type, if applicable."
+      enum:
+        - SMART_CONTENT
+        - CONTENT_GENERATION
+    QuestionAndAnswer:
+      type: object
+      description: Generated Q&A content.
+      properties:
+        answer:
+          type: string
+          description: The generated answer.
+        created_at:
+          type: string
+          format: date-time
+          description: The create date-time.
+          readOnly: true
+        entity_gaps:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        errors:
+          type: array
+          description: The set of errors found for the answer.
+          items:
+            $ref: "#/components/schemas/ValidationResult"
+          readOnly: true
+        id:
+          type: integer
+          format: int64
+          description: The unique id.
+          readOnly: true
+        iri:
+          type: string
+          description: The webpage IRI tied to this Q&A.
+        is_deleted:
+          type: boolean
+          default: false
+          description: The deleted flag.
+        is_published:
+          type: boolean
+          default: false
+          description: The published flag.
+        modified_at:
+          type: string
+          format: date-time
+          description: The last modified date-time.
+          readOnly: true
+        question:
+          type: string
+          description: The generated question.
+        smart_content_id:
+          type: integer
+          format: int64
+        url:
+          type: string
+          description: The webpage URL tied to this Q&A.
+        warnings:
+          type: array
+          description: The set of warnings found for the answer.
+          items:
+            $ref: "#/components/schemas/ValidationResult"
+          readOnly: true
+      required:
+        - iri
+        - url
+    QuestionAndAnswerRequest:
+      type: object
+      properties:
+        smartContentId:
+          type: integer
+          format: int64
+        webpageProperties:
+          $ref: "#/components/schemas/WebpageProperties"
+    Record:
+      type: object
+      properties:
+        completion:
+          type: string
+        content_generation_id:
+          type: integer
+          format: int64
+          description: The parent content generation id.
+          readOnly: true
+        data:
+          $ref: "#/components/schemas/Json"
+        errors:
+          type: array
+          description: The set of errors found for record.
+          items:
+            $ref: "#/components/schemas/ValidationResult"
+          readOnly: true
+        has_upvote:
+          type: boolean
+          description: This indicates whether the user upvoted the completion.
+        id:
+          type: integer
+          format: int64
+        is_accepted:
+          type: boolean
+          description: This indicates whether the completion is accepted by the user.
+        modified_at:
+          type: string
+          format: date-time
+          description: The last modified date-time.
+          readOnly: true
+        not_in_prompt_words:
+          type: array
+          description: Words in completion that are not in the prompt.
+          items:
+            type: string
+            description: Words in completion that are not in the prompt.
+            readOnly: true
+          readOnly: true
+          uniqueItems: true
+        prompt:
+          type: string
+          description: The prompt.
+        repeated_words:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/WordRepetitionData"
+          description: Words in completion which are repeated.
+          readOnly: true
+        status:
+          type: string
+          description:
+            "The status of the record, whether it's accepted, with errors,\
+            \ with warnings or valid."
+          enum:
+            - accepted
+            - warnings
+            - errors
+            - valid
+          readOnly: true
+        validated_at:
+          type: string
+          format: date-time
+          description: The last validation date-time.
+          readOnly: true
+        warnings:
+          type: array
+          description: The set of errors found for record.
+          items:
+            $ref: "#/components/schemas/ValidationResult"
+          readOnly: true
+      required:
+        - content_generation_id
+        - has_upvote
+        - is_accepted
+        - prompt
+    RenderRequest:
+      type: object
+      description: A request to render a template using the provided data structure.
+      properties:
+        data:
+          $ref: "#/components/schemas/Json"
+        template:
+          type: string
+          description: The liquid template.
+      required:
+        - data
+        - template
+    Request:
+      type: object
+      properties:
+        completion:
+          type: string
+        has_upvote:
+          type: boolean
+          description: This indicates whether the user upvoted the completion.
+        is_accepted:
+          type: boolean
+          description: This indicates whether the completion is accepted by the user.
+        validated_at:
+          type: string
+          format: date-time
+          description: Validation time of the record - null to revalidate.
+      required:
+        - has_upvote
+        - is_accepted
+    Rule:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: The create date-time.
+          readOnly: true
+        description:
+          type: string
+          description: Description for the rule
+        fixes:
+          type: array
+          description: The list of fixes to apply when the rule validation fails.
+          items:
+            $ref: "#/components/schemas/ValidationFix"
+        id:
+          type: integer
+          format: int64
+        is_enabled:
+          type: boolean
+        level:
+          $ref: "#/components/schemas/LevelEnum"
+        modified_at:
+          type: string
+          format: date-time
+          description: The last modified date-time.
+          readOnly: true
+        name:
+          type: string
+          description: The rule name.
+        project_id:
+          type: integer
+          format: int64
+        project_type:
+          $ref: "#/components/schemas/ProjectType"
+        scope:
+          $ref: "#/components/schemas/Scope"
+        type:
+          type: string
+          description:
+            "The rule type, one of `field`, `word` or `code`. By default\
+            \ `field`."
+        what_operand_lhs:
+          $ref: "#/components/schemas/WhatOperandLhs"
+        what_operand_rhs:
+          type: string
+          description: The right hand side operand for what condition.
+        what_operator:
+          $ref: "#/components/schemas/WhatOperator"
+        when_operand_lhs:
+          type: string
+          description: The left hand side  operand for when condition.
+        when_operand_rhs:
+          type: string
+          description: The right hand side operand for when condition.
+        when_operator:
+          $ref: "#/components/schemas/WhenOperator"
+      required:
+        - level
+        - name
+        - scope
+        - type
+        - what_operand_lhs
+        - what_operand_rhs
+        - what_operator
+        - when_operand_lhs
+        - when_operand_rhs
+        - when_operator
+    RuleRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description for the rule
+        fixes:
+          type: array
+          description: The list of fixes to apply when the rule validation fails.
+          items:
+            $ref: "#/components/schemas/ValidationFix"
+        is_enabled:
+          type: boolean
+        level:
+          $ref: "#/components/schemas/LevelEnum"
+        name:
+          type: string
+          description: The rule name.
+        project_id:
+          type: integer
+          format: int64
+          description: "The project id, if applicable."
+        project_type:
+          $ref: "#/components/schemas/ProjectType"
+        scope:
+          $ref: "#/components/schemas/Scope"
+        type:
+          type: string
+          description:
+            "The rule type, one of `field`, `word` or `code`. By default\
+            \ `field`."
+        what_operand_lhs:
+          $ref: "#/components/schemas/WhatOperandLhs"
+        what_operand_rhs:
+          type: string
+          description: The right hand side operand for what condition.
+        what_operator:
+          $ref: "#/components/schemas/WhatOperator"
+        when_operand_lhs:
+          type: string
+          description: The left hand side  operand for when condition.
+        when_operand_rhs:
+          type: string
+          description: The right hand side operand for when condition.
+        when_operator:
+          $ref: "#/components/schemas/WhenOperator"
+      required:
+        - level
+        - name
+        - scope
+        - type
+        - what_operand_lhs
+        - what_operand_rhs
+        - what_operator
+        - when_operand_lhs
+        - when_operand_rhs
+        - when_operator
+    Scope:
+      type: string
+      description: The rule scope.
+      enum:
+        - USER
+        - PROJECT
+    SmartContent:
+      type: object
+      description: A Smart Content project.
+      properties:
+        account_id:
+          type: integer
+          format: int64
+          description: The account id.
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          description: The create date-time.
+          readOnly: true
+        id:
+          type: integer
+          format: int64
+          description: The unique id.
+          readOnly: true
+        model_id:
+          type: integer
+          format: int64
+          default: 1
+          description: The model id.
+          minimum: 1
+      required:
+        - account_id
+    SmartContentRequest:
+      type: object
+      properties:
+        account_id:
+          type: integer
+          format: int64
+          description: The account id.
+          minimum: 1
+        model_id:
+          type: integer
+          format: int64
+          default: 1
+          description: The model id.
+          minimum: 1
+        rules:
+          type: array
+          items:
+            $ref: "#/components/schemas/RuleRequest"
+        webpage_properties:
+          type: array
+          items:
+            $ref: "#/components/schemas/WebpageProperties"
+      required:
+        - account_id
+    UpdateQuestionAndAnswerRequest:
+      type: object
+      properties:
+        answer:
+          type: string
+        question:
+          type: string
+    UpdateRecordRequest:
+      type: object
+      description: A request to update the properties of a record.
+      properties:
+        completion:
+          type: string
+        has_upvote:
+          type: boolean
+          description: Whether the user upvoted the completion.
+        id:
+          type: integer
+          format: int64
+        is_accepted:
+          type: boolean
+          description: Whether the completion is accepted by the user.
+      required:
+        - has_upvote
+        - id
+        - is_accepted
+    UpdateRecordsRequest:
+      type: object
+      description: A request to update the properties of multiple records.
+      properties:
+        validated_at:
+          type: string
+          format: date-time
+          description: The validation time of the record.
+    ValidationFix:
+      type: object
+      description: The list of fixes to apply when the rule validation fails.
+      properties:
+        type:
+          $ref: "#/components/schemas/ValidationTypeEnum"
+        what:
+          type: string
+        with:
+          type: string
+    ValidationResult:
+      type: object
+      description: The set of warnings found for the answer.
+      properties:
+        levelEnum:
+          $ref: "#/components/schemas/LevelEnum"
+        name:
+          type: string
+        result:
+          type: string
+          enum:
+            - PASS
+            - FAIL
+            - SKIP
+            - FIXED
+      readOnly: true
+    ValidationTypeEnum:
+      type: string
+      enum:
+        - FIND_AND_REPLACE
+        - OPEN_AI
+        - APPEND
+    WebpageProperties:
+      type: object
+      properties:
+        entities:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        iri:
+          type: string
+        query:
+          type: string
+        url:
+          type: string
+      required:
+        - entities
+        - iri
+        - url
+    WhatOperandLhs:
+      type: string
+      description: The left hand side operand for what condition.
+      enum:
+        - EVERYWHERE
+        - FIRST_SENTENCE
+        - LAST_SENTENCE
+    WhatOperator:
+      type: string
+      description: The operator for what condition.
+      enum:
+        - CONTAINS
+        - DOESNT_CONTAIN
+        - ENDS_WITH
+        - REGEX
+        - REGEX_DOESNT_MATCH
+    WhenOperator:
+      type: string
+      description: The operator for when condition.
+      enum:
+        - ALWAYS
+        - EQUALS
+        - NOT_EQUALS
+    Word:
+      type: object
+      description: A Word bias.
+      properties:
+        bias:
+          type: integer
+          format: int32
+          description: The bias.
+        cluster:
+          type: string
+          description: The cluster of the word.
+          maxLength: 1000
+        content_generation_id:
+          type: integer
+          format: int64
+          description: The content generation id.
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          description: The create date-time.
+          readOnly: true
+        id:
+          type: integer
+          format: int64
+          description: The unique id.
+          readOnly: true
+        modified_at:
+          type: string
+          format: date-time
+          description: The last modified date-time.
+          readOnly: true
+        token_id:
+          type: string
+          description: The token id for the word.
+          maxLength: 1000
+        word:
+          type: string
+          description: The actual word.
+          maxLength: 1000
+      required:
+        - bias
+        - cluster
+        - content_generation_id
+        - token_id
+        - word
+    WordRepetitionData:
+      type: object
+      description: Words in completion which are repeated.
+      properties:
+        count:
+          type: integer
+          format: int32
+        repeated_in_same_sentence:
+          type: boolean
+      readOnly: true
+    WordRequest:
+      type: object
+      properties:
+        bias:
+          type: integer
+          format: int32
+          description: The bias.
+        word:
+          type: string
+          description: The actual word.
+          maxLength: 1000
+      required:
+        - bias
+        - word
+  securitySchemes:
+    security_oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: https://s.wordlift.io/oauth/authorize/
+          scopes:
+            basic: basic scope
+          tokenUrl: https://s.wordlift.io/oauth/token/
+      type: oauth2

@@ -1,0 +1,43 @@
+openapi: 3.0.0
+info:
+  title: WordLift Fact-Checking API
+  version: 1.0.0
+  description: API for semi-automated fact-checking. Returns schema.org/ClaimReview markup. This markup is structured data that contains information about the fact check -- for example, what was the claim being assessed, who made the claim, what was the verdict.
+servers:
+  - url: https://api.wordlift.io
+paths:
+  /fact-check/score:
+    post:
+      summary: Submit a fact-checking request
+      operationId: submitFactCheck
+      tags:
+        - Fact Check
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  example: "Aristotele said 'It is the mark of an educated mind to be able to entertain a thought without accepting it.'"
+      responses:
+        '200':
+          description: Fact-checking result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                    example: "{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"ClaimReview\",\n  \"claimReviewed\": \"Aristotle quote 'It is the mark of an educated mind to be able to entertain a thought without accepting it.'\",\n  \"author\": { \"@type\": \"Organization\", \"name\": \"WordLift\" },\n  \"datePublished\": \"2024-01-17\",\n  \"reviewRating\": {\n    \"@type\": \"Rating\",\n    \"ratingValue\": \"5\",\n    \"alternateName\": \"True\",\n    \"bestRating\": \"5\",\n    \"worstRating\": \"1\"\n  },\n  \"url\": \"https://fact-check.wordlift.io/review/aristotle-quote\",\n  \"reviewBody\": \"The quote 'It is the mark of an educated mind to be able to entertain a thought without accepting it.' is correctly attributable to Aristotle. It has been found in multiple credible sources, including publications of academic texts, reputable quote repositories, and philosophical discussions.\",\n  \"itemReviewed\": {\n    \"@type\": \"CreativeWork\",\n    \"url\": [\"https://www.azquotes.com/quote/10261\", \"https://philosiblog.com/2012/03/07/it-is-the-mark-of-an-educated-mind-to-be-able-to-entertain-a-thought-without-accepting-it/\", \"https://www.brainyquote.com/quotes/aristotle_100584\", \"https://www.goodreads.com/quotes/1629-it-is-the-mark-of-an-educated-mind-to-be\", \"https://www.socratic-method.com/philosophy-quote-meanings/aristotle-it-is-the-mark-of-an-educated-mind-to-be-able-to-entertain-a-thought-without-accepting-it\"]\n  }\n}"
+security:
+  - ApiKeyAuth: []
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization

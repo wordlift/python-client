@@ -1,0 +1,375 @@
+openapi: 3.0.1
+info:
+  title: Long Tail
+  description: Provide suggestions for long tail opportunities.
+  termsOfService: https://wordlift.io/terms-of-service/
+  contact:
+    name: WordLift
+    url: https://wordlift.io
+    email: hello@wordlift.io
+  license:
+    name: (c) copyright 2022-present WordLift
+    url: https://wordlift.io
+  version: "1.0"
+servers:
+- url: https://api.wordlift.io/longtail
+tags:
+- name: Web Asyncs responses
+  description: Retrieve Web Async data.
+- name: Long Tails
+  description: Research long tail opportunities.
+- name: Web Asyncs metadata
+  description: Operation on asynchronous calls.
+paths:
+  /webasyncs:
+    get:
+      tags:
+      - Web Asyncs metadata
+      summary: List
+      description: List all Web Async operations.
+      operationId: list
+      responses:
+        "200":
+          description: Found.
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebAsync'
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+  /webasyncs/{id}:
+    get:
+      tags:
+      - Web Asyncs metadata
+      summary: Get by id
+      description: Get a Web Async operation by its id.
+      operationId: get
+      parameters:
+      - name: id
+        in: path
+        description: The Web Async id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Found.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WebAsync'
+        "404":
+          description: Not Found
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+  /webasyncs/{id}/pull:
+    get:
+      tags:
+      - Web Asyncs responses
+      summary: Get by id
+      description: Get a Web Async response by id.
+      operationId: get_1
+      parameters:
+      - name: id
+        in: path
+        description: The Web Async id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Found.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: byte
+        "404":
+          description: Not Found
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+  /longtail:
+    get:
+      tags:
+      - Long Tails
+      summary: Get entities
+      description: Query for long tail opportunities and receive entities.
+      operationId: get_2
+      parameters:
+      - name: q
+        in: query
+        description: The Longtail query
+        required: true
+        schema:
+          type: string
+      - name: ln
+        in: query
+        description: "A location name, origin of the search"
+        required: true
+        schema:
+          type: string
+        example: "London,England,United Kingdom"
+      - name: lc
+        in: query
+        description: Language Code
+        required: true
+        schema:
+          type: string
+        example: en
+      - name: sd
+        in: query
+        description: Search Domain
+        required: true
+        schema:
+          type: string
+        example: "google.co.uk, google.com.au, google.de, etc."
+      - name: sc
+        in: query
+        description: Analysis Scope
+        required: false
+        schema:
+          type: string
+          enum:
+          - all
+          - local
+          - network
+      - name: d
+        in: query
+        description: The maximum number of results to analyze
+        required: false
+        schema:
+          type: string
+          default: "10"
+      responses:
+        "200":
+          description: Found.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LongtailResponse'
+        "500":
+          description: Server Error
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+  /longtail/v2:
+    get:
+      tags:
+      - Long Tails
+      summary: Get entities by rank
+      description: Query for long tail opportunities and receive entities along with
+        their position in SERP.
+      operationId: getV2
+      parameters:
+      - name: q
+        in: query
+        description: The Longtail query
+        required: true
+        schema:
+          type: string
+      - name: ln
+        in: query
+        description: "A location name, origin of the search"
+        required: true
+        schema:
+          type: string
+        example: "London,England,United Kingdom"
+      - name: lc
+        in: query
+        description: Language Code
+        required: true
+        schema:
+          type: string
+        example: en
+      - name: sd
+        in: query
+        description: Search Domain
+        required: true
+        schema:
+          type: string
+        example: "google.co.uk, google.com.au, google.de, etc."
+      - name: sc
+        in: query
+        description: Analysis Scope
+        required: false
+        schema:
+          type: string
+          enum:
+          - all
+          - local
+          - network
+      - name: d
+        in: query
+        description: The maximum number of results to analyze
+        required: false
+        schema:
+          type: string
+          default: "10"
+      responses:
+        "200":
+          description: Found.
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RankEntities'
+        "500":
+          description: Server Error
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+  /longtail/hook:
+    get:
+      tags:
+      - Long Tails
+      summary: Get entities by rank (async)
+      description: Query for long tail opportunities and receive entities along with
+        their position in SERP.
+      operationId: get_3
+      parameters:
+      - name: q
+        in: query
+        description: The Longtail query
+        required: true
+        schema:
+          type: string
+      - name: ln
+        in: query
+        description: "A location name, origin of the search"
+        required: true
+        schema:
+          type: string
+        example: "London,England,United Kingdom"
+      - name: lc
+        in: query
+        description: Language Code
+        required: true
+        schema:
+          type: string
+        example: en
+      - name: sd
+        in: query
+        description: Search Domain
+        required: true
+        schema:
+          type: string
+        example: "google.co.uk, google.com.au, google.de, etc."
+      - name: sc
+        in: query
+        description: Analysis Scope
+        required: false
+        schema:
+          type: string
+          enum:
+          - all
+          - local
+          - network
+      - name: hk
+        in: query
+        description: Webhook URL
+        required: true
+        schema:
+          type: string
+      - name: d
+        in: query
+        description: The maximum number of results to analyze
+        required: false
+        schema:
+          type: string
+          default: "10"
+      responses:
+        "200":
+          description: Found.
+        "500":
+          description: Server Error
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+components:
+  schemas:
+    WebAsync:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        created:
+          type: string
+          format: date-time
+        completed:
+          type: string
+          format: date-time
+        delivered:
+          type: string
+          format: date-time
+        method:
+          type: string
+        url:
+          type: string
+        callback:
+          type: string
+        remoteAddress:
+          type: string
+    Entity:
+      type: object
+      properties:
+        reference:
+          type: string
+          description: The referenced entity URI
+        properties:
+          $ref: '#/components/schemas/Properties'
+      description: The list of entities matching the query.
+    LongtailResponse:
+      type: object
+      properties:
+        summary:
+          type: string
+          description: The page summary.
+        entities:
+          type: array
+          description: The list of entities matching the query.
+          items:
+            $ref: '#/components/schemas/Entity'
+    Properties:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the entity.
+        sameAs:
+          type: array
+          description: A list of sameAs entity URIs.
+          items:
+            type: string
+            description: A list of sameAs entity URIs.
+    RankEntities:
+      type: object
+      properties:
+        rank:
+          type: integer
+          format: int32
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entity'
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      description: "`Key {your key}`"
+      name: Authorization
+      in: header

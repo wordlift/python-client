@@ -4,28 +4,64 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    types: [closed]
 
 jobs:
-  build:
+  build_sdk:
     name: Build distribution 📦
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      # Step 1: Checkout the first repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20" # Specify the Node.js version to use
+
+      # Step 3: Install openapi-merge-cli and openapi-generator-cli
+      - name: Install openapi-merge-cli
+        run: |
+          npm i openapi-merge-cli
+          npm i @openapitools/openapi-generator-cli
+
+      # Step 4: Set up Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
-      - name: Install pypa/build
-        run: >-
-          python3 -m
-          pip install
-          build
-          --user
+
+      # Step 5: Install Python dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
+          pip install build
+
+      # Step 6: Run the Python script to generate json for openApi-merge
+      - name: generate json for openApi-merge
+        run: python3 ./python-client/bin/json_merge_generator.py
+
+      # Step 7: Merge the YAML files
+      - name: Merge the yaml files
+        run: npx openapi-merge-cli --config ./openapi-merge.json
+
+      # Step 8: Generate the SDK
+      - name: Generate the SDK
+        run: npx @openapitools/openapi-generator-cli generate -i ./wordliftApiSpec.yaml -o ./wordlift-client -g python --package-name 'Wordlift_client' --library 'asyncio' --additional-properties='generateSourceCodeOnly=true'
+
+      # Step 9: Run tests
+      - name: Run tests
+        run: pytest
+
+      # Step 10: Build the binary
       - name: Build a binary wheel and a source tarball
-        run: python3 -m build
+        run: |
+          cd ./wordlift-client
+          python3 -m build
       - name: Store the distribution packages
         uses: actions/upload-artifact@v3
         with:

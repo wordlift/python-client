@@ -1,0 +1,127 @@
+openapi: 3.0.1
+info:
+  title: Inspection
+  description: Inspect web pages for structured data.
+  termsOfService: https://wordlift.io/terms-of-service/
+  contact:
+    name: WordLift
+    url: https://wordlift.io
+    email: hello@wordlift.io
+  license:
+    name: (c) copyright 2022-present WordLift
+    url: https://wordlift.io
+  version: "1.0"
+servers:
+- url: https://api.wordlift.io/inspector
+tags:
+- name: Microdata
+  description: Converts any microdata found on a web page to JSON-LD.
+- name: Inspector
+  description: Inspect a web page URL
+paths:
+  /microdata-to-jsonld:
+    get:
+      tags:
+      - Microdata
+      summary: Microdata to JSON-LD
+      description: "Provided a URL, converts any microdata found on that URL to JSON-LD."
+      operationId: microdataToJsonLd
+      parameters:
+      - name: u
+        in: query
+        description: The web page URL
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Found.
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        "500":
+          description: Server Error
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+  /inspect:
+    get:
+      tags:
+      - Inspector
+      summary: Inspect
+      description: Inspect a URL to perform a variety of tasks defined by the list
+        of applied filters.
+      operationId: get
+      parameters:
+      - name: u
+        in: query
+        description: The URL to inspect
+        required: true
+        schema:
+          type: string
+        example: https://wordlift.io
+      - name: f
+        in: query
+        description: "Filters to be applied on the result, if you want to apply multiple\
+          \ filters they should be separated by comma"
+        required: true
+        schema:
+          type: string
+          example: validator
+          enum:
+          - validator
+          - content-analysis
+          - mock-language-detection
+          - browser-response
+          - jena-graph
+          - links
+          - browser-response
+          - lingua-language-detection
+          - language-detection
+          - redlink-content-analysis
+          - summarize
+          - text
+          - validator
+          - xmltei
+          - classify
+        example: "validator,content-analysis"
+      - name: classes
+        in: query
+        description: A list of categories to be provided for classify filter.
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InspectResponse'
+        "500":
+          description: Server Error
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+components:
+  schemas:
+    InspectResponse:
+      type: object
+      properties:
+        empty:
+          type: boolean
+      additionalProperties:
+        type: object
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      description: "`Key {your key}`"
+      name: Authorization
+      in: header

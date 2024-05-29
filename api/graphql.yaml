@@ -1,0 +1,70 @@
+openapi: 3.0.1
+info:
+  title: GraphQL support
+  description: GraphQL endpoint to query Knowledge Graphs
+  termsOfService: https://wordlift.io/terms-of-service/
+  contact:
+    name: WordLift
+    url: https://wordlift.io
+    email: hello@wordlift.io
+  license:
+    name: (c) copyright 2022-present WordLift
+    url: https://wordlift.io
+  version: "1.0"
+servers:
+  - url: https://api.wordlift.io
+tags:
+  - name: GraphQL
+    description: Query Knowledge Graphs using GraphQL
+paths:
+  /graphql:
+    post:
+      tags:
+        - GraphQL
+      summary: Query
+      operationId: graphqlUsingPost
+      requestBody:
+        description: body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphqlRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties: {}
+        '201':
+          description: Created
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '404':
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: body
+      security:
+        - ApiKey: []
+components:
+  schemas:
+    GraphqlRequest:
+      title: GraphqlRequest
+      type: object
+      properties:
+        query:
+          type: string
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header

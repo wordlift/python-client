@@ -1,0 +1,110 @@
+openapi: 3.0.1
+info:
+  title: Classification
+  description: Generic text classification
+  termsOfService: https://wordlift.io/terms-of-service/
+  contact:
+    name: WordLift
+    url: https://wordlift.io
+    email: hello@wordlift.io
+  license:
+    name: (c) copyright 2022-present WordLift
+    url: https://wordlift.io
+  version: "1.0"
+servers:
+  - url: https://api.wordlift.io
+tags:
+  - name: Classifications
+    description: Unsupervised text classification.
+paths:
+  /classification/classify:
+    post:
+      tags:
+        - Classifications
+      summary: Create
+      description: Classify the text to provided categories
+      operationId: classifyUsingPost
+      parameters:
+        - name: lang
+          in: query
+          description: Language code
+          schema:
+            type: string
+            default: en
+        - name: multi_class
+          in: query
+          description: >-
+            When set to true the scores will be independent, each will fall
+            between 0 and 1
+          schema:
+            type: boolean
+            default: false
+      requestBody:
+        description: body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClassificationRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ClassificationResponse'
+        '201':
+          description: Created
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '404':
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: body
+      security:
+        - ApiKey: []
+components:
+  schemas:
+    ClassificationRequest:
+      title: ClassificationRequest
+      type: object
+      properties:
+        classes:
+          type: array
+          example:
+            - indian
+            - thai
+            - chinese
+            - italian
+          items:
+            type: string
+        text:
+          type: string
+          example: >-
+            This dish is a deli egg-bacon-and-cheese-on-a-roll that has been
+            pasta-fied, fancified, fetishized and turned into an Italian
+            tradition that, like many inviolate Italian traditions, is actually
+            far less old than the Mayflower.
+    ClassificationResponse:
+      title: ClassificationResponse
+      type: object
+      properties:
+        labels:
+          type: array
+          items:
+            type: string
+        scores:
+          type: array
+          items:
+            type: number
+            format: float
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header

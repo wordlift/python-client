@@ -1,0 +1,609 @@
+openapi: 3.0.1
+info:
+  title: Analysis
+  description: Analyse content using Linked Data and Knowledge Graphs.
+  termsOfService: https://wordlift.io/terms-of-service/
+  contact:
+    name: WordLift
+    url: https://wordlift.io
+    email: hello@wordlift.io
+  license:
+    name: (c) copyright 2022-present WordLift
+    url: https://wordlift.io
+  version: "1.0"
+servers:
+  - url: https://api.wordlift.io/analysis
+tags:
+  - name: Analysis
+    description:
+      Analyse content and extract entities from Linked Data and Knowledge
+      Graphs.
+  - name: Entity Gaps
+    description: Analyze entity gaps.
+  - name: Analyses
+    description: Perform content analysis.
+  - name: Content Expansions
+    description: Expand Content.
+paths:
+  /v2/analyze:
+    post:
+      tags:
+        - Analyses
+      summary: Analyse Web Page
+      description:
+        Analyse the content of a webpage by using the `url` property of
+        the request.
+      operationId: v2Analysis
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Request"
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
+        "500":
+          description: Server Error
+        "401":
+          description: Authentication Failure
+      security:
+        - ApiKey: []
+  /single:
+    post:
+      tags:
+        - Analyses
+      summary: Analyse content
+      description: Analyze the content provided with the request.
+      operationId: analyse
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Request"
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
+        "500":
+          description: Server Error
+        "401":
+          description: Authentication Failure
+      security:
+        - ApiKey: []
+  /merge:
+    post:
+      tags:
+        - Analyses
+      summary: Analyse and Merge
+      description: Analyze content and return the results merged as HTML code.
+      operationId: merge
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Request"
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            text/html:
+              schema:
+                type: string
+        "500":
+          description: Server Error
+        "401":
+          description: Authentication Failure
+      security:
+        - ApiKey: []
+  /entity-gaps:
+    post:
+      tags:
+        - Entity Gaps
+      summary: Create
+      description: Create an Entity Gaps analysis.
+      operationId: createEntityGap
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EntityGapRequest"
+        required: true
+      responses:
+        "200":
+          description: Found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalysesResponse"
+        "401":
+          description: Authentication Failure
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalysesResponse"
+        "500":
+          description: "Uh oh, something went wrong"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalysesResponse"
+      security:
+        - ApiKey: []
+  /content-expansions:
+    post:
+      tags:
+        - Content Expansions
+      summary: Create
+      description: Create a Content Expansion
+      operationId: createContentExpansion
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContentExpansionRequest"
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContentExpansionResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContentExpansionResponse"
+        "500":
+          description: "Uh oh, something went wrong"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContentExpansionResponse"
+      security:
+        - ApiKey: []
+  /analysis/analyses:
+    post:
+      tags:
+        - Analyses
+      summary: Create
+      description: Create an analysis request
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalysesRequest"
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/x.wordlift.analysis+json;version=3:
+              schema:
+                $ref: "#/components/schemas/AnalysesResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/x.wordlift.analysis+json;version=3:
+              schema:
+                $ref: "#/components/schemas/AnalysesResponse"
+        "500":
+          description: "Uh oh, something went wrong"
+          content:
+            application/x.wordlift.analysis+json;version=3:
+              schema:
+                $ref: "#/components/schemas/AnalysesResponse"
+      security:
+        - ApiKey: []
+components:
+  schemas:
+    Html:
+      type: object
+      properties:
+        fragment:
+          type: string
+          description: The html fragment to analyze.
+        page:
+          type: string
+          description:
+            "The html page to analyze, either fragment or page should be\
+            \ present"
+      description: The html fragment or html page to analyze.
+    Request:
+      required:
+        - language
+        - scope
+      type: object
+      properties:
+        html:
+          $ref: "#/components/schemas/Html"
+        url:
+          type: string
+          description: The url of the page to analyze.
+          format: url
+        urlClient:
+          type: string
+          description:
+            "The client which the analysis should use to extract the content,\
+            \ by default chrome is used."
+          enum:
+            - CHROME
+            - PLAIN_HTTP
+            - "CHROME, PLAIN_HTTP"
+        language:
+          maxLength: 2
+          minLength: 2
+          type: string
+          description: "The content language, 2 letters code, e.g. 'en'."
+        text:
+          type: string
+          description: A textual fragment.
+        exclude:
+          type: array
+          description: An array of item IDs to exclude from the analysis results.
+          items:
+            type: string
+            description: An array of item IDs to exclude from the analysis results.
+            format: url
+        scope:
+          type: string
+          description:
+            "The scope of the analysis, one of 'local', 'network', 'cloud-only',\
+            \ 'network-only' or 'all'."
+        matches:
+          type: integer
+          description:
+            Filter out results that don't have at least the specified number
+            of occurrences. By default 1.
+          format: int32
+        links:
+          type: string
+          description:
+            "When returning an interpolated HTML results, matches should\
+            \ have the 'wl-link' class. By default 'no'."
+      description: The request
+    Annotation:
+      type: object
+      properties:
+        annotationId:
+          type: string
+          description: An unique id.
+        start:
+          type: integer
+          description:
+            The starting posistion of annotation in content (zero-indexed
+            & non negative ).
+          format: int32
+        end:
+          type: integer
+          description:
+            The ending posistion of annotation in content (zero-indexed
+            & non negative ).
+          format: int32
+        text:
+          type: string
+          description: The annotated text.
+        entityMatches:
+          type: array
+          description: The list of entities which the annotation matches.
+          items:
+            $ref: "#/components/schemas/EntityMatch"
+      description: Object representing single annotation.
+    Entity:
+      type: object
+      properties:
+        entityId:
+          type: string
+          description: The entity URI.
+          format: url
+        confidence:
+          type: number
+          description: Confidence score representing the entity match level.
+          format: double
+        mainType:
+          type: string
+          description: The main schema type for the current entity.
+        types:
+          type: array
+          description:
+            The list of schema types which the entity can be classified
+            to.
+          items:
+            type: string
+            description:
+              The list of schema types which the entity can be classified
+              to.
+        label:
+          type: string
+          description: The title of the entity.
+        description:
+          type: string
+          description: The description about the entity.
+        images:
+          type: array
+          description: The list of entity image URIs.
+          items:
+            type: string
+            description: The list of entity image URIs.
+            format: url
+        sameAs:
+          type: array
+          description: The list of entity sameas URIs.
+          items:
+            type: string
+            description: The list of entity sameas URIs.
+            format: url
+        properties:
+          $ref: "#/components/schemas/Properties"
+        synonyms:
+          type: array
+          items:
+            type: string
+      description: Entity
+    EntityMatch:
+      type: object
+      properties:
+        confidence:
+          type: number
+          description: Confidence score for the current entity.
+          format: double
+        entityId:
+          type: string
+          description: The entity URI.
+          format: url
+      description: Entity Match
+    Image:
+      type: object
+      properties:
+        label:
+          type: string
+          description: The title of the image.
+        url:
+          type: string
+          description: The image URI.
+          format: url
+      description: Image
+    Properties:
+      type: object
+      properties:
+        latitude:
+          type: number
+          description: The latitude.
+          format: double
+        longitude:
+          type: number
+          description: The longitude.
+          format: double
+      description: The entity properties.
+    Response:
+      type: object
+      properties:
+        entities:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/Entity"
+          description: A map of entity URI to the respective entity.
+        annotations:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/Annotation"
+          description: A map of annotation id to the respective annotation.
+        images:
+          type: array
+          description: A list of images.
+          items:
+            $ref: "#/components/schemas/Image"
+        languages:
+          type: array
+          description: A list of languages.
+          items:
+            type: string
+            description: A list of languages.
+        topics:
+          type: array
+          description: A list of topics.
+          items:
+            $ref: "#/components/schemas/Topic"
+        content:
+          type: string
+          description: The text supplied for analysis.
+      description: Response
+    Topic:
+      type: object
+      properties:
+        label:
+          type: string
+          description: The topic title.
+        description:
+          type: string
+          description: The topic description.
+        uri:
+          type: string
+          description: The topic URI.
+          format: url
+        confidence:
+          type: number
+          description: The topic confidence score.
+          format: double
+        images:
+          type: array
+          description: A list of image URIs.
+          items:
+            type: string
+            description: A list of image URIs.
+            format: url
+        sameAs:
+          type: array
+          description: A list of sameas URIs.
+          items:
+            type: string
+            description: A list of sameas URIs.
+            format: url
+      description: Topic
+    EntityGapRequest:
+      required:
+        - query
+        - url
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL to analyze.
+        query:
+          type: string
+          description: The search query to analyze.
+        model:
+          type: string
+          description: The model
+        number_of_entities:
+          type: integer
+          description: Number of entities to highlight.
+          format: int32
+          default: 5
+        query_location_name:
+          type: string
+          description: "The location name for the query, e.g. United Kingdom."
+          example: United Kingdom
+          default: United States
+        query_search_engine:
+          type: string
+          description:
+            "The search engine domain for the query, if not set will be\
+            \ chosen according to `query_location_name`"
+          example: google.co.uk
+          default: google.com
+    AnalysesResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/AnalysesResponseItem"
+    AnalysesResponseItem:
+      type: object
+      properties:
+        text:
+          type: string
+          description: The text matching the entity.
+        confidence:
+          maximum: 1.0
+          minimum: 0.0
+          type: number
+          description: The confidence score this is the right entity.
+          format: double
+        occurrences:
+          type: integer
+          description: The number of occurrences.
+          format: int32
+        serp_position:
+          type: integer
+          description: The position of the entity in SERP. `null` if not applicable.
+          format: int32
+        entity_id:
+          type: string
+          description: The entity id (URI).
+        entity_label:
+          type: string
+          description: The entity label.
+        entity_type:
+          type: string
+          description: The entity type.
+        entity_description:
+          type: string
+          description: The entity description.
+    ContentExpansionRequest:
+      required:
+        - entities
+        - openai_key
+        - url
+      type: object
+      properties:
+        url:
+          type: string
+          description: The target URL.
+          format: url
+        entities:
+          uniqueItems: true
+          type: array
+          description: A list of entity labels.
+          items:
+            type: string
+            description: A list of entity labels.
+        openai_key:
+          type: string
+          description: The OpenAI key.
+      description: The Content Expansion request.
+    ContentExpansionResponse:
+      type: object
+      properties:
+        completion:
+          type: string
+          description: The completion.
+      description: A Content Expansion response.
+    AnalysesRequest:
+      type: object
+      properties:
+        text:
+          type: string
+          description: The text to analyse.
+        url:
+          type: string
+          description: The URL to analyse.
+        query:
+          type: string
+          description: The query string to analyse.
+        html:
+          type: string
+          description: The html to analyse.
+        language_code:
+          type: string
+          description: "The language code used for content analysis, e.g. `en`."
+          example: en
+          default: en
+        query_location_name:
+          type: string
+          description: "The location name for the query, e.g. United Kingdom."
+          example: United Kingdom
+          default: United States
+        query_search_engine:
+          type: string
+          description:
+            "The search engine domain for the query, if not set will be\
+            \ chosen according to `query_location_name`"
+          example: google.co.uk
+        linked_data:
+          type: boolean
+          description:
+            "Whether to include results from Linked Data (e.g. DBpedia),\
+            \ by default true."
+          default: true
+        local_data:
+          type: boolean
+          description:
+            "Whether to include results from the local Knowledge Graph,\
+            \ by default true."
+          default: true
+        network_data:
+          type: boolean
+          description:
+            "Whether to include results from connected Knowledge Graphs,\
+            \ by default true."
+          default: true
+      description: The analysis request.
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header

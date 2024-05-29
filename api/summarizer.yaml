@@ -1,0 +1,85 @@
+openapi: 3.0.1
+info:
+  title: Summarizer
+  description: Generic text summarization
+  termsOfService: https://wordlift.io/terms-of-service/
+  contact:
+    name: WordLift
+    url: https://wordlift.io
+    email: hello@wordlift.io
+  license:
+    name: (c) copyright 2022-present WordLift
+    url: https://wordlift.io
+  version: "1.0"
+servers:
+  - url: https://api.wordlift.io
+tags:
+  - name: Summarizations
+    description: Create a generic text summarization
+paths:
+  /summarize:
+    post:
+      tags:
+        - Summarizations
+      summary: Create
+      operationId: microdataToJsonLdUsingPOST
+      parameters:
+        - name: max_length
+          in: query
+          description: Maximum text length
+          schema:
+            type: integer
+            format: int32
+            default: 500
+        - name: min_length
+          in: query
+          description: Minimum text length
+          schema:
+            type: integer
+            format: int32
+            default: 25
+        - name: ratio
+          in: query
+          description: Ratio
+          schema:
+            type: number
+            format: float
+            default: 0.2
+      requestBody:
+        description: body
+        content:
+          text/plain:
+            schema:
+              type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '201':
+          description: Created
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '404':
+          description: Not Found
+          content: { }
+      x-codegen-request-body-name: body
+      security:
+        - ApiKey: []
+components:
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+

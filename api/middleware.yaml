@@ -1,0 +1,469 @@
+openapi: 3.0.1
+info:
+  title: Middleware
+  description: Knowledge Graph data management.
+  termsOfService: https://wordlift.io/terms-of-service/
+  contact:
+    name: WordLift
+    url: https://wordlift.io
+    email: hello@wordlift.io
+  license:
+    name: (c) copyright 2022-present WordLift
+    url: https://wordlift.io
+  version: "1.0"
+servers:
+  - url: https://api.wordlift.io
+tags:
+  - name: Autocomplete
+    description: Find entities in Linked Data or Knowledge Graph by partial match.
+  - name: Entities
+    description: Manage entities in Knowledge Graphs
+  - name: Dataset
+    description: Manage Entities (legacy)
+paths:
+  /entities:
+    get:
+      tags:
+        - Entities
+      summary: Get
+      description: Get entities with the provided ids.
+      operationId: getEntities
+      parameters:
+        - name: id
+          in: query
+          description: "One or more ids, in the form of URLs."
+          required: true
+          schema:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+              format: uri
+        - name: include_children
+          in: query
+          description:
+            "Whether to return all the entities whose ids start with the\
+            \ provided ids, by default false."
+          required: false
+          schema:
+            type: string
+            default: "false"
+        - name: include_referenced
+          in: query
+          description:
+            "Whether to return all the referenced entities (e.g. in `schema:mentions`),\
+            \ by default false."
+          required: false
+          schema:
+            type: string
+            default: "false"
+        - name: include_private
+          in: query
+          description:
+            "Whether to return private properties, requires an authenticated\
+            \ request, by default false."
+          required: false
+          schema:
+            type: string
+            default: "false"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                description: A model containing the Structured Data.
+                items:
+                  type: object
+            application/rdf+xml:
+              schema:
+                type: array
+                description: A model containing the Structured Data.
+                items:
+                  type: object
+            text/turtle:
+              schema:
+                type: array
+                description: A model containing the Structured Data.
+                items:
+                  type: object
+        "412":
+          description: Invalid request parameters
+      security:
+        - ApiKey: []
+    put:
+      tags:
+        - Entities
+      summary: Update (or create)
+      description: Create or update entities by using the provided ids.
+      operationId: createOrUpdateEntities
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              type: array
+              description: A model containing the Structured Data.
+              items:
+                type: object
+          application/rdf+xml:
+            schema:
+              type: array
+              description: A model containing the Structured Data.
+              items:
+                type: object
+          text/turtle:
+            schema:
+              type: array
+              description: A model containing the Structured Data.
+              items:
+                type: object
+        required: true
+      responses:
+        "200":
+          description: Success
+        "412":
+          description: Invalid request parameters
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - Entities
+      summary: Create
+      description: Create new entities by automatically generating their id.
+      operationId: createEntities
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              type: string
+              description: "The entity request, containing the actual semantic data."
+          application/rdf+xml:
+            schema:
+              type: string
+              description: "The entity request, containing the actual semantic data."
+          text/turtle:
+            schema:
+              type: string
+              description: "The entity request, containing the actual semantic data."
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                description: A model containing the Structured Data.
+                items:
+                  type: object
+            application/rdf+xml:
+              schema:
+                type: array
+                description: A model containing the Structured Data.
+                items:
+                  type: object
+            text/turtle:
+              schema:
+                type: array
+                description: A model containing the Structured Data.
+                items:
+                  type: object
+        "412":
+          description: Invalid request parameters
+      security:
+        - ApiKey: []
+    delete:
+      tags:
+        - Entities
+      summary: Delete
+      description: Delete entities with the provided ids.
+      operationId: deleteEntities
+      parameters:
+        - name: id
+          in: query
+          description: "One or more ids, in the form of URLs."
+          required: true
+          schema:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+              format: uri
+        - name: include_children
+          in: query
+          description:
+            "Whether to delete all the entities whose ids start with the\
+            \ provided ids, by default false."
+          required: false
+          schema:
+            type: string
+            default: "false"
+        - name: include_referenced
+          in: query
+          description:
+            "Whether to delete all the referenced entities (e.g. in `schema:mentions`),\
+            \ by default false."
+          required: false
+          schema:
+            type: string
+            default: "false"
+      responses:
+        "200":
+          description: Success
+        "412":
+          description: Invalid request parameters
+      security:
+        - ApiKey: []
+  /dataset/batch:
+    post:
+      tags:
+        - Dataset
+      summary: Create or update many
+      description: Create or update many entities in the Knowledge Graph.
+      operationId: createOrUpdateEntities_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              description: A list of requests
+              items:
+                $ref: "#/components/schemas/BatchRequest"
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        "404":
+          description: Not Found
+        "401":
+          description: Authentication Failure
+      security:
+        - ApiKey: []
+  /dataset:
+    post:
+      tags:
+        - Dataset
+      summary: Create or update one
+      description: Create or update an entity in the Knowledge Graph.
+      operationId: createOrUpdateEntity
+      parameters:
+        - name: uri
+          in: query
+          description: The entity's URI
+          required: true
+          schema:
+            type: string
+        - name: private
+          in: query
+          description: Whether the entity should be hidden from Linked Data and GraphQL
+          required: false
+          schema:
+            type: boolean
+            default: true
+          example: true
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              type: array
+              description: A model containing the Structured Data.
+              items:
+                type: object
+        required: true
+      responses:
+        "200":
+          description: Success
+        "404":
+          description: Not Found
+        "401":
+          description: Authentication Failure
+      security:
+        - ApiKey: []
+    delete:
+      tags:
+        - Dataset
+      summary: Delete one
+      description: Delete an entity from the Knowledge Graph.
+      operationId: deleteEntity
+      parameters:
+        - name: uri
+          in: query
+          description: The URI of the entity to delete.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+        "404":
+          description: Not Found
+        "401":
+          description: Authentication Failure
+      security:
+        - ApiKey: []
+  /autocomplete:
+    get:
+      tags:
+        - Autocomplete
+      summary: Get
+      description:
+        The autocomplete endpoint suggests entities from Linked Data that
+        match the provided query.
+      operationId: get
+      parameters:
+        - name: query
+          in: query
+          description: Autocomplete query
+          required: true
+          schema:
+            type: string
+        - name: language
+          in: query
+          description: "2-letter language code, e.g. 'en'."
+          required: true
+          schema:
+            type: string
+        - name: scope
+          in: query
+          description: Scope
+          required: false
+          schema:
+            type: string
+            default: cloud
+            enum:
+              - cloud
+        - name: limit
+          in: query
+          description: Maximum number of results. By default 10.
+          required: false
+          schema:
+            type: string
+            default: "10"
+        - name: exclude
+          in: query
+          description: List of entity URIs to exclude.
+          required: false
+          schema:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/AutocompleteResultList"
+        "404":
+          description: Not Found
+        "401":
+          description: Authentication Failure
+      security:
+        - ApiKey: []
+  /dataset/all:
+    delete:
+      tags:
+        - Dataset
+      summary: Delete all
+      description: Delete all the entities in the Knowledge Graph.
+      operationId: deleteAllEntities
+      responses:
+        "200":
+          description: Success
+        "404":
+          description: Not Found
+        "401":
+          description: Authentication Failure
+      security:
+        - ApiKey: []
+components:
+  schemas:
+    BatchRequest:
+      required:
+        - model
+        - uri
+      type: object
+      properties:
+        uri:
+          type: string
+          description: The entity URI.
+        model:
+          type: array
+          description: A model containing the Structured Data.
+          items:
+            type: object
+        private:
+          type: boolean
+          description: Whether the entity should be hidden from Linked Data and GraphQL.
+          example: true
+      description: A request part of a batch.
+    AutocompleteResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uri
+        labels:
+          type: array
+          items:
+            type: string
+        descriptions:
+          type: array
+          items:
+            type: string
+        types:
+          type: array
+          items:
+            type: string
+            format: url
+        urls:
+          type: array
+          items:
+            type: string
+            format: url
+        images:
+          type: array
+          description: A list of image URLs.
+          items:
+            type: string
+            description: A list of image URLs.
+            format: url
+        sameAss:
+          type: array
+          items:
+            type: string
+            format: url
+        scope:
+          type: string
+          enum:
+            - local
+            - network
+            - cloud
+        description:
+          type: string
+        mainType:
+          type: string
+          description: Schema type slug
+        label:
+          type: string
+        value:
+          type: string
+        displayTypes:
+          type: string
+    AutocompleteResultList:
+      type: array
+      description: A list of autocomplete results.
+      items:
+        $ref: "#/components/schemas/AutocompleteResult"
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      description: "`Key {your key}`"
+      name: Authorization
+      in: header
