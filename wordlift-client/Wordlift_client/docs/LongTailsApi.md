@@ -1,0 +1,283 @@
+# Wordlift_client.LongTailsApi
+
+All URIs are relative to *https://api.wordlift.io/analysis*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**get2**](LongTailsApi.md#get2) | **GET** /longtail | Get entities
+[**get3**](LongTailsApi.md#get3) | **GET** /longtail/hook | Get entities by rank (async)
+[**get_v2**](LongTailsApi.md#get_v2) | **GET** /longtail/v2 | Get entities by rank
+
+
+# **get2**
+> LongtailResponse get2(q, ln, lc, sd, sc=sc, d=d)
+
+Get entities
+
+Query for long tail opportunities and receive entities.
+
+### Example
+
+* Api Key Authentication (ApiKey):
+
+```python
+import Wordlift_client
+from Wordlift_client.models.longtail_response import LongtailResponse
+from Wordlift_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# See configuration.py for a list of all supported configuration parameters.
+configuration = Wordlift_client.Configuration(
+    host = "https://api.wordlift.io/analysis"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with Wordlift_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = Wordlift_client.LongTailsApi(api_client)
+    q = 'q_example' # str | The Longtail query
+    ln = 'London,England,United Kingdom' # str | A location name, origin of the search
+    lc = 'en' # str | Language Code
+    sd = 'google.co.uk, google.com.au, google.de, etc.' # str | Search Domain
+    sc = 'sc_example' # str | Analysis Scope (optional)
+    d = '10' # str | The maximum number of results to analyze (optional) (default to '10')
+
+    try:
+        # Get entities
+        api_response = await api_instance.get2(q, ln, lc, sd, sc=sc, d=d)
+        print("The response of LongTailsApi->get2:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling LongTailsApi->get2: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **q** | **str**| The Longtail query | 
+ **ln** | **str**| A location name, origin of the search | 
+ **lc** | **str**| Language Code | 
+ **sd** | **str**| Search Domain | 
+ **sc** | **str**| Analysis Scope | [optional] 
+ **d** | **str**| The maximum number of results to analyze | [optional] [default to &#39;10&#39;]
+
+### Return type
+
+[**LongtailResponse**](LongtailResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Found. |  -  |
+**401** | Authentication Failure |  -  |
+**500** | Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get3**
+> get3(q, ln, lc, sd, hk, sc=sc, d=d)
+
+Get entities by rank (async)
+
+Query for long tail opportunities and receive entities along with their position in SERP.
+
+### Example
+
+* Api Key Authentication (ApiKey):
+
+```python
+import Wordlift_client
+from Wordlift_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# See configuration.py for a list of all supported configuration parameters.
+configuration = Wordlift_client.Configuration(
+    host = "https://api.wordlift.io/analysis"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with Wordlift_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = Wordlift_client.LongTailsApi(api_client)
+    q = 'q_example' # str | The Longtail query
+    ln = 'London,England,United Kingdom' # str | A location name, origin of the search
+    lc = 'en' # str | Language Code
+    sd = 'google.co.uk, google.com.au, google.de, etc.' # str | Search Domain
+    hk = 'hk_example' # str | Webhook URL
+    sc = 'sc_example' # str | Analysis Scope (optional)
+    d = '10' # str | The maximum number of results to analyze (optional) (default to '10')
+
+    try:
+        # Get entities by rank (async)
+        await api_instance.get3(q, ln, lc, sd, hk, sc=sc, d=d)
+    except Exception as e:
+        print("Exception when calling LongTailsApi->get3: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **q** | **str**| The Longtail query | 
+ **ln** | **str**| A location name, origin of the search | 
+ **lc** | **str**| Language Code | 
+ **sd** | **str**| Search Domain | 
+ **hk** | **str**| Webhook URL | 
+ **sc** | **str**| Analysis Scope | [optional] 
+ **d** | **str**| The maximum number of results to analyze | [optional] [default to &#39;10&#39;]
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Found. |  -  |
+**401** | Authentication Failure |  -  |
+**500** | Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_v2**
+> List[RankEntities] get_v2(q, ln, lc, sd, sc=sc, d=d)
+
+Get entities by rank
+
+Query for long tail opportunities and receive entities along with their position in SERP.
+
+### Example
+
+* Api Key Authentication (ApiKey):
+
+```python
+import Wordlift_client
+from Wordlift_client.models.rank_entities import RankEntities
+from Wordlift_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# See configuration.py for a list of all supported configuration parameters.
+configuration = Wordlift_client.Configuration(
+    host = "https://api.wordlift.io/analysis"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with Wordlift_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = Wordlift_client.LongTailsApi(api_client)
+    q = 'q_example' # str | The Longtail query
+    ln = 'London,England,United Kingdom' # str | A location name, origin of the search
+    lc = 'en' # str | Language Code
+    sd = 'google.co.uk, google.com.au, google.de, etc.' # str | Search Domain
+    sc = 'sc_example' # str | Analysis Scope (optional)
+    d = '10' # str | The maximum number of results to analyze (optional) (default to '10')
+
+    try:
+        # Get entities by rank
+        api_response = await api_instance.get_v2(q, ln, lc, sd, sc=sc, d=d)
+        print("The response of LongTailsApi->get_v2:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling LongTailsApi->get_v2: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **q** | **str**| The Longtail query | 
+ **ln** | **str**| A location name, origin of the search | 
+ **lc** | **str**| Language Code | 
+ **sd** | **str**| Search Domain | 
+ **sc** | **str**| Analysis Scope | [optional] 
+ **d** | **str**| The maximum number of results to analyze | [optional] [default to &#39;10&#39;]
+
+### Return type
+
+[**List[RankEntities]**](RankEntities.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Found. |  -  |
+**401** | Authentication Failure |  -  |
+**500** | Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
