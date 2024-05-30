@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build_sdk:
+  build:
     name: Build distribution 📦
     runs-on: ubuntu-latest
 
@@ -51,7 +51,7 @@ jobs:
 
       # Step 8: Generate the SDK
       - name: Generate the SDK
-        run: npx @openapitools/openapi-generator-cli generate -i ./wordliftApiSpec.yaml -o ./wordlift-client -g python --package-name 'Wordlift_client' --library 'asyncio' --additional-properties='generateSourceCodeOnly=true'
+        run: npx @openapitools/openapi-generator-cli generate -i ./wordliftApiSpec.yaml -o ./wordlift-client -g python --package-name 'wordlift_client' --library 'asyncio' --additional-properties='generateSourceCodeOnly=true'
 
       # Step 9: Run tests
       - name: Run tests
@@ -68,16 +68,44 @@ jobs:
           name: python-package-distributions
           path: dist/
 
+  test:
+    name: Test client
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+
+    steps:
+      # Step 1: Set up Python
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # Step 2: Install Python dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
+
+      # Step 3: Run tests
+      - name: Run tests
+        run: pytest
+
   publish-to-pypi:
     name: >-
       Publish Python 🐍 distribution 📦 to PyPI
     if: startsWith(github.ref, 'refs/tags/')
     needs:
       - build
+      - test
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/<wordlift-client>
+      url: https://pypi.org/p/wordlift-client
     permissions:
       id-token: write
 
@@ -98,7 +126,7 @@ jobs:
 
     environment:
       name: testpypi
-      url: https://test.pypi.org/p/<wordlift-client>
+      url: https://test.pypi.org/p/wordlift-client
 
     permissions:
       id-token: write
