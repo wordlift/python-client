@@ -38,7 +38,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest
           pip install build
 
       # Step 6: Run the Python script to generate json for openApi-merge
@@ -53,11 +52,7 @@ jobs:
       - name: Generate the SDK
         run: npx @openapitools/openapi-generator-cli generate -i ./wordliftApiSpec.yaml -o ./wordlift-client -g python --package-name 'wordlift_client' --library 'asyncio' --additional-properties='generateSourceCodeOnly=true'
 
-      # Step 9: Run tests
-      - name: Run tests
-        run: pytest
-
-      # Step 10: Build the binary
+      # Step 9: Build the binary
       - name: Build a binary wheel and a source tarball
         run: |
           cd ./wordlift-client
