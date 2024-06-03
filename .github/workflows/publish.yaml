@@ -31,7 +31,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.7"
 
       # Step 5: Install Python dependencies
       - name: Install dependencies
@@ -42,7 +42,7 @@ jobs:
 
       # Step 6: Run the Python script to generate json for openApi-merge
       - name: generate json for openApi-merge
-        run: python3 ./python-client/bin/json_merge_generator.py
+        run: python3 ./utils/json_merge_generator.py
 
       # Step 7: Merge the YAML files
       - name: Merge the yaml files
@@ -50,12 +50,11 @@ jobs:
 
       # Step 8: Generate the SDK
       - name: Generate the SDK
-        run: npx @openapitools/openapi-generator-cli generate -i ./wordliftApiSpec.yaml -o ./wordlift-client -g python --package-name 'wordlift_client' --library 'asyncio' --additional-properties='generateSourceCodeOnly=true'
+        run: npx @openapitools/openapi-generator-cli generate -i ./wordliftApiSpec.yaml -g python --package-name 'wordlift_client' --library 'asyncio'
 
       # Step 9: Build the binary
       - name: Build a binary wheel and a source tarball
         run: |
-          cd ./wordlift-client
           python3 -m build
       - name: Store the distribution packages
         uses: actions/upload-artifact@v3
