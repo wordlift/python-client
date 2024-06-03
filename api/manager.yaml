@@ -1,0 +1,3157 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: hello@wordlift.io
+    name: WordLift
+    url: https://wordlift.io
+  description: Subscription management and related services.
+  license:
+    name: (c) copyright 2022-present WordLift
+    url: https://wordlift.io
+  termsOfService: https://wordlift.io/terms-of-service/
+  title: Manager
+  version: "1.0"
+servers:
+- url: https://api.wordlift.io
+tags:
+- description: Get Account Information
+  name: Account
+- description: Manage Custom Domains
+  name: Custom Domains
+- description: Import Botify Crawl data to KG
+  name: Botify Crawl Imports
+- description: Retrieve Add-ons data
+  name: AddOns
+- description: Data URI for a Web page URL.
+  name: Data URI
+- description: Add embeddings to a Knowledge Graphs.
+  name: Embedding
+- description: Import sitemaps to the KG
+  name: Sitemap Imports
+- description: Retrieve analytics data from Google Search Console
+  name: Google Search Console Searches
+- description: Access Google Search Console data
+  name: Google Search Console
+- description: Manage Google Merchants
+  name: Google Merchants
+- description: Manage Platform Consumptions
+  name: Platform Consumptions
+- description: Get answers to questions.
+  name: Vector Search Questions
+- description: Manage OAuth2 Authorized Clients
+  name: OAuth2 Authorized Clients
+- description: "Import Analytics data to the KG using different sources, e.g. Google\
+    \ Search Console."
+  name: Analytics Imports
+- description: Manage vector search nodes embeddings.
+  name: Vector Search Nodes
+- description: Manage redeem codes.
+  name: Redeem Codes
+- description: Create vector search queries.
+  name: Vector Search Queries
+- description: The list of included or excluded URLs from the WordPress configuration
+  name: Include Excludes (WordPress plugin)
+- description: Manage Platform Limits
+  name: Platform Limits
+- description: Manage Accounts
+  name: Accounts
+- description: Manage Merchants
+  name: Merchants
+- description: Configure Google Search Console OAuth2 authorized access codes.
+  name: Google Search Console OAuth2
+- description: Synchronize Products from the Merchant Feed
+  name: Merchant Syncs
+- description: Update Plugin Diagnostics data for WordPress clients.
+  name: Plugin Diagnostics
+paths:
+  /accounts:
+    get:
+      description: List the accounts
+      operationId: listAccounts
+      parameters:
+      - description: The cursor
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - description: Filter accounts that can or cannot do Content Generation
+        in: query
+        name: can_content_generation
+        required: false
+        schema:
+          type: boolean
+      - description: Add entity count data
+        in: query
+        name: include_entity_count
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: Include all the accounts the user has access to
+        in: query
+        name: include_all_accounts
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: Include the subscription data
+        in: query
+        name: include_subscription
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - description: The URL
+        in: query
+        name: url
+        required: false
+        schema:
+          type: string
+      - description: The dataset id
+        in: query
+        name: ng_dataset_id
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/vnd.wordlift.accounts+json;version=1:
+              schema:
+                $ref: '#/components/schemas/PageActiveAccount'
+          description: Found
+        "401":
+          description: Authentication Failure
+      security:
+      - BasicAuth: []
+      - OAuth2: []
+      summary: List
+      tags:
+      - Accounts
+  /accounts/me:
+    get:
+      description: Get the account data for the current account identified by its
+        key.
+      operationId: getMe
+      responses:
+        "200":
+          content:
+            application/vnd.wordlift.account-info.v2+json:
+              schema:
+                $ref: '#/components/schemas/AccountInfo'
+          description: Found
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+      summary: Get
+      tags:
+      - Account
+  /accounts/me/google/searches:
+    get:
+      description: List the Website Search performance data
+      operationId: listWebsiteSearch_1
+      parameters:
+      - description: The cursor
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - description: "The start date, inclusive, in yyyy-MM-dd format."
+        in: query
+        name: since
+        required: true
+        schema:
+          type: string
+      - description: "The end date, inclusive, in yyyy-MM-dd format."
+        in: query
+        name: until
+        required: true
+        schema:
+          type: string
+      - description: "The dimensions, e.g. `query`, `page`. Must repeat for each dimension."
+        in: query
+        name: dimensions
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+      - description: "If \"all\" (case-insensitive), data will include fresh data.\
+          \ If \"final\" (case-insensitive) or if this parameter is omitted, the returned\
+          \ data will include only finalized data."
+        in: query
+        name: data_state
+        required: false
+        schema:
+          type: string
+          enum:
+          - all
+          - final
+      - description: The maximum number of results
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          default: 10
+          maximum: 25000
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageWebsiteSearch'
+          description: Found
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+      summary: List Website Search data
+      tags:
+      - Google Search Console Searches
+  /accounts/me/include-excludes:
+    get:
+      description: List the include and exclude configurations.
+      operationId: listIncludeExcludes
+      parameters:
+      - in: query
+        name: account
+        required: true
+        schema:
+          $ref: '#/components/schemas/Account'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IncludeExclude'
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IncludeExclude'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IncludeExclude'
+          description: Not Found
+      summary: List
+      tags:
+      - Include Excludes (WordPress plugin)
+    put:
+      description: Update the include and exclude configurations.
+      operationId: updateIncludeExcludes
+      parameters:
+      - in: query
+        name: account
+        required: true
+        schema:
+          $ref: '#/components/schemas/Account'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/IncludeExcludeRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IncludeExclude'
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IncludeExclude'
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IncludeExclude'
+          description: Not Found
+      summary: Update
+      tags:
+      - Include Excludes (WordPress plugin)
+  /accounts/me/plugin/diagnostics/plugins-collection:
+    put:
+      description: Replace the list of the plugins for the current account with the
+        one provided by the client
+      operationId: updateDiagnosticPluginCollection
+      parameters:
+      - in: query
+        name: account
+        required: true
+        schema:
+          $ref: '#/components/schemas/Account'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DiagnosticPluginRequest'
+        required: true
+      responses:
+        "200":
+          description: Found.
+        "204":
+          description: No Content
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: Update
+      tags:
+      - Plugin Diagnostics
+  /accounts/{id}:
+    get:
+      description: Get the account
+      operationId: getAccount
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+          description: Found
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - BasicAuth: []
+      - OAuth2: []
+      summary: Get an account.
+      tags:
+      - Accounts
+    put:
+      description: Update the account
+      operationId: updateAccount
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAccountRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+          description: Found
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - BasicAuth: []
+      - OAuth2: []
+      summary: Update an account.
+      tags:
+      - Accounts
+  /addon/configurations:
+    get:
+      description: List the Add-ons configurations
+      operationId: listConfigurations
+      parameters:
+      - description: The access token
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+      - description: The key
+        in: query
+        name: key
+        required: false
+        schema:
+          type: string
+      - description: The maximum number of results
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          default: 10
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageAddOnConfiguration'
+          description: Found
+        "401":
+          description: Authentication Failure
+      summary: List
+      tags:
+      - AddOns
+  /analytics-imports:
+    post:
+      description: Create a Analytics Import using Google Search Console or Botify
+        depending on the Account configuration.
+      operationId: createAnalyticsImport
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalyticsImportRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/x-ndjson:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties:
+                    type: string
+          description: Success
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+      summary: Create
+      tags:
+      - Analytics Imports
+  /botify-crawl-imports:
+    post:
+      description: Create a Botify Crawl Import
+      operationId: createBotifyCrawlImport
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BotifyCrawlImportRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/x-ndjson:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebPage'
+          description: Success
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+      summary: Create
+      tags:
+      - Botify Crawl Imports
+  /data-uri:
+    get:
+      description: |
+        The service will return a Web Data URI only for existing datasets. The Web Data URI is not guaranteed to exist (i.e. it may return 404).
+      operationId: get
+      parameters:
+      - description: The Web Page URL.
+        in: query
+        name: u
+        required: true
+        schema:
+          type: string
+          format: url
+      responses:
+        "303":
+          description: See Other
+          headers:
+            Location:
+              description: "${api.data-uri-controller.get.headers.location.description}"
+              schema: {}
+              style: simple
+      summary: Get the Web Data URI for a Web Page URL.
+      tags:
+      - Data URI
+  /ext/google/searchconsole/searches:
+    get:
+      description: List the Website Search performance data
+      operationId: listWebsiteSearch
+      parameters:
+      - description: The website URL
+        in: query
+        name: website
+        required: true
+        schema:
+          type: string
+      - description: The cursor
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - description: "The start date, inclusive, in yyyy-MM-dd format."
+        in: query
+        name: since
+        required: true
+        schema:
+          type: string
+      - description: "The end date, inclusive, in yyyy-MM-dd format."
+        in: query
+        name: until
+        required: true
+        schema:
+          type: string
+      - description: "The dimensions, e.g. `query`, `page`. Must repeat for each dimension."
+        in: query
+        name: dimensions
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+      - description: "The Google access token, must have access to the Google Search\
+          \ Console scope"
+        in: query
+        name: google_access_token
+        required: true
+        schema:
+          type: string
+      - description: The maximum number of results
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          default: 10
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageWebsiteSearch'
+          description: Found
+        "401":
+          description: Authentication Failure
+      summary: List Website Search data
+      tags:
+      - Google Search Console
+  /ext/google/searchconsole/websites:
+    get:
+      description: List the Websites
+      operationId: listWebsites
+      parameters:
+      - description: "The Google access token, must have access to the Google Search\
+          \ Console scope"
+        in: query
+        name: google_access_token
+        required: true
+        schema:
+          type: string
+      - description: The maximum number of results
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          default: 10
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageWebsite'
+          description: Found
+        "401":
+          description: Authentication Failure
+      summary: List
+      tags:
+      - Google Search Console
+  /ext/google/shopping/merchants:
+    get:
+      description: List the Google Merchants
+      operationId: listGoogleMerchants
+      parameters:
+      - in: query
+        name: google_access_token
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageMerchantEntry'
+          description: Found
+        "401":
+          description: Authentication Failure
+      security:
+      - OAuth2: []
+      summary: List
+      tags:
+      - Google Merchants
+  /google-search-console/oauth2/auth-code-exchanges:
+    post:
+      description: Call this API to have the Platform receive an Authentication Token
+        to access the Analytics data via Google Search Console.
+      operationId: createAuthCodeExchange
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExchangeAuthCodeRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ExchangeAuthCodeResponse'
+          description: Found
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: Get an Access Code
+      tags:
+      - Google Search Console OAuth2
+  /google-search-console/oauth2/authorize-uris:
+    post:
+      description: Call this API to get an authorization URI needed to interactively
+        get an authorization token. Then call the `exchangeAuthCode` to exchange it
+        with an authorization token.
+      operationId: createAuthorizeUri
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildAuthorizeUriRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BuildAuthorizeUriResponse'
+          description: Found
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: Create an Authorization URI
+      tags:
+      - Google Search Console OAuth2
+  /kg/embeddings:
+    post:
+      description: Create the embedding for the IRIs for the provided query.
+      operationId: createEmbedding
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmbeddingRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/x-ndjson:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties:
+                    type: string
+          description: Success
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+      summary: Create
+      tags:
+      - Embedding
+  /merchants:
+    get:
+      description: "List the Merchants, optionally filtering by the `deleted` flag"
+      operationId: listMerchants
+      parameters:
+      - description: The cursor
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - description: The maximum number of results
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          default: 10
+      - description: Filter by the `deleted` flag
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageMerchantView'
+          description: Found
+        "401":
+          description: Authentication Failure
+      security:
+      - OAuth2: []
+      summary: List
+      tags:
+      - Merchants
+    post:
+      description: Create a Merchant
+      operationId: createMerchant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MerchantRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Merchant'
+          description: Success
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - OAuth2: []
+      summary: Create
+      tags:
+      - Merchants
+  /merchants/{id}:
+    delete:
+      description: Delete a Merchant by its `id`.
+      operationId: deleteMerchant
+      parameters:
+      - description: The Merchant id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Deleted
+        "401":
+          description: Authentication Failure
+      security:
+      - OAuth2: []
+      summary: Delete by id
+      tags:
+      - Merchants
+    get:
+      description: Get a Merchant by its `id`.
+      operationId: getMerchant
+      parameters:
+      - description: The Merchant id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Merchant'
+          description: Success
+        "401":
+          description: Authentication Failure
+      security:
+      - OAuth2: []
+      summary: Get by id
+      tags:
+      - Merchants
+    put:
+      description: Update a Merchant
+      operationId: updateMerchant
+      parameters:
+      - description: The Merchant id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MerchantRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Merchant'
+          description: Success
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - OAuth2: []
+      summary: Update
+      tags:
+      - Merchants
+  /merchants/{merchantId}/syncs:
+    get:
+      description: List the Merchants Syncs
+      operationId: listMerchantSyncs
+      parameters:
+      - description: The Merchant's `id`
+        in: path
+        name: merchantId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - description: The cursor
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - description: The maximum number of results
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          default: 10
+      - description: "The sorting, `+id` or `-id`"
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+          default: +id
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageMerchantSync'
+          description: Found
+        "401":
+          description: Authentication Failure
+      security:
+      - OAuth2: []
+      summary: List
+      tags:
+      - Merchant Syncs
+    post:
+      operationId: createSync
+      parameters:
+      - description: The Merchant's `id`
+        in: path
+        name: merchantId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MerchantSync'
+          description: Found.
+        "401":
+          description: Authentication Failure
+      security:
+      - OAuth2: []
+      summary: Start
+      tags:
+      - Merchant Syncs
+  /merchants/{merchantId}/syncs/{id}:
+    get:
+      operationId: getMerchantSync
+      parameters:
+      - description: The Merchant's `id`
+        in: path
+        name: merchantId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - description: The Merchant Sync `id`.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerchantSync'
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - OAuth2: []
+      summary: Get by id
+      tags:
+      - Merchant Syncs
+  /oauth2/authorized-clients:
+    get:
+      description: List OAuth2 Authorized Clients
+      operationId: listOAuth2AuthorizedClients
+      parameters:
+      - description: The cursor
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - description: The maximum number of results
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          default: 10
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOAuth2AuthorizedClient'
+          description: Found
+        "401":
+          description: Authentication Failure
+      security:
+      - OAuth2: []
+      summary: List
+      tags:
+      - OAuth2 Authorized Clients
+    post:
+      description: Create a OAuth2 Authorized Client
+      operationId: createOAuth2AuthorizedClient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAuth2AuthorizedClientRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuth2AuthorizedClient'
+          description: Found
+        "401":
+          description: Authentication Failure
+      security:
+      - OAuth2: []
+      summary: Create
+      tags:
+      - OAuth2 Authorized Clients
+  /oauth2/authorized-clients/{id}:
+    delete:
+      description: Delete a OAuth2 Authorized Client given its client registration
+        id
+      operationId: deleteOAuth2AuthorizedClient
+      parameters:
+      - description: The Id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Found
+        "401":
+          description: Authentication Failure
+      security:
+      - OAuth2: []
+      summary: Delete
+      tags:
+      - OAuth2 Authorized Clients
+    get:
+      description: Get a OAuth2 Authorized Client given its client registration id
+      operationId: getOAuth2AuthorizedClient
+      parameters:
+      - description: The Id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuth2AuthorizedClient'
+          description: Found
+        "401":
+          description: Authentication Failure
+      security:
+      - OAuth2: []
+      summary: Get
+      tags:
+      - OAuth2 Authorized Clients
+    put:
+      description: Update a OAuth2 Authorized Client given its client registration
+        id
+      operationId: updateOAuth2AuthorizedClient
+      parameters:
+      - description: The Id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAuth2AuthorizedClientRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuth2AuthorizedClient'
+          description: Found
+        "401":
+          description: Authentication Failure
+      security:
+      - OAuth2: []
+      summary: Update
+      tags:
+      - OAuth2 Authorized Clients
+  /platform-limit/consumptions/me:
+    get:
+      description: Get the Platform Consumption for the authenticated user.
+      operationId: getMyPlatformConsumption
+      parameters:
+      - in: query
+        name: applies_to
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: include_subscription
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: include_limit
+        required: false
+        schema:
+          type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageWithLimits'
+          description: Found
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - ApiKey: []
+      - OAuth2: []
+      summary: Get the Platform Consumption
+      tags:
+      - Platform Consumptions
+    put:
+      description: Create or update the Platform Consumption for the authenticated
+        user.
+      operationId: createOrUpdateMyPlatformConsumption
+      parameters:
+      - in: query
+        name: applies_to
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: consumption_to_add
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageWithLimits'
+          description: Found
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - ApiKey: []
+      - OAuth2: []
+      summary: Create or update the Platform Consumption
+      tags:
+      - Platform Consumptions
+  /platform-limit/limits:
+    get:
+      description: List the platform limits.
+      operationId: listPlatformLimits
+      parameters:
+      - description: "The type of based on, e.g. `sku`."
+        in: query
+        name: based_on_in
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - SKU
+          uniqueItems: true
+      - description: The based on values.
+        in: query
+        name: based_on_value_in
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+      - description: The applies to (e.g. API name).
+        in: query
+        name: applies_to_in
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+      - description: The scope.
+        in: query
+        name: scope_in
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - ACCOUNT
+            - SUBSCRIPTION
+          uniqueItems: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagePlatformLimit'
+          description: Found
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - BasicAuth: []
+      summary: List Platform Limits
+      tags:
+      - Platform Limits
+    post:
+      description: Create a platform limit.
+      operationId: createPlatformLimit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlatformLimitRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformLimit'
+          description: Found
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - BasicAuth: []
+      summary: Create Platform Limit
+      tags:
+      - Platform Limits
+  /platform-limit/limits/{id}:
+    delete:
+      description: Delete a platform limit.
+      operationId: deletePlatformLimit
+      parameters:
+      - description: Platform Limit id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Found
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - BasicAuth: []
+      summary: Delete Platform Limit
+      tags:
+      - Platform Limits
+    get:
+      description: Get a platform limit.
+      operationId: getPlatformLimit
+      parameters:
+      - description: Platform Limit id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformLimit'
+          description: Found
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - BasicAuth: []
+      summary: Get Platform Limit
+      tags:
+      - Platform Limits
+    put:
+      description: Update a platform limit.
+      operationId: updatePlatformLimit
+      parameters:
+      - description: Platform Limit id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlatformLimitRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformLimit'
+          description: Found
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - BasicAuth: []
+      summary: Update Platform Limit
+      tags:
+      - Platform Limits
+  /redeem-codes:
+    post:
+      operationId: redeemCode
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+          description: Found.
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Not Found.
+        "409":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Code already redeemed.
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Configuration error.
+      summary: Redeem the provided code and get a key
+      tags:
+      - Redeem Codes
+  /sitemap-imports:
+    post:
+      description: Create a Sitemap Import
+      operationId: createSitemapImport
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SitemapImportRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/x-ndjson:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebPage'
+          description: Success
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+      summary: Create
+      tags:
+      - Sitemap Imports
+  /validations:
+    post:
+      description: Check if the provided custom domain can be set for the account
+      operationId: validate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainValidationRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/vnd.wordlift.custom-domain-validation+json;version-1: {}
+          description: Success
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - OAuth2: []
+      summary: Validate
+      tags:
+      - Custom Domains
+  /vector-search/nodes-collection:
+    put:
+      operationId: updateNodesCollection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              description: A list of node requests.
+              items:
+                $ref: '#/components/schemas/NodeRequest'
+        required: true
+      responses:
+        "200":
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: Update
+      tags:
+      - Vector Search Nodes
+  /vector-search/queries:
+    post:
+      operationId: createQuery
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VectorSearchQueryRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageVectorSearchQueryResponseItem'
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: Create
+      tags:
+      - Vector Search Queries
+  /vector-search/questions-collection:
+    post:
+      operationId: createVectorSearchQuestion
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VectorSearchQuestionRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageVectorSearchQuestionResponseItem'
+          description: Found.
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: Create
+      tags:
+      - Vector Search Questions
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        analytics_client_factory:
+          type: string
+        analyzerId:
+          type: integer
+          format: int64
+        botify_project:
+          type: string
+        botify_token:
+          type: string
+        botify_username:
+          type: string
+        country:
+          type: string
+        datasetId:
+          type: string
+          deprecated: true
+        datasetUri:
+          type: string
+        domainUri:
+          type: string
+        google_search_console_site_url:
+          type: string
+        id:
+          type: integer
+          format: int64
+        indexed:
+          type: boolean
+        is_wordpress:
+          type: boolean
+        key:
+          type: string
+        language:
+          type: string
+        ngDatasetId:
+          type: string
+        resolvedUrl:
+          type: string
+        subscriptionId:
+          type: integer
+          format: int64
+        url:
+          type: string
+        wpAdmin:
+          type: string
+        wpJson:
+          type: string
+        wp_include_exclude_default:
+          type: string
+    AccountInfo:
+      type: object
+      description: Account Information
+      properties:
+        accountId:
+          type: integer
+          format: int64
+          description: The Account Id
+          readOnly: true
+        datasetId:
+          type: string
+          description: The Dataset Id
+          readOnly: true
+        datasetUri:
+          type: string
+          description: The dataset URI
+          readOnly: true
+        features:
+          type: object
+          additionalProperties:
+            type: boolean
+            description: A list of features enabled or disabled for the account
+            readOnly: true
+          description: A list of features enabled or disabled for the account
+          readOnly: true
+        googleSearchConsoleSiteUrl:
+          type: string
+          description: Google Search Console Site URL
+          readOnly: true
+        key:
+          type: string
+          description: The Key
+          readOnly: true
+        language:
+          type: string
+          description: The language code
+          readOnly: true
+        networks:
+          type: array
+          description: A list of connected Account Information
+          items:
+            $ref: '#/components/schemas/NetworkAccountInfo'
+          readOnly: true
+        ngDatasetId:
+          type: string
+        subscriptionId:
+          type: integer
+          format: int64
+          description: The Subscription Id
+          readOnly: true
+        url:
+          type: string
+          description: The website URL
+          readOnly: true
+        wpAdmin:
+          type: string
+          description: "If WordPress, the WP-ADMIN URL"
+          readOnly: true
+        wpJson:
+          type: string
+          description: "If WordPress, the WP-JSON end-point"
+          readOnly: true
+      required:
+      - accountId
+      - datasetUri
+      - networks
+      - subscriptionId
+    AccountSubscription:
+      type: object
+      properties:
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        order_id:
+          type: integer
+          format: int64
+        sku:
+          type: string
+    ActiveAccount:
+      type: object
+      description: An array of objects.
+      properties:
+        country:
+          type: string
+        diagnostic_plugins:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiagnosticPlugin'
+        domain_uri:
+          type: string
+        google_search_console_site_url:
+          type: string
+        id:
+          type: integer
+          format: int64
+        is_wordpress:
+          type: boolean
+        key:
+          type: string
+        language:
+          type: string
+        ng_dataset_id:
+          type: string
+        package_type:
+          type: string
+        subscription:
+          $ref: '#/components/schemas/AccountSubscription'
+        subscription_id:
+          type: integer
+          format: int64
+        total_entities:
+          type: integer
+          format: int64
+        total_entities_with_schema_url:
+          type: integer
+          format: int64
+        url:
+          type: string
+        user_id:
+          type: integer
+          format: int64
+        wp_admin:
+          type: string
+        wp_include_exclude_default:
+          type: string
+        wp_json:
+          type: string
+    AddOnConfiguration:
+      type: object
+      description: An Add-On configuration
+      properties:
+        can_do_content_expansion:
+          type: boolean
+          description: Whether this Add-on can do content expansion
+          readOnly: true
+        can_import_to_wordpress:
+          type: boolean
+          description: Whether this Add-on can import to WordPress.
+          readOnly: true
+        key:
+          type: string
+          description: A key
+          readOnly: true
+        wp_admin:
+          type: string
+          description: The wp-admin endpoint for a website using the key.
+          readOnly: true
+        wp_json:
+          type: string
+          description: The wp-json endpoint for a website using the key.
+          readOnly: true
+    AnalyticsImportRequest:
+      type: object
+      description: An Analytics Import request.
+      properties:
+        urls:
+          type: array
+          description: An array of URLs.
+          items:
+            type: string
+            description: An array of URLs.
+          uniqueItems: true
+    BotifyCrawlImportRequest:
+      type: object
+      description: The Botify Crawl Import request
+      properties:
+        collection:
+          type: string
+        description:
+          type: array
+          items:
+            type: string
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+        headline:
+          type: string
+        request_embeddings:
+          type: array
+          items:
+            type: string
+        text:
+          type: array
+          items:
+            type: string
+        types:
+          type: array
+          items:
+            type: string
+        url:
+          type: string
+    BuildAuthorizeUriRequest:
+      type: object
+      description: The request of the `buildAuthorizeUri` endpoint.
+      properties:
+        redirect_uri:
+          type: string
+          description: The Redirect URI to where redirect the Client after successful
+            authentication.
+      required:
+      - redirect_uri
+    BuildAuthorizeUriResponse:
+      type: object
+      description: The response of the `buildAuthorizeUri` endpoint.
+      properties:
+        authorize_uri:
+          type: string
+          description: The Authorization URI. The Client should be redirected to this
+            URI.
+      required:
+      - authorize_uri
+    DiagnosticPlugin:
+      type: object
+      description: Plugin Data used for diagnostics
+      properties:
+        account_id:
+          type: integer
+          format: int64
+          description: The account id.
+          readOnly: true
+        active:
+          type: boolean
+          description: Whether the plugin is active.
+        created_at:
+          type: string
+          format: date-time
+          description: The create date-time
+          readOnly: true
+        id:
+          type: integer
+          format: int64
+          description: The record id.
+          readOnly: true
+        name:
+          type: string
+          description: The plugin name.
+        version:
+          type: string
+          description: The plugin version.
+    DiagnosticPluginRequest:
+      type: object
+      description: Diagnostic Plugin Data Request
+      properties:
+        active:
+          type: boolean
+          description: Whether the plugin is active.
+        name:
+          type: string
+          description: The plugin name.
+        version:
+          type: string
+          description: The plugin version.
+    DomainValidationRequest:
+      type: object
+      properties:
+        dataset_domain:
+          type: string
+          description: "The dataset domain, e.g. data.example.org"
+        dataset_name:
+          type: string
+          description: "The dataset name, e.g. my-dataset-name"
+      required:
+      - dataset_domain
+      - dataset_name
+    EmbeddingRequest:
+      type: object
+      properties:
+        graphql_query:
+          type: string
+        properties:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+    ExchangeAuthCodeRequest:
+      type: object
+      description: The request of the `exchangeAuthCode` endpoint.
+      properties:
+        code:
+          type: string
+          description: The Authorization Code. The API will use the Authorization
+            Code to exchange it with an Access Token.
+        google_search_console_resource_id:
+          type: string
+          description: "The Google Search Console Resource Id as it shows in the Google\
+            \ Search Console, e.g. sc-domain:example.org."
+      required:
+      - code
+      - google_search_console_resource_id
+    ExchangeAuthCodeResponse:
+      type: object
+      description: The response of the `buildAuthorizeUri` endpoint.
+      properties:
+        access_token:
+          type: string
+          description: The access token
+        expires_in:
+          type: integer
+          format: int32
+          description: The number of seconds for the access token to expire
+        refresh_token:
+          type: string
+          description: The refresh token
+        scope:
+          type: string
+          description: The scope
+        token_type:
+          type: string
+          description: "The token type, usually Bearer"
+    Filter:
+      type: object
+      description: A query request filter.
+      properties:
+        key:
+          type: string
+          description: The filter key.
+        operator:
+          type: string
+          description: A query request filter operator.
+          enum:
+          - EQ
+          - GT
+          - LT
+          - NE
+          - GTE
+          - LTE
+          - IN
+          - NIN
+        value:
+          type: string
+          description: The filter value.
+      required:
+      - key
+      - operator
+      - value
+    IncludeExclude:
+      type: object
+      properties:
+        account_id:
+          type: integer
+          format: int64
+          readOnly: true
+          title: Account unique identifier
+        flag:
+          type: string
+          description: A flag which determines whether the URL is `INCLUDE` or `EXCLUDE`.
+          enum:
+          - INCLUDE
+          - EXCLUDE
+          title: Include or Exclude
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          title: Unique identifier
+        url:
+          type: string
+          title: The URL
+      required:
+      - account_id
+      - flag
+      - url
+    IncludeExcludeRequest:
+      type: object
+      description: A request to create an IncludeExclude.
+      properties:
+        Include or Exclude:
+          type: string
+          description: A flag which determines whether the URL is `INCLUDE` or `EXCLUDE`.
+          enum:
+          - INCLUDE
+          - EXCLUDE
+        The URL:
+          type: string
+      required:
+      - Include or Exclude
+      - The URL
+    Merchant:
+      type: object
+      description: A Merchant project.
+      properties:
+        access_token:
+          type: string
+          description: The Google merchant access token
+        account_id:
+          type: integer
+          format: int64
+          description: The account id
+          readOnly: true
+        automatic_synchronization:
+          type: boolean
+          description: Whether the Merchant data will be synchronized automatically
+        created_at:
+          type: string
+          format: date-time
+          description: The create date-time
+          readOnly: true
+        dataset_domain:
+          type: string
+          description: The custom domain (for example data.example.org)
+        dataset_name:
+          type: string
+          description: The dataset path (for example /data)
+        deleted:
+          type: boolean
+          default: false
+          description: True if the merchant has been deleted
+        deleted_at:
+          type: string
+          format: date-time
+          description: The delete date-time
+          readOnly: true
+        google_merchant_id:
+          type: integer
+          format: int64
+          description: The Google Merchant id
+        id:
+          type: integer
+          format: int64
+          description: The unique id
+          readOnly: true
+        ignore_brand:
+          type: boolean
+          description: Whether to ignore the `brand` property during validation
+        ignore_image:
+          type: boolean
+          description: Whether to ignore the `image` property during validation
+        modified_at:
+          type: string
+          format: date-time
+          description: The last modified date-time
+          readOnly: true
+        publisher_name:
+          type: string
+          description: The publisher name (shows in schema publisher)
+        refresh_token:
+          type: string
+          description: The Google merchant refresh token
+        url:
+          type: string
+          description: The website URL
+        writer_service:
+          type: string
+          description: "How to write the merchant data to the graph, if unsure, do\
+            \ not set anything (by default `wordpressMerchantWriter`)."
+      required:
+      - access_token
+      - deleted
+      - google_merchant_id
+      - publisher_name
+      - refresh_token
+    MerchantEntry:
+      type: object
+      description: A Merchant Entry with the Google Merchant Id and the Website URL
+      properties:
+        google_merchant_id:
+          type: integer
+          format: int64
+          description: The Google Merchant id
+        website_url:
+          type: string
+          description: The Google Merchant Website URL
+      required:
+      - google_merchant_id
+      - website_url
+    MerchantRequest:
+      type: object
+      description: The Merchant request
+      properties:
+        access_token:
+          type: string
+          description: Google Merchant access token
+        dataset_domain:
+          type: string
+          description: The custom domain (for example data.example.org)
+        dataset_name:
+          type: string
+          description: The dataset path (for example "data")
+        deleted:
+          type: boolean
+          default: false
+          description: True if the merchant has been deleted
+        google_merchant_id:
+          type: integer
+          format: int64
+          description: The Google Merchant id
+        ignore_brand:
+          type: boolean
+          description: Whether to ignore the `brand` property during validation
+        ignore_image:
+          type: boolean
+          description: Whether to ignore the `image` property during validation
+        publisher_name:
+          type: string
+          description: The publisher name (shows in schema publisher)
+        refresh_token:
+          type: string
+          description: Google Merchant refresh token
+        url:
+          type: string
+          description: The website URL
+        writer_service:
+          type: string
+          description: "How to write the merchant data to the graph, if unsure, do\
+            \ not set anything (by default `wordpressMerchantWriter`)."
+      required:
+      - google_merchant_id
+      - publisher_name
+      - refresh_token
+      - url
+    MerchantSync:
+      type: object
+      description: A Merchant products data synchronization.
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: The create date-time.
+          readOnly: true
+        has_errors:
+          type: boolean
+          description: Whether the sync encountered errors.
+          readOnly: true
+        id:
+          type: integer
+          format: int64
+          description: The unique id.
+          readOnly: true
+        merchant_id:
+          type: integer
+          format: int64
+          description: The parent Merchant id.
+          readOnly: true
+        modified_at:
+          type: string
+          format: date-time
+          description: The last modified date-time.
+          readOnly: true
+        products_created:
+          type: integer
+          format: int32
+          description: The number of created products
+          readOnly: true
+        products_deleted:
+          type: integer
+          format: int32
+          description: The number of deleted products
+          readOnly: true
+        products_errored:
+          type: integer
+          format: int32
+          description: The number of errored products
+          readOnly: true
+        products_skipped:
+          type: integer
+          format: int32
+          description: The number of skipped products
+          readOnly: true
+        products_total:
+          type: integer
+          format: int32
+          description: "The total number of processed products, including the skipped\
+            \ and errored."
+          readOnly: true
+        products_updated:
+          type: integer
+          format: int32
+          description: The number of update products
+          readOnly: true
+        started_at:
+          type: string
+          format: date-time
+          description: The started date-time.
+          readOnly: true
+        stopped_at:
+          type: string
+          format: date-time
+          description: The stopped date-time.
+          readOnly: true
+      required:
+      - merchant_id
+    MerchantView:
+      type: object
+      description: An array of objects.
+      properties:
+        access_token:
+          type: string
+          description: The Google merchant access token
+        account_id:
+          type: integer
+          format: int64
+          description: The account id
+          readOnly: true
+        automatic_synchronization:
+          type: boolean
+          description: Whether the Merchant data will be synchronized automatically
+        created_at:
+          type: string
+          format: date-time
+          description: The create date-time
+          readOnly: true
+        dataset_domain:
+          type: string
+          description: The custom domain (for example data.example.org)
+        dataset_name:
+          type: string
+          description: The dataset path (for example /data)
+        deleted:
+          type: boolean
+          default: false
+          description: True if the merchant has been deleted
+        deleted_at:
+          type: string
+          format: date-time
+          description: The delete date-time
+          readOnly: true
+        google_merchant_id:
+          type: integer
+          format: int64
+          description: The Google Merchant id
+        id:
+          type: integer
+          format: int64
+          description: The unique id
+          readOnly: true
+        ignore_brand:
+          type: boolean
+          description: Whether to ignore the `brand` property during validation
+        ignore_image:
+          type: boolean
+          description: Whether to ignore the `image` property during validation
+        modified_at:
+          type: string
+          format: date-time
+          description: The last modified date-time
+          readOnly: true
+        publisher_name:
+          type: string
+          description: The publisher name (shows in schema publisher)
+        refresh_token:
+          type: string
+          description: The Google merchant refresh token
+        sid:
+          type: string
+        sync_has_errors:
+          type: boolean
+        sync_id:
+          type: integer
+          format: int64
+        sync_products_created:
+          type: integer
+          format: int32
+        sync_products_deleted:
+          type: integer
+          format: int32
+        sync_products_errored:
+          type: integer
+          format: int32
+        sync_products_skipped:
+          type: integer
+          format: int32
+        sync_products_total:
+          type: integer
+          format: int32
+        sync_products_updated:
+          type: integer
+          format: int32
+        sync_started_at:
+          type: string
+          format: date-time
+          description: The started date-time.
+          readOnly: true
+        sync_stopped_at:
+          type: string
+          format: date-time
+          description: The stopped date-time.
+          readOnly: true
+        url:
+          type: string
+          description: The website URL
+        writer_service:
+          type: string
+          description: "How to write the merchant data to the graph, if unsure, do\
+            \ not set anything (by default `wordpressMerchantWriter`)."
+      required:
+      - access_token
+      - deleted
+      - google_merchant_id
+      - publisher_name
+      - refresh_token
+    NetworkAccountInfo:
+      type: object
+      description: Network Account Information
+      properties:
+        accountId:
+          type: integer
+          format: int64
+          description: The Account Id
+          readOnly: true
+        datasetId:
+          type: string
+          description: The Dataset Id
+          readOnly: true
+        datasetUri:
+          type: string
+          description: The Dataset URI
+          readOnly: true
+        url:
+          type: string
+          description: The website URL
+          readOnly: true
+      readOnly: true
+      required:
+      - datasetUri
+    NodeRequest:
+      type: object
+      description: A node request.
+      properties:
+        embeddings:
+          type: array
+          description: A list of embeddings.
+          items:
+            type: number
+            format: double
+            description: A list of embeddings.
+        entity_id:
+          type: string
+          description: "The entity id in the form on an IRI, e.g. https://data.example.org/dataset/entity."
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+            description: A map of metadata properties.
+          description: A map of metadata properties.
+        node_id:
+          type: string
+          description: The node id generally expressed in the form of a UUID.
+        text:
+          type: string
+          description: The original text.
+      required:
+      - entity_id
+      - node_id
+    OAuth2AuthorizedClient:
+      type: object
+      description: A OAuth2 Authorized Client
+      properties:
+        access_token_expires_at:
+          type: string
+          format: date-time
+        access_token_issued_at:
+          type: string
+          format: date-time
+        access_token_scopes:
+          type: string
+        access_token_type:
+          type: string
+        access_token_value:
+          type: string
+        client_registration_id:
+          type: string
+        id:
+          type: integer
+          format: int64
+        principal_name:
+          type: string
+        refresh_token_issued_at:
+          type: string
+          format: date-time
+        refresh_token_value:
+          type: string
+    OAuth2AuthorizedClientRequest:
+      type: object
+      description: The OAuth2 Authorized Client request
+      properties:
+        access_token_expires_at:
+          type: string
+          format: date-time
+          description: When the Access Token expires
+        access_token_issued_at:
+          type: string
+          format: date-time
+          description: When the Access Token was issued
+        access_token_scopes:
+          type: string
+          description: The Access Token scopes
+        access_token_type:
+          type: string
+          description: The Access Token Type
+        access_token_value:
+          type: string
+          description: The Access Token Value
+        client_registration_id:
+          type: string
+          description: The Client Registration Id
+        principal_name:
+          type: string
+          description: The Principal Name
+        refresh_token_issued_at:
+          type: string
+          format: date-time
+          description: When the Access Token was issued
+        refresh_token_value:
+          type: string
+          description: The Refresh Token Value
+    PageActiveAccount:
+      type: object
+      description: A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: '#/components/schemas/ActiveAccount'
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+      - first
+      - items
+      - last
+      - next
+      - prev
+      - self
+    PageAddOnConfiguration:
+      type: object
+      description: A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: '#/components/schemas/AddOnConfiguration'
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+      - first
+      - items
+      - last
+      - next
+      - prev
+      - self
+    PageMerchantEntry:
+      type: object
+      description: A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: '#/components/schemas/MerchantEntry'
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+      - first
+      - items
+      - last
+      - next
+      - prev
+      - self
+    PageMerchantSync:
+      type: object
+      description: A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: '#/components/schemas/MerchantSync'
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+      - first
+      - items
+      - last
+      - next
+      - prev
+      - self
+    PageMerchantView:
+      type: object
+      description: A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: '#/components/schemas/MerchantView'
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+      - first
+      - items
+      - last
+      - next
+      - prev
+      - self
+    PageOAuth2AuthorizedClient:
+      type: object
+      description: A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: '#/components/schemas/OAuth2AuthorizedClient'
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+      - first
+      - items
+      - last
+      - next
+      - prev
+      - self
+    PagePlatformLimit:
+      type: object
+      description: A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: '#/components/schemas/PlatformLimit'
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+      - first
+      - items
+      - last
+      - next
+      - prev
+      - self
+    PageVectorSearchQueryResponseItem:
+      type: object
+      description: A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: '#/components/schemas/VectorSearchQueryResponseItem'
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+      - first
+      - items
+      - last
+      - next
+      - prev
+      - self
+    PageVectorSearchQuestionResponseItem:
+      type: object
+      description: A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: '#/components/schemas/VectorSearchQuestionResponseItem'
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+      - first
+      - items
+      - last
+      - next
+      - prev
+      - self
+    PageWebsite:
+      type: object
+      description: A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: '#/components/schemas/Website'
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+      - first
+      - items
+      - last
+      - next
+      - prev
+      - self
+    PageWebsiteSearch:
+      type: object
+      description: A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: '#/components/schemas/WebsiteSearch'
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+      - first
+      - items
+      - last
+      - next
+      - prev
+      - self
+    PageWithLimits:
+      type: object
+      description: A page object with links to move to other pages and the list of
+        objects.
+      properties:
+        first:
+          type: string
+          description: The link to the first page.
+          nullable: true
+        items:
+          type: array
+          description: An array of objects.
+          items:
+            $ref: '#/components/schemas/WithLimits'
+        last:
+          type: string
+          description: The link to the last page.
+          nullable: true
+        next:
+          type: string
+          description: The link to the next page or `null` if there's no page.
+          nullable: true
+        prev:
+          type: string
+          description: The link to the previous page or `null` if there's no page.
+          nullable: true
+        self:
+          type: string
+          description: The link to the current page.
+          nullable: true
+      required:
+      - first
+      - items
+      - last
+      - next
+      - prev
+      - self
+    PlatformLimit:
+      type: object
+      properties:
+        applies_to:
+          type: string
+        based_on:
+          type: string
+          enum:
+          - SKU
+        based_on_value:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          description: The create date-time.
+          readOnly: true
+        description:
+          type: string
+        id:
+          type: integer
+          format: int64
+        limits:
+          type: integer
+          format: int32
+          minimum: 1
+        modified_at:
+          type: string
+          format: date-time
+          description: The last modified date-time.
+          readOnly: true
+        scope:
+          type: string
+          enum:
+          - ACCOUNT
+          - SUBSCRIPTION
+      required:
+      - applies_to
+      - based_on
+      - based_on_value
+      - limits
+      - scope
+    PlatformLimitRequest:
+      type: object
+      description: Platform Limit request
+      properties:
+        applies_to:
+          type: string
+        based_on:
+          type: string
+          enum:
+          - SKU
+        based_on_value:
+          type: string
+        description:
+          type: string
+        limits:
+          type: integer
+          format: int32
+          minimum: 1
+        scope:
+          type: string
+          enum:
+          - ACCOUNT
+          - SUBSCRIPTION
+      required:
+      - applies_to
+      - based_on
+      - based_on_value
+      - limits
+      - scope
+    ProblemDetail:
+      type: object
+      properties:
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        properties:
+          type: object
+          additionalProperties:
+            type: object
+        status:
+          type: integer
+          format: int32
+        title:
+          type: string
+        type:
+          type: string
+          format: uri
+    Request:
+      type: object
+      properties:
+        redeem_code:
+          type: string
+    Response:
+      type: object
+      properties:
+        key:
+          type: string
+    SitemapImportRequest:
+      type: object
+      description: The Sitemap Import request
+      properties:
+        sitemap_url:
+          type: string
+          description: The sitemap URL
+        urls:
+          type: array
+          description: The URLs
+          items:
+            type: string
+            description: The URLs
+          uniqueItems: true
+    UpdateAccountRequest:
+      type: object
+      properties:
+        country:
+          type: string
+        language:
+          type: string
+        url:
+          type: string
+    VectorSearchQueryRequest:
+      type: object
+      description: A query request.
+      properties:
+        filters:
+          type: array
+          description: A list of prefilters.
+          items:
+            $ref: '#/components/schemas/Filter'
+        query_embedding:
+          type: array
+          description: "The list of embeddings, not required if `query_string` is\
+            \ provided."
+          items:
+            type: number
+            format: double
+            description: "The list of embeddings, not required if `query_string` is\
+              \ provided."
+        query_string:
+          type: string
+          description: "The query string, not required if the `query_embeddings` are\
+            \ provided. Please note that the `query_string` is ignored if the `query_embeddings`\
+            \ are provided."
+        query_uri:
+          type: string
+          format: uri
+          description: Perform a Vector Search based on similarities with an entity
+            with the specified URI.
+        query_url:
+          type: string
+          format: url
+          description: Perform a Vector Search based on similarities with an entity
+            with the specified URL (schema:url).
+        similarity_top_k:
+          type: integer
+          format: int32
+          default: 2
+          description: The similarity top K.
+          minimum: 1
+    VectorSearchQueryResponseItem:
+      type: object
+      description: An array of objects.
+      properties:
+        datasetUri:
+          type: string
+        id:
+          type: string
+        iri:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+            description: A nodes extra metadata.
+          description: A nodes extra metadata.
+        node_id:
+          type: string
+          description: A nodes id.
+        score:
+          type: number
+          format: double
+          description: The similarity score between the node and the query embeddings.
+        text:
+          type: string
+          description: The text of a node from which the embeddings were generated.
+      required:
+      - node_id
+      - score
+      - text
+    VectorSearchQuestionRequest:
+      type: object
+      description: One or more questions.
+      properties:
+        language:
+          type: string
+          description: The desired language of the answer.
+        questions:
+          type: array
+          description: The list of questions.
+          items:
+            type: string
+            description: The list of questions.
+      required:
+      - questions
+    VectorSearchQuestionResponseItem:
+      type: object
+      description: An array of objects.
+      properties:
+        answer:
+          type: string
+        question:
+          type: string
+    WebPage:
+      type: object
+      properties:
+        abstract:
+          type: string
+        date_published:
+          type: string
+          format: date
+        headline:
+          type: string
+        image:
+          type: string
+        text:
+          type: string
+        types:
+          type: array
+          items:
+            type: string
+        url:
+          type: string
+    Website:
+      type: object
+      description: A Website
+      properties:
+        url:
+          type: string
+          description: "The Website URL, it may also start with thew `sc-domain:`\
+            \ prefix."
+      required:
+      - url
+    WebsiteSearch:
+      type: object
+      description: Search Data
+      properties:
+        clicks:
+          type: integer
+          format: int32
+          description: Number of clicks.
+        ctr:
+          type: number
+          format: double
+          description: CTR.
+        id:
+          type: integer
+          format: int64
+          description: "The id: it's now a unique id, but a row index."
+        impressions:
+          type: integer
+          format: int32
+          description: Number of impressions.
+        keys:
+          type: array
+          description: "The keys for the current data, matching the provided `dimensions`\
+            \ in the query."
+          items:
+            type: string
+            description: "The keys for the current data, matching the provided `dimensions`\
+              \ in the query."
+        position:
+          type: number
+          format: double
+          description: Position.
+        score:
+          type: number
+          format: double
+          description: "A score to spot traffic opportunities, from 0.0 to 1.0 (the\
+            \ higher the better). The score is based on the traffic data."
+      required:
+      - clicks
+      - ctr
+      - id
+      - impressions
+      - keys
+      - position
+      - score
+    WithLimits:
+      type: object
+      description: An array of objects.
+      properties:
+        account_limits:
+          type: integer
+          format: int32
+        applies_to:
+          type: string
+        block:
+          type: boolean
+        consumption:
+          type: integer
+          format: int32
+          minimum: 1
+        id:
+          type: integer
+          format: int64
+        limits:
+          type: integer
+          format: int32
+        reference_id:
+          type: integer
+          format: int64
+        reference_type:
+          type: string
+          enum:
+          - SUBSCRIPTION
+          - ACCOUNT
+        remaining:
+          type: integer
+          format: int32
+        resets_in_seconds:
+          type: integer
+          format: int64
+        subscription_limits:
+          type: integer
+          format: int32
+      required:
+      - applies_to
+  securitySchemes:
+    ApiKey:
+      description: "`Key {your key}`"
+      in: header
+      name: Authorization
+      type: apiKey
+    BasicAuth:
+      description: "`Basic {encoded username:password}`"
+      in: header
+      name: Authorization
+      scheme: basic
+      type: http
+    OAuth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: https://s.wordlift.io/oauth/authorize/
+          scopes:
+            basic: basic scope
+          tokenUrl: https://s.wordlift.io/oauth/token/
+      type: oauth2

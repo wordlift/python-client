@@ -1,0 +1,137 @@
+name: Publish Python 🐍 distribution 📦 to PyPI and TestPyPI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build distribution 📦
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the first repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20" # Specify the Node.js version to use
+
+      # Step 3: Install openapi-merge-cli and openapi-generator-cli
+      - name: Install openapi-merge-cli
+        run: |
+          npm i openapi-merge-cli
+          npm i @openapitools/openapi-generator-cli
+
+      # Step 4: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.7"
+
+      # Step 5: Install Python dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install build
+
+      # Step 6: Run the Python script to generate json for openApi-merge
+      - name: generate json for openApi-merge
+        run: python3 ./utils/json_merge_generator.py
+
+      # Step 7: Merge the YAML files
+      - name: Merge the yaml files
+        run: npx openapi-merge-cli --config ./openapi-merge.json
+
+      # Step 8: Generate the SDK
+      - name: Generate the SDK
+        run: npx @openapitools/openapi-generator-cli generate -i ./wordliftApiSpec.yaml -g python --package-name 'wordlift_client' --library 'asyncio'
+
+      # Step 9: Build the binary
+      - name: Build a binary wheel and a source tarball
+        run: |
+          python3 -m build
+      - name: Store the distribution packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: python-package-distributions
+          path: dist/
+
+  test:
+    name: Test client
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+      # Step 1: Set up Python
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # Step 2: Install Python dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
+
+      # Step 3: Run tests
+      - name: Run tests
+        run: pytest
+
+  publish-to-pypi:
+    name: >-
+      Publish Python 🐍 distribution 📦 to PyPI
+    if: startsWith(github.ref, 'refs/tags/')
+    needs:
+      - build
+      - test
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/wordlift-client
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Download all the dists
+        uses: actions/download-artifact@v3
+        with:
+          name: python-package-distributions
+          path: dist/
+      - name: Publish distribution 📦 to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+  publish-to-testpypi:
+    name: Publish Python 🐍 distribution 📦 to TestPyPI
+    needs:
+      - build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/wordlift-client
+
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Download all the dists
+        uses: actions/download-artifact@v3
+        with:
+          name: python-package-distributions
+          path: dist/
+      - name: Publish distribution 📦 to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/

@@ -1,0 +1,161 @@
+openapi: 3.0.1
+info:
+  title: Events
+  description: An API to record and query events raised by clients in order to facilitate
+    KPI tracking.
+  termsOfService: https://wordlift.io/terms-of-service/
+  contact:
+    name: WordLift
+    url: https://wordlift.io
+    email: hello@wordlift.io
+  license:
+    name: (c) copyright 2022-present WordLift
+    url: https://wordlift.io
+  version: "1.0"
+servers:
+- url: https://api.wordlift.io
+tags:
+- name: Plugin Events
+  description: Record and query for events raised by the WordLift Plugin in order
+    to analyze KPI data.
+paths:
+  /plugin/events:
+    get:
+      tags:
+      - Plugin Events
+      summary: List
+      description: List the events bound to the authenticated account.
+      operationId: listEvents
+      parameters:
+      - name: url
+        in: query
+        description: URLs to return
+        required: false
+        schema:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+      - name: date_greater_than
+        in: query
+        description: Event datetime filter to return events with date greater than
+          the parameter
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: date_less_than
+        in: query
+        description: Event datetime filter to return events with date less than the
+          parameter
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: cursor
+        in: query
+        description: The pagination cursor
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The maximum number of results
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        "401":
+          description: Authentication failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+      security:
+      - ApiKey: []
+    post:
+      tags:
+      - Plugin Events
+      summary: Create
+      description: Create an event
+      operationId: createEvent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Request'
+        required: true
+      responses:
+        "200":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        "401":
+          description: Authentication failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+      security:
+      - ApiKey: []
+components:
+  schemas:
+    Json:
+      type: object
+    Request:
+      type: object
+      properties:
+        source:
+          type: string
+        args:
+          $ref: '#/components/schemas/Json'
+        url:
+          type: string
+      description: The Event request
+    Event:
+      type: object
+      properties:
+        source:
+          type: string
+        args:
+          $ref: '#/components/schemas/Json'
+        url:
+          type: string
+        recorded_at:
+          type: string
+          format: date-time
+        account_id:
+          type: integer
+          format: int64
+    Response:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        self:
+          type: string
+        next:
+          type: string
+        prev:
+          type: string
+        last:
+          type: string
+        first:
+          type: string
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      description: "`Key {your key}`"
+      name: Authorization
+      in: header

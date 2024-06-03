@@ -1,0 +1,64 @@
+openapi: 3.0.3
+info:
+    title: Embeddings API
+    version: 1.0.0
+paths:
+    /api/embeddings:
+        post:
+            responses: {}
+            tags:
+            - Embeddings
+            operationId: create_embeddings
+            summary: Create Embeddings
+            description: Create Embeddings
+            parameters: []
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateEmbeddingsInput'
+                required: true
+servers: []
+components:
+    schemas:
+        CreateEmbeddingsInput:
+            type: object
+            required:
+            - text
+            properties:
+                text:
+                    type: string
+                    nullable: false
+    parameters:
+        page:
+            name: page
+            in: query
+            schema:
+                format: int64
+                default: 1
+                minimum: 0
+            description: Page number.
+        limit:
+            name: limit
+            in: query
+            schema:
+                format: int32
+                default: 100
+                maximum: 1000
+                minimum: 0
+            description: Number of results per page.
+        continuation_id:
+            name: continuation_id
+            in: query
+            schema:
+                format: int64
+            description: Optional, ID of the last item that was retrieved. If provided,
+                enables faster pagination.
+        order:
+            name: order
+            in: query
+            schema:
+                type: string
+            description: Optional sort order (asc / desc) - default asc.
+tags:
+-   name: Embeddings
