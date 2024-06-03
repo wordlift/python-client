@@ -52,7 +52,14 @@ jobs:
       - name: Generate the SDK
         run: npx @openapitools/openapi-generator-cli generate -i ./wordliftApiSpec.yaml -g python --package-name 'wordlift_client' --library 'asyncio'
 
-      # Step 9: Build the binary
+      # Step 9: Store the package for testing
+      - name: Store the package
+        uses: actions/upload-artifact@v3
+        with:
+          name: python-package
+          path: ./
+
+      # Step 10: Build the binary
       - name: Build a binary wheel and a source tarball
         run: |
           python3 -m build
@@ -72,20 +79,27 @@ jobs:
         python-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
 
     steps:
-      # Step 1: Set up Python
+      # Step 1: Download the package
+      - name: Download the package
+        uses: actions/download-artifact@v3
+        with:
+          name: python-package
+          path: ./
+
+      # Step 2: Set up Python
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
-      # Step 2: Install Python dependencies
+      # Step 3: Install Python dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest
 
-      # Step 3: Run tests
+      # Step 4: Run tests
       - name: Run tests
         run: pytest
 
