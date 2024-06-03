@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.validation_result import ValidationResult
+from wordlift_client.models.validation_result import ValidationResult
 
 # TODO update the JSON string below
 json = "{}"

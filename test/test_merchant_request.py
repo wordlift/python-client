@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.merchant_request import MerchantRequest
+from wordlift_client.models.merchant_request import MerchantRequest
 
 class TestMerchantRequest(unittest.TestCase):
     """MerchantRequest unit test stubs"""

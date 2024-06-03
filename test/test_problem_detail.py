@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.problem_detail import ProblemDetail
+from wordlift_client.models.problem_detail import ProblemDetail
 
 class TestProblemDetail(unittest.TestCase):
     """ProblemDetail unit test stubs"""

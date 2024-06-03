@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.autocomplete_api import AutocompleteApi
+from wordlift_client.api.autocomplete_api import AutocompleteApi
 
 
 class TestAutocompleteApi(unittest.TestCase):

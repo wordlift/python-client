@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.completion_request import CompletionRequest
+from wordlift_client.models.completion_request import CompletionRequest
 
 # TODO update the JSON string below
 json = "{}"

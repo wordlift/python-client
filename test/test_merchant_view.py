@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.merchant_view import MerchantView
+from wordlift_client.models.merchant_view import MerchantView
 
 class TestMerchantView(unittest.TestCase):
     """MerchantView unit test stubs"""

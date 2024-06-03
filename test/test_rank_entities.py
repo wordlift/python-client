@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.rank_entities import RankEntities
+from wordlift_client.models.rank_entities import RankEntities
 
 class TestRankEntities(unittest.TestCase):
     """RankEntities unit test stubs"""
@@ -38,9 +38,9 @@ class TestRankEntities(unittest.TestCase):
             return RankEntities(
                 rank = 56,
                 entities = [
-                    wordlift-client.models.entity1.Entity1(
+                    wordlift_client.models.entity1.Entity1(
                         reference = '', 
-                        properties = wordlift-client.models.properties1.Properties1(
+                        properties = wordlift_client.models.properties1.Properties1(
                             name = '', 
                             same_as = [
                                 ''

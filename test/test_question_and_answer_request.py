@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.question_and_answer_request import QuestionAndAnswerRequest
+from wordlift_client.models.question_and_answer_request import QuestionAndAnswerRequest
 
 class TestQuestionAndAnswerRequest(unittest.TestCase):
     """QuestionAndAnswerRequest unit test stubs"""
@@ -37,7 +37,7 @@ class TestQuestionAndAnswerRequest(unittest.TestCase):
         if include_optional:
             return QuestionAndAnswerRequest(
                 smart_content_id = 56,
-                webpage_properties = wordlift-client.models.webpage_properties.WebpageProperties(
+                webpage_properties = wordlift_client.models.webpage_properties.WebpageProperties(
                     entities = [
                         ''
                         ], 

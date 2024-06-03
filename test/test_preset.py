@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.preset import Preset
+from wordlift_client.models.preset import Preset
 
 class TestPreset(unittest.TestCase):
     """Preset unit test stubs"""

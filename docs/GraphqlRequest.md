@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.graphql_request import GraphqlRequest
+from wordlift_client.models.graphql_request import GraphqlRequest
 
 # TODO update the JSON string below
 json = "{}"

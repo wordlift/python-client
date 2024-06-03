@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.include_exclude import IncludeExclude
+from wordlift_client.models.include_exclude import IncludeExclude
 
 # TODO update the JSON string below
 json = "{}"

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.longtail_response import LongtailResponse
+from wordlift_client.models.longtail_response import LongtailResponse
 
 # TODO update the JSON string below
 json = "{}"

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.include_exclude_request import IncludeExcludeRequest
+from wordlift_client.models.include_exclude_request import IncludeExcludeRequest
 
 # TODO update the JSON string below
 json = "{}"

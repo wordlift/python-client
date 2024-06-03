@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.question_and_answer import QuestionAndAnswer
+from wordlift_client.models.question_and_answer import QuestionAndAnswer
 
 class TestQuestionAndAnswer(unittest.TestCase):
     """QuestionAndAnswer unit test stubs"""
@@ -42,7 +42,7 @@ class TestQuestionAndAnswer(unittest.TestCase):
                     ''
                     ],
                 errors = [
-                    wordlift-client.models.validation_result.ValidationResult(
+                    wordlift_client.models.validation_result.ValidationResult(
                         level_enum = 'RECOMMENDED', 
                         name = '', 
                         result = 'PASS', )
@@ -56,7 +56,7 @@ class TestQuestionAndAnswer(unittest.TestCase):
                 smart_content_id = 56,
                 url = '',
                 warnings = [
-                    wordlift-client.models.validation_result.ValidationResult(
+                    wordlift_client.models.validation_result.ValidationResult(
                         level_enum = 'RECOMMENDED', 
                         name = '', 
                         result = 'PASS', )

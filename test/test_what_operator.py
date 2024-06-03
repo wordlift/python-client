@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.what_operator import WhatOperator
+from wordlift_client.models.what_operator import WhatOperator
 
 class TestWhatOperator(unittest.TestCase):
     """WhatOperator unit test stubs"""

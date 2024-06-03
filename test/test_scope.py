@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.scope import Scope
+from wordlift_client.models.scope import Scope
 
 class TestScope(unittest.TestCase):
     """Scope unit test stubs"""

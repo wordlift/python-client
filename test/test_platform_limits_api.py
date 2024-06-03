@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.platform_limits_api import PlatformLimitsApi
+from wordlift_client.api.platform_limits_api import PlatformLimitsApi
 
 
 class TestPlatformLimitsApi(unittest.TestCase):

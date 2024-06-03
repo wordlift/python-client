@@ -38,7 +38,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.merchant_view import MerchantView
+from wordlift_client.models.merchant_view import MerchantView
 
 # TODO update the JSON string below
 json = "{}"

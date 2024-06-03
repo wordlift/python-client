@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.plugin_events_api import PluginEventsApi
+from wordlift_client.api.plugin_events_api import PluginEventsApi
 
 
 class TestPluginEventsApi(unittest.TestCase):

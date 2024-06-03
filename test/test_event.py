@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.event import Event
+from wordlift_client.models.event import Event
 
 class TestEvent(unittest.TestCase):
     """Event unit test stubs"""

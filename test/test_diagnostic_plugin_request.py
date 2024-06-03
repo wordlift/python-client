@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.diagnostic_plugin_request import DiagnosticPluginRequest
+from wordlift_client.models.diagnostic_plugin_request import DiagnosticPluginRequest
 
 class TestDiagnosticPluginRequest(unittest.TestCase):
     """DiagnosticPluginRequest unit test stubs"""

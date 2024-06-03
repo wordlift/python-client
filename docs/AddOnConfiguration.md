@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.add_on_configuration import AddOnConfiguration
+from wordlift_client.models.add_on_configuration import AddOnConfiguration
 
 # TODO update the JSON string below
 json = "{}"

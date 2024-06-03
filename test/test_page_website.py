@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.page_website import PageWebsite
+from wordlift_client.models.page_website import PageWebsite
 
 class TestPageWebsite(unittest.TestCase):
     """PageWebsite unit test stubs"""
@@ -38,7 +38,7 @@ class TestPageWebsite(unittest.TestCase):
             return PageWebsite(
                 first = '',
                 items = [
-                    wordlift-client.models.website.Website(
+                    wordlift_client.models.website.Website(
                         url = '', )
                     ],
                 last = '',
@@ -50,7 +50,7 @@ class TestPageWebsite(unittest.TestCase):
             return PageWebsite(
                 first = '',
                 items = [
-                    wordlift-client.models.website.Website(
+                    wordlift_client.models.website.Website(
                         url = '', )
                     ],
                 last = '',

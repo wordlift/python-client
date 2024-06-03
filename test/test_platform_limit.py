@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.platform_limit import PlatformLimit
+from wordlift_client.models.platform_limit import PlatformLimit
 
 class TestPlatformLimit(unittest.TestCase):
     """PlatformLimit unit test stubs"""

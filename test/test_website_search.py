@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.website_search import WebsiteSearch
+from wordlift_client.models.website_search import WebsiteSearch
 
 class TestWebsiteSearch(unittest.TestCase):
     """WebsiteSearch unit test stubs"""

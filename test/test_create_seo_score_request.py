@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.create_seo_score_request import CreateSEOScoreRequest
+from wordlift_client.models.create_seo_score_request import CreateSEOScoreRequest
 
 class TestCreateSEOScoreRequest(unittest.TestCase):
     """CreateSEOScoreRequest unit test stubs"""

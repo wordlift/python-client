@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.what_operand_lhs import WhatOperandLhs
+from wordlift_client.models.what_operand_lhs import WhatOperandLhs
 
 class TestWhatOperandLhs(unittest.TestCase):
     """WhatOperandLhs unit test stubs"""

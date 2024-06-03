@@ -1,4 +1,4 @@
-# wordlift-client.MerchantSyncsApi
+# wordlift_client.MerchantSyncsApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -18,22 +18,22 @@ Start
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.merchant_sync import MerchantSync
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.merchant_sync import MerchantSync
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.MerchantSyncsApi(api_client)
+    api_instance = wordlift_client.MerchantSyncsApi(api_client)
     merchant_id = 56 # int | The Merchant's `id`
 
     try:
@@ -85,22 +85,22 @@ Get by id
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.merchant_sync import MerchantSync
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.merchant_sync import MerchantSync
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.MerchantSyncsApi(api_client)
+    api_instance = wordlift_client.MerchantSyncsApi(api_client)
     merchant_id = 56 # int | The Merchant's `id`
     id = 56 # int | The Merchant Sync `id`.
 
@@ -157,22 +157,22 @@ List the Merchants Syncs
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.page_merchant_sync import PageMerchantSync
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.page_merchant_sync import PageMerchantSync
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.MerchantSyncsApi(api_client)
+    api_instance = wordlift_client.MerchantSyncsApi(api_client)
     merchant_id = 56 # int | The Merchant's `id`
     cursor = 'cursor_example' # str | The cursor (optional)
     limit = 10 # int | The maximum number of results (optional) (default to 10)

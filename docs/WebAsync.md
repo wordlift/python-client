@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.web_async import WebAsync
+from wordlift_client.models.web_async import WebAsync
 
 # TODO update the JSON string below
 json = "{}"

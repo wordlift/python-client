@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.create_embeddings_input import CreateEmbeddingsInput
+from wordlift_client.models.create_embeddings_input import CreateEmbeddingsInput
 
 # TODO update the JSON string below
 json = "{}"

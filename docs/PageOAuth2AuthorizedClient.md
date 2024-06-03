@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.page_o_auth2_authorized_client import PageOAuth2AuthorizedClient
+from wordlift_client.models.page_o_auth2_authorized_client import PageOAuth2AuthorizedClient
 
 # TODO update the JSON string below
 json = "{}"

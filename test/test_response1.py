@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.response1 import Response1
+from wordlift_client.models.response1 import Response1
 
 class TestResponse1(unittest.TestCase):
     """Response1 unit test stubs"""
@@ -37,9 +37,9 @@ class TestResponse1(unittest.TestCase):
         if include_optional:
             return Response1(
                 items = [
-                    wordlift-client.models.event.Event(
+                    wordlift_client.models.event.Event(
                         source = '', 
-                        args = wordlift-client.models.args.args(), 
+                        args = wordlift_client.models.args.args(), 
                         url = '', 
                         recorded_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         account_id = 56, )

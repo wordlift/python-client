@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.vector_search_question_request import VectorSearchQuestionRequest
+from wordlift_client.models.vector_search_question_request import VectorSearchQuestionRequest
 
 # TODO update the JSON string below
 json = "{}"

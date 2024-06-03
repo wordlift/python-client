@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.smart_content import SmartContent
+from wordlift_client.models.smart_content import SmartContent
 
 # TODO update the JSON string below
 json = "{}"

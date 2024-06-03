@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.filter import Filter
+from wordlift_client.models.filter import Filter
 
 class TestFilter(unittest.TestCase):
     """Filter unit test stubs"""

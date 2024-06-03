@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.word_repetition_data import WordRepetitionData
+from wordlift_client.models.word_repetition_data import WordRepetitionData
 
 class TestWordRepetitionData(unittest.TestCase):
     """WordRepetitionData unit test stubs"""

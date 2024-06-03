@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.create_seo_score_request import CreateSEOScoreRequest
+from wordlift_client.models.create_seo_score_request import CreateSEOScoreRequest
 
 # TODO update the JSON string below
 json = "{}"

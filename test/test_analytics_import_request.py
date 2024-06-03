@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.analytics_import_request import AnalyticsImportRequest
+from wordlift_client.models.analytics_import_request import AnalyticsImportRequest
 
 class TestAnalyticsImportRequest(unittest.TestCase):
     """AnalyticsImportRequest unit test stubs"""

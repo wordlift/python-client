@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.active_account import ActiveAccount
+from wordlift_client.models.active_account import ActiveAccount
 
 # TODO update the JSON string below
 json = "{}"

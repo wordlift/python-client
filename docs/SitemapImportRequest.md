@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.sitemap_import_request import SitemapImportRequest
+from wordlift_client.models.sitemap_import_request import SitemapImportRequest
 
 # TODO update the JSON string below
 json = "{}"

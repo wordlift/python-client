@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.graph_ql_api import GraphQLApi
+from wordlift_client.api.graph_ql_api import GraphQLApi
 
 
 class TestGraphQLApi(unittest.TestCase):

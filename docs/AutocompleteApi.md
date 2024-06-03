@@ -1,4 +1,4 @@
-# wordlift-client.AutocompleteApi
+# wordlift_client.AutocompleteApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -19,14 +19,14 @@ The autocomplete endpoint suggests entities from Linked Data that match the prov
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.models.autocomplete_result import AutocompleteResult
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.autocomplete_result import AutocompleteResult
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -42,9 +42,9 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.AutocompleteApi(api_client)
+    api_instance = wordlift_client.AutocompleteApi(api_client)
     query = 'query_example' # str | Autocomplete query
     language = 'language_example' # str | 2-letter language code, e.g. 'en'.
     scope = 'cloud' # str | Scope (optional) (default to 'cloud')

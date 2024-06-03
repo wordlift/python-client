@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.network_account_info import NetworkAccountInfo
+from wordlift_client.models.network_account_info import NetworkAccountInfo
 
 class TestNetworkAccountInfo(unittest.TestCase):
     """NetworkAccountInfo unit test stubs"""

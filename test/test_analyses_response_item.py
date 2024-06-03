@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.analyses_response_item import AnalysesResponseItem
+from wordlift_client.models.analyses_response_item import AnalysesResponseItem
 
 class TestAnalysesResponseItem(unittest.TestCase):
     """AnalysesResponseItem unit test stubs"""

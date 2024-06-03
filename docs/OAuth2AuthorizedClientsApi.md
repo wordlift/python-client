@@ -1,4 +1,4 @@
-# wordlift-client.OAuth2AuthorizedClientsApi
+# wordlift_client.OAuth2AuthorizedClientsApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -22,24 +22,24 @@ Create a OAuth2 Authorized Client
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.o_auth2_authorized_client import OAuth2AuthorizedClient
-from wordlift-client.models.o_auth2_authorized_client_request import OAuth2AuthorizedClientRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.o_auth2_authorized_client import OAuth2AuthorizedClient
+from wordlift_client.models.o_auth2_authorized_client_request import OAuth2AuthorizedClientRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.OAuth2AuthorizedClientsApi(api_client)
-    o_auth2_authorized_client_request = wordlift-client.OAuth2AuthorizedClientRequest() # OAuth2AuthorizedClientRequest | 
+    api_instance = wordlift_client.OAuth2AuthorizedClientsApi(api_client)
+    o_auth2_authorized_client_request = wordlift_client.OAuth2AuthorizedClientRequest() # OAuth2AuthorizedClientRequest | 
 
     try:
         # Create
@@ -92,21 +92,21 @@ Delete a OAuth2 Authorized Client given its client registration id
 
 
 ```python
-import wordlift-client
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.OAuth2AuthorizedClientsApi(api_client)
+    api_instance = wordlift_client.OAuth2AuthorizedClientsApi(api_client)
     id = 56 # int | The Id
 
     try:
@@ -158,22 +158,22 @@ Get a OAuth2 Authorized Client given its client registration id
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.o_auth2_authorized_client import OAuth2AuthorizedClient
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.o_auth2_authorized_client import OAuth2AuthorizedClient
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.OAuth2AuthorizedClientsApi(api_client)
+    api_instance = wordlift_client.OAuth2AuthorizedClientsApi(api_client)
     id = 56 # int | The Id
 
     try:
@@ -227,22 +227,22 @@ List OAuth2 Authorized Clients
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.page_o_auth2_authorized_client import PageOAuth2AuthorizedClient
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.page_o_auth2_authorized_client import PageOAuth2AuthorizedClient
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.OAuth2AuthorizedClientsApi(api_client)
+    api_instance = wordlift_client.OAuth2AuthorizedClientsApi(api_client)
     cursor = 'cursor_example' # str | The cursor (optional)
     limit = 10 # int | The maximum number of results (optional) (default to 10)
 
@@ -298,25 +298,25 @@ Update a OAuth2 Authorized Client given its client registration id
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.o_auth2_authorized_client import OAuth2AuthorizedClient
-from wordlift-client.models.o_auth2_authorized_client_request import OAuth2AuthorizedClientRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.o_auth2_authorized_client import OAuth2AuthorizedClient
+from wordlift_client.models.o_auth2_authorized_client_request import OAuth2AuthorizedClientRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.OAuth2AuthorizedClientsApi(api_client)
+    api_instance = wordlift_client.OAuth2AuthorizedClientsApi(api_client)
     id = 56 # int | The Id
-    o_auth2_authorized_client_request = wordlift-client.OAuth2AuthorizedClientRequest() # OAuth2AuthorizedClientRequest | 
+    o_auth2_authorized_client_request = wordlift_client.OAuth2AuthorizedClientRequest() # OAuth2AuthorizedClientRequest | 
 
     try:
         # Update

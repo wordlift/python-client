@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.merchant_syncs_api import MerchantSyncsApi
+from wordlift_client.api.merchant_syncs_api import MerchantSyncsApi
 
 
 class TestMerchantSyncsApi(unittest.TestCase):

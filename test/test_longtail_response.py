@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.longtail_response import LongtailResponse
+from wordlift_client.models.longtail_response import LongtailResponse
 
 class TestLongtailResponse(unittest.TestCase):
     """LongtailResponse unit test stubs"""
@@ -38,9 +38,9 @@ class TestLongtailResponse(unittest.TestCase):
             return LongtailResponse(
                 summary = '',
                 entities = [
-                    wordlift-client.models.entity1.Entity1(
+                    wordlift_client.models.entity1.Entity1(
                         reference = '', 
-                        properties = wordlift-client.models.properties1.Properties1(
+                        properties = wordlift_client.models.properties1.Properties1(
                             name = '', 
                             same_as = [
                                 ''

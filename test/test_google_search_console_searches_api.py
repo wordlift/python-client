@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.google_search_console_searches_api import GoogleSearchConsoleSearchesApi
+from wordlift_client.api.google_search_console_searches_api import GoogleSearchConsoleSearchesApi
 
 
 class TestGoogleSearchConsoleSearchesApi(unittest.TestCase):

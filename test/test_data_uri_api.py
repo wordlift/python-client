@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.data_uri_api import DataURIApi
+from wordlift_client.api.data_uri_api import DataURIApi
 
 
 class TestDataURIApi(unittest.TestCase):

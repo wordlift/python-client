@@ -1,4 +1,4 @@
-# wordlift-client.ContentGenerationStatsApi
+# wordlift_client.ContentGenerationStatsApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -16,22 +16,22 @@ Get
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.content_generation_stats import ContentGenerationStats
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.content_generation_stats import ContentGenerationStats
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.ContentGenerationStatsApi(api_client)
+    api_instance = wordlift_client.ContentGenerationStatsApi(api_client)
     content_generation_id = 56 # int | The Content Generation id.
 
     try:

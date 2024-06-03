@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.page_field import PageField
+from wordlift_client.models.page_field import PageField
 
 class TestPageField(unittest.TestCase):
     """PageField unit test stubs"""
@@ -38,7 +38,7 @@ class TestPageField(unittest.TestCase):
             return PageField(
                 first = '',
                 items = [
-                    wordlift-client.models.field.Field(
+                    wordlift_client.models.field.Field(
                         id = 56, 
                         name = '', )
                     ],
@@ -51,7 +51,7 @@ class TestPageField(unittest.TestCase):
             return PageField(
                 first = '',
                 items = [
-                    wordlift-client.models.field.Field(
+                    wordlift_client.models.field.Field(
                         id = 56, 
                         name = '', )
                     ],

@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.exchange_auth_code_request import ExchangeAuthCodeRequest
+from wordlift_client.models.exchange_auth_code_request import ExchangeAuthCodeRequest
 
 class TestExchangeAuthCodeRequest(unittest.TestCase):
     """ExchangeAuthCodeRequest unit test stubs"""

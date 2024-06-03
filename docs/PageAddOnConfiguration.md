@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.page_add_on_configuration import PageAddOnConfiguration
+from wordlift_client.models.page_add_on_configuration import PageAddOnConfiguration
 
 # TODO update the JSON string below
 json = "{}"

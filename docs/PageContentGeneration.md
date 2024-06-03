@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.page_content_generation import PageContentGeneration
+from wordlift_client.models.page_content_generation import PageContentGeneration
 
 # TODO update the JSON string below
 json = "{}"

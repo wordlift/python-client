@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.when_operator import WhenOperator
+from wordlift_client.models.when_operator import WhenOperator
 
 class TestWhenOperator(unittest.TestCase):
     """WhenOperator unit test stubs"""

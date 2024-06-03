@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.word import Word
+from wordlift_client.models.word import Word
 
 class TestWord(unittest.TestCase):
     """Word unit test stubs"""

@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.model_field import ModelField
+from wordlift_client.models.model_field import ModelField
 
 class TestModelField(unittest.TestCase):
     """ModelField unit test stubs"""

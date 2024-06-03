@@ -1,4 +1,4 @@
-# wordlift-client.SEOScoresApi
+# wordlift_client.SEOScoresApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -17,15 +17,15 @@ Create
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.models.create_seo_score200_response import CreateSEOScore200Response
-from wordlift-client.models.create_seo_score_request import CreateSEOScoreRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.create_seo_score200_response import CreateSEOScore200Response
+from wordlift_client.models.create_seo_score_request import CreateSEOScoreRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -41,10 +41,10 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.SEOScoresApi(api_client)
-    create_seo_score_request = wordlift-client.CreateSEOScoreRequest() # CreateSEOScoreRequest | body
+    api_instance = wordlift_client.SEOScoresApi(api_client)
+    create_seo_score_request = wordlift_client.CreateSEOScoreRequest() # CreateSEOScoreRequest | body
 
     try:
         # Create

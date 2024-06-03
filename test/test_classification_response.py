@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.classification_response import ClassificationResponse
+from wordlift_client.models.classification_response import ClassificationResponse
 
 class TestClassificationResponse(unittest.TestCase):
     """ClassificationResponse unit test stubs"""

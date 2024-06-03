@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.page_preset import PagePreset
+from wordlift_client.models.page_preset import PagePreset
 
 class TestPagePreset(unittest.TestCase):
     """PagePreset unit test stubs"""
@@ -38,7 +38,7 @@ class TestPagePreset(unittest.TestCase):
             return PagePreset(
                 first = '',
                 items = [
-                    wordlift-client.models.preset.Preset(
+                    wordlift_client.models.preset.Preset(
                         body = '', 
                         id = 56, 
                         label = '', )
@@ -52,7 +52,7 @@ class TestPagePreset(unittest.TestCase):
             return PagePreset(
                 first = '',
                 items = [
-                    wordlift-client.models.preset.Preset(
+                    wordlift_client.models.preset.Preset(
                         body = '', 
                         id = 56, 
                         label = '', )

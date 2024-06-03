@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.render_request import RenderRequest
+from wordlift_client.models.render_request import RenderRequest
 
 class TestRenderRequest(unittest.TestCase):
     """RenderRequest unit test stubs"""
@@ -36,12 +36,12 @@ class TestRenderRequest(unittest.TestCase):
         model = RenderRequest()
         if include_optional:
             return RenderRequest(
-                data = wordlift-client.models.json.Json(),
+                data = wordlift_client.models.json.Json(),
                 template = ''
             )
         else:
             return RenderRequest(
-                data = wordlift-client.models.json.Json(),
+                data = wordlift_client.models.json.Json(),
                 template = '',
         )
         """

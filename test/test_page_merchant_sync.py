@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.page_merchant_sync import PageMerchantSync
+from wordlift_client.models.page_merchant_sync import PageMerchantSync
 
 class TestPageMerchantSync(unittest.TestCase):
     """PageMerchantSync unit test stubs"""
@@ -38,7 +38,7 @@ class TestPageMerchantSync(unittest.TestCase):
             return PageMerchantSync(
                 first = '',
                 items = [
-                    wordlift-client.models.merchant_sync.MerchantSync(
+                    wordlift_client.models.merchant_sync.MerchantSync(
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         has_errors = True, 
                         id = 56, 
@@ -62,7 +62,7 @@ class TestPageMerchantSync(unittest.TestCase):
             return PageMerchantSync(
                 first = '',
                 items = [
-                    wordlift-client.models.merchant_sync.MerchantSync(
+                    wordlift_client.models.merchant_sync.MerchantSync(
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         has_errors = True, 
                         id = 56, 

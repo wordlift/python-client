@@ -1,4 +1,4 @@
-# wordlift-client.QuestionsAndAnswersApi
+# wordlift_client.QuestionsAndAnswersApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -22,24 +22,24 @@ Create
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.question_and_answer import QuestionAndAnswer
-from wordlift-client.models.question_and_answer_request import QuestionAndAnswerRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.question_and_answer import QuestionAndAnswer
+from wordlift_client.models.question_and_answer_request import QuestionAndAnswerRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.QuestionsAndAnswersApi(api_client)
-    question_and_answer_request = wordlift-client.QuestionAndAnswerRequest() # QuestionAndAnswerRequest | 
+    api_instance = wordlift_client.QuestionsAndAnswersApi(api_client)
+    question_and_answer_request = wordlift_client.QuestionAndAnswerRequest() # QuestionAndAnswerRequest | 
 
     try:
         # Create
@@ -90,24 +90,24 @@ Create
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.smart_content import SmartContent
-from wordlift-client.models.smart_content_request import SmartContentRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.smart_content import SmartContent
+from wordlift_client.models.smart_content_request import SmartContentRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.QuestionsAndAnswersApi(api_client)
-    smart_content_request = wordlift-client.SmartContentRequest() # SmartContentRequest | 
+    api_instance = wordlift_client.QuestionsAndAnswersApi(api_client)
+    smart_content_request = wordlift_client.SmartContentRequest() # SmartContentRequest | 
 
     try:
         # Create
@@ -158,21 +158,21 @@ Delete
 
 
 ```python
-import wordlift-client
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.QuestionsAndAnswersApi(api_client)
+    api_instance = wordlift_client.QuestionsAndAnswersApi(api_client)
     id = 56 # int | 
 
     try:
@@ -223,21 +223,21 @@ Delete
 
 
 ```python
-import wordlift-client
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.QuestionsAndAnswersApi(api_client)
+    api_instance = wordlift_client.QuestionsAndAnswersApi(api_client)
     smart_content_id = 56 # int | 
 
     try:
@@ -287,22 +287,22 @@ Get
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.question_and_answer import QuestionAndAnswer
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.question_and_answer import QuestionAndAnswer
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.QuestionsAndAnswersApi(api_client)
+    api_instance = wordlift_client.QuestionsAndAnswersApi(api_client)
     account_id = 56 # int | The account id. (optional)
     iri = 'iri_example' # str | The webpage IRI (optional)
     smart_content_id = 56 # int | The smart content id. (optional)
@@ -359,25 +359,25 @@ Update
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.question_and_answer import QuestionAndAnswer
-from wordlift-client.models.update_question_and_answer_request import UpdateQuestionAndAnswerRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.question_and_answer import QuestionAndAnswer
+from wordlift_client.models.update_question_and_answer_request import UpdateQuestionAndAnswerRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.QuestionsAndAnswersApi(api_client)
+    api_instance = wordlift_client.QuestionsAndAnswersApi(api_client)
     id = 56 # int | 
-    update_question_and_answer_request = wordlift-client.UpdateQuestionAndAnswerRequest() # UpdateQuestionAndAnswerRequest | 
+    update_question_and_answer_request = wordlift_client.UpdateQuestionAndAnswerRequest() # UpdateQuestionAndAnswerRequest | 
 
     try:
         # Update
@@ -430,24 +430,24 @@ Update
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.question_and_answer import QuestionAndAnswer
-from wordlift-client.models.question_and_answer_request import QuestionAndAnswerRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.question_and_answer import QuestionAndAnswer
+from wordlift_client.models.question_and_answer_request import QuestionAndAnswerRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.QuestionsAndAnswersApi(api_client)
-    question_and_answer_request = wordlift-client.QuestionAndAnswerRequest() # QuestionAndAnswerRequest | 
+    api_instance = wordlift_client.QuestionsAndAnswersApi(api_client)
+    question_and_answer_request = wordlift_client.QuestionAndAnswerRequest() # QuestionAndAnswerRequest | 
 
     try:
         # Update

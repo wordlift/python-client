@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.page_platform_limit import PagePlatformLimit
+from wordlift_client.models.page_platform_limit import PagePlatformLimit
 
 # TODO update the JSON string below
 json = "{}"

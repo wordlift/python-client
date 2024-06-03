@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.validation_fix import ValidationFix
+from wordlift_client.models.validation_fix import ValidationFix
 
 class TestValidationFix(unittest.TestCase):
     """ValidationFix unit test stubs"""

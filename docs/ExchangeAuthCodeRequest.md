@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.exchange_auth_code_request import ExchangeAuthCodeRequest
+from wordlift_client.models.exchange_auth_code_request import ExchangeAuthCodeRequest
 
 # TODO update the JSON string below
 json = "{}"

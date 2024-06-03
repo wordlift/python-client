@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.entity import Entity
+from wordlift_client.models.entity import Entity
 
 class TestEntity(unittest.TestCase):
     """Entity unit test stubs"""
@@ -50,7 +50,7 @@ class TestEntity(unittest.TestCase):
                 same_as = [
                     ''
                     ],
-                properties = wordlift-client.models.properties.Properties(
+                properties = wordlift_client.models.properties.Properties(
                     latitude = 1.337, 
                     longitude = 1.337, ),
                 synonyms = [

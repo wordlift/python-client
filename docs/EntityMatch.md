@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.entity_match import EntityMatch
+from wordlift_client.models.entity_match import EntityMatch
 
 # TODO update the JSON string below
 json = "{}"

@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.update_question_and_answer_request import UpdateQuestionAndAnswerRequest
+from wordlift_client.models.update_question_and_answer_request import UpdateQuestionAndAnswerRequest
 
 class TestUpdateQuestionAndAnswerRequest(unittest.TestCase):
     """UpdateQuestionAndAnswerRequest unit test stubs"""

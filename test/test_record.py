@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.record import Record
+from wordlift_client.models.record import Record
 
 class TestRecord(unittest.TestCase):
     """Record unit test stubs"""
@@ -38,9 +38,9 @@ class TestRecord(unittest.TestCase):
             return Record(
                 completion = '',
                 content_generation_id = 56,
-                data = wordlift-client.models.json.Json(),
+                data = wordlift_client.models.json.Json(),
                 errors = [
-                    wordlift-client.models.validation_result.ValidationResult(
+                    wordlift_client.models.validation_result.ValidationResult(
                         level_enum = 'RECOMMENDED', 
                         name = '', 
                         result = 'PASS', )
@@ -54,14 +54,14 @@ class TestRecord(unittest.TestCase):
                     ],
                 prompt = '',
                 repeated_words = {
-                    'key' : wordlift-client.models.word_repetition_data.WordRepetitionData(
+                    'key' : wordlift_client.models.word_repetition_data.WordRepetitionData(
                         count = 56, 
                         repeated_in_same_sentence = True, )
                     },
                 status = 'accepted',
                 validated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 warnings = [
-                    wordlift-client.models.validation_result.ValidationResult(
+                    wordlift_client.models.validation_result.ValidationResult(
                         level_enum = 'RECOMMENDED', 
                         name = '', 
                         result = 'PASS', )

@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.response1 import Response1
+from wordlift_client.models.response1 import Response1
 
 # TODO update the JSON string below
 json = "{}"

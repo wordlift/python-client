@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.page_model import PageModel
+from wordlift_client.models.page_model import PageModel
 
 class TestPageModel(unittest.TestCase):
     """PageModel unit test stubs"""
@@ -38,7 +38,7 @@ class TestPageModel(unittest.TestCase):
             return PageModel(
                 first = '',
                 items = [
-                    wordlift-client.models.model.Model(
+                    wordlift_client.models.model.Model(
                         id = 56, 
                         name = '', 
                         system_prompt = '', 
@@ -53,7 +53,7 @@ class TestPageModel(unittest.TestCase):
             return PageModel(
                 first = '',
                 items = [
-                    wordlift-client.models.model.Model(
+                    wordlift_client.models.model.Model(
                         id = 56, 
                         name = '', 
                         system_prompt = '', 

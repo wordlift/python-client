@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.page_with_limits import PageWithLimits
+from wordlift_client.models.page_with_limits import PageWithLimits
 
 class TestPageWithLimits(unittest.TestCase):
     """PageWithLimits unit test stubs"""
@@ -38,7 +38,7 @@ class TestPageWithLimits(unittest.TestCase):
             return PageWithLimits(
                 first = '',
                 items = [
-                    wordlift-client.models.with_limits.WithLimits(
+                    wordlift_client.models.with_limits.WithLimits(
                         account_limits = 56, 
                         applies_to = '', 
                         block = True, 
@@ -60,7 +60,7 @@ class TestPageWithLimits(unittest.TestCase):
             return PageWithLimits(
                 first = '',
                 items = [
-                    wordlift-client.models.with_limits.WithLimits(
+                    wordlift_client.models.with_limits.WithLimits(
                         account_limits = 56, 
                         applies_to = '', 
                         block = True, 

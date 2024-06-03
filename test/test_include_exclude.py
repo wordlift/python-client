@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.include_exclude import IncludeExclude
+from wordlift_client.models.include_exclude import IncludeExclude
 
 class TestIncludeExclude(unittest.TestCase):
     """IncludeExclude unit test stubs"""

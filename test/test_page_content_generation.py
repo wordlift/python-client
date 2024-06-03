@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.page_content_generation import PageContentGeneration
+from wordlift_client.models.page_content_generation import PageContentGeneration
 
 class TestPageContentGeneration(unittest.TestCase):
     """PageContentGeneration unit test stubs"""
@@ -38,7 +38,7 @@ class TestPageContentGeneration(unittest.TestCase):
             return PageContentGeneration(
                 first = '',
                 items = [
-                    wordlift-client.models.content_generation.ContentGeneration(
+                    wordlift_client.models.content_generation.ContentGeneration(
                         account_id = 56, 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         deleted = True, 
@@ -67,7 +67,7 @@ class TestPageContentGeneration(unittest.TestCase):
             return PageContentGeneration(
                 first = '',
                 items = [
-                    wordlift-client.models.content_generation.ContentGeneration(
+                    wordlift_client.models.content_generation.ContentGeneration(
                         account_id = 56, 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         deleted = True, 

@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.microdata_api import MicrodataApi
+from wordlift_client.api.microdata_api import MicrodataApi
 
 
 class TestMicrodataApi(unittest.TestCase):

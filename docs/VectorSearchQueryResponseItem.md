@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.vector_search_query_response_item import VectorSearchQueryResponseItem
+from wordlift_client.models.vector_search_query_response_item import VectorSearchQueryResponseItem
 
 # TODO update the JSON string below
 json = "{}"

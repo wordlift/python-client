@@ -1,4 +1,4 @@
-# wordlift-client.IncludeExcludesWordPressPluginApi
+# wordlift_client.IncludeExcludesWordPressPluginApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -19,24 +19,24 @@ List the include and exclude configurations.
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.account import Account
-from wordlift-client.models.include_exclude import IncludeExclude
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.account import Account
+from wordlift_client.models.include_exclude import IncludeExclude
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.IncludeExcludesWordPressPluginApi(api_client)
-    account = wordlift-client.Account() # Account | 
+    api_instance = wordlift_client.IncludeExcludesWordPressPluginApi(api_client)
+    account = wordlift_client.Account() # Account | 
 
     try:
         # List
@@ -90,26 +90,26 @@ Update the include and exclude configurations.
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.account import Account
-from wordlift-client.models.include_exclude import IncludeExclude
-from wordlift-client.models.include_exclude_request import IncludeExcludeRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.account import Account
+from wordlift_client.models.include_exclude import IncludeExclude
+from wordlift_client.models.include_exclude_request import IncludeExcludeRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.IncludeExcludesWordPressPluginApi(api_client)
-    account = wordlift-client.Account() # Account | 
-    include_exclude_request = [wordlift-client.IncludeExcludeRequest()] # List[IncludeExcludeRequest] | 
+    api_instance = wordlift_client.IncludeExcludesWordPressPluginApi(api_client)
+    account = wordlift_client.Account() # Account | 
+    include_exclude_request = [wordlift_client.IncludeExcludeRequest()] # List[IncludeExcludeRequest] | 
 
     try:
         # Update

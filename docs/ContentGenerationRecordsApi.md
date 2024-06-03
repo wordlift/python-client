@@ -1,4 +1,4 @@
-# wordlift-client.ContentGenerationRecordsApi
+# wordlift_client.ContentGenerationRecordsApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -21,22 +21,22 @@ Get
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.record import Record
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.record import Record
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.ContentGenerationRecordsApi(api_client)
+    api_instance = wordlift_client.ContentGenerationRecordsApi(api_client)
     content_generation_id = 56 # int | The Content Generation id.
     record_id = 56 # int | The Record id.
 
@@ -91,22 +91,22 @@ List
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.page_record import PageRecord
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.page_record import PageRecord
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.ContentGenerationRecordsApi(api_client)
+    api_instance = wordlift_client.ContentGenerationRecordsApi(api_client)
     content_generation_id = 56 # int | The Content Generation id.
     cursor = 'cursor_example' # str | The cursor (optional)
     limit = 10 # int | The maximum number of results (optional) (default to 10)
@@ -164,21 +164,21 @@ List as Events
 
 
 ```python
-import wordlift-client
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.ContentGenerationRecordsApi(api_client)
+    api_instance = wordlift_client.ContentGenerationRecordsApi(api_client)
     content_generation_id = 56 # int | The Content Generation id.
 
     try:
@@ -228,26 +228,26 @@ Update
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.record import Record
-from wordlift-client.models.request1 import Request1
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.record import Record
+from wordlift_client.models.request1 import Request1
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.ContentGenerationRecordsApi(api_client)
+    api_instance = wordlift_client.ContentGenerationRecordsApi(api_client)
     content_generation_id = 56 # int | The Content Generation id.
     record_id = 56 # int | The Record id.
-    request1 = wordlift-client.Request1() # Request1 | 
+    request1 = wordlift_client.Request1() # Request1 | 
 
     try:
         # Update
@@ -301,25 +301,25 @@ Update
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.update_records_request import UpdateRecordsRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.update_records_request import UpdateRecordsRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.ContentGenerationRecordsApi(api_client)
+    api_instance = wordlift_client.ContentGenerationRecordsApi(api_client)
     content_generation_id = 56 # int | The Content Generation id.
     is_accepted = True # bool | Completion accepted
-    update_records_request = wordlift-client.UpdateRecordsRequest() # UpdateRecordsRequest | 
+    update_records_request = wordlift_client.UpdateRecordsRequest() # UpdateRecordsRequest | 
 
     try:
         # Update
@@ -371,25 +371,25 @@ Update
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.record import Record
-from wordlift-client.models.update_record_request import UpdateRecordRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.record import Record
+from wordlift_client.models.update_record_request import UpdateRecordRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.ContentGenerationRecordsApi(api_client)
+    api_instance = wordlift_client.ContentGenerationRecordsApi(api_client)
     content_generation_id = 56 # int | The Content Generation id.
-    update_record_request = [wordlift-client.UpdateRecordRequest()] # List[UpdateRecordRequest] | 
+    update_record_request = [wordlift_client.UpdateRecordRequest()] # List[UpdateRecordRequest] | 
 
     try:
         # Update

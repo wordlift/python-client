@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.node_request import NodeRequest
+from wordlift_client.models.node_request import NodeRequest
 
 # TODO update the JSON string below
 json = "{}"

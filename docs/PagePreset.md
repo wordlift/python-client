@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.page_preset import PagePreset
+from wordlift_client.models.page_preset import PagePreset
 
 # TODO update the JSON string below
 json = "{}"

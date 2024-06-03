@@ -1,4 +1,4 @@
-# wordlift-client.EmbeddingsApi
+# wordlift_client.EmbeddingsApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -18,23 +18,23 @@ Create Embeddings
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.create_embeddings_input import CreateEmbeddingsInput
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.create_embeddings_input import CreateEmbeddingsInput
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.EmbeddingsApi(api_client)
-    create_embeddings_input = wordlift-client.CreateEmbeddingsInput() # CreateEmbeddingsInput | 
+    api_instance = wordlift_client.EmbeddingsApi(api_client)
+    create_embeddings_input = wordlift_client.CreateEmbeddingsInput() # CreateEmbeddingsInput | 
 
     try:
         # Create Embeddings

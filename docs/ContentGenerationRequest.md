@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.content_generation_request import ContentGenerationRequest
+from wordlift_client.models.content_generation_request import ContentGenerationRequest
 
 # TODO update the JSON string below
 json = "{}"

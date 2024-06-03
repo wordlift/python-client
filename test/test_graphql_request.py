@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.graphql_request import GraphqlRequest
+from wordlift_client.models.graphql_request import GraphqlRequest
 
 class TestGraphqlRequest(unittest.TestCase):
     """GraphqlRequest unit test stubs"""

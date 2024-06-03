@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.response import Response
+from wordlift_client.models.response import Response
 
 class TestResponse(unittest.TestCase):
     """Response unit test stubs"""
@@ -37,7 +37,7 @@ class TestResponse(unittest.TestCase):
         if include_optional:
             return Response(
                 entities = {
-                    'key' : wordlift-client.models.entity.Entity(
+                    'key' : wordlift_client.models.entity.Entity(
                         entity_id = '', 
                         confidence = 1.337, 
                         main_type = '', 
@@ -52,7 +52,7 @@ class TestResponse(unittest.TestCase):
                         same_as = [
                             ''
                             ], 
-                        properties = wordlift-client.models.properties.Properties(
+                        properties = wordlift_client.models.properties.Properties(
                             latitude = 1.337, 
                             longitude = 1.337, ), 
                         synonyms = [
@@ -60,19 +60,19 @@ class TestResponse(unittest.TestCase):
                             ], )
                     },
                 annotations = {
-                    'key' : wordlift-client.models.annotation.Annotation(
+                    'key' : wordlift_client.models.annotation.Annotation(
                         annotation_id = '', 
                         start = 56, 
                         end = 56, 
                         text = '', 
                         entity_matches = [
-                            wordlift-client.models.entity_match.EntityMatch(
+                            wordlift_client.models.entity_match.EntityMatch(
                                 confidence = 1.337, 
                                 entity_id = '', )
                             ], )
                     },
                 images = [
-                    wordlift-client.models.image.Image(
+                    wordlift_client.models.image.Image(
                         label = '', 
                         url = '', )
                     ],
@@ -80,7 +80,7 @@ class TestResponse(unittest.TestCase):
                     ''
                     ],
                 topics = [
-                    wordlift-client.models.topic.Topic(
+                    wordlift_client.models.topic.Topic(
                         label = '', 
                         description = '', 
                         uri = '', 

@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.domain_validation_request import DomainValidationRequest
+from wordlift_client.models.domain_validation_request import DomainValidationRequest
 
 class TestDomainValidationRequest(unittest.TestCase):
     """DomainValidationRequest unit test stubs"""

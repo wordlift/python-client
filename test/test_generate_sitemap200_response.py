@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.generate_sitemap200_response import GenerateSitemap200Response
+from wordlift_client.models.generate_sitemap200_response import GenerateSitemap200Response
 
 class TestGenerateSitemap200Response(unittest.TestCase):
     """GenerateSitemap200Response unit test stubs"""

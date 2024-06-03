@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.analyses_response import AnalysesResponse
+from wordlift_client.models.analyses_response import AnalysesResponse
 
 class TestAnalysesResponse(unittest.TestCase):
     """AnalysesResponse unit test stubs"""
@@ -37,7 +37,7 @@ class TestAnalysesResponse(unittest.TestCase):
         if include_optional:
             return AnalysesResponse(
                 items = [
-                    wordlift-client.models.analyses_response_item.AnalysesResponseItem(
+                    wordlift_client.models.analyses_response_item.AnalysesResponseItem(
                         text = '', 
                         confidence = 0, 
                         occurrences = 56, 

@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.node_request import NodeRequest
+from wordlift_client.models.node_request import NodeRequest
 
 class TestNodeRequest(unittest.TestCase):
     """NodeRequest unit test stubs"""

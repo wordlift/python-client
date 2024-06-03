@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.rule import Rule
+from wordlift_client.models.rule import Rule
 
 class TestRule(unittest.TestCase):
     """Rule unit test stubs"""
@@ -39,7 +39,7 @@ class TestRule(unittest.TestCase):
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 description = '',
                 fixes = [
-                    wordlift-client.models.validation_fix.ValidationFix(
+                    wordlift_client.models.validation_fix.ValidationFix(
                         type = 'FIND_AND_REPLACE', 
                         what = '', 
                         with = '', )

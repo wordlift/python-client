@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.google_search_console_o_auth2_api import GoogleSearchConsoleOAuth2Api
+from wordlift_client.api.google_search_console_o_auth2_api import GoogleSearchConsoleOAuth2Api
 
 
 class TestGoogleSearchConsoleOAuth2Api(unittest.TestCase):

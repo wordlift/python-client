@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.create_embeddings_input import CreateEmbeddingsInput
+from wordlift_client.models.create_embeddings_input import CreateEmbeddingsInput
 
 class TestCreateEmbeddingsInput(unittest.TestCase):
     """CreateEmbeddingsInput unit test stubs"""

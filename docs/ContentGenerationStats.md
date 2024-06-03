@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.content_generation_stats import ContentGenerationStats
+from wordlift_client.models.content_generation_stats import ContentGenerationStats
 
 # TODO update the JSON string below
 json = "{}"

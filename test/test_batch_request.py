@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.batch_request import BatchRequest
+from wordlift_client.models.batch_request import BatchRequest
 
 class TestBatchRequest(unittest.TestCase):
     """BatchRequest unit test stubs"""

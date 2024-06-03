@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.build_authorize_uri_request import BuildAuthorizeUriRequest
+from wordlift_client.models.build_authorize_uri_request import BuildAuthorizeUriRequest
 
 class TestBuildAuthorizeUriRequest(unittest.TestCase):
     """BuildAuthorizeUriRequest unit test stubs"""

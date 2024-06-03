@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.entity1 import Entity1
+from wordlift_client.models.entity1 import Entity1
 
 class TestEntity1(unittest.TestCase):
     """Entity1 unit test stubs"""
@@ -37,7 +37,7 @@ class TestEntity1(unittest.TestCase):
         if include_optional:
             return Entity1(
                 reference = '',
-                properties = wordlift-client.models.properties1.Properties1(
+                properties = wordlift_client.models.properties1.Properties1(
                     name = '', 
                     same_as = [
                         ''

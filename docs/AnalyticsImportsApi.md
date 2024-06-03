@@ -1,4 +1,4 @@
-# wordlift-client.AnalyticsImportsApi
+# wordlift_client.AnalyticsImportsApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -19,14 +19,14 @@ Create a Analytics Import using Google Search Console or Botify depending on the
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.models.analytics_import_request import AnalyticsImportRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.analytics_import_request import AnalyticsImportRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -42,10 +42,10 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.AnalyticsImportsApi(api_client)
-    analytics_import_request = wordlift-client.AnalyticsImportRequest() # AnalyticsImportRequest | 
+    api_instance = wordlift_client.AnalyticsImportsApi(api_client)
+    analytics_import_request = wordlift_client.AnalyticsImportRequest() # AnalyticsImportRequest | 
 
     try:
         # Create

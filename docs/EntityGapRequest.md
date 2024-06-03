@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.entity_gap_request import EntityGapRequest
+from wordlift_client.models.entity_gap_request import EntityGapRequest
 
 # TODO update the JSON string below
 json = "{}"

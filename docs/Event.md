@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.event import Event
+from wordlift_client.models.event import Event
 
 # TODO update the JSON string below
 json = "{}"

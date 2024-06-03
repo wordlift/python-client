@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.smart_content import SmartContent
+from wordlift_client.models.smart_content import SmartContent
 
 class TestSmartContent(unittest.TestCase):
     """SmartContent unit test stubs"""

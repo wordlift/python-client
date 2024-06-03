@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.generate_sitemap_request import GenerateSitemapRequest
+from wordlift_client.models.generate_sitemap_request import GenerateSitemapRequest
 
 class TestGenerateSitemapRequest(unittest.TestCase):
     """GenerateSitemapRequest unit test stubs"""

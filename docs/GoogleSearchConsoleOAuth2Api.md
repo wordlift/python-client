@@ -1,4 +1,4 @@
-# wordlift-client.GoogleSearchConsoleOAuth2Api
+# wordlift_client.GoogleSearchConsoleOAuth2Api
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -20,15 +20,15 @@ Call this API to have the Platform receive an Authentication Token to access the
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.models.exchange_auth_code_request import ExchangeAuthCodeRequest
-from wordlift-client.models.exchange_auth_code_response import ExchangeAuthCodeResponse
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.exchange_auth_code_request import ExchangeAuthCodeRequest
+from wordlift_client.models.exchange_auth_code_response import ExchangeAuthCodeResponse
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -44,10 +44,10 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.GoogleSearchConsoleOAuth2Api(api_client)
-    exchange_auth_code_request = wordlift-client.ExchangeAuthCodeRequest() # ExchangeAuthCodeRequest | 
+    api_instance = wordlift_client.GoogleSearchConsoleOAuth2Api(api_client)
+    exchange_auth_code_request = wordlift_client.ExchangeAuthCodeRequest() # ExchangeAuthCodeRequest | 
 
     try:
         # Get an Access Code
@@ -102,15 +102,15 @@ Call this API to get an authorization URI needed to interactively get an authori
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.models.build_authorize_uri_request import BuildAuthorizeUriRequest
-from wordlift-client.models.build_authorize_uri_response import BuildAuthorizeUriResponse
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.build_authorize_uri_request import BuildAuthorizeUriRequest
+from wordlift_client.models.build_authorize_uri_response import BuildAuthorizeUriResponse
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -126,10 +126,10 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.GoogleSearchConsoleOAuth2Api(api_client)
-    build_authorize_uri_request = wordlift-client.BuildAuthorizeUriRequest() # BuildAuthorizeUriRequest | 
+    api_instance = wordlift_client.GoogleSearchConsoleOAuth2Api(api_client)
+    build_authorize_uri_request = wordlift_client.BuildAuthorizeUriRequest() # BuildAuthorizeUriRequest | 
 
     try:
         # Create an Authorization URI

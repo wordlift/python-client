@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.entity_match import EntityMatch
+from wordlift_client.models.entity_match import EntityMatch
 
 class TestEntityMatch(unittest.TestCase):
     """EntityMatch unit test stubs"""

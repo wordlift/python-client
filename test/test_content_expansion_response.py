@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.content_expansion_response import ContentExpansionResponse
+from wordlift_client.models.content_expansion_response import ContentExpansionResponse
 
 class TestContentExpansionResponse(unittest.TestCase):
     """ContentExpansionResponse unit test stubs"""

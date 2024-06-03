@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.inspector_api import InspectorApi
+from wordlift_client.api.inspector_api import InspectorApi
 
 
 class TestInspectorApi(unittest.TestCase):

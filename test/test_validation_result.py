@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.validation_result import ValidationResult
+from wordlift_client.models.validation_result import ValidationResult
 
 class TestValidationResult(unittest.TestCase):
     """ValidationResult unit test stubs"""

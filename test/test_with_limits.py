@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.with_limits import WithLimits
+from wordlift_client.models.with_limits import WithLimits
 
 class TestWithLimits(unittest.TestCase):
     """WithLimits unit test stubs"""

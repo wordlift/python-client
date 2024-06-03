@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.sitemap_import_request import SitemapImportRequest
+from wordlift_client.models.sitemap_import_request import SitemapImportRequest
 
 class TestSitemapImportRequest(unittest.TestCase):
     """SitemapImportRequest unit test stubs"""

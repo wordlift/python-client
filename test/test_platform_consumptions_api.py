@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.platform_consumptions_api import PlatformConsumptionsApi
+from wordlift_client.api.platform_consumptions_api import PlatformConsumptionsApi
 
 
 class TestPlatformConsumptionsApi(unittest.TestCase):

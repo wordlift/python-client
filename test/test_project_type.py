@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.project_type import ProjectType
+from wordlift_client.models.project_type import ProjectType
 
 class TestProjectType(unittest.TestCase):
     """ProjectType unit test stubs"""

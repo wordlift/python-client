@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.custom_domains_api import CustomDomainsApi
+from wordlift_client.api.custom_domains_api import CustomDomainsApi
 
 
 class TestCustomDomainsApi(unittest.TestCase):

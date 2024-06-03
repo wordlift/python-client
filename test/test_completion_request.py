@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.completion_request import CompletionRequest
+from wordlift_client.models.completion_request import CompletionRequest
 
 class TestCompletionRequest(unittest.TestCase):
     """CompletionRequest unit test stubs"""

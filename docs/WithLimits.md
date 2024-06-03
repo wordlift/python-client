@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.with_limits import WithLimits
+from wordlift_client.models.with_limits import WithLimits
 
 # TODO update the JSON string below
 json = "{}"

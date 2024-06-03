@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.annotation import Annotation
+from wordlift_client.models.annotation import Annotation
 
 class TestAnnotation(unittest.TestCase):
     """Annotation unit test stubs"""
@@ -41,7 +41,7 @@ class TestAnnotation(unittest.TestCase):
                 end = 56,
                 text = '',
                 entity_matches = [
-                    wordlift-client.models.entity_match.EntityMatch(
+                    wordlift_client.models.entity_match.EntityMatch(
                         confidence = 1.337, 
                         entity_id = '', )
                     ]

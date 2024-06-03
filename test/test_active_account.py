@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.active_account import ActiveAccount
+from wordlift_client.models.active_account import ActiveAccount
 
 class TestActiveAccount(unittest.TestCase):
     """ActiveAccount unit test stubs"""
@@ -38,7 +38,7 @@ class TestActiveAccount(unittest.TestCase):
             return ActiveAccount(
                 country = '',
                 diagnostic_plugins = [
-                    wordlift-client.models.diagnostic_plugin.DiagnosticPlugin(
+                    wordlift_client.models.diagnostic_plugin.DiagnosticPlugin(
                         account_id = 56, 
                         active = True, 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
@@ -54,7 +54,7 @@ class TestActiveAccount(unittest.TestCase):
                 language = '',
                 ng_dataset_id = '',
                 package_type = '',
-                subscription = wordlift-client.models.account_subscription.AccountSubscription(
+                subscription = wordlift_client.models.account_subscription.AccountSubscription(
                     email = '', 
                     first_name = '', 
                     last_name = '', 

@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.seo_scores_api import SEOScoresApi
+from wordlift_client.api.seo_scores_api import SEOScoresApi
 
 
 class TestSEOScoresApi(unittest.TestCase):

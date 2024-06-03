@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.webpage_properties import WebpageProperties
+from wordlift_client.models.webpage_properties import WebpageProperties
 
 class TestWebpageProperties(unittest.TestCase):
     """WebpageProperties unit test stubs"""

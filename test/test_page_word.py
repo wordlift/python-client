@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.page_word import PageWord
+from wordlift_client.models.page_word import PageWord
 
 class TestPageWord(unittest.TestCase):
     """PageWord unit test stubs"""
@@ -38,7 +38,7 @@ class TestPageWord(unittest.TestCase):
             return PageWord(
                 first = '',
                 items = [
-                    wordlift-client.models.word.Word(
+                    wordlift_client.models.word.Word(
                         bias = 56, 
                         cluster = '', 
                         content_generation_id = 56, 
@@ -57,7 +57,7 @@ class TestPageWord(unittest.TestCase):
             return PageWord(
                 first = '',
                 items = [
-                    wordlift-client.models.word.Word(
+                    wordlift_client.models.word.Word(
                         bias = 56, 
                         cluster = '', 
                         content_generation_id = 56, 

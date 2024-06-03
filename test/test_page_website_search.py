@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.page_website_search import PageWebsiteSearch
+from wordlift_client.models.page_website_search import PageWebsiteSearch
 
 class TestPageWebsiteSearch(unittest.TestCase):
     """PageWebsiteSearch unit test stubs"""
@@ -38,7 +38,7 @@ class TestPageWebsiteSearch(unittest.TestCase):
             return PageWebsiteSearch(
                 first = '',
                 items = [
-                    wordlift-client.models.website_search.WebsiteSearch(
+                    wordlift_client.models.website_search.WebsiteSearch(
                         clicks = 56, 
                         ctr = 1.337, 
                         id = 56, 
@@ -58,7 +58,7 @@ class TestPageWebsiteSearch(unittest.TestCase):
             return PageWebsiteSearch(
                 first = '',
                 items = [
-                    wordlift-client.models.website_search.WebsiteSearch(
+                    wordlift_client.models.website_search.WebsiteSearch(
                         clicks = 56, 
                         ctr = 1.337, 
                         id = 56, 

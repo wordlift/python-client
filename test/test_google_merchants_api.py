@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.google_merchants_api import GoogleMerchantsApi
+from wordlift_client.api.google_merchants_api import GoogleMerchantsApi
 
 
 class TestGoogleMerchantsApi(unittest.TestCase):

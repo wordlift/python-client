@@ -1,4 +1,4 @@
-# wordlift-client.DatasetApi
+# wordlift_client.DatasetApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -22,14 +22,14 @@ Create or update many entities in the Knowledge Graph.
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.models.batch_request import BatchRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.batch_request import BatchRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -45,10 +45,10 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.DatasetApi(api_client)
-    batch_request = [wordlift-client.BatchRequest()] # List[BatchRequest] | 
+    api_instance = wordlift_client.DatasetApi(api_client)
+    batch_request = [wordlift_client.BatchRequest()] # List[BatchRequest] | 
 
     try:
         # Create or update many
@@ -103,13 +103,13 @@ Create or update an entity in the Knowledge Graph.
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -125,9 +125,9 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.DatasetApi(api_client)
+    api_instance = wordlift_client.DatasetApi(api_client)
     uri = 'uri_example' # str | The entity's URI
     request_body = None # List[object] | 
     private = True # bool | Whether the entity should be hidden from Linked Data and GraphQL (optional) (default to True)
@@ -185,13 +185,13 @@ Delete all the entities in the Knowledge Graph.
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -207,9 +207,9 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.DatasetApi(api_client)
+    api_instance = wordlift_client.DatasetApi(api_client)
 
     try:
         # Delete all
@@ -259,13 +259,13 @@ Delete an entity from the Knowledge Graph.
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -281,9 +281,9 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.DatasetApi(api_client)
+    api_instance = wordlift_client.DatasetApi(api_client)
     uri = 'uri_example' # str | The URI of the entity to delete.
 
     try:

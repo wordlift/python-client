@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.include_excludes_word_press_plugin_api import IncludeExcludesWordPressPluginApi
+from wordlift_client.api.include_excludes_word_press_plugin_api import IncludeExcludesWordPressPluginApi
 
 
 class TestIncludeExcludesWordPressPluginApi(unittest.TestCase):

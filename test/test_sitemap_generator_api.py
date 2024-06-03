@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.sitemap_generator_api import SitemapGeneratorApi
+from wordlift_client.api.sitemap_generator_api import SitemapGeneratorApi
 
 
 class TestSitemapGeneratorApi(unittest.TestCase):

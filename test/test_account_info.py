@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.account_info import AccountInfo
+from wordlift_client.models.account_info import AccountInfo
 
 class TestAccountInfo(unittest.TestCase):
     """AccountInfo unit test stubs"""
@@ -46,7 +46,7 @@ class TestAccountInfo(unittest.TestCase):
                 key = '',
                 language = '',
                 networks = [
-                    wordlift-client.models.network_account_info.NetworkAccountInfo(
+                    wordlift_client.models.network_account_info.NetworkAccountInfo(
                         account_id = 56, 
                         dataset_id = '', 
                         dataset_uri = '', 
@@ -63,7 +63,7 @@ class TestAccountInfo(unittest.TestCase):
                 account_id = 56,
                 dataset_uri = '',
                 networks = [
-                    wordlift-client.models.network_account_info.NetworkAccountInfo(
+                    wordlift_client.models.network_account_info.NetworkAccountInfo(
                         account_id = 56, 
                         dataset_id = '', 
                         dataset_uri = '', 

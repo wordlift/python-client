@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.domain_validation_request import DomainValidationRequest
+from wordlift_client.models.domain_validation_request import DomainValidationRequest
 
 # TODO update the JSON string below
 json = "{}"

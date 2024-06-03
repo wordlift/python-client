@@ -1,4 +1,4 @@
-# wordlift-client.PlatformLimitsApi
+# wordlift_client.PlatformLimitsApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -22,24 +22,24 @@ Create a platform limit.
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.platform_limit import PlatformLimit
-from wordlift-client.models.platform_limit_request import PlatformLimitRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.platform_limit import PlatformLimit
+from wordlift_client.models.platform_limit_request import PlatformLimitRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.PlatformLimitsApi(api_client)
-    platform_limit_request = wordlift-client.PlatformLimitRequest() # PlatformLimitRequest | 
+    api_instance = wordlift_client.PlatformLimitsApi(api_client)
+    platform_limit_request = wordlift_client.PlatformLimitRequest() # PlatformLimitRequest | 
 
     try:
         # Create Platform Limit
@@ -93,21 +93,21 @@ Delete a platform limit.
 
 
 ```python
-import wordlift-client
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.PlatformLimitsApi(api_client)
+    api_instance = wordlift_client.PlatformLimitsApi(api_client)
     id = 56 # int | Platform Limit id
 
     try:
@@ -160,22 +160,22 @@ Get a platform limit.
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.platform_limit import PlatformLimit
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.platform_limit import PlatformLimit
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.PlatformLimitsApi(api_client)
+    api_instance = wordlift_client.PlatformLimitsApi(api_client)
     id = 56 # int | Platform Limit id
 
     try:
@@ -230,22 +230,22 @@ List the platform limits.
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.page_platform_limit import PagePlatformLimit
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.page_platform_limit import PagePlatformLimit
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.PlatformLimitsApi(api_client)
+    api_instance = wordlift_client.PlatformLimitsApi(api_client)
     based_on_in = ['based_on_in_example'] # List[str] | The type of based on, e.g. `sku`. (optional)
     based_on_value_in = ['based_on_value_in_example'] # List[str] | The based on values. (optional)
     applies_to_in = ['applies_to_in_example'] # List[str] | The applies to (e.g. API name). (optional)
@@ -306,25 +306,25 @@ Update a platform limit.
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.platform_limit import PlatformLimit
-from wordlift-client.models.platform_limit_request import PlatformLimitRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.platform_limit import PlatformLimit
+from wordlift_client.models.platform_limit_request import PlatformLimitRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.PlatformLimitsApi(api_client)
+    api_instance = wordlift_client.PlatformLimitsApi(api_client)
     id = 56 # int | Platform Limit id
-    platform_limit_request = wordlift-client.PlatformLimitRequest() # PlatformLimitRequest | 
+    platform_limit_request = wordlift_client.PlatformLimitRequest() # PlatformLimitRequest | 
 
     try:
         # Update Platform Limit

@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.update_records_request import UpdateRecordsRequest
+from wordlift_client.models.update_records_request import UpdateRecordsRequest
 
 class TestUpdateRecordsRequest(unittest.TestCase):
     """UpdateRecordsRequest unit test stubs"""

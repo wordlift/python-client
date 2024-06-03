@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.content_expansion_request import ContentExpansionRequest
+from wordlift_client.models.content_expansion_request import ContentExpansionRequest
 
 class TestContentExpansionRequest(unittest.TestCase):
     """ContentExpansionRequest unit test stubs"""

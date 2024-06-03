@@ -1,4 +1,4 @@
-# wordlift-client.GraphQLApi
+# wordlift_client.GraphQLApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -17,14 +17,14 @@ Query
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.models.graphql_request import GraphqlRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.graphql_request import GraphqlRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -40,10 +40,10 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.GraphQLApi(api_client)
-    body = wordlift-client.GraphqlRequest() # GraphqlRequest | body
+    api_instance = wordlift_client.GraphQLApi(api_client)
+    body = wordlift_client.GraphqlRequest() # GraphqlRequest | body
 
     try:
         # Query

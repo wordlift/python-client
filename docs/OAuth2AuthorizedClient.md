@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.o_auth2_authorized_client import OAuth2AuthorizedClient
+from wordlift_client.models.o_auth2_authorized_client import OAuth2AuthorizedClient
 
 # TODO update the JSON string below
 json = "{}"

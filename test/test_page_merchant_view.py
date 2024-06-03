@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.page_merchant_view import PageMerchantView
+from wordlift_client.models.page_merchant_view import PageMerchantView
 
 class TestPageMerchantView(unittest.TestCase):
     """PageMerchantView unit test stubs"""
@@ -38,7 +38,7 @@ class TestPageMerchantView(unittest.TestCase):
             return PageMerchantView(
                 first = '',
                 items = [
-                    wordlift-client.models.merchant_view.MerchantView(
+                    wordlift_client.models.merchant_view.MerchantView(
                         access_token = '', 
                         account_id = 56, 
                         automatic_synchronization = True, 
@@ -77,7 +77,7 @@ class TestPageMerchantView(unittest.TestCase):
             return PageMerchantView(
                 first = '',
                 items = [
-                    wordlift-client.models.merchant_view.MerchantView(
+                    wordlift_client.models.merchant_view.MerchantView(
                         access_token = '', 
                         account_id = 56, 
                         automatic_synchronization = True, 

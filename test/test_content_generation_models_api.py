@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.content_generation_models_api import ContentGenerationModelsApi
+from wordlift_client.api.content_generation_models_api import ContentGenerationModelsApi
 
 
 class TestContentGenerationModelsApi(unittest.TestCase):

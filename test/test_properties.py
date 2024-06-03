@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.properties import Properties
+from wordlift_client.models.properties import Properties
 
 class TestProperties(unittest.TestCase):
     """Properties unit test stubs"""

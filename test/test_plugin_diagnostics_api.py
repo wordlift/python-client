@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.plugin_diagnostics_api import PluginDiagnosticsApi
+from wordlift_client.api.plugin_diagnostics_api import PluginDiagnosticsApi
 
 
 class TestPluginDiagnosticsApi(unittest.TestCase):

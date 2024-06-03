@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.redeem_codes_api import RedeemCodesApi
+from wordlift_client.api.redeem_codes_api import RedeemCodesApi
 
 
 class TestRedeemCodesApi(unittest.TestCase):

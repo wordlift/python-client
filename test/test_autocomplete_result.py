@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.autocomplete_result import AutocompleteResult
+from wordlift_client.models.autocomplete_result import AutocompleteResult
 
 class TestAutocompleteResult(unittest.TestCase):
     """AutocompleteResult unit test stubs"""

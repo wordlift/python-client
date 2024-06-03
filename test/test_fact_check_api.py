@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.fact_check_api import FactCheckApi
+from wordlift_client.api.fact_check_api import FactCheckApi
 
 
 class TestFactCheckApi(unittest.TestCase):

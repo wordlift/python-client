@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.o_auth2_authorized_clients_api import OAuth2AuthorizedClientsApi
+from wordlift_client.api.o_auth2_authorized_clients_api import OAuth2AuthorizedClientsApi
 
 
 class TestOAuth2AuthorizedClientsApi(unittest.TestCase):

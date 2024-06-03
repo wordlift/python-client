@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.entities_api import EntitiesApi
+from wordlift_client.api.entities_api import EntitiesApi
 
 
 class TestEntitiesApi(unittest.TestCase):

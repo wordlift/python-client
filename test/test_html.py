@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.html import Html
+from wordlift_client.models.html import Html
 
 class TestHtml(unittest.TestCase):
     """Html unit test stubs"""

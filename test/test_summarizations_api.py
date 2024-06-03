@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.summarizations_api import SummarizationsApi
+from wordlift_client.api.summarizations_api import SummarizationsApi
 
 
 class TestSummarizationsApi(unittest.TestCase):

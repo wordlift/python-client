@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.html import Html
+from wordlift_client.models.html import Html
 
 # TODO update the JSON string below
 json = "{}"

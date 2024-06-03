@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.analyses_api import AnalysesApi
+from wordlift_client.api.analyses_api import AnalysesApi
 
 
 class TestAnalysesApi(unittest.TestCase):

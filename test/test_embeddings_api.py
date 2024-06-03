@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.embeddings_api import EmbeddingsApi
+from wordlift_client.api.embeddings_api import EmbeddingsApi
 
 
 class TestEmbeddingsApi(unittest.TestCase):

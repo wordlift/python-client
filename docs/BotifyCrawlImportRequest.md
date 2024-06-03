@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.botify_crawl_import_request import BotifyCrawlImportRequest
+from wordlift_client.models.botify_crawl_import_request import BotifyCrawlImportRequest
 
 # TODO update the JSON string below
 json = "{}"

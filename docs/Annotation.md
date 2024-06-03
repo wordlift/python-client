@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.annotation import Annotation
+from wordlift_client.models.annotation import Annotation
 
 # TODO update the JSON string below
 json = "{}"

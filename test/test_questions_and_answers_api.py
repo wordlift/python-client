@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.questions_and_answers_api import QuestionsAndAnswersApi
+from wordlift_client.api.questions_and_answers_api import QuestionsAndAnswersApi
 
 
 class TestQuestionsAndAnswersApi(unittest.TestCase):

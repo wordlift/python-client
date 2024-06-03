@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.add_ons_api import AddOnsApi
+from wordlift_client.api.add_ons_api import AddOnsApi
 
 
 class TestAddOnsApi(unittest.TestCase):

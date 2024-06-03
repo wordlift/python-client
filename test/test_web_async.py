@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.web_async import WebAsync
+from wordlift_client.models.web_async import WebAsync
 
 class TestWebAsync(unittest.TestCase):
     """WebAsync unit test stubs"""

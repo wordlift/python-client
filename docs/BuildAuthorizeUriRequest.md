@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.build_authorize_uri_request import BuildAuthorizeUriRequest
+from wordlift_client.models.build_authorize_uri_request import BuildAuthorizeUriRequest
 
 # TODO update the JSON string below
 json = "{}"

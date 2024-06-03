@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.generate_sitemap_request import GenerateSitemapRequest
+from wordlift_client.models.generate_sitemap_request import GenerateSitemapRequest
 
 # TODO update the JSON string below
 json = "{}"

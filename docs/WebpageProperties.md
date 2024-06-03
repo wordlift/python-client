@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.webpage_properties import WebpageProperties
+from wordlift_client.models.webpage_properties import WebpageProperties
 
 # TODO update the JSON string below
 json = "{}"

@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.entity_gaps_api import EntityGapsApi
+from wordlift_client.api.entity_gaps_api import EntityGapsApi
 
 
 class TestEntityGapsApi(unittest.TestCase):

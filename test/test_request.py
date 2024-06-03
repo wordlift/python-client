@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.request import Request
+from wordlift_client.models.request import Request
 
 class TestRequest(unittest.TestCase):
     """Request unit test stubs"""
@@ -36,7 +36,7 @@ class TestRequest(unittest.TestCase):
         model = Request()
         if include_optional:
             return Request(
-                html = wordlift-client.models.html.Html(
+                html = wordlift_client.models.html.Html(
                     fragment = '', 
                     page = '', ),
                 url = '',

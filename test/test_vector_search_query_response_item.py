@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.vector_search_query_response_item import VectorSearchQueryResponseItem
+from wordlift_client.models.vector_search_query_response_item import VectorSearchQueryResponseItem
 
 class TestVectorSearchQueryResponseItem(unittest.TestCase):
     """VectorSearchQueryResponseItem unit test stubs"""

@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.request3 import Request3
+from wordlift_client.models.request3 import Request3
 
 class TestRequest3(unittest.TestCase):
     """Request3 unit test stubs"""

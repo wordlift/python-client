@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.content_expansions_api import ContentExpansionsApi
+from wordlift_client.api.content_expansions_api import ContentExpansionsApi
 
 
 class TestContentExpansionsApi(unittest.TestCase):

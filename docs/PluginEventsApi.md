@@ -1,4 +1,4 @@
-# wordlift-client.PluginEventsApi
+# wordlift_client.PluginEventsApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -20,15 +20,15 @@ Create an event
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.models.event import Event
-from wordlift-client.models.request2 import Request2
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.event import Event
+from wordlift_client.models.request2 import Request2
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -44,10 +44,10 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.PluginEventsApi(api_client)
-    request2 = wordlift-client.Request2() # Request2 | 
+    api_instance = wordlift_client.PluginEventsApi(api_client)
+    request2 = wordlift_client.Request2() # Request2 | 
 
     try:
         # Create
@@ -101,14 +101,14 @@ List the events bound to the authenticated account.
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.models.response1 import Response1
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.response1 import Response1
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -124,9 +124,9 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.PluginEventsApi(api_client)
+    api_instance = wordlift_client.PluginEventsApi(api_client)
     url = ['url_example'] # List[str] | URLs to return (optional)
     date_greater_than = '2013-10-20T19:20:30+01:00' # datetime | Event datetime filter to return events with date greater than the parameter (optional)
     date_less_than = '2013-10-20T19:20:30+01:00' # datetime | Event datetime filter to return events with date less than the parameter (optional)

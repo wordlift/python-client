@@ -1,4 +1,4 @@
-# wordlift-client.AnalysesApi
+# wordlift_client.AnalysesApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -22,15 +22,15 @@ Analyze the content provided with the request.
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.models.request import Request
-from wordlift-client.models.response import Response
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.request import Request
+from wordlift_client.models.response import Response
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -46,10 +46,10 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.AnalysesApi(api_client)
-    request = wordlift-client.Request() # Request | 
+    api_instance = wordlift_client.AnalysesApi(api_client)
+    request = wordlift_client.Request() # Request | 
 
     try:
         # Analyse content
@@ -104,15 +104,15 @@ Create an analysis request
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.models.analyses_request import AnalysesRequest
-from wordlift-client.models.analyses_response import AnalysesResponse
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.analyses_request import AnalysesRequest
+from wordlift_client.models.analyses_response import AnalysesResponse
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -128,10 +128,10 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.AnalysesApi(api_client)
-    analyses_request = wordlift-client.AnalysesRequest() # AnalysesRequest | 
+    api_instance = wordlift_client.AnalysesApi(api_client)
+    analyses_request = wordlift_client.AnalysesRequest() # AnalysesRequest | 
 
     try:
         # Create
@@ -186,14 +186,14 @@ Analyze content and return the results merged as HTML code.
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.models.request import Request
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.request import Request
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -209,10 +209,10 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.AnalysesApi(api_client)
-    request = wordlift-client.Request() # Request | 
+    api_instance = wordlift_client.AnalysesApi(api_client)
+    request = wordlift_client.Request() # Request | 
 
     try:
         # Analyse and Merge
@@ -267,15 +267,15 @@ Analyse the content of a webpage by using the `url` property of the request.
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.models.request import Request
-from wordlift-client.models.response import Response
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.request import Request
+from wordlift_client.models.response import Response
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -291,10 +291,10 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.AnalysesApi(api_client)
-    request = wordlift-client.Request() # Request | 
+    api_instance = wordlift_client.AnalysesApi(api_client)
+    request = wordlift_client.Request() # Request | 
 
     try:
         # Analyse Web Page

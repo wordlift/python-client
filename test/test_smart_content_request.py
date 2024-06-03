@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.smart_content_request import SmartContentRequest
+from wordlift_client.models.smart_content_request import SmartContentRequest
 
 class TestSmartContentRequest(unittest.TestCase):
     """SmartContentRequest unit test stubs"""
@@ -39,10 +39,10 @@ class TestSmartContentRequest(unittest.TestCase):
                 account_id = 1,
                 model_id = 1,
                 rules = [
-                    wordlift-client.models.rule_request.RuleRequest(
+                    wordlift_client.models.rule_request.RuleRequest(
                         description = '', 
                         fixes = [
-                            wordlift-client.models.validation_fix.ValidationFix(
+                            wordlift_client.models.validation_fix.ValidationFix(
                                 type = 'FIND_AND_REPLACE', 
                                 what = '', 
                                 with = '', )
@@ -62,7 +62,7 @@ class TestSmartContentRequest(unittest.TestCase):
                         when_operator = 'ALWAYS', )
                     ],
                 webpage_properties = [
-                    wordlift-client.models.webpage_properties.WebpageProperties(
+                    wordlift_client.models.webpage_properties.WebpageProperties(
                         entities = [
                             ''
                             ], 

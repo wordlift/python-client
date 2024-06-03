@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.page_vector_search_query_response_item import PageVectorSearchQueryResponseItem
+from wordlift_client.models.page_vector_search_query_response_item import PageVectorSearchQueryResponseItem
 
 class TestPageVectorSearchQueryResponseItem(unittest.TestCase):
     """PageVectorSearchQueryResponseItem unit test stubs"""
@@ -38,7 +38,7 @@ class TestPageVectorSearchQueryResponseItem(unittest.TestCase):
             return PageVectorSearchQueryResponseItem(
                 first = '',
                 items = [
-                    wordlift-client.models.vector_search_query_response_item.VectorSearchQueryResponseItem(
+                    wordlift_client.models.vector_search_query_response_item.VectorSearchQueryResponseItem(
                         dataset_uri = '', 
                         id = '', 
                         iri = '', 
@@ -58,7 +58,7 @@ class TestPageVectorSearchQueryResponseItem(unittest.TestCase):
             return PageVectorSearchQueryResponseItem(
                 first = '',
                 items = [
-                    wordlift-client.models.vector_search_query_response_item.VectorSearchQueryResponseItem(
+                    wordlift_client.models.vector_search_query_response_item.VectorSearchQueryResponseItem(
                         dataset_uri = '', 
                         id = '', 
                         iri = '', 

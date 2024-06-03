@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.website import Website
+from wordlift_client.models.website import Website
 
 class TestWebsite(unittest.TestCase):
     """Website unit test stubs"""

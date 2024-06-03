@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.page_vector_search_query_response_item import PageVectorSearchQueryResponseItem
+from wordlift_client.models.page_vector_search_query_response_item import PageVectorSearchQueryResponseItem
 
 # TODO update the JSON string below
 json = "{}"

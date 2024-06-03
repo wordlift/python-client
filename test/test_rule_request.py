@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.rule_request import RuleRequest
+from wordlift_client.models.rule_request import RuleRequest
 
 class TestRuleRequest(unittest.TestCase):
     """RuleRequest unit test stubs"""
@@ -38,7 +38,7 @@ class TestRuleRequest(unittest.TestCase):
             return RuleRequest(
                 description = '',
                 fixes = [
-                    wordlift-client.models.validation_fix.ValidationFix(
+                    wordlift_client.models.validation_fix.ValidationFix(
                         type = 'FIND_AND_REPLACE', 
                         what = '', 
                         with = '', )

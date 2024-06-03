@@ -1,4 +1,4 @@
-# wordlift-client.InspectorApi
+# wordlift_client.InspectorApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -19,14 +19,14 @@ Inspect a URL to perform a variety of tasks defined by the list of applied filte
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.models.inspect_response import InspectResponse
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.inspect_response import InspectResponse
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -42,9 +42,9 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.InspectorApi(api_client)
+    api_instance = wordlift_client.InspectorApi(api_client)
     u = 'https://wordlift.io' # str | The URL to inspect
     f = 'validator,content-analysis' # str | Filters to be applied on the result, if you want to apply multiple filters they should be separated by comma
     classes = ['classes_example'] # List[str] | A list of categories to be provided for classify filter. (optional)

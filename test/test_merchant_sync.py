@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.merchant_sync import MerchantSync
+from wordlift_client.models.merchant_sync import MerchantSync
 
 class TestMerchantSync(unittest.TestCase):
     """MerchantSync unit test stubs"""

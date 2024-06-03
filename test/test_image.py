@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.image import Image
+from wordlift_client.models.image import Image
 
 class TestImage(unittest.TestCase):
     """Image unit test stubs"""

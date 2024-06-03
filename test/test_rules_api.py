@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.rules_api import RulesApi
+from wordlift_client.api.rules_api import RulesApi
 
 
 class TestRulesApi(unittest.TestCase):

@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.page_rule import PageRule
+from wordlift_client.models.page_rule import PageRule
 
 class TestPageRule(unittest.TestCase):
     """PageRule unit test stubs"""
@@ -38,11 +38,11 @@ class TestPageRule(unittest.TestCase):
             return PageRule(
                 first = '',
                 items = [
-                    wordlift-client.models.rule.Rule(
+                    wordlift_client.models.rule.Rule(
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         description = '', 
                         fixes = [
-                            wordlift-client.models.validation_fix.ValidationFix(
+                            wordlift_client.models.validation_fix.ValidationFix(
                                 type = 'FIND_AND_REPLACE', 
                                 what = '', 
                                 with = '', )
@@ -72,11 +72,11 @@ class TestPageRule(unittest.TestCase):
             return PageRule(
                 first = '',
                 items = [
-                    wordlift-client.models.rule.Rule(
+                    wordlift_client.models.rule.Rule(
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         description = '', 
                         fixes = [
-                            wordlift-client.models.validation_fix.ValidationFix(
+                            wordlift_client.models.validation_fix.ValidationFix(
                                 type = 'FIND_AND_REPLACE', 
                                 what = '', 
                                 with = '', )

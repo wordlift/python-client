@@ -49,5 +49,5 @@ setup(
     long_description="""\
     Analyse content using Linked Data and Knowledge Graphs.
     """,  # noqa: E501
-    package_data={"wordlift-client": ["py.typed"]},
+    package_data={"wordlift_client": ["py.typed"]},
 )

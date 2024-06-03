@@ -1,4 +1,4 @@
-# wordlift-client.ContentExpansionsApi
+# wordlift_client.ContentExpansionsApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -19,15 +19,15 @@ Create a Content Expansion
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.models.content_expansion_request import ContentExpansionRequest
-from wordlift-client.models.content_expansion_response import ContentExpansionResponse
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.content_expansion_request import ContentExpansionRequest
+from wordlift_client.models.content_expansion_response import ContentExpansionResponse
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -43,10 +43,10 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.ContentExpansionsApi(api_client)
-    content_expansion_request = wordlift-client.ContentExpansionRequest() # ContentExpansionRequest | 
+    api_instance = wordlift_client.ContentExpansionsApi(api_client)
+    content_expansion_request = wordlift_client.ContentExpansionRequest() # ContentExpansionRequest | 
 
     try:
         # Create

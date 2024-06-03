@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.rule import Rule
+from wordlift_client.models.rule import Rule
 
 # TODO update the JSON string below
 json = "{}"

@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.content_generation_request import ContentGenerationRequest
+from wordlift_client.models.content_generation_request import ContentGenerationRequest
 
 class TestContentGenerationRequest(unittest.TestCase):
     """ContentGenerationRequest unit test stubs"""

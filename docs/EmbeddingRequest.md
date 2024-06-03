@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.embedding_request import EmbeddingRequest
+from wordlift_client.models.embedding_request import EmbeddingRequest
 
 # TODO update the JSON string below
 json = "{}"

@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.submit_fact_check200_response import SubmitFactCheck200Response
+from wordlift_client.models.submit_fact_check200_response import SubmitFactCheck200Response
 
 class TestSubmitFactCheck200Response(unittest.TestCase):
     """SubmitFactCheck200Response unit test stubs"""

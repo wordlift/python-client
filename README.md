@@ -25,7 +25,7 @@ pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git
 
 Then import the package:
 ```python
-import wordlift-client
+import wordlift_client
 ```
 
 ### Setuptools
@@ -39,7 +39,7 @@ python setup.py install --user
 
 Then import the package:
 ```python
-import wordlift-client
+import wordlift_client
 ```
 
 ### Tests
@@ -52,13 +52,13 @@ Please follow the [installation procedure](#installation--usage) and then run th
 
 ```python
 
-import wordlift-client
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -75,9 +75,9 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.AccountApi(api_client)
+    api_instance = wordlift_client.AccountApi(api_client)
 
     try:
         # Get

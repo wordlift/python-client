@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.image import Image
+from wordlift_client.models.image import Image
 
 # TODO update the JSON string below
 json = "{}"

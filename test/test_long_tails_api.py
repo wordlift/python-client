@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.long_tails_api import LongTailsApi
+from wordlift_client.api.long_tails_api import LongTailsApi
 
 
 class TestLongTailsApi(unittest.TestCase):

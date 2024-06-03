@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.validation_type_enum import ValidationTypeEnum
+from wordlift_client.models.validation_type_enum import ValidationTypeEnum
 
 class TestValidationTypeEnum(unittest.TestCase):
     """ValidationTypeEnum unit test stubs"""

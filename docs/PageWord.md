@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.page_word import PageWord
+from wordlift_client.models.page_word import PageWord
 
 # TODO update the JSON string below
 json = "{}"

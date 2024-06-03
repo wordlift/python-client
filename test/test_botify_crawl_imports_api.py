@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.botify_crawl_imports_api import BotifyCrawlImportsApi
+from wordlift_client.api.botify_crawl_imports_api import BotifyCrawlImportsApi
 
 
 class TestBotifyCrawlImportsApi(unittest.TestCase):

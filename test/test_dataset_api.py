@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.dataset_api import DatasetApi
+from wordlift_client.api.dataset_api import DatasetApi
 
 
 class TestDatasetApi(unittest.TestCase):

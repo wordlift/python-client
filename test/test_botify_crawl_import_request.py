@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.botify_crawl_import_request import BotifyCrawlImportRequest
+from wordlift_client.models.botify_crawl_import_request import BotifyCrawlImportRequest
 
 class TestBotifyCrawlImportRequest(unittest.TestCase):
     """BotifyCrawlImportRequest unit test stubs"""
@@ -41,7 +41,7 @@ class TestBotifyCrawlImportRequest(unittest.TestCase):
                     ''
                     ],
                 filters = [
-                    wordlift-client.models.filter.Filter(
+                    wordlift_client.models.filter.Filter(
                         key = '', 
                         operator = 'EQ', 
                         value = '', )

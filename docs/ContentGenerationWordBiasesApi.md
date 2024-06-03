@@ -1,4 +1,4 @@
-# wordlift-client.ContentGenerationWordBiasesApi
+# wordlift_client.ContentGenerationWordBiasesApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -21,25 +21,25 @@ Create
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.word import Word
-from wordlift-client.models.word_request import WordRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.word import Word
+from wordlift_client.models.word_request import WordRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.ContentGenerationWordBiasesApi(api_client)
+    api_instance = wordlift_client.ContentGenerationWordBiasesApi(api_client)
     content_generation_id = 56 # int | The Content Generation id.
-    word_request = wordlift-client.WordRequest() # WordRequest | 
+    word_request = wordlift_client.WordRequest() # WordRequest | 
 
     try:
         # Create
@@ -94,25 +94,25 @@ Send a list of word biases for this prompt. Existing words will be deleted.
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.word import Word
-from wordlift-client.models.word_request import WordRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.word import Word
+from wordlift_client.models.word_request import WordRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.ContentGenerationWordBiasesApi(api_client)
+    api_instance = wordlift_client.ContentGenerationWordBiasesApi(api_client)
     content_generation_id = 56 # int | The Content Generation id.
-    word_request = [wordlift-client.WordRequest()] # List[WordRequest] |  (optional)
+    word_request = [wordlift_client.WordRequest()] # List[WordRequest] |  (optional)
 
     try:
         # Update for prompt
@@ -165,21 +165,21 @@ Update from CSV
 
 
 ```python
-import wordlift-client
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.ContentGenerationWordBiasesApi(api_client)
+    api_instance = wordlift_client.ContentGenerationWordBiasesApi(api_client)
     content_generation_id = 56 # int | The Content Generation id.
     body = 'body_example' # str | 
     content_type = 'content_type_example' # str |  (optional)
@@ -234,21 +234,21 @@ Delete
 
 
 ```python
-import wordlift-client
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.ContentGenerationWordBiasesApi(api_client)
+    api_instance = wordlift_client.ContentGenerationWordBiasesApi(api_client)
     content_generation_id = 56 # int | The Content Generation id.
     id = 56 # int | The Word to delete.
 
@@ -301,22 +301,22 @@ List
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.page_word import PageWord
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.page_word import PageWord
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.ContentGenerationWordBiasesApi(api_client)
+    api_instance = wordlift_client.ContentGenerationWordBiasesApi(api_client)
     content_generation_id = 56 # int | The Content Generation id.
     the_cursor_ = 'the_cursor__example' # str |  (optional)
     the_maximum_number_of_results_ = 10 # int |  (optional) (default to 10)
@@ -373,26 +373,26 @@ Update
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.word import Word
-from wordlift-client.models.word_request import WordRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.word import Word
+from wordlift_client.models.word_request import WordRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.ContentGenerationWordBiasesApi(api_client)
+    api_instance = wordlift_client.ContentGenerationWordBiasesApi(api_client)
     content_generation_id = 56 # int | The Content Generation id.
     id = 56 # int | The Word bias to update.
-    word_request = wordlift-client.WordRequest() # WordRequest | 
+    word_request = wordlift_client.WordRequest() # WordRequest | 
 
     try:
         # Update

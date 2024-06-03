@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.vector_search_query_request import VectorSearchQueryRequest
+from wordlift_client.models.vector_search_query_request import VectorSearchQueryRequest
 
 class TestVectorSearchQueryRequest(unittest.TestCase):
     """VectorSearchQueryRequest unit test stubs"""
@@ -37,7 +37,7 @@ class TestVectorSearchQueryRequest(unittest.TestCase):
         if include_optional:
             return VectorSearchQueryRequest(
                 filters = [
-                    wordlift-client.models.filter.Filter(
+                    wordlift_client.models.filter.Filter(
                         key = '', 
                         operator = 'EQ', 
                         value = '', )

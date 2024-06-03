@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.entity_gap_request import EntityGapRequest
+from wordlift_client.models.entity_gap_request import EntityGapRequest
 
 class TestEntityGapRequest(unittest.TestCase):
     """EntityGapRequest unit test stubs"""

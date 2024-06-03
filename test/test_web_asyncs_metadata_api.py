@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.web_asyncs_metadata_api import WebAsyncsMetadataApi
+from wordlift_client.api.web_asyncs_metadata_api import WebAsyncsMetadataApi
 
 
 class TestWebAsyncsMetadataApi(unittest.TestCase):

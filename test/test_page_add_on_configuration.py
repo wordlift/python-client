@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.page_add_on_configuration import PageAddOnConfiguration
+from wordlift_client.models.page_add_on_configuration import PageAddOnConfiguration
 
 class TestPageAddOnConfiguration(unittest.TestCase):
     """PageAddOnConfiguration unit test stubs"""
@@ -38,7 +38,7 @@ class TestPageAddOnConfiguration(unittest.TestCase):
             return PageAddOnConfiguration(
                 first = '',
                 items = [
-                    wordlift-client.models.add_on_configuration.AddOnConfiguration(
+                    wordlift_client.models.add_on_configuration.AddOnConfiguration(
                         can_do_content_expansion = True, 
                         can_import_to_wordpress = True, 
                         key = '', 
@@ -54,7 +54,7 @@ class TestPageAddOnConfiguration(unittest.TestCase):
             return PageAddOnConfiguration(
                 first = '',
                 items = [
-                    wordlift-client.models.add_on_configuration.AddOnConfiguration(
+                    wordlift_client.models.add_on_configuration.AddOnConfiguration(
                         can_do_content_expansion = True, 
                         can_import_to_wordpress = True, 
                         key = '', 

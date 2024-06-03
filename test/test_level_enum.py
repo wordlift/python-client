@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.level_enum import LevelEnum
+from wordlift_client.models.level_enum import LevelEnum
 
 class TestLevelEnum(unittest.TestCase):
     """LevelEnum unit test stubs"""

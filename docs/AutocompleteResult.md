@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.autocomplete_result import AutocompleteResult
+from wordlift_client.models.autocomplete_result import AutocompleteResult
 
 # TODO update the JSON string below
 json = "{}"

@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.question_and_answer import QuestionAndAnswer
+from wordlift_client.models.question_and_answer import QuestionAndAnswer
 
 # TODO update the JSON string below
 json = "{}"

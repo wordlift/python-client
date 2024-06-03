@@ -1,4 +1,4 @@
-# wordlift-client.RulesApi
+# wordlift_client.RulesApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -21,23 +21,23 @@ Copy
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.project_type import ProjectType
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.project_type import ProjectType
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.RulesApi(api_client)
-    project_type = wordlift-client.ProjectType() # ProjectType | The project type
+    api_instance = wordlift_client.RulesApi(api_client)
+    project_type = wordlift_client.ProjectType() # ProjectType | The project type
     from_project_id = 56 # int | The source Content Generation id.
     to_project_id = 56 # int | The target Content Generation id.
 
@@ -91,24 +91,24 @@ Create
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.rule import Rule
-from wordlift-client.models.rule_request import RuleRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.rule import Rule
+from wordlift_client.models.rule_request import RuleRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.RulesApi(api_client)
-    rule_request = wordlift-client.RuleRequest() # RuleRequest | 
+    api_instance = wordlift_client.RulesApi(api_client)
+    rule_request = wordlift_client.RuleRequest() # RuleRequest | 
 
     try:
         # Create
@@ -160,21 +160,21 @@ Delete
 
 
 ```python
-import wordlift-client
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.RulesApi(api_client)
+    api_instance = wordlift_client.RulesApi(api_client)
     id = 56 # int | The id
 
     try:
@@ -225,29 +225,29 @@ List
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.page_rule import PageRule
-from wordlift-client.models.project_type import ProjectType
-from wordlift-client.models.scope import Scope
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.page_rule import PageRule
+from wordlift_client.models.project_type import ProjectType
+from wordlift_client.models.scope import Scope
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.RulesApi(api_client)
+    api_instance = wordlift_client.RulesApi(api_client)
     cursor = 'cursor_example' # str | The cursor (optional)
     limit = 10 # int | The maximum number of results (optional) (default to 10)
     project_id = 56 # int | The project id - if provided, must also provide the project type (optional)
-    project_type = wordlift-client.ProjectType() # ProjectType | The project type - if provided, must also provide the project id (optional)
-    scope = wordlift-client.Scope() # Scope | The scope (optional)
+    project_type = wordlift_client.ProjectType() # ProjectType | The project type - if provided, must also provide the project id (optional)
+    scope = wordlift_client.Scope() # Scope | The scope (optional)
 
     try:
         # List
@@ -303,25 +303,25 @@ Update
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.rule import Rule
-from wordlift-client.models.rule_request import RuleRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.rule import Rule
+from wordlift_client.models.rule_request import RuleRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.RulesApi(api_client)
+    api_instance = wordlift_client.RulesApi(api_client)
     id = 56 # int | The id
-    rule_request = wordlift-client.RuleRequest() # RuleRequest | 
+    rule_request = wordlift_client.RuleRequest() # RuleRequest | 
 
     try:
         # Update
@@ -374,27 +374,27 @@ Update
 
 
 ```python
-import wordlift-client
-from wordlift-client.models.project_type import ProjectType
-from wordlift-client.models.rule import Rule
-from wordlift-client.models.rule_request import RuleRequest
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.project_type import ProjectType
+from wordlift_client.models.rule import Rule
+from wordlift_client.models.rule_request import RuleRequest
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.RulesApi(api_client)
+    api_instance = wordlift_client.RulesApi(api_client)
     project_id = 56 # int | The project id
-    project_type = wordlift-client.ProjectType() # ProjectType | The project type
-    rule_request = [wordlift-client.RuleRequest()] # List[RuleRequest] | 
+    project_type = wordlift_client.ProjectType() # ProjectType | The project type
+    rule_request = [wordlift_client.RuleRequest()] # List[RuleRequest] | 
 
     try:
         # Update

@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.embedding_request import EmbeddingRequest
+from wordlift_client.models.embedding_request import EmbeddingRequest
 
 class TestEmbeddingRequest(unittest.TestCase):
     """EmbeddingRequest unit test stubs"""

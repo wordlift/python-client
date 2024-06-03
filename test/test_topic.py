@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.topic import Topic
+from wordlift_client.models.topic import Topic
 
 class TestTopic(unittest.TestCase):
     """Topic unit test stubs"""

@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.page_merchant_sync import PageMerchantSync
+from wordlift_client.models.page_merchant_sync import PageMerchantSync
 
 # TODO update the JSON string below
 json = "{}"

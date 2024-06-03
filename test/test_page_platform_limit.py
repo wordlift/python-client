@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.page_platform_limit import PagePlatformLimit
+from wordlift_client.models.page_platform_limit import PagePlatformLimit
 
 class TestPagePlatformLimit(unittest.TestCase):
     """PagePlatformLimit unit test stubs"""
@@ -38,7 +38,7 @@ class TestPagePlatformLimit(unittest.TestCase):
             return PagePlatformLimit(
                 first = '',
                 items = [
-                    wordlift-client.models.platform_limit.PlatformLimit(
+                    wordlift_client.models.platform_limit.PlatformLimit(
                         applies_to = '', 
                         based_on = 'SKU', 
                         based_on_value = '', 
@@ -58,7 +58,7 @@ class TestPagePlatformLimit(unittest.TestCase):
             return PagePlatformLimit(
                 first = '',
                 items = [
-                    wordlift-client.models.platform_limit.PlatformLimit(
+                    wordlift_client.models.platform_limit.PlatformLimit(
                         applies_to = '', 
                         based_on = 'SKU', 
                         based_on_value = '', 

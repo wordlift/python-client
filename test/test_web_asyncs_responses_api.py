@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.web_asyncs_responses_api import WebAsyncsResponsesApi
+from wordlift_client.api.web_asyncs_responses_api import WebAsyncsResponsesApi
 
 
 class TestWebAsyncsResponsesApi(unittest.TestCase):

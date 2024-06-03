@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.page_o_auth2_authorized_client import PageOAuth2AuthorizedClient
+from wordlift_client.models.page_o_auth2_authorized_client import PageOAuth2AuthorizedClient
 
 class TestPageOAuth2AuthorizedClient(unittest.TestCase):
     """PageOAuth2AuthorizedClient unit test stubs"""
@@ -38,7 +38,7 @@ class TestPageOAuth2AuthorizedClient(unittest.TestCase):
             return PageOAuth2AuthorizedClient(
                 first = '',
                 items = [
-                    wordlift-client.models.o_auth2_authorized_client.OAuth2AuthorizedClient(
+                    wordlift_client.models.o_auth2_authorized_client.OAuth2AuthorizedClient(
                         access_token_expires_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         access_token_issued_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         access_token_scopes = '', 
@@ -59,7 +59,7 @@ class TestPageOAuth2AuthorizedClient(unittest.TestCase):
             return PageOAuth2AuthorizedClient(
                 first = '',
                 items = [
-                    wordlift-client.models.o_auth2_authorized_client.OAuth2AuthorizedClient(
+                    wordlift_client.models.o_auth2_authorized_client.OAuth2AuthorizedClient(
                         access_token_expires_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         access_token_issued_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         access_token_scopes = '', 

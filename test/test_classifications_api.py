@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.classifications_api import ClassificationsApi
+from wordlift_client.api.classifications_api import ClassificationsApi
 
 
 class TestClassificationsApi(unittest.TestCase):

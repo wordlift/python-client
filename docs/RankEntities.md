@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.rank_entities import RankEntities
+from wordlift_client.models.rank_entities import RankEntities
 
 # TODO update the JSON string below
 json = "{}"

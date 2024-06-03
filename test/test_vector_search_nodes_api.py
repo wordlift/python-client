@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.api.vector_search_nodes_api import VectorSearchNodesApi
+from wordlift_client.api.vector_search_nodes_api import VectorSearchNodesApi
 
 
 class TestVectorSearchNodesApi(unittest.TestCase):

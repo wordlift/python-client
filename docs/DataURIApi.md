@@ -1,4 +1,4 @@
-# wordlift-client.DataURIApi
+# wordlift_client.DataURIApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -18,21 +18,21 @@ The service will return a Web Data URI only for existing datasets. The Web Data 
 
 
 ```python
-import wordlift-client
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.DataURIApi(api_client)
+    api_instance = wordlift_client.DataURIApi(api_client)
     u = 'u_example' # str | The Web Page URL.
 
     try:

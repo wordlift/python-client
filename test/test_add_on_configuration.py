@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.add_on_configuration import AddOnConfiguration
+from wordlift_client.models.add_on_configuration import AddOnConfiguration
 
 class TestAddOnConfiguration(unittest.TestCase):
     """AddOnConfiguration unit test stubs"""

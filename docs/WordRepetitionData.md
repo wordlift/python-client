@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.word_repetition_data import WordRepetitionData
+from wordlift_client.models.word_repetition_data import WordRepetitionData
 
 # TODO update the JSON string below
 json = "{}"

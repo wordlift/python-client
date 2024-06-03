@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.inspect_response import InspectResponse
+from wordlift_client.models.inspect_response import InspectResponse
 
 class TestInspectResponse(unittest.TestCase):
     """InspectResponse unit test stubs"""

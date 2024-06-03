@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.o_auth2_authorized_client_request import OAuth2AuthorizedClientRequest
+from wordlift_client.models.o_auth2_authorized_client_request import OAuth2AuthorizedClientRequest
 
 class TestOAuth2AuthorizedClientRequest(unittest.TestCase):
     """OAuth2AuthorizedClientRequest unit test stubs"""

@@ -1,4 +1,4 @@
-# wordlift-client.EntitiesApi
+# wordlift_client.EntitiesApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -22,13 +22,13 @@ Create new entities by automatically generating their id.
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -44,9 +44,9 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.EntitiesApi(api_client)
+    api_instance = wordlift_client.EntitiesApi(api_client)
     body = 'body_example' # str | 
 
     try:
@@ -101,13 +101,13 @@ Create or update entities by using the provided ids.
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -123,9 +123,9 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.EntitiesApi(api_client)
+    api_instance = wordlift_client.EntitiesApi(api_client)
     request_body = None # List[object] | 
 
     try:
@@ -178,13 +178,13 @@ Delete entities with the provided ids.
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -200,9 +200,9 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.EntitiesApi(api_client)
+    api_instance = wordlift_client.EntitiesApi(api_client)
     id = ['id_example'] # List[str] | One or more ids, in the form of URLs.
     include_children = 'false' # str | Whether to delete all the entities whose ids start with the provided ids, by default false. (optional) (default to 'false')
     include_referenced = 'false' # str | Whether to delete all the referenced entities (e.g. in `schema:mentions`), by default false. (optional) (default to 'false')
@@ -259,13 +259,13 @@ Get entities with the provided ids.
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -281,9 +281,9 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.EntitiesApi(api_client)
+    api_instance = wordlift_client.EntitiesApi(api_client)
     id = ['id_example'] # List[str] | One or more ids, in the form of URLs.
     include_children = 'false' # str | Whether to return all the entities whose ids start with the provided ids, by default false. (optional) (default to 'false')
     include_referenced = 'false' # str | Whether to return all the referenced entities (e.g. in `schema:mentions`), by default false. (optional) (default to 'false')

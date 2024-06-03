@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.page_merchant_entry import PageMerchantEntry
+from wordlift_client.models.page_merchant_entry import PageMerchantEntry
 
 class TestPageMerchantEntry(unittest.TestCase):
     """PageMerchantEntry unit test stubs"""
@@ -38,7 +38,7 @@ class TestPageMerchantEntry(unittest.TestCase):
             return PageMerchantEntry(
                 first = '',
                 items = [
-                    wordlift-client.models.merchant_entry.MerchantEntry(
+                    wordlift_client.models.merchant_entry.MerchantEntry(
                         google_merchant_id = 56, 
                         website_url = '', )
                     ],
@@ -51,7 +51,7 @@ class TestPageMerchantEntry(unittest.TestCase):
             return PageMerchantEntry(
                 first = '',
                 items = [
-                    wordlift-client.models.merchant_entry.MerchantEntry(
+                    wordlift_client.models.merchant_entry.MerchantEntry(
                         google_merchant_id = 56, 
                         website_url = '', )
                     ],

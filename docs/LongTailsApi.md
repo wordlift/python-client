@@ -1,4 +1,4 @@
-# wordlift-client.LongTailsApi
+# wordlift_client.LongTailsApi
 
 All URIs are relative to *https://api.wordlift.io/analysis*
 
@@ -21,14 +21,14 @@ Query for long tail opportunities and receive entities.
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.models.longtail_response import LongtailResponse
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.longtail_response import LongtailResponse
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -44,9 +44,9 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.LongTailsApi(api_client)
+    api_instance = wordlift_client.LongTailsApi(api_client)
     q = 'q_example' # str | The Longtail query
     ln = 'London,England,United Kingdom' # str | A location name, origin of the search
     lc = 'en' # str | Language Code
@@ -112,13 +112,13 @@ Query for long tail opportunities and receive entities along with their position
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -134,9 +134,9 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.LongTailsApi(api_client)
+    api_instance = wordlift_client.LongTailsApi(api_client)
     q = 'q_example' # str | The Longtail query
     ln = 'London,England,United Kingdom' # str | A location name, origin of the search
     lc = 'en' # str | Language Code
@@ -202,14 +202,14 @@ Query for long tail opportunities and receive entities along with their position
 * Api Key Authentication (ApiKey):
 
 ```python
-import wordlift-client
-from wordlift-client.models.rank_entities import RankEntities
-from wordlift-client.rest import ApiException
+import wordlift_client
+from wordlift_client.models.rank_entities import RankEntities
+from wordlift_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.wordlift.io/analysis
 # See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift-client.Configuration(
+configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io/analysis"
 )
 
@@ -225,9 +225,9 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-async with wordlift-client.ApiClient(configuration) as api_client:
+async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift-client.LongTailsApi(api_client)
+    api_instance = wordlift_client.LongTailsApi(api_client)
     q = 'q_example' # str | The Longtail query
     ln = 'London,England,United Kingdom' # str | A location name, origin of the search
     lc = 'en' # str | Language Code

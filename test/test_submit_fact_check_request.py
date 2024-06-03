@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.submit_fact_check_request import SubmitFactCheckRequest
+from wordlift_client.models.submit_fact_check_request import SubmitFactCheckRequest
 
 class TestSubmitFactCheckRequest(unittest.TestCase):
     """SubmitFactCheckRequest unit test stubs"""

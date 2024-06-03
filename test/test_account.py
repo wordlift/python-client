@@ -15,7 +15,7 @@
 
 import unittest
 
-from wordlift-client.models.account import Account
+from wordlift_client.models.account import Account
 
 class TestAccount(unittest.TestCase):
     """Account unit test stubs"""

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from wordlift-client.models.analytics_import_request import AnalyticsImportRequest
+from wordlift_client.models.analytics_import_request import AnalyticsImportRequest
 
 # TODO update the JSON string below
 json = "{}"
