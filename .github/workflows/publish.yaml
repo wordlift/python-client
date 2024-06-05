@@ -1,3 +1,4 @@
+# workflow that receives updated api specifications from https://github.com/wordlift/docs, bumps version, build and publish to pypi
 name: Publish Python 🐍 distribution 📦 to PyPI and TestPyPI
 
 on:
@@ -48,18 +49,22 @@ jobs:
       - name: Merge the yaml files
         run: npx openapi-merge-cli --config ./openapi-merge.json
 
-      # Step 8: Generate the SDK
-      - name: Generate the SDK
-        run: npx @openapitools/openapi-generator-cli generate -i ./wordliftApiSpec.yaml -g python --package-name 'wordlift_client' --library 'asyncio'
+      # Step 8: Bump version in config.json
+      - name: Bump version in config.json
+        run: python3 ./utils/bump.py
 
-      # Step 9: Store the package for testing
+      # Step 9: Generate the SDK
+      - name: Generate the SDK
+        run: npx @openapitools/openapi-generator-cli generate -i ./wordliftApiSpec.yaml -g python -c config.json --package-name 'wordlift_client' --library 'asyncio'
+
+      # Step 10: Store the package for testing
       - name: Store the package
         uses: actions/upload-artifact@v3
         with:
           name: python-package
           path: ./
 
-      # Step 10: Build the binary
+      # Step 11: Build the binary
       - name: Build a binary wheel and a source tarball
         run: |
           python3 -m build
@@ -103,13 +108,49 @@ jobs:
       - name: Run tests
         run: pytest
 
+  push:
+    name: Push client
+    needs:
+      - test
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Download the package
+      - name: Download the package
+        uses: actions/download-artifact@v3
+        with:
+          name: python-package
+          path: ./
+
+      # Step 3: Get version from setup
+      - name: Get version from setup.py
+        id: get_version
+        run: |
+          version=$(python setup.py --version)
+          echo "version=$version" >> $GITHUB_ENV # Appends the version number to the $GITHUB_ENV file, making it an environment variable for subsequent steps, need it for commit
+
+      # Step 4: push updated client
+      - name: Commit and Push Changes
+        env:
+          VERSION: ${{ env.version }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a $VERSION -m "Release version $VERSION"
+          git add .
+          git commit -m "Update client to version $VERSION [skip ci]"
+          git push --follow-tags origin main
+
   publish-to-pypi:
     name: >-
       Publish Python 🐍 distribution 📦 to PyPI
     if: startsWith(github.ref, 'refs/tags/')
     needs:
-      - build
-      - test
+      - push
     runs-on: ubuntu-latest
     environment:
       name: pypi
@@ -129,7 +170,7 @@ jobs:
   publish-to-testpypi:
     name: Publish Python 🐍 distribution 📦 to TestPyPI
     needs:
-      - build
+      - push
     runs-on: ubuntu-latest
 
     environment:
