@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    Analysis
+    Middleware
 
-    Analyse content using Linked Data and Knowledge Graphs.
+    Knowledge Graph data management.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -18,18 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class Properties(BaseModel):
     """
-    The entity properties.
+    Properties
     """ # noqa: E501
-    latitude: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The latitude.")
-    longitude: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The longitude.")
-    __properties: ClassVar[List[str]] = ["latitude", "longitude"]
+    name: Optional[StrictStr] = Field(default=None, description="The name of the entity.")
+    same_as: Optional[List[StrictStr]] = Field(default=None, description="A list of sameAs entity URIs.", alias="sameAs")
+    __properties: ClassVar[List[str]] = ["name", "sameAs"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,8 +82,8 @@ class Properties(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "latitude": obj.get("latitude"),
-            "longitude": obj.get("longitude")
+            "name": obj.get("name"),
+            "sameAs": obj.get("sameAs")
         })
         return _obj
 

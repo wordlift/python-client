@@ -3,9 +3,9 @@
 # flake8: noqa
 
 """
-    Analysis
+    Middleware
 
-    Analyse content using Linked Data and Knowledge Graphs.
+    Knowledge Graph data management.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi

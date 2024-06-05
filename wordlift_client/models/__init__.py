@@ -2,9 +2,9 @@
 
 # flake8: noqa
 """
-    Analysis
+    Middleware
 
-    Analyse content using Linked Data and Knowledge Graphs.
+    Knowledge Graph data management.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io

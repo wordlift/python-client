@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    Analysis
+    Middleware
 
-    Analyse content using Linked Data and Knowledge Graphs.
+    Knowledge Graph data management.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -17,8 +17,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from wordlift_client.models.request3 import Request3
-from wordlift_client.models.response2 import Response2
+from wordlift_client.models.request import Request
+from wordlift_client.models.response import Response
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
 from wordlift_client.api_response import ApiResponse
@@ -41,7 +41,7 @@ class RedeemCodesApi:
     @validate_call
     async def redeem_code(
         self,
-        request3: Request3,
+        request: Request,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -54,12 +54,12 @@ class RedeemCodesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Response2:
+    ) -> Response:
         """Redeem the provided code and get a key
 
 
-        :param request3: (required)
-        :type request3: Request3
+        :param request: (required)
+        :type request: Request
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -83,7 +83,7 @@ class RedeemCodesApi:
         """ # noqa: E501
 
         _param = self._redeem_code_serialize(
-            request3=request3,
+            request=request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -91,7 +91,7 @@ class RedeemCodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Response2",
+            '200': "Response",
             '404': "ProblemDetail",
             '409': "ProblemDetail",
             '500': "ProblemDetail",
@@ -110,7 +110,7 @@ class RedeemCodesApi:
     @validate_call
     async def redeem_code_with_http_info(
         self,
-        request3: Request3,
+        request: Request,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -123,12 +123,12 @@ class RedeemCodesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Response2]:
+    ) -> ApiResponse[Response]:
         """Redeem the provided code and get a key
 
 
-        :param request3: (required)
-        :type request3: Request3
+        :param request: (required)
+        :type request: Request
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -152,7 +152,7 @@ class RedeemCodesApi:
         """ # noqa: E501
 
         _param = self._redeem_code_serialize(
-            request3=request3,
+            request=request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -160,7 +160,7 @@ class RedeemCodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Response2",
+            '200': "Response",
             '404': "ProblemDetail",
             '409': "ProblemDetail",
             '500': "ProblemDetail",
@@ -179,7 +179,7 @@ class RedeemCodesApi:
     @validate_call
     async def redeem_code_without_preload_content(
         self,
-        request3: Request3,
+        request: Request,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -196,8 +196,8 @@ class RedeemCodesApi:
         """Redeem the provided code and get a key
 
 
-        :param request3: (required)
-        :type request3: Request3
+        :param request: (required)
+        :type request: Request
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -221,7 +221,7 @@ class RedeemCodesApi:
         """ # noqa: E501
 
         _param = self._redeem_code_serialize(
-            request3=request3,
+            request=request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -229,7 +229,7 @@ class RedeemCodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Response2",
+            '200': "Response",
             '404': "ProblemDetail",
             '409': "ProblemDetail",
             '500': "ProblemDetail",
@@ -243,7 +243,7 @@ class RedeemCodesApi:
 
     def _redeem_code_serialize(
         self,
-        request3,
+        request,
         _request_auth,
         _content_type,
         _headers,
@@ -267,8 +267,8 @@ class RedeemCodesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request3 is not None:
-            _body_params = request3
+        if request is not None:
+            _body_params = request
 
 
         # set the HTTP header `Accept`

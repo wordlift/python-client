@@ -1,6 +1,6 @@
 # wordlift_client.PluginEventsApi
 
-All URIs are relative to *https://api.wordlift.io/analysis*
+All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **create_event**
-> Event create_event(request2)
+> Event create_event(request1)
 
 Create
 
@@ -22,14 +22,14 @@ Create an event
 ```python
 import wordlift_client
 from wordlift_client.models.event import Event
-from wordlift_client.models.request2 import Request2
+from wordlift_client.models.request1 import Request1
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/analysis"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -47,11 +47,11 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.PluginEventsApi(api_client)
-    request2 = wordlift_client.Request2() # Request2 | 
+    request1 = wordlift_client.Request1() # Request1 | 
 
     try:
         # Create
-        api_response = await api_instance.create_event(request2)
+        api_response = await api_instance.create_event(request1)
         print("The response of PluginEventsApi->create_event:\n")
         pprint(api_response)
     except Exception as e:
@@ -65,7 +65,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request2** | [**Request2**](Request2.md)|  | 
+ **request1** | [**Request1**](Request1.md)|  | 
 
 ### Return type
 
@@ -106,10 +106,10 @@ from wordlift_client.models.response1 import Response1
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/analysis"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters

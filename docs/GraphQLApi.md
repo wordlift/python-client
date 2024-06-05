@@ -1,6 +1,6 @@
 # wordlift_client.GraphQLApi
 
-All URIs are relative to *https://api.wordlift.io/analysis*
+All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -22,10 +22,10 @@ from wordlift_client.models.graphql_request import GraphqlRequest
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/analysis"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters

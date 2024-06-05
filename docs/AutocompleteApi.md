@@ -1,14 +1,14 @@
 # wordlift_client.AutocompleteApi
 
-All URIs are relative to *https://api.wordlift.io/analysis*
+All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get4**](AutocompleteApi.md#get4) | **GET** /autocomplete | Get
+[**get**](AutocompleteApi.md#get) | **GET** /autocomplete | Get
 
 
-# **get4**
-> List[AutocompleteResult] get4(query, language, scope=scope, limit=limit, exclude=exclude)
+# **get**
+> List[AutocompleteResult] get(query, language, scope=scope, limit=limit, exclude=exclude)
 
 Get
 
@@ -24,10 +24,10 @@ from wordlift_client.models.autocomplete_result import AutocompleteResult
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/analysis"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -53,11 +53,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Get
-        api_response = await api_instance.get4(query, language, scope=scope, limit=limit, exclude=exclude)
-        print("The response of AutocompleteApi->get4:\n")
+        api_response = await api_instance.get(query, language, scope=scope, limit=limit, exclude=exclude)
+        print("The response of AutocompleteApi->get:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AutocompleteApi->get4: %s\n" % e)
+        print("Exception when calling AutocompleteApi->get: %s\n" % e)
 ```
 
 

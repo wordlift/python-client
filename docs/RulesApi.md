@@ -1,6 +1,6 @@
 # wordlift_client.RulesApi
 
-All URIs are relative to *https://api.wordlift.io/analysis*
+All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -26,10 +26,10 @@ from wordlift_client.models.project_type import ProjectType
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/analysis"
+    host = "https://api.wordlift.io"
 )
 
 
@@ -97,10 +97,10 @@ from wordlift_client.models.rule_request import RuleRequest
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/analysis"
+    host = "https://api.wordlift.io"
 )
 
 
@@ -164,10 +164,10 @@ import wordlift_client
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/analysis"
+    host = "https://api.wordlift.io"
 )
 
 
@@ -232,10 +232,10 @@ from wordlift_client.models.scope import Scope
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/analysis"
+    host = "https://api.wordlift.io"
 )
 
 
@@ -309,10 +309,10 @@ from wordlift_client.models.rule_request import RuleRequest
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/analysis"
+    host = "https://api.wordlift.io"
 )
 
 
@@ -381,10 +381,10 @@ from wordlift_client.models.rule_request import RuleRequest
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/analysis"
+    host = "https://api.wordlift.io"
 )
 
 

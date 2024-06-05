@@ -1,6 +1,6 @@
 # wordlift_client.ContentGenerationRecordsApi
 
-All URIs are relative to *https://api.wordlift.io/analysis*
+All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -26,10 +26,10 @@ from wordlift_client.models.record import Record
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/analysis"
+    host = "https://api.wordlift.io"
 )
 
 
@@ -96,10 +96,10 @@ from wordlift_client.models.page_record import PageRecord
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/analysis"
+    host = "https://api.wordlift.io"
 )
 
 
@@ -168,10 +168,10 @@ import wordlift_client
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/analysis"
+    host = "https://api.wordlift.io"
 )
 
 
@@ -220,7 +220,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_record**
-> Record update_record(content_generation_id, record_id, request1)
+> Record update_record(content_generation_id, record_id, request2)
 
 Update
 
@@ -230,14 +230,14 @@ Update
 ```python
 import wordlift_client
 from wordlift_client.models.record import Record
-from wordlift_client.models.request1 import Request1
+from wordlift_client.models.request2 import Request2
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/analysis"
+    host = "https://api.wordlift.io"
 )
 
 
@@ -247,11 +247,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     api_instance = wordlift_client.ContentGenerationRecordsApi(api_client)
     content_generation_id = 56 # int | The Content Generation id.
     record_id = 56 # int | The Record id.
-    request1 = wordlift_client.Request1() # Request1 | 
+    request2 = wordlift_client.Request2() # Request2 | 
 
     try:
         # Update
-        api_response = await api_instance.update_record(content_generation_id, record_id, request1)
+        api_response = await api_instance.update_record(content_generation_id, record_id, request2)
         print("The response of ContentGenerationRecordsApi->update_record:\n")
         pprint(api_response)
     except Exception as e:
@@ -267,7 +267,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **content_generation_id** | **int**| The Content Generation id. | 
  **record_id** | **int**| The Record id. | 
- **request1** | [**Request1**](Request1.md)|  | 
+ **request2** | [**Request2**](Request2.md)|  | 
 
 ### Return type
 
@@ -306,10 +306,10 @@ from wordlift_client.models.update_records_request import UpdateRecordsRequest
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/analysis"
+    host = "https://api.wordlift.io"
 )
 
 
@@ -377,10 +377,10 @@ from wordlift_client.models.update_record_request import UpdateRecordRequest
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/analysis
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/analysis"
+    host = "https://api.wordlift.io"
 )
 
 

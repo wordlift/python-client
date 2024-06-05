@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    Analysis
+    Middleware
 
-    Analyse content using Linked Data and Knowledge Graphs.
+    Knowledge Graph data management.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -40,7 +40,7 @@ class ContentGenerationStatsApi:
 
 
     @validate_call
-    async def get(
+    async def get3(
         self,
         content_generation_id: Annotated[StrictInt, Field(description="The Content Generation id.")],
         _request_timeout: Union[
@@ -83,7 +83,7 @@ class ContentGenerationStatsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_serialize(
+        _param = self._get3_serialize(
             content_generation_id=content_generation_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -108,7 +108,7 @@ class ContentGenerationStatsApi:
 
 
     @validate_call
-    async def get_with_http_info(
+    async def get3_with_http_info(
         self,
         content_generation_id: Annotated[StrictInt, Field(description="The Content Generation id.")],
         _request_timeout: Union[
@@ -151,7 +151,7 @@ class ContentGenerationStatsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_serialize(
+        _param = self._get3_serialize(
             content_generation_id=content_generation_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -176,7 +176,7 @@ class ContentGenerationStatsApi:
 
 
     @validate_call
-    async def get_without_preload_content(
+    async def get3_without_preload_content(
         self,
         content_generation_id: Annotated[StrictInt, Field(description="The Content Generation id.")],
         _request_timeout: Union[
@@ -219,7 +219,7 @@ class ContentGenerationStatsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_serialize(
+        _param = self._get3_serialize(
             content_generation_id=content_generation_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -239,7 +239,7 @@ class ContentGenerationStatsApi:
         return response_data.response
 
 
-    def _get_serialize(
+    def _get3_serialize(
         self,
         content_generation_id,
         _request_auth,
