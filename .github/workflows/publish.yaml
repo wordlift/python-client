@@ -115,16 +115,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      # Step 2: Download the package
+      # Step 1: Download the package
       - name: Download the package
         uses: actions/download-artifact@v3
         with:
           name: python-package
           path: ./
+
+      # Step 2: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       # Step 3: Get version from setup
       - name: Get version from setup.py
