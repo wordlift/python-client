@@ -1,3 +1,4 @@
+# workflow that receives updated api specifications from https://github.com/wordlift/docs, bumps version, build and publish to pypi
 name: Publish Python 🐍 distribution 📦 to PyPI and TestPyPI
 
 on:
@@ -130,7 +131,7 @@ jobs:
         id: get_version
         run: |
           version=$(python setup.py --version)
-          echo "version=$version" >> $GITHUB_ENV
+          echo "version=$version" >> $GITHUB_ENV # Appends the version number to the $GITHUB_ENV file, making it an environment variable for subsequent steps, need it for commit
 
       # Step 4: push updated client
       - name: Commit and Push Changes
