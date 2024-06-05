@@ -57,6 +57,25 @@ jobs:
       - name: Generate the SDK
         run: npx @openapitools/openapi-generator-cli generate -i ./wordliftApiSpec.yaml -g python -c config.json --package-name 'wordlift_client' --library 'asyncio'
 
+      # Step 3: Get version from setup
+      - name: Get version from setup.py
+        id: get_version
+        run: |
+          version=$(python setup.py --version)
+          echo "version=$version" >> $GITHUB_ENV # Appends the version number to the $GITHUB_ENV file, making it an environment variable for subsequent steps, need it for commit
+
+      # Step 4: push updated client
+      - name: Commit and Push Changes
+        env:
+          VERSION: ${{ env.version }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a $VERSION -m "Release version $VERSION"
+          git add .
+          git commit -m "Update client to version $VERSION [skip ci]"
+          git push --follow-tags origin main
+
       # Step 10: Store the package for testing
       - name: Store the package
         uses: actions/upload-artifact@v3
@@ -108,82 +127,12 @@ jobs:
       - name: Run tests
         run: pytest
 
-  push:
-    name: Push client
-    needs:
-      - test
-    runs-on: ubuntu-latest
-
-    steps:
-      # Step 1: Checkout the repository
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      # Step 2: Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20" # Specify the Node.js version to use
-
-      # Step 3: Install openapi-merge-cli and openapi-generator-cli
-      - name: Install openapi-merge-cli
-        run: |
-          npm i openapi-merge-cli
-          npm i @openapitools/openapi-generator-cli
-
-      # Step 4: Set up Python
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.7"
-
-      # Step 5: Install Python dependencies
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      # Step 6: Run the Python script to generate json for openApi-merge
-      - name: generate json for openApi-merge
-        run: python3 ./utils/json_merge_generator.py
-
-      # Step 7: Merge the YAML files
-      - name: Merge the yaml files
-        run: npx openapi-merge-cli --config ./openapi-merge.json
-
-      # Step 8: Bump version in config.json
-      - name: Bump version in config.json
-        run: python3 ./utils/bump.py
-
-      # Step 9: Generate the SDK
-      - name: Generate the SDK
-        run: npx @openapitools/openapi-generator-cli generate -i ./wordliftApiSpec.yaml -g python -c config.json --package-name 'wordlift_client' --library 'asyncio'
-
-      # Step 3: Get version from setup
-      - name: Get version from setup.py
-        id: get_version
-        run: |
-          version=$(python setup.py --version)
-          echo "version=$version" >> $GITHUB_ENV # Appends the version number to the $GITHUB_ENV file, making it an environment variable for subsequent steps, need it for commit
-
-      # Step 4: push updated client
-      - name: Commit and Push Changes
-        env:
-          VERSION: ${{ env.version }}
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git tag -a $VERSION -m "Release version $VERSION"
-          git add .
-          git commit -m "Update client to version $VERSION [skip ci]"
-          git push --follow-tags origin main
-
   publish-to-pypi:
     name: >-
       Publish Python 🐍 distribution 📦 to PyPI
     if: startsWith(github.ref, 'refs/tags/')
     needs:
-      - push
+      - test
     runs-on: ubuntu-latest
     environment:
       name: pypi
@@ -203,7 +152,7 @@ jobs:
   publish-to-testpypi:
     name: Publish Python 🐍 distribution 📦 to TestPyPI
     needs:
-      - push
+      - test
     runs-on: ubuntu-latest
 
     environment:
