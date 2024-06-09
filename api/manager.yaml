@@ -920,8 +920,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/MerchantSync'
           description: Found.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Another merchant sync is in already in progress. There can
+            only be one sync running at a time.
         "401":
           description: Authentication Failure
+        "403":
+          description: Authorization Failure
       security:
       - OAuth2: []
       summary: Start
@@ -1885,8 +1894,11 @@ components:
           - IN
           - NIN
         value:
-          type: string
+          type: object
           description: The filter value.
+          oneOf:
+          - type: string
+          - type: object
       required:
       - key
       - operator
@@ -2074,6 +2086,12 @@ components:
           type: string
           format: date-time
           description: The create date-time.
+          readOnly: true
+        error_reason:
+          type: string
+          description: Error that caused the synchronization to fail.
+          maxLength: 500
+          minLength: 0
           readOnly: true
         has_errors:
           type: boolean
@@ -2932,6 +2950,13 @@ components:
       type: object
       description: A query request.
       properties:
+        fields:
+          type: array
+          description: List of extra fields to be retrieved.
+          items:
+            type: string
+            description: List of extra fields to be retrieved.
+          uniqueItems: true
         filters:
           type: array
           description: A list of prefilters.
@@ -2971,12 +2996,27 @@ components:
       type: object
       description: An array of objects.
       properties:
-        datasetUri:
-          type: string
+        fields:
+          type: object
+          additionalProperties:
+            type: array
+            description: Map of extra retrieved fields. The values of the requested
+              fields are always returned in an array.If no value is found an empty
+              array is returned.
+            items:
+              type: object
+              description: Map of extra retrieved fields. The values of the requested
+                fields are always returned in an array.If no value is found an empty
+                array is returned.
+          description: Map of extra retrieved fields. The values of the requested
+            fields are always returned in an array.If no value is found an empty array
+            is returned.
         id:
           type: string
         iri:
           type: string
+          deprecated: true
+          description: The IRI of the entity that this node belongs to.
         metadata:
           type: object
           additionalProperties:
@@ -2994,6 +3034,7 @@ components:
           type: string
           description: The text of a node from which the embeddings were generated.
       required:
+      - iri
       - node_id
       - score
       - text

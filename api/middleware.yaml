@@ -12,60 +12,57 @@ info:
     url: https://wordlift.io
   version: "1.0"
 servers:
-  - url: https://api.wordlift.io
+- url: https://api.wordlift.io
 tags:
-  - name: Autocomplete
-    description: Find entities in Linked Data or Knowledge Graph by partial match.
-  - name: Entities
-    description: Manage entities in Knowledge Graphs
-  - name: Dataset
-    description: Manage Entities (legacy)
+- name: Autocomplete
+  description: Find entities in Linked Data or Knowledge Graph by partial match.
+- name: Entities
+  description: Manage entities in Knowledge Graphs
+- name: Dataset
+  description: Manage Entities (legacy)
 paths:
   /entities:
     get:
       tags:
-        - Entities
+      - Entities
       summary: Get
       description: Get entities with the provided ids.
       operationId: getEntities
       parameters:
-        - name: id
-          in: query
-          description: "One or more ids, in the form of URLs."
-          required: true
-          schema:
-            uniqueItems: true
-            type: array
-            items:
-              type: string
-              format: uri
-        - name: include_children
-          in: query
-          description:
-            "Whether to return all the entities whose ids start with the\
-            \ provided ids, by default false."
-          required: false
-          schema:
+      - name: id
+        in: query
+        description: "One or more ids, in the form of URLs."
+        required: true
+        schema:
+          uniqueItems: true
+          type: array
+          items:
             type: string
-            default: "false"
-        - name: include_referenced
-          in: query
-          description:
-            "Whether to return all the referenced entities (e.g. in `schema:mentions`),\
-            \ by default false."
-          required: false
-          schema:
-            type: string
-            default: "false"
-        - name: include_private
-          in: query
-          description:
-            "Whether to return private properties, requires an authenticated\
-            \ request, by default false."
-          required: false
-          schema:
-            type: string
-            default: "false"
+            format: uri
+      - name: include_children
+        in: query
+        description: "Whether to return all the entities whose ids start with the\
+          \ provided ids, by default false."
+        required: false
+        schema:
+          type: string
+          default: "false"
+      - name: include_referenced
+        in: query
+        description: "Whether to return all the referenced entities (e.g. in `schema:mentions`),\
+          \ by default false."
+        required: false
+        schema:
+          type: string
+          default: "false"
+      - name: include_private
+        in: query
+        description: "Whether to return private properties, requires an authenticated\
+          \ request, by default false."
+        required: false
+        schema:
+          type: string
+          default: "false"
       responses:
         "200":
           description: Success
@@ -91,10 +88,10 @@ paths:
         "412":
           description: Invalid request parameters
       security:
-        - ApiKey: []
+      - ApiKey: []
     put:
       tags:
-        - Entities
+      - Entities
       summary: Update (or create)
       description: Create or update entities by using the provided ids.
       operationId: createOrUpdateEntities
@@ -125,10 +122,10 @@ paths:
         "412":
           description: Invalid request parameters
       security:
-        - ApiKey: []
+      - ApiKey: []
     post:
       tags:
-        - Entities
+      - Entities
       summary: Create
       description: Create new entities by automatically generating their id.
       operationId: createEntities
@@ -172,53 +169,81 @@ paths:
         "412":
           description: Invalid request parameters
       security:
-        - ApiKey: []
+      - ApiKey: []
     delete:
       tags:
-        - Entities
+      - Entities
       summary: Delete
       description: Delete entities with the provided ids.
       operationId: deleteEntities
       parameters:
-        - name: id
-          in: query
-          description: "One or more ids, in the form of URLs."
-          required: true
-          schema:
-            uniqueItems: true
-            type: array
-            items:
-              type: string
-              format: uri
-        - name: include_children
-          in: query
-          description:
-            "Whether to delete all the entities whose ids start with the\
-            \ provided ids, by default false."
-          required: false
-          schema:
+      - name: id
+        in: query
+        description: "One or more ids, in the form of URLs."
+        required: true
+        schema:
+          uniqueItems: true
+          type: array
+          items:
             type: string
-            default: "false"
-        - name: include_referenced
-          in: query
-          description:
-            "Whether to delete all the referenced entities (e.g. in `schema:mentions`),\
-            \ by default false."
-          required: false
-          schema:
-            type: string
-            default: "false"
+            format: uri
+      - name: include_children
+        in: query
+        description: "Whether to delete all the entities whose ids start with the\
+          \ provided ids, by default false."
+        required: false
+        schema:
+          type: string
+          default: "false"
+      - name: include_referenced
+        in: query
+        description: "Whether to delete all the referenced entities (e.g. in `schema:mentions`),\
+          \ by default false."
+        required: false
+        schema:
+          type: string
+          default: "false"
       responses:
         "200":
           description: Success
         "412":
           description: Invalid request parameters
       security:
-        - ApiKey: []
+      - ApiKey: []
+    patch:
+      tags:
+      - Entities
+      summary: Patch Entity
+      description: Patch entity
+      operationId: patchEntities
+      parameters:
+      - name: id
+        in: query
+        description: Entity id.
+        required: true
+        schema:
+          type: string
+          format: uri
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              description: "The entity request, containing the actual semantic data."
+              items:
+                $ref: '#/components/schemas/EntityPatchRequest'
+        required: true
+      responses:
+        "200":
+          description: Success
+        "412":
+          description: Invalid request parameters
+      security:
+      - ApiKey: []
   /dataset/batch:
     post:
       tags:
-        - Dataset
+      - Dataset
       summary: Create or update many
       description: Create or update many entities in the Knowledge Graph.
       operationId: createOrUpdateEntities_1
@@ -229,7 +254,7 @@ paths:
               type: array
               description: A list of requests
               items:
-                $ref: "#/components/schemas/BatchRequest"
+                $ref: '#/components/schemas/BatchRequest'
         required: true
       responses:
         "200":
@@ -243,29 +268,29 @@ paths:
         "401":
           description: Authentication Failure
       security:
-        - ApiKey: []
+      - ApiKey: []
   /dataset:
     post:
       tags:
-        - Dataset
+      - Dataset
       summary: Create or update one
       description: Create or update an entity in the Knowledge Graph.
       operationId: createOrUpdateEntity
       parameters:
-        - name: uri
-          in: query
-          description: The entity's URI
-          required: true
-          schema:
-            type: string
-        - name: private
-          in: query
-          description: Whether the entity should be hidden from Linked Data and GraphQL
-          required: false
-          schema:
-            type: boolean
-            default: true
-          example: true
+      - name: uri
+        in: query
+        description: The entity's URI
+        required: true
+        schema:
+          type: string
+      - name: private
+        in: query
+        description: Whether the entity should be hidden from Linked Data and GraphQL
+        required: false
+        schema:
+          type: boolean
+          default: true
+        example: true
       requestBody:
         content:
           application/ld+json:
@@ -283,20 +308,20 @@ paths:
         "401":
           description: Authentication Failure
       security:
-        - ApiKey: []
+      - ApiKey: []
     delete:
       tags:
-        - Dataset
+      - Dataset
       summary: Delete one
       description: Delete an entity from the Knowledge Graph.
       operationId: deleteEntity
       parameters:
-        - name: uri
-          in: query
-          description: The URI of the entity to delete.
-          required: true
-          schema:
-            type: string
+      - name: uri
+        in: query
+        description: The URI of the entity to delete.
+        required: true
+        schema:
+          type: string
       responses:
         "200":
           description: Success
@@ -305,71 +330,70 @@ paths:
         "401":
           description: Authentication Failure
       security:
-        - ApiKey: []
+      - ApiKey: []
   /autocomplete:
     get:
       tags:
-        - Autocomplete
+      - Autocomplete
       summary: Get
-      description:
-        The autocomplete endpoint suggests entities from Linked Data that
+      description: The autocomplete endpoint suggests entities from Linked Data that
         match the provided query.
       operationId: get
       parameters:
-        - name: query
-          in: query
-          description: Autocomplete query
-          required: true
-          schema:
+      - name: query
+        in: query
+        description: Autocomplete query
+        required: true
+        schema:
+          type: string
+      - name: language
+        in: query
+        description: "2-letter language code, e.g. 'en'."
+        required: true
+        schema:
+          type: string
+      - name: scope
+        in: query
+        description: Scope
+        required: false
+        schema:
+          type: string
+          default: cloud
+          enum:
+          - cloud
+      - name: limit
+        in: query
+        description: Maximum number of results. By default 10.
+        required: false
+        schema:
+          type: string
+          default: "10"
+      - name: exclude
+        in: query
+        description: List of entity URIs to exclude.
+        required: false
+        schema:
+          uniqueItems: true
+          type: array
+          items:
             type: string
-        - name: language
-          in: query
-          description: "2-letter language code, e.g. 'en'."
-          required: true
-          schema:
-            type: string
-        - name: scope
-          in: query
-          description: Scope
-          required: false
-          schema:
-            type: string
-            default: cloud
-            enum:
-              - cloud
-        - name: limit
-          in: query
-          description: Maximum number of results. By default 10.
-          required: false
-          schema:
-            type: string
-            default: "10"
-        - name: exclude
-          in: query
-          description: List of entity URIs to exclude.
-          required: false
-          schema:
-            uniqueItems: true
-            type: array
-            items:
-              type: string
       responses:
         "200":
           description: Success
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/AutocompleteResultList"
+                $ref: '#/components/schemas/AutocompleteResult'
         "404":
           description: Not Found
         "401":
           description: Authentication Failure
       security:
-        - ApiKey: []
+      - ApiKey: []
   /dataset/all:
     delete:
       tags:
-        - Dataset
+      - Dataset
       summary: Delete all
       description: Delete all the entities in the Knowledge Graph.
       operationId: deleteAllEntities
@@ -381,13 +405,13 @@ paths:
         "401":
           description: Authentication Failure
       security:
-        - ApiKey: []
+      - ApiKey: []
 components:
   schemas:
     BatchRequest:
       required:
-        - model
-        - uri
+      - model
+      - uri
       type: object
       properties:
         uri:
@@ -403,6 +427,25 @@ components:
           description: Whether the entity should be hidden from Linked Data and GraphQL.
           example: true
       description: A request part of a batch.
+    EntityPatchRequest:
+      type: object
+      properties:
+        op:
+          type: string
+          enum:
+          - ADD
+          - REMOVE
+          - REPLACE
+          - MOVE
+          - COPY
+          - TEST
+        path:
+          type: string
+        value:
+          type: array
+          description: A model containing the Structured Data.
+          items:
+            type: object
     AutocompleteResult:
       type: object
       properties:
@@ -442,9 +485,9 @@ components:
         scope:
           type: string
           enum:
-            - local
-            - network
-            - cloud
+          - local
+          - network
+          - cloud
         description:
           type: string
         mainType:
@@ -456,11 +499,6 @@ components:
           type: string
         displayTypes:
           type: string
-    AutocompleteResultList:
-      type: array
-      description: A list of autocomplete results.
-      items:
-        $ref: "#/components/schemas/AutocompleteResult"
   securitySchemes:
     ApiKey:
       type: apiKey
