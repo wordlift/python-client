@@ -6,6 +6,13 @@ __pycache__/
 # C extensions
 *.so
 
+# Node files
+node_modules/
+
+# OpenApi Merge files
+wordliftApiSpec.yaml
+openapi-merge.json
+
 # Distribution / packaging
 .Python
 env/
