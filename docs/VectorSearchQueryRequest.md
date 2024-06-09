@@ -6,6 +6,7 @@ A query request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**fields** | **List[str]** | List of extra fields to be retrieved. | [optional] 
 **filters** | [**List[Filter]**](Filter.md) | A list of prefilters. | [optional] 
 **query_embedding** | **List[float]** | The list of embeddings, not required if &#x60;query_string&#x60; is provided. | [optional] 
 **query_string** | **str** | The query string, not required if the &#x60;query_embeddings&#x60; are provided. Please note that the &#x60;query_string&#x60; is ignored if the &#x60;query_embeddings&#x60; are provided. | [optional] 

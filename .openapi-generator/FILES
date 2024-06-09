@@ -64,11 +64,13 @@ docs/Entity1.md
 docs/EntityGapRequest.md
 docs/EntityGapsApi.md
 docs/EntityMatch.md
+docs/EntityPatchRequest.md
 docs/Event.md
 docs/ExchangeAuthCodeRequest.md
 docs/ExchangeAuthCodeResponse.md
 docs/FactCheckApi.md
 docs/Filter.md
+docs/FilterValue.md
 docs/GenerateSitemap200Response.md
 docs/GenerateSitemapRequest.md
 docs/GoogleMerchantsApi.md
@@ -195,6 +197,8 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_entity_patch_request.py
+test/test_filter_value.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -293,10 +297,12 @@ wordlift_client/models/entity.py
 wordlift_client/models/entity1.py
 wordlift_client/models/entity_gap_request.py
 wordlift_client/models/entity_match.py
+wordlift_client/models/entity_patch_request.py
 wordlift_client/models/event.py
 wordlift_client/models/exchange_auth_code_request.py
 wordlift_client/models/exchange_auth_code_response.py
 wordlift_client/models/filter.py
+wordlift_client/models/filter_value.py
 wordlift_client/models/generate_sitemap200_response.py
 wordlift_client/models/generate_sitemap_request.py
 wordlift_client/models/graphql_request.py

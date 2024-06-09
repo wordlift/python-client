@@ -27,14 +27,14 @@ class VectorSearchQueryResponseItem(BaseModel):
     """
     An array of objects.
     """ # noqa: E501
-    dataset_uri: Optional[StrictStr] = Field(default=None, alias="datasetUri")
+    fields: Optional[Dict[str, List[Dict[str, Any]]]] = Field(default=None, description="Map of extra retrieved fields. The values of the requested fields are always returned in an array.If no value is found an empty array is returned.")
     id: Optional[StrictStr] = None
-    iri: Optional[StrictStr] = None
+    iri: StrictStr = Field(description="The IRI of the entity that this node belongs to.")
     metadata: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="A nodes extra metadata.")
     node_id: StrictStr = Field(description="A nodes id.")
     score: Union[StrictFloat, StrictInt] = Field(description="The similarity score between the node and the query embeddings.")
     text: StrictStr = Field(description="The text of a node from which the embeddings were generated.")
-    __properties: ClassVar[List[str]] = ["datasetUri", "id", "iri", "metadata", "node_id", "score", "text"]
+    __properties: ClassVar[List[str]] = ["fields", "id", "iri", "metadata", "node_id", "score", "text"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,7 +87,7 @@ class VectorSearchQueryResponseItem(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "datasetUri": obj.get("datasetUri"),
+            "fields": obj.get("fields"),
             "id": obj.get("id"),
             "iri": obj.get("iri"),
             "metadata": obj.get("metadata"),

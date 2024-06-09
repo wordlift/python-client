@@ -29,13 +29,14 @@ class VectorSearchQueryRequest(BaseModel):
     """
     A query request.
     """ # noqa: E501
+    fields: Optional[List[StrictStr]] = Field(default=None, description="List of extra fields to be retrieved.")
     filters: Optional[List[Filter]] = Field(default=None, description="A list of prefilters.")
     query_embedding: Optional[List[Union[StrictFloat, StrictInt]]] = Field(default=None, description="The list of embeddings, not required if `query_string` is provided.")
     query_string: Optional[StrictStr] = Field(default=None, description="The query string, not required if the `query_embeddings` are provided. Please note that the `query_string` is ignored if the `query_embeddings` are provided.")
     query_uri: Optional[StrictStr] = Field(default=None, description="Perform a Vector Search based on similarities with an entity with the specified URI.")
     query_url: Optional[StrictStr] = Field(default=None, description="Perform a Vector Search based on similarities with an entity with the specified URL (schema:url).")
     similarity_top_k: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=2, description="The similarity top K.")
-    __properties: ClassVar[List[str]] = ["filters", "query_embedding", "query_string", "query_uri", "query_url", "similarity_top_k"]
+    __properties: ClassVar[List[str]] = ["fields", "filters", "query_embedding", "query_string", "query_uri", "query_url", "similarity_top_k"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,6 +96,7 @@ class VectorSearchQueryRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "fields": obj.get("fields"),
             "filters": [Filter.from_dict(_item) for _item in obj["filters"]] if obj.get("filters") is not None else None,
             "query_embedding": obj.get("query_embedding"),
             "query_string": obj.get("query_string"),

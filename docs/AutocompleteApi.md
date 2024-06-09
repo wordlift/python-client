@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get**
-> List[AutocompleteResult] get(query, language, scope=scope, limit=limit, exclude=exclude)
+> AutocompleteResult get(query, language, scope=scope, limit=limit, exclude=exclude)
 
 Get
 
@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[AutocompleteResult]**](AutocompleteResult.md)
+[**AutocompleteResult**](AutocompleteResult.md)
 
 ### Authorization
 

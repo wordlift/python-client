@@ -65,14 +65,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: */*
+ - **Accept**: */*, application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Found. |  -  |
+**400** | Another merchant sync is in already in progress. There can only be one sync running at a time. |  -  |
 **401** | Authentication Failure |  -  |
+**403** | Authorization Failure |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

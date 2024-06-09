@@ -21,6 +21,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,6 +30,7 @@ class MerchantSync(BaseModel):
     A Merchant products data synchronization.
     """ # noqa: E501
     created_at: Optional[datetime] = Field(default=None, description="The create date-time.")
+    error_reason: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=500)]] = Field(default=None, description="Error that caused the synchronization to fail.")
     has_errors: Optional[StrictBool] = Field(default=None, description="Whether the sync encountered errors.")
     id: Optional[StrictInt] = Field(default=None, description="The unique id.")
     merchant_id: StrictInt = Field(description="The parent Merchant id.")
@@ -41,7 +43,7 @@ class MerchantSync(BaseModel):
     products_updated: Optional[StrictInt] = Field(default=None, description="The number of update products")
     started_at: Optional[datetime] = Field(default=None, description="The started date-time.")
     stopped_at: Optional[datetime] = Field(default=None, description="The stopped date-time.")
-    __properties: ClassVar[List[str]] = ["created_at", "has_errors", "id", "merchant_id", "modified_at", "products_created", "products_deleted", "products_errored", "products_skipped", "products_total", "products_updated", "started_at", "stopped_at"]
+    __properties: ClassVar[List[str]] = ["created_at", "error_reason", "has_errors", "id", "merchant_id", "modified_at", "products_created", "products_deleted", "products_errored", "products_skipped", "products_total", "products_updated", "started_at", "stopped_at"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,9 +88,11 @@ class MerchantSync(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
             "created_at",
+            "error_reason",
             "has_errors",
             "id",
             "merchant_id",
@@ -121,6 +125,7 @@ class MerchantSync(BaseModel):
 
         _obj = cls.model_validate({
             "created_at": obj.get("created_at"),
+            "error_reason": obj.get("error_reason"),
             "has_errors": obj.get("has_errors"),
             "id": obj.get("id"),
             "merchant_id": obj.get("merchant_id"),

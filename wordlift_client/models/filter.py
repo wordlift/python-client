@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List
+from wordlift_client.models.filter_value import FilterValue
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +30,7 @@ class Filter(BaseModel):
     """ # noqa: E501
     key: StrictStr = Field(description="The filter key.")
     operator: StrictStr = Field(description="A query request filter operator.")
-    value: StrictStr = Field(description="The filter value.")
+    value: FilterValue
     __properties: ClassVar[List[str]] = ["key", "operator", "value"]
 
     @field_validator('operator')
@@ -78,6 +79,9 @@ class Filter(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of value
+        if self.value:
+            _dict['value'] = self.value.to_dict()
         return _dict
 
     @classmethod
@@ -92,7 +96,7 @@ class Filter(BaseModel):
         _obj = cls.model_validate({
             "key": obj.get("key"),
             "operator": obj.get("operator"),
-            "value": obj.get("value")
+            "value": FilterValue.from_dict(obj["value"]) if obj.get("value") is not None else None
         })
         return _obj
 

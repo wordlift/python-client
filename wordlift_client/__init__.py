@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -121,10 +121,12 @@ from wordlift_client.models.entity import Entity
 from wordlift_client.models.entity1 import Entity1
 from wordlift_client.models.entity_gap_request import EntityGapRequest
 from wordlift_client.models.entity_match import EntityMatch
+from wordlift_client.models.entity_patch_request import EntityPatchRequest
 from wordlift_client.models.event import Event
 from wordlift_client.models.exchange_auth_code_request import ExchangeAuthCodeRequest
 from wordlift_client.models.exchange_auth_code_response import ExchangeAuthCodeResponse
 from wordlift_client.models.filter import Filter
+from wordlift_client.models.filter_value import FilterValue
 from wordlift_client.models.generate_sitemap200_response import GenerateSitemap200Response
 from wordlift_client.models.generate_sitemap_request import GenerateSitemapRequest
 from wordlift_client.models.graphql_request import GraphqlRequest

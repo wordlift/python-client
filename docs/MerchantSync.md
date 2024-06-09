@@ -7,6 +7,7 @@ A Merchant products data synchronization.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **created_at** | **datetime** | The create date-time. | [optional] [readonly] 
+**error_reason** | **str** | Error that caused the synchronization to fail. | [optional] [readonly] 
 **has_errors** | **bool** | Whether the sync encountered errors. | [optional] [readonly] 
 **id** | **int** | The unique id. | [optional] [readonly] 
 **merchant_id** | **int** | The parent Merchant id. | [readonly] 

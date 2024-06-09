@@ -60,7 +60,7 @@ class AutocompleteApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[AutocompleteResult]:
+    ) -> AutocompleteResult:
         """Get
 
         The autocomplete endpoint suggests entities from Linked Data that match the provided query.
@@ -110,7 +110,7 @@ class AutocompleteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[AutocompleteResult]",
+            '200': "AutocompleteResult",
             '401': None,
             '404': None,
         }
@@ -145,7 +145,7 @@ class AutocompleteApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[AutocompleteResult]]:
+    ) -> ApiResponse[AutocompleteResult]:
         """Get
 
         The autocomplete endpoint suggests entities from Linked Data that match the provided query.
@@ -195,7 +195,7 @@ class AutocompleteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[AutocompleteResult]",
+            '200': "AutocompleteResult",
             '401': None,
             '404': None,
         }
@@ -280,7 +280,7 @@ class AutocompleteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[AutocompleteResult]",
+            '200': "AutocompleteResult",
             '401': None,
             '404': None,
         }

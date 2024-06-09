@@ -95,7 +95,9 @@ class MerchantSyncsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MerchantSync",
+            '400': "ProblemDetail",
             '401': None,
+            '403': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -162,7 +164,9 @@ class MerchantSyncsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MerchantSync",
+            '400': "ProblemDetail",
             '401': None,
+            '403': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -229,7 +233,9 @@ class MerchantSyncsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MerchantSync",
+            '400': "ProblemDetail",
             '401': None,
+            '403': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -271,7 +277,8 @@ class MerchantSyncsApi:
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(
             [
-                '*/*'
+                '*/*', 
+                'application/json'
             ]
         )
 
