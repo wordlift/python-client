@@ -1,5 +1,4 @@
 .github/workflows/python.yml
-.gitignore
 .gitlab-ci.yml
 .travis.yml
 README.md
@@ -197,8 +196,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_entity_patch_request.py
-test/test_filter_value.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py

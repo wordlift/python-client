@@ -6,6 +6,7 @@ An array of objects.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**collection** | **str** | The collection hosting the Knowledge Graph. | [optional] [default to 'entity']
 **country** | **str** |  | [optional] 
 **diagnostic_plugins** | [**List[DiagnosticPlugin]**](DiagnosticPlugin.md) |  | [optional] 
 **domain_uri** | **str** |  | [optional] 

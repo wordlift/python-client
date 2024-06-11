@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.account_subscription import AccountSubscription
 from wordlift_client.models.diagnostic_plugin import DiagnosticPlugin
@@ -29,6 +29,7 @@ class ActiveAccount(BaseModel):
     """
     An array of objects.
     """ # noqa: E501
+    collection: Optional[StrictStr] = Field(default='entity', description="The collection hosting the Knowledge Graph.")
     country: Optional[StrictStr] = None
     diagnostic_plugins: Optional[List[DiagnosticPlugin]] = None
     domain_uri: Optional[StrictStr] = None
@@ -48,7 +49,7 @@ class ActiveAccount(BaseModel):
     wp_admin: Optional[StrictStr] = None
     wp_include_exclude_default: Optional[StrictStr] = None
     wp_json: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["country", "diagnostic_plugins", "domain_uri", "google_search_console_site_url", "id", "is_wordpress", "key", "language", "ng_dataset_id", "package_type", "subscription", "subscription_id", "total_entities", "total_entities_with_schema_url", "url", "user_id", "wp_admin", "wp_include_exclude_default", "wp_json"]
+    __properties: ClassVar[List[str]] = ["collection", "country", "diagnostic_plugins", "domain_uri", "google_search_console_site_url", "id", "is_wordpress", "key", "language", "ng_dataset_id", "package_type", "subscription", "subscription_id", "total_entities", "total_entities_with_schema_url", "url", "user_id", "wp_admin", "wp_include_exclude_default", "wp_json"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,6 +112,7 @@ class ActiveAccount(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "collection": obj.get("collection") if obj.get("collection") is not None else 'entity',
             "country": obj.get("country"),
             "diagnostic_plugins": [DiagnosticPlugin.from_dict(_item) for _item in obj["diagnostic_plugins"]] if obj.get("diagnostic_plugins") is not None else None,
             "domain_uri": obj.get("domain_uri"),

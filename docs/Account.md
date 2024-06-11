@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **botify_project** | **str** |  | [optional] 
 **botify_token** | **str** |  | [optional] 
 **botify_username** | **str** |  | [optional] 
+**collection** | **str** | The collection hosing the Knowledge Graph. | [optional] [default to 'entity']
 **country** | **str** |  | [optional] 
 **dataset_id** | **str** |  | [optional] 
 **dataset_uri** | **str** |  | [optional] 

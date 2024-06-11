@@ -32,6 +32,7 @@ class Account(BaseModel):
     botify_project: Optional[StrictStr] = None
     botify_token: Optional[StrictStr] = None
     botify_username: Optional[StrictStr] = None
+    collection: Optional[StrictStr] = Field(default='entity', description="The collection hosing the Knowledge Graph.")
     country: Optional[StrictStr] = None
     dataset_id: Optional[StrictStr] = Field(default=None, alias="datasetId")
     dataset_uri: Optional[StrictStr] = Field(default=None, alias="datasetUri")
@@ -49,7 +50,7 @@ class Account(BaseModel):
     wp_admin: Optional[StrictStr] = Field(default=None, alias="wpAdmin")
     wp_json: Optional[StrictStr] = Field(default=None, alias="wpJson")
     wp_include_exclude_default: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["analytics_client_factory", "analyzerId", "botify_project", "botify_token", "botify_username", "country", "datasetId", "datasetUri", "domainUri", "google_search_console_site_url", "id", "indexed", "is_wordpress", "key", "language", "ngDatasetId", "resolvedUrl", "subscriptionId", "url", "wpAdmin", "wpJson", "wp_include_exclude_default"]
+    __properties: ClassVar[List[str]] = ["analytics_client_factory", "analyzerId", "botify_project", "botify_token", "botify_username", "collection", "country", "datasetId", "datasetUri", "domainUri", "google_search_console_site_url", "id", "indexed", "is_wordpress", "key", "language", "ngDatasetId", "resolvedUrl", "subscriptionId", "url", "wpAdmin", "wpJson", "wp_include_exclude_default"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -107,6 +108,7 @@ class Account(BaseModel):
             "botify_project": obj.get("botify_project"),
             "botify_token": obj.get("botify_token"),
             "botify_username": obj.get("botify_username"),
+            "collection": obj.get("collection") if obj.get("collection") is not None else 'entity',
             "country": obj.get("country"),
             "datasetId": obj.get("datasetId"),
             "datasetUri": obj.get("datasetUri"),
