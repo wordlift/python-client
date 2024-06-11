@@ -1524,6 +1524,10 @@ components:
           type: string
         botify_username:
           type: string
+        collection:
+          type: string
+          default: entity
+          description: The collection hosing the Knowledge Graph.
         country:
           type: string
         datasetId:
@@ -1646,6 +1650,10 @@ components:
       type: object
       description: An array of objects.
       properties:
+        collection:
+          type: string
+          default: entity
+          description: The collection hosting the Knowledge Graph.
         country:
           type: string
         diagnostic_plugins:
