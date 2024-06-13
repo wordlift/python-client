@@ -236,6 +236,25 @@ paths:
       responses:
         "200":
           description: Success
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                description: A model containing the Structured Data.
+                items:
+                  type: object
+            application/rdf+xml:
+              schema:
+                type: array
+                description: A model containing the Structured Data.
+                items:
+                  type: object
+            text/turtle:
+              schema:
+                type: array
+                description: A model containing the Structured Data.
+                items:
+                  type: object
         "412":
           description: Invalid request parameters
       security:
@@ -433,12 +452,12 @@ components:
         op:
           type: string
           enum:
-          - ADD
-          - REMOVE
-          - REPLACE
-          - MOVE
-          - COPY
-          - TEST
+          - add
+          - remove
+          - replace
+          - move
+          - copy
+          - test
         path:
           type: string
         value:
