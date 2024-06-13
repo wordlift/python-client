@@ -334,7 +334,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_entities**
-> patch_entities(id, entity_patch_request)
+> List[object] patch_entities(id, entity_patch_request)
 
 Patch Entity
 
@@ -376,7 +376,9 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Patch Entity
-        await api_instance.patch_entities(id, entity_patch_request)
+        api_response = await api_instance.patch_entities(id, entity_patch_request)
+        print("The response of EntitiesApi->patch_entities:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling EntitiesApi->patch_entities: %s\n" % e)
 ```
@@ -393,7 +395,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**List[object]**
 
 ### Authorization
 
@@ -402,7 +404,7 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json
- - **Accept**: Not defined
+ - **Accept**: application/ld+json, application/rdf+xml, text/turtle
 
 ### HTTP response details
 

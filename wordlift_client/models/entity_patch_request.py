@@ -38,8 +38,8 @@ class EntityPatchRequest(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['ADD', 'REMOVE', 'REPLACE', 'MOVE', 'COPY', 'TEST']):
-            raise ValueError("must be one of enum values ('ADD', 'REMOVE', 'REPLACE', 'MOVE', 'COPY', 'TEST')")
+        if value not in set(['add', 'remove', 'replace', 'move', 'copy', 'test']):
+            raise ValueError("must be one of enum values ('add', 'remove', 'replace', 'move', 'copy', 'test')")
         return value
 
     model_config = ConfigDict(

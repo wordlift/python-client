@@ -1215,7 +1215,7 @@ class EntitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> List[object]:
         """Patch Entity
 
         Patch entity
@@ -1256,7 +1256,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '200': "List[object]",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -1287,7 +1287,7 @@ class EntitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[object]]:
         """Patch Entity
 
         Patch entity
@@ -1328,7 +1328,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '200': "List[object]",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -1400,7 +1400,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '200': "List[object]",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -1446,6 +1446,14 @@ class EntitiesApi:
             _body_params = entity_patch_request
 
 
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/ld+json', 
+                'application/rdf+xml', 
+                'text/turtle'
+            ]
+        )
 
         # set the HTTP header `Content-Type`
         if _content_type:
