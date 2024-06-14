@@ -451,6 +451,7 @@ components:
       properties:
         op:
           type: string
+          description: "The patch operation, example `add`."
           enum:
           - add
           - remove
@@ -458,8 +459,13 @@ components:
           - move
           - copy
           - test
+          - add
+          - remove
+          - replace
         path:
           type: string
+          description: "The property to apply the operation, JSONPath formatted (leading\
+            \ slash) on, e.g. `/https://schema.org/image (note the leading slash)."
         value:
           type: array
           description: A model containing the Structured Data.
@@ -512,9 +518,9 @@ components:
         mainType:
           type: string
           description: Schema type slug
-        value:
-          type: string
         label:
+          type: string
+        value:
           type: string
         displayTypes:
           type: string
