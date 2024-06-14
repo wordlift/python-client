@@ -69,7 +69,7 @@ paths:
           content:
             application/ld+json:
               schema:
-                title: Model
+                title: Graph
                 description: A model containing the Structured Data.
                 oneOf:
                 - type: array
@@ -78,7 +78,7 @@ paths:
                 - type: string
             application/rdf+xml:
               schema:
-                title: Model
+                title: Graph
                 description: A model containing the Structured Data.
                 oneOf:
                 - type: array
@@ -87,7 +87,7 @@ paths:
                 - type: string
             text/turtle:
               schema:
-                title: Model
+                title: Graph
                 description: A model containing the Structured Data.
                 oneOf:
                 - type: array
@@ -108,7 +108,7 @@ paths:
         content:
           application/ld+json:
             schema:
-              title: Model
+              title: Graph
               description: A model containing the Structured Data.
               oneOf:
               - type: array
@@ -117,7 +117,7 @@ paths:
               - type: string
           application/rdf+xml:
             schema:
-              title: Model
+              title: Graph
               description: A model containing the Structured Data.
               oneOf:
               - type: array
@@ -126,7 +126,7 @@ paths:
               - type: string
           text/turtle:
             schema:
-              title: Model
+              title: Graph
               description: A model containing the Structured Data.
               oneOf:
               - type: array
@@ -168,7 +168,7 @@ paths:
           content:
             application/ld+json:
               schema:
-                title: Model
+                title: Graph
                 description: A model containing the Structured Data.
                 oneOf:
                 - type: array
@@ -177,7 +177,7 @@ paths:
                 - type: string
             application/rdf+xml:
               schema:
-                title: Model
+                title: Graph
                 description: A model containing the Structured Data.
                 oneOf:
                 - type: array
@@ -186,7 +186,7 @@ paths:
                 - type: string
             text/turtle:
               schema:
-                title: Model
+                title: Graph
                 description: A model containing the Structured Data.
                 oneOf:
                 - type: array
@@ -266,7 +266,7 @@ paths:
           content:
             application/ld+json:
               schema:
-                title: Model
+                title: Graph
                 description: A model containing the Structured Data.
                 oneOf:
                 - type: array
@@ -275,7 +275,7 @@ paths:
                 - type: string
             application/rdf+xml:
               schema:
-                title: Model
+                title: Graph
                 description: A model containing the Structured Data.
                 oneOf:
                 - type: array
@@ -284,7 +284,7 @@ paths:
                 - type: string
             text/turtle:
               schema:
-                title: Model
+                title: Graph
                 description: A model containing the Structured Data.
                 oneOf:
                 - type: array
@@ -350,7 +350,7 @@ paths:
         content:
           application/ld+json:
             schema:
-              title: Model
+              title: Graph
               description: A model containing the Structured Data.
               oneOf:
               - type: array
@@ -476,7 +476,7 @@ components:
           type: string
           description: The entity URI.
         model:
-          title: Model
+          title: Graph
           description: A model containing the Structured Data.
           oneOf:
           - type: array
@@ -509,7 +509,7 @@ components:
           description: "The property to apply the operation, JSONPath formatted (leading\
             \ slash) on, e.g. `/https://schema.org/image (note the leading slash)."
         value:
-          title: Model
+          title: Graph
           description: A model containing the Structured Data.
           oneOf:
           - type: array
@@ -563,9 +563,9 @@ components:
         mainType:
           type: string
           description: Schema type slug
-        label:
-          type: string
         value:
+          type: string
+        label:
           type: string
         displayTypes:
           type: string
