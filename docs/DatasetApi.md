@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_or_update_entity**
-> create_or_update_entity(uri, get_entities200_response, private=private)
+> create_or_update_entity(uri, model1, private=private)
 
 Create or update one
 
@@ -104,7 +104,7 @@ Create or update an entity in the Knowledge Graph.
 
 ```python
 import wordlift_client
-from wordlift_client.models.get_entities200_response import GetEntities200Response
+from wordlift_client.models.model1 import Model1
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -130,12 +130,12 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.DatasetApi(api_client)
     uri = 'uri_example' # str | The entity's URI
-    get_entities200_response = wordlift_client.GetEntities200Response() # GetEntities200Response | 
+    model1 = wordlift_client.Model1() # Model1 | 
     private = True # bool | Whether the entity should be hidden from Linked Data and GraphQL (optional) (default to True)
 
     try:
         # Create or update one
-        await api_instance.create_or_update_entity(uri, get_entities200_response, private=private)
+        await api_instance.create_or_update_entity(uri, model1, private=private)
     except Exception as e:
         print("Exception when calling DatasetApi->create_or_update_entity: %s\n" % e)
 ```
@@ -148,7 +148,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **uri** | **str**| The entity&#39;s URI | 
- **get_entities200_response** | [**GetEntities200Response**](GetEntities200Response.md)|  | 
+ **model1** | [**Model1**](Model1.md)|  | 
  **private** | **bool**| Whether the entity should be hidden from Linked Data and GraphQL | [optional] [default to True]
 
 ### Return type

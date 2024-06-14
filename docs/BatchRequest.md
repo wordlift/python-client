@@ -7,7 +7,7 @@ A request part of a batch.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **uri** | **str** | The entity URI. | 
-**model** | [**GetEntities200Response**](GetEntities200Response.md) |  | 
+**model** | [**Model1**](Model1.md) |  | 
 **private** | **bool** | Whether the entity should be hidden from Linked Data and GraphQL. | [optional] 
 
 ## Example

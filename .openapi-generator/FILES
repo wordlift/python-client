@@ -72,7 +72,6 @@ docs/Filter.md
 docs/FilterValue.md
 docs/GenerateSitemap200Response.md
 docs/GenerateSitemapRequest.md
-docs/GetEntities200Response.md
 docs/GoogleMerchantsApi.md
 docs/GoogleSearchConsoleApi.md
 docs/GoogleSearchConsoleOAuth2Api.md
@@ -98,6 +97,7 @@ docs/MerchantView.md
 docs/MerchantsApi.md
 docs/MicrodataApi.md
 docs/Model.md
+docs/Model1.md
 docs/ModelField.md
 docs/NetworkAccountInfo.md
 docs/NodeRequest.md
@@ -197,7 +197,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_get_entities200_response.py
+test/test_model1.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -304,7 +304,6 @@ wordlift_client/models/filter.py
 wordlift_client/models/filter_value.py
 wordlift_client/models/generate_sitemap200_response.py
 wordlift_client/models/generate_sitemap_request.py
-wordlift_client/models/get_entities200_response.py
 wordlift_client/models/graphql_request.py
 wordlift_client/models/html.py
 wordlift_client/models/image.py
@@ -319,6 +318,7 @@ wordlift_client/models/merchant_request.py
 wordlift_client/models/merchant_sync.py
 wordlift_client/models/merchant_view.py
 wordlift_client/models/model.py
+wordlift_client/models/model1.py
 wordlift_client/models/model_field.py
 wordlift_client/models/network_account_info.py
 wordlift_client/models/node_request.py
