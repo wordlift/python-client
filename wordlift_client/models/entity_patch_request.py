@@ -27,8 +27,8 @@ class EntityPatchRequest(BaseModel):
     """
     EntityPatchRequest
     """ # noqa: E501
-    op: Optional[StrictStr] = None
-    path: Optional[StrictStr] = None
+    op: Optional[StrictStr] = Field(default=None, description="The patch operation, example `add`.")
+    path: Optional[StrictStr] = Field(default=None, description="The property to apply the operation, JSONPath formatted (leading slash) on, e.g. `/https://schema.org/image (note the leading slash).")
     value: Optional[List[Dict[str, Any]]] = Field(default=None, description="A model containing the Structured Data.")
     __properties: ClassVar[List[str]] = ["op", "path", "value"]
 
@@ -38,8 +38,8 @@ class EntityPatchRequest(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['add', 'remove', 'replace', 'move', 'copy', 'test']):
-            raise ValueError("must be one of enum values ('add', 'remove', 'replace', 'move', 'copy', 'test')")
+        if value not in set(['add', 'remove', 'replace', 'move', 'copy', 'test', 'add', 'remove', 'replace']):
+            raise ValueError("must be one of enum values ('add', 'remove', 'replace', 'move', 'copy', 'test', 'add', 'remove', 'replace')")
         return value
 
     model_config = ConfigDict(
