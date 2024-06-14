@@ -72,6 +72,7 @@ docs/Filter.md
 docs/FilterValue.md
 docs/GenerateSitemap200Response.md
 docs/GenerateSitemapRequest.md
+docs/GetEntities200Response.md
 docs/GoogleMerchantsApi.md
 docs/GoogleSearchConsoleApi.md
 docs/GoogleSearchConsoleOAuth2Api.md
@@ -196,6 +197,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_get_entities200_response.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -302,6 +304,7 @@ wordlift_client/models/filter.py
 wordlift_client/models/filter_value.py
 wordlift_client/models/generate_sitemap200_response.py
 wordlift_client/models/generate_sitemap_request.py
+wordlift_client/models/get_entities200_response.py
 wordlift_client/models/graphql_request.py
 wordlift_client/models/html.py
 wordlift_client/models/image.py

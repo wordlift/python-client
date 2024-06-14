@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wordlift_client.models.get_entities200_response import GetEntities200Response
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +29,7 @@ class BatchRequest(BaseModel):
     A request part of a batch.
     """ # noqa: E501
     uri: StrictStr = Field(description="The entity URI.")
-    model: List[Dict[str, Any]] = Field(description="A model containing the Structured Data.")
+    model: GetEntities200Response
     private: Optional[StrictBool] = Field(default=None, description="Whether the entity should be hidden from Linked Data and GraphQL.")
     __properties: ClassVar[List[str]] = ["uri", "model", "private"]
 
@@ -71,6 +72,9 @@ class BatchRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of model
+        if self.model:
+            _dict['model'] = self.model.to_dict()
         return _dict
 
     @classmethod
@@ -84,7 +88,7 @@ class BatchRequest(BaseModel):
 
         _obj = cls.model_validate({
             "uri": obj.get("uri"),
-            "model": obj.get("model"),
+            "model": GetEntities200Response.from_dict(obj["model"]) if obj.get("model") is not None else None,
             "private": obj.get("private")
         })
         return _obj

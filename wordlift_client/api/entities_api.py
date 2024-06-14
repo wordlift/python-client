@@ -18,9 +18,10 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from wordlift_client.models.entity_patch_request import EntityPatchRequest
+from wordlift_client.models.get_entities200_response import GetEntities200Response
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
 from wordlift_client.api_response import ApiResponse
@@ -56,7 +57,7 @@ class EntitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> GetEntities200Response:
         """Create
 
         Create new entities by automatically generating their id.
@@ -94,7 +95,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[object]",
+            '200': "GetEntities200Response",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -124,7 +125,7 @@ class EntitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[GetEntities200Response]:
         """Create
 
         Create new entities by automatically generating their id.
@@ -162,7 +163,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[object]",
+            '200': "GetEntities200Response",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -230,7 +231,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[object]",
+            '200': "GetEntities200Response",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -321,7 +322,7 @@ class EntitiesApi:
     @validate_call
     async def create_or_update_entities(
         self,
-        request_body: List[Dict[str, Any]],
+        get_entities200_response: Optional[GetEntities200Response],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -339,8 +340,8 @@ class EntitiesApi:
 
         Create or update entities by using the provided ids.
 
-        :param request_body: (required)
-        :type request_body: List[object]
+        :param get_entities200_response: (required)
+        :type get_entities200_response: GetEntities200Response
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -364,7 +365,7 @@ class EntitiesApi:
         """ # noqa: E501
 
         _param = self._create_or_update_entities_serialize(
-            request_body=request_body,
+            get_entities200_response=get_entities200_response,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -389,7 +390,7 @@ class EntitiesApi:
     @validate_call
     async def create_or_update_entities_with_http_info(
         self,
-        request_body: List[Dict[str, Any]],
+        get_entities200_response: Optional[GetEntities200Response],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -407,8 +408,8 @@ class EntitiesApi:
 
         Create or update entities by using the provided ids.
 
-        :param request_body: (required)
-        :type request_body: List[object]
+        :param get_entities200_response: (required)
+        :type get_entities200_response: GetEntities200Response
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -432,7 +433,7 @@ class EntitiesApi:
         """ # noqa: E501
 
         _param = self._create_or_update_entities_serialize(
-            request_body=request_body,
+            get_entities200_response=get_entities200_response,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -457,7 +458,7 @@ class EntitiesApi:
     @validate_call
     async def create_or_update_entities_without_preload_content(
         self,
-        request_body: List[Dict[str, Any]],
+        get_entities200_response: Optional[GetEntities200Response],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -475,8 +476,8 @@ class EntitiesApi:
 
         Create or update entities by using the provided ids.
 
-        :param request_body: (required)
-        :type request_body: List[object]
+        :param get_entities200_response: (required)
+        :type get_entities200_response: GetEntities200Response
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -500,7 +501,7 @@ class EntitiesApi:
         """ # noqa: E501
 
         _param = self._create_or_update_entities_serialize(
-            request_body=request_body,
+            get_entities200_response=get_entities200_response,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -520,7 +521,7 @@ class EntitiesApi:
 
     def _create_or_update_entities_serialize(
         self,
-        request_body,
+        get_entities200_response,
         _request_auth,
         _content_type,
         _headers,
@@ -530,7 +531,6 @@ class EntitiesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'request_body': '',
         }
 
         _path_params: Dict[str, str] = {}
@@ -545,8 +545,8 @@ class EntitiesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request_body is not None:
-            _body_params = request_body
+        if get_entities200_response is not None:
+            _body_params = get_entities200_response
 
 
 
@@ -900,7 +900,7 @@ class EntitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> GetEntities200Response:
         """Get
 
         Get entities with the provided ids.
@@ -947,7 +947,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[object]",
+            '200': "GetEntities200Response",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -980,7 +980,7 @@ class EntitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[GetEntities200Response]:
         """Get
 
         Get entities with the provided ids.
@@ -1027,7 +1027,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[object]",
+            '200': "GetEntities200Response",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -1107,7 +1107,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[object]",
+            '200': "GetEntities200Response",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -1215,7 +1215,7 @@ class EntitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> GetEntities200Response:
         """Patch Entity
 
         Patch entity
@@ -1256,7 +1256,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[object]",
+            '200': "GetEntities200Response",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -1287,7 +1287,7 @@ class EntitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[GetEntities200Response]:
         """Patch Entity
 
         Patch entity
@@ -1328,7 +1328,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[object]",
+            '200': "GetEntities200Response",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -1400,7 +1400,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[object]",
+            '200': "GetEntities200Response",
             '412': None,
         }
         response_data = await self.api_client.call_api(

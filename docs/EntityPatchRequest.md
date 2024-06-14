@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **op** | **str** | The patch operation, example &#x60;add&#x60;. | [optional] 
 **path** | **str** | The property to apply the operation, JSONPath formatted (leading slash) on, e.g. &#x60;/https://schema.org/image (note the leading slash). | [optional] 
-**value** | **List[object]** | A model containing the Structured Data. | [optional] 
+**value** | [**GetEntities200Response**](GetEntities200Response.md) |  | [optional] 
 
 ## Example
 

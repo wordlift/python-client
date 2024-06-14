@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **create_entities**
-> List[object] create_entities(body)
+> GetEntities200Response create_entities(body)
 
 Create
 
@@ -24,6 +24,7 @@ Create new entities by automatically generating their id.
 
 ```python
 import wordlift_client
+from wordlift_client.models.get_entities200_response import GetEntities200Response
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -70,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**GetEntities200Response**](GetEntities200Response.md)
 
 ### Authorization
 
@@ -91,7 +92,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_or_update_entities**
-> create_or_update_entities(request_body)
+> create_or_update_entities(get_entities200_response)
 
 Update (or create)
 
@@ -103,6 +104,7 @@ Create or update entities by using the provided ids.
 
 ```python
 import wordlift_client
+from wordlift_client.models.get_entities200_response import GetEntities200Response
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -127,11 +129,11 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.EntitiesApi(api_client)
-    request_body = None # List[object] | 
+    get_entities200_response = wordlift_client.GetEntities200Response() # GetEntities200Response | 
 
     try:
         # Update (or create)
-        await api_instance.create_or_update_entities(request_body)
+        await api_instance.create_or_update_entities(get_entities200_response)
     except Exception as e:
         print("Exception when calling EntitiesApi->create_or_update_entities: %s\n" % e)
 ```
@@ -143,7 +145,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request_body** | [**List[object]**](object.md)|  | 
+ **get_entities200_response** | [**GetEntities200Response**](GetEntities200Response.md)|  | 
 
 ### Return type
 
@@ -249,7 +251,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_entities**
-> List[object] get_entities(id, include_children=include_children, include_referenced=include_referenced, include_private=include_private)
+> GetEntities200Response get_entities(id, include_children=include_children, include_referenced=include_referenced, include_private=include_private)
 
 Get
 
@@ -261,6 +263,7 @@ Get entities with the provided ids.
 
 ```python
 import wordlift_client
+from wordlift_client.models.get_entities200_response import GetEntities200Response
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -313,7 +316,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**GetEntities200Response**](GetEntities200Response.md)
 
 ### Authorization
 
@@ -334,7 +337,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_entities**
-> List[object] patch_entities(id, entity_patch_request)
+> GetEntities200Response patch_entities(id, entity_patch_request)
 
 Patch Entity
 
@@ -347,6 +350,7 @@ Patch entity
 ```python
 import wordlift_client
 from wordlift_client.models.entity_patch_request import EntityPatchRequest
+from wordlift_client.models.get_entities200_response import GetEntities200Response
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -395,7 +399,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**GetEntities200Response**](GetEntities200Response.md)
 
 ### Authorization
 

@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from wordlift_client.models.get_entities200_response import GetEntities200Response
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +30,7 @@ class EntityPatchRequest(BaseModel):
     """ # noqa: E501
     op: Optional[StrictStr] = Field(default=None, description="The patch operation, example `add`.")
     path: Optional[StrictStr] = Field(default=None, description="The property to apply the operation, JSONPath formatted (leading slash) on, e.g. `/https://schema.org/image (note the leading slash).")
-    value: Optional[List[Dict[str, Any]]] = Field(default=None, description="A model containing the Structured Data.")
+    value: Optional[GetEntities200Response] = None
     __properties: ClassVar[List[str]] = ["op", "path", "value"]
 
     @field_validator('op')
@@ -81,6 +82,9 @@ class EntityPatchRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of value
+        if self.value:
+            _dict['value'] = self.value.to_dict()
         return _dict
 
     @classmethod
@@ -95,7 +99,7 @@ class EntityPatchRequest(BaseModel):
         _obj = cls.model_validate({
             "op": obj.get("op"),
             "path": obj.get("path"),
-            "value": obj.get("value")
+            "value": GetEntities200Response.from_dict(obj["value"]) if obj.get("value") is not None else None
         })
         return _obj
 
