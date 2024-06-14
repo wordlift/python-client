@@ -20,7 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from wordlift_client.models.model1 import Model1
+from wordlift_client.models.graph import Graph
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +29,7 @@ class BatchRequest(BaseModel):
     A request part of a batch.
     """ # noqa: E501
     uri: StrictStr = Field(description="The entity URI.")
-    model: Model1
+    model: Graph
     private: Optional[StrictBool] = Field(default=None, description="Whether the entity should be hidden from Linked Data and GraphQL.")
     __properties: ClassVar[List[str]] = ["uri", "model", "private"]
 
@@ -88,7 +88,7 @@ class BatchRequest(BaseModel):
 
         _obj = cls.model_validate({
             "uri": obj.get("uri"),
-            "model": Model1.from_dict(obj["model"]) if obj.get("model") is not None else None,
+            "model": Graph.from_dict(obj["model"]) if obj.get("model") is not None else None,
             "private": obj.get("private")
         })
         return _obj

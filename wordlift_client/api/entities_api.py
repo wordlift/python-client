@@ -21,7 +21,7 @@ from pydantic import Field, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
 from wordlift_client.models.entity_patch_request import EntityPatchRequest
-from wordlift_client.models.model1 import Model1
+from wordlift_client.models.graph import Graph
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
 from wordlift_client.api_response import ApiResponse
@@ -57,7 +57,7 @@ class EntitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Model1:
+    ) -> Graph:
         """Create
 
         Create new entities by automatically generating their id.
@@ -95,7 +95,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Model1",
+            '200': "Graph",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -125,7 +125,7 @@ class EntitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Model1]:
+    ) -> ApiResponse[Graph]:
         """Create
 
         Create new entities by automatically generating their id.
@@ -163,7 +163,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Model1",
+            '200': "Graph",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -231,7 +231,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Model1",
+            '200': "Graph",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -322,7 +322,7 @@ class EntitiesApi:
     @validate_call
     async def create_or_update_entities(
         self,
-        model1: Optional[Model1],
+        graph: Optional[Graph],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -340,8 +340,8 @@ class EntitiesApi:
 
         Create or update entities by using the provided ids.
 
-        :param model1: (required)
-        :type model1: Model1
+        :param graph: (required)
+        :type graph: Graph
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -365,7 +365,7 @@ class EntitiesApi:
         """ # noqa: E501
 
         _param = self._create_or_update_entities_serialize(
-            model1=model1,
+            graph=graph,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -390,7 +390,7 @@ class EntitiesApi:
     @validate_call
     async def create_or_update_entities_with_http_info(
         self,
-        model1: Optional[Model1],
+        graph: Optional[Graph],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -408,8 +408,8 @@ class EntitiesApi:
 
         Create or update entities by using the provided ids.
 
-        :param model1: (required)
-        :type model1: Model1
+        :param graph: (required)
+        :type graph: Graph
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -433,7 +433,7 @@ class EntitiesApi:
         """ # noqa: E501
 
         _param = self._create_or_update_entities_serialize(
-            model1=model1,
+            graph=graph,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -458,7 +458,7 @@ class EntitiesApi:
     @validate_call
     async def create_or_update_entities_without_preload_content(
         self,
-        model1: Optional[Model1],
+        graph: Optional[Graph],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -476,8 +476,8 @@ class EntitiesApi:
 
         Create or update entities by using the provided ids.
 
-        :param model1: (required)
-        :type model1: Model1
+        :param graph: (required)
+        :type graph: Graph
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -501,7 +501,7 @@ class EntitiesApi:
         """ # noqa: E501
 
         _param = self._create_or_update_entities_serialize(
-            model1=model1,
+            graph=graph,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -521,7 +521,7 @@ class EntitiesApi:
 
     def _create_or_update_entities_serialize(
         self,
-        model1,
+        graph,
         _request_auth,
         _content_type,
         _headers,
@@ -545,8 +545,8 @@ class EntitiesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if model1 is not None:
-            _body_params = model1
+        if graph is not None:
+            _body_params = graph
 
 
 
@@ -900,7 +900,7 @@ class EntitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Model1:
+    ) -> Graph:
         """Get
 
         Get entities with the provided ids.
@@ -947,7 +947,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Model1",
+            '200': "Graph",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -980,7 +980,7 @@ class EntitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Model1]:
+    ) -> ApiResponse[Graph]:
         """Get
 
         Get entities with the provided ids.
@@ -1027,7 +1027,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Model1",
+            '200': "Graph",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -1107,7 +1107,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Model1",
+            '200': "Graph",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -1215,7 +1215,7 @@ class EntitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Model1:
+    ) -> Graph:
         """Patch Entity
 
         Patch entity
@@ -1256,7 +1256,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Model1",
+            '200': "Graph",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -1287,7 +1287,7 @@ class EntitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Model1]:
+    ) -> ApiResponse[Graph]:
         """Patch Entity
 
         Patch entity
@@ -1328,7 +1328,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Model1",
+            '200': "Graph",
             '412': None,
         }
         response_data = await self.api_client.call_api(
@@ -1400,7 +1400,7 @@ class EntitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Model1",
+            '200': "Graph",
             '412': None,
         }
         response_data = await self.api_client.call_api(

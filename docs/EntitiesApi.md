@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **create_entities**
-> Model1 create_entities(body)
+> Graph create_entities(body)
 
 Create
 
@@ -24,7 +24,7 @@ Create new entities by automatically generating their id.
 
 ```python
 import wordlift_client
-from wordlift_client.models.model1 import Model1
+from wordlift_client.models.graph import Graph
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Model1**](Model1.md)
+[**Graph**](Graph.md)
 
 ### Authorization
 
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_or_update_entities**
-> create_or_update_entities(model1)
+> create_or_update_entities(graph)
 
 Update (or create)
 
@@ -104,7 +104,7 @@ Create or update entities by using the provided ids.
 
 ```python
 import wordlift_client
-from wordlift_client.models.model1 import Model1
+from wordlift_client.models.graph import Graph
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -129,11 +129,11 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.EntitiesApi(api_client)
-    model1 = wordlift_client.Model1() # Model1 | 
+    graph = wordlift_client.Graph() # Graph | 
 
     try:
         # Update (or create)
-        await api_instance.create_or_update_entities(model1)
+        await api_instance.create_or_update_entities(graph)
     except Exception as e:
         print("Exception when calling EntitiesApi->create_or_update_entities: %s\n" % e)
 ```
@@ -145,7 +145,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **model1** | [**Model1**](Model1.md)|  | 
+ **graph** | [**Graph**](Graph.md)|  | 
 
 ### Return type
 
@@ -251,7 +251,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_entities**
-> Model1 get_entities(id, include_children=include_children, include_referenced=include_referenced, include_private=include_private)
+> Graph get_entities(id, include_children=include_children, include_referenced=include_referenced, include_private=include_private)
 
 Get
 
@@ -263,7 +263,7 @@ Get entities with the provided ids.
 
 ```python
 import wordlift_client
-from wordlift_client.models.model1 import Model1
+from wordlift_client.models.graph import Graph
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -316,7 +316,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Model1**](Model1.md)
+[**Graph**](Graph.md)
 
 ### Authorization
 
@@ -337,7 +337,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_entities**
-> Model1 patch_entities(id, entity_patch_request)
+> Graph patch_entities(id, entity_patch_request)
 
 Patch Entity
 
@@ -350,7 +350,7 @@ Patch entity
 ```python
 import wordlift_client
 from wordlift_client.models.entity_patch_request import EntityPatchRequest
-from wordlift_client.models.model1 import Model1
+from wordlift_client.models.graph import Graph
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -399,7 +399,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Model1**](Model1.md)
+[**Graph**](Graph.md)
 
 ### Authorization
 
