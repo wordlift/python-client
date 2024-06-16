@@ -57,7 +57,6 @@ from wordlift_client.models.filter import Filter
 from wordlift_client.models.filter_value import FilterValue
 from wordlift_client.models.generate_sitemap200_response import GenerateSitemap200Response
 from wordlift_client.models.generate_sitemap_request import GenerateSitemapRequest
-from wordlift_client.models.graph import Graph
 from wordlift_client.models.graphql_request import GraphqlRequest
 from wordlift_client.models.html import Html
 from wordlift_client.models.image import Image

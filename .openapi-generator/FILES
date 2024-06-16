@@ -76,7 +76,6 @@ docs/GoogleMerchantsApi.md
 docs/GoogleSearchConsoleApi.md
 docs/GoogleSearchConsoleOAuth2Api.md
 docs/GoogleSearchConsoleSearchesApi.md
-docs/Graph.md
 docs/GraphQLApi.md
 docs/GraphqlRequest.md
 docs/Html.md
@@ -197,7 +196,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_graph.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -304,7 +302,6 @@ wordlift_client/models/filter.py
 wordlift_client/models/filter_value.py
 wordlift_client/models/generate_sitemap200_response.py
 wordlift_client/models/generate_sitemap_request.py
-wordlift_client/models/graph.py
 wordlift_client/models/graphql_request.py
 wordlift_client/models/html.py
 wordlift_client/models/image.py

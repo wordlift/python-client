@@ -21,7 +21,6 @@ from pydantic import Field, StrictBool, StrictStr
 from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated
 from wordlift_client.models.batch_request import BatchRequest
-from wordlift_client.models.graph import Graph
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
 from wordlift_client.api_response import ApiResponse
@@ -323,7 +322,7 @@ class DatasetApi:
     async def create_or_update_entity(
         self,
         uri: Annotated[StrictStr, Field(description="The entity's URI")],
-        graph: Optional[Graph],
+        body: StrictStr,
         private: Annotated[Optional[StrictBool], Field(description="Whether the entity should be hidden from Linked Data and GraphQL")] = None,
         _request_timeout: Union[
             None,
@@ -344,8 +343,8 @@ class DatasetApi:
 
         :param uri: The entity's URI (required)
         :type uri: str
-        :param graph: (required)
-        :type graph: Graph
+        :param body: (required)
+        :type body: str
         :param private: Whether the entity should be hidden from Linked Data and GraphQL
         :type private: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -372,7 +371,7 @@ class DatasetApi:
 
         _param = self._create_or_update_entity_serialize(
             uri=uri,
-            graph=graph,
+            body=body,
             private=private,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -400,7 +399,7 @@ class DatasetApi:
     async def create_or_update_entity_with_http_info(
         self,
         uri: Annotated[StrictStr, Field(description="The entity's URI")],
-        graph: Optional[Graph],
+        body: StrictStr,
         private: Annotated[Optional[StrictBool], Field(description="Whether the entity should be hidden from Linked Data and GraphQL")] = None,
         _request_timeout: Union[
             None,
@@ -421,8 +420,8 @@ class DatasetApi:
 
         :param uri: The entity's URI (required)
         :type uri: str
-        :param graph: (required)
-        :type graph: Graph
+        :param body: (required)
+        :type body: str
         :param private: Whether the entity should be hidden from Linked Data and GraphQL
         :type private: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -449,7 +448,7 @@ class DatasetApi:
 
         _param = self._create_or_update_entity_serialize(
             uri=uri,
-            graph=graph,
+            body=body,
             private=private,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -477,7 +476,7 @@ class DatasetApi:
     async def create_or_update_entity_without_preload_content(
         self,
         uri: Annotated[StrictStr, Field(description="The entity's URI")],
-        graph: Optional[Graph],
+        body: StrictStr,
         private: Annotated[Optional[StrictBool], Field(description="Whether the entity should be hidden from Linked Data and GraphQL")] = None,
         _request_timeout: Union[
             None,
@@ -498,8 +497,8 @@ class DatasetApi:
 
         :param uri: The entity's URI (required)
         :type uri: str
-        :param graph: (required)
-        :type graph: Graph
+        :param body: (required)
+        :type body: str
         :param private: Whether the entity should be hidden from Linked Data and GraphQL
         :type private: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -526,7 +525,7 @@ class DatasetApi:
 
         _param = self._create_or_update_entity_serialize(
             uri=uri,
-            graph=graph,
+            body=body,
             private=private,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -549,7 +548,7 @@ class DatasetApi:
     def _create_or_update_entity_serialize(
         self,
         uri,
-        graph,
+        body,
         private,
         _request_auth,
         _content_type,
@@ -582,8 +581,8 @@ class DatasetApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if graph is not None:
-            _body_params = graph
+        if body is not None:
+            _body_params = body
 
 
 
