@@ -69,31 +69,13 @@ paths:
           content:
             application/ld+json:
               schema:
-                title: Graph
-                description: A model containing the Structured Data.
-                oneOf:
-                - type: array
-                  items:
-                    type: object
-                - type: string
+                type: string
             application/rdf+xml:
               schema:
-                title: Graph
-                description: A model containing the Structured Data.
-                oneOf:
-                - type: array
-                  items:
-                    type: object
-                - type: string
+                type: string
             text/turtle:
               schema:
-                title: Graph
-                description: A model containing the Structured Data.
-                oneOf:
-                - type: array
-                  items:
-                    type: object
-                - type: string
+                type: string
         "412":
           description: Invalid request parameters
       security:
@@ -108,31 +90,16 @@ paths:
         content:
           application/ld+json:
             schema:
-              title: Graph
-              description: A model containing the Structured Data.
-              oneOf:
-              - type: array
-                items:
-                  type: object
-              - type: string
+              type: string
+              description: "The entity request, containing the actual semantic data."
           application/rdf+xml:
             schema:
-              title: Graph
-              description: A model containing the Structured Data.
-              oneOf:
-              - type: array
-                items:
-                  type: object
-              - type: string
+              type: string
+              description: "The entity request, containing the actual semantic data."
           text/turtle:
             schema:
-              title: Graph
-              description: A model containing the Structured Data.
-              oneOf:
-              - type: array
-                items:
-                  type: object
-              - type: string
+              type: string
+              description: "The entity request, containing the actual semantic data."
         required: true
       responses:
         "200":
@@ -168,31 +135,13 @@ paths:
           content:
             application/ld+json:
               schema:
-                title: Graph
-                description: A model containing the Structured Data.
-                oneOf:
-                - type: array
-                  items:
-                    type: object
-                - type: string
+                type: string
             application/rdf+xml:
               schema:
-                title: Graph
-                description: A model containing the Structured Data.
-                oneOf:
-                - type: array
-                  items:
-                    type: object
-                - type: string
+                type: string
             text/turtle:
               schema:
-                title: Graph
-                description: A model containing the Structured Data.
-                oneOf:
-                - type: array
-                  items:
-                    type: object
-                - type: string
+                type: string
         "412":
           description: Invalid request parameters
       security:
@@ -266,31 +215,13 @@ paths:
           content:
             application/ld+json:
               schema:
-                title: Graph
-                description: A model containing the Structured Data.
-                oneOf:
-                - type: array
-                  items:
-                    type: object
-                - type: string
+                type: string
             application/rdf+xml:
               schema:
-                title: Graph
-                description: A model containing the Structured Data.
-                oneOf:
-                - type: array
-                  items:
-                    type: object
-                - type: string
+                type: string
             text/turtle:
               schema:
-                title: Graph
-                description: A model containing the Structured Data.
-                oneOf:
-                - type: array
-                  items:
-                    type: object
-                - type: string
+                type: string
         "412":
           description: Invalid request parameters
       security:
@@ -350,13 +281,8 @@ paths:
         content:
           application/ld+json:
             schema:
-              title: Graph
-              description: A model containing the Structured Data.
-              oneOf:
-              - type: array
-                items:
-                  type: object
-              - type: string
+              type: string
+              description: The structured data as a JSON-LD representation
         required: true
       responses:
         "200":
@@ -476,13 +402,7 @@ components:
           type: string
           description: The entity URI.
         model:
-          title: Graph
-          description: A model containing the Structured Data.
-          oneOf:
-          - type: array
-            items:
-              type: object
-          - type: string
+          type: string
         private:
           type: boolean
           description: Whether the entity should be hidden from Linked Data and GraphQL.
@@ -509,13 +429,7 @@ components:
           description: "The property to apply the operation, JSONPath formatted (leading\
             \ slash) on, e.g. `/https://schema.org/image (note the leading slash)."
         value:
-          title: Graph
-          description: A model containing the Structured Data.
-          oneOf:
-          - type: array
-            items:
-              type: object
-          - type: string
+          type: string
     AutocompleteResult:
       type: object
       properties:
@@ -563,9 +477,9 @@ components:
         mainType:
           type: string
           description: Schema type slug
-        value:
-          type: string
         label:
+          type: string
+        value:
           type: string
         displayTypes:
           type: string
