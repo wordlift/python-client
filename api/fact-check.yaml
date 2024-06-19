@@ -34,10 +34,10 @@ paths:
                     type: string
                     example: "{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"ClaimReview\",\n  \"claimReviewed\": \"Aristotle quote 'It is the mark of an educated mind to be able to entertain a thought without accepting it.'\",\n  \"author\": { \"@type\": \"Organization\", \"name\": \"WordLift\" },\n  \"datePublished\": \"2024-01-17\",\n  \"reviewRating\": {\n    \"@type\": \"Rating\",\n    \"ratingValue\": \"5\",\n    \"alternateName\": \"True\",\n    \"bestRating\": \"5\",\n    \"worstRating\": \"1\"\n  },\n  \"url\": \"https://fact-check.wordlift.io/review/aristotle-quote\",\n  \"reviewBody\": \"The quote 'It is the mark of an educated mind to be able to entertain a thought without accepting it.' is correctly attributable to Aristotle. It has been found in multiple credible sources, including publications of academic texts, reputable quote repositories, and philosophical discussions.\",\n  \"itemReviewed\": {\n    \"@type\": \"CreativeWork\",\n    \"url\": [\"https://www.azquotes.com/quote/10261\", \"https://philosiblog.com/2012/03/07/it-is-the-mark-of-an-educated-mind-to-be-able-to-entertain-a-thought-without-accepting-it/\", \"https://www.brainyquote.com/quotes/aristotle_100584\", \"https://www.goodreads.com/quotes/1629-it-is-the-mark-of-an-educated-mind-to-be\", \"https://www.socratic-method.com/philosophy-quote-meanings/aristotle-it-is-the-mark-of-an-educated-mind-to-be-able-to-entertain-a-thought-without-accepting-it\"]\n  }\n}"
 security:
-  - ApiKeyAuth: []
+  - ApiKey: []
 components:
   securitySchemes:
-    ApiKeyAuth:
+    ApiKey:
       type: apiKey
       in: header
       name: Authorization
