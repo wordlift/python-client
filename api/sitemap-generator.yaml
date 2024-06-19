@@ -56,10 +56,10 @@ paths:
         '500':
           description: Internal Server Error
       security:
-        - apiKeyAuth: []
+        - ApiKey: []
 components:
   securitySchemes:
-    apiKeyAuth:
+    ApiKey:
       type: apiKey
       in: header
       name: Authorization
