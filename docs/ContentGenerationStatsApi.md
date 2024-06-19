@@ -4,11 +4,11 @@ All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get3**](ContentGenerationStatsApi.md#get3) | **GET** /content-generations/{contentGenerationId}/stats | Get
+[**get**](ContentGenerationStatsApi.md#get) | **GET** /content-generations/{contentGenerationId}/stats | Get
 
 
-# **get3**
-> ContentGenerationStats get3(content_generation_id)
+# **get**
+> ContentGenerationStats get(content_generation_id)
 
 Get
 
@@ -47,11 +47,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Get
-        api_response = await api_instance.get3(content_generation_id)
-        print("The response of ContentGenerationStatsApi->get3:\n")
+        api_response = await api_instance.get(content_generation_id)
+        print("The response of ContentGenerationStatsApi->get:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling ContentGenerationStatsApi->get3: %s\n" % e)
+        print("Exception when calling ContentGenerationStatsApi->get: %s\n" % e)
 ```
 
 
