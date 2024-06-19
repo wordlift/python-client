@@ -4,19 +4,19 @@ All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_sync1**](MerchantSyncsApi.md#create_sync1) | **POST** /merchants/{merchantId}/syncs | Start
+[**create_sync**](MerchantSyncsApi.md#create_sync) | **POST** /merchants/{merchantId}/syncs | Start
 [**get_merchant_sync**](MerchantSyncsApi.md#get_merchant_sync) | **GET** /merchants/{merchantId}/syncs/{id} | Get by id
 [**list_merchant_syncs**](MerchantSyncsApi.md#list_merchant_syncs) | **GET** /merchants/{merchantId}/syncs | List
 
 
-# **create_sync1**
-> MerchantSync create_sync1(merchant_id)
+# **create_sync**
+> MerchantSync create_sync(merchant_id)
 
 Start
 
 ### Example
 
-* Api Key Authentication (ApiKeyAuth):
+* Api Key Authentication (ApiKey):
 
 ```python
 import wordlift_client
@@ -35,11 +35,11 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKeyAuth
-configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -49,11 +49,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Start
-        api_response = await api_instance.create_sync1(merchant_id)
-        print("The response of MerchantSyncsApi->create_sync1:\n")
+        api_response = await api_instance.create_sync(merchant_id)
+        print("The response of MerchantSyncsApi->create_sync:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling MerchantSyncsApi->create_sync1: %s\n" % e)
+        print("Exception when calling MerchantSyncsApi->create_sync: %s\n" % e)
 ```
 
 
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -96,7 +96,7 @@ Get by id
 
 ### Example
 
-* Api Key Authentication (ApiKeyAuth):
+* Api Key Authentication (ApiKey):
 
 ```python
 import wordlift_client
@@ -115,11 +115,11 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKeyAuth
-configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -179,7 +179,7 @@ List the Merchants Syncs
 
 ### Example
 
-* Api Key Authentication (ApiKeyAuth):
+* Api Key Authentication (ApiKey):
 
 ```python
 import wordlift_client
@@ -198,11 +198,11 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKeyAuth
-configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -240,7 +240,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 

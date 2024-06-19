@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **analyse**
-> Response analyse(request)
+> Response2 analyse(request3)
 
 Analyse content
 
@@ -19,12 +19,12 @@ Analyze the content provided with the request.
 
 ### Example
 
-* Api Key Authentication (ApiKeyAuth):
+* Api Key Authentication (ApiKey):
 
 ```python
 import wordlift_client
-from wordlift_client.models.request import Request
-from wordlift_client.models.response import Response
+from wordlift_client.models.request3 import Request3
+from wordlift_client.models.response2 import Response2
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -39,21 +39,21 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKeyAuth
-configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.AnalysesApi(api_client)
-    request = wordlift_client.Request() # Request | 
+    request3 = wordlift_client.Request3() # Request3 | 
 
     try:
         # Analyse content
-        api_response = await api_instance.analyse(request)
+        api_response = await api_instance.analyse(request3)
         print("The response of AnalysesApi->analyse:\n")
         pprint(api_response)
     except Exception as e:
@@ -67,15 +67,15 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request** | [**Request**](Request.md)|  | 
+ **request3** | [**Request3**](Request3.md)|  | 
 
 ### Return type
 
-[**Response**](Response.md)
+[**Response2**](Response2.md)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -101,7 +101,7 @@ Create an analysis request
 
 ### Example
 
-* Api Key Authentication (ApiKeyAuth):
+* Api Key Authentication (ApiKey):
 
 ```python
 import wordlift_client
@@ -121,11 +121,11 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKeyAuth
-configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -175,7 +175,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **merge**
-> str merge(request)
+> str merge(request3)
 
 Analyse and Merge
 
@@ -183,11 +183,11 @@ Analyze content and return the results merged as HTML code.
 
 ### Example
 
-* Api Key Authentication (ApiKeyAuth):
+* Api Key Authentication (ApiKey):
 
 ```python
 import wordlift_client
-from wordlift_client.models.request import Request
+from wordlift_client.models.request3 import Request3
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -202,21 +202,21 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKeyAuth
-configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.AnalysesApi(api_client)
-    request = wordlift_client.Request() # Request | 
+    request3 = wordlift_client.Request3() # Request3 | 
 
     try:
         # Analyse and Merge
-        api_response = await api_instance.merge(request)
+        api_response = await api_instance.merge(request3)
         print("The response of AnalysesApi->merge:\n")
         pprint(api_response)
     except Exception as e:
@@ -230,7 +230,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request** | [**Request**](Request.md)|  | 
+ **request3** | [**Request3**](Request3.md)|  | 
 
 ### Return type
 
@@ -238,7 +238,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -256,7 +256,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **v2_analysis**
-> Response v2_analysis(request)
+> Response2 v2_analysis(request3)
 
 Analyse Web Page
 
@@ -264,12 +264,12 @@ Analyse the content of a webpage by using the `url` property of the request.
 
 ### Example
 
-* Api Key Authentication (ApiKeyAuth):
+* Api Key Authentication (ApiKey):
 
 ```python
 import wordlift_client
-from wordlift_client.models.request import Request
-from wordlift_client.models.response import Response
+from wordlift_client.models.request3 import Request3
+from wordlift_client.models.response2 import Response2
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -284,21 +284,21 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKeyAuth
-configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.AnalysesApi(api_client)
-    request = wordlift_client.Request() # Request | 
+    request3 = wordlift_client.Request3() # Request3 | 
 
     try:
         # Analyse Web Page
-        api_response = await api_instance.v2_analysis(request)
+        api_response = await api_instance.v2_analysis(request3)
         print("The response of AnalysesApi->v2_analysis:\n")
         pprint(api_response)
     except Exception as e:
@@ -312,15 +312,15 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request** | [**Request**](Request.md)|  | 
+ **request3** | [**Request3**](Request3.md)|  | 
 
 ### Return type
 
-[**Response**](Response.md)
+[**Response2**](Response2.md)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
