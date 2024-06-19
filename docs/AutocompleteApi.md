@@ -4,11 +4,11 @@ All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get**](AutocompleteApi.md#get) | **GET** /autocomplete | Get
+[**get2**](AutocompleteApi.md#get2) | **GET** /autocomplete | Get
 
 
-# **get**
-> AutocompleteResult get(query, language, scope=scope, limit=limit, exclude=exclude)
+# **get2**
+> AutocompleteResult get2(query, language, scope=scope, limit=limit, exclude=exclude)
 
 Get
 
@@ -16,7 +16,7 @@ The autocomplete endpoint suggests entities from Linked Data that match the prov
 
 ### Example
 
-* Api Key Authentication (ApiKey):
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import wordlift_client
@@ -35,11 +35,11 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKey
-configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -53,11 +53,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Get
-        api_response = await api_instance.get(query, language, scope=scope, limit=limit, exclude=exclude)
-        print("The response of AutocompleteApi->get:\n")
+        api_response = await api_instance.get2(query, language, scope=scope, limit=limit, exclude=exclude)
+        print("The response of AutocompleteApi->get2:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AutocompleteApi->get: %s\n" % e)
+        print("Exception when calling AutocompleteApi->get2: %s\n" % e)
 ```
 
 
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 

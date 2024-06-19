@@ -4,16 +4,17 @@ All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_sync1**](ContentGenerationSyncsApi.md#create_sync1) | **POST** /content-generations/{contentGenerationId}/syncs | Create
+[**create_sync**](ContentGenerationSyncsApi.md#create_sync) | **POST** /content-generations/{contentGenerationId}/syncs | Create
 
 
-# **create_sync1**
-> create_sync1(content_generation_id)
+# **create_sync**
+> create_sync(content_generation_id)
 
 Create
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import wordlift_client
@@ -26,6 +27,16 @@ configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -35,9 +46,9 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Create
-        await api_instance.create_sync1(content_generation_id)
+        await api_instance.create_sync(content_generation_id)
     except Exception as e:
-        print("Exception when calling ContentGenerationSyncsApi->create_sync1: %s\n" % e)
+        print("Exception when calling ContentGenerationSyncsApi->create_sync: %s\n" % e)
 ```
 
 
@@ -55,7 +66,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 

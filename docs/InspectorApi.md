@@ -4,11 +4,11 @@ All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get4**](InspectorApi.md#get4) | **GET** /inspect | Inspect
+[**get3**](InspectorApi.md#get3) | **GET** /inspect | Inspect
 
 
-# **get4**
-> InspectResponse get4(u, f, classes=classes)
+# **get3**
+> InspectResponse get3(u, f, classes=classes)
 
 Inspect
 
@@ -16,7 +16,7 @@ Inspect a URL to perform a variety of tasks defined by the list of applied filte
 
 ### Example
 
-* Api Key Authentication (ApiKey):
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import wordlift_client
@@ -35,11 +35,11 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKey
-configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -51,11 +51,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Inspect
-        api_response = await api_instance.get4(u, f, classes=classes)
-        print("The response of InspectorApi->get4:\n")
+        api_response = await api_instance.get3(u, f, classes=classes)
+        print("The response of InspectorApi->get3:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling InspectorApi->get4: %s\n" % e)
+        print("Exception when calling InspectorApi->get3: %s\n" % e)
 ```
 
 
@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 

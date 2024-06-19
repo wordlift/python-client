@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **create_event**
-> Event create_event(request1)
+> Event create_event(request2)
 
 Create
 
@@ -17,12 +17,12 @@ Create an event
 
 ### Example
 
-* Api Key Authentication (ApiKey):
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import wordlift_client
 from wordlift_client.models.event import Event
-from wordlift_client.models.request1 import Request1
+from wordlift_client.models.request2 import Request2
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -37,21 +37,21 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKey
-configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.PluginEventsApi(api_client)
-    request1 = wordlift_client.Request1() # Request1 | 
+    request2 = wordlift_client.Request2() # Request2 | 
 
     try:
         # Create
-        api_response = await api_instance.create_event(request1)
+        api_response = await api_instance.create_event(request2)
         print("The response of PluginEventsApi->create_event:\n")
         pprint(api_response)
     except Exception as e:
@@ -65,7 +65,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request1** | [**Request1**](Request1.md)|  | 
+ **request2** | [**Request2**](Request2.md)|  | 
 
 ### Return type
 
@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -98,7 +98,7 @@ List the events bound to the authenticated account.
 
 ### Example
 
-* Api Key Authentication (ApiKey):
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import wordlift_client
@@ -117,11 +117,11 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKey
-configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -161,7 +161,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 

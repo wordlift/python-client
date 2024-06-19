@@ -4,16 +4,17 @@ All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get3**](ContentGenerationStatsApi.md#get3) | **GET** /content-generations/{contentGenerationId}/stats | Get
+[**get**](ContentGenerationStatsApi.md#get) | **GET** /content-generations/{contentGenerationId}/stats | Get
 
 
-# **get3**
-> ContentGenerationStats get3(content_generation_id)
+# **get**
+> ContentGenerationStats get(content_generation_id)
 
 Get
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import wordlift_client
@@ -27,6 +28,16 @@ configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -36,11 +47,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Get
-        api_response = await api_instance.get3(content_generation_id)
-        print("The response of ContentGenerationStatsApi->get3:\n")
+        api_response = await api_instance.get(content_generation_id)
+        print("The response of ContentGenerationStatsApi->get:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling ContentGenerationStatsApi->get3: %s\n" % e)
+        print("Exception when calling ContentGenerationStatsApi->get: %s\n" % e)
 ```
 
 
@@ -58,7 +69,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 

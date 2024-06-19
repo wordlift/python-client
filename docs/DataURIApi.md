@@ -4,11 +4,11 @@ All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get1**](DataURIApi.md#get1) | **GET** /data-uri | Get the Web Data URI for a Web Page URL.
+[**get4**](DataURIApi.md#get4) | **GET** /data-uri | Get the Web Data URI for a Web Page URL.
 
 
-# **get1**
-> get1(u)
+# **get4**
+> get4(u)
 
 Get the Web Data URI for a Web Page URL.
 
@@ -16,6 +16,7 @@ The service will return a Web Data URI only for existing datasets. The Web Data 
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import wordlift_client
@@ -28,6 +29,16 @@ configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -37,9 +48,9 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Get the Web Data URI for a Web Page URL.
-        await api_instance.get1(u)
+        await api_instance.get4(u)
     except Exception as e:
-        print("Exception when calling DataURIApi->get1: %s\n" % e)
+        print("Exception when calling DataURIApi->get4: %s\n" % e)
 ```
 
 
@@ -57,7 +68,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
