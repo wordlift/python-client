@@ -1,0 +1,17 @@
+diff --git a/wordlift_client/rest.py b/wordlift_client/rest.py
+index 63ff448..f9f5d60 100644
+--- a/wordlift_client/rest.py
++++ b/wordlift_client/rest.py
+@@ -188,10 +188,10 @@ class RESTClientObject:
+                         data.add_field(k, v)
+                 args["data"] = data
+ 
+-            # Pass a `bytes` parameter directly in the body to support
++            # Pass a `str` or `bytes` parameter directly in the body to support
+             # other content types than Json when `body` argument is provided
+             # in serialized form
+-            elif isinstance(body, bytes):
++            elif isinstance(body, str) or isinstance(body, bytes):
+                 args["data"] = body
+             else:
+                 # Cannot generate the request from given parameters

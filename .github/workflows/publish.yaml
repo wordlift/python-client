@@ -59,6 +59,9 @@ jobs:
       - name: Generate the SDK
         run: npx @openapitools/openapi-generator-cli generate -i ./wordliftApiSpec.yaml -g python -c config.json --package-name 'wordlift_client' --library 'asyncio'
 
+      - name: Patch generated files
+        run: git apply -R .patches/1-add-str.patch 
+
       # Step 3: Get version from setup
       - name: Get version from setup.py
         id: get_version
