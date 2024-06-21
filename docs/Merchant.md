@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **publisher_name** | **str** | The publisher name (shows in schema publisher) | 
 **refresh_token** | **str** | The Google merchant refresh token | 
 **url** | **str** | The website URL | [optional] 
+**url_strategy** | **str** | Which strategy to use to write the url schema. | [optional] [default to 'canonicalLinkAndLink']
 **writer_service** | **str** | How to write the merchant data to the graph, if unsure, do not set anything (by default &#x60;wordpressMerchantWriter&#x60;). | [optional] 
 
 ## Example
