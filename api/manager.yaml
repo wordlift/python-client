@@ -2017,6 +2017,15 @@ components:
         url:
           type: string
           description: The website URL
+        url_strategy:
+          type: string
+          default: canonicalLinkAndLink
+          description: Which strategy to use to write the url schema.
+          enum:
+          - canonicalLinkAndLink
+          - canonicalLinkOtherwiseLink
+          maxLength: 50
+          minLength: 0
         writer_service:
           type: string
           description: "How to write the merchant data to the graph, if unsure, do\
@@ -2077,6 +2086,15 @@ components:
         url:
           type: string
           description: The website URL
+        url_strategy:
+          type: string
+          default: canonicalLinkAndLink
+          description: Which strategy to use to write the url schema.
+          enum:
+          - canonicalLinkAndLink
+          - canonicalLinkOtherwiseLink
+          maxLength: 50
+          minLength: 0
         writer_service:
           type: string
           description: "How to write the merchant data to the graph, if unsure, do\
@@ -2262,6 +2280,15 @@ components:
         url:
           type: string
           description: The website URL
+        url_strategy:
+          type: string
+          default: canonicalLinkAndLink
+          description: Which strategy to use to write the url schema.
+          enum:
+          - canonicalLinkAndLink
+          - canonicalLinkOtherwiseLink
+          maxLength: 50
+          minLength: 0
         writer_service:
           type: string
           description: "How to write the merchant data to the graph, if unsure, do\
