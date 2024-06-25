@@ -1975,9 +1975,11 @@ components:
           readOnly: true
         dataset_domain:
           type: string
+          deprecated: true
           description: The custom domain (for example data.example.org)
         dataset_name:
           type: string
+          deprecated: true
           description: The dataset path (for example /data)
         deleted:
           type: boolean
@@ -2203,9 +2205,11 @@ components:
           readOnly: true
         dataset_domain:
           type: string
+          deprecated: true
           description: The custom domain (for example data.example.org)
         dataset_name:
           type: string
+          deprecated: true
           description: The dataset path (for example /data)
         deleted:
           type: boolean
