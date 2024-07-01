@@ -15,13 +15,13 @@
 from __future__ import annotations
 import json
 import pprint
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr, ValidationError, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional, Union
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-NODEREQUESTMETADATAVALUE_ONE_OF_SCHEMAS = ["float", "int", "str"]
+NODEREQUESTMETADATAVALUE_ONE_OF_SCHEMAS = ["bool", "float", "int", "str"]
 
 class NodeRequestMetadataValue(BaseModel):
     """
@@ -33,8 +33,12 @@ class NodeRequestMetadataValue(BaseModel):
     oneof_schema_2_validator: Optional[StrictInt] = None
     # data type: float
     oneof_schema_3_validator: Optional[Union[StrictFloat, StrictInt]] = None
-    actual_instance: Optional[Union[float, int, str]] = None
-    one_of_schemas: Set[str] = { "float", "int", "str" }
+    # data type: float
+    oneof_schema_4_validator: Optional[Union[StrictFloat, StrictInt]] = None
+    # data type: bool
+    oneof_schema_5_validator: Optional[StrictBool] = None
+    actual_instance: Optional[Union[bool, float, int, str]] = None
+    one_of_schemas: Set[str] = { "bool", "float", "int", "str" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -75,12 +79,24 @@ class NodeRequestMetadataValue(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # validate data type: float
+        try:
+            instance.oneof_schema_4_validator = v
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # validate data type: bool
+        try:
+            instance.oneof_schema_5_validator = v
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in NodeRequestMetadataValue with oneOf schemas: float, int, str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in NodeRequestMetadataValue with oneOf schemas: bool, float, int, str. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in NodeRequestMetadataValue with oneOf schemas: float, int, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in NodeRequestMetadataValue with oneOf schemas: bool, float, int, str. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -122,13 +138,31 @@ class NodeRequestMetadataValue(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into float
+        try:
+            # validation
+            instance.oneof_schema_4_validator = json.loads(json_str)
+            # assign value to actual_instance
+            instance.actual_instance = instance.oneof_schema_4_validator
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into bool
+        try:
+            # validation
+            instance.oneof_schema_5_validator = json.loads(json_str)
+            # assign value to actual_instance
+            instance.actual_instance = instance.oneof_schema_5_validator
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into NodeRequestMetadataValue with oneOf schemas: float, int, str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into NodeRequestMetadataValue with oneOf schemas: bool, float, int, str. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into NodeRequestMetadataValue with oneOf schemas: float, int, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into NodeRequestMetadataValue with oneOf schemas: bool, float, int, str. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -142,7 +176,7 @@ class NodeRequestMetadataValue(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], float, int, str]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], bool, float, int, str]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
