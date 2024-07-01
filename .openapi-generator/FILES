@@ -100,6 +100,7 @@ docs/Model.md
 docs/ModelField.md
 docs/NetworkAccountInfo.md
 docs/NodeRequest.md
+docs/NodeRequestMetadataValue.md
 docs/OAuth2AuthorizedClient.md
 docs/OAuth2AuthorizedClientRequest.md
 docs/OAuth2AuthorizedClientsApi.md
@@ -196,6 +197,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_node_request_metadata_value.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -319,6 +321,7 @@ wordlift_client/models/model.py
 wordlift_client/models/model_field.py
 wordlift_client/models/network_account_info.py
 wordlift_client/models/node_request.py
+wordlift_client/models/node_request_metadata_value.py
 wordlift_client/models/o_auth2_authorized_client.py
 wordlift_client/models/o_auth2_authorized_client_request.py
 wordlift_client/models/page_active_account.py

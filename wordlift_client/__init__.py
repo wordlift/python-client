@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.17.0"
+__version__ = "1.18.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -145,6 +145,7 @@ from wordlift_client.models.model import Model
 from wordlift_client.models.model_field import ModelField
 from wordlift_client.models.network_account_info import NetworkAccountInfo
 from wordlift_client.models.node_request import NodeRequest
+from wordlift_client.models.node_request_metadata_value import NodeRequestMetadataValue
 from wordlift_client.models.o_auth2_authorized_client import OAuth2AuthorizedClient
 from wordlift_client.models.o_auth2_authorized_client_request import OAuth2AuthorizedClientRequest
 from wordlift_client.models.page_active_account import PageActiveAccount

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **embeddings** | **List[float]** | A list of embeddings. | [optional] 
 **entity_id** | **str** | The entity id in the form on an IRI, e.g. https://data.example.org/dataset/entity. | 
-**metadata** | **Dict[str, object]** | A map of metadata properties. | [optional] 
+**metadata** | [**Dict[str, NodeRequestMetadataValue]**](NodeRequestMetadataValue.md) | A map of metadata properties. | [optional] 
 **node_id** | **str** | The node id generally expressed in the form of a UUID. | 
 **text** | **str** | The original text. | [optional] 
 
