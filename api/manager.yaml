@@ -12,133 +12,135 @@ info:
   title: Manager
   version: "1.0"
 servers:
-- url: https://api.wordlift.io
+  - url: https://api.wordlift.io
 tags:
-- description: Get Account Information
-  name: Account
-- description: Manage Custom Domains
-  name: Custom Domains
-- description: Import Botify Crawl data to KG
-  name: Botify Crawl Imports
-- description: Retrieve Add-ons data
-  name: AddOns
-- description: Data URI for a Web page URL.
-  name: Data URI
-- description: Add embeddings to a Knowledge Graphs.
-  name: Embedding
-- description: Import sitemaps to the KG
-  name: Sitemap Imports
-- description: Retrieve analytics data from Google Search Console
-  name: Google Search Console Searches
-- description: Access Google Search Console data
-  name: Google Search Console
-- description: Manage Google Merchants
-  name: Google Merchants
-- description: Manage Platform Consumptions
-  name: Platform Consumptions
-- description: Get answers to questions.
-  name: Vector Search Questions
-- description: Manage OAuth2 Authorized Clients
-  name: OAuth2 Authorized Clients
-- description: "Import Analytics data to the KG using different sources, e.g. Google\
-    \ Search Console."
-  name: Analytics Imports
-- description: Manage vector search nodes embeddings.
-  name: Vector Search Nodes
-- description: Manage redeem codes.
-  name: Redeem Codes
-- description: Create vector search queries.
-  name: Vector Search Queries
-- description: The list of included or excluded URLs from the WordPress configuration
-  name: Include Excludes (WordPress plugin)
-- description: Manage Platform Limits
-  name: Platform Limits
-- description: Manage Accounts
-  name: Accounts
-- description: Manage Merchants
-  name: Merchants
-- description: Configure Google Search Console OAuth2 authorized access codes.
-  name: Google Search Console OAuth2
-- description: Synchronize Products from the Merchant Feed
-  name: Merchant Syncs
-- description: Update Plugin Diagnostics data for WordPress clients.
-  name: Plugin Diagnostics
+  - description: Get Account Information
+    name: Account
+  - description: Manage Custom Domains
+    name: Custom Domains
+  - description: Import Botify Crawl data to KG
+    name: Botify Crawl Imports
+  - description: Retrieve Add-ons data
+    name: AddOns
+  - description: Data URI for a Web page URL.
+    name: Data URI
+  - description: Add embeddings to a Knowledge Graphs.
+    name: Embedding
+  - description: Import sitemaps to the KG
+    name: Sitemap Imports
+  - description: Retrieve analytics data from Google Search Console
+    name: Google Search Console Searches
+  - description: Access Google Search Console data
+    name: Google Search Console
+  - description: Manage Google Merchants
+    name: Google Merchants
+  - description: Manage Platform Consumptions
+    name: Platform Consumptions
+  - description: Get answers to questions.
+    name: Vector Search Questions
+  - description: Manage OAuth2 Authorized Clients
+    name: OAuth2 Authorized Clients
+  - description:
+      "Import Analytics data to the KG using different sources, e.g. Google\
+      \ Search Console."
+    name: Analytics Imports
+  - description: Manage vector search nodes embeddings.
+    name: Vector Search Nodes
+  - description: Manage redeem codes.
+    name: Redeem Codes
+  - description: Create vector search queries.
+    name: Vector Search Queries
+  - description: The list of included or excluded URLs from the WordPress configuration
+    name: Include Excludes (WordPress plugin)
+  - description: Manage Platform Limits
+    name: Platform Limits
+  - description: Manage Accounts
+    name: Accounts
+  - description: Manage Merchants
+    name: Merchants
+  - description: Configure Google Search Console OAuth2 authorized access codes.
+    name: Google Search Console OAuth2
+  - description: Synchronize Products from the Merchant Feed
+    name: Merchant Syncs
+  - description: Update Plugin Diagnostics data for WordPress clients.
+    name: Plugin Diagnostics
 paths:
   /accounts:
     get:
       description: List the accounts
       operationId: listAccounts
       parameters:
-      - description: The cursor
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-      - in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
-      - description: Filter accounts that can or cannot do Content Generation
-        in: query
-        name: can_content_generation
-        required: false
-        schema:
-          type: boolean
-      - description: Add entity count data
-        in: query
-        name: include_entity_count
-        required: false
-        schema:
-          type: boolean
-          default: false
-      - description: Include all the accounts the user has access to
-        in: query
-        name: include_all_accounts
-        required: false
-        schema:
-          type: boolean
-          default: false
-      - description: Include the subscription data
-        in: query
-        name: include_subscription
-        required: false
-        schema:
-          type: boolean
-          default: false
-      - description: The URL
-        in: query
-        name: url
-        required: false
-        schema:
-          type: string
-      - description: The dataset id
-        in: query
-        name: ng_dataset_id
-        required: false
-        schema:
-          type: string
+        - description: The cursor
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - description: Filter accounts that can or cannot do Content Generation
+          in: query
+          name: can_content_generation
+          required: false
+          schema:
+            type: boolean
+        - description: Add entity count data
+          in: query
+          name: include_entity_count
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - description: Include all the accounts the user has access to
+          in: query
+          name: include_all_accounts
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - description: Include the subscription data
+          in: query
+          name: include_subscription
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - description: The URL
+          in: query
+          name: url
+          required: false
+          schema:
+            type: string
+        - description: The dataset id
+          in: query
+          name: ng_dataset_id
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
             application/vnd.wordlift.accounts+json;version=1:
               schema:
-                $ref: '#/components/schemas/PageActiveAccount'
+                $ref: "#/components/schemas/PageActiveAccount"
           description: Found
         "401":
           description: Authentication Failure
       security:
-      - BasicAuth: []
-      - OAuth2: []
+        - BasicAuth: []
+        - OAuth2: []
       summary: List
       tags:
-      - Accounts
+        - Accounts
   /accounts/me:
     get:
-      description: Get the account data for the current account identified by its
+      description:
+        Get the account data for the current account identified by its
         key.
       operationId: getMe
       responses:
@@ -146,90 +148,91 @@ paths:
           content:
             application/vnd.wordlift.account-info.v2+json:
               schema:
-                $ref: '#/components/schemas/AccountInfo'
+                $ref: "#/components/schemas/AccountInfo"
           description: Found
         "401":
           description: Authentication Failure
       security:
-      - ApiKey: []
+        - ApiKey: []
       summary: Get
       tags:
-      - Account
+        - Account
   /accounts/me/google/searches:
     get:
       description: List the Website Search performance data
       operationId: listWebsiteSearch_1
       parameters:
-      - description: The cursor
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-      - description: "The start date, inclusive, in yyyy-MM-dd format."
-        in: query
-        name: since
-        required: true
-        schema:
-          type: string
-      - description: "The end date, inclusive, in yyyy-MM-dd format."
-        in: query
-        name: until
-        required: true
-        schema:
-          type: string
-      - description: "The dimensions, e.g. `query`, `page`. Must repeat for each dimension."
-        in: query
-        name: dimensions
-        required: true
-        schema:
-          type: array
-          items:
+        - description: The cursor
+          in: query
+          name: cursor
+          required: false
+          schema:
             type: string
-        style: form
-      - description: "If \"all\" (case-insensitive), data will include fresh data.\
-          \ If \"final\" (case-insensitive) or if this parameter is omitted, the returned\
-          \ data will include only finalized data."
-        in: query
-        name: data_state
-        required: false
-        schema:
-          type: string
-          enum:
-          - all
-          - final
-      - description: The maximum number of results
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-          default: 10
-          maximum: 25000
+        - description: "The start date, inclusive, in yyyy-MM-dd format."
+          in: query
+          name: since
+          required: true
+          schema:
+            type: string
+        - description: "The end date, inclusive, in yyyy-MM-dd format."
+          in: query
+          name: until
+          required: true
+          schema:
+            type: string
+        - description: "The dimensions, e.g. `query`, `page`. Must repeat for each dimension."
+          in: query
+          name: dimensions
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+        - description:
+            "If \"all\" (case-insensitive), data will include fresh data.\
+            \ If \"final\" (case-insensitive) or if this parameter is omitted, the returned\
+            \ data will include only finalized data."
+          in: query
+          name: data_state
+          required: false
+          schema:
+            type: string
+            enum:
+              - all
+              - final
+        - description: The maximum number of results
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            default: 10
+            maximum: 25000
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PageWebsiteSearch'
+                $ref: "#/components/schemas/PageWebsiteSearch"
           description: Found
         "401":
           description: Authentication Failure
       security:
-      - ApiKey: []
+        - ApiKey: []
       summary: List Website Search data
       tags:
-      - Google Search Console Searches
+        - Google Search Console Searches
   /accounts/me/include-excludes:
     get:
       description: List the include and exclude configurations.
       operationId: listIncludeExcludes
       parameters:
-      - in: query
-        name: account
-        required: true
-        schema:
-          $ref: '#/components/schemas/Account'
+        - in: query
+          name: account
+          required: true
+          schema:
+            $ref: "#/components/schemas/Account"
       responses:
         "200":
           content:
@@ -237,7 +240,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/IncludeExclude'
+                  $ref: "#/components/schemas/IncludeExclude"
           description: Success
         "401":
           content:
@@ -245,7 +248,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/IncludeExclude'
+                  $ref: "#/components/schemas/IncludeExclude"
           description: Unauthorized
         "404":
           content:
@@ -253,27 +256,27 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/IncludeExclude'
+                  $ref: "#/components/schemas/IncludeExclude"
           description: Not Found
       summary: List
       tags:
-      - Include Excludes (WordPress plugin)
+        - Include Excludes (WordPress plugin)
     put:
       description: Update the include and exclude configurations.
       operationId: updateIncludeExcludes
       parameters:
-      - in: query
-        name: account
-        required: true
-        schema:
-          $ref: '#/components/schemas/Account'
+        - in: query
+          name: account
+          required: true
+          schema:
+            $ref: "#/components/schemas/Account"
       requestBody:
         content:
           application/json:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/IncludeExcludeRequest'
+                $ref: "#/components/schemas/IncludeExcludeRequest"
         required: true
       responses:
         "200":
@@ -282,7 +285,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/IncludeExclude'
+                  $ref: "#/components/schemas/IncludeExclude"
           description: Success
         "401":
           content:
@@ -290,7 +293,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/IncludeExclude'
+                  $ref: "#/components/schemas/IncludeExclude"
           description: Unauthorized
         "404":
           content:
@@ -298,29 +301,30 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/IncludeExclude'
+                  $ref: "#/components/schemas/IncludeExclude"
           description: Not Found
       summary: Update
       tags:
-      - Include Excludes (WordPress plugin)
+        - Include Excludes (WordPress plugin)
   /accounts/me/plugin/diagnostics/plugins-collection:
     put:
-      description: Replace the list of the plugins for the current account with the
+      description:
+        Replace the list of the plugins for the current account with the
         one provided by the client
       operationId: updateDiagnosticPluginCollection
       parameters:
-      - in: query
-        name: account
-        required: true
-        schema:
-          $ref: '#/components/schemas/Account'
+        - in: query
+          name: account
+          required: true
+          schema:
+            $ref: "#/components/schemas/Account"
       requestBody:
         content:
           application/json:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/DiagnosticPluginRequest'
+                $ref: "#/components/schemas/DiagnosticPluginRequest"
         required: true
       responses:
         "200":
@@ -332,117 +336,118 @@ paths:
         "404":
           description: Not Found
       security:
-      - ApiKey: []
+        - ApiKey: []
       summary: Update
       tags:
-      - Plugin Diagnostics
+        - Plugin Diagnostics
   /accounts/{id}:
     get:
       description: Get the account
       operationId: getAccount
       parameters:
-      - in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Account'
+                $ref: "#/components/schemas/Account"
           description: Found
         "401":
           description: Authentication Failure
         "404":
           description: Not Found
       security:
-      - BasicAuth: []
-      - OAuth2: []
+        - BasicAuth: []
+        - OAuth2: []
       summary: Get an account.
       tags:
-      - Accounts
+        - Accounts
     put:
       description: Update the account
       operationId: updateAccount
       parameters:
-      - in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateAccountRequest'
+              $ref: "#/components/schemas/UpdateAccountRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Account'
+                $ref: "#/components/schemas/Account"
           description: Found
         "401":
           description: Authentication Failure
         "404":
           description: Not Found
       security:
-      - BasicAuth: []
-      - OAuth2: []
+        - BasicAuth: []
+        - OAuth2: []
       summary: Update an account.
       tags:
-      - Accounts
+        - Accounts
   /addon/configurations:
     get:
       description: List the Add-ons configurations
       operationId: listConfigurations
       parameters:
-      - description: The access token
-        in: query
-        name: token
-        required: false
-        schema:
-          type: string
-      - description: The key
-        in: query
-        name: key
-        required: false
-        schema:
-          type: string
-      - description: The maximum number of results
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-          default: 10
+        - description: The access token
+          in: query
+          name: token
+          required: false
+          schema:
+            type: string
+        - description: The key
+          in: query
+          name: key
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of results
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            default: 10
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PageAddOnConfiguration'
+                $ref: "#/components/schemas/PageAddOnConfiguration"
           description: Found
         "401":
           description: Authentication Failure
       summary: List
       tags:
-      - AddOns
+        - AddOns
   /analytics-imports:
     post:
-      description: Create a Analytics Import using Google Search Console or Botify
+      description:
+        Create a Analytics Import using Google Search Console or Botify
         depending on the Account configuration.
       operationId: createAnalyticsImport
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AnalyticsImportRequest'
+              $ref: "#/components/schemas/AnalyticsImportRequest"
         required: true
       responses:
         "201":
@@ -458,10 +463,10 @@ paths:
         "401":
           description: Authentication Failure
       security:
-      - ApiKey: []
+        - ApiKey: []
       summary: Create
       tags:
-      - Analytics Imports
+        - Analytics Imports
   /botify-crawl-imports:
     post:
       description: Create a Botify Crawl Import
@@ -470,7 +475,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BotifyCrawlImportRequest'
+              $ref: "#/components/schemas/BotifyCrawlImportRequest"
         required: true
       responses:
         "200":
@@ -479,28 +484,28 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/WebPage'
+                  $ref: "#/components/schemas/WebPage"
           description: Success
         "401":
           description: Authentication Failure
       security:
-      - ApiKey: []
+        - ApiKey: []
       summary: Create
       tags:
-      - Botify Crawl Imports
+        - Botify Crawl Imports
   /data-uri:
     get:
       description: |
         The service will return a Web Data URI only for existing datasets. The Web Data URI is not guaranteed to exist (i.e. it may return 404).
       operationId: get
       parameters:
-      - description: The Web Page URL.
-        in: query
-        name: u
-        required: true
-        schema:
-          type: string
-          format: url
+        - description: The Web Page URL.
+          in: query
+          name: u
+          required: true
+          schema:
+            type: string
+            format: url
       responses:
         "303":
           description: See Other
@@ -511,156 +516,160 @@ paths:
               style: simple
       summary: Get the Web Data URI for a Web Page URL.
       tags:
-      - Data URI
+        - Data URI
   /ext/google/searchconsole/searches:
     get:
       description: List the Website Search performance data
       operationId: listWebsiteSearch
       parameters:
-      - description: The website URL
-        in: query
-        name: website
-        required: true
-        schema:
-          type: string
-      - description: The cursor
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-      - description: "The start date, inclusive, in yyyy-MM-dd format."
-        in: query
-        name: since
-        required: true
-        schema:
-          type: string
-      - description: "The end date, inclusive, in yyyy-MM-dd format."
-        in: query
-        name: until
-        required: true
-        schema:
-          type: string
-      - description: "The dimensions, e.g. `query`, `page`. Must repeat for each dimension."
-        in: query
-        name: dimensions
-        required: true
-        schema:
-          type: array
-          items:
+        - description: The website URL
+          in: query
+          name: website
+          required: true
+          schema:
             type: string
-        style: form
-      - description: "The Google access token, must have access to the Google Search\
-          \ Console scope"
-        in: query
-        name: google_access_token
-        required: true
-        schema:
-          type: string
-      - description: The maximum number of results
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-          default: 10
+        - description: The cursor
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+        - description: "The start date, inclusive, in yyyy-MM-dd format."
+          in: query
+          name: since
+          required: true
+          schema:
+            type: string
+        - description: "The end date, inclusive, in yyyy-MM-dd format."
+          in: query
+          name: until
+          required: true
+          schema:
+            type: string
+        - description: "The dimensions, e.g. `query`, `page`. Must repeat for each dimension."
+          in: query
+          name: dimensions
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+        - description:
+            "The Google access token, must have access to the Google Search\
+            \ Console scope"
+          in: query
+          name: google_access_token
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of results
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            default: 10
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PageWebsiteSearch'
+                $ref: "#/components/schemas/PageWebsiteSearch"
           description: Found
         "401":
           description: Authentication Failure
       summary: List Website Search data
       tags:
-      - Google Search Console
+        - Google Search Console
   /ext/google/searchconsole/websites:
     get:
       description: List the Websites
       operationId: listWebsites
       parameters:
-      - description: "The Google access token, must have access to the Google Search\
-          \ Console scope"
-        in: query
-        name: google_access_token
-        required: true
-        schema:
-          type: string
-      - description: The maximum number of results
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-          default: 10
+        - description:
+            "The Google access token, must have access to the Google Search\
+            \ Console scope"
+          in: query
+          name: google_access_token
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of results
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            default: 10
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PageWebsite'
+                $ref: "#/components/schemas/PageWebsite"
           description: Found
         "401":
           description: Authentication Failure
       summary: List
       tags:
-      - Google Search Console
+        - Google Search Console
   /ext/google/shopping/merchants:
     get:
       description: List the Google Merchants
       operationId: listGoogleMerchants
       parameters:
-      - in: query
-        name: google_access_token
-        required: true
-        schema:
-          type: string
+        - in: query
+          name: google_access_token
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PageMerchantEntry'
+                $ref: "#/components/schemas/PageMerchantEntry"
           description: Found
         "401":
           description: Authentication Failure
       security:
-      - OAuth2: []
+        - OAuth2: []
       summary: List
       tags:
-      - Google Merchants
+        - Google Merchants
   /google-search-console/oauth2/auth-code-exchanges:
     post:
-      description: Call this API to have the Platform receive an Authentication Token
+      description:
+        Call this API to have the Platform receive an Authentication Token
         to access the Analytics data via Google Search Console.
       operationId: createAuthCodeExchange
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ExchangeAuthCodeRequest'
+              $ref: "#/components/schemas/ExchangeAuthCodeRequest"
         required: true
       responses:
         "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ExchangeAuthCodeResponse'
+                $ref: "#/components/schemas/ExchangeAuthCodeResponse"
           description: Found
         "401":
           description: Authentication Failure
         "404":
           description: Not Found
       security:
-      - ApiKey: []
+        - ApiKey: []
       summary: Get an Access Code
       tags:
-      - Google Search Console OAuth2
+        - Google Search Console OAuth2
   /google-search-console/oauth2/authorize-uris:
     post:
-      description: Call this API to get an authorization URI needed to interactively
+      description:
+        Call this API to get an authorization URI needed to interactively
         get an authorization token. Then call the `exchangeAuthCode` to exchange it
         with an authorization token.
       operationId: createAuthorizeUri
@@ -668,24 +677,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BuildAuthorizeUriRequest'
+              $ref: "#/components/schemas/BuildAuthorizeUriRequest"
         required: true
       responses:
         "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/BuildAuthorizeUriResponse'
+                $ref: "#/components/schemas/BuildAuthorizeUriResponse"
           description: Found
         "401":
           description: Authentication Failure
         "404":
           description: Not Found
       security:
-      - ApiKey: []
+        - ApiKey: []
       summary: Create an Authorization URI
       tags:
-      - Google Search Console OAuth2
+        - Google Search Console OAuth2
   /kg/embeddings:
     post:
       description: Create the embedding for the IRIs for the provided query.
@@ -694,7 +703,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EmbeddingRequest'
+              $ref: "#/components/schemas/EmbeddingRequest"
         required: true
       responses:
         "201":
@@ -710,48 +719,48 @@ paths:
         "401":
           description: Authentication Failure
       security:
-      - ApiKey: []
+        - ApiKey: []
       summary: Create
       tags:
-      - Embedding
+        - Embedding
   /merchants:
     get:
       description: "List the Merchants, optionally filtering by the `deleted` flag"
       operationId: listMerchants
       parameters:
-      - description: The cursor
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-      - description: The maximum number of results
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-          default: 10
-      - description: Filter by the `deleted` flag
-        in: query
-        name: deleted
-        required: false
-        schema:
-          type: boolean
+        - description: The cursor
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of results
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - description: Filter by the `deleted` flag
+          in: query
+          name: deleted
+          required: false
+          schema:
+            type: boolean
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PageMerchantView'
+                $ref: "#/components/schemas/PageMerchantView"
           description: Found
         "401":
           description: Authentication Failure
       security:
-      - OAuth2: []
+        - OAuth2: []
       summary: List
       tags:
-      - Merchants
+        - Merchants
     post:
       description: Create a Merchant
       operationId: createMerchant
@@ -759,249 +768,250 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MerchantRequest'
+              $ref: "#/components/schemas/MerchantRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Merchant'
+                $ref: "#/components/schemas/Merchant"
           description: Success
         "401":
           description: Authentication Failure
         "404":
           description: Not Found
       security:
-      - OAuth2: []
+        - OAuth2: []
       summary: Create
       tags:
-      - Merchants
+        - Merchants
   /merchants/{id}:
     delete:
       description: Delete a Merchant by its `id`.
       operationId: deleteMerchant
       parameters:
-      - description: The Merchant id
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - description: The Merchant id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: Deleted
         "401":
           description: Authentication Failure
       security:
-      - OAuth2: []
+        - OAuth2: []
       summary: Delete by id
       tags:
-      - Merchants
+        - Merchants
     get:
       description: Get a Merchant by its `id`.
       operationId: getMerchant
       parameters:
-      - description: The Merchant id
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - description: The Merchant id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Merchant'
+                $ref: "#/components/schemas/Merchant"
           description: Success
         "401":
           description: Authentication Failure
       security:
-      - OAuth2: []
+        - OAuth2: []
       summary: Get by id
       tags:
-      - Merchants
+        - Merchants
     put:
       description: Update a Merchant
       operationId: updateMerchant
       parameters:
-      - description: The Merchant id
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - description: The Merchant id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MerchantRequest'
+              $ref: "#/components/schemas/MerchantRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Merchant'
+                $ref: "#/components/schemas/Merchant"
           description: Success
         "401":
           description: Authentication Failure
         "404":
           description: Not Found
       security:
-      - OAuth2: []
+        - OAuth2: []
       summary: Update
       tags:
-      - Merchants
+        - Merchants
   /merchants/{merchantId}/syncs:
     get:
       description: List the Merchants Syncs
       operationId: listMerchantSyncs
       parameters:
-      - description: The Merchant's `id`
-        in: path
-        name: merchantId
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - description: The cursor
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-      - description: The maximum number of results
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-          default: 10
-      - description: "The sorting, `+id` or `-id`"
-        in: query
-        name: sort
-        required: false
-        schema:
-          type: string
-          default: +id
+        - description: The Merchant's `id`
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: The cursor
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of results
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - description: "The sorting, `+id` or `-id`"
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+            default: +id
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PageMerchantSync'
+                $ref: "#/components/schemas/PageMerchantSync"
           description: Found
         "401":
           description: Authentication Failure
       security:
-      - OAuth2: []
+        - OAuth2: []
       summary: List
       tags:
-      - Merchant Syncs
+        - Merchant Syncs
     post:
       operationId: createSync
       parameters:
-      - description: The Merchant's `id`
-        in: path
-        name: merchantId
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - description: The Merchant's `id`
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/MerchantSync'
+                $ref: "#/components/schemas/MerchantSync"
           description: Found.
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProblemDetail'
-          description: Another merchant sync is in already in progress. There can
+                $ref: "#/components/schemas/ProblemDetail"
+          description:
+            Another merchant sync is in already in progress. There can
             only be one sync running at a time.
         "401":
           description: Authentication Failure
         "403":
           description: Authorization Failure
       security:
-      - OAuth2: []
+        - OAuth2: []
       summary: Start
       tags:
-      - Merchant Syncs
+        - Merchant Syncs
   /merchants/{merchantId}/syncs/{id}:
     get:
       operationId: getMerchantSync
       parameters:
-      - description: The Merchant's `id`
-        in: path
-        name: merchantId
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - description: The Merchant Sync `id`.
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - description: The Merchant's `id`
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: The Merchant Sync `id`.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MerchantSync'
+                $ref: "#/components/schemas/MerchantSync"
           description: Found.
         "401":
           description: Authentication Failure
         "404":
           description: Not Found
       security:
-      - OAuth2: []
+        - OAuth2: []
       summary: Get by id
       tags:
-      - Merchant Syncs
+        - Merchant Syncs
   /oauth2/authorized-clients:
     get:
       description: List OAuth2 Authorized Clients
       operationId: listOAuth2AuthorizedClients
       parameters:
-      - description: The cursor
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-      - description: The maximum number of results
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-          default: 10
+        - description: The cursor
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of results
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            default: 10
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PageOAuth2AuthorizedClient'
+                $ref: "#/components/schemas/PageOAuth2AuthorizedClient"
           description: Found
         "401":
           description: Authentication Failure
       security:
-      - OAuth2: []
+        - OAuth2: []
       summary: List
       tags:
-      - OAuth2 Authorized Clients
+        - OAuth2 Authorized Clients
     post:
       description: Create a OAuth2 Authorized Client
       operationId: createOAuth2AuthorizedClient
@@ -1009,235 +1019,238 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OAuth2AuthorizedClientRequest'
+              $ref: "#/components/schemas/OAuth2AuthorizedClientRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OAuth2AuthorizedClient'
+                $ref: "#/components/schemas/OAuth2AuthorizedClient"
           description: Found
         "401":
           description: Authentication Failure
       security:
-      - OAuth2: []
+        - OAuth2: []
       summary: Create
       tags:
-      - OAuth2 Authorized Clients
+        - OAuth2 Authorized Clients
   /oauth2/authorized-clients/{id}:
     delete:
-      description: Delete a OAuth2 Authorized Client given its client registration
+      description:
+        Delete a OAuth2 Authorized Client given its client registration
         id
       operationId: deleteOAuth2AuthorizedClient
       parameters:
-      - description: The Id
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - description: The Id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: Found
         "401":
           description: Authentication Failure
       security:
-      - OAuth2: []
+        - OAuth2: []
       summary: Delete
       tags:
-      - OAuth2 Authorized Clients
+        - OAuth2 Authorized Clients
     get:
       description: Get a OAuth2 Authorized Client given its client registration id
       operationId: getOAuth2AuthorizedClient
       parameters:
-      - description: The Id
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - description: The Id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OAuth2AuthorizedClient'
+                $ref: "#/components/schemas/OAuth2AuthorizedClient"
           description: Found
         "401":
           description: Authentication Failure
       security:
-      - OAuth2: []
+        - OAuth2: []
       summary: Get
       tags:
-      - OAuth2 Authorized Clients
+        - OAuth2 Authorized Clients
     put:
-      description: Update a OAuth2 Authorized Client given its client registration
+      description:
+        Update a OAuth2 Authorized Client given its client registration
         id
       operationId: updateOAuth2AuthorizedClient
       parameters:
-      - description: The Id
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - description: The Id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OAuth2AuthorizedClientRequest'
+              $ref: "#/components/schemas/OAuth2AuthorizedClientRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OAuth2AuthorizedClient'
+                $ref: "#/components/schemas/OAuth2AuthorizedClient"
           description: Found
         "401":
           description: Authentication Failure
       security:
-      - OAuth2: []
+        - OAuth2: []
       summary: Update
       tags:
-      - OAuth2 Authorized Clients
+        - OAuth2 Authorized Clients
   /platform-limit/consumptions/me:
     get:
       description: Get the Platform Consumption for the authenticated user.
       operationId: getMyPlatformConsumption
       parameters:
-      - in: query
-        name: applies_to
-        required: true
-        schema:
-          type: string
-      - in: query
-        name: include_subscription
-        required: false
-        schema:
-          type: boolean
-      - in: query
-        name: include_limit
-        required: false
-        schema:
-          type: boolean
+        - in: query
+          name: applies_to
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: include_subscription
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: include_limit
+          required: false
+          schema:
+            type: boolean
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PageWithLimits'
+                $ref: "#/components/schemas/PageWithLimits"
           description: Found
         "401":
           description: Authentication Failure
         "404":
           description: Not Found
       security:
-      - ApiKey: []
-      - OAuth2: []
+        - ApiKey: []
+        - OAuth2: []
       summary: Get the Platform Consumption
       tags:
-      - Platform Consumptions
+        - Platform Consumptions
     put:
-      description: Create or update the Platform Consumption for the authenticated
+      description:
+        Create or update the Platform Consumption for the authenticated
         user.
       operationId: createOrUpdateMyPlatformConsumption
       parameters:
-      - in: query
-        name: applies_to
-        required: true
-        schema:
-          type: string
-      - in: query
-        name: consumption_to_add
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 1
+        - in: query
+          name: applies_to
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: consumption_to_add
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PageWithLimits'
+                $ref: "#/components/schemas/PageWithLimits"
           description: Found
         "401":
           description: Authentication Failure
         "404":
           description: Not Found
       security:
-      - ApiKey: []
-      - OAuth2: []
+        - ApiKey: []
+        - OAuth2: []
       summary: Create or update the Platform Consumption
       tags:
-      - Platform Consumptions
+        - Platform Consumptions
   /platform-limit/limits:
     get:
       description: List the platform limits.
       operationId: listPlatformLimits
       parameters:
-      - description: "The type of based on, e.g. `sku`."
-        in: query
-        name: based_on_in
-        required: false
-        schema:
-          type: array
-          items:
-            type: string
-            enum:
-            - SKU
-          uniqueItems: true
-      - description: The based on values.
-        in: query
-        name: based_on_value_in
-        required: false
-        schema:
-          type: array
-          items:
-            type: string
-          uniqueItems: true
-      - description: The applies to (e.g. API name).
-        in: query
-        name: applies_to_in
-        required: false
-        schema:
-          type: array
-          items:
-            type: string
-          uniqueItems: true
-      - description: The scope.
-        in: query
-        name: scope_in
-        required: false
-        schema:
-          type: array
-          items:
-            type: string
-            enum:
-            - ACCOUNT
-            - SUBSCRIPTION
-          uniqueItems: true
+        - description: "The type of based on, e.g. `sku`."
+          in: query
+          name: based_on_in
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - SKU
+            uniqueItems: true
+        - description: The based on values.
+          in: query
+          name: based_on_value_in
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+            uniqueItems: true
+        - description: The applies to (e.g. API name).
+          in: query
+          name: applies_to_in
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+            uniqueItems: true
+        - description: The scope.
+          in: query
+          name: scope_in
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - ACCOUNT
+                - SUBSCRIPTION
+            uniqueItems: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PagePlatformLimit'
+                $ref: "#/components/schemas/PagePlatformLimit"
           description: Found
         "401":
           description: Authentication Failure
         "404":
           description: Not Found
       security:
-      - BasicAuth: []
+        - BasicAuth: []
       summary: List Platform Limits
       tags:
-      - Platform Limits
+        - Platform Limits
     post:
       description: Create a platform limit.
       operationId: createPlatformLimit
@@ -1245,36 +1258,36 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PlatformLimitRequest'
+              $ref: "#/components/schemas/PlatformLimitRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PlatformLimit'
+                $ref: "#/components/schemas/PlatformLimit"
           description: Found
         "401":
           description: Authentication Failure
         "404":
           description: Not Found
       security:
-      - BasicAuth: []
+        - BasicAuth: []
       summary: Create Platform Limit
       tags:
-      - Platform Limits
+        - Platform Limits
   /platform-limit/limits/{id}:
     delete:
       description: Delete a platform limit.
       operationId: deletePlatformLimit
       parameters:
-      - description: Platform Limit id
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - description: Platform Limit id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: Found
@@ -1283,70 +1296,70 @@ paths:
         "404":
           description: Not Found
       security:
-      - BasicAuth: []
+        - BasicAuth: []
       summary: Delete Platform Limit
       tags:
-      - Platform Limits
+        - Platform Limits
     get:
       description: Get a platform limit.
       operationId: getPlatformLimit
       parameters:
-      - description: Platform Limit id
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - description: Platform Limit id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PlatformLimit'
+                $ref: "#/components/schemas/PlatformLimit"
           description: Found
         "401":
           description: Authentication Failure
         "404":
           description: Not Found
       security:
-      - BasicAuth: []
+        - BasicAuth: []
       summary: Get Platform Limit
       tags:
-      - Platform Limits
+        - Platform Limits
     put:
       description: Update a platform limit.
       operationId: updatePlatformLimit
       parameters:
-      - description: Platform Limit id
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - description: Platform Limit id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PlatformLimitRequest'
+              $ref: "#/components/schemas/PlatformLimitRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PlatformLimit'
+                $ref: "#/components/schemas/PlatformLimit"
           description: Found
         "401":
           description: Authentication Failure
         "404":
           description: Not Found
       security:
-      - BasicAuth: []
+        - BasicAuth: []
       summary: Update Platform Limit
       tags:
-      - Platform Limits
+        - Platform Limits
   /redeem-codes:
     post:
       operationId: redeemCode
@@ -1354,36 +1367,36 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Request'
+              $ref: "#/components/schemas/Request"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Response'
+                $ref: "#/components/schemas/Response"
           description: Found.
         "404":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ProblemDetail'
+                $ref: "#/components/schemas/ProblemDetail"
           description: Not Found.
         "409":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ProblemDetail'
+                $ref: "#/components/schemas/ProblemDetail"
           description: Code already redeemed.
         "500":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/ProblemDetail'
+                $ref: "#/components/schemas/ProblemDetail"
           description: Configuration error.
       summary: Redeem the provided code and get a key
       tags:
-      - Redeem Codes
+        - Redeem Codes
   /sitemap-imports:
     post:
       description: Create a Sitemap Import
@@ -1392,7 +1405,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SitemapImportRequest'
+              $ref: "#/components/schemas/SitemapImportRequest"
         required: true
       responses:
         "200":
@@ -1401,15 +1414,15 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/WebPage'
+                  $ref: "#/components/schemas/WebPage"
           description: Success
         "401":
           description: Authentication Failure
       security:
-      - ApiKey: []
+        - ApiKey: []
       summary: Create
       tags:
-      - Sitemap Imports
+        - Sitemap Imports
   /validations:
     post:
       description: Check if the provided custom domain can be set for the account
@@ -1418,7 +1431,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DomainValidationRequest'
+              $ref: "#/components/schemas/DomainValidationRequest"
         required: true
       responses:
         "200":
@@ -1430,10 +1443,10 @@ paths:
         "404":
           description: Not Found
       security:
-      - OAuth2: []
+        - OAuth2: []
       summary: Validate
       tags:
-      - Custom Domains
+        - Custom Domains
   /vector-search/nodes-collection:
     put:
       operationId: updateNodesCollection
@@ -1444,7 +1457,7 @@ paths:
               type: array
               description: A list of node requests.
               items:
-                $ref: '#/components/schemas/NodeRequest'
+                $ref: "#/components/schemas/NodeRequest"
         required: true
       responses:
         "200":
@@ -1454,10 +1467,10 @@ paths:
         "404":
           description: Not Found
       security:
-      - ApiKey: []
+        - ApiKey: []
       summary: Update
       tags:
-      - Vector Search Nodes
+        - Vector Search Nodes
   /vector-search/queries:
     post:
       operationId: createQuery
@@ -1465,24 +1478,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VectorSearchQueryRequest'
+              $ref: "#/components/schemas/VectorSearchQueryRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PageVectorSearchQueryResponseItem'
+                $ref: "#/components/schemas/PageVectorSearchQueryResponseItem"
           description: Found.
         "401":
           description: Authentication Failure
         "404":
           description: Not Found
       security:
-      - ApiKey: []
+        - ApiKey: []
       summary: Create
       tags:
-      - Vector Search Queries
+        - Vector Search Queries
   /vector-search/questions-collection:
     post:
       operationId: createVectorSearchQuestion
@@ -1490,24 +1503,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VectorSearchQuestionRequest'
+              $ref: "#/components/schemas/VectorSearchQuestionRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PageVectorSearchQuestionResponseItem'
+                $ref: "#/components/schemas/PageVectorSearchQuestionResponseItem"
           description: Found.
         "401":
           description: Authentication Failure
         "404":
           description: Not Found
       security:
-      - ApiKey: []
+        - ApiKey: []
       summary: Create
       tags:
-      - Vector Search Questions
+        - Vector Search Questions
 components:
   schemas:
     Account:
@@ -1606,7 +1619,7 @@ components:
           type: array
           description: A list of connected Account Information
           items:
-            $ref: '#/components/schemas/NetworkAccountInfo'
+            $ref: "#/components/schemas/NetworkAccountInfo"
           readOnly: true
         ngDatasetId:
           type: string
@@ -1628,10 +1641,10 @@ components:
           description: "If WordPress, the WP-JSON end-point"
           readOnly: true
       required:
-      - accountId
-      - datasetUri
-      - networks
-      - subscriptionId
+        - accountId
+        - datasetUri
+        - networks
+        - subscriptionId
     AccountSubscription:
       type: object
       properties:
@@ -1659,7 +1672,7 @@ components:
         diagnostic_plugins:
           type: array
           items:
-            $ref: '#/components/schemas/DiagnosticPlugin'
+            $ref: "#/components/schemas/DiagnosticPlugin"
         domain_uri:
           type: string
         google_search_console_site_url:
@@ -1678,7 +1691,7 @@ components:
         package_type:
           type: string
         subscription:
-          $ref: '#/components/schemas/AccountSubscription'
+          $ref: "#/components/schemas/AccountSubscription"
         subscription_id:
           type: integer
           format: int64
@@ -1747,7 +1760,7 @@ components:
         filters:
           type: array
           items:
-            $ref: '#/components/schemas/Filter'
+            $ref: "#/components/schemas/Filter"
         headline:
           type: string
         request_embeddings:
@@ -1770,20 +1783,22 @@ components:
       properties:
         redirect_uri:
           type: string
-          description: The Redirect URI to where redirect the Client after successful
+          description:
+            The Redirect URI to where redirect the Client after successful
             authentication.
       required:
-      - redirect_uri
+        - redirect_uri
     BuildAuthorizeUriResponse:
       type: object
       description: The response of the `buildAuthorizeUri` endpoint.
       properties:
         authorize_uri:
           type: string
-          description: The Authorization URI. The Client should be redirected to this
+          description:
+            The Authorization URI. The Client should be redirected to this
             URI.
       required:
-      - authorize_uri
+        - authorize_uri
     DiagnosticPlugin:
       type: object
       description: Plugin Data used for diagnostics
@@ -1835,8 +1850,8 @@ components:
           type: string
           description: "The dataset name, e.g. my-dataset-name"
       required:
-      - dataset_domain
-      - dataset_name
+        - dataset_domain
+        - dataset_name
     EmbeddingRequest:
       type: object
       properties:
@@ -1853,15 +1868,17 @@ components:
       properties:
         code:
           type: string
-          description: The Authorization Code. The API will use the Authorization
+          description:
+            The Authorization Code. The API will use the Authorization
             Code to exchange it with an Access Token.
         google_search_console_resource_id:
           type: string
-          description: "The Google Search Console Resource Id as it shows in the Google\
+          description:
+            "The Google Search Console Resource Id as it shows in the Google\
             \ Search Console, e.g. sc-domain:example.org."
       required:
-      - code
-      - google_search_console_resource_id
+        - code
+        - google_search_console_resource_id
     ExchangeAuthCodeResponse:
       type: object
       description: The response of the `buildAuthorizeUri` endpoint.
@@ -1893,24 +1910,24 @@ components:
           type: string
           description: A query request filter operator.
           enum:
-          - EQ
-          - GT
-          - LT
-          - NE
-          - GTE
-          - LTE
-          - IN
-          - NIN
+            - EQ
+            - GT
+            - LT
+            - NE
+            - GTE
+            - LTE
+            - IN
+            - NIN
         value:
           type: object
           description: The filter value.
           oneOf:
-          - type: string
-          - type: object
+            - type: string
+            - type: object
       required:
-      - key
-      - operator
-      - value
+        - key
+        - operator
+        - value
     IncludeExclude:
       type: object
       properties:
@@ -1923,8 +1940,8 @@ components:
           type: string
           description: A flag which determines whether the URL is `INCLUDE` or `EXCLUDE`.
           enum:
-          - INCLUDE
-          - EXCLUDE
+            - INCLUDE
+            - EXCLUDE
           title: Include or Exclude
         id:
           type: integer
@@ -1935,9 +1952,9 @@ components:
           type: string
           title: The URL
       required:
-      - account_id
-      - flag
-      - url
+        - account_id
+        - flag
+        - url
     IncludeExcludeRequest:
       type: object
       description: A request to create an IncludeExclude.
@@ -1946,13 +1963,13 @@ components:
           type: string
           description: A flag which determines whether the URL is `INCLUDE` or `EXCLUDE`.
           enum:
-          - INCLUDE
-          - EXCLUDE
+            - INCLUDE
+            - EXCLUDE
         The URL:
           type: string
       required:
-      - Include or Exclude
-      - The URL
+        - Include or Exclude
+        - The URL
     Merchant:
       type: object
       description: A Merchant project.
@@ -2024,20 +2041,21 @@ components:
           default: canonicalLinkAndLink
           description: Which strategy to use to write the url schema.
           enum:
-          - canonicalLinkAndLink
-          - canonicalLinkOtherwiseLink
+            - canonicalLinkAndLink
+            - canonicalLinkOtherwiseLink
           maxLength: 50
           minLength: 0
         writer_service:
           type: string
-          description: "How to write the merchant data to the graph, if unsure, do\
+          description:
+            "How to write the merchant data to the graph, if unsure, do\
             \ not set anything (by default `wordpressMerchantWriter`)."
       required:
-      - access_token
-      - deleted
-      - google_merchant_id
-      - publisher_name
-      - refresh_token
+        - access_token
+        - deleted
+        - google_merchant_id
+        - publisher_name
+        - refresh_token
     MerchantEntry:
       type: object
       description: A Merchant Entry with the Google Merchant Id and the Website URL
@@ -2050,8 +2068,8 @@ components:
           type: string
           description: The Google Merchant Website URL
       required:
-      - google_merchant_id
-      - website_url
+        - google_merchant_id
+        - website_url
     MerchantRequest:
       type: object
       description: The Merchant request
@@ -2093,19 +2111,20 @@ components:
           default: canonicalLinkAndLink
           description: Which strategy to use to write the url schema.
           enum:
-          - canonicalLinkAndLink
-          - canonicalLinkOtherwiseLink
+            - canonicalLinkAndLink
+            - canonicalLinkOtherwiseLink
           maxLength: 50
           minLength: 0
         writer_service:
           type: string
-          description: "How to write the merchant data to the graph, if unsure, do\
+          description:
+            "How to write the merchant data to the graph, if unsure, do\
             \ not set anything (by default `wordpressMerchantWriter`)."
       required:
-      - google_merchant_id
-      - publisher_name
-      - refresh_token
-      - url
+        - google_merchant_id
+        - publisher_name
+        - refresh_token
+        - url
     MerchantSync:
       type: object
       description: A Merchant products data synchronization.
@@ -2163,7 +2182,8 @@ components:
         products_total:
           type: integer
           format: int32
-          description: "The total number of processed products, including the skipped\
+          description:
+            "The total number of processed products, including the skipped\
             \ and errored."
           readOnly: true
         products_updated:
@@ -2182,7 +2202,7 @@ components:
           description: The stopped date-time.
           readOnly: true
       required:
-      - merchant_id
+        - merchant_id
     MerchantView:
       type: object
       description: An array of objects.
@@ -2289,20 +2309,21 @@ components:
           default: canonicalLinkAndLink
           description: Which strategy to use to write the url schema.
           enum:
-          - canonicalLinkAndLink
-          - canonicalLinkOtherwiseLink
+            - canonicalLinkAndLink
+            - canonicalLinkOtherwiseLink
           maxLength: 50
           minLength: 0
         writer_service:
           type: string
-          description: "How to write the merchant data to the graph, if unsure, do\
+          description:
+            "How to write the merchant data to the graph, if unsure, do\
             \ not set anything (by default `wordpressMerchantWriter`)."
       required:
-      - access_token
-      - deleted
-      - google_merchant_id
-      - publisher_name
-      - refresh_token
+        - access_token
+        - deleted
+        - google_merchant_id
+        - publisher_name
+        - refresh_token
     NetworkAccountInfo:
       type: object
       description: Network Account Information
@@ -2326,7 +2347,7 @@ components:
           readOnly: true
       readOnly: true
       required:
-      - datasetUri
+        - datasetUri
     NodeRequest:
       type: object
       description: A node request.
@@ -2344,7 +2365,10 @@ components:
         metadata:
           type: object
           additionalProperties:
-            type: object
+            oneOf:
+              - type: string
+              - type: integer
+              - type: number
             description: A map of metadata properties.
           description: A map of metadata properties.
         node_id:
@@ -2354,8 +2378,8 @@ components:
           type: string
           description: The original text.
       required:
-      - entity_id
-      - node_id
+        - entity_id
+        - node_id
     OAuth2AuthorizedClient:
       type: object
       description: A OAuth2 Authorized Client
@@ -2420,7 +2444,8 @@ components:
           description: The Refresh Token Value
     PageActiveAccount:
       type: object
-      description: A page object with links to move to other pages and the list of
+      description:
+        A page object with links to move to other pages and the list of
         objects.
       properties:
         first:
@@ -2431,7 +2456,7 @@ components:
           type: array
           description: An array of objects.
           items:
-            $ref: '#/components/schemas/ActiveAccount'
+            $ref: "#/components/schemas/ActiveAccount"
         last:
           type: string
           description: The link to the last page.
@@ -2449,15 +2474,16 @@ components:
           description: The link to the current page.
           nullable: true
       required:
-      - first
-      - items
-      - last
-      - next
-      - prev
-      - self
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
     PageAddOnConfiguration:
       type: object
-      description: A page object with links to move to other pages and the list of
+      description:
+        A page object with links to move to other pages and the list of
         objects.
       properties:
         first:
@@ -2468,7 +2494,7 @@ components:
           type: array
           description: An array of objects.
           items:
-            $ref: '#/components/schemas/AddOnConfiguration'
+            $ref: "#/components/schemas/AddOnConfiguration"
         last:
           type: string
           description: The link to the last page.
@@ -2486,15 +2512,16 @@ components:
           description: The link to the current page.
           nullable: true
       required:
-      - first
-      - items
-      - last
-      - next
-      - prev
-      - self
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
     PageMerchantEntry:
       type: object
-      description: A page object with links to move to other pages and the list of
+      description:
+        A page object with links to move to other pages and the list of
         objects.
       properties:
         first:
@@ -2505,7 +2532,7 @@ components:
           type: array
           description: An array of objects.
           items:
-            $ref: '#/components/schemas/MerchantEntry'
+            $ref: "#/components/schemas/MerchantEntry"
         last:
           type: string
           description: The link to the last page.
@@ -2523,15 +2550,16 @@ components:
           description: The link to the current page.
           nullable: true
       required:
-      - first
-      - items
-      - last
-      - next
-      - prev
-      - self
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
     PageMerchantSync:
       type: object
-      description: A page object with links to move to other pages and the list of
+      description:
+        A page object with links to move to other pages and the list of
         objects.
       properties:
         first:
@@ -2542,7 +2570,7 @@ components:
           type: array
           description: An array of objects.
           items:
-            $ref: '#/components/schemas/MerchantSync'
+            $ref: "#/components/schemas/MerchantSync"
         last:
           type: string
           description: The link to the last page.
@@ -2560,15 +2588,16 @@ components:
           description: The link to the current page.
           nullable: true
       required:
-      - first
-      - items
-      - last
-      - next
-      - prev
-      - self
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
     PageMerchantView:
       type: object
-      description: A page object with links to move to other pages and the list of
+      description:
+        A page object with links to move to other pages and the list of
         objects.
       properties:
         first:
@@ -2579,7 +2608,7 @@ components:
           type: array
           description: An array of objects.
           items:
-            $ref: '#/components/schemas/MerchantView'
+            $ref: "#/components/schemas/MerchantView"
         last:
           type: string
           description: The link to the last page.
@@ -2597,15 +2626,16 @@ components:
           description: The link to the current page.
           nullable: true
       required:
-      - first
-      - items
-      - last
-      - next
-      - prev
-      - self
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
     PageOAuth2AuthorizedClient:
       type: object
-      description: A page object with links to move to other pages and the list of
+      description:
+        A page object with links to move to other pages and the list of
         objects.
       properties:
         first:
@@ -2616,7 +2646,7 @@ components:
           type: array
           description: An array of objects.
           items:
-            $ref: '#/components/schemas/OAuth2AuthorizedClient'
+            $ref: "#/components/schemas/OAuth2AuthorizedClient"
         last:
           type: string
           description: The link to the last page.
@@ -2634,15 +2664,16 @@ components:
           description: The link to the current page.
           nullable: true
       required:
-      - first
-      - items
-      - last
-      - next
-      - prev
-      - self
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
     PagePlatformLimit:
       type: object
-      description: A page object with links to move to other pages and the list of
+      description:
+        A page object with links to move to other pages and the list of
         objects.
       properties:
         first:
@@ -2653,7 +2684,7 @@ components:
           type: array
           description: An array of objects.
           items:
-            $ref: '#/components/schemas/PlatformLimit'
+            $ref: "#/components/schemas/PlatformLimit"
         last:
           type: string
           description: The link to the last page.
@@ -2671,15 +2702,16 @@ components:
           description: The link to the current page.
           nullable: true
       required:
-      - first
-      - items
-      - last
-      - next
-      - prev
-      - self
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
     PageVectorSearchQueryResponseItem:
       type: object
-      description: A page object with links to move to other pages and the list of
+      description:
+        A page object with links to move to other pages and the list of
         objects.
       properties:
         first:
@@ -2690,7 +2722,7 @@ components:
           type: array
           description: An array of objects.
           items:
-            $ref: '#/components/schemas/VectorSearchQueryResponseItem'
+            $ref: "#/components/schemas/VectorSearchQueryResponseItem"
         last:
           type: string
           description: The link to the last page.
@@ -2708,15 +2740,16 @@ components:
           description: The link to the current page.
           nullable: true
       required:
-      - first
-      - items
-      - last
-      - next
-      - prev
-      - self
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
     PageVectorSearchQuestionResponseItem:
       type: object
-      description: A page object with links to move to other pages and the list of
+      description:
+        A page object with links to move to other pages and the list of
         objects.
       properties:
         first:
@@ -2727,7 +2760,7 @@ components:
           type: array
           description: An array of objects.
           items:
-            $ref: '#/components/schemas/VectorSearchQuestionResponseItem'
+            $ref: "#/components/schemas/VectorSearchQuestionResponseItem"
         last:
           type: string
           description: The link to the last page.
@@ -2745,15 +2778,16 @@ components:
           description: The link to the current page.
           nullable: true
       required:
-      - first
-      - items
-      - last
-      - next
-      - prev
-      - self
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
     PageWebsite:
       type: object
-      description: A page object with links to move to other pages and the list of
+      description:
+        A page object with links to move to other pages and the list of
         objects.
       properties:
         first:
@@ -2764,7 +2798,7 @@ components:
           type: array
           description: An array of objects.
           items:
-            $ref: '#/components/schemas/Website'
+            $ref: "#/components/schemas/Website"
         last:
           type: string
           description: The link to the last page.
@@ -2782,15 +2816,16 @@ components:
           description: The link to the current page.
           nullable: true
       required:
-      - first
-      - items
-      - last
-      - next
-      - prev
-      - self
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
     PageWebsiteSearch:
       type: object
-      description: A page object with links to move to other pages and the list of
+      description:
+        A page object with links to move to other pages and the list of
         objects.
       properties:
         first:
@@ -2801,7 +2836,7 @@ components:
           type: array
           description: An array of objects.
           items:
-            $ref: '#/components/schemas/WebsiteSearch'
+            $ref: "#/components/schemas/WebsiteSearch"
         last:
           type: string
           description: The link to the last page.
@@ -2819,15 +2854,16 @@ components:
           description: The link to the current page.
           nullable: true
       required:
-      - first
-      - items
-      - last
-      - next
-      - prev
-      - self
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
     PageWithLimits:
       type: object
-      description: A page object with links to move to other pages and the list of
+      description:
+        A page object with links to move to other pages and the list of
         objects.
       properties:
         first:
@@ -2838,7 +2874,7 @@ components:
           type: array
           description: An array of objects.
           items:
-            $ref: '#/components/schemas/WithLimits'
+            $ref: "#/components/schemas/WithLimits"
         last:
           type: string
           description: The link to the last page.
@@ -2856,12 +2892,12 @@ components:
           description: The link to the current page.
           nullable: true
       required:
-      - first
-      - items
-      - last
-      - next
-      - prev
-      - self
+        - first
+        - items
+        - last
+        - next
+        - prev
+        - self
     PlatformLimit:
       type: object
       properties:
@@ -2870,7 +2906,7 @@ components:
         based_on:
           type: string
           enum:
-          - SKU
+            - SKU
         based_on_value:
           type: string
         created_at:
@@ -2895,14 +2931,14 @@ components:
         scope:
           type: string
           enum:
-          - ACCOUNT
-          - SUBSCRIPTION
+            - ACCOUNT
+            - SUBSCRIPTION
       required:
-      - applies_to
-      - based_on
-      - based_on_value
-      - limits
-      - scope
+        - applies_to
+        - based_on
+        - based_on_value
+        - limits
+        - scope
     PlatformLimitRequest:
       type: object
       description: Platform Limit request
@@ -2912,7 +2948,7 @@ components:
         based_on:
           type: string
           enum:
-          - SKU
+            - SKU
         based_on_value:
           type: string
         description:
@@ -2924,14 +2960,14 @@ components:
         scope:
           type: string
           enum:
-          - ACCOUNT
-          - SUBSCRIPTION
+            - ACCOUNT
+            - SUBSCRIPTION
       required:
-      - applies_to
-      - based_on
-      - based_on_value
-      - limits
-      - scope
+        - applies_to
+        - based_on
+        - based_on_value
+        - limits
+        - scope
     ProblemDetail:
       type: object
       properties:
@@ -3000,30 +3036,35 @@ components:
           type: array
           description: A list of prefilters.
           items:
-            $ref: '#/components/schemas/Filter'
+            $ref: "#/components/schemas/Filter"
         query_embedding:
           type: array
-          description: "The list of embeddings, not required if `query_string` is\
+          description:
+            "The list of embeddings, not required if `query_string` is\
             \ provided."
           items:
             type: number
             format: double
-            description: "The list of embeddings, not required if `query_string` is\
+            description:
+              "The list of embeddings, not required if `query_string` is\
               \ provided."
         query_string:
           type: string
-          description: "The query string, not required if the `query_embeddings` are\
+          description:
+            "The query string, not required if the `query_embeddings` are\
             \ provided. Please note that the `query_string` is ignored if the `query_embeddings`\
             \ are provided."
         query_uri:
           type: string
           format: uri
-          description: Perform a Vector Search based on similarities with an entity
+          description:
+            Perform a Vector Search based on similarities with an entity
             with the specified URI.
         query_url:
           type: string
           format: url
-          description: Perform a Vector Search based on similarities with an entity
+          description:
+            Perform a Vector Search based on similarities with an entity
             with the specified URL (schema:url).
         similarity_top_k:
           type: integer
@@ -3039,15 +3080,18 @@ components:
           type: object
           additionalProperties:
             type: array
-            description: Map of extra retrieved fields. The values of the requested
+            description:
+              Map of extra retrieved fields. The values of the requested
               fields are always returned in an array.If no value is found an empty
               array is returned.
             items:
               type: object
-              description: Map of extra retrieved fields. The values of the requested
+              description:
+                Map of extra retrieved fields. The values of the requested
                 fields are always returned in an array.If no value is found an empty
                 array is returned.
-          description: Map of extra retrieved fields. The values of the requested
+          description:
+            Map of extra retrieved fields. The values of the requested
             fields are always returned in an array.If no value is found an empty array
             is returned.
         id:
@@ -3073,10 +3117,10 @@ components:
           type: string
           description: The text of a node from which the embeddings were generated.
       required:
-      - iri
-      - node_id
-      - score
-      - text
+        - iri
+        - node_id
+        - score
+        - text
     VectorSearchQuestionRequest:
       type: object
       description: One or more questions.
@@ -3091,7 +3135,7 @@ components:
             type: string
             description: The list of questions.
       required:
-      - questions
+        - questions
     VectorSearchQuestionResponseItem:
       type: object
       description: An array of objects.
@@ -3126,10 +3170,11 @@ components:
       properties:
         url:
           type: string
-          description: "The Website URL, it may also start with thew `sc-domain:`\
+          description:
+            "The Website URL, it may also start with thew `sc-domain:`\
             \ prefix."
       required:
-      - url
+        - url
     WebsiteSearch:
       type: object
       description: Search Data
@@ -3152,11 +3197,13 @@ components:
           description: Number of impressions.
         keys:
           type: array
-          description: "The keys for the current data, matching the provided `dimensions`\
+          description:
+            "The keys for the current data, matching the provided `dimensions`\
             \ in the query."
           items:
             type: string
-            description: "The keys for the current data, matching the provided `dimensions`\
+            description:
+              "The keys for the current data, matching the provided `dimensions`\
               \ in the query."
         position:
           type: number
@@ -3165,16 +3212,17 @@ components:
         score:
           type: number
           format: double
-          description: "A score to spot traffic opportunities, from 0.0 to 1.0 (the\
+          description:
+            "A score to spot traffic opportunities, from 0.0 to 1.0 (the\
             \ higher the better). The score is based on the traffic data."
       required:
-      - clicks
-      - ctr
-      - id
-      - impressions
-      - keys
-      - position
-      - score
+        - clicks
+        - ctr
+        - id
+        - impressions
+        - keys
+        - position
+        - score
     WithLimits:
       type: object
       description: An array of objects.
@@ -3202,8 +3250,8 @@ components:
         reference_type:
           type: string
           enum:
-          - SUBSCRIPTION
-          - ACCOUNT
+            - SUBSCRIPTION
+            - ACCOUNT
         remaining:
           type: integer
           format: int32
@@ -3214,7 +3262,7 @@ components:
           type: integer
           format: int32
       required:
-      - applies_to
+        - applies_to
   securitySchemes:
     ApiKey:
       description: "`Key {your key}`"
