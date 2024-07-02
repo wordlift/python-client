@@ -36,10 +36,10 @@ class AutocompleteResult(BaseModel):
     scope: Optional[StrictStr] = None
     description: Optional[StrictStr] = None
     main_type: Optional[StrictStr] = Field(default=None, description="Schema type slug", alias="mainType")
-    label: Optional[StrictStr] = None
     value: Optional[StrictStr] = None
+    label: Optional[StrictStr] = None
     display_types: Optional[StrictStr] = Field(default=None, alias="displayTypes")
-    __properties: ClassVar[List[str]] = ["id", "labels", "descriptions", "types", "urls", "images", "sameAss", "scope", "description", "mainType", "label", "value", "displayTypes"]
+    __properties: ClassVar[List[str]] = ["id", "labels", "descriptions", "types", "urls", "images", "sameAss", "scope", "description", "mainType", "value", "label", "displayTypes"]
 
     @field_validator('scope')
     def scope_validate_enum(cls, value):
@@ -112,8 +112,8 @@ class AutocompleteResult(BaseModel):
             "scope": obj.get("scope"),
             "description": obj.get("description"),
             "mainType": obj.get("mainType"),
-            "label": obj.get("label"),
             "value": obj.get("value"),
+            "label": obj.get("label"),
             "displayTypes": obj.get("displayTypes")
         })
         return _obj

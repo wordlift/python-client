@@ -15,8 +15,8 @@ Name | Type | Description | Notes
 **scope** | **str** |  | [optional] 
 **description** | **str** |  | [optional] 
 **main_type** | **str** | Schema type slug | [optional] 
-**label** | **str** |  | [optional] 
 **value** | **str** |  | [optional] 
+**label** | **str** |  | [optional] 
 **display_types** | **str** |  | [optional] 
 
 ## Example
