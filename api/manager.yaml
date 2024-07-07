@@ -1905,8 +1905,28 @@ components:
           type: object
           description: The filter value.
           oneOf:
+          - type: array
+            items:
+              type: string
           - type: string
-          - type: object
+          - type: array
+            items:
+              type: integer
+              format: int32
+          - type: integer
+            format: int32
+          - type: array
+            items:
+              type: number
+              format: double
+          - type: number
+            format: double
+          - type: array
+            items:
+              type: integer
+              format: int64
+          - type: integer
+            format: int64
       required:
       - key
       - operator
