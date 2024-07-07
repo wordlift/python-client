@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "wordlift_client"
-version = "1.21.0"
+version = "1.22.0"
 description = "WordLift Fact-Checking API"
 authors = ["OpenAPI Generator Community <team@openapitools.org>"]
 license = "NoLicense"
