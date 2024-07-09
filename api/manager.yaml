@@ -1888,7 +1888,7 @@ components:
       properties:
         key:
           type: string
-          description: The filter key.
+          description: The filter key. Ignored if filter is AND or OR.
         operator:
           type: string
           description: A query request filter operator.
@@ -1901,6 +1901,8 @@ components:
           - LTE
           - IN
           - NIN
+          - AND
+          - OR
         value:
           type: object
           description: The filter value.
@@ -1927,6 +1929,9 @@ components:
               format: int64
           - type: integer
             format: int64
+          - type: array
+            items:
+              $ref: '#/components/schemas/Filter'
       required:
       - key
       - operator
