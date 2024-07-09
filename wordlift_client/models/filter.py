@@ -19,7 +19,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List
-from wordlift_client.models.filter_value import FilterValue
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +26,7 @@ class Filter(BaseModel):
     """
     A query request filter.
     """ # noqa: E501
-    key: StrictStr = Field(description="The filter key.")
+    key: StrictStr = Field(description="The filter key. Ignored if filter is AND or OR.")
     operator: StrictStr = Field(description="A query request filter operator.")
     value: FilterValue
     __properties: ClassVar[List[str]] = ["key", "operator", "value"]
@@ -35,8 +34,8 @@ class Filter(BaseModel):
     @field_validator('operator')
     def operator_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['EQ', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'IN', 'NIN']):
-            raise ValueError("must be one of enum values ('EQ', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'IN', 'NIN')")
+        if value not in set(['EQ', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'IN', 'NIN', 'AND', 'OR']):
+            raise ValueError("must be one of enum values ('EQ', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'IN', 'NIN', 'AND', 'OR')")
         return value
 
     model_config = ConfigDict(
@@ -99,4 +98,7 @@ class Filter(BaseModel):
         })
         return _obj
 
+from wordlift_client.models.filter_value import FilterValue
+# TODO: Rewrite to not use raise_errors
+Filter.model_rebuild(raise_errors=False)
 

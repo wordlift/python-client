@@ -6,7 +6,7 @@ A query request filter.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key** | **str** | The filter key. | 
+**key** | **str** | The filter key. Ignored if filter is AND or OR. | 
 **operator** | **str** | A query request filter operator. | 
 **value** | [**FilterValue**](FilterValue.md) |  | 
 
