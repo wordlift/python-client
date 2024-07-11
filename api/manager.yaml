@@ -1893,7 +1893,8 @@ components:
             $ref: '#/components/schemas/Filter'
         key:
           type: string
-          description: The filter key. Ignored if filter is AND or OR.
+          description: "The filter key. Key is required for the filters [EQ, NE, GT,\
+            \ LT, GTE, LTE, IN, NIN]"
         operator:
           type: string
           description: A query request filter operator.
@@ -1935,7 +1936,6 @@ components:
           - type: integer
             format: int64
       required:
-      - key
       - operator
     IncludeExclude:
       type: object
