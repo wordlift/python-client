@@ -29,7 +29,7 @@ class Filter(BaseModel):
     A query request filter.
     """ # noqa: E501
     filters: Optional[List[Filter]] = Field(default=None, description="Operational filters such as AND or OR.")
-    key: StrictStr = Field(description="The filter key. Ignored if filter is AND or OR.")
+    key: Optional[StrictStr] = Field(default=None, description="The filter key. Key is required for the filters [EQ, NE, GT, LT, GTE, LTE, IN, NIN]")
     operator: StrictStr = Field(description="A query request filter operator.")
     value: Optional[FilterValue] = None
     __properties: ClassVar[List[str]] = ["filters", "key", "operator", "value"]
