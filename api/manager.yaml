@@ -1886,6 +1886,11 @@ components:
       type: object
       description: A query request filter.
       properties:
+        filters:
+          type: array
+          description: Operational filters such as AND or OR.
+          items:
+            $ref: '#/components/schemas/Filter'
         key:
           type: string
           description: The filter key. Ignored if filter is AND or OR.
@@ -1929,13 +1934,9 @@ components:
               format: int64
           - type: integer
             format: int64
-          - type: array
-            items:
-              $ref: '#/components/schemas/Filter'
       required:
       - key
       - operator
-      - value
     IncludeExclude:
       type: object
       properties:
