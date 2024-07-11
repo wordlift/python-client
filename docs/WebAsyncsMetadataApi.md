@@ -4,12 +4,12 @@ All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get1**](WebAsyncsMetadataApi.md#get1) | **GET** /webasyncs/{id} | Get by id
+[**get4**](WebAsyncsMetadataApi.md#get4) | **GET** /webasyncs/{id} | Get by id
 [**list**](WebAsyncsMetadataApi.md#list) | **GET** /webasyncs | List
 
 
-# **get1**
-> WebAsync get1(id)
+# **get4**
+> WebAsync get4(id)
 
 Get by id
 
@@ -50,11 +50,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Get by id
-        api_response = await api_instance.get1(id)
-        print("The response of WebAsyncsMetadataApi->get1:\n")
+        api_response = await api_instance.get4(id)
+        print("The response of WebAsyncsMetadataApi->get4:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WebAsyncsMetadataApi->get1: %s\n" % e)
+        print("Exception when calling WebAsyncsMetadataApi->get4: %s\n" % e)
 ```
 
 

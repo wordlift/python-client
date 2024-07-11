@@ -4,11 +4,11 @@ All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get2**](AutocompleteApi.md#get2) | **GET** /autocomplete | Get
+[**get1**](AutocompleteApi.md#get1) | **GET** /autocomplete | Get
 
 
-# **get2**
-> AutocompleteResult get2(query, language, scope=scope, limit=limit, exclude=exclude)
+# **get1**
+> AutocompleteResult get1(query, language, scope=scope, limit=limit, exclude=exclude)
 
 Get
 
@@ -53,11 +53,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Get
-        api_response = await api_instance.get2(query, language, scope=scope, limit=limit, exclude=exclude)
-        print("The response of AutocompleteApi->get2:\n")
+        api_response = await api_instance.get1(query, language, scope=scope, limit=limit, exclude=exclude)
+        print("The response of AutocompleteApi->get1:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AutocompleteApi->get2: %s\n" % e)
+        print("Exception when calling AutocompleteApi->get1: %s\n" % e)
 ```
 
 

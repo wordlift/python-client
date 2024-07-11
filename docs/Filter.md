@@ -6,9 +6,10 @@ A query request filter.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**filters** | [**List[Filter]**](Filter.md) | Operational filters such as AND or OR. | [optional] 
 **key** | **str** | The filter key. Ignored if filter is AND or OR. | 
 **operator** | **str** | A query request filter operator. | 
-**value** | [**FilterValue**](FilterValue.md) |  | 
+**value** | [**FilterValue**](FilterValue.md) |  | [optional] 
 
 ## Example
 
