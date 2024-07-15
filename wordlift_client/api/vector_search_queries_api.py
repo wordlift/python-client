@@ -17,6 +17,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from pydantic import StrictStr
+from typing import Optional
 from wordlift_client.models.page_vector_search_query_response_item import PageVectorSearchQueryResponseItem
 from wordlift_client.models.vector_search_query_request import VectorSearchQueryRequest
 
@@ -42,6 +44,7 @@ class VectorSearchQueriesApi:
     async def create_query(
         self,
         vector_search_query_request: VectorSearchQueryRequest,
+        x_ng_network_dataset_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -60,6 +63,8 @@ class VectorSearchQueriesApi:
 
         :param vector_search_query_request: (required)
         :type vector_search_query_request: VectorSearchQueryRequest
+        :param x_ng_network_dataset_id:
+        :type x_ng_network_dataset_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -84,6 +89,7 @@ class VectorSearchQueriesApi:
 
         _param = self._create_query_serialize(
             vector_search_query_request=vector_search_query_request,
+            x_ng_network_dataset_id=x_ng_network_dataset_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -110,6 +116,7 @@ class VectorSearchQueriesApi:
     async def create_query_with_http_info(
         self,
         vector_search_query_request: VectorSearchQueryRequest,
+        x_ng_network_dataset_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -128,6 +135,8 @@ class VectorSearchQueriesApi:
 
         :param vector_search_query_request: (required)
         :type vector_search_query_request: VectorSearchQueryRequest
+        :param x_ng_network_dataset_id:
+        :type x_ng_network_dataset_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -152,6 +161,7 @@ class VectorSearchQueriesApi:
 
         _param = self._create_query_serialize(
             vector_search_query_request=vector_search_query_request,
+            x_ng_network_dataset_id=x_ng_network_dataset_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -178,6 +188,7 @@ class VectorSearchQueriesApi:
     async def create_query_without_preload_content(
         self,
         vector_search_query_request: VectorSearchQueryRequest,
+        x_ng_network_dataset_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -196,6 +207,8 @@ class VectorSearchQueriesApi:
 
         :param vector_search_query_request: (required)
         :type vector_search_query_request: VectorSearchQueryRequest
+        :param x_ng_network_dataset_id:
+        :type x_ng_network_dataset_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -220,6 +233,7 @@ class VectorSearchQueriesApi:
 
         _param = self._create_query_serialize(
             vector_search_query_request=vector_search_query_request,
+            x_ng_network_dataset_id=x_ng_network_dataset_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -241,6 +255,7 @@ class VectorSearchQueriesApi:
     def _create_query_serialize(
         self,
         vector_search_query_request,
+        x_ng_network_dataset_id,
         _request_auth,
         _content_type,
         _headers,
@@ -262,6 +277,8 @@ class VectorSearchQueriesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
+        if x_ng_network_dataset_id is not None:
+            _header_params['X-Ng-Network-Dataset-Id'] = x_ng_network_dataset_id
         # process the form parameters
         # process the body parameter
         if vector_search_query_request is not None:

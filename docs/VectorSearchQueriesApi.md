@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **create_query**
-> PageVectorSearchQueryResponseItem create_query(vector_search_query_request)
+> PageVectorSearchQueryResponseItem create_query(vector_search_query_request, x_ng_network_dataset_id=x_ng_network_dataset_id)
 
 Create
 
@@ -45,10 +45,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.VectorSearchQueriesApi(api_client)
     vector_search_query_request = wordlift_client.VectorSearchQueryRequest() # VectorSearchQueryRequest | 
+    x_ng_network_dataset_id = 'x_ng_network_dataset_id_example' # str |  (optional)
 
     try:
         # Create
-        api_response = await api_instance.create_query(vector_search_query_request)
+        api_response = await api_instance.create_query(vector_search_query_request, x_ng_network_dataset_id=x_ng_network_dataset_id)
         print("The response of VectorSearchQueriesApi->create_query:\n")
         pprint(api_response)
     except Exception as e:
@@ -63,6 +64,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **vector_search_query_request** | [**VectorSearchQueryRequest**](VectorSearchQueryRequest.md)|  | 
+ **x_ng_network_dataset_id** | **str**|  | [optional] 
 
 ### Return type
 
