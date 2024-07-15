@@ -1760,6 +1760,7 @@ components:
           type: array
           items:
             type: string
+          uniqueItems: true
         text:
           type: array
           items:
@@ -1768,6 +1769,7 @@ components:
           type: array
           items:
             type: string
+          uniqueItems: true
         url:
           type: string
     BuildAuthorizeUriRequest:
@@ -1845,13 +1847,18 @@ components:
       - dataset_name
     EmbeddingRequest:
       type: object
+      description: A request to generate the embeddings.
       properties:
-        graphql_query:
+        model:
           type: string
+          default: nomic-ai/nomic-embed-text-v1
+          description: The model used to generate the embeddings.
         properties:
           type: array
+          description: The list of properties to use to generate the embeddings.
           items:
             type: string
+            description: The list of properties to use to generate the embeddings.
           uniqueItems: true
     ExchangeAuthCodeRequest:
       type: object
@@ -3007,9 +3014,24 @@ components:
       type: object
       description: The Sitemap Import request
       properties:
+        embedding:
+          $ref: '#/components/schemas/EmbeddingRequest'
+        output_types:
+          type: array
+          default: schema:WebPage
+          description: "The type of the generated entities, by default `schema:WebPage`."
+          items:
+            type: string
+            default: schema:WebPage
+            description: "The type of the generated entities, by default `schema:WebPage`."
+          uniqueItems: true
         sitemap_url:
           type: string
           description: The sitemap URL
+        sitemap_url_regex:
+          type: string
+          description: "A regex filter to apply to discovered URLs, it only applies\
+            \ to URLs in sitemaps."
         urls:
           type: array
           description: The URLs
@@ -3159,6 +3181,7 @@ components:
           type: array
           items:
             type: string
+          uniqueItems: true
         url:
           type: string
     Website:
