@@ -18,18 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class EmbeddingRequest(BaseModel):
     """
-    EmbeddingRequest
+    A request to generate the embeddings.
     """ # noqa: E501
-    graphql_query: Optional[StrictStr] = None
-    properties: Optional[List[StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["graphql_query", "properties"]
+    model: Optional[StrictStr] = Field(default='nomic-ai/nomic-embed-text-v1', description="The model used to generate the embeddings.")
+    properties: Optional[List[StrictStr]] = Field(default=None, description="The list of properties to use to generate the embeddings.")
+    __properties: ClassVar[List[str]] = ["model", "properties"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,7 +82,7 @@ class EmbeddingRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "graphql_query": obj.get("graphql_query"),
+            "model": obj.get("model") if obj.get("model") is not None else 'nomic-ai/nomic-embed-text-v1',
             "properties": obj.get("properties")
         })
         return _obj

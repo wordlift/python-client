@@ -17,9 +17,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing import List
 from wordlift_client.models.sitemap_import_request import SitemapImportRequest
-from wordlift_client.models.web_page import WebPage
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
 from wordlift_client.api_response import ApiResponse
@@ -55,7 +53,7 @@ class SitemapImportsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[WebPage]:
+    ) -> None:
         """Create
 
         Create a Sitemap Import
@@ -93,7 +91,7 @@ class SitemapImportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[WebPage]",
+            '200': None,
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -123,7 +121,7 @@ class SitemapImportsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[WebPage]]:
+    ) -> ApiResponse[None]:
         """Create
 
         Create a Sitemap Import
@@ -161,7 +159,7 @@ class SitemapImportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[WebPage]",
+            '200': None,
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -229,7 +227,7 @@ class SitemapImportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[WebPage]",
+            '200': None,
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -269,12 +267,6 @@ class SitemapImportsApi:
             _body_params = sitemap_import_request
 
 
-        # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/x-ndjson'
-            ]
-        )
 
         # set the HTTP header `Content-Type`
         if _content_type:
