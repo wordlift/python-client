@@ -3007,11 +3007,12 @@ components:
           $ref: '#/components/schemas/EmbeddingRequest'
         output_types:
           type: array
-          default: schema:WebPage
+          default:
+          - schema:WebPage
           description: "The type of the generated entities, by default `schema:WebPage`."
           items:
             type: string
-            default: schema:WebPage
+            default: "[\"schema:WebPage\"]"
             description: "The type of the generated entities, by default `schema:WebPage`."
           uniqueItems: true
         overwrite:
