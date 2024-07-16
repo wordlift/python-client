@@ -3014,6 +3014,10 @@ components:
             default: schema:WebPage
             description: "The type of the generated entities, by default `schema:WebPage`."
           uniqueItems: true
+        overwrite:
+          type: boolean
+          default: false
+          description: Whether to overwrite existing entities.
         sitemap_url:
           type: string
           description: The sitemap URL
