@@ -1461,12 +1461,6 @@ paths:
   /vector-search/queries:
     post:
       operationId: createQuery
-      parameters:
-      - in: header
-        name: X-Ng-Network-Dataset-Id
-        required: false
-        schema:
-          type: string
       requestBody:
         content:
           application/json:
