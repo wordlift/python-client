@@ -1396,12 +1396,7 @@ paths:
         required: true
       responses:
         "200":
-          content:
-            application/x-ndjson:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/WebPage'
+          content: {}
           description: Success
         "401":
           description: Authentication Failure
