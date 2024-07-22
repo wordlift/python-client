@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.27.0"
+__version__ = "1.28.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -135,6 +135,7 @@ from wordlift_client.models.image import Image
 from wordlift_client.models.include_exclude import IncludeExclude
 from wordlift_client.models.include_exclude_request import IncludeExcludeRequest
 from wordlift_client.models.inspect_response import InspectResponse
+from wordlift_client.models.kg_embedding_request import KgEmbeddingRequest
 from wordlift_client.models.level_enum import LevelEnum
 from wordlift_client.models.longtail_response import LongtailResponse
 from wordlift_client.models.merchant import Merchant

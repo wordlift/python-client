@@ -7,7 +7,7 @@ The Sitemap Import request
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **embedding** | [**EmbeddingRequest**](EmbeddingRequest.md) |  | [optional] 
-**output_types** | **List[str]** | The type of the generated entities, by default &#x60;schema:WebPage&#x60;. | [optional] [default to ["schema:WebPage"]]
+**output_types** | **List[str]** | The type of the generated entities, by default &#x60;http://schema.org/WebPage&#x60;. | [optional] [default to ["http://schema.org/WebPage"]]
 **overwrite** | **bool** | Whether to overwrite existing entities. | [optional] [default to False]
 **sitemap_url** | **str** | The sitemap URL | [optional] 
 **sitemap_url_regex** | **str** | A regex filter to apply to discovered URLs, it only applies to URLs in sitemaps. | [optional] 

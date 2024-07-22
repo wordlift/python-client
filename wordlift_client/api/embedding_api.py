@@ -19,7 +19,7 @@ from typing_extensions import Annotated
 
 from pydantic import StrictStr
 from typing import Dict, List
-from wordlift_client.models.embedding_request import EmbeddingRequest
+from wordlift_client.models.kg_embedding_request import KgEmbeddingRequest
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
 from wordlift_client.api_response import ApiResponse
@@ -42,7 +42,7 @@ class EmbeddingApi:
     @validate_call
     async def create_embedding(
         self,
-        embedding_request: EmbeddingRequest,
+        kg_embedding_request: KgEmbeddingRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -60,8 +60,8 @@ class EmbeddingApi:
 
         Create the embedding for the IRIs for the provided query.
 
-        :param embedding_request: (required)
-        :type embedding_request: EmbeddingRequest
+        :param kg_embedding_request: (required)
+        :type kg_embedding_request: KgEmbeddingRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -85,7 +85,7 @@ class EmbeddingApi:
         """ # noqa: E501
 
         _param = self._create_embedding_serialize(
-            embedding_request=embedding_request,
+            kg_embedding_request=kg_embedding_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -110,7 +110,7 @@ class EmbeddingApi:
     @validate_call
     async def create_embedding_with_http_info(
         self,
-        embedding_request: EmbeddingRequest,
+        kg_embedding_request: KgEmbeddingRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -128,8 +128,8 @@ class EmbeddingApi:
 
         Create the embedding for the IRIs for the provided query.
 
-        :param embedding_request: (required)
-        :type embedding_request: EmbeddingRequest
+        :param kg_embedding_request: (required)
+        :type kg_embedding_request: KgEmbeddingRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -153,7 +153,7 @@ class EmbeddingApi:
         """ # noqa: E501
 
         _param = self._create_embedding_serialize(
-            embedding_request=embedding_request,
+            kg_embedding_request=kg_embedding_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -178,7 +178,7 @@ class EmbeddingApi:
     @validate_call
     async def create_embedding_without_preload_content(
         self,
-        embedding_request: EmbeddingRequest,
+        kg_embedding_request: KgEmbeddingRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -196,8 +196,8 @@ class EmbeddingApi:
 
         Create the embedding for the IRIs for the provided query.
 
-        :param embedding_request: (required)
-        :type embedding_request: EmbeddingRequest
+        :param kg_embedding_request: (required)
+        :type kg_embedding_request: KgEmbeddingRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -221,7 +221,7 @@ class EmbeddingApi:
         """ # noqa: E501
 
         _param = self._create_embedding_serialize(
-            embedding_request=embedding_request,
+            kg_embedding_request=kg_embedding_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -241,7 +241,7 @@ class EmbeddingApi:
 
     def _create_embedding_serialize(
         self,
-        embedding_request,
+        kg_embedding_request,
         _request_auth,
         _content_type,
         _headers,
@@ -265,8 +265,8 @@ class EmbeddingApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if embedding_request is not None:
-            _body_params = embedding_request
+        if kg_embedding_request is not None:
+            _body_params = kg_embedding_request
 
 
         # set the HTTP header `Accept`

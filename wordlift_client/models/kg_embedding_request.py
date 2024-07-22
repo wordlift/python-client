@@ -18,23 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from wordlift_client.models.embedding_request import EmbeddingRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
-class SitemapImportRequest(BaseModel):
+class KgEmbeddingRequest(BaseModel):
     """
-    The Sitemap Import request
+    KgEmbeddingRequest
     """ # noqa: E501
-    embedding: Optional[EmbeddingRequest] = None
-    output_types: Optional[List[StrictStr]] = Field(default=None, description="The type of the generated entities, by default `http://schema.org/WebPage`.")
-    overwrite: Optional[StrictBool] = Field(default=False, description="Whether to overwrite existing entities.")
-    sitemap_url: Optional[StrictStr] = Field(default=None, description="The sitemap URL")
-    sitemap_url_regex: Optional[StrictStr] = Field(default=None, description="A regex filter to apply to discovered URLs, it only applies to URLs in sitemaps.")
-    urls: Optional[List[StrictStr]] = Field(default=None, description="The URLs")
-    __properties: ClassVar[List[str]] = ["embedding", "output_types", "overwrite", "sitemap_url", "sitemap_url_regex", "urls"]
+    graphql_query: Optional[StrictStr] = None
+    properties: Optional[List[StrictStr]] = None
+    __properties: ClassVar[List[str]] = ["graphql_query", "properties"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -54,7 +49,7 @@ class SitemapImportRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of SitemapImportRequest from a JSON string"""
+        """Create an instance of KgEmbeddingRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,14 +70,11 @@ class SitemapImportRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of embedding
-        if self.embedding:
-            _dict['embedding'] = self.embedding.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of SitemapImportRequest from a dict"""
+        """Create an instance of KgEmbeddingRequest from a dict"""
         if obj is None:
             return None
 
@@ -90,12 +82,8 @@ class SitemapImportRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "embedding": EmbeddingRequest.from_dict(obj["embedding"]) if obj.get("embedding") is not None else None,
-            "output_types": obj.get("output_types"),
-            "overwrite": obj.get("overwrite") if obj.get("overwrite") is not None else False,
-            "sitemap_url": obj.get("sitemap_url"),
-            "sitemap_url_regex": obj.get("sitemap_url_regex"),
-            "urls": obj.get("urls")
+            "graphql_query": obj.get("graphql_query"),
+            "properties": obj.get("properties")
         })
         return _obj
 

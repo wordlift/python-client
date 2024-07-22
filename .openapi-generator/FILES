@@ -85,6 +85,7 @@ docs/IncludeExcludeRequest.md
 docs/IncludeExcludesWordPressPluginApi.md
 docs/InspectResponse.md
 docs/InspectorApi.md
+docs/KgEmbeddingRequest.md
 docs/LevelEnum.md
 docs/LongTailsApi.md
 docs/LongtailResponse.md
@@ -197,6 +198,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_kg_embedding_request.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -309,6 +311,7 @@ wordlift_client/models/image.py
 wordlift_client/models/include_exclude.py
 wordlift_client/models/include_exclude_request.py
 wordlift_client/models/inspect_response.py
+wordlift_client/models/kg_embedding_request.py
 wordlift_client/models/level_enum.py
 wordlift_client/models/longtail_response.py
 wordlift_client/models/merchant.py
