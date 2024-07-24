@@ -16,22 +16,14 @@ servers:
 tags:
 - description: Get Account Information
   name: Account
-- description: Manage Custom Domains
-  name: Custom Domains
 - description: Import Botify Crawl data to KG
   name: Botify Crawl Imports
 - description: Retrieve Add-ons data
   name: AddOns
 - description: Data URI for a Web page URL.
   name: Data URI
-- description: Add embeddings to a Knowledge Graphs.
-  name: Embedding
 - description: Import sitemaps to the KG
   name: Sitemap Imports
-- description: Retrieve analytics data from Google Search Console
-  name: Google Search Console Searches
-- description: Access Google Search Console data
-  name: Google Search Console
 - description: Manage Google Merchants
   name: Google Merchants
 - description: Manage Platform Consumptions
@@ -40,11 +32,27 @@ tags:
   name: Vector Search Questions
 - description: Manage OAuth2 Authorized Clients
   name: OAuth2 Authorized Clients
+- description: Manage Accounts
+  name: Accounts
+- description: Configure Google Search Console OAuth2 authorized access codes.
+  name: Google Search Console OAuth2
+- description: Update Plugin Diagnostics data for WordPress clients.
+  name: Plugin Diagnostics
+- description: Manage Custom Domains
+  name: Custom Domains
+- description: Add embeddings to a Knowledge Graphs.
+  name: Embedding
+- description: Retrieve analytics data from Google Search Console
+  name: Google Search Console Searches
+- description: Access Google Search Console data
+  name: Google Search Console
 - description: "Import Analytics data to the KG using different sources, e.g. Google\
     \ Search Console."
   name: Analytics Imports
 - description: Manage vector search nodes embeddings.
   name: Vector Search Nodes
+- description: Create Internal Links.
+  name: Internal Links
 - description: Manage redeem codes.
   name: Redeem Codes
 - description: Create vector search queries.
@@ -53,16 +61,10 @@ tags:
   name: Include Excludes (WordPress plugin)
 - description: Manage Platform Limits
   name: Platform Limits
-- description: Manage Accounts
-  name: Accounts
 - description: Manage Merchants
   name: Merchants
-- description: Configure Google Search Console OAuth2 authorized access codes.
-  name: Google Search Console OAuth2
 - description: Synchronize Products from the Merchant Feed
   name: Merchant Syncs
-- description: Update Plugin Diagnostics data for WordPress clients.
-  name: Plugin Diagnostics
 paths:
   /accounts:
     get:
@@ -686,6 +688,32 @@ paths:
       summary: Create an Authorization URI
       tags:
       - Google Search Console OAuth2
+  /internal-links:
+    post:
+      description: Create Internal Links.
+      operationId: createInternalLink
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InternalLinkRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/x-ndjson:
+              schema:
+                type: array
+                items:
+                  type: string
+          description: Success
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+      summary: Create
+      tags:
+      - Internal Links
   /kg/embeddings:
     post:
       description: Create the embedding for the IRIs for the provided query.
@@ -1981,6 +2009,25 @@ components:
       required:
       - Include or Exclude
       - The URL
+    InternalLinkRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        template:
+          type: string
+    Item:
+      type: object
+      properties:
+        query:
+          $ref: '#/components/schemas/VectorSearchQueryRequest'
+        source_name:
+          type: string
+      required:
+      - query
+      - source_name
     KgEmbeddingRequest:
       type: object
       properties:
