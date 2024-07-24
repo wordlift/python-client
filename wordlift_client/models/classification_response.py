@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    Summarizer
+    GraphQL support
 
-    Generic text summarization
+    GraphQL endpoint to query Knowledge Graphs
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io

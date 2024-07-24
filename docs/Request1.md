@@ -5,10 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**completion** | **str** |  | [optional] 
-**has_upvote** | **bool** | This indicates whether the user upvoted the completion. | 
-**is_accepted** | **bool** | This indicates whether the completion is accepted by the user. | 
-**validated_at** | **datetime** | Validation time of the record - null to revalidate. | [optional] 
+**redeem_code** | **str** |  | [optional] 
 
 ## Example
 

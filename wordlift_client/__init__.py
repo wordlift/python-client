@@ -3,9 +3,9 @@
 # flake8: noqa
 
 """
-    Summarizer
+    GraphQL support
 
-    Generic text summarization
+    GraphQL endpoint to query Knowledge Graphs
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.28.0"
+__version__ = "1.29.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -53,6 +53,7 @@ from wordlift_client.api.google_search_console_searches_api import GoogleSearchC
 from wordlift_client.api.graph_ql_api import GraphQLApi
 from wordlift_client.api.include_excludes_word_press_plugin_api import IncludeExcludesWordPressPluginApi
 from wordlift_client.api.inspector_api import InspectorApi
+from wordlift_client.api.internal_links_api import InternalLinksApi
 from wordlift_client.api.long_tails_api import LongTailsApi
 from wordlift_client.api.merchant_syncs_api import MerchantSyncsApi
 from wordlift_client.api.merchants_api import MerchantsApi
@@ -135,6 +136,8 @@ from wordlift_client.models.image import Image
 from wordlift_client.models.include_exclude import IncludeExclude
 from wordlift_client.models.include_exclude_request import IncludeExcludeRequest
 from wordlift_client.models.inspect_response import InspectResponse
+from wordlift_client.models.internal_link_request import InternalLinkRequest
+from wordlift_client.models.item import Item
 from wordlift_client.models.kg_embedding_request import KgEmbeddingRequest
 from wordlift_client.models.level_enum import LevelEnum
 from wordlift_client.models.longtail_response import LongtailResponse

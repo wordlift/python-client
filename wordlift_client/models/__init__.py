@@ -2,9 +2,9 @@
 
 # flake8: noqa
 """
-    Summarizer
+    GraphQL support
 
-    Generic text summarization
+    GraphQL endpoint to query Knowledge Graphs
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -63,6 +63,8 @@ from wordlift_client.models.image import Image
 from wordlift_client.models.include_exclude import IncludeExclude
 from wordlift_client.models.include_exclude_request import IncludeExcludeRequest
 from wordlift_client.models.inspect_response import InspectResponse
+from wordlift_client.models.internal_link_request import InternalLinkRequest
+from wordlift_client.models.item import Item
 from wordlift_client.models.kg_embedding_request import KgEmbeddingRequest
 from wordlift_client.models.level_enum import LevelEnum
 from wordlift_client.models.longtail_response import LongtailResponse

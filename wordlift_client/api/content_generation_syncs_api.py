@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    Summarizer
+    GraphQL support
 
-    Generic text summarization
+    GraphQL endpoint to query Knowledge Graphs
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -39,7 +39,7 @@ class ContentGenerationSyncsApi:
 
 
     @validate_call
-    async def create_sync(
+    async def create_sync1(
         self,
         content_generation_id: Annotated[StrictInt, Field(description="The Content Generation id.")],
         _request_timeout: Union[
@@ -82,7 +82,7 @@ class ContentGenerationSyncsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_sync_serialize(
+        _param = self._create_sync1_serialize(
             content_generation_id=content_generation_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -106,7 +106,7 @@ class ContentGenerationSyncsApi:
 
 
     @validate_call
-    async def create_sync_with_http_info(
+    async def create_sync1_with_http_info(
         self,
         content_generation_id: Annotated[StrictInt, Field(description="The Content Generation id.")],
         _request_timeout: Union[
@@ -149,7 +149,7 @@ class ContentGenerationSyncsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_sync_serialize(
+        _param = self._create_sync1_serialize(
             content_generation_id=content_generation_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -173,7 +173,7 @@ class ContentGenerationSyncsApi:
 
 
     @validate_call
-    async def create_sync_without_preload_content(
+    async def create_sync1_without_preload_content(
         self,
         content_generation_id: Annotated[StrictInt, Field(description="The Content Generation id.")],
         _request_timeout: Union[
@@ -216,7 +216,7 @@ class ContentGenerationSyncsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_sync_serialize(
+        _param = self._create_sync1_serialize(
             content_generation_id=content_generation_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -235,7 +235,7 @@ class ContentGenerationSyncsApi:
         return response_data.response
 
 
-    def _create_sync_serialize(
+    def _create_sync1_serialize(
         self,
         content_generation_id,
         _request_auth,

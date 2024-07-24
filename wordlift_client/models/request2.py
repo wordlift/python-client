@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    Summarizer
+    GraphQL support
 
-    Generic text summarization
+    GraphQL endpoint to query Knowledge Graphs
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -25,10 +25,12 @@ from typing_extensions import Self
 
 class Request2(BaseModel):
     """
-    Request2
+    The Event request
     """ # noqa: E501
-    redeem_code: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["redeem_code"]
+    source: Optional[StrictStr] = None
+    args: Optional[Dict[str, Any]] = None
+    url: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["source", "args", "url"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,7 +83,9 @@ class Request2(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "redeem_code": obj.get("redeem_code")
+            "source": obj.get("source"),
+            "args": obj.get("args"),
+            "url": obj.get("url")
         })
         return _obj
 

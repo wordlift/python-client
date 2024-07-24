@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    Summarizer
+    GraphQL support
 
-    Generic text summarization
+    GraphQL endpoint to query Knowledge Graphs
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -18,8 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,11 +27,8 @@ class Request1(BaseModel):
     """
     Request1
     """ # noqa: E501
-    completion: Optional[StrictStr] = None
-    has_upvote: StrictBool = Field(description="This indicates whether the user upvoted the completion.")
-    is_accepted: StrictBool = Field(description="This indicates whether the completion is accepted by the user.")
-    validated_at: Optional[datetime] = Field(default=None, description="Validation time of the record - null to revalidate.")
-    __properties: ClassVar[List[str]] = ["completion", "has_upvote", "is_accepted", "validated_at"]
+    redeem_code: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["redeem_code"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,10 +81,7 @@ class Request1(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "completion": obj.get("completion"),
-            "has_upvote": obj.get("has_upvote"),
-            "is_accepted": obj.get("is_accepted"),
-            "validated_at": obj.get("validated_at")
+            "redeem_code": obj.get("redeem_code")
         })
         return _obj
 
