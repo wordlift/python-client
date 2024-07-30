@@ -3175,6 +3175,15 @@ components:
           additionalProperties:
             type: object
             description: A nodes extra metadata.
+            oneOf:
+            - type: string
+            - type: integer
+              format: int64
+            - type: number
+              format: double
+            - type: number
+              format: float
+            - type: boolean
           description: A nodes extra metadata.
         node_id:
           type: string
