@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.29.0"
+__version__ = "1.30.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -209,6 +209,7 @@ from wordlift_client.models.validation_result import ValidationResult
 from wordlift_client.models.validation_type_enum import ValidationTypeEnum
 from wordlift_client.models.vector_search_query_request import VectorSearchQueryRequest
 from wordlift_client.models.vector_search_query_response_item import VectorSearchQueryResponseItem
+from wordlift_client.models.vector_search_query_response_item_metadata_value import VectorSearchQueryResponseItemMetadataValue
 from wordlift_client.models.vector_search_question_request import VectorSearchQuestionRequest
 from wordlift_client.models.vector_search_question_response_item import VectorSearchQuestionResponseItem
 from wordlift_client.models.web_async import WebAsync
