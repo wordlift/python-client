@@ -3161,6 +3161,15 @@ components:
               description: Map of extra retrieved fields. The values of the requested
                 fields are always returned in an array.If no value is found an empty
                 array is returned.
+              oneOf:
+              - type: string
+              - type: integer
+                format: int64
+              - type: number
+                format: double
+              - type: number
+                format: float
+              - type: boolean
           description: Map of extra retrieved fields. The values of the requested
             fields are always returned in an array.If no value is found an empty array
             is returned.
