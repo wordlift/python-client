@@ -89,6 +89,7 @@ jobs:
         with:
           name: python-package
           path: |
+            test/
             wordlift_client/
             requirements.pinned.txt
           retention-days: 1
