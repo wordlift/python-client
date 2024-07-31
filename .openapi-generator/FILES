@@ -203,7 +203,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_vector_search_query_response_item_fields_value_inner.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
