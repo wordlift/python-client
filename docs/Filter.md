@@ -6,9 +6,10 @@ A query request filter.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key** | **str** | The filter key. | 
+**filters** | [**List[Filter]**](Filter.md) | Operational filters such as AND or OR. | [optional] 
+**key** | **str** | The filter key. Key is required for the filters [EQ, NE, GT, LT, GTE, LTE, IN, NIN] | [optional] 
 **operator** | **str** | A query request filter operator. | 
-**value** | [**FilterValue**](FilterValue.md) |  | 
+**value** | [**FilterValue**](FilterValue.md) |  | [optional] 
 
 ## Example
 

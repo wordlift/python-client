@@ -3,9 +3,9 @@
 # flake8: noqa
 
 """
-    Middleware
+    GraphQL support
 
-    Knowledge Graph data management.
+    GraphQL endpoint to query Knowledge Graphs
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.10.0"
+__version__ = "1.31.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -53,6 +53,7 @@ from wordlift_client.api.google_search_console_searches_api import GoogleSearchC
 from wordlift_client.api.graph_ql_api import GraphQLApi
 from wordlift_client.api.include_excludes_word_press_plugin_api import IncludeExcludesWordPressPluginApi
 from wordlift_client.api.inspector_api import InspectorApi
+from wordlift_client.api.internal_links_api import InternalLinksApi
 from wordlift_client.api.long_tails_api import LongTailsApi
 from wordlift_client.api.merchant_syncs_api import MerchantSyncsApi
 from wordlift_client.api.merchants_api import MerchantsApi
@@ -135,6 +136,9 @@ from wordlift_client.models.image import Image
 from wordlift_client.models.include_exclude import IncludeExclude
 from wordlift_client.models.include_exclude_request import IncludeExcludeRequest
 from wordlift_client.models.inspect_response import InspectResponse
+from wordlift_client.models.internal_link_request import InternalLinkRequest
+from wordlift_client.models.item import Item
+from wordlift_client.models.kg_embedding_request import KgEmbeddingRequest
 from wordlift_client.models.level_enum import LevelEnum
 from wordlift_client.models.longtail_response import LongtailResponse
 from wordlift_client.models.merchant import Merchant
@@ -146,6 +150,7 @@ from wordlift_client.models.model import Model
 from wordlift_client.models.model_field import ModelField
 from wordlift_client.models.network_account_info import NetworkAccountInfo
 from wordlift_client.models.node_request import NodeRequest
+from wordlift_client.models.node_request_metadata_value import NodeRequestMetadataValue
 from wordlift_client.models.o_auth2_authorized_client import OAuth2AuthorizedClient
 from wordlift_client.models.o_auth2_authorized_client_request import OAuth2AuthorizedClientRequest
 from wordlift_client.models.page_active_account import PageActiveAccount
@@ -204,6 +209,8 @@ from wordlift_client.models.validation_result import ValidationResult
 from wordlift_client.models.validation_type_enum import ValidationTypeEnum
 from wordlift_client.models.vector_search_query_request import VectorSearchQueryRequest
 from wordlift_client.models.vector_search_query_response_item import VectorSearchQueryResponseItem
+from wordlift_client.models.vector_search_query_response_item_fields_value_inner import VectorSearchQueryResponseItemFieldsValueInner
+from wordlift_client.models.vector_search_query_response_item_metadata_value import VectorSearchQueryResponseItemMetadataValue
 from wordlift_client.models.vector_search_question_request import VectorSearchQuestionRequest
 from wordlift_client.models.vector_search_question_response_item import VectorSearchQuestionResponseItem
 from wordlift_client.models.web_async import WebAsync

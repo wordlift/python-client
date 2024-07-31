@@ -36,6 +36,7 @@ from wordlift_client.api.google_search_console_searches_api import GoogleSearchC
 from wordlift_client.api.graph_ql_api import GraphQLApi
 from wordlift_client.api.include_excludes_word_press_plugin_api import IncludeExcludesWordPressPluginApi
 from wordlift_client.api.inspector_api import InspectorApi
+from wordlift_client.api.internal_links_api import InternalLinksApi
 from wordlift_client.api.long_tails_api import LongTailsApi
 from wordlift_client.api.merchant_syncs_api import MerchantSyncsApi
 from wordlift_client.api.merchants_api import MerchantsApi

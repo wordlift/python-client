@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    Middleware
+    GraphQL support
 
-    Knowledge Graph data management.
+    GraphQL endpoint to query Knowledge Graphs
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -25,12 +25,10 @@ from typing_extensions import Self
 
 class Request1(BaseModel):
     """
-    The Event request
+    Request1
     """ # noqa: E501
-    source: Optional[StrictStr] = None
-    args: Optional[Dict[str, Any]] = None
-    url: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["source", "args", "url"]
+    redeem_code: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["redeem_code"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,9 +81,7 @@ class Request1(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "source": obj.get("source"),
-            "args": obj.get("args"),
-            "url": obj.get("url")
+            "redeem_code": obj.get("redeem_code")
         })
         return _obj
 

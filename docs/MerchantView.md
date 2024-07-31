@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **sync_started_at** | **datetime** | The started date-time. | [optional] [readonly] 
 **sync_stopped_at** | **datetime** | The stopped date-time. | [optional] [readonly] 
 **url** | **str** | The website URL | [optional] 
+**url_strategy** | **str** | Which strategy to use to write the url schema. | [optional] [default to 'canonicalLinkAndLink']
 **writer_service** | **str** | How to write the merchant data to the graph, if unsure, do not set anything (by default &#x60;wordpressMerchantWriter&#x60;). | [optional] 
 
 ## Example

@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **create_embedding**
-> List[Dict[str, str]] create_embedding(embedding_request)
+> List[Dict[str, str]] create_embedding(kg_embedding_request)
 
 Create
 
@@ -20,7 +20,7 @@ Create the embedding for the IRIs for the provided query.
 
 ```python
 import wordlift_client
-from wordlift_client.models.embedding_request import EmbeddingRequest
+from wordlift_client.models.kg_embedding_request import KgEmbeddingRequest
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -45,11 +45,11 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.EmbeddingApi(api_client)
-    embedding_request = wordlift_client.EmbeddingRequest() # EmbeddingRequest | 
+    kg_embedding_request = wordlift_client.KgEmbeddingRequest() # KgEmbeddingRequest | 
 
     try:
         # Create
-        api_response = await api_instance.create_embedding(embedding_request)
+        api_response = await api_instance.create_embedding(kg_embedding_request)
         print("The response of EmbeddingApi->create_embedding:\n")
         pprint(api_response)
     except Exception as e:
@@ -63,7 +63,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **embedding_request** | [**EmbeddingRequest**](EmbeddingRequest.md)|  | 
+ **kg_embedding_request** | [**KgEmbeddingRequest**](KgEmbeddingRequest.md)|  | 
 
 ### Return type
 

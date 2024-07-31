@@ -1,12 +1,13 @@
 # EmbeddingRequest
 
+A request to generate the embeddings.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**graphql_query** | **str** |  | [optional] 
-**properties** | **List[str]** |  | [optional] 
+**model** | **str** | The model used to generate the embeddings. | [optional] [default to 'nomic-ai/nomic-embed-text-v1']
+**properties** | **List[str]** | The list of properties to use to generate the embeddings. | [optional] 
 
 ## Example
 

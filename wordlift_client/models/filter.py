@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    Middleware
+    GraphQL support
 
-    Knowledge Graph data management.
+    GraphQL endpoint to query Knowledge Graphs
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.filter_value import FilterValue
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,16 +28,17 @@ class Filter(BaseModel):
     """
     A query request filter.
     """ # noqa: E501
-    key: StrictStr = Field(description="The filter key.")
+    filters: Optional[List[Filter]] = Field(default=None, description="Operational filters such as AND or OR.")
+    key: Optional[StrictStr] = Field(default=None, description="The filter key. Key is required for the filters [EQ, NE, GT, LT, GTE, LTE, IN, NIN]")
     operator: StrictStr = Field(description="A query request filter operator.")
-    value: FilterValue
-    __properties: ClassVar[List[str]] = ["key", "operator", "value"]
+    value: Optional[FilterValue] = None
+    __properties: ClassVar[List[str]] = ["filters", "key", "operator", "value"]
 
     @field_validator('operator')
     def operator_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['EQ', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'IN', 'NIN']):
-            raise ValueError("must be one of enum values ('EQ', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'IN', 'NIN')")
+        if value not in set(['EQ', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'IN', 'NIN', 'AND', 'OR']):
+            raise ValueError("must be one of enum values ('EQ', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'IN', 'NIN', 'AND', 'OR')")
         return value
 
     model_config = ConfigDict(
@@ -79,6 +80,13 @@ class Filter(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in filters (list)
+        _items = []
+        if self.filters:
+            for _item in self.filters:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['filters'] = _items
         # override the default output from pydantic by calling `to_dict()` of value
         if self.value:
             _dict['value'] = self.value.to_dict()
@@ -94,10 +102,13 @@ class Filter(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "filters": [Filter.from_dict(_item) for _item in obj["filters"]] if obj.get("filters") is not None else None,
             "key": obj.get("key"),
             "operator": obj.get("operator"),
             "value": FilterValue.from_dict(obj["value"]) if obj.get("value") is not None else None
         })
         return _obj
 
+# TODO: Rewrite to not use raise_errors
+Filter.model_rebuild(raise_errors=False)
 

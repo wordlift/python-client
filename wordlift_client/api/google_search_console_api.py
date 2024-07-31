@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    Middleware
+    GraphQL support
 
-    Knowledge Graph data management.
+    GraphQL endpoint to query Knowledge Graphs
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -386,6 +386,7 @@ class GoogleSearchConsoleApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'ApiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -665,6 +666,7 @@ class GoogleSearchConsoleApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'ApiKey'
         ]
 
         return self.api_client.param_serialize(

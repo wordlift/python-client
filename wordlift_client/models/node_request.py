@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    Middleware
+    GraphQL support
 
-    Knowledge Graph data management.
+    GraphQL endpoint to query Knowledge Graphs
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from wordlift_client.models.node_request_metadata_value import NodeRequestMetadataValue
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +30,7 @@ class NodeRequest(BaseModel):
     """ # noqa: E501
     embeddings: Optional[List[Union[StrictFloat, StrictInt]]] = Field(default=None, description="A list of embeddings.")
     entity_id: StrictStr = Field(description="The entity id in the form on an IRI, e.g. https://data.example.org/dataset/entity.")
-    metadata: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="A map of metadata properties.")
+    metadata: Optional[Dict[str, NodeRequestMetadataValue]] = Field(default=None, description="A map of metadata properties.")
     node_id: StrictStr = Field(description="The node id generally expressed in the form of a UUID.")
     text: Optional[StrictStr] = Field(default=None, description="The original text.")
     __properties: ClassVar[List[str]] = ["embeddings", "entity_id", "metadata", "node_id", "text"]
@@ -73,6 +74,13 @@ class NodeRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
+        _field_dict = {}
+        if self.metadata:
+            for _key in self.metadata:
+                if self.metadata[_key]:
+                    _field_dict[_key] = self.metadata[_key].to_dict()
+            _dict['metadata'] = _field_dict
         return _dict
 
     @classmethod
@@ -87,7 +95,12 @@ class NodeRequest(BaseModel):
         _obj = cls.model_validate({
             "embeddings": obj.get("embeddings"),
             "entity_id": obj.get("entity_id"),
-            "metadata": obj.get("metadata"),
+            "metadata": dict(
+                (_k, NodeRequestMetadataValue.from_dict(_v))
+                for _k, _v in obj["metadata"].items()
+            )
+            if obj.get("metadata") is not None
+            else None,
             "node_id": obj.get("node_id"),
             "text": obj.get("text")
         })

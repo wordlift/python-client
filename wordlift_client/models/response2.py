@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    Middleware
+    GraphQL support
 
-    Knowledge Graph data management.
+    GraphQL endpoint to query Knowledge Graphs
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -20,24 +20,21 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from wordlift_client.models.annotation import Annotation
-from wordlift_client.models.entity1 import Entity1
-from wordlift_client.models.image import Image
-from wordlift_client.models.topic import Topic
+from wordlift_client.models.event import Event
 from typing import Optional, Set
 from typing_extensions import Self
 
 class Response2(BaseModel):
     """
-    Response
+    Response2
     """ # noqa: E501
-    entities: Optional[Dict[str, Entity1]] = Field(default=None, description="A map of entity URI to the respective entity.")
-    annotations: Optional[Dict[str, Annotation]] = Field(default=None, description="A map of annotation id to the respective annotation.")
-    images: Optional[List[Image]] = Field(default=None, description="A list of images.")
-    languages: Optional[List[StrictStr]] = Field(default=None, description="A list of languages.")
-    topics: Optional[List[Topic]] = Field(default=None, description="A list of topics.")
-    content: Optional[StrictStr] = Field(default=None, description="The text supplied for analysis.")
-    __properties: ClassVar[List[str]] = ["entities", "annotations", "images", "languages", "topics", "content"]
+    items: Optional[List[Event]] = None
+    var_self: Optional[StrictStr] = Field(default=None, alias="self")
+    next: Optional[StrictStr] = None
+    prev: Optional[StrictStr] = None
+    last: Optional[StrictStr] = None
+    first: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["items", "self", "next", "prev", "last", "first"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,34 +75,13 @@ class Response2(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each value in entities (dict)
-        _field_dict = {}
-        if self.entities:
-            for _key in self.entities:
-                if self.entities[_key]:
-                    _field_dict[_key] = self.entities[_key].to_dict()
-            _dict['entities'] = _field_dict
-        # override the default output from pydantic by calling `to_dict()` of each value in annotations (dict)
-        _field_dict = {}
-        if self.annotations:
-            for _key in self.annotations:
-                if self.annotations[_key]:
-                    _field_dict[_key] = self.annotations[_key].to_dict()
-            _dict['annotations'] = _field_dict
-        # override the default output from pydantic by calling `to_dict()` of each item in images (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in items (list)
         _items = []
-        if self.images:
-            for _item in self.images:
+        if self.items:
+            for _item in self.items:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['images'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in topics (list)
-        _items = []
-        if self.topics:
-            for _item in self.topics:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['topics'] = _items
+            _dict['items'] = _items
         return _dict
 
     @classmethod
@@ -118,22 +94,12 @@ class Response2(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "entities": dict(
-                (_k, Entity1.from_dict(_v))
-                for _k, _v in obj["entities"].items()
-            )
-            if obj.get("entities") is not None
-            else None,
-            "annotations": dict(
-                (_k, Annotation.from_dict(_v))
-                for _k, _v in obj["annotations"].items()
-            )
-            if obj.get("annotations") is not None
-            else None,
-            "images": [Image.from_dict(_item) for _item in obj["images"]] if obj.get("images") is not None else None,
-            "languages": obj.get("languages"),
-            "topics": [Topic.from_dict(_item) for _item in obj["topics"]] if obj.get("topics") is not None else None,
-            "content": obj.get("content")
+            "items": [Event.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
+            "self": obj.get("self"),
+            "next": obj.get("next"),
+            "prev": obj.get("prev"),
+            "last": obj.get("last"),
+            "first": obj.get("first")
         })
         return _obj
 

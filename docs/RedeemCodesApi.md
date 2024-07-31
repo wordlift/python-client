@@ -8,17 +8,18 @@ Method | HTTP request | Description
 
 
 # **redeem_code**
-> Response redeem_code(request)
+> Response1 redeem_code(request1)
 
 Redeem the provided code and get a key
 
 ### Example
 
+* Api Key Authentication (ApiKey):
 
 ```python
 import wordlift_client
-from wordlift_client.models.request import Request
-from wordlift_client.models.response import Response
+from wordlift_client.models.request1 import Request1
+from wordlift_client.models.response1 import Response1
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -28,16 +29,26 @@ configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.RedeemCodesApi(api_client)
-    request = wordlift_client.Request() # Request | 
+    request1 = wordlift_client.Request1() # Request1 | 
 
     try:
         # Redeem the provided code and get a key
-        api_response = await api_instance.redeem_code(request)
+        api_response = await api_instance.redeem_code(request1)
         print("The response of RedeemCodesApi->redeem_code:\n")
         pprint(api_response)
     except Exception as e:
@@ -51,15 +62,15 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request** | [**Request**](Request.md)|  | 
+ **request1** | [**Request1**](Request1.md)|  | 
 
 ### Return type
 
-[**Response**](Response.md)
+[**Response1**](Response1.md)
 
 ### Authorization
 
-No authorization required
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 

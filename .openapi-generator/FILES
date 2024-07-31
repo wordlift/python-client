@@ -85,6 +85,10 @@ docs/IncludeExcludeRequest.md
 docs/IncludeExcludesWordPressPluginApi.md
 docs/InspectResponse.md
 docs/InspectorApi.md
+docs/InternalLinkRequest.md
+docs/InternalLinksApi.md
+docs/Item.md
+docs/KgEmbeddingRequest.md
 docs/LevelEnum.md
 docs/LongTailsApi.md
 docs/LongtailResponse.md
@@ -100,6 +104,7 @@ docs/Model.md
 docs/ModelField.md
 docs/NetworkAccountInfo.md
 docs/NodeRequest.md
+docs/NodeRequestMetadataValue.md
 docs/OAuth2AuthorizedClient.md
 docs/OAuth2AuthorizedClientRequest.md
 docs/OAuth2AuthorizedClientsApi.md
@@ -172,6 +177,8 @@ docs/VectorSearchNodesApi.md
 docs/VectorSearchQueriesApi.md
 docs/VectorSearchQueryRequest.md
 docs/VectorSearchQueryResponseItem.md
+docs/VectorSearchQueryResponseItemFieldsValueInner.md
+docs/VectorSearchQueryResponseItemMetadataValue.md
 docs/VectorSearchQuestionRequest.md
 docs/VectorSearchQuestionResponseItem.md
 docs/VectorSearchQuestionsApi.md
@@ -196,6 +203,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_vector_search_query_response_item_fields_value_inner.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -234,6 +242,7 @@ wordlift_client/api/google_search_console_searches_api.py
 wordlift_client/api/graph_ql_api.py
 wordlift_client/api/include_excludes_word_press_plugin_api.py
 wordlift_client/api/inspector_api.py
+wordlift_client/api/internal_links_api.py
 wordlift_client/api/long_tails_api.py
 wordlift_client/api/merchant_syncs_api.py
 wordlift_client/api/merchants_api.py
@@ -308,6 +317,9 @@ wordlift_client/models/image.py
 wordlift_client/models/include_exclude.py
 wordlift_client/models/include_exclude_request.py
 wordlift_client/models/inspect_response.py
+wordlift_client/models/internal_link_request.py
+wordlift_client/models/item.py
+wordlift_client/models/kg_embedding_request.py
 wordlift_client/models/level_enum.py
 wordlift_client/models/longtail_response.py
 wordlift_client/models/merchant.py
@@ -319,6 +331,7 @@ wordlift_client/models/model.py
 wordlift_client/models/model_field.py
 wordlift_client/models/network_account_info.py
 wordlift_client/models/node_request.py
+wordlift_client/models/node_request_metadata_value.py
 wordlift_client/models/o_auth2_authorized_client.py
 wordlift_client/models/o_auth2_authorized_client_request.py
 wordlift_client/models/page_active_account.py
@@ -377,6 +390,8 @@ wordlift_client/models/validation_result.py
 wordlift_client/models/validation_type_enum.py
 wordlift_client/models/vector_search_query_request.py
 wordlift_client/models/vector_search_query_response_item.py
+wordlift_client/models/vector_search_query_response_item_fields_value_inner.py
+wordlift_client/models/vector_search_query_response_item_metadata_value.py
 wordlift_client/models/vector_search_question_request.py
 wordlift_client/models/vector_search_question_response_item.py
 wordlift_client/models/web_async.py
