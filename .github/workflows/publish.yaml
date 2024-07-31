@@ -60,7 +60,9 @@ jobs:
         run: npx @openapitools/openapi-generator-cli generate -i ./wordliftApiSpec.yaml -g python -c config.json --package-name 'wordlift_client' --library 'asyncio'
 
       - name: Patch generated files
-        run: git apply -p1 .patches/1-add-str.patch
+        run: |
+          git apply -p1 .patches/1-add-str.patch
+          cp -f requirements.pinned.txt requirements.txt
 
       # Step 3: Get version from setup
       - name: Get version from setup.py
