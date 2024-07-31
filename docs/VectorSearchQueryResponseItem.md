@@ -6,7 +6,7 @@ An array of objects.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**fields** | **Dict[str, List[object]]** | Map of extra retrieved fields. The values of the requested fields are always returned in an array.If no value is found an empty array is returned. | [optional] 
+**fields** | **Dict[str, List[VectorSearchQueryResponseItemFieldsValueInner]]** | Map of extra retrieved fields. The values of the requested fields are always returned in an array.If no value is found an empty array is returned. | [optional] 
 **id** | **str** |  | [optional] 
 **iri** | **str** | The IRI of the entity that this node belongs to. | 
 **metadata** | [**Dict[str, VectorSearchQueryResponseItemMetadataValue]**](VectorSearchQueryResponseItemMetadataValue.md) | A nodes extra metadata. | [optional] 

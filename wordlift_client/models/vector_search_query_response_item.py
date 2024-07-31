@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from wordlift_client.models.vector_search_query_response_item_fields_value_inner import VectorSearchQueryResponseItemFieldsValueInner
 from wordlift_client.models.vector_search_query_response_item_metadata_value import VectorSearchQueryResponseItemMetadataValue
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +29,7 @@ class VectorSearchQueryResponseItem(BaseModel):
     """
     An array of objects.
     """ # noqa: E501
-    fields: Optional[Dict[str, List[Dict[str, Any]]]] = Field(default=None, description="Map of extra retrieved fields. The values of the requested fields are always returned in an array.If no value is found an empty array is returned.")
+    fields: Optional[Dict[str, List[VectorSearchQueryResponseItemFieldsValueInner]]] = Field(default=None, description="Map of extra retrieved fields. The values of the requested fields are always returned in an array.If no value is found an empty array is returned.")
     id: Optional[StrictStr] = None
     iri: StrictStr = Field(description="The IRI of the entity that this node belongs to.")
     metadata: Optional[Dict[str, VectorSearchQueryResponseItemMetadataValue]] = Field(default=None, description="A nodes extra metadata.")
@@ -76,6 +77,15 @@ class VectorSearchQueryResponseItem(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each value in fields (dict of array)
+        _field_dict_of_array = {}
+        if self.fields:
+            for _key in self.fields:
+                if self.fields[_key] is not None:
+                    _field_dict_of_array[_key] = [
+                        _item.to_dict() for _item in self.fields[_key]
+                    ]
+            _dict['fields'] = _field_dict_of_array
         # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
         _field_dict = {}
         if self.metadata:
@@ -95,7 +105,14 @@ class VectorSearchQueryResponseItem(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "fields": obj.get("fields"),
+            "fields": dict(
+                (_k,
+                        [VectorSearchQueryResponseItemFieldsValueInner.from_dict(_item) for _item in _v]
+                        if _v is not None
+                        else None
+                )
+                for _k, _v in obj.get("fields", {}).items()
+            ),
             "id": obj.get("id"),
             "iri": obj.get("iri"),
             "metadata": dict(

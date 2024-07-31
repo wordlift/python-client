@@ -177,6 +177,7 @@ docs/VectorSearchNodesApi.md
 docs/VectorSearchQueriesApi.md
 docs/VectorSearchQueryRequest.md
 docs/VectorSearchQueryResponseItem.md
+docs/VectorSearchQueryResponseItemFieldsValueInner.md
 docs/VectorSearchQueryResponseItemMetadataValue.md
 docs/VectorSearchQuestionRequest.md
 docs/VectorSearchQuestionResponseItem.md
@@ -202,7 +203,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_vector_search_query_response_item_metadata_value.py
+test/test_vector_search_query_response_item_fields_value_inner.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -389,6 +390,7 @@ wordlift_client/models/validation_result.py
 wordlift_client/models/validation_type_enum.py
 wordlift_client/models/vector_search_query_request.py
 wordlift_client/models/vector_search_query_response_item.py
+wordlift_client/models/vector_search_query_response_item_fields_value_inner.py
 wordlift_client/models/vector_search_query_response_item_metadata_value.py
 wordlift_client/models/vector_search_question_request.py
 wordlift_client/models/vector_search_question_response_item.py
