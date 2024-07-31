@@ -88,7 +88,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: python-package
-          path: ./wordlift_client
+          path: |
+            wordlift_client/
+            requirements.pinned.txt
           retention-days: 1
 
       # Step 11: Build the binary
@@ -108,7 +110,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: [ "3.7", "3.8", "3.9", "3.10", "3.11", "3.12" ]
 
     steps:
       # Step 1: Download the package
@@ -116,7 +118,9 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: python-package
-          path: ./wordlift_client
+          path: |
+            wordlift_client/
+            requirements.pinned.txt
 
       # Step 2: Set up Python
       - name: Set up Python ${{ matrix.python-version }}
