@@ -1757,6 +1757,20 @@ components:
             type: string
             description: An array of URLs.
           uniqueItems: true
+    AnchorText:
+      type: object
+      properties:
+        actual_prompt_template:
+          type: string
+        enabled:
+          type: boolean
+        max_characters:
+          type: integer
+          format: int32
+        model:
+          type: string
+        prompt_template:
+          type: string
     BotifyCrawlImportRequest:
       type: object
       description: The Botify Crawl Import request
@@ -2012,6 +2026,8 @@ components:
     InternalLinkRequest:
       type: object
       properties:
+        anchor_text:
+          $ref: '#/components/schemas/AnchorText'
         items:
           type: array
           items:
