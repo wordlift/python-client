@@ -1,15 +1,15 @@
 # wordlift_client.WebAsyncsMetadataApi
 
-All URIs are relative to *https://api.wordlift.io*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get3**](WebAsyncsMetadataApi.md#get3) | **GET** /webasyncs/{id} | Get by id
+[**get**](WebAsyncsMetadataApi.md#get) | **GET** /webasyncs/{id} | Get by id
 [**list**](WebAsyncsMetadataApi.md#list) | **GET** /webasyncs | List
 
 
-# **get3**
-> WebAsync get3(id)
+# **get**
+> WebAsync get(id)
 
 Get by id
 
@@ -25,10 +25,10 @@ from wordlift_client.models.web_async import WebAsync
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -50,11 +50,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Get by id
-        api_response = await api_instance.get3(id)
-        print("The response of WebAsyncsMetadataApi->get3:\n")
+        api_response = await api_instance.get(id)
+        print("The response of WebAsyncsMetadataApi->get:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WebAsyncsMetadataApi->get3: %s\n" % e)
+        print("Exception when calling WebAsyncsMetadataApi->get: %s\n" % e)
 ```
 
 
@@ -106,10 +106,10 @@ from wordlift_client.models.web_async import WebAsync
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters

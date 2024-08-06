@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **str** |  | [optional] 
 **query** | [**VectorSearchQueryRequest**](VectorSearchQueryRequest.md) |  | 
 **source_name** | **str** |  | 
 
