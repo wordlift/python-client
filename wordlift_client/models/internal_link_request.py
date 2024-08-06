@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.anchor_text import AnchorText
 from wordlift_client.models.item import Item
@@ -26,11 +26,11 @@ from typing_extensions import Self
 
 class InternalLinkRequest(BaseModel):
     """
-    InternalLinkRequest
+    An Internal Links request.
     """ # noqa: E501
     anchor_text: Optional[AnchorText] = None
-    items: Optional[List[Item]] = None
-    template: Optional[StrictStr] = None
+    items: List[Item] = Field(description="An array of items.")
+    template: Optional[StrictStr] = Field(default=None, description="The output template, not required, we provide a default JSON-LD template")
     __properties: ClassVar[List[str]] = ["anchor_text", "items", "template"]
 
     model_config = ConfigDict(

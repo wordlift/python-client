@@ -1,13 +1,14 @@
 # Item
 
+An Internal Link request item.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] 
+**id** | **str** | The entity id, reused in the output template. | [optional] 
 **query** | [**VectorSearchQueryRequest**](VectorSearchQueryRequest.md) |  | 
-**source_name** | **str** |  | 
+**source_name** | **str** | The webpage name, reused in the output template. | [optional] 
 
 ## Example
 

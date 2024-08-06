@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.vector_search_query_request import VectorSearchQueryRequest
 from typing import Optional, Set
@@ -25,11 +25,11 @@ from typing_extensions import Self
 
 class Item(BaseModel):
     """
-    Item
+    An Internal Link request item.
     """ # noqa: E501
-    id: Optional[StrictStr] = None
+    id: Optional[StrictStr] = Field(default=None, description="The entity id, reused in the output template.")
     query: VectorSearchQueryRequest
-    source_name: StrictStr
+    source_name: Optional[StrictStr] = Field(default=None, description="The webpage name, reused in the output template.")
     __properties: ClassVar[List[str]] = ["id", "query", "source_name"]
 
     model_config = ConfigDict(

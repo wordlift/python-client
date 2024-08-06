@@ -17,20 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class AnchorText(BaseModel):
     """
-    AnchorText
+    The Anchor Text request.
     """ # noqa: E501
     actual_prompt_template: Optional[StrictStr] = None
-    enabled: Optional[StrictBool] = None
-    max_characters: Optional[StrictInt] = None
-    model: Optional[StrictStr] = None
-    prompt_template: Optional[StrictStr] = None
+    enabled: Optional[StrictBool] = Field(default=False, description="Whether to enable Anchor Text, by default false.")
+    max_characters: Optional[StrictInt] = Field(default=15, description="The maximum anchor text length, by default 15 characters.")
+    model: Optional[StrictStr] = Field(default='gpt-4', description="The model to use.")
+    prompt_template: Optional[StrictStr] = Field(default=None, description="The prompt template, we provide a default. Liquid template language is supported.")
     __properties: ClassVar[List[str]] = ["actual_prompt_template", "enabled", "max_characters", "model", "prompt_template"]
 
     model_config = ConfigDict(
@@ -85,9 +85,9 @@ class AnchorText(BaseModel):
 
         _obj = cls.model_validate({
             "actual_prompt_template": obj.get("actual_prompt_template"),
-            "enabled": obj.get("enabled"),
-            "max_characters": obj.get("max_characters"),
-            "model": obj.get("model"),
+            "enabled": obj.get("enabled") if obj.get("enabled") is not None else False,
+            "max_characters": obj.get("max_characters") if obj.get("max_characters") is not None else 15,
+            "model": obj.get("model") if obj.get("model") is not None else 'gpt-4',
             "prompt_template": obj.get("prompt_template")
         })
         return _obj

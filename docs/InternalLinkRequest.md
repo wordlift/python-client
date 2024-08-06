@@ -1,13 +1,14 @@
 # InternalLinkRequest
 
+An Internal Links request.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **anchor_text** | [**AnchorText**](AnchorText.md) |  | [optional] 
-**items** | [**List[Item]**](Item.md) |  | [optional] 
-**template** | **str** |  | [optional] 
+**items** | [**List[Item]**](Item.md) | An array of items. | 
+**template** | **str** | The output template, not required, we provide a default JSON-LD template | [optional] 
 
 ## Example
 
