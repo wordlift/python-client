@@ -2,9 +2,9 @@
 
 # flake8: noqa
 """
-    GraphQL support
+    Manager
 
-    GraphQL endpoint to query Knowledge Graphs
+    Subscription management and related services.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -24,6 +24,7 @@ from wordlift_client.models.analyses_request import AnalysesRequest
 from wordlift_client.models.analyses_response import AnalysesResponse
 from wordlift_client.models.analyses_response_item import AnalysesResponseItem
 from wordlift_client.models.analytics_import_request import AnalyticsImportRequest
+from wordlift_client.models.anchor_text import AnchorText
 from wordlift_client.models.annotation import Annotation
 from wordlift_client.models.autocomplete_result import AutocompleteResult
 from wordlift_client.models.batch_request import BatchRequest

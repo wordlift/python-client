@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    GraphQL support
+    Manager
 
-    GraphQL endpoint to query Knowledge Graphs
+    Subscription management and related services.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -75,6 +75,22 @@ conf = wordlift_client.Configuration(
 
     The following cookie will be added to the HTTP request:
        Cookie: JSESSIONID abc123
+
+    HTTP Basic Authentication Example.
+    Given the following security scheme in the OpenAPI specification:
+      components:
+        securitySchemes:
+          http_basic_auth:
+            type: http
+            scheme: basic
+
+    Configure API client with HTTP basic authentication:
+
+conf = wordlift_client.Configuration(
+    username='the-user',
+    password='the-password',
+)
+
     """
 
     _default = None
@@ -385,6 +401,20 @@ conf = wordlift_client.Configuration(
                     'ApiKey',
                 ),
             }
+        if self.username is not None and self.password is not None:
+            auth['BasicAuth'] = {
+                'type': 'basic',
+                'in': 'header',
+                'key': 'Authorization',
+                'value': self.get_basic_auth_token()
+            }
+        if self.access_token is not None:
+            auth['OAuth2'] = {
+                'type': 'oauth2',
+                'in': 'header',
+                'key': 'Authorization',
+                'value': 'Bearer ' + self.access_token
+            }
         return auth
 
     def to_debug_report(self):
@@ -396,7 +426,7 @@ conf = wordlift_client.Configuration(
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 1.0\n"\
-               "SDK Package Version: 1.42.0".\
+               "SDK Package Version: 1.43.0".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):

@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    GraphQL support
+    Manager
 
-    GraphQL endpoint to query Knowledge Graphs
+    Subscription management and related services.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io

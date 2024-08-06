@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **redeem_code**
-> Response1 redeem_code(request1)
+> Response redeem_code(request)
 
 Redeem the provided code and get a key
 
@@ -18,8 +18,8 @@ Redeem the provided code and get a key
 
 ```python
 import wordlift_client
-from wordlift_client.models.request1 import Request1
-from wordlift_client.models.response1 import Response1
+from wordlift_client.models.request import Request
+from wordlift_client.models.response import Response
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -44,11 +44,11 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.RedeemCodesApi(api_client)
-    request1 = wordlift_client.Request1() # Request1 | 
+    request = wordlift_client.Request() # Request | 
 
     try:
         # Redeem the provided code and get a key
-        api_response = await api_instance.redeem_code(request1)
+        api_response = await api_instance.redeem_code(request)
         print("The response of RedeemCodesApi->redeem_code:\n")
         pprint(api_response)
     except Exception as e:
@@ -62,11 +62,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request1** | [**Request1**](Request1.md)|  | 
+ **request** | [**Request**](Request.md)|  | 
 
 ### Return type
 
-[**Response1**](Response1.md)
+[**Response**](Response.md)
 
 ### Authorization
 

@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    GraphQL support
+    Manager
 
-    GraphQL endpoint to query Knowledge Graphs
+    Subscription management and related services.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -41,7 +41,7 @@ class InspectorApi:
 
 
     @validate_call
-    async def get1(
+    async def get2(
         self,
         u: Annotated[StrictStr, Field(description="The URL to inspect")],
         f: Annotated[StrictStr, Field(description="Filters to be applied on the result, if you want to apply multiple filters they should be separated by comma")],
@@ -91,7 +91,7 @@ class InspectorApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get1_serialize(
+        _param = self._get2_serialize(
             u=u,
             f=f,
             classes=classes,
@@ -118,7 +118,7 @@ class InspectorApi:
 
 
     @validate_call
-    async def get1_with_http_info(
+    async def get2_with_http_info(
         self,
         u: Annotated[StrictStr, Field(description="The URL to inspect")],
         f: Annotated[StrictStr, Field(description="Filters to be applied on the result, if you want to apply multiple filters they should be separated by comma")],
@@ -168,7 +168,7 @@ class InspectorApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get1_serialize(
+        _param = self._get2_serialize(
             u=u,
             f=f,
             classes=classes,
@@ -195,7 +195,7 @@ class InspectorApi:
 
 
     @validate_call
-    async def get1_without_preload_content(
+    async def get2_without_preload_content(
         self,
         u: Annotated[StrictStr, Field(description="The URL to inspect")],
         f: Annotated[StrictStr, Field(description="Filters to be applied on the result, if you want to apply multiple filters they should be separated by comma")],
@@ -245,7 +245,7 @@ class InspectorApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get1_serialize(
+        _param = self._get2_serialize(
             u=u,
             f=f,
             classes=classes,
@@ -267,7 +267,7 @@ class InspectorApi:
         return response_data.response
 
 
-    def _get1_serialize(
+    def _get2_serialize(
         self,
         u,
         f,

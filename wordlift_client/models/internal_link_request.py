@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    GraphQL support
+    Manager
 
-    GraphQL endpoint to query Knowledge Graphs
+    Subscription management and related services.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wordlift_client.models.anchor_text import AnchorText
 from wordlift_client.models.item import Item
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,9 +29,10 @@ class InternalLinkRequest(BaseModel):
     """
     InternalLinkRequest
     """ # noqa: E501
+    anchor_text: Optional[AnchorText] = None
     items: Optional[List[Item]] = None
     template: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["items", "template"]
+    __properties: ClassVar[List[str]] = ["anchor_text", "items", "template"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,6 +73,9 @@ class InternalLinkRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of anchor_text
+        if self.anchor_text:
+            _dict['anchor_text'] = self.anchor_text.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in items (list)
         _items = []
         if self.items:
@@ -90,6 +95,7 @@ class InternalLinkRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "anchor_text": AnchorText.from_dict(obj["anchor_text"]) if obj.get("anchor_text") is not None else None,
             "items": [Item.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
             "template": obj.get("template")
         })

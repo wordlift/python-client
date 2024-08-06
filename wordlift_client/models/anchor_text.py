@@ -18,19 +18,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class BatchRequest(BaseModel):
+class AnchorText(BaseModel):
     """
-    A request part of a batch.
+    AnchorText
     """ # noqa: E501
-    uri: StrictStr = Field(description="The entity URI.")
-    model: StrictStr
-    private: Optional[StrictBool] = Field(default=None, description="Whether the entity should be hidden from Linked Data and GraphQL.")
-    __properties: ClassVar[List[str]] = ["uri", "model", "private"]
+    actual_prompt_template: Optional[StrictStr] = None
+    enabled: Optional[StrictBool] = None
+    max_characters: Optional[StrictInt] = None
+    model: Optional[StrictStr] = None
+    prompt_template: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["actual_prompt_template", "enabled", "max_characters", "model", "prompt_template"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +52,7 @@ class BatchRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of BatchRequest from a JSON string"""
+        """Create an instance of AnchorText from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,7 +77,7 @@ class BatchRequest(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of BatchRequest from a dict"""
+        """Create an instance of AnchorText from a dict"""
         if obj is None:
             return None
 
@@ -83,9 +85,11 @@ class BatchRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "uri": obj.get("uri"),
+            "actual_prompt_template": obj.get("actual_prompt_template"),
+            "enabled": obj.get("enabled"),
+            "max_characters": obj.get("max_characters"),
             "model": obj.get("model"),
-            "private": obj.get("private")
+            "prompt_template": obj.get("prompt_template")
         })
         return _obj
 

@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**anchor_text** | [**AnchorText**](AnchorText.md) |  | [optional] 
 **items** | [**List[Item]**](Item.md) |  | [optional] 
 **template** | **str** |  | [optional] 
 

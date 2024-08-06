@@ -17,6 +17,7 @@ Create or update the Platform Consumption for the authenticated user.
 
 ### Example
 
+* OAuth Authentication (OAuth2):
 * Api Key Authentication (ApiKey):
 
 ```python
@@ -35,6 +36,8 @@ configuration = wordlift_client.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Configure API key authorization: ApiKey
 configuration.api_key['ApiKey'] = os.environ["API_KEY"]
@@ -74,7 +77,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+[OAuth2](../README.md#OAuth2), [ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -100,6 +103,7 @@ Get the Platform Consumption for the authenticated user.
 
 ### Example
 
+* OAuth Authentication (OAuth2):
 * Api Key Authentication (ApiKey):
 
 ```python
@@ -118,6 +122,8 @@ configuration = wordlift_client.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Configure API key authorization: ApiKey
 configuration.api_key['ApiKey'] = os.environ["API_KEY"]
@@ -159,7 +165,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+[OAuth2](../README.md#OAuth2), [ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 

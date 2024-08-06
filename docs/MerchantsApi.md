@@ -20,7 +20,7 @@ Create a Merchant
 
 ### Example
 
-* Api Key Authentication (ApiKey):
+* OAuth Authentication (OAuth2):
 
 ```python
 import wordlift_client
@@ -40,11 +40,7 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKey
-configuration.api_key['ApiKey'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -76,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -102,7 +98,7 @@ Delete a Merchant by its `id`.
 
 ### Example
 
-* Api Key Authentication (ApiKey):
+* OAuth Authentication (OAuth2):
 
 ```python
 import wordlift_client
@@ -120,11 +116,7 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKey
-configuration.api_key['ApiKey'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -154,7 +146,7 @@ void (empty response body)
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -179,7 +171,7 @@ Get a Merchant by its `id`.
 
 ### Example
 
-* Api Key Authentication (ApiKey):
+* OAuth Authentication (OAuth2):
 
 ```python
 import wordlift_client
@@ -198,11 +190,7 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKey
-configuration.api_key['ApiKey'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -234,7 +222,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -259,7 +247,7 @@ List the Merchants, optionally filtering by the `deleted` flag
 
 ### Example
 
-* Api Key Authentication (ApiKey):
+* OAuth Authentication (OAuth2):
 
 ```python
 import wordlift_client
@@ -278,11 +266,7 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKey
-configuration.api_key['ApiKey'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -318,7 +302,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -343,7 +327,7 @@ Update a Merchant
 
 ### Example
 
-* Api Key Authentication (ApiKey):
+* OAuth Authentication (OAuth2):
 
 ```python
 import wordlift_client
@@ -363,11 +347,7 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKey
-configuration.api_key['ApiKey'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -401,7 +381,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 

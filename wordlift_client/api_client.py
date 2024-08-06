@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    GraphQL support
+    Manager
 
-    GraphQL endpoint to query Knowledge Graphs
+    Subscription management and related services.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -89,7 +89,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/1.42.0/python'
+        self.user_agent = 'OpenAPI-Generator/1.43.0/python'
         self.client_side_validation = configuration.client_side_validation
 
     async def __aenter__(self):

@@ -16,6 +16,7 @@ docs/AnalysesResponse.md
 docs/AnalysesResponseItem.md
 docs/AnalyticsImportRequest.md
 docs/AnalyticsImportsApi.md
+docs/AnchorText.md
 docs/Annotation.md
 docs/AutocompleteApi.md
 docs/AutocompleteResult.md
@@ -203,6 +204,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_anchor_text.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -277,6 +279,7 @@ wordlift_client/models/analyses_request.py
 wordlift_client/models/analyses_response.py
 wordlift_client/models/analyses_response_item.py
 wordlift_client/models/analytics_import_request.py
+wordlift_client/models/anchor_text.py
 wordlift_client/models/annotation.py
 wordlift_client/models/autocomplete_result.py
 wordlift_client/models/batch_request.py

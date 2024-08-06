@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    GraphQL support
+    Manager
 
-    GraphQL endpoint to query Knowledge Graphs
+    Subscription management and related services.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -293,7 +293,7 @@ class CustomDomainsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'ApiKey'
+            'OAuth2'
         ]
 
         return self.api_client.param_serialize(

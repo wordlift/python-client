@@ -18,7 +18,8 @@ Get the account
 
 ### Example
 
-* Api Key Authentication (ApiKey):
+* OAuth Authentication (OAuth2):
+* Basic Authentication (BasicAuth):
 
 ```python
 import wordlift_client
@@ -37,11 +38,13 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKey
-configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+# Configure HTTP basic authorization: BasicAuth
+configuration = wordlift_client.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -73,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+[OAuth2](../README.md#OAuth2), [BasicAuth](../README.md#BasicAuth)
 
 ### HTTP request headers
 
@@ -99,7 +102,8 @@ List the accounts
 
 ### Example
 
-* Api Key Authentication (ApiKey):
+* OAuth Authentication (OAuth2):
+* Basic Authentication (BasicAuth):
 
 ```python
 import wordlift_client
@@ -118,11 +122,13 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKey
-configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+# Configure HTTP basic authorization: BasicAuth
+configuration = wordlift_client.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -168,7 +174,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+[OAuth2](../README.md#OAuth2), [BasicAuth](../README.md#BasicAuth)
 
 ### HTTP request headers
 
@@ -193,7 +199,8 @@ Update the account
 
 ### Example
 
-* Api Key Authentication (ApiKey):
+* OAuth Authentication (OAuth2):
+* Basic Authentication (BasicAuth):
 
 ```python
 import wordlift_client
@@ -213,11 +220,13 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKey
-configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+# Configure HTTP basic authorization: BasicAuth
+configuration = wordlift_client.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -251,7 +260,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+[OAuth2](../README.md#OAuth2), [BasicAuth](../README.md#BasicAuth)
 
 ### HTTP request headers
 

@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    GraphQL support
+    Manager
 
-    GraphQL endpoint to query Knowledge Graphs
+    Subscription management and related services.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -41,7 +41,7 @@ class AutocompleteApi:
 
 
     @validate_call
-    async def get3(
+    async def get1(
         self,
         query: Annotated[StrictStr, Field(description="Autocomplete query")],
         language: Annotated[StrictStr, Field(description="2-letter language code, e.g. 'en'.")],
@@ -97,7 +97,7 @@ class AutocompleteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get3_serialize(
+        _param = self._get1_serialize(
             query=query,
             language=language,
             scope=scope,
@@ -126,7 +126,7 @@ class AutocompleteApi:
 
 
     @validate_call
-    async def get3_with_http_info(
+    async def get1_with_http_info(
         self,
         query: Annotated[StrictStr, Field(description="Autocomplete query")],
         language: Annotated[StrictStr, Field(description="2-letter language code, e.g. 'en'.")],
@@ -182,7 +182,7 @@ class AutocompleteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get3_serialize(
+        _param = self._get1_serialize(
             query=query,
             language=language,
             scope=scope,
@@ -211,7 +211,7 @@ class AutocompleteApi:
 
 
     @validate_call
-    async def get3_without_preload_content(
+    async def get1_without_preload_content(
         self,
         query: Annotated[StrictStr, Field(description="Autocomplete query")],
         language: Annotated[StrictStr, Field(description="2-letter language code, e.g. 'en'.")],
@@ -267,7 +267,7 @@ class AutocompleteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get3_serialize(
+        _param = self._get1_serialize(
             query=query,
             language=language,
             scope=scope,
@@ -291,7 +291,7 @@ class AutocompleteApi:
         return response_data.response
 
 
-    def _get3_serialize(
+    def _get1_serialize(
         self,
         query,
         language,
