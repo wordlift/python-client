@@ -2037,6 +2037,9 @@ components:
     Item:
       type: object
       properties:
+        id:
+          type: string
+          format: uri
         query:
           $ref: '#/components/schemas/VectorSearchQueryRequest'
         source_name:
