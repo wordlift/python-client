@@ -1759,18 +1759,27 @@ components:
           uniqueItems: true
     AnchorText:
       type: object
+      description: The Anchor Text request.
       properties:
         actual_prompt_template:
           type: string
         enabled:
           type: boolean
+          default: false
+          description: "Whether to enable Anchor Text, by default false."
         max_characters:
           type: integer
           format: int32
+          default: 15
+          description: "The maximum anchor text length, by default 15 characters."
         model:
           type: string
+          default: gpt-4
+          description: The model to use.
         prompt_template:
           type: string
+          description: "The prompt template, we provide a default. Liquid template\
+            \ language is supported."
     BotifyCrawlImportRequest:
       type: object
       description: The Botify Crawl Import request
@@ -2025,28 +2034,36 @@ components:
       - The URL
     InternalLinkRequest:
       type: object
+      description: An Internal Links request.
       properties:
         anchor_text:
           $ref: '#/components/schemas/AnchorText'
         items:
           type: array
+          description: An array of items.
           items:
             $ref: '#/components/schemas/Item'
         template:
           type: string
+          description: "The output template, not required, we provide a default JSON-LD\
+            \ template"
+      required:
+      - items
     Item:
       type: object
+      description: An Internal Link request item.
       properties:
         id:
           type: string
           format: uri
+          description: "The entity id, reused in the output template."
         query:
           $ref: '#/components/schemas/VectorSearchQueryRequest'
         source_name:
           type: string
+          description: "The webpage name, reused in the output template."
       required:
       - query
-      - source_name
     KgEmbeddingRequest:
       type: object
       properties:
