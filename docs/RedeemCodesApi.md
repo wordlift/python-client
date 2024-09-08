@@ -1,6 +1,6 @@
 # wordlift_client.RedeemCodesApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **redeem_code**
-> Response2 redeem_code(request2)
+> Response1 redeem_code(request2)
 
 Redeem the provided code and get a key
 
@@ -19,14 +19,14 @@ Redeem the provided code and get a key
 ```python
 import wordlift_client
 from wordlift_client.models.request2 import Request2
-from wordlift_client.models.response2 import Response2
+from wordlift_client.models.response1 import Response1
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "http://localhost"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Response2**](Response2.md)
+[**Response1**](Response1.md)
 
 ### Authorization
 

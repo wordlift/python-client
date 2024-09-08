@@ -1,6 +1,6 @@
 # wordlift_client.AnalysesApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **analyse**
-> Response1 analyse(request1)
+> Response analyse(request1)
 
 Analyse content
 
@@ -24,14 +24,14 @@ Analyze the content provided with the request.
 ```python
 import wordlift_client
 from wordlift_client.models.request1 import Request1
-from wordlift_client.models.response1 import Response1
+from wordlift_client.models.response import Response
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "http://localhost"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Response1**](Response1.md)
+[**Response**](Response.md)
 
 ### Authorization
 
@@ -110,10 +110,10 @@ from wordlift_client.models.analyses_response import AnalysesResponse
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "http://localhost"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -191,10 +191,10 @@ from wordlift_client.models.request1 import Request1
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "http://localhost"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -256,7 +256,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **v2_analysis**
-> Response1 v2_analysis(request1)
+> Response v2_analysis(request1)
 
 Analyse Web Page
 
@@ -269,14 +269,14 @@ Analyse the content of a webpage by using the `url` property of the request.
 ```python
 import wordlift_client
 from wordlift_client.models.request1 import Request1
-from wordlift_client.models.response1 import Response1
+from wordlift_client.models.response import Response
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "http://localhost"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -316,7 +316,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Response1**](Response1.md)
+[**Response**](Response.md)
 
 ### Authorization
 

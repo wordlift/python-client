@@ -5,7 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key** | **str** |  | [optional] 
+**items** | [**List[Event]**](Event.md) |  | [optional] 
+**var_self** | **str** |  | [optional] 
+**next** | **str** |  | [optional] 
+**prev** | **str** |  | [optional] 
+**last** | **str** |  | [optional] 
+**first** | **str** |  | [optional] 
 
 ## Example
 

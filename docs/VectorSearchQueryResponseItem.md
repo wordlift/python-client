@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **id** | **str** |  | [optional] 
 **iri** | **str** | The IRI of the entity that this node belongs to. | 
 **metadata** | [**Dict[str, VectorSearchQueryResponseItemMetadataValue]**](VectorSearchQueryResponseItemMetadataValue.md) | A nodes extra metadata. | [optional] 
-**node_id** | **str** | A nodes id. | 
+**node_id** | **str** | A nodes id. | [optional] 
 **score** | **float** | The similarity score between the node and the query embeddings. | 
-**text** | **str** | The text of a node from which the embeddings were generated. | 
+**text** | **str** | The text of a node from which the embeddings were generated. | [optional] 
 
 ## Example
 
