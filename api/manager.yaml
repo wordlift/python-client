@@ -3242,9 +3242,7 @@ components:
           description: The text of a node from which the embeddings were generated.
       required:
       - iri
-      - node_id
       - score
-      - text
     VectorSearchQuestionRequest:
       type: object
       description: One or more questions.
