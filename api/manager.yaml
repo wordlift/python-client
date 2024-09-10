@@ -2180,6 +2180,12 @@ components:
         access_token:
           type: string
           description: Google Merchant access token
+        account_id:
+          type: integer
+          format: int64
+          description: "The Knowledge Graph to use for the Merchant. Please note that\
+            \ the Knowledge Graph will be reset. When not provided, this method will\
+            \ use the first available Knowledge Graph."
         dataset_domain:
           type: string
           description: The custom domain (for example data.example.org)
