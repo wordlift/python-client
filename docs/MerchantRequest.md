@@ -7,6 +7,7 @@ The Merchant request
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **access_token** | **str** | Google Merchant access token | [optional] 
+**account_id** | **int** | The Knowledge Graph to use for the Merchant. Please note that the Knowledge Graph will be reset. When not provided, this method will use the first available Knowledge Graph. | [optional] 
 **dataset_domain** | **str** | The custom domain (for example data.example.org) | [optional] 
 **dataset_name** | **str** | The dataset path (for example \&quot;data\&quot;) | [optional] 
 **deleted** | **bool** | True if the merchant has been deleted | [optional] [default to False]

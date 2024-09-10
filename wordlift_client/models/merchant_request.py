@@ -29,6 +29,7 @@ class MerchantRequest(BaseModel):
     The Merchant request
     """ # noqa: E501
     access_token: Optional[StrictStr] = Field(default=None, description="Google Merchant access token")
+    account_id: Optional[StrictInt] = Field(default=None, description="The Knowledge Graph to use for the Merchant. Please note that the Knowledge Graph will be reset. When not provided, this method will use the first available Knowledge Graph.")
     dataset_domain: Optional[StrictStr] = Field(default=None, description="The custom domain (for example data.example.org)")
     dataset_name: Optional[StrictStr] = Field(default=None, description="The dataset path (for example \"data\")")
     deleted: Optional[StrictBool] = Field(default=False, description="True if the merchant has been deleted")
@@ -40,7 +41,7 @@ class MerchantRequest(BaseModel):
     url: StrictStr = Field(description="The website URL")
     url_strategy: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default='canonicalLinkAndLink', description="Which strategy to use to write the url schema.")
     writer_service: Optional[StrictStr] = Field(default=None, description="How to write the merchant data to the graph, if unsure, do not set anything (by default `wordpressMerchantWriter`).")
-    __properties: ClassVar[List[str]] = ["access_token", "dataset_domain", "dataset_name", "deleted", "google_merchant_id", "ignore_brand", "ignore_image", "publisher_name", "refresh_token", "url", "url_strategy", "writer_service"]
+    __properties: ClassVar[List[str]] = ["access_token", "account_id", "dataset_domain", "dataset_name", "deleted", "google_merchant_id", "ignore_brand", "ignore_image", "publisher_name", "refresh_token", "url", "url_strategy", "writer_service"]
 
     @field_validator('url_strategy')
     def url_strategy_validate_enum(cls, value):
@@ -104,6 +105,7 @@ class MerchantRequest(BaseModel):
 
         _obj = cls.model_validate({
             "access_token": obj.get("access_token"),
+            "account_id": obj.get("account_id"),
             "dataset_domain": obj.get("dataset_domain"),
             "dataset_name": obj.get("dataset_name"),
             "deleted": obj.get("deleted") if obj.get("deleted") is not None else False,
