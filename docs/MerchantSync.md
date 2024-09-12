@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **products_errored** | **int** | The number of errored products | [optional] [readonly] 
 **products_skipped** | **int** | The number of skipped products | [optional] [readonly] 
 **products_total** | **int** | The total number of processed products, including the skipped and errored. | [optional] [readonly] 
+**products_unchanged** | **int** | The number of products that haven&#39;t changed and therefore haven&#39;t been synced again | [optional] [readonly] 
 **products_updated** | **int** | The number of update products | [optional] [readonly] 
 **started_at** | **datetime** | The started date-time. | [optional] [readonly] 
 **stopped_at** | **datetime** | The stopped date-time. | [optional] [readonly] 

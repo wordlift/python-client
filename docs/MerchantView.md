@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **sync_products_errored** | **int** |  | [optional] 
 **sync_products_skipped** | **int** |  | [optional] 
 **sync_products_total** | **int** |  | [optional] 
+**sync_products_unchanged** | **int** |  | [optional] 
 **sync_products_updated** | **int** |  | [optional] 
 **sync_started_at** | **datetime** | The started date-time. | [optional] [readonly] 
 **sync_stopped_at** | **datetime** | The stopped date-time. | [optional] [readonly] 
