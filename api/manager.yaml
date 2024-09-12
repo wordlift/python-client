@@ -2293,6 +2293,12 @@ components:
           description: "The total number of processed products, including the skipped\
             \ and errored."
           readOnly: true
+        products_unchanged:
+          type: integer
+          format: int32
+          description: The number of products that haven't changed and therefore haven't
+            been synced again
+          readOnly: true
         products_updated:
           type: integer
           format: int32
@@ -2393,6 +2399,9 @@ components:
           type: integer
           format: int32
         sync_products_total:
+          type: integer
+          format: int32
+        sync_products_unchanged:
           type: integer
           format: int32
         sync_products_updated:
