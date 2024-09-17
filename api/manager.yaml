@@ -1617,6 +1617,11 @@ components:
           type: string
           description: Google Search Console Site URL
           readOnly: true
+        includeExcludeDefault:
+          type: string
+          default: include
+          description: The default setting for include/exclude URLs.
+          readOnly: true
         key:
           type: string
           description: The Key
