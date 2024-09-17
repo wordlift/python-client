@@ -706,12 +706,38 @@ paths:
                 type: array
                 items:
                   type: string
-          description: Success
+          description: Created
         "401":
           description: Authentication Failure
       security:
       - ApiKey: []
       summary: Create
+      tags:
+      - Internal Links
+  /internal-links/suggestions:
+    post:
+      description: Create an Internal Links suggestion.
+      operationId: createInternalLinkSuggestion
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InternalLinkRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalLink'
+          description: Created
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+      summary: Suggest
       tags:
       - Internal Links
   /kg/embeddings:
@@ -1768,6 +1794,7 @@ components:
       properties:
         actual_prompt_template:
           type: string
+          readOnly: true
         enabled:
           type: boolean
           default: false
@@ -1783,6 +1810,15 @@ components:
           description: The model to use.
         prompt_template:
           type: string
+          default: |
+            As an SEO and content editor, your task is to create a concise and appropriate anchor text to enhance keyword targeting, using the
+            provided keyword and page title. Ensure to maintain a neutral tone and adhere to the examples below for guidance:
+
+            {%- for anchor in anchors -%}
+            - Title: {{ anchor.title }}
+            - Keyword: {{ anchor.keyword }}
+            - Anchor text: {{ anchor.anchor_text }}
+            {%- endfor -%}
           description: "The prompt template, we provide a default. Liquid template\
             \ language is supported."
     BotifyCrawlImportRequest:
@@ -2037,6 +2073,38 @@ components:
       required:
       - Include or Exclude
       - The URL
+    InternalLink:
+      type: object
+      properties:
+        destinations:
+          type: array
+          description: InternalLink destinations configuration.
+          items:
+            $ref: '#/components/schemas/InternalLinkDestination'
+        source:
+          $ref: '#/components/schemas/InternalLinkSource'
+      required:
+      - destinations
+      - source
+    InternalLinkDestination:
+      type: object
+      description: InternalLink destinations configuration.
+      properties:
+        name:
+          type: string
+          description: Identifier of the Entity.
+        position:
+          type: integer
+          format: int32
+          description: The position of an item in a series or sequence of items.
+        url:
+          type: string
+          format: url
+          description: URL of the Entity.
+      required:
+      - name
+      - position
+      - url
     InternalLinkRequest:
       type: object
       description: An Internal Links request.
@@ -2054,6 +2122,25 @@ components:
             \ template"
       required:
       - items
+    InternalLinkSource:
+      type: object
+      description: InternalLink source configuration.
+      properties:
+        id:
+          type: string
+          format: uri
+          description: Entity identifier.
+        name:
+          type: string
+          description: Entity name.
+        url:
+          type: string
+          format: url
+          description: Entity url.
+      required:
+      - id
+      - name
+      - url
     Item:
       type: object
       description: An Internal Link request item.
