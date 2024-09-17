@@ -33,6 +33,7 @@ class AccountInfo(BaseModel):
     dataset_uri: StrictStr = Field(description="The dataset URI", alias="datasetUri")
     features: Optional[Dict[str, StrictBool]] = Field(default=None, description="A list of features enabled or disabled for the account")
     google_search_console_site_url: Optional[StrictStr] = Field(default=None, description="Google Search Console Site URL", alias="googleSearchConsoleSiteUrl")
+    include_exclude_default: Optional[StrictStr] = Field(default='include', description="The default setting for include/exclude URLs.", alias="includeExcludeDefault")
     key: Optional[StrictStr] = Field(default=None, description="The Key")
     language: Optional[StrictStr] = Field(default=None, description="The language code")
     networks: List[NetworkAccountInfo] = Field(description="A list of connected Account Information")
@@ -41,7 +42,7 @@ class AccountInfo(BaseModel):
     url: Optional[StrictStr] = Field(default=None, description="The website URL")
     wp_admin: Optional[StrictStr] = Field(default=None, description="If WordPress, the WP-ADMIN URL", alias="wpAdmin")
     wp_json: Optional[StrictStr] = Field(default=None, description="If WordPress, the WP-JSON end-point", alias="wpJson")
-    __properties: ClassVar[List[str]] = ["accountId", "datasetId", "datasetUri", "features", "googleSearchConsoleSiteUrl", "key", "language", "networks", "ngDatasetId", "subscriptionId", "url", "wpAdmin", "wpJson"]
+    __properties: ClassVar[List[str]] = ["accountId", "datasetId", "datasetUri", "features", "googleSearchConsoleSiteUrl", "includeExcludeDefault", "key", "language", "networks", "ngDatasetId", "subscriptionId", "url", "wpAdmin", "wpJson"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,6 +86,7 @@ class AccountInfo(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
             "account_id",
@@ -92,6 +94,7 @@ class AccountInfo(BaseModel):
             "dataset_uri",
             "features",
             "google_search_console_site_url",
+            "include_exclude_default",
             "key",
             "language",
             "networks",
@@ -130,6 +133,7 @@ class AccountInfo(BaseModel):
             "datasetUri": obj.get("datasetUri"),
             "features": obj.get("features"),
             "googleSearchConsoleSiteUrl": obj.get("googleSearchConsoleSiteUrl"),
+            "includeExcludeDefault": obj.get("includeExcludeDefault") if obj.get("includeExcludeDefault") is not None else 'include',
             "key": obj.get("key"),
             "language": obj.get("language"),
             "networks": [NetworkAccountInfo.from_dict(_item) for _item in obj["networks"]] if obj.get("networks") is not None else None,

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **dataset_uri** | **str** | The dataset URI | [readonly] 
 **features** | **Dict[str, bool]** | A list of features enabled or disabled for the account | [optional] [readonly] 
 **google_search_console_site_url** | **str** | Google Search Console Site URL | [optional] [readonly] 
+**include_exclude_default** | **str** | The default setting for include/exclude URLs. | [optional] [readonly] [default to 'include']
 **key** | **str** | The Key | [optional] [readonly] 
 **language** | **str** | The language code | [optional] [readonly] 
 **networks** | [**List[NetworkAccountInfo]**](NetworkAccountInfo.md) | A list of connected Account Information | [readonly] 
