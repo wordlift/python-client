@@ -31,7 +31,15 @@ class AnchorText(BaseModel):
     enabled: Optional[StrictBool] = Field(default=False, description="Whether to enable Anchor Text, by default false.")
     max_characters: Optional[StrictInt] = Field(default=15, description="The maximum anchor text length, by default 15 characters.")
     model: Optional[StrictStr] = Field(default='gpt-4', description="The model to use.")
-    prompt_template: Optional[StrictStr] = Field(default=None, description="The prompt template, we provide a default. Liquid template language is supported.")
+    prompt_template: Optional[StrictStr] = Field(default='''As an SEO and content editor, your task is to create a concise and appropriate anchor text to enhance keyword targeting, using the
+provided keyword and page title. Ensure to maintain a neutral tone and adhere to the examples below for guidance:
+
+{%- for anchor in anchors -%}
+- Title: {{ anchor.title }}
+- Keyword: {{ anchor.keyword }}
+- Anchor text: {{ anchor.anchor_text }}
+{%- endfor -%}
+''', description="The prompt template, we provide a default. Liquid template language is supported.")
     __properties: ClassVar[List[str]] = ["actual_prompt_template", "enabled", "max_characters", "model", "prompt_template"]
 
     model_config = ConfigDict(
@@ -64,8 +72,10 @@ class AnchorText(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "actual_prompt_template",
         ])
 
         _dict = self.model_dump(
@@ -89,7 +99,15 @@ class AnchorText(BaseModel):
             "enabled": obj.get("enabled") if obj.get("enabled") is not None else False,
             "max_characters": obj.get("max_characters") if obj.get("max_characters") is not None else 15,
             "model": obj.get("model") if obj.get("model") is not None else 'gpt-4',
-            "prompt_template": obj.get("prompt_template")
+            "prompt_template": obj.get("prompt_template") if obj.get("prompt_template") is not None else '''As an SEO and content editor, your task is to create a concise and appropriate anchor text to enhance keyword targeting, using the
+provided keyword and page title. Ensure to maintain a neutral tone and adhere to the examples below for guidance:
+
+{%- for anchor in anchors -%}
+- Title: {{ anchor.title }}
+- Keyword: {{ anchor.keyword }}
+- Anchor text: {{ anchor.anchor_text }}
+{%- endfor -%}
+'''
         })
         return _obj
 

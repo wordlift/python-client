@@ -86,7 +86,10 @@ docs/IncludeExcludeRequest.md
 docs/IncludeExcludesWordPressPluginApi.md
 docs/InspectResponse.md
 docs/InspectorApi.md
+docs/InternalLink.md
+docs/InternalLinkDestination.md
 docs/InternalLinkRequest.md
+docs/InternalLinkSource.md
 docs/InternalLinksApi.md
 docs/Item.md
 docs/KgEmbeddingRequest.md
@@ -204,6 +207,9 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_internal_link.py
+test/test_internal_link_destination.py
+test/test_internal_link_source.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -318,7 +324,10 @@ wordlift_client/models/image.py
 wordlift_client/models/include_exclude.py
 wordlift_client/models/include_exclude_request.py
 wordlift_client/models/inspect_response.py
+wordlift_client/models/internal_link.py
+wordlift_client/models/internal_link_destination.py
 wordlift_client/models/internal_link_request.py
+wordlift_client/models/internal_link_source.py
 wordlift_client/models/item.py
 wordlift_client/models/kg_embedding_request.py
 wordlift_client/models/level_enum.py

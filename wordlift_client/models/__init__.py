@@ -64,7 +64,10 @@ from wordlift_client.models.image import Image
 from wordlift_client.models.include_exclude import IncludeExclude
 from wordlift_client.models.include_exclude_request import IncludeExcludeRequest
 from wordlift_client.models.inspect_response import InspectResponse
+from wordlift_client.models.internal_link import InternalLink
+from wordlift_client.models.internal_link_destination import InternalLinkDestination
 from wordlift_client.models.internal_link_request import InternalLinkRequest
+from wordlift_client.models.internal_link_source import InternalLinkSource
 from wordlift_client.models.item import Item
 from wordlift_client.models.kg_embedding_request import KgEmbeddingRequest
 from wordlift_client.models.level_enum import LevelEnum
