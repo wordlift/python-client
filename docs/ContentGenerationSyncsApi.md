@@ -1,14 +1,14 @@
 # wordlift_client.ContentGenerationSyncsApi
 
-All URIs are relative to *https://api.wordlift.io*
+All URIs are relative to *https://api.wordlift.io/quality-rating*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_sync**](ContentGenerationSyncsApi.md#create_sync) | **POST** /content-generations/{contentGenerationId}/syncs | Create
+[**create_sync1**](ContentGenerationSyncsApi.md#create_sync1) | **POST** /content-generations/{contentGenerationId}/syncs | Create
 
 
-# **create_sync**
-> create_sync(content_generation_id)
+# **create_sync1**
+> create_sync1(content_generation_id)
 
 Create
 
@@ -21,10 +21,10 @@ import wordlift_client
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to https://api.wordlift.io/quality-rating
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "https://api.wordlift.io/quality-rating"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -46,9 +46,9 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Create
-        await api_instance.create_sync(content_generation_id)
+        await api_instance.create_sync1(content_generation_id)
     except Exception as e:
-        print("Exception when calling ContentGenerationSyncsApi->create_sync: %s\n" % e)
+        print("Exception when calling ContentGenerationSyncsApi->create_sync1: %s\n" % e)
 ```
 
 

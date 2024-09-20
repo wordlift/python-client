@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    GraphQL support
+    SEO Content Analysis API
 
-    GraphQL endpoint to query Knowledge Graphs
+    This API assesses the match between a URL or text content, a query, and an intent, using advanced SEO techniques.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -18,7 +18,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from wordlift_client.models.request2 import Request2
-from wordlift_client.models.response1 import Response1
+from wordlift_client.models.response2 import Response2
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
 from wordlift_client.api_response import ApiResponse
@@ -54,7 +54,7 @@ class RedeemCodesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Response1:
+    ) -> Response2:
         """Redeem the provided code and get a key
 
 
@@ -91,7 +91,7 @@ class RedeemCodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Response1",
+            '200': "Response2",
             '404': "ProblemDetail",
             '409': "ProblemDetail",
             '500': "ProblemDetail",
@@ -123,7 +123,7 @@ class RedeemCodesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Response1]:
+    ) -> ApiResponse[Response2]:
         """Redeem the provided code and get a key
 
 
@@ -160,7 +160,7 @@ class RedeemCodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Response1",
+            '200': "Response2",
             '404': "ProblemDetail",
             '409': "ProblemDetail",
             '500': "ProblemDetail",
@@ -229,7 +229,7 @@ class RedeemCodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Response1",
+            '200': "Response2",
             '404': "ProblemDetail",
             '409': "ProblemDetail",
             '500': "ProblemDetail",

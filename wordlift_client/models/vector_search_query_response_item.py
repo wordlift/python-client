@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    GraphQL support
+    SEO Content Analysis API
 
-    GraphQL endpoint to query Knowledge Graphs
+    This API assesses the match between a URL or text content, a query, and an intent, using advanced SEO techniques.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io

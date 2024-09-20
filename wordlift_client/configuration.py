@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    GraphQL support
+    SEO Content Analysis API
 
-    GraphQL endpoint to query Knowledge Graphs
+    This API assesses the match between a URL or text content, a query, and an intent, using advanced SEO techniques.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -89,7 +89,7 @@ conf = wordlift_client.Configuration(
                  ) -> None:
         """Constructor
         """
-        self._base_path = "https://api.wordlift.io" if host is None else host
+        self._base_path = "https://api.wordlift.io/quality-rating" if host is None else host
         """Default Base url
         """
         self.server_index = 0 if server_index is None and host is None else server_index
@@ -396,7 +396,7 @@ conf = wordlift_client.Configuration(
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 1.0\n"\
-               "SDK Package Version: 1.50.0".\
+               "SDK Package Version: 1.51.0".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):
@@ -406,7 +406,7 @@ conf = wordlift_client.Configuration(
         """
         return [
             {
-                'url': "https://api.wordlift.io",
+                'url': "https://api.wordlift.io/quality-rating",
                 'description': "No description provided",
             }
         ]

@@ -1,6 +1,6 @@
 # wordlift_client.FactCheckApi
 
-All URIs are relative to *https://api.wordlift.io*
+All URIs are relative to *https://api.wordlift.io/quality-rating*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -23,10 +23,10 @@ from wordlift_client.models.submit_fact_check_request import SubmitFactCheckRequ
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to https://api.wordlift.io/quality-rating
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "https://api.wordlift.io/quality-rating"
 )
 
 # The client must configure the authentication and authorization parameters

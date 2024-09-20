@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    GraphQL support
+    SEO Content Analysis API
 
-    GraphQL endpoint to query Knowledge Graphs
+    This API assesses the match between a URL or text content, a query, and an intent, using advanced SEO techniques.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -42,7 +42,7 @@ class MerchantSyncsApi:
 
 
     @validate_call
-    async def create_sync1(
+    async def create_sync(
         self,
         merchant_id: Annotated[StrictInt, Field(description="The Merchant's `id`")],
         _request_timeout: Union[
@@ -85,7 +85,7 @@ class MerchantSyncsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_sync1_serialize(
+        _param = self._create_sync_serialize(
             merchant_id=merchant_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -111,7 +111,7 @@ class MerchantSyncsApi:
 
 
     @validate_call
-    async def create_sync1_with_http_info(
+    async def create_sync_with_http_info(
         self,
         merchant_id: Annotated[StrictInt, Field(description="The Merchant's `id`")],
         _request_timeout: Union[
@@ -154,7 +154,7 @@ class MerchantSyncsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_sync1_serialize(
+        _param = self._create_sync_serialize(
             merchant_id=merchant_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -180,7 +180,7 @@ class MerchantSyncsApi:
 
 
     @validate_call
-    async def create_sync1_without_preload_content(
+    async def create_sync_without_preload_content(
         self,
         merchant_id: Annotated[StrictInt, Field(description="The Merchant's `id`")],
         _request_timeout: Union[
@@ -223,7 +223,7 @@ class MerchantSyncsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_sync1_serialize(
+        _param = self._create_sync_serialize(
             merchant_id=merchant_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -244,7 +244,7 @@ class MerchantSyncsApi:
         return response_data.response
 
 
-    def _create_sync1_serialize(
+    def _create_sync_serialize(
         self,
         merchant_id,
         _request_auth,

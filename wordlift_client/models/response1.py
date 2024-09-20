@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    GraphQL support
+    SEO Content Analysis API
 
-    GraphQL endpoint to query Knowledge Graphs
+    This API assesses the match between a URL or text content, a query, and an intent, using advanced SEO techniques.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -18,8 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wordlift_client.models.event import Event
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,8 +28,13 @@ class Response1(BaseModel):
     """
     Response1
     """ # noqa: E501
-    key: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["key"]
+    items: Optional[List[Event]] = None
+    var_self: Optional[StrictStr] = Field(default=None, alias="self")
+    next: Optional[StrictStr] = None
+    prev: Optional[StrictStr] = None
+    last: Optional[StrictStr] = None
+    first: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["items", "self", "next", "prev", "last", "first"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -69,6 +75,13 @@ class Response1(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in items (list)
+        _items = []
+        if self.items:
+            for _item in self.items:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['items'] = _items
         return _dict
 
     @classmethod
@@ -81,7 +94,12 @@ class Response1(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "key": obj.get("key")
+            "items": [Event.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
+            "self": obj.get("self"),
+            "next": obj.get("next"),
+            "prev": obj.get("prev"),
+            "last": obj.get("last"),
+            "first": obj.get("first")
         })
         return _obj
 

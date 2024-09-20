@@ -207,9 +207,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_internal_link.py
-test/test_internal_link_destination.py
-test/test_internal_link_source.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py

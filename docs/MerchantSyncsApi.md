@@ -1,16 +1,16 @@
 # wordlift_client.MerchantSyncsApi
 
-All URIs are relative to *https://api.wordlift.io*
+All URIs are relative to *https://api.wordlift.io/quality-rating*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_sync1**](MerchantSyncsApi.md#create_sync1) | **POST** /merchants/{merchantId}/syncs | Start
+[**create_sync**](MerchantSyncsApi.md#create_sync) | **POST** /merchants/{merchantId}/syncs | Start
 [**get_merchant_sync**](MerchantSyncsApi.md#get_merchant_sync) | **GET** /merchants/{merchantId}/syncs/{id} | Get by id
 [**list_merchant_syncs**](MerchantSyncsApi.md#list_merchant_syncs) | **GET** /merchants/{merchantId}/syncs | List
 
 
-# **create_sync1**
-> MerchantSync create_sync1(merchant_id)
+# **create_sync**
+> MerchantSync create_sync(merchant_id)
 
 Start
 
@@ -24,10 +24,10 @@ from wordlift_client.models.merchant_sync import MerchantSync
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to https://api.wordlift.io/quality-rating
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "https://api.wordlift.io/quality-rating"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -49,11 +49,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Start
-        api_response = await api_instance.create_sync1(merchant_id)
-        print("The response of MerchantSyncsApi->create_sync1:\n")
+        api_response = await api_instance.create_sync(merchant_id)
+        print("The response of MerchantSyncsApi->create_sync:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling MerchantSyncsApi->create_sync1: %s\n" % e)
+        print("Exception when calling MerchantSyncsApi->create_sync: %s\n" % e)
 ```
 
 
@@ -104,10 +104,10 @@ from wordlift_client.models.merchant_sync import MerchantSync
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to https://api.wordlift.io/quality-rating
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "https://api.wordlift.io/quality-rating"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -187,10 +187,10 @@ from wordlift_client.models.page_merchant_sync import PageMerchantSync
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to https://api.wordlift.io/quality-rating
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "https://api.wordlift.io/quality-rating"
 )
 
 # The client must configure the authentication and authorization parameters

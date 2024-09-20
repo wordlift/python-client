@@ -1,14 +1,14 @@
 # wordlift_client.DataURIApi
 
-All URIs are relative to *https://api.wordlift.io*
+All URIs are relative to *https://api.wordlift.io/quality-rating*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get3**](DataURIApi.md#get3) | **GET** /data-uri | Get the Web Data URI for a Web Page URL.
+[**get1**](DataURIApi.md#get1) | **GET** /data-uri | Get the Web Data URI for a Web Page URL.
 
 
-# **get3**
-> get3(u)
+# **get1**
+> get1(u)
 
 Get the Web Data URI for a Web Page URL.
 
@@ -23,10 +23,10 @@ import wordlift_client
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to https://api.wordlift.io/quality-rating
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "https://api.wordlift.io/quality-rating"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -48,9 +48,9 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Get the Web Data URI for a Web Page URL.
-        await api_instance.get3(u)
+        await api_instance.get1(u)
     except Exception as e:
-        print("Exception when calling DataURIApi->get3: %s\n" % e)
+        print("Exception when calling DataURIApi->get1: %s\n" % e)
 ```
 
 

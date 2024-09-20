@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    GraphQL support
+    SEO Content Analysis API
 
-    GraphQL endpoint to query Knowledge Graphs
+    This API assesses the match between a URL or text content, a query, and an intent, using advanced SEO techniques.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -18,19 +18,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class Request3(BaseModel):
     """
-    The Event request
+    Request3
     """ # noqa: E501
-    source: Optional[StrictStr] = None
-    args: Optional[Dict[str, Any]] = None
-    url: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["source", "args", "url"]
+    completion: Optional[StrictStr] = None
+    has_upvote: StrictBool = Field(description="This indicates whether the user upvoted the completion.")
+    is_accepted: StrictBool = Field(description="This indicates whether the completion is accepted by the user.")
+    validated_at: Optional[datetime] = Field(default=None, description="Validation time of the record - null to revalidate.")
+    __properties: ClassVar[List[str]] = ["completion", "has_upvote", "is_accepted", "validated_at"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,9 +85,10 @@ class Request3(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "source": obj.get("source"),
-            "args": obj.get("args"),
-            "url": obj.get("url")
+            "completion": obj.get("completion"),
+            "has_upvote": obj.get("has_upvote"),
+            "is_accepted": obj.get("is_accepted"),
+            "validated_at": obj.get("validated_at")
         })
         return _obj
 

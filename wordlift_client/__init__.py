@@ -3,9 +3,9 @@
 # flake8: noqa
 
 """
-    GraphQL support
+    SEO Content Analysis API
 
-    GraphQL endpoint to query Knowledge Graphs
+    This API assesses the match between a URL or text content, a query, and an intent, using advanced SEO techniques.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.50.0"
+__version__ = "1.51.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi

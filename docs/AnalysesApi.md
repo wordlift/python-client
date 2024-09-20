@@ -1,6 +1,6 @@
 # wordlift_client.AnalysesApi
 
-All URIs are relative to *https://api.wordlift.io*
+All URIs are relative to *https://api.wordlift.io/quality-rating*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **analyse**
-> Response analyse(request1)
+> Response analyse(request)
 
 Analyse content
 
@@ -23,15 +23,15 @@ Analyze the content provided with the request.
 
 ```python
 import wordlift_client
-from wordlift_client.models.request1 import Request1
+from wordlift_client.models.request import Request
 from wordlift_client.models.response import Response
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to https://api.wordlift.io/quality-rating
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "https://api.wordlift.io/quality-rating"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -49,11 +49,11 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.AnalysesApi(api_client)
-    request1 = wordlift_client.Request1() # Request1 | 
+    request = wordlift_client.Request() # Request | 
 
     try:
         # Analyse content
-        api_response = await api_instance.analyse(request1)
+        api_response = await api_instance.analyse(request)
         print("The response of AnalysesApi->analyse:\n")
         pprint(api_response)
     except Exception as e:
@@ -67,7 +67,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request1** | [**Request1**](Request1.md)|  | 
+ **request** | [**Request**](Request.md)|  | 
 
 ### Return type
 
@@ -110,10 +110,10 @@ from wordlift_client.models.analyses_response import AnalysesResponse
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to https://api.wordlift.io/quality-rating
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "https://api.wordlift.io/quality-rating"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -175,7 +175,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **merge**
-> str merge(request1)
+> str merge(request)
 
 Analyse and Merge
 
@@ -187,14 +187,14 @@ Analyze content and return the results merged as HTML code.
 
 ```python
 import wordlift_client
-from wordlift_client.models.request1 import Request1
+from wordlift_client.models.request import Request
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to https://api.wordlift.io/quality-rating
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "https://api.wordlift.io/quality-rating"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -212,11 +212,11 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.AnalysesApi(api_client)
-    request1 = wordlift_client.Request1() # Request1 | 
+    request = wordlift_client.Request() # Request | 
 
     try:
         # Analyse and Merge
-        api_response = await api_instance.merge(request1)
+        api_response = await api_instance.merge(request)
         print("The response of AnalysesApi->merge:\n")
         pprint(api_response)
     except Exception as e:
@@ -230,7 +230,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request1** | [**Request1**](Request1.md)|  | 
+ **request** | [**Request**](Request.md)|  | 
 
 ### Return type
 
@@ -256,7 +256,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **v2_analysis**
-> Response v2_analysis(request1)
+> Response v2_analysis(request)
 
 Analyse Web Page
 
@@ -268,15 +268,15 @@ Analyse the content of a webpage by using the `url` property of the request.
 
 ```python
 import wordlift_client
-from wordlift_client.models.request1 import Request1
+from wordlift_client.models.request import Request
 from wordlift_client.models.response import Response
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to https://api.wordlift.io/quality-rating
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "https://api.wordlift.io/quality-rating"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -294,11 +294,11 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.AnalysesApi(api_client)
-    request1 = wordlift_client.Request1() # Request1 | 
+    request = wordlift_client.Request() # Request | 
 
     try:
         # Analyse Web Page
-        api_response = await api_instance.v2_analysis(request1)
+        api_response = await api_instance.v2_analysis(request)
         print("The response of AnalysesApi->v2_analysis:\n")
         pprint(api_response)
     except Exception as e:
@@ -312,7 +312,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request1** | [**Request1**](Request1.md)|  | 
+ **request** | [**Request**](Request.md)|  | 
 
 ### Return type
 

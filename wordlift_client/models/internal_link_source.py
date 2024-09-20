@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    GraphQL support
+    SEO Content Analysis API
 
-    GraphQL endpoint to query Knowledge Graphs
+    This API assesses the match between a URL or text content, a query, and an intent, using advanced SEO techniques.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +27,7 @@ class InternalLinkSource(BaseModel):
     """
     InternalLink source configuration.
     """ # noqa: E501
-    id: StrictStr = Field(description="Entity identifier.")
+    id: Optional[StrictStr] = Field(default=None, description="Entity identifier.")
     name: StrictStr = Field(description="Entity name.")
     url: StrictStr = Field(description="Entity url.")
     __properties: ClassVar[List[str]] = ["id", "name", "url"]

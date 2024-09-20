@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    GraphQL support
+    SEO Content Analysis API
 
-    GraphQL endpoint to query Knowledge Graphs
+    This API assesses the match between a URL or text content, a query, and an intent, using advanced SEO techniques.
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -22,8 +22,8 @@ from pydantic import Field, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
 from wordlift_client.models.event import Event
-from wordlift_client.models.request3 import Request3
-from wordlift_client.models.response2 import Response2
+from wordlift_client.models.request1 import Request1
+from wordlift_client.models.response1 import Response1
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
 from wordlift_client.api_response import ApiResponse
@@ -46,7 +46,7 @@ class PluginEventsApi:
     @validate_call
     async def create_event(
         self,
-        request3: Request3,
+        request1: Request1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -64,8 +64,8 @@ class PluginEventsApi:
 
         Create an event
 
-        :param request3: (required)
-        :type request3: Request3
+        :param request1: (required)
+        :type request1: Request1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -89,7 +89,7 @@ class PluginEventsApi:
         """ # noqa: E501
 
         _param = self._create_event_serialize(
-            request3=request3,
+            request1=request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -114,7 +114,7 @@ class PluginEventsApi:
     @validate_call
     async def create_event_with_http_info(
         self,
-        request3: Request3,
+        request1: Request1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -132,8 +132,8 @@ class PluginEventsApi:
 
         Create an event
 
-        :param request3: (required)
-        :type request3: Request3
+        :param request1: (required)
+        :type request1: Request1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -157,7 +157,7 @@ class PluginEventsApi:
         """ # noqa: E501
 
         _param = self._create_event_serialize(
-            request3=request3,
+            request1=request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -182,7 +182,7 @@ class PluginEventsApi:
     @validate_call
     async def create_event_without_preload_content(
         self,
-        request3: Request3,
+        request1: Request1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -200,8 +200,8 @@ class PluginEventsApi:
 
         Create an event
 
-        :param request3: (required)
-        :type request3: Request3
+        :param request1: (required)
+        :type request1: Request1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -225,7 +225,7 @@ class PluginEventsApi:
         """ # noqa: E501
 
         _param = self._create_event_serialize(
-            request3=request3,
+            request1=request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -245,7 +245,7 @@ class PluginEventsApi:
 
     def _create_event_serialize(
         self,
-        request3,
+        request1,
         _request_auth,
         _content_type,
         _headers,
@@ -269,8 +269,8 @@ class PluginEventsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request3 is not None:
-            _body_params = request3
+        if request1 is not None:
+            _body_params = request1
 
 
         # set the HTTP header `Accept`
@@ -337,7 +337,7 @@ class PluginEventsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Response2:
+    ) -> Response1:
         """List
 
         List the events bound to the authenticated account.
@@ -387,8 +387,8 @@ class PluginEventsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Response2",
-            '401': "Response2",
+            '200': "Response1",
+            '401': "Response1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -421,7 +421,7 @@ class PluginEventsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Response2]:
+    ) -> ApiResponse[Response1]:
         """List
 
         List the events bound to the authenticated account.
@@ -471,8 +471,8 @@ class PluginEventsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Response2",
-            '401': "Response2",
+            '200': "Response1",
+            '401': "Response1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -555,8 +555,8 @@ class PluginEventsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Response2",
-            '401': "Response2",
+            '200': "Response1",
+            '401': "Response1",
         }
         response_data = await self.api_client.call_api(
             *_param,
