@@ -28,7 +28,7 @@ class InternalLinkSource(BaseModel):
     InternalLink source configuration.
     """ # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="Entity identifier.")
-    name: StrictStr = Field(description="Entity name.")
+    name: Optional[StrictStr] = Field(default=None, description="Entity name.")
     url: StrictStr = Field(description="Entity url.")
     __properties: ClassVar[List[str]] = ["id", "name", "url"]
 

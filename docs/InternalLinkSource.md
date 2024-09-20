@@ -7,7 +7,7 @@ InternalLink source configuration.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | Entity identifier. | [optional] 
-**name** | **str** | Entity name. | 
+**name** | **str** | Entity name. | [optional] 
 **url** | **str** | Entity url. | 
 
 ## Example
