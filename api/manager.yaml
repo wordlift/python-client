@@ -2138,7 +2138,6 @@ components:
           format: url
           description: Entity url.
       required:
-      - id
       - name
       - url
     Item:
