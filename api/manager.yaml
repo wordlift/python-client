@@ -46,6 +46,8 @@ tags:
   name: Google Search Console Searches
 - description: Access Google Search Console data
   name: Google Search Console
+- description: Account Statistics
+  name: Account Stats
 - description: "Import Analytics data to the KG using different sources, e.g. Google\
     \ Search Console."
   name: Analytics Imports
@@ -338,6 +340,25 @@ paths:
       summary: Update
       tags:
       - Plugin Diagnostics
+  /accounts/me/stats:
+    get:
+      description: "Get the Account statistics, such the number of products, product\
+        \ groups and urls in the KG."
+      operationId: getMyStats
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountStats'
+          description: Found
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+      summary: Get my Account statistics
+      tags:
+      - Account Stats
   /accounts/{id}:
     get:
       description: Get the account
@@ -1686,6 +1707,26 @@ components:
       - datasetUri
       - networks
       - subscriptionId
+    AccountStats:
+      type: object
+      description: The Account statistics
+      properties:
+        entities_with_url:
+          type: integer
+          format: int64
+          description: The number of entities with URL.
+        product_groups:
+          type: integer
+          format: int64
+          description: The number of product groups in the KG.
+        products:
+          type: integer
+          format: int64
+          description: The number of products in the KG.
+      required:
+      - entities_with_url
+      - product_groups
+      - products
     AccountSubscription:
       type: object
       properties:
