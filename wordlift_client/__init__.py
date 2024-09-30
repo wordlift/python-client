@@ -15,10 +15,11 @@
 """  # noqa: E501
 
 
-__version__ = "1.52.0"
+__version__ = "1.53.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
+from wordlift_client.api.account_stats_api import AccountStatsApi
 from wordlift_client.api.accounts_api import AccountsApi
 from wordlift_client.api.add_ons_api import AddOnsApi
 from wordlift_client.api.analyses_api import AnalysesApi
@@ -90,6 +91,7 @@ from wordlift_client.exceptions import ApiException
 # import models into sdk package
 from wordlift_client.models.account import Account
 from wordlift_client.models.account_info import AccountInfo
+from wordlift_client.models.account_stats import AccountStats
 from wordlift_client.models.account_subscription import AccountSubscription
 from wordlift_client.models.active_account import ActiveAccount
 from wordlift_client.models.add_on_configuration import AddOnConfiguration

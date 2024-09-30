@@ -17,6 +17,7 @@
 # import models into model package
 from wordlift_client.models.account import Account
 from wordlift_client.models.account_info import AccountInfo
+from wordlift_client.models.account_stats import AccountStats
 from wordlift_client.models.account_subscription import AccountSubscription
 from wordlift_client.models.active_account import ActiveAccount
 from wordlift_client.models.add_on_configuration import AddOnConfiguration

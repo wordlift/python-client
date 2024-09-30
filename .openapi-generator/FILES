@@ -5,6 +5,8 @@ README.md
 docs/Account.md
 docs/AccountApi.md
 docs/AccountInfo.md
+docs/AccountStats.md
+docs/AccountStatsApi.md
 docs/AccountSubscription.md
 docs/AccountsApi.md
 docs/ActiveAccount.md
@@ -207,10 +209,13 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_account_stats.py
+test/test_account_stats_api.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
 wordlift_client/api/account_api.py
+wordlift_client/api/account_stats_api.py
 wordlift_client/api/accounts_api.py
 wordlift_client/api/add_ons_api.py
 wordlift_client/api/analyses_api.py
@@ -274,6 +279,7 @@ wordlift_client/exceptions.py
 wordlift_client/models/__init__.py
 wordlift_client/models/account.py
 wordlift_client/models/account_info.py
+wordlift_client/models/account_stats.py
 wordlift_client/models/account_subscription.py
 wordlift_client/models/active_account.py
 wordlift_client/models/add_on_configuration.py
