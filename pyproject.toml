@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "wordlift_client"
-version = "1.53.0"
+version = "1.54.0"
 description = "SEO Content Analysis API"
 authors = ["WordLift <hello@wordlift.io>"]
 license = "(c) copyright 2023-present WordLift"
