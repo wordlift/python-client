@@ -356,6 +356,7 @@ paths:
           description: Authentication Failure
       security:
       - ApiKey: []
+      - OAuth2: []
       summary: Get my Account statistics
       tags:
       - Account Stats
@@ -1711,6 +1712,10 @@ components:
       type: object
       description: The Account statistics
       properties:
+        entities:
+          type: integer
+          format: int64
+          description: The number of entities.
         entities_with_url:
           type: integer
           format: int64
@@ -1724,6 +1729,7 @@ components:
           format: int64
           description: The number of products in the KG.
       required:
+      - entities
       - entities_with_url
       - product_groups
       - products
