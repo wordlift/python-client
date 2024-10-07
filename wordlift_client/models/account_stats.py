@@ -27,10 +27,11 @@ class AccountStats(BaseModel):
     """
     The Account statistics
     """ # noqa: E501
+    entities: StrictInt = Field(description="The number of entities.")
     entities_with_url: StrictInt = Field(description="The number of entities with URL.")
     product_groups: StrictInt = Field(description="The number of product groups in the KG.")
     products: StrictInt = Field(description="The number of products in the KG.")
-    __properties: ClassVar[List[str]] = ["entities_with_url", "product_groups", "products"]
+    __properties: ClassVar[List[str]] = ["entities", "entities_with_url", "product_groups", "products"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,6 +84,7 @@ class AccountStats(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "entities": obj.get("entities"),
             "entities_with_url": obj.get("entities_with_url"),
             "product_groups": obj.get("product_groups"),
             "products": obj.get("products")
