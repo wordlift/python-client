@@ -2419,6 +2419,11 @@ components:
           format: int32
           description: The number of errored products
           readOnly: true
+        products_in_kg_after_sync:
+          type: integer
+          format: int64
+          description: The number of products present in the KG after syncing.
+          readOnly: true
         products_skipped:
           type: integer
           format: int32
