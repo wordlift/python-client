@@ -2404,6 +2404,11 @@ components:
           format: date-time
           description: The last modified date-time.
           readOnly: true
+        overall_products_in_kg:
+          type: integer
+          format: int64
+          description: The overall amount of products available on KG after syncing.
+          readOnly: true
         products_created:
           type: integer
           format: int32
@@ -2418,11 +2423,6 @@ components:
           type: integer
           format: int32
           description: The number of errored products
-          readOnly: true
-        products_in_kg_after_sync:
-          type: integer
-          format: int64
-          description: The number of products present in the KG after syncing.
           readOnly: true
         products_skipped:
           type: integer
@@ -2455,6 +2455,12 @@ components:
           type: string
           format: date-time
           description: The stopped date-time.
+          readOnly: true
+        synced_products_in_kg:
+          type: integer
+          format: int64
+          description: The number of products synced by this process available in
+            KG.
           readOnly: true
       required:
       - merchant_id
