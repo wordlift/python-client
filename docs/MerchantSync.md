@@ -12,16 +12,17 @@ Name | Type | Description | Notes
 **id** | **int** | The unique id. | [optional] [readonly] 
 **merchant_id** | **int** | The parent Merchant id. | [readonly] 
 **modified_at** | **datetime** | The last modified date-time. | [optional] [readonly] 
+**overall_products_in_kg** | **int** | The overall amount of products available on KG after syncing. | [optional] [readonly] 
 **products_created** | **int** | The number of created products | [optional] [readonly] 
 **products_deleted** | **int** | The number of deleted products | [optional] [readonly] 
 **products_errored** | **int** | The number of errored products | [optional] [readonly] 
-**products_in_kg_after_sync** | **int** | The number of products present in the KG after syncing. | [optional] [readonly] 
 **products_skipped** | **int** | The number of skipped products | [optional] [readonly] 
 **products_total** | **int** | The total number of processed products, including the skipped and errored. | [optional] [readonly] 
 **products_unchanged** | **int** | The number of products that haven&#39;t changed and therefore haven&#39;t been synced again | [optional] [readonly] 
 **products_updated** | **int** | The number of update products | [optional] [readonly] 
 **started_at** | **datetime** | The started date-time. | [optional] [readonly] 
 **stopped_at** | **datetime** | The stopped date-time. | [optional] [readonly] 
+**synced_products_in_kg** | **int** | The number of products synced by this process available in KG. | [optional] [readonly] 
 
 ## Example
 

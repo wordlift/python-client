@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    SEO Content Analysis API
+    GraphQL support
 
-    This API assesses the match between a URL or text content, a query, and an intent, using advanced SEO techniques.
+    GraphQL endpoint to query Knowledge Graphs
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -20,7 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from wordlift_client.models.entity1 import Entity1
+from wordlift_client.models.entity import Entity
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +29,7 @@ class RankEntities(BaseModel):
     RankEntities
     """ # noqa: E501
     rank: Optional[StrictInt] = None
-    entities: Optional[List[Entity1]] = None
+    entities: Optional[List[Entity]] = None
     __properties: ClassVar[List[str]] = ["rank", "entities"]
 
     model_config = ConfigDict(
@@ -91,7 +91,7 @@ class RankEntities(BaseModel):
 
         _obj = cls.model_validate({
             "rank": obj.get("rank"),
-            "entities": [Entity1.from_dict(_item) for _item in obj["entities"]] if obj.get("entities") is not None else None
+            "entities": [Entity.from_dict(_item) for _item in obj["entities"]] if obj.get("entities") is not None else None
         })
         return _obj
 

@@ -1,6 +1,6 @@
 # wordlift_client.AnalysesApi
 
-All URIs are relative to *https://api.wordlift.io/quality-rating*
+All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -28,10 +28,10 @@ from wordlift_client.models.response import Response
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/quality-rating
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/quality-rating"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -110,10 +110,10 @@ from wordlift_client.models.analyses_response import AnalysesResponse
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/quality-rating
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/quality-rating"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -191,10 +191,10 @@ from wordlift_client.models.request import Request
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/quality-rating
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/quality-rating"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -273,10 +273,10 @@ from wordlift_client.models.response import Response
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/quality-rating
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/quality-rating"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters

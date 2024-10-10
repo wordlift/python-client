@@ -1,14 +1,14 @@
 # wordlift_client.InspectorApi
 
-All URIs are relative to *https://api.wordlift.io/quality-rating*
+All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get4**](InspectorApi.md#get4) | **GET** /inspect | Inspect
+[**get2**](InspectorApi.md#get2) | **GET** /inspect | Inspect
 
 
-# **get4**
-> InspectResponse get4(u, f, classes=classes)
+# **get2**
+> InspectResponse get2(u, f, classes=classes)
 
 Inspect
 
@@ -24,10 +24,10 @@ from wordlift_client.models.inspect_response import InspectResponse
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io/quality-rating
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io/quality-rating"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -51,11 +51,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Inspect
-        api_response = await api_instance.get4(u, f, classes=classes)
-        print("The response of InspectorApi->get4:\n")
+        api_response = await api_instance.get2(u, f, classes=classes)
+        print("The response of InspectorApi->get2:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling InspectorApi->get4: %s\n" % e)
+        print("Exception when calling InspectorApi->get2: %s\n" % e)
 ```
 
 

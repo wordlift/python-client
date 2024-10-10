@@ -2,9 +2,9 @@
 
 # flake8: noqa
 """
-    SEO Content Analysis API
+    GraphQL support
 
-    This API assesses the match between a URL or text content, a query, and an intent, using advanced SEO techniques.
+    GraphQL endpoint to query Knowledge Graphs
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io

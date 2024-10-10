@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    SEO Content Analysis API
+    GraphQL support
 
-    This API assesses the match between a URL or text content, a query, and an intent, using advanced SEO techniques.
+    GraphQL endpoint to query Knowledge Graphs
 
     The version of the OpenAPI document: 1.0
     Contact: hello@wordlift.io
@@ -39,7 +39,7 @@ class DataURIApi:
 
 
     @validate_call
-    async def get1(
+    async def get3(
         self,
         u: Annotated[StrictStr, Field(description="The Web Page URL.")],
         _request_timeout: Union[
@@ -83,7 +83,7 @@ class DataURIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get1_serialize(
+        _param = self._get3_serialize(
             u=u,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -106,7 +106,7 @@ class DataURIApi:
 
 
     @validate_call
-    async def get1_with_http_info(
+    async def get3_with_http_info(
         self,
         u: Annotated[StrictStr, Field(description="The Web Page URL.")],
         _request_timeout: Union[
@@ -150,7 +150,7 @@ class DataURIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get1_serialize(
+        _param = self._get3_serialize(
             u=u,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -173,7 +173,7 @@ class DataURIApi:
 
 
     @validate_call
-    async def get1_without_preload_content(
+    async def get3_without_preload_content(
         self,
         u: Annotated[StrictStr, Field(description="The Web Page URL.")],
         _request_timeout: Union[
@@ -217,7 +217,7 @@ class DataURIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get1_serialize(
+        _param = self._get3_serialize(
             u=u,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -235,7 +235,7 @@ class DataURIApi:
         return response_data.response
 
 
-    def _get1_serialize(
+    def _get3_serialize(
         self,
         u,
         _request_auth,
