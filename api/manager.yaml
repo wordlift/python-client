@@ -2076,6 +2076,12 @@ components:
               format: int64
           - type: integer
             format: int64
+          - type: array
+            items:
+              type: string
+              format: date-time
+          - type: string
+            format: date-time
       required:
       - operator
     IncludeExclude:
