@@ -16,13 +16,14 @@
 from __future__ import annotations
 import json
 import pprint
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional, Union
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-FILTERVALUE_ONE_OF_SCHEMAS = ["List[float]", "List[int]", "List[str]", "float", "int", "str"]
+FILTERVALUE_ONE_OF_SCHEMAS = ["List[datetime]", "List[float]", "List[int]", "List[str]", "datetime", "float", "int", "str"]
 
 class FilterValue(BaseModel):
     """
@@ -44,8 +45,12 @@ class FilterValue(BaseModel):
     oneof_schema_7_validator: Optional[List[StrictInt]] = None
     # data type: int
     oneof_schema_8_validator: Optional[StrictInt] = None
-    actual_instance: Optional[Union[List[float], List[int], List[str], float, int, str]] = None
-    one_of_schemas: Set[str] = { "List[float]", "List[int]", "List[str]", "float", "int", "str" }
+    # data type: List[datetime]
+    oneof_schema_9_validator: Optional[List[datetime]] = None
+    # data type: datetime
+    oneof_schema_10_validator: Optional[datetime] = None
+    actual_instance: Optional[Union[List[datetime], List[float], List[int], List[str], datetime, float, int, str]] = None
+    one_of_schemas: Set[str] = { "List[datetime]", "List[float]", "List[int]", "List[str]", "datetime", "float", "int", "str" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -116,12 +121,24 @@ class FilterValue(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # validate data type: List[datetime]
+        try:
+            instance.oneof_schema_9_validator = v
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # validate data type: datetime
+        try:
+            instance.oneof_schema_10_validator = v
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in FilterValue with oneOf schemas: List[float], List[int], List[str], float, int, str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in FilterValue with oneOf schemas: List[datetime], List[float], List[int], List[str], datetime, float, int, str. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in FilterValue with oneOf schemas: List[float], List[int], List[str], float, int, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in FilterValue with oneOf schemas: List[datetime], List[float], List[int], List[str], datetime, float, int, str. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -208,13 +225,31 @@ class FilterValue(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into List[datetime]
+        try:
+            # validation
+            instance.oneof_schema_9_validator = json.loads(json_str)
+            # assign value to actual_instance
+            instance.actual_instance = instance.oneof_schema_9_validator
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into datetime
+        try:
+            # validation
+            instance.oneof_schema_10_validator = json.loads(json_str)
+            # assign value to actual_instance
+            instance.actual_instance = instance.oneof_schema_10_validator
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into FilterValue with oneOf schemas: List[float], List[int], List[str], float, int, str. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into FilterValue with oneOf schemas: List[datetime], List[float], List[int], List[str], datetime, float, int, str. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into FilterValue with oneOf schemas: List[float], List[int], List[str], float, int, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into FilterValue with oneOf schemas: List[datetime], List[float], List[int], List[str], datetime, float, int, str. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -228,7 +263,7 @@ class FilterValue(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], List[float], List[int], List[str], float, int, str]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], List[datetime], List[float], List[int], List[str], datetime, float, int, str]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
