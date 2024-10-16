@@ -40,6 +40,8 @@ tags:
   name: Plugin Diagnostics
 - description: Manage Custom Domains
   name: Custom Domains
+- description: The list of included or excluded URLs
+  name: Include Excludes
 - description: Add embeddings to a Knowledge Graphs.
   name: Embedding
 - description: Retrieve analytics data from Google Search Console
@@ -59,8 +61,6 @@ tags:
   name: Redeem Codes
 - description: Create vector search queries.
   name: Vector Search Queries
-- description: The list of included or excluded URLs from the WordPress configuration
-  name: Include Excludes (WordPress plugin)
 - description: Manage Platform Limits
   name: Platform Limits
 - description: Manage Merchants
@@ -228,12 +228,6 @@ paths:
     get:
       description: List the include and exclude configurations.
       operationId: listIncludeExcludes
-      parameters:
-      - in: query
-        name: account
-        required: true
-        schema:
-          $ref: '#/components/schemas/Account'
       responses:
         "200":
           content:
@@ -259,18 +253,14 @@ paths:
                 items:
                   $ref: '#/components/schemas/IncludeExclude'
           description: Not Found
+      security:
+      - ApiKey: []
       summary: List
       tags:
-      - Include Excludes (WordPress plugin)
+      - Include Excludes
     put:
       description: Update the include and exclude configurations.
       operationId: updateIncludeExcludes
-      parameters:
-      - in: query
-        name: account
-        required: true
-        schema:
-          $ref: '#/components/schemas/Account'
       requestBody:
         content:
           application/json:
@@ -304,9 +294,11 @@ paths:
                 items:
                   $ref: '#/components/schemas/IncludeExclude'
           description: Not Found
+      security:
+      - ApiKey: []
       summary: Update
       tags:
-      - Include Excludes (WordPress plugin)
+      - Include Excludes
   /accounts/me/plugin/diagnostics/plugins-collection:
     put:
       description: Replace the list of the plugins for the current account with the
@@ -2090,42 +2082,41 @@ components:
         account_id:
           type: integer
           format: int64
+          description: Account unique identifier
           readOnly: true
-          title: Account unique identifier
         flag:
           type: string
           description: A flag which determines whether the URL is `INCLUDE` or `EXCLUDE`.
           enum:
           - INCLUDE
           - EXCLUDE
-          title: Include or Exclude
         id:
           type: integer
           format: int64
+          description: Unique identifier
           readOnly: true
-          title: Unique identifier
         url:
           type: string
-          title: The URL
+          description: The URL
       required:
       - account_id
       - flag
       - url
     IncludeExcludeRequest:
       type: object
-      description: A request to create an IncludeExclude.
       properties:
-        Include or Exclude:
+        flag:
           type: string
           description: A flag which determines whether the URL is `INCLUDE` or `EXCLUDE`.
           enum:
           - INCLUDE
           - EXCLUDE
-        The URL:
+        url:
           type: string
+          description: The URL
       required:
-      - Include or Exclude
-      - The URL
+      - flag
+      - url
     InternalLink:
       type: object
       properties:
