@@ -1,13 +1,12 @@
 # IncludeExcludeRequest
 
-A request to create an IncludeExclude.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**include_or_exclude** | **str** | A flag which determines whether the URL is &#x60;INCLUDE&#x60; or &#x60;EXCLUDE&#x60;. | 
-**the_url** | **str** |  | 
+**flag** | **str** | A flag which determines whether the URL is &#x60;INCLUDE&#x60; or &#x60;EXCLUDE&#x60;. | 
+**url** | **str** | The URL | 
 
 ## Example
 

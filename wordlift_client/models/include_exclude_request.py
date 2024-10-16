@@ -25,14 +25,14 @@ from typing_extensions import Self
 
 class IncludeExcludeRequest(BaseModel):
     """
-    A request to create an IncludeExclude.
+    IncludeExcludeRequest
     """ # noqa: E501
-    include_or_exclude: StrictStr = Field(description="A flag which determines whether the URL is `INCLUDE` or `EXCLUDE`.", alias="Include or Exclude")
-    the_url: StrictStr = Field(alias="The URL")
-    __properties: ClassVar[List[str]] = ["Include or Exclude", "The URL"]
+    flag: StrictStr = Field(description="A flag which determines whether the URL is `INCLUDE` or `EXCLUDE`.")
+    url: StrictStr = Field(description="The URL")
+    __properties: ClassVar[List[str]] = ["flag", "url"]
 
-    @field_validator('include_or_exclude')
-    def include_or_exclude_validate_enum(cls, value):
+    @field_validator('flag')
+    def flag_validate_enum(cls, value):
         """Validates the enum"""
         if value not in set(['INCLUDE', 'EXCLUDE']):
             raise ValueError("must be one of enum values ('INCLUDE', 'EXCLUDE')")
@@ -89,8 +89,8 @@ class IncludeExcludeRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "Include or Exclude": obj.get("Include or Exclude"),
-            "The URL": obj.get("The URL")
+            "flag": obj.get("flag"),
+            "url": obj.get("url")
         })
         return _obj
 

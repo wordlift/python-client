@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.58.0"
+__version__ = "1.59.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -52,7 +52,7 @@ from wordlift_client.api.google_search_console_api import GoogleSearchConsoleApi
 from wordlift_client.api.google_search_console_o_auth2_api import GoogleSearchConsoleOAuth2Api
 from wordlift_client.api.google_search_console_searches_api import GoogleSearchConsoleSearchesApi
 from wordlift_client.api.graph_ql_api import GraphQLApi
-from wordlift_client.api.include_excludes_word_press_plugin_api import IncludeExcludesWordPressPluginApi
+from wordlift_client.api.include_excludes_api import IncludeExcludesApi
 from wordlift_client.api.inspector_api import InspectorApi
 from wordlift_client.api.internal_links_api import InternalLinksApi
 from wordlift_client.api.long_tails_api import LongTailsApi

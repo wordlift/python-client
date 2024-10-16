@@ -27,10 +27,10 @@ class IncludeExclude(BaseModel):
     """
     IncludeExclude
     """ # noqa: E501
-    account_id: StrictInt
+    account_id: StrictInt = Field(description="Account unique identifier")
     flag: StrictStr = Field(description="A flag which determines whether the URL is `INCLUDE` or `EXCLUDE`.")
-    id: Optional[StrictInt] = None
-    url: StrictStr
+    id: Optional[StrictInt] = Field(default=None, description="Unique identifier")
+    url: StrictStr = Field(description="The URL")
     __properties: ClassVar[List[str]] = ["account_id", "flag", "id", "url"]
 
     @field_validator('flag')

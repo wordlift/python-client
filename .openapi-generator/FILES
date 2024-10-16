@@ -85,7 +85,7 @@ docs/Html.md
 docs/Image.md
 docs/IncludeExclude.md
 docs/IncludeExcludeRequest.md
-docs/IncludeExcludesWordPressPluginApi.md
+docs/IncludeExcludesApi.md
 docs/InspectResponse.md
 docs/InspectorApi.md
 docs/InternalLink.md
@@ -209,6 +209,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_include_excludes_api.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -246,7 +247,7 @@ wordlift_client/api/google_search_console_api.py
 wordlift_client/api/google_search_console_o_auth2_api.py
 wordlift_client/api/google_search_console_searches_api.py
 wordlift_client/api/graph_ql_api.py
-wordlift_client/api/include_excludes_word_press_plugin_api.py
+wordlift_client/api/include_excludes_api.py
 wordlift_client/api/inspector_api.py
 wordlift_client/api/internal_links_api.py
 wordlift_client/api/long_tails_api.py

@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**account_id** | **int** |  | [readonly] 
+**account_id** | **int** | Account unique identifier | [readonly] 
 **flag** | **str** | A flag which determines whether the URL is &#x60;INCLUDE&#x60; or &#x60;EXCLUDE&#x60;. | 
-**id** | **int** |  | [optional] [readonly] 
-**url** | **str** |  | 
+**id** | **int** | Unique identifier | [optional] [readonly] 
+**url** | **str** | The URL | 
 
 ## Example
 
