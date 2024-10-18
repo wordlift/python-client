@@ -33,6 +33,7 @@ class Merchant(BaseModel):
     account_id: Optional[StrictInt] = Field(default=None, description="The account id")
     automatic_synchronization: Optional[StrictBool] = Field(default=None, description="Whether the Merchant data will be synchronized automatically")
     created_at: Optional[datetime] = Field(default=None, description="The create date-time")
+    custom_seller: Optional[StrictStr] = Field(default=None, description="Custom seller entity - if applicable.")
     dataset_domain: Optional[StrictStr] = Field(default=None, description="The custom domain (for example data.example.org)")
     dataset_name: Optional[StrictStr] = Field(default=None, description="The dataset path (for example /data)")
     deleted: StrictBool = Field(description="True if the merchant has been deleted")
@@ -47,7 +48,7 @@ class Merchant(BaseModel):
     url: Optional[StrictStr] = Field(default=None, description="The website URL")
     url_strategy: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default='canonicalLinkAndLink', description="Which strategy to use to write the url schema.")
     writer_service: Optional[StrictStr] = Field(default=None, description="How to write the merchant data to the graph, if unsure, do not set anything (by default `wordpressMerchantWriter`).")
-    __properties: ClassVar[List[str]] = ["access_token", "account_id", "automatic_synchronization", "created_at", "dataset_domain", "dataset_name", "deleted", "deleted_at", "google_merchant_id", "id", "ignore_brand", "ignore_image", "modified_at", "publisher_name", "refresh_token", "url", "url_strategy", "writer_service"]
+    __properties: ClassVar[List[str]] = ["access_token", "account_id", "automatic_synchronization", "created_at", "custom_seller", "dataset_domain", "dataset_name", "deleted", "deleted_at", "google_merchant_id", "id", "ignore_brand", "ignore_image", "modified_at", "publisher_name", "refresh_token", "url", "url_strategy", "writer_service"]
 
     @field_validator('url_strategy')
     def url_strategy_validate_enum(cls, value):
@@ -124,6 +125,7 @@ class Merchant(BaseModel):
             "account_id": obj.get("account_id"),
             "automatic_synchronization": obj.get("automatic_synchronization"),
             "created_at": obj.get("created_at"),
+            "custom_seller": obj.get("custom_seller"),
             "dataset_domain": obj.get("dataset_domain"),
             "dataset_name": obj.get("dataset_name"),
             "deleted": obj.get("deleted") if obj.get("deleted") is not None else False,
