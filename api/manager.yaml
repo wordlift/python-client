@@ -2228,6 +2228,9 @@ components:
           format: date-time
           description: The create date-time
           readOnly: true
+        custom_seller:
+          type: string
+          description: Custom seller entity - if applicable.
         dataset_domain:
           type: string
           deprecated: true
@@ -2481,6 +2484,9 @@ components:
           format: date-time
           description: The create date-time
           readOnly: true
+        custom_seller:
+          type: string
+          description: Custom seller entity - if applicable.
         dataset_domain:
           type: string
           deprecated: true
