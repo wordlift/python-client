@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.embedding_request import EmbeddingRequest
 from typing import Optional, Set
@@ -29,12 +29,23 @@ class SitemapImportRequest(BaseModel):
     The Sitemap Import request
     """ # noqa: E501
     embedding: Optional[EmbeddingRequest] = None
+    id_generator: Optional[StrictStr] = Field(default='default', description="The entity id generator, by default uses the web page path.")
     output_types: Optional[List[StrictStr]] = Field(default=None, description="The type of the generated entities, by default `http://schema.org/WebPage`.")
     overwrite: Optional[StrictBool] = Field(default=False, description="Whether to overwrite existing entities.")
     sitemap_url: Optional[StrictStr] = Field(default=None, description="The sitemap URL")
     sitemap_url_regex: Optional[StrictStr] = Field(default=None, description="A regex filter to apply to discovered URLs, it only applies to URLs in sitemaps.")
     urls: Optional[List[StrictStr]] = Field(default=None, description="The URLs")
-    __properties: ClassVar[List[str]] = ["embedding", "output_types", "overwrite", "sitemap_url", "sitemap_url_regex", "urls"]
+    __properties: ClassVar[List[str]] = ["embedding", "id_generator", "output_types", "overwrite", "sitemap_url", "sitemap_url_regex", "urls"]
+
+    @field_validator('id_generator')
+    def id_generator_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['default', 'headline-with-url-hash']):
+            raise ValueError("must be one of enum values ('default', 'headline-with-url-hash')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,6 +102,7 @@ class SitemapImportRequest(BaseModel):
 
         _obj = cls.model_validate({
             "embedding": EmbeddingRequest.from_dict(obj["embedding"]) if obj.get("embedding") is not None else None,
+            "id_generator": obj.get("id_generator") if obj.get("id_generator") is not None else 'default',
             "output_types": obj.get("output_types"),
             "overwrite": obj.get("overwrite") if obj.get("overwrite") is not None else False,
             "sitemap_url": obj.get("sitemap_url"),
