@@ -3264,6 +3264,13 @@ components:
       properties:
         embedding:
           $ref: '#/components/schemas/EmbeddingRequest'
+        id_generator:
+          type: string
+          default: default
+          description: "The entity id generator, by default uses the web page path."
+          enum:
+          - default
+          - headline-with-url-hash
         output_types:
           type: array
           default:
