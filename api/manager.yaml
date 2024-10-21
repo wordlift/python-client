@@ -2068,12 +2068,11 @@ components:
               format: int64
           - type: integer
             format: int64
-          - type: array
-            items:
-              type: string
-              format: date-time
-          - type: string
-            format: date-time
+        value_date:
+          type: string
+          format: date-time
+          description: "The filter value as a date, if provided will be preferred\
+            \ over the `value` field."
       required:
       - operator
     IncludeExclude:
