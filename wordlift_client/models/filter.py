@@ -18,6 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.filter_value import FilterValue
@@ -32,7 +33,8 @@ class Filter(BaseModel):
     key: Optional[StrictStr] = Field(default=None, description="The filter key. Key is required for the filters [EQ, NE, GT, LT, GTE, LTE, IN, NIN]")
     operator: StrictStr = Field(description="A query request filter operator.")
     value: Optional[FilterValue] = None
-    __properties: ClassVar[List[str]] = ["filters", "key", "operator", "value"]
+    value_date: Optional[datetime] = Field(default=None, description="The filter value as a date, if provided will be preferred over the `value` field.")
+    __properties: ClassVar[List[str]] = ["filters", "key", "operator", "value", "value_date"]
 
     @field_validator('operator')
     def operator_validate_enum(cls, value):
@@ -105,7 +107,8 @@ class Filter(BaseModel):
             "filters": [Filter.from_dict(_item) for _item in obj["filters"]] if obj.get("filters") is not None else None,
             "key": obj.get("key"),
             "operator": obj.get("operator"),
-            "value": FilterValue.from_dict(obj["value"]) if obj.get("value") is not None else None
+            "value": FilterValue.from_dict(obj["value"]) if obj.get("value") is not None else None,
+            "value_date": obj.get("value_date")
         })
         return _obj
 

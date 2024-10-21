@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **key** | **str** | The filter key. Key is required for the filters [EQ, NE, GT, LT, GTE, LTE, IN, NIN] | [optional] 
 **operator** | **str** | A query request filter operator. | 
 **value** | [**FilterValue**](FilterValue.md) |  | [optional] 
+**value_date** | **datetime** | The filter value as a date, if provided will be preferred over the &#x60;value&#x60; field. | [optional] 
 
 ## Example
 
