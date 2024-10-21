@@ -661,7 +661,7 @@ paths:
       responses:
         "200":
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/ExchangeAuthCodeResponse'
           description: Found
@@ -689,7 +689,7 @@ paths:
       responses:
         "200":
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/BuildAuthorizeUriResponse'
           description: Found
