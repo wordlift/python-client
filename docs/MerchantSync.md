@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **started_at** | **datetime** | The started date-time. | [optional] [readonly] 
 **stopped_at** | **datetime** | The stopped date-time. | [optional] [readonly] 
 **synced_products_in_kg** | **int** | The number of products synced by this process available in KG. | [optional] [readonly] 
+**synced_products_in_kg_before_cleanup** | **int** |  | [optional] 
 
 ## Example
 

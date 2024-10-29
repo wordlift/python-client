@@ -46,7 +46,8 @@ class MerchantSync(BaseModel):
     started_at: Optional[datetime] = Field(default=None, description="The started date-time.")
     stopped_at: Optional[datetime] = Field(default=None, description="The stopped date-time.")
     synced_products_in_kg: Optional[StrictInt] = Field(default=None, description="The number of products synced by this process available in KG.")
-    __properties: ClassVar[List[str]] = ["created_at", "error_reason", "has_errors", "id", "merchant_id", "modified_at", "overall_products_in_kg", "products_created", "products_deleted", "products_errored", "products_skipped", "products_total", "products_unchanged", "products_updated", "started_at", "stopped_at", "synced_products_in_kg"]
+    synced_products_in_kg_before_cleanup: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["created_at", "error_reason", "has_errors", "id", "merchant_id", "modified_at", "overall_products_in_kg", "products_created", "products_deleted", "products_errored", "products_skipped", "products_total", "products_unchanged", "products_updated", "started_at", "stopped_at", "synced_products_in_kg", "synced_products_in_kg_before_cleanup"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -149,7 +150,8 @@ class MerchantSync(BaseModel):
             "products_updated": obj.get("products_updated"),
             "started_at": obj.get("started_at"),
             "stopped_at": obj.get("stopped_at"),
-            "synced_products_in_kg": obj.get("synced_products_in_kg")
+            "synced_products_in_kg": obj.get("synced_products_in_kg"),
+            "synced_products_in_kg_before_cleanup": obj.get("synced_products_in_kg_before_cleanup")
         })
         return _obj
 
