@@ -2461,6 +2461,9 @@ components:
           description: The number of products synced by this process available in
             KG.
           readOnly: true
+        synced_products_in_kg_before_cleanup:
+          type: integer
+          format: int64
       required:
       - merchant_id
     MerchantView:
