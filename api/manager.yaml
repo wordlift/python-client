@@ -42,6 +42,8 @@ tags:
   name: Custom Domains
 - description: The list of included or excluded URLs
   name: Include Excludes
+- description: Create structured data for authors.
+  name: Authors
 - description: Add embeddings to a Knowledge Graphs.
   name: Embedding
 - description: Retrieve analytics data from Google Search Console
@@ -528,6 +530,23 @@ paths:
       summary: Get the Web Data URI for a Web Page URL.
       tags:
       - Data URI
+  /data/authors:
+    post:
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorRequest'
+        required: true
+      responses:
+        "200":
+          content: {}
+          description: OK
+      security:
+      - ApiKey: []
+      tags:
+      - Authors
   /ext/google/searchconsole/searches:
     get:
       description: List the Website Search performance data
@@ -1860,6 +1879,13 @@ components:
             {%- endfor -%}
           description: "The prompt template, we provide a default. Liquid template\
             \ language is supported."
+    AuthorRequest:
+      type: object
+      properties:
+        language:
+          type: string
+        name:
+          type: string
     BotifyCrawlImportRequest:
       type: object
       description: The Botify Crawl Import request
