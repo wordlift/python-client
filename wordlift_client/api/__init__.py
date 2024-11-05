@@ -7,6 +7,7 @@ from wordlift_client.api.accounts_api import AccountsApi
 from wordlift_client.api.add_ons_api import AddOnsApi
 from wordlift_client.api.analyses_api import AnalysesApi
 from wordlift_client.api.analytics_imports_api import AnalyticsImportsApi
+from wordlift_client.api.authors_api import AuthorsApi
 from wordlift_client.api.autocomplete_api import AutocompleteApi
 from wordlift_client.api.botify_crawl_imports_api import BotifyCrawlImportsApi
 from wordlift_client.api.classifications_api import ClassificationsApi

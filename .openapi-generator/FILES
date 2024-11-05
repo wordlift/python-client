@@ -20,6 +20,8 @@ docs/AnalyticsImportRequest.md
 docs/AnalyticsImportsApi.md
 docs/AnchorText.md
 docs/Annotation.md
+docs/AuthorRequest.md
+docs/AuthorsApi.md
 docs/AutocompleteApi.md
 docs/AutocompleteResult.md
 docs/BatchRequest.md
@@ -209,6 +211,8 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_author_request.py
+test/test_authors_api.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -218,6 +222,7 @@ wordlift_client/api/accounts_api.py
 wordlift_client/api/add_ons_api.py
 wordlift_client/api/analyses_api.py
 wordlift_client/api/analytics_imports_api.py
+wordlift_client/api/authors_api.py
 wordlift_client/api/autocomplete_api.py
 wordlift_client/api/botify_crawl_imports_api.py
 wordlift_client/api/classifications_api.py
@@ -287,6 +292,7 @@ wordlift_client/models/analyses_response_item.py
 wordlift_client/models/analytics_import_request.py
 wordlift_client/models/anchor_text.py
 wordlift_client/models/annotation.py
+wordlift_client/models/author_request.py
 wordlift_client/models/autocomplete_result.py
 wordlift_client/models/batch_request.py
 wordlift_client/models/botify_crawl_import_request.py
