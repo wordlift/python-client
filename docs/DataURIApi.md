@@ -79,7 +79,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**303** | See Other |  * Location - ${api.data-uri-controller.get.headers.location.description} <br>  |
+**303** | See Other |  * Location - Redirect to google login page <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
