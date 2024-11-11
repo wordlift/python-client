@@ -57,6 +57,8 @@ tags:
   name: Analytics Imports
 - description: Manage vector search nodes embeddings.
   name: Vector Search Nodes
+- description: Authorize Google Search Console API client.
+  name: Google Search Console OAuth2
 - description: Create Internal Links.
   name: Internal Links
 - description: Manage redeem codes.
@@ -666,8 +668,78 @@ paths:
       summary: List
       tags:
       - Google Merchants
+  /google-search-console/authorize/complete:
+    get:
+      description: Handle the return of the authorisation flow of GSC.
+      operationId: authorize_1
+      parameters:
+      - description: The error from the authorization server
+        in: query
+        name: error
+        required: true
+        schema:
+          type: string
+      - description: The state to maintain after authorize.
+        in: query
+        name: state
+        required: true
+        schema:
+          type: string
+      - description: The authorization code from the oauth server after authorization
+        in: query
+        name: code
+        required: true
+        schema:
+          type: string
+      responses:
+        "307":
+          description: Redirect to redirectUri value
+          headers:
+            Location:
+              description: The URL to redirect to
+              schema: {}
+              style: simple
+      summary: Authorize the Google Search Console API client
+      tags:
+      - Google Search Console OAuth2
+  /google-search-console/authorize/init:
+    get:
+      description: Call this API to go to the login page of the Google Search Console.
+      operationId: login
+      parameters:
+      - description: The account key
+        in: query
+        name: accountKey
+        required: true
+        schema:
+          type: string
+      - description: The redirect URI to redirect to after the login
+        in: query
+        name: redirectUri
+        required: true
+        schema:
+          type: string
+          format: uri
+      - description: The state to maintain after authorize.
+        in: query
+        name: state
+        required: false
+        schema:
+          type: string
+      responses:
+        "307":
+          description: Redirect to redirectUri value
+          headers:
+            Location:
+              description: Redirect to google login page
+              schema: {}
+              style: simple
+      summary: Login to the Google Search Console API client
+      tags:
+      - Google Search Console OAuth2
   /google-search-console/oauth2/auth-code-exchanges:
     post:
+      deprecated: true
       description: Call this API to have the Platform receive an Authentication Token
         to access the Analytics data via Google Search Console.
       operationId: createAuthCodeExchange
@@ -695,6 +767,7 @@ paths:
       - Google Search Console OAuth2
   /google-search-console/oauth2/authorize-uris:
     post:
+      deprecated: true
       description: Call this API to get an authorization URI needed to interactively
         get an authorization token. Then call the `exchangeAuthCode` to exchange it
         with an authorization token.
