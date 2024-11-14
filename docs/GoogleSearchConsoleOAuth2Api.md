@@ -4,91 +4,10 @@ All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**authorize1**](GoogleSearchConsoleOAuth2Api.md#authorize1) | **GET** /google-search-console/authorize/complete | Authorize the Google Search Console API client
 [**create_auth_code_exchange**](GoogleSearchConsoleOAuth2Api.md#create_auth_code_exchange) | **POST** /google-search-console/oauth2/auth-code-exchanges | Get an Access Code
 [**create_authorize_uri**](GoogleSearchConsoleOAuth2Api.md#create_authorize_uri) | **POST** /google-search-console/oauth2/authorize-uris | Create an Authorization URI
 [**login**](GoogleSearchConsoleOAuth2Api.md#login) | **GET** /google-search-console/authorize/init | Login to the Google Search Console API client
 
-
-# **authorize1**
-> authorize1(error, state, code)
-
-Authorize the Google Search Console API client
-
-Handle the return of the authorisation flow of GSC.
-
-### Example
-
-* Api Key Authentication (ApiKey):
-
-```python
-import wordlift_client
-from wordlift_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.wordlift.io
-# See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: ApiKey
-configuration.api_key['ApiKey'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKey'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-async with wordlift_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = wordlift_client.GoogleSearchConsoleOAuth2Api(api_client)
-    error = 'error_example' # str | The error from the authorization server
-    state = 'state_example' # str | The state to maintain after authorize.
-    code = 'code_example' # str | The authorization code from the oauth server after authorization
-
-    try:
-        # Authorize the Google Search Console API client
-        await api_instance.authorize1(error, state, code)
-    except Exception as e:
-        print("Exception when calling GoogleSearchConsoleOAuth2Api->authorize1: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **error** | **str**| The error from the authorization server | 
- **state** | **str**| The state to maintain after authorize. | 
- **code** | **str**| The authorization code from the oauth server after authorization | 
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[ApiKey](../README.md#ApiKey)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**307** | Redirect to redirectUri value |  * Location - Redirect to google login page <br>  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_auth_code_exchange**
 > ExchangeAuthCodeResponse create_auth_code_exchange(exchange_auth_code_request)
