@@ -668,40 +668,6 @@ paths:
       summary: List
       tags:
       - Google Merchants
-  /google-search-console/authorize/complete:
-    get:
-      description: Handle the return of the authorisation flow of GSC.
-      operationId: authorize_1
-      parameters:
-      - description: The error from the authorization server
-        in: query
-        name: error
-        required: true
-        schema:
-          type: string
-      - description: The state to maintain after authorize.
-        in: query
-        name: state
-        required: true
-        schema:
-          type: string
-      - description: The authorization code from the oauth server after authorization
-        in: query
-        name: code
-        required: true
-        schema:
-          type: string
-      responses:
-        "307":
-          description: Redirect to redirectUri value
-          headers:
-            Location:
-              description: The URL to redirect to
-              schema: {}
-              style: simple
-      summary: Authorize the Google Search Console API client
-      tags:
-      - Google Search Console OAuth2
   /google-search-console/authorize/init:
     get:
       description: Call this API to go to the login page of the Google Search Console.
