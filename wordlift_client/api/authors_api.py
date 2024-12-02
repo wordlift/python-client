@@ -38,7 +38,7 @@ class AuthorsApi:
 
 
     @validate_call
-    async def create1(
+    async def create_author(
         self,
         author_request: AuthorRequest,
         _request_timeout: Union[
@@ -54,8 +54,9 @@ class AuthorsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """create1
+        """Create
 
+        Creates the structured data for an author.
 
         :param author_request: (required)
         :type author_request: AuthorRequest
@@ -81,7 +82,7 @@ class AuthorsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create1_serialize(
+        _param = self._create_author_serialize(
             author_request=author_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -90,7 +91,8 @@ class AuthorsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '201': None,
+            '401': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -104,7 +106,7 @@ class AuthorsApi:
 
 
     @validate_call
-    async def create1_with_http_info(
+    async def create_author_with_http_info(
         self,
         author_request: AuthorRequest,
         _request_timeout: Union[
@@ -120,8 +122,9 @@ class AuthorsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """create1
+        """Create
 
+        Creates the structured data for an author.
 
         :param author_request: (required)
         :type author_request: AuthorRequest
@@ -147,7 +150,7 @@ class AuthorsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create1_serialize(
+        _param = self._create_author_serialize(
             author_request=author_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -156,7 +159,8 @@ class AuthorsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '201': None,
+            '401': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -170,7 +174,7 @@ class AuthorsApi:
 
 
     @validate_call
-    async def create1_without_preload_content(
+    async def create_author_without_preload_content(
         self,
         author_request: AuthorRequest,
         _request_timeout: Union[
@@ -186,8 +190,9 @@ class AuthorsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create1
+        """Create
 
+        Creates the structured data for an author.
 
         :param author_request: (required)
         :type author_request: AuthorRequest
@@ -213,7 +218,7 @@ class AuthorsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create1_serialize(
+        _param = self._create_author_serialize(
             author_request=author_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -222,7 +227,8 @@ class AuthorsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '201': None,
+            '401': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -231,7 +237,7 @@ class AuthorsApi:
         return response_data.response
 
 
-    def _create1_serialize(
+    def _create_author_serialize(
         self,
         author_request,
         _request_auth,

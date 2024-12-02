@@ -1,12 +1,12 @@
 # AuthorRequest
 
+The author request.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**language** | **str** |  | [optional] 
-**name** | **str** |  | [optional] 
+**name** | **str** | The name of the author, e.g. &#x60;John Smith&#x60;. | 
 
 ## Example
 

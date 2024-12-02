@@ -4,13 +4,15 @@ All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create1**](AuthorsApi.md#create1) | **POST** /data/authors | 
+[**create_author**](AuthorsApi.md#create_author) | **POST** /data/authors | Create
 
 
-# **create1**
-> create1(author_request)
+# **create_author**
+> create_author(author_request)
 
+Create
 
+Creates the structured data for an author.
 
 ### Example
 
@@ -46,9 +48,10 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     author_request = wordlift_client.AuthorRequest() # AuthorRequest | 
 
     try:
-        await api_instance.create1(author_request)
+        # Create
+        await api_instance.create_author(author_request)
     except Exception as e:
-        print("Exception when calling AuthorsApi->create1: %s\n" % e)
+        print("Exception when calling AuthorsApi->create_author: %s\n" % e)
 ```
 
 
@@ -77,7 +80,8 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
+**201** | Success |  -  |
+**401** | Authentication Failure |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

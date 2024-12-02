@@ -18,18 +18,17 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
 class AuthorRequest(BaseModel):
     """
-    AuthorRequest
+    The author request.
     """ # noqa: E501
-    language: Optional[StrictStr] = None
-    name: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["language", "name"]
+    name: StrictStr = Field(description="The name of the author, e.g. `John Smith`.")
+    __properties: ClassVar[List[str]] = ["name"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,7 +81,6 @@ class AuthorRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "language": obj.get("language"),
             "name": obj.get("name")
         })
         return _obj
