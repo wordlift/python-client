@@ -534,7 +534,8 @@ paths:
       - Data URI
   /data/authors:
     post:
-      operationId: create
+      description: Creates the structured data for an author.
+      operationId: createAuthor
       requestBody:
         content:
           application/json:
@@ -542,11 +543,14 @@ paths:
               $ref: '#/components/schemas/AuthorRequest'
         required: true
       responses:
-        "200":
+        "201":
           content: {}
-          description: OK
+          description: Success
+        "401":
+          description: Authentication Failure
       security:
       - ApiKey: []
+      summary: Create
       tags:
       - Authors
   /ext/google/searchconsole/searches:
@@ -1920,11 +1924,13 @@ components:
             \ language is supported."
     AuthorRequest:
       type: object
+      description: The author request.
       properties:
-        language:
-          type: string
         name:
           type: string
+          description: "The name of the author, e.g. `John Smith`."
+      required:
+      - name
     BotifyCrawlImportRequest:
       type: object
       description: The Botify Crawl Import request
