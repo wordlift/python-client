@@ -1,5 +1,5 @@
 {
-  "name": "wordlift-client",
+  "name": "wordlift_client",
   "version": "1.0.0",
   "description": "Analyse content using Linked Data and Knowledge Graphs.",
   "license": "Apache License 2.0",
