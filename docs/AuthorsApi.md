@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **create_author**
-> create_author(author_request)
+> str create_author(author_request)
 
 Create
 
@@ -49,7 +49,9 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Create
-        await api_instance.create_author(author_request)
+        api_response = await api_instance.create_author(author_request)
+        print("The response of AuthorsApi->create_author:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AuthorsApi->create_author: %s\n" % e)
 ```
@@ -65,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**str**
 
 ### Authorization
 
@@ -74,7 +76,7 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/ld+json, application/n-triples, application/rdf+xml, text/turtle
 
 ### HTTP response details
 

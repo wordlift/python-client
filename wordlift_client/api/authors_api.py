@@ -17,6 +17,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from pydantic import StrictStr
 from wordlift_client.models.author_request import AuthorRequest
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
@@ -53,7 +54,7 @@ class AuthorsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> str:
         """Create
 
         Creates the structured data for an author.
@@ -91,7 +92,7 @@ class AuthorsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': None,
+            '201': "str",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -121,7 +122,7 @@ class AuthorsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[str]:
         """Create
 
         Creates the structured data for an author.
@@ -159,7 +160,7 @@ class AuthorsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': None,
+            '201': "str",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -227,7 +228,7 @@ class AuthorsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': None,
+            '201': "str",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -267,6 +268,15 @@ class AuthorsApi:
             _body_params = author_request
 
 
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/ld+json', 
+                'application/n-triples', 
+                'application/rdf+xml', 
+                'text/turtle'
+            ]
+        )
 
         # set the HTTP header `Content-Type`
         if _content_type:

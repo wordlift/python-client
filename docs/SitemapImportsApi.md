@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **create_sitemap_import**
-> create_sitemap_import(sitemap_import_request)
+> List[str] create_sitemap_import(sitemap_import_request)
 
 Create
 
@@ -49,7 +49,9 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Create
-        await api_instance.create_sitemap_import(sitemap_import_request)
+        api_response = await api_instance.create_sitemap_import(sitemap_import_request)
+        print("The response of SitemapImportsApi->create_sitemap_import:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SitemapImportsApi->create_sitemap_import: %s\n" % e)
 ```
@@ -65,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**List[str]**
 
 ### Authorization
 
@@ -74,7 +76,7 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/x-ndjson
 
 ### HTTP response details
 
