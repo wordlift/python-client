@@ -684,6 +684,33 @@ paths:
       summary: List
       tags:
       - Google Merchants
+  /google-search-console/authorize/duplicate:
+    post:
+      description: Call this API to duplicate an existing google search console connection
+        to another accounts.
+      operationId: duplicate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DuplicateAuthorizationRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: The connection has been duplicated
+        "422":
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: The account keys are invalid
+      summary: Duplicate the Google Search Console connection through accounts
+      tags:
+      - Google Search Console OAuth2
   /google-search-console/authorize/init:
     get:
       description: Call this API to go to the login page of the Google Search Console.
@@ -2053,6 +2080,18 @@ components:
       required:
       - dataset_domain
       - dataset_name
+    DuplicateAuthorizationRequest:
+      type: object
+      properties:
+        from_account_key:
+          type: string
+        to_account_keys:
+          type: array
+          items:
+            type: string
+      required:
+      - from_account_key
+      - to_account_keys
     EmbeddingRequest:
       type: object
       description: A request to generate the embeddings.
