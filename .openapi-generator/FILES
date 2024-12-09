@@ -59,6 +59,7 @@ docs/DatasetApi.md
 docs/DiagnosticPlugin.md
 docs/DiagnosticPluginRequest.md
 docs/DomainValidationRequest.md
+docs/DuplicateAuthorizationRequest.md
 docs/EmbeddingApi.md
 docs/EmbeddingRequest.md
 docs/EmbeddingsApi.md
@@ -211,6 +212,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_duplicate_authorization_request.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -310,6 +312,7 @@ wordlift_client/models/create_seo_score_request.py
 wordlift_client/models/diagnostic_plugin.py
 wordlift_client/models/diagnostic_plugin_request.py
 wordlift_client/models/domain_validation_request.py
+wordlift_client/models/duplicate_authorization_request.py
 wordlift_client/models/embedding_request.py
 wordlift_client/models/entity.py
 wordlift_client/models/entity1.py

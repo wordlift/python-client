@@ -47,6 +47,7 @@ from wordlift_client.models.create_seo_score_request import CreateSEOScoreReques
 from wordlift_client.models.diagnostic_plugin import DiagnosticPlugin
 from wordlift_client.models.diagnostic_plugin_request import DiagnosticPluginRequest
 from wordlift_client.models.domain_validation_request import DomainValidationRequest
+from wordlift_client.models.duplicate_authorization_request import DuplicateAuthorizationRequest
 from wordlift_client.models.embedding_request import EmbeddingRequest
 from wordlift_client.models.entity import Entity
 from wordlift_client.models.entity1 import Entity1
