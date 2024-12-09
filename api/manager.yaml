@@ -544,7 +544,19 @@ paths:
         required: true
       responses:
         "201":
-          content: {}
+          content:
+            application/ld+json:
+              schema:
+                type: string
+            application/n-triples:
+              schema:
+                type: string
+            application/rdf+xml:
+              schema:
+                type: string
+            text/turtle:
+              schema:
+                type: string
           description: Success
         "401":
           description: Authentication Failure
@@ -1526,7 +1538,12 @@ paths:
         required: true
       responses:
         "200":
-          content: {}
+          content:
+            application/x-ndjson:
+              schema:
+                type: array
+                items:
+                  type: string
           description: Success
         "401":
           description: Authentication Failure
