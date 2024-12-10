@@ -92,7 +92,7 @@ class AuthorsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "str",
+            '200': "str",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -160,7 +160,7 @@ class AuthorsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "str",
+            '200': "str",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -228,7 +228,7 @@ class AuthorsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "str",
+            '200': "str",
             '401': None,
         }
         response_data = await self.api_client.call_api(
