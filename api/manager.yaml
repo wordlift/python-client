@@ -543,7 +543,7 @@ paths:
               $ref: '#/components/schemas/AuthorRequest'
         required: true
       responses:
-        "201":
+        "200":
           content:
             application/ld+json:
               schema:
