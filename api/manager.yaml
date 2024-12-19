@@ -2365,6 +2365,13 @@ components:
           type: string
           deprecated: true
           description: The dataset path (for example /data)
+        default_products_filter_action:
+          type: string
+          default: PROCESS
+          description: Default Products filter action to apply during sync process.
+          enum:
+          - PROCESS
+          - IGNORE
         deleted:
           type: boolean
           default: false
@@ -2418,6 +2425,7 @@ components:
             \ not set anything (by default `wordpressMerchantWriter`)."
       required:
       - access_token
+      - default_products_filter_action
       - deleted
       - google_merchant_id
       - publisher_name
@@ -2624,6 +2632,13 @@ components:
           type: string
           deprecated: true
           description: The dataset path (for example /data)
+        default_products_filter_action:
+          type: string
+          default: PROCESS
+          description: Default Products filter action to apply during sync process.
+          enum:
+          - PROCESS
+          - IGNORE
         deleted:
           type: boolean
           default: false
@@ -2715,6 +2730,7 @@ components:
             \ not set anything (by default `wordpressMerchantWriter`)."
       required:
       - access_token
+      - default_products_filter_action
       - deleted
       - google_merchant_id
       - publisher_name
