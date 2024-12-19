@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **custom_seller** | **str** | Custom seller entity - if applicable. | [optional] 
 **dataset_domain** | **str** | The custom domain (for example data.example.org) | [optional] 
 **dataset_name** | **str** | The dataset path (for example /data) | [optional] 
+**default_products_filter_action** | **str** | Default Products filter action to apply during sync process. | [default to 'PROCESS']
 **deleted** | **bool** | True if the merchant has been deleted | [default to False]
 **deleted_at** | **datetime** | The delete date-time | [optional] [readonly] 
 **google_merchant_id** | **int** | The Google Merchant id | 
