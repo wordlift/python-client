@@ -12,6 +12,7 @@ docs/AccountsApi.md
 docs/ActiveAccount.md
 docs/AddOnConfiguration.md
 docs/AddOnsApi.md
+docs/AgentApi.md
 docs/AnalysesApi.md
 docs/AnalysesRequest.md
 docs/AnalysesResponse.md
@@ -58,7 +59,6 @@ docs/CreateSEOScoreRequest.md
 docs/CustomDomainsApi.md
 docs/DataURIApi.md
 docs/DatasetApi.md
-docs/DefaultApi.md
 docs/DiagnosticPlugin.md
 docs/DiagnosticPluginRequest.md
 docs/DomainValidationRequest.md
@@ -218,6 +218,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_agent_api.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -225,6 +226,7 @@ wordlift_client/api/account_api.py
 wordlift_client/api/account_stats_api.py
 wordlift_client/api/accounts_api.py
 wordlift_client/api/add_ons_api.py
+wordlift_client/api/agent_api.py
 wordlift_client/api/analyses_api.py
 wordlift_client/api/analytics_imports_api.py
 wordlift_client/api/authors_api.py
@@ -246,7 +248,6 @@ wordlift_client/api/content_generations_api.py
 wordlift_client/api/custom_domains_api.py
 wordlift_client/api/data_uri_api.py
 wordlift_client/api/dataset_api.py
-wordlift_client/api/default_api.py
 wordlift_client/api/embedding_api.py
 wordlift_client/api/embeddings_api.py
 wordlift_client/api/entities_api.py
