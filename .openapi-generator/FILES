@@ -218,12 +218,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_ask_request.py
-test/test_ask_response.py
-test/test_default_api.py
-test/test_http_validation_error.py
-test/test_location_inner.py
-test/test_validation_error.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py

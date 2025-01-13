@@ -6,8 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **message** | **str** |  | 
-**model** | **str** |  | [optional] 
-**security** | **bool** |  | [optional] 
+**model** | **str** |  | [optional] [default to 'gpt-4o']
+**security** | **bool** |  | [optional] [default to False]
 
 ## Example
 

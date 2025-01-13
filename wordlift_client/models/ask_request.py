@@ -28,8 +28,8 @@ class AskRequest(BaseModel):
     AskRequest
     """ # noqa: E501
     message: StrictStr
-    model: Optional[StrictStr] = None
-    security: Optional[StrictBool] = None
+    model: Optional[StrictStr] = 'gpt-4o'
+    security: Optional[StrictBool] = False
     __properties: ClassVar[List[str]] = ["message", "model", "security"]
 
     model_config = ConfigDict(
@@ -71,16 +71,6 @@ class AskRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if model (nullable) is None
-        # and model_fields_set contains the field
-        if self.model is None and "model" in self.model_fields_set:
-            _dict['model'] = None
-
-        # set to None if security (nullable) is None
-        # and model_fields_set contains the field
-        if self.security is None and "security" in self.model_fields_set:
-            _dict['security'] = None
-
         return _dict
 
     @classmethod
@@ -94,8 +84,8 @@ class AskRequest(BaseModel):
 
         _obj = cls.model_validate({
             "message": obj.get("message"),
-            "model": obj.get("model"),
-            "security": obj.get("security")
+            "model": obj.get("model") if obj.get("model") is not None else 'gpt-4o',
+            "security": obj.get("security") if obj.get("security") is not None else False
         })
         return _obj
 
