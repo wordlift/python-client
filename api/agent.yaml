@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  title: WordLift Agent API
+  description: API for interacting with the WordLift Agent
+  version: 1.0.0
+paths:
+  /ask:
+    post:
+      summary: Ask Request
+      operationId: ask_request_api_ask_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AskRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AskResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - APIKeyHeader: []
+components:
+  schemas:
+    AskRequest:
+      properties:
+        message:
+          type: string
+          title: Message
+        model:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Model
+          default: gpt-4o
+        security:
+          anyOf:
+            - type: boolean
+            - type: 'null'
+          title: Security
+          default: false
+      type: object
+      required:
+        - message
+      title: AskRequest
+    AskResponse:
+      properties:
+        response:
+          type: string
+          title: Response
+      type: object
+      required:
+        - response
+      title: AskResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+        - loc
+        - msg
+        - type
+      title: ValidationError
+  securitySchemes:
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: authorization
+servers:
+  - url: https://api.wordlift.io/agent
+    description: WordLift Agent API
