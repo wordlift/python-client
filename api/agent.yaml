@@ -6,7 +6,11 @@ info:
 paths:
   /ask:
     post:
+      tags:
+        - Agent
       summary: Ask Request
+      description: Interact with the WordLift Agent to process a message and receive
+        an AI-driven response.
       operationId: ask_request_api_ask_post
       requestBody:
         content:
