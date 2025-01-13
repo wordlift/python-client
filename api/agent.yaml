@@ -37,15 +37,11 @@ components:
           type: string
           title: Message
         model:
-          anyOf:
-            - type: string
-            - type: 'null'
+          type: string
           title: Model
           default: gpt-4o
         security:
-          anyOf:
-            - type: boolean
-            - type: 'null'
+          type: boolean
           title: Security
           default: false
       type: object
