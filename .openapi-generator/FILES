@@ -20,6 +20,8 @@ docs/AnalyticsImportRequest.md
 docs/AnalyticsImportsApi.md
 docs/AnchorText.md
 docs/Annotation.md
+docs/AskRequest.md
+docs/AskResponse.md
 docs/AuthorRequest.md
 docs/AuthorsApi.md
 docs/AutocompleteApi.md
@@ -56,6 +58,7 @@ docs/CreateSEOScoreRequest.md
 docs/CustomDomainsApi.md
 docs/DataURIApi.md
 docs/DatasetApi.md
+docs/DefaultApi.md
 docs/DiagnosticPlugin.md
 docs/DiagnosticPluginRequest.md
 docs/DomainValidationRequest.md
@@ -84,6 +87,7 @@ docs/GoogleSearchConsoleOAuth2Api.md
 docs/GoogleSearchConsoleSearchesApi.md
 docs/GraphQLApi.md
 docs/GraphqlRequest.md
+docs/HTTPValidationError.md
 docs/Html.md
 docs/Image.md
 docs/IncludeExclude.md
@@ -99,6 +103,7 @@ docs/InternalLinksApi.md
 docs/Item.md
 docs/KgEmbeddingRequest.md
 docs/LevelEnum.md
+docs/LocationInner.md
 docs/LongTailsApi.md
 docs/LongtailResponse.md
 docs/Merchant.md
@@ -179,6 +184,7 @@ docs/UpdateAccountRequest.md
 docs/UpdateQuestionAndAnswerRequest.md
 docs/UpdateRecordRequest.md
 docs/UpdateRecordsRequest.md
+docs/ValidationError.md
 docs/ValidationFix.md
 docs/ValidationResult.md
 docs/ValidationTypeEnum.md
@@ -212,6 +218,12 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_ask_request.py
+test/test_ask_response.py
+test/test_default_api.py
+test/test_http_validation_error.py
+test/test_location_inner.py
+test/test_validation_error.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -240,6 +252,7 @@ wordlift_client/api/content_generations_api.py
 wordlift_client/api/custom_domains_api.py
 wordlift_client/api/data_uri_api.py
 wordlift_client/api/dataset_api.py
+wordlift_client/api/default_api.py
 wordlift_client/api/embedding_api.py
 wordlift_client/api/embeddings_api.py
 wordlift_client/api/entities_api.py
@@ -291,6 +304,8 @@ wordlift_client/models/analyses_response_item.py
 wordlift_client/models/analytics_import_request.py
 wordlift_client/models/anchor_text.py
 wordlift_client/models/annotation.py
+wordlift_client/models/ask_request.py
+wordlift_client/models/ask_response.py
 wordlift_client/models/author_request.py
 wordlift_client/models/autocomplete_result.py
 wordlift_client/models/batch_request.py
@@ -327,6 +342,7 @@ wordlift_client/models/generate_sitemap200_response.py
 wordlift_client/models/generate_sitemap_request.py
 wordlift_client/models/graphql_request.py
 wordlift_client/models/html.py
+wordlift_client/models/http_validation_error.py
 wordlift_client/models/image.py
 wordlift_client/models/include_exclude.py
 wordlift_client/models/include_exclude_request.py
@@ -338,6 +354,7 @@ wordlift_client/models/internal_link_source.py
 wordlift_client/models/item.py
 wordlift_client/models/kg_embedding_request.py
 wordlift_client/models/level_enum.py
+wordlift_client/models/location_inner.py
 wordlift_client/models/longtail_response.py
 wordlift_client/models/merchant.py
 wordlift_client/models/merchant_entry.py
@@ -402,6 +419,7 @@ wordlift_client/models/update_account_request.py
 wordlift_client/models/update_question_and_answer_request.py
 wordlift_client/models/update_record_request.py
 wordlift_client/models/update_records_request.py
+wordlift_client/models/validation_error.py
 wordlift_client/models/validation_fix.py
 wordlift_client/models/validation_result.py
 wordlift_client/models/validation_type_enum.py

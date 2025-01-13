@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.72.0"
+__version__ = "1.73.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -77,6 +77,7 @@ from wordlift_client.api.vector_search_queries_api import VectorSearchQueriesApi
 from wordlift_client.api.vector_search_questions_api import VectorSearchQuestionsApi
 from wordlift_client.api.web_asyncs_metadata_api import WebAsyncsMetadataApi
 from wordlift_client.api.web_asyncs_responses_api import WebAsyncsResponsesApi
+from wordlift_client.api.default_api import DefaultApi
 
 # import ApiClient
 from wordlift_client.api_response import ApiResponse
@@ -102,6 +103,8 @@ from wordlift_client.models.analyses_response_item import AnalysesResponseItem
 from wordlift_client.models.analytics_import_request import AnalyticsImportRequest
 from wordlift_client.models.anchor_text import AnchorText
 from wordlift_client.models.annotation import Annotation
+from wordlift_client.models.ask_request import AskRequest
+from wordlift_client.models.ask_response import AskResponse
 from wordlift_client.models.author_request import AuthorRequest
 from wordlift_client.models.autocomplete_result import AutocompleteResult
 from wordlift_client.models.batch_request import BatchRequest
@@ -137,6 +140,7 @@ from wordlift_client.models.filter_value import FilterValue
 from wordlift_client.models.generate_sitemap200_response import GenerateSitemap200Response
 from wordlift_client.models.generate_sitemap_request import GenerateSitemapRequest
 from wordlift_client.models.graphql_request import GraphqlRequest
+from wordlift_client.models.http_validation_error import HTTPValidationError
 from wordlift_client.models.html import Html
 from wordlift_client.models.image import Image
 from wordlift_client.models.include_exclude import IncludeExclude
@@ -149,6 +153,7 @@ from wordlift_client.models.internal_link_source import InternalLinkSource
 from wordlift_client.models.item import Item
 from wordlift_client.models.kg_embedding_request import KgEmbeddingRequest
 from wordlift_client.models.level_enum import LevelEnum
+from wordlift_client.models.location_inner import LocationInner
 from wordlift_client.models.longtail_response import LongtailResponse
 from wordlift_client.models.merchant import Merchant
 from wordlift_client.models.merchant_entry import MerchantEntry
@@ -213,6 +218,7 @@ from wordlift_client.models.update_account_request import UpdateAccountRequest
 from wordlift_client.models.update_question_and_answer_request import UpdateQuestionAndAnswerRequest
 from wordlift_client.models.update_record_request import UpdateRecordRequest
 from wordlift_client.models.update_records_request import UpdateRecordsRequest
+from wordlift_client.models.validation_error import ValidationError
 from wordlift_client.models.validation_fix import ValidationFix
 from wordlift_client.models.validation_result import ValidationResult
 from wordlift_client.models.validation_type_enum import ValidationTypeEnum
