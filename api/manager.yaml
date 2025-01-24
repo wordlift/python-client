@@ -684,6 +684,30 @@ paths:
       summary: List
       tags:
       - Google Merchants
+  /google-search-console/authorizations:
+    get:
+      description: Retrieve the authorizations of the authenticated user.
+      operationId: getAuthorizations
+      parameters:
+      - in: query
+        name: account_key
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization'
+          description: The authorizations of the user
+      summary: Get the authorizations
+      tags:
+      - Google Search Console OAuth2
   /google-search-console/authorize/duplicate:
     post:
       description: Call this API to duplicate an existing google search console connection
@@ -1975,6 +1999,35 @@ components:
           description: "The name of the author, e.g. `John Smith`."
       required:
       - name
+    Authorization:
+      type: object
+      properties:
+        access_token_issued_at:
+          type: string
+          format: date-time
+          description: When the access token was issued
+          readOnly: true
+        account:
+          type: string
+          description: Account key
+          readOnly: true
+        refresh_token_issued_at:
+          type: string
+          format: date-time
+          description: When the refresh token was issued
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/AuthorizationStatus'
+      required:
+      - access_token_issued_at
+      - account
+      - status
+    AuthorizationStatus:
+      type: string
+      description: The connections status
+      enum:
+      - connected
+      readOnly: true
     BotifyCrawlImportRequest:
       type: object
       description: The Botify Crawl Import request
