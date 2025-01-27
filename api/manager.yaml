@@ -684,6 +684,18 @@ paths:
       summary: List
       tags:
       - Google Merchants
+  /google-search-console/authorization:
+    delete:
+      description: Retrieve the authorizations of the authenticated user.
+      operationId: deleteAuthorization
+      responses:
+        "202":
+          description: Authorization of the account authenticated is deleted.
+      security:
+      - ApiKey: []
+      summary: Delete an authorization
+      tags:
+      - Google Search Console OAuth2
   /google-search-console/authorizations:
     get:
       description: Retrieve the authorizations of the authenticated user.
