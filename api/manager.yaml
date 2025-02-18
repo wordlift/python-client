@@ -34,6 +34,8 @@ tags:
   name: OAuth2 Authorized Clients
 - description: Manage Accounts
   name: Accounts
+- description: Get Account Group Information
+  name: Account Groups
 - description: Configure Google Search Console OAuth2 authorized access codes.
   name: Google Search Console OAuth2
 - description: Update Plugin Diagnostics data for WordPress clients.
@@ -72,6 +74,67 @@ tags:
 - description: Synchronize Products from the Merchant Feed
   name: Merchant Syncs
 paths:
+  /account/group:
+    get:
+      description: Get the group where the authenticated account is part of
+      operationId: getGroupOfAccount
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: The group where the account is part of
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: Authentication Failure
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: The account is not part of any group
+      security:
+      - ApiKey: []
+      summary: Get group of account.
+      tags:
+      - Account Groups
+    put:
+      description: Save a group with all the accounts provided.
+      operationId: saveGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReplaceGroupRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: The group is created
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: Authentication Failure
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: Invalid request
+      security:
+      - ApiKey: []
+      summary: Save a group account.
+      tags:
+      - Account Groups
   /accounts:
     get:
       description: List the accounts
@@ -2267,6 +2330,16 @@ components:
             \ over the `value` field."
       required:
       - operator
+    Group:
+      type: object
+      properties:
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        id:
+          type: string
+          format: uuid
     IncludeExclude:
       type: object
       properties:
@@ -3458,6 +3531,16 @@ components:
         type:
           type: string
           format: uri
+    ReplaceGroupRequest:
+      type: object
+      properties:
+        account_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+      required:
+      - account_ids
     Request:
       type: object
       properties:
