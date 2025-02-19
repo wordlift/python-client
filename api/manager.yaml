@@ -3744,6 +3744,8 @@ components:
           type: string
         image:
           type: string
+        markdown:
+          type: string
         text:
           type: string
         types:
