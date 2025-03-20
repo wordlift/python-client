@@ -1,12 +1,14 @@
 # wordlift_client.GoogleSearchConsoleOAuth2Api
 
-All URIs are relative to *https://api.wordlift.io*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_auth_code_exchange**](GoogleSearchConsoleOAuth2Api.md#create_auth_code_exchange) | **POST** /google-search-console/oauth2/auth-code-exchanges | Get an Access Code
 [**create_authorize_uri**](GoogleSearchConsoleOAuth2Api.md#create_authorize_uri) | **POST** /google-search-console/oauth2/authorize-uris | Create an Authorization URI
+[**delete_authorization**](GoogleSearchConsoleOAuth2Api.md#delete_authorization) | **DELETE** /google-search-console/authorization | Delete an authorization
 [**duplicate**](GoogleSearchConsoleOAuth2Api.md#duplicate) | **POST** /google-search-console/authorize/duplicate | Duplicate the Google Search Console connection through accounts
+[**get_authorizations**](GoogleSearchConsoleOAuth2Api.md#get_authorizations) | **GET** /google-search-console/authorizations | Get the authorizations
 [**login**](GoogleSearchConsoleOAuth2Api.md#login) | **GET** /google-search-console/authorize/init | Login to the Google Search Console API client
 
 
@@ -28,10 +30,10 @@ from wordlift_client.models.exchange_auth_code_response import ExchangeAuthCodeR
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -110,10 +112,10 @@ from wordlift_client.models.build_authorize_uri_response import BuildAuthorizeUr
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -174,6 +176,78 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **delete_authorization**
+> delete_authorization()
+
+Delete an authorization
+
+Retrieve the authorizations of the authenticated user.
+
+### Example
+
+* Api Key Authentication (ApiKey):
+
+```python
+import wordlift_client
+from wordlift_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wordlift_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with wordlift_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wordlift_client.GoogleSearchConsoleOAuth2Api(api_client)
+
+    try:
+        # Delete an authorization
+        await api_instance.delete_authorization()
+    except Exception as e:
+        print("Exception when calling GoogleSearchConsoleOAuth2Api->delete_authorization: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Authorization of the account authenticated is deleted. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **duplicate**
 > object duplicate(duplicate_authorization_request)
 
@@ -191,10 +265,10 @@ from wordlift_client.models.duplicate_authorization_request import DuplicateAuth
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -254,6 +328,85 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_authorizations**
+> List[Authorization] get_authorizations(account_key=account_key)
+
+Get the authorizations
+
+Retrieve the authorizations of the authenticated user.
+
+### Example
+
+* Api Key Authentication (ApiKey):
+
+```python
+import wordlift_client
+from wordlift_client.models.authorization import Authorization
+from wordlift_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wordlift_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with wordlift_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wordlift_client.GoogleSearchConsoleOAuth2Api(api_client)
+    account_key = ['account_key_example'] # List[str] |  (optional)
+
+    try:
+        # Get the authorizations
+        api_response = await api_instance.get_authorizations(account_key=account_key)
+        print("The response of GoogleSearchConsoleOAuth2Api->get_authorizations:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling GoogleSearchConsoleOAuth2Api->get_authorizations: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **account_key** | [**List[str]**](str.md)|  | [optional] 
+
+### Return type
+
+[**List[Authorization]**](Authorization.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The authorizations of the user |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **login**
 > login(account_key, redirect_uri, state=state)
 
@@ -270,10 +423,10 @@ import wordlift_client
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
