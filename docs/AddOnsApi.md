@@ -1,6 +1,6 @@
 # wordlift_client.AddOnsApi
 
-All URIs are relative to *https://api.wordlift.io*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -24,10 +24,10 @@ from wordlift_client.models.page_add_on_configuration import PageAddOnConfigurat
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters

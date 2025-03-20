@@ -1,6 +1,6 @@
 # wordlift_client.ContentGenerationRecordsApi
 
-All URIs are relative to *https://api.wordlift.io*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -27,10 +27,10 @@ from wordlift_client.models.record import Record
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -108,10 +108,10 @@ from wordlift_client.models.page_record import PageRecord
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -191,10 +191,10 @@ import wordlift_client
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -268,10 +268,10 @@ from wordlift_client.models.request3 import Request3
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -351,10 +351,10 @@ from wordlift_client.models.update_records_request import UpdateRecordsRequest
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -433,10 +433,10 @@ from wordlift_client.models.update_record_request import UpdateRecordRequest
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters

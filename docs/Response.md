@@ -6,7 +6,7 @@ Response
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entities** | [**Dict[str, Entity1]**](Entity1.md) | A map of entity URI to the respective entity. | [optional] 
+**entities** | [**Dict[str, Entity]**](Entity.md) | A map of entity URI to the respective entity. | [optional] 
 **annotations** | [**Dict[str, Annotation]**](Annotation.md) | A map of annotation id to the respective annotation. | [optional] 
 **images** | [**List[Image]**](Image.md) | A list of images. | [optional] 
 **languages** | **List[str]** | A list of languages. | [optional] 

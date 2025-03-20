@@ -24,6 +24,8 @@ docs/Annotation.md
 docs/AskRequest.md
 docs/AskResponse.md
 docs/AuthorRequest.md
+docs/Authorization.md
+docs/AuthorizationStatus.md
 docs/AuthorsApi.md
 docs/AutocompleteApi.md
 docs/AutocompleteResult.md
@@ -218,7 +220,8 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_agent_api.py
+test/test_authorization.py
+test/test_authorization_status.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -302,6 +305,8 @@ wordlift_client/models/annotation.py
 wordlift_client/models/ask_request.py
 wordlift_client/models/ask_response.py
 wordlift_client/models/author_request.py
+wordlift_client/models/authorization.py
+wordlift_client/models/authorization_status.py
 wordlift_client/models/autocomplete_result.py
 wordlift_client/models/batch_request.py
 wordlift_client/models/botify_crawl_import_request.py

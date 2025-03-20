@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **date_published** | **date** |  | [optional] 
 **headline** | **str** |  | [optional] 
 **image** | **str** |  | [optional] 
+**markdown** | **str** |  | [optional] 
 **text** | **str** |  | [optional] 
 **types** | **List[str]** |  | [optional] 
 **url** | **str** |  | [optional] 
