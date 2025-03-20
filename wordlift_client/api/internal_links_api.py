@@ -93,7 +93,7 @@ class InternalLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "List[str]",
+            '200': "List[str]",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -161,7 +161,7 @@ class InternalLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "List[str]",
+            '200': "List[str]",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -229,7 +229,7 @@ class InternalLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "List[str]",
+            '200': "List[str]",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -367,7 +367,7 @@ class InternalLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "List[InternalLink]",
+            '200': "List[InternalLink]",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -435,7 +435,7 @@ class InternalLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "List[InternalLink]",
+            '200': "List[InternalLink]",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -503,7 +503,7 @@ class InternalLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "List[InternalLink]",
+            '200': "List[InternalLink]",
             '401': None,
         }
         response_data = await self.api_client.call_api(
