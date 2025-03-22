@@ -2325,9 +2325,12 @@ components:
       type: object
       description: InternalLink destinations configuration.
       properties:
+        id:
+          type: string
+          description: "The entity ID, usually a URI."
         name:
           type: string
-          description: Identifier of the Entity.
+          description: "The entity's name, or headline."
         position:
           type: integer
           format: int32
@@ -2335,8 +2338,9 @@ components:
         url:
           type: string
           format: url
-          description: URL of the Entity.
+          description: The entity's web page URL.
       required:
+      - id
       - name
       - position
       - url
@@ -3596,7 +3600,6 @@ components:
           type: string
         iri:
           type: string
-          deprecated: true
           description: The IRI of the entity that this node belongs to.
         metadata:
           type: object
