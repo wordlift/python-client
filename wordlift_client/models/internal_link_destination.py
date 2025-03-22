@@ -26,10 +26,11 @@ class InternalLinkDestination(BaseModel):
     """
     InternalLink destinations configuration.
     """ # noqa: E501
-    name: StrictStr = Field(description="Identifier of the Entity.")
+    id: StrictStr = Field(description="The entity ID, usually a URI.")
+    name: StrictStr = Field(description="The entity's name, or headline.")
     position: StrictInt = Field(description="The position of an item in a series or sequence of items.")
-    url: StrictStr = Field(description="URL of the Entity.")
-    __properties: ClassVar[List[str]] = ["name", "position", "url"]
+    url: StrictStr = Field(description="The entity's web page URL.")
+    __properties: ClassVar[List[str]] = ["id", "name", "position", "url"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,6 +83,7 @@ class InternalLinkDestination(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "id": obj.get("id"),
             "name": obj.get("name"),
             "position": obj.get("position"),
             "url": obj.get("url")

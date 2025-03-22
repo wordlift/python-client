@@ -6,9 +6,10 @@ InternalLink destinations configuration.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | Identifier of the Entity. | 
+**id** | **str** | The entity ID, usually a URI. | 
+**name** | **str** | The entity&#39;s name, or headline. | 
 **position** | **int** | The position of an item in a series or sequence of items. | 
-**url** | **str** | URL of the Entity. | 
+**url** | **str** | The entity&#39;s web page URL. | 
 
 ## Example
 
