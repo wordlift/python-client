@@ -35,6 +35,7 @@ class Account(BaseModel):
     country: Optional[StrictStr] = None
     dataset_id: Optional[StrictStr] = Field(default=None, alias="datasetId")
     dataset_uri: Optional[StrictStr] = Field(default=None, alias="datasetUri")
+    default_data_formatter: Optional[StrictStr] = None
     domain_uri: Optional[StrictStr] = Field(default=None, alias="domainUri")
     google_search_console_site_url: Optional[StrictStr] = None
     id: Optional[StrictInt] = None
@@ -49,7 +50,7 @@ class Account(BaseModel):
     wp_admin: Optional[StrictStr] = Field(default=None, alias="wpAdmin")
     wp_json: Optional[StrictStr] = Field(default=None, alias="wpJson")
     wp_include_exclude_default: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["analytics_client_factory", "analyzerId", "botify_project", "botify_token", "botify_username", "collection", "country", "datasetId", "datasetUri", "domainUri", "google_search_console_site_url", "id", "indexed", "is_wordpress", "key", "language", "ngDatasetId", "resolvedUrl", "subscriptionId", "url", "wpAdmin", "wpJson", "wp_include_exclude_default"]
+    __properties: ClassVar[List[str]] = ["analytics_client_factory", "analyzerId", "botify_project", "botify_token", "botify_username", "collection", "country", "datasetId", "datasetUri", "default_data_formatter", "domainUri", "google_search_console_site_url", "id", "indexed", "is_wordpress", "key", "language", "ngDatasetId", "resolvedUrl", "subscriptionId", "url", "wpAdmin", "wpJson", "wp_include_exclude_default"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,6 +112,7 @@ class Account(BaseModel):
             "country": obj.get("country"),
             "datasetId": obj.get("datasetId"),
             "datasetUri": obj.get("datasetUri"),
+            "default_data_formatter": obj.get("default_data_formatter"),
             "domainUri": obj.get("domainUri"),
             "google_search_console_site_url": obj.get("google_search_console_site_url"),
             "id": obj.get("id"),

@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **country** | **str** |  | [optional] 
 **dataset_id** | **str** |  | [optional] 
 **dataset_uri** | **str** |  | [optional] 
+**default_data_formatter** | **str** |  | [optional] 
 **domain_uri** | **str** |  | [optional] 
 **google_search_console_site_url** | **str** |  | [optional] 
 **id** | **int** |  | [optional] 

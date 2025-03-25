@@ -223,9 +223,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_image_to_text_api.py
-test/test_image_to_text_request.py
-test/test_image_to_text_response.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
