@@ -92,6 +92,9 @@ docs/GraphqlRequest.md
 docs/HTTPValidationError.md
 docs/Html.md
 docs/Image.md
+docs/ImageToTextApi.md
+docs/ImageToTextRequest.md
+docs/ImageToTextResponse.md
 docs/IncludeExclude.md
 docs/IncludeExcludeRequest.md
 docs/IncludeExcludesApi.md
@@ -220,6 +223,9 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_image_to_text_api.py
+test/test_image_to_text_request.py
+test/test_image_to_text_response.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -259,6 +265,7 @@ wordlift_client/api/google_search_console_api.py
 wordlift_client/api/google_search_console_o_auth2_api.py
 wordlift_client/api/google_search_console_searches_api.py
 wordlift_client/api/graph_ql_api.py
+wordlift_client/api/image_to_text_api.py
 wordlift_client/api/include_excludes_api.py
 wordlift_client/api/inspector_api.py
 wordlift_client/api/internal_links_api.py
@@ -342,6 +349,8 @@ wordlift_client/models/graphql_request.py
 wordlift_client/models/html.py
 wordlift_client/models/http_validation_error.py
 wordlift_client/models/image.py
+wordlift_client/models/image_to_text_request.py
+wordlift_client/models/image_to_text_response.py
 wordlift_client/models/include_exclude.py
 wordlift_client/models/include_exclude_request.py
 wordlift_client/models/inspect_response.py

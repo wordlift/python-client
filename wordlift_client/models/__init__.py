@@ -68,6 +68,8 @@ from wordlift_client.models.graphql_request import GraphqlRequest
 from wordlift_client.models.http_validation_error import HTTPValidationError
 from wordlift_client.models.html import Html
 from wordlift_client.models.image import Image
+from wordlift_client.models.image_to_text_request import ImageToTextRequest
+from wordlift_client.models.image_to_text_response import ImageToTextResponse
 from wordlift_client.models.include_exclude import IncludeExclude
 from wordlift_client.models.include_exclude_request import IncludeExcludeRequest
 from wordlift_client.models.inspect_response import InspectResponse
