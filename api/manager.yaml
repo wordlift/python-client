@@ -1789,6 +1789,11 @@ components:
           type: string
           description: The dataset URI
           readOnly: true
+        defaultDataFormatter:
+          type: string
+          description: The default data formatter used by the account to format the
+            JSON+LD of the data from the KG.
+          readOnly: true
         features:
           type: object
           additionalProperties:
