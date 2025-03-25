@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **account_id** | **int** | The Account Id | [readonly] 
 **dataset_id** | **str** | The Dataset Id | [optional] [readonly] 
 **dataset_uri** | **str** | The dataset URI | [readonly] 
+**default_data_formatter** | **str** | The default data formatter used by the account to format the JSON+LD of the data from the KG. | [optional] [readonly] 
 **features** | **Dict[str, bool]** | A list of features enabled or disabled for the account | [optional] [readonly] 
 **google_search_console_site_url** | **str** | Google Search Console Site URL | [optional] [readonly] 
 **include_exclude_default** | **str** | The default setting for include/exclude URLs. | [optional] [readonly] [default to 'include']

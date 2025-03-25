@@ -30,6 +30,7 @@ class AccountInfo(BaseModel):
     account_id: StrictInt = Field(description="The Account Id", alias="accountId")
     dataset_id: Optional[StrictStr] = Field(default=None, description="The Dataset Id", alias="datasetId")
     dataset_uri: StrictStr = Field(description="The dataset URI", alias="datasetUri")
+    default_data_formatter: Optional[StrictStr] = Field(default=None, description="The default data formatter used by the account to format the JSON+LD of the data from the KG.", alias="defaultDataFormatter")
     features: Optional[Dict[str, StrictBool]] = Field(default=None, description="A list of features enabled or disabled for the account")
     google_search_console_site_url: Optional[StrictStr] = Field(default=None, description="Google Search Console Site URL", alias="googleSearchConsoleSiteUrl")
     include_exclude_default: Optional[StrictStr] = Field(default='include', description="The default setting for include/exclude URLs.", alias="includeExcludeDefault")
@@ -41,7 +42,7 @@ class AccountInfo(BaseModel):
     url: Optional[StrictStr] = Field(default=None, description="The website URL")
     wp_admin: Optional[StrictStr] = Field(default=None, description="If WordPress, the WP-ADMIN URL", alias="wpAdmin")
     wp_json: Optional[StrictStr] = Field(default=None, description="If WordPress, the WP-JSON end-point", alias="wpJson")
-    __properties: ClassVar[List[str]] = ["accountId", "datasetId", "datasetUri", "features", "googleSearchConsoleSiteUrl", "includeExcludeDefault", "key", "language", "networks", "ngDatasetId", "subscriptionId", "url", "wpAdmin", "wpJson"]
+    __properties: ClassVar[List[str]] = ["accountId", "datasetId", "datasetUri", "defaultDataFormatter", "features", "googleSearchConsoleSiteUrl", "includeExcludeDefault", "key", "language", "networks", "ngDatasetId", "subscriptionId", "url", "wpAdmin", "wpJson"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,11 +87,13 @@ class AccountInfo(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
             "account_id",
             "dataset_id",
             "dataset_uri",
+            "default_data_formatter",
             "features",
             "google_search_console_site_url",
             "include_exclude_default",
@@ -130,6 +133,7 @@ class AccountInfo(BaseModel):
             "accountId": obj.get("accountId"),
             "datasetId": obj.get("datasetId"),
             "datasetUri": obj.get("datasetUri"),
+            "defaultDataFormatter": obj.get("defaultDataFormatter"),
             "features": obj.get("features"),
             "googleSearchConsoleSiteUrl": obj.get("googleSearchConsoleSiteUrl"),
             "includeExcludeDefault": obj.get("includeExcludeDefault") if obj.get("includeExcludeDefault") is not None else 'include',
