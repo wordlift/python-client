@@ -1740,6 +1740,8 @@ components:
           deprecated: true
         datasetUri:
           type: string
+        default_data_formatter:
+          type: string
         domainUri:
           type: string
         google_search_console_site_url:
