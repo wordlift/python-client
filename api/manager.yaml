@@ -1989,7 +1989,7 @@ components:
           description: "The maximum anchor text length, by default 15 characters."
         model:
           type: string
-          default: gpt-4
+          default: gpt-4o
           description: The model to use.
         prompt_template:
           type: string
