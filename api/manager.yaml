@@ -1781,6 +1781,10 @@ components:
           format: int64
           description: The Account Id
           readOnly: true
+        country_code:
+          type: string
+          description: The country code
+          readOnly: true
         datasetId:
           type: string
           description: The Dataset Id
