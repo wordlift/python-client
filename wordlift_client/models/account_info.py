@@ -28,6 +28,7 @@ class AccountInfo(BaseModel):
     Account Information
     """ # noqa: E501
     account_id: StrictInt = Field(description="The Account Id", alias="accountId")
+    country_code: Optional[StrictStr] = Field(default=None, description="The country code")
     dataset_id: Optional[StrictStr] = Field(default=None, description="The Dataset Id", alias="datasetId")
     dataset_uri: StrictStr = Field(description="The dataset URI", alias="datasetUri")
     default_data_formatter: Optional[StrictStr] = Field(default=None, description="The default data formatter used by the account to format the JSON+LD of the data from the KG.", alias="defaultDataFormatter")
@@ -42,7 +43,7 @@ class AccountInfo(BaseModel):
     url: Optional[StrictStr] = Field(default=None, description="The website URL")
     wp_admin: Optional[StrictStr] = Field(default=None, description="If WordPress, the WP-ADMIN URL", alias="wpAdmin")
     wp_json: Optional[StrictStr] = Field(default=None, description="If WordPress, the WP-JSON end-point", alias="wpJson")
-    __properties: ClassVar[List[str]] = ["accountId", "datasetId", "datasetUri", "defaultDataFormatter", "features", "googleSearchConsoleSiteUrl", "includeExcludeDefault", "key", "language", "networks", "ngDatasetId", "subscriptionId", "url", "wpAdmin", "wpJson"]
+    __properties: ClassVar[List[str]] = ["accountId", "country_code", "datasetId", "datasetUri", "defaultDataFormatter", "features", "googleSearchConsoleSiteUrl", "includeExcludeDefault", "key", "language", "networks", "ngDatasetId", "subscriptionId", "url", "wpAdmin", "wpJson"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,9 +89,11 @@ class AccountInfo(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
             "account_id",
+            "country_code",
             "dataset_id",
             "dataset_uri",
             "default_data_formatter",
@@ -131,6 +134,7 @@ class AccountInfo(BaseModel):
 
         _obj = cls.model_validate({
             "accountId": obj.get("accountId"),
+            "country_code": obj.get("country_code"),
             "datasetId": obj.get("datasetId"),
             "datasetUri": obj.get("datasetUri"),
             "defaultDataFormatter": obj.get("defaultDataFormatter"),

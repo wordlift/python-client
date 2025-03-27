@@ -7,6 +7,7 @@ Account Information
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **account_id** | **int** | The Account Id | [readonly] 
+**country_code** | **str** | The country code | [optional] [readonly] 
 **dataset_id** | **str** | The Dataset Id | [optional] [readonly] 
 **dataset_uri** | **str** | The dataset URI | [readonly] 
 **default_data_formatter** | **str** | The default data formatter used by the account to format the JSON+LD of the data from the KG. | [optional] [readonly] 
