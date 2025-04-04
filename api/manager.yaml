@@ -38,6 +38,8 @@ tags:
   name: Google Search Console OAuth2
 - description: Update Plugin Diagnostics data for WordPress clients.
   name: Plugin Diagnostics
+- description: Data about performed search analytics synchronizations to the KG.
+  name: Search analytics synchronizations.
 - description: Manage Custom Domains
   name: Custom Domains
 - description: The list of included or excluded URLs
@@ -482,6 +484,70 @@ paths:
       summary: Create
       tags:
       - Analytics Imports
+  /analytics-syncs:
+    get:
+      description: Retrieve the latest executed syncs.
+      operationId: listAnalyticsSyncs
+      parameters:
+      - in: query
+        name: accountIds
+        required: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+          enum:
+          - most_recent
+      - in: query
+        name: group_by
+        required: false
+        schema:
+          type: string
+          enum:
+          - account_id
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnalyticsSync'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnalyticsSync'
+          description: Bad Request
+      security:
+      - OAuth2: []
+      summary: Get the latest syncs
+      tags:
+      - Search analytics synchronizations.
+    post:
+      description: Create and run analytics sync.
+      operationId: createSync_1
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsSync'
+          description: Created
+      security:
+      - ApiKey: []
+      summary: Create analytics sync.
+      tags:
+      - Search analytics synchronizations.
   /botify-crawl-imports:
     post:
       description: Create a Botify Crawl Import
@@ -1980,6 +2046,65 @@ components:
             type: string
             description: An array of URLs.
           uniqueItems: true
+    AnalyticsSync:
+      type: object
+      properties:
+        account_id:
+          type: integer
+          format: int64
+          description: The Account identifier
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          description: The creation date-time.
+          readOnly: true
+        id:
+          type: string
+          format: uuid
+          description: The resource identifier
+          readOnly: true
+        queries_retrieved:
+          type: integer
+          format: int64
+          description: Total number of queries retrieved by the analytics provider.
+          readOnly: true
+        retrievable_urls:
+          type: integer
+          format: int32
+          description: Number of URLs processable by the analytics provider based
+            on the Account URL.
+          readOnly: true
+        started_at:
+          type: string
+          format: date-time
+          description: The started date-time.
+          readOnly: true
+        status:
+          type: string
+          description: Status of the sync process.
+          enum:
+          - SCHEDULED
+          - SYNCING
+          - COMPLETED
+          - ERROR
+          - CANCELLED
+          readOnly: true
+        stopped_at:
+          type: string
+          format: date-time
+          description: The stopped date-time.
+          readOnly: true
+        total_entities_updated:
+          type: integer
+          format: int32
+          description: Number of unique entities updated with analytics by this sync.
+          readOnly: true
+        urls_in_dataset:
+          type: integer
+          format: int32
+          description: Number of total URLs retrieved from dataset entities
+          readOnly: true
     AnchorText:
       type: object
       description: The Anchor Text request.
