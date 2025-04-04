@@ -19,6 +19,7 @@ docs/AnalysesResponse.md
 docs/AnalysesResponseItem.md
 docs/AnalyticsImportRequest.md
 docs/AnalyticsImportsApi.md
+docs/AnalyticsSync.md
 docs/AnchorText.md
 docs/Annotation.md
 docs/AskRequest.md
@@ -176,6 +177,7 @@ docs/RuleRequest.md
 docs/RulesApi.md
 docs/SEOScoresApi.md
 docs/Scope.md
+docs/SearchAnalyticsSynchronizationsApi.md
 docs/SitemapGeneratorApi.md
 docs/SitemapImportRequest.md
 docs/SitemapImportsApi.md
@@ -223,6 +225,8 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_analytics_sync.py
+test/test_search_analytics_synchronizations_api.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -278,6 +282,7 @@ wordlift_client/api/plugin_events_api.py
 wordlift_client/api/questions_and_answers_api.py
 wordlift_client/api/redeem_codes_api.py
 wordlift_client/api/rules_api.py
+wordlift_client/api/search_analytics_synchronizations_api.py
 wordlift_client/api/seo_scores_api.py
 wordlift_client/api/sitemap_generator_api.py
 wordlift_client/api/sitemap_imports_api.py
@@ -302,6 +307,7 @@ wordlift_client/models/analyses_request.py
 wordlift_client/models/analyses_response.py
 wordlift_client/models/analyses_response_item.py
 wordlift_client/models/analytics_import_request.py
+wordlift_client/models/analytics_sync.py
 wordlift_client/models/anchor_text.py
 wordlift_client/models/annotation.py
 wordlift_client/models/ask_request.py
