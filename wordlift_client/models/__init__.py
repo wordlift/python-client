@@ -25,6 +25,7 @@ from wordlift_client.models.analyses_response import AnalysesResponse
 from wordlift_client.models.analyses_response_item import AnalysesResponseItem
 from wordlift_client.models.analytics_import_request import AnalyticsImportRequest
 from wordlift_client.models.analytics_sync import AnalyticsSync
+from wordlift_client.models.analytics_sync_request import AnalyticsSyncRequest
 from wordlift_client.models.anchor_text import AnchorText
 from wordlift_client.models.annotation import Annotation
 from wordlift_client.models.ask_request import AskRequest

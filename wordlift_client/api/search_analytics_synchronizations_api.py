@@ -19,6 +19,7 @@ from typing_extensions import Annotated
 from pydantic import StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from wordlift_client.models.analytics_sync import AnalyticsSync
+from wordlift_client.models.analytics_sync_request import AnalyticsSyncRequest
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
 from wordlift_client.api_response import ApiResponse
@@ -41,6 +42,7 @@ class SearchAnalyticsSynchronizationsApi:
     @validate_call
     async def create_sync1(
         self,
+        analytics_sync_request: AnalyticsSyncRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -54,10 +56,12 @@ class SearchAnalyticsSynchronizationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AnalyticsSync:
-        """Create analytics sync.
+        """Create analytics sync
 
-        Create and run analytics sync.
+        Create and run analytics sync
 
+        :param analytics_sync_request: (required)
+        :type analytics_sync_request: AnalyticsSyncRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -81,6 +85,7 @@ class SearchAnalyticsSynchronizationsApi:
         """ # noqa: E501
 
         _param = self._create_sync1_serialize(
+            analytics_sync_request=analytics_sync_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -104,6 +109,7 @@ class SearchAnalyticsSynchronizationsApi:
     @validate_call
     async def create_sync1_with_http_info(
         self,
+        analytics_sync_request: AnalyticsSyncRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -117,10 +123,12 @@ class SearchAnalyticsSynchronizationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AnalyticsSync]:
-        """Create analytics sync.
+        """Create analytics sync
 
-        Create and run analytics sync.
+        Create and run analytics sync
 
+        :param analytics_sync_request: (required)
+        :type analytics_sync_request: AnalyticsSyncRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -144,6 +152,7 @@ class SearchAnalyticsSynchronizationsApi:
         """ # noqa: E501
 
         _param = self._create_sync1_serialize(
+            analytics_sync_request=analytics_sync_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -167,6 +176,7 @@ class SearchAnalyticsSynchronizationsApi:
     @validate_call
     async def create_sync1_without_preload_content(
         self,
+        analytics_sync_request: AnalyticsSyncRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -180,10 +190,12 @@ class SearchAnalyticsSynchronizationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create analytics sync.
+        """Create analytics sync
 
-        Create and run analytics sync.
+        Create and run analytics sync
 
+        :param analytics_sync_request: (required)
+        :type analytics_sync_request: AnalyticsSyncRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -207,6 +219,7 @@ class SearchAnalyticsSynchronizationsApi:
         """ # noqa: E501
 
         _param = self._create_sync1_serialize(
+            analytics_sync_request=analytics_sync_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -225,6 +238,7 @@ class SearchAnalyticsSynchronizationsApi:
 
     def _create_sync1_serialize(
         self,
+        analytics_sync_request,
         _request_auth,
         _content_type,
         _headers,
@@ -248,6 +262,8 @@ class SearchAnalyticsSynchronizationsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
+        if analytics_sync_request is not None:
+            _body_params = analytics_sync_request
 
 
         # set the HTTP header `Accept`
@@ -257,6 +273,19 @@ class SearchAnalyticsSynchronizationsApi:
             ]
         )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -302,7 +331,7 @@ class SearchAnalyticsSynchronizationsApi:
     ) -> List[AnalyticsSync]:
         """Get the latest syncs
 
-        Retrieve the latest executed syncs.
+        Retrieve the latest executed syncs
 
         :param account_ids: (required)
         :type account_ids: List[int]
@@ -378,7 +407,7 @@ class SearchAnalyticsSynchronizationsApi:
     ) -> ApiResponse[List[AnalyticsSync]]:
         """Get the latest syncs
 
-        Retrieve the latest executed syncs.
+        Retrieve the latest executed syncs
 
         :param account_ids: (required)
         :type account_ids: List[int]
@@ -454,7 +483,7 @@ class SearchAnalyticsSynchronizationsApi:
     ) -> RESTResponseType:
         """Get the latest syncs
 
-        Retrieve the latest executed syncs.
+        Retrieve the latest executed syncs
 
         :param account_ids: (required)
         :type account_ids: List[int]

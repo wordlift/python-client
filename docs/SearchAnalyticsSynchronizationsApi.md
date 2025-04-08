@@ -4,16 +4,16 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_sync1**](SearchAnalyticsSynchronizationsApi.md#create_sync1) | **POST** /analytics-syncs | Create analytics sync.
+[**create_sync1**](SearchAnalyticsSynchronizationsApi.md#create_sync1) | **POST** /analytics-syncs | Create analytics sync
 [**list_analytics_syncs**](SearchAnalyticsSynchronizationsApi.md#list_analytics_syncs) | **GET** /analytics-syncs | Get the latest syncs
 
 
 # **create_sync1**
-> AnalyticsSync create_sync1()
+> AnalyticsSync create_sync1(analytics_sync_request)
 
-Create analytics sync.
+Create analytics sync
 
-Create and run analytics sync.
+Create and run analytics sync
 
 ### Example
 
@@ -22,6 +22,7 @@ Create and run analytics sync.
 ```python
 import wordlift_client
 from wordlift_client.models.analytics_sync import AnalyticsSync
+from wordlift_client.models.analytics_sync_request import AnalyticsSyncRequest
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -46,10 +47,11 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.SearchAnalyticsSynchronizationsApi(api_client)
+    analytics_sync_request = wordlift_client.AnalyticsSyncRequest() # AnalyticsSyncRequest | 
 
     try:
-        # Create analytics sync.
-        api_response = await api_instance.create_sync1()
+        # Create analytics sync
+        api_response = await api_instance.create_sync1(analytics_sync_request)
         print("The response of SearchAnalyticsSynchronizationsApi->create_sync1:\n")
         pprint(api_response)
     except Exception as e:
@@ -60,7 +62,10 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **analytics_sync_request** | [**AnalyticsSyncRequest**](AnalyticsSyncRequest.md)|  | 
 
 ### Return type
 
@@ -72,7 +77,7 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
@@ -88,7 +93,7 @@ This endpoint does not need any parameter.
 
 Get the latest syncs
 
-Retrieve the latest executed syncs.
+Retrieve the latest executed syncs
 
 ### Example
 
