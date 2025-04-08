@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "wordlift_client"
-version = "1.92.0"
+version = "1.93.0"
 description = "Embeddings API"
 authors = ["OpenAPI Generator Community <team@openapitools.org>"]
 license = "NoLicense"
