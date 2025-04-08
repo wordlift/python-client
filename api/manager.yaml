@@ -38,8 +38,8 @@ tags:
   name: Google Search Console OAuth2
 - description: Update Plugin Diagnostics data for WordPress clients.
   name: Plugin Diagnostics
-- description: Data about performed search analytics synchronizations to the KG.
-  name: Search analytics synchronizations.
+- description: Data about performed search analytics synchronizations to the KG
+  name: Search analytics synchronizations
 - description: Manage Custom Domains
   name: Custom Domains
 - description: The list of included or excluded URLs
@@ -486,7 +486,7 @@ paths:
       - Analytics Imports
   /analytics-syncs:
     get:
-      description: Retrieve the latest executed syncs.
+      description: Retrieve the latest executed syncs
       operationId: listAnalyticsSyncs
       parameters:
       - in: query
@@ -532,10 +532,16 @@ paths:
       - OAuth2: []
       summary: Get the latest syncs
       tags:
-      - Search analytics synchronizations.
+      - Search analytics synchronizations
     post:
-      description: Create and run analytics sync.
+      description: Create and run analytics sync
       operationId: createSync_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalyticsSyncRequest'
+        required: true
       responses:
         "201":
           content:
@@ -544,10 +550,10 @@ paths:
                 $ref: '#/components/schemas/AnalyticsSync'
           description: Created
       security:
-      - ApiKey: []
-      summary: Create analytics sync.
+      - OAuth2: []
+      summary: Create analytics sync
       tags:
-      - Search analytics synchronizations.
+      - Search analytics synchronizations
   /botify-crawl-imports:
     post:
       description: Create a Botify Crawl Import
@@ -2105,6 +2111,12 @@ components:
           format: int32
           description: Number of total URLs retrieved from dataset entities
           readOnly: true
+    AnalyticsSyncRequest:
+      type: object
+      properties:
+        account_id:
+          type: integer
+          format: int64
     AnchorText:
       type: object
       description: The Anchor Text request.
