@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.91.0"
+__version__ = "1.92.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi

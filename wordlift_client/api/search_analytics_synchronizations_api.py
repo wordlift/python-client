@@ -548,7 +548,7 @@ class SearchAnalyticsSynchronizationsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'accountIds': 'multi',
+            'account_ids': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -562,7 +562,7 @@ class SearchAnalyticsSynchronizationsApi:
         # process the query parameters
         if account_ids is not None:
             
-            _query_params.append(('accountIds', account_ids))
+            _query_params.append(('account_ids', account_ids))
             
         if sort is not None:
             
