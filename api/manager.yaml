@@ -490,7 +490,7 @@ paths:
       operationId: listAnalyticsSyncs
       parameters:
       - in: query
-        name: accountIds
+        name: account_ids
         required: true
         schema:
           type: array
@@ -503,14 +503,14 @@ paths:
         schema:
           type: string
           enum:
-          - most_recent
+          - MOST_RECENT
       - in: query
         name: group_by
         required: false
         schema:
           type: string
           enum:
-          - account_id
+          - ACCOUNT_ID
       responses:
         "200":
           content:
