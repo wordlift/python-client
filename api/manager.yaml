@@ -26,6 +26,8 @@ tags:
   name: Sitemap Imports
 - description: Manage Google Merchants
   name: Google Merchants
+- description: Data about performed search analytics synchronizations to the KG
+  name: Analytics syncs
 - description: Manage Platform Consumptions
   name: Platform Consumptions
 - description: Get answers to questions.
@@ -38,8 +40,6 @@ tags:
   name: Google Search Console OAuth2
 - description: Update Plugin Diagnostics data for WordPress clients.
   name: Plugin Diagnostics
-- description: Data about performed search analytics synchronizations to the KG
-  name: Search analytics synchronizations
 - description: Manage Custom Domains
   name: Custom Domains
 - description: The list of included or excluded URLs
@@ -486,7 +486,7 @@ paths:
       - Analytics Imports
   /analytics-syncs:
     get:
-      description: Retrieve the latest executed syncs
+      description: Retrieve the analytics syncs
       operationId: listAnalyticsSyncs
       parameters:
       - in: query
@@ -530,12 +530,12 @@ paths:
           description: Bad Request
       security:
       - OAuth2: []
-      summary: Get the latest syncs
+      summary: List
       tags:
-      - Search analytics synchronizations
+      - Analytics syncs
     post:
       description: Create and run analytics sync
-      operationId: createSync_1
+      operationId: createAnalyticsSync
       requestBody:
         content:
           application/json:
@@ -551,9 +551,9 @@ paths:
           description: Created
       security:
       - OAuth2: []
-      summary: Create analytics sync
+      summary: Create
       tags:
-      - Search analytics synchronizations
+      - Analytics syncs
   /botify-crawl-imports:
     post:
       description: Create a Botify Crawl Import
