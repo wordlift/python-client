@@ -1,0 +1,214 @@
+openapi: 3.1.0
+info:
+  title: WordLift Content Evaluations API
+  description: API for evaluating text content based on specific criteria.
+  version: 1.0.0
+paths:
+  /content-evaluations:
+    post:
+      tags:
+        - Content Evaluations
+      summary: Evaluate Content
+      description: Submit text content for evaluation.
+      operationId: evaluate_content_api_content_evaluations_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentEvaluationRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentEvaluationResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - APIKeyHeader: []
+components:
+  schemas:
+    ContentEvaluationRequest:
+      properties:
+        text:
+          type: string
+          title: Text
+          description: The text content to be evaluated.
+      type: object
+      required:
+        - text
+      title: ContentEvaluationRequest
+    ContentEvaluationResponse:
+      type: object
+      required:
+        - quality_score
+        - metadata
+      properties:
+        quality_score:
+          type: object
+          required:
+            - overall
+            - breakdown
+          properties:
+            overall:
+              type: number
+              format: float
+              description: The overall quality score.
+            breakdown:
+              type: object
+              required:
+                - content
+                - readability
+                - seo
+              properties:
+                content:
+                  type: object
+                  required:
+                    - purpose
+                    - accuracy
+                    - depth
+                  properties:
+                    purpose:
+                      type: integer
+                    accuracy:
+                      type: integer
+                    depth:
+                      type: integer
+                readability:
+                  type: object
+                  required:
+                    - score
+                    - grade_level
+                    - complex_sentences
+                  properties:
+                    score:
+                      type: number
+                      format: float
+                    grade_level:
+                      type: integer
+                    complex_sentences:
+                      type: object
+                      required:
+                        - hard
+                        - very_hard
+                        - total
+                      properties:
+                        hard:
+                          type: integer
+                        very_hard:
+                          type: integer
+                        total:
+                          type: integer
+                seo:
+                  type: object
+                  required:
+                    - keyword_density
+                    - top_entities
+                    - score
+                  properties:
+                    keyword_density:
+                      type: ["number", "null"]
+                      format: float
+                    top_entities:
+                      type: object
+                      additionalProperties:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                            - text
+                            - count
+                          properties:
+                            text:
+                              type: string
+                            count:
+                              type: integer
+                    score:
+                      type: integer
+        metadata:
+          type: object
+          required:
+            - word_count
+            - sentiment
+            - performance
+            - eval_id
+          properties:
+            word_count:
+              type: integer
+            sentiment:
+              type: object
+              required:
+                - polarity
+                - subjectivity
+              properties:
+                polarity:
+                  type: number
+                  format: float
+                subjectivity:
+                  type: number
+                  format: float
+            performance:
+              type: object
+              required:
+                - automated_metrics
+                - llm_evaluation
+                - combine_metrics
+                - quality_score
+              properties:
+                automated_metrics:
+                  type: number
+                  format: float
+                llm_evaluation:
+                  type: number
+                  format: float
+                combine_metrics:
+                  type: integer # Assuming integer based on 0 value
+                quality_score:
+                  type: integer # Assuming integer based on 0 value
+            eval_id:
+              type: string
+      title: ContentEvaluationResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+        - loc
+        - msg
+        - type
+      title: ValidationError
+  securitySchemes:
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: authorization
+servers:
+  - url: https://api.wordlift.io
+    description: WordLift API Server
