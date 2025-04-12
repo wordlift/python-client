@@ -40,6 +40,12 @@ components:
           type: string
           title: Text
           description: The text content to be evaluated.
+        keywords:
+          type: array
+          title: Keywords
+          description: List of keywords to analyze within the text content.
+          items:
+            type: string
       type: object
       required:
         - text
@@ -113,8 +119,14 @@ components:
                     - score
                   properties:
                     keyword_density:
-                      type: ["number", "null"]
-                      format: float
+                      oneOf:
+                        - type: object
+                          description: Object with keyword percentages when keywords are provided
+                          additionalProperties:
+                            type: number
+                            format: float
+                        - type: "null"
+                          description: Null when no keywords are provided
                     top_entities:
                       type: object
                       additionalProperties:
@@ -157,11 +169,15 @@ components:
               type: object
               required:
                 - automated_metrics
+                - keyword_analysis
                 - llm_evaluation
                 - combine_metrics
                 - quality_score
               properties:
                 automated_metrics:
+                  type: number
+                  format: float
+                keyword_analysis:
                   type: number
                   format: float
                 llm_evaluation:
