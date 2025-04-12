@@ -13,6 +13,7 @@ from wordlift_client.api.authors_api import AuthorsApi
 from wordlift_client.api.autocomplete_api import AutocompleteApi
 from wordlift_client.api.botify_crawl_imports_api import BotifyCrawlImportsApi
 from wordlift_client.api.classifications_api import ClassificationsApi
+from wordlift_client.api.content_evaluations_api import ContentEvaluationsApi
 from wordlift_client.api.content_expansions_api import ContentExpansionsApi
 from wordlift_client.api.content_generation_completion_api import ContentGenerationCompletionApi
 from wordlift_client.api.content_generation_fields_api import ContentGenerationFieldsApi
