@@ -34,6 +34,9 @@ tags:
   name: Vector Search Questions
 - description: Manage OAuth2 Authorized Clients
   name: OAuth2 Authorized Clients
+- description: Get a list of all properties from google search console related to
+    an account.
+  name: Google Search Console Websites
 - description: Manage Accounts
   name: Accounts
 - description: Configure Google Search Console OAuth2 authorized access codes.
@@ -67,6 +70,9 @@ tags:
   name: Redeem Codes
 - description: Create vector search queries.
   name: Vector Search Queries
+- description: Manage the relationship between the account and the Google Search Console
+    siteUrl.
+  name: Account - Google Search Console
 - description: Manage Platform Limits
   name: Platform Limits
 - description: Manage Merchants
@@ -165,6 +171,47 @@ paths:
       summary: Get
       tags:
       - Account
+  /accounts/me/google-search-console:
+    patch:
+      description: Update the Google Search Console siteUrl for the authenticated
+        account.
+      operationId: updateAccountConfig
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSiteUrlRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccountConfig'
+          description: Google Search Console configuration updated on the account
+        "401":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccountConfig'
+          description: Unauthorized
+        "412":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccountConfig'
+          description: GSC api denied or missing
+        "422":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccountConfig'
+          description: Validation error
+      security:
+      - ApiKey: []
+      summary: Account configuration update
+      tags:
+      - Account - Google Search Console
   /accounts/me/google/searches:
     get:
       description: List the Website Search performance data
@@ -911,6 +958,49 @@ paths:
       summary: Create an Authorization URI
       tags:
       - Google Search Console OAuth2
+  /google-search-console/sites:
+    get:
+      description: List all of sites from the authenticated google search console
+        in account.
+      operationId: getGscSites
+      parameters:
+      - description: "Filters the list to include only site URLs that are equal to\
+          \ or related to the given site URL, including its parent or base URLs."
+        in: query
+        name: relatedSiteUrl
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Website'
+          description: List of GSC sites
+        "401":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Website'
+          description: Unauthorized
+        "412":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Website'
+          description: When the account is not connected to any Google Search Console
+      security:
+      - ApiKey: []
+      summary: Get Google Search Console sites
+      tags:
+      - Google Search Console Websites
   /internal-links:
     post:
       description: Create Internal Links.
@@ -1844,6 +1934,13 @@ components:
           type: string
         wp_include_exclude_default:
           type: string
+    AccountConfig:
+      type: object
+      properties:
+        account:
+          $ref: '#/components/schemas/Account'
+        siteUrl:
+          type: string
     AccountInfo:
       type: object
       description: Account Information
@@ -2541,6 +2638,8 @@ components:
           description: "The webpage name, reused in the output template."
       required:
       - query
+    JsonPointer:
+      type: object
     KgEmbeddingRequest:
       type: object
       properties:
@@ -3670,6 +3769,14 @@ components:
           type: string
         url:
           type: string
+    UpdateSiteUrlRequest:
+      type: object
+      properties:
+        siteUrlPointer:
+          $ref: '#/components/schemas/JsonPointer'
+        site_url:
+          type: string
+          pattern: ^(https?://|sc-domain:)\S+
     VectorSearchQueryRequest:
       type: object
       description: A query request.
