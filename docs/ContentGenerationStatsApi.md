@@ -1,14 +1,14 @@
 # wordlift_client.ContentGenerationStatsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get4**](ContentGenerationStatsApi.md#get4) | **GET** /content-generations/{contentGenerationId}/stats | Get
+[**get2**](ContentGenerationStatsApi.md#get2) | **GET** /content-generations/{contentGenerationId}/stats | Get
 
 
-# **get4**
-> ContentGenerationStats get4(content_generation_id)
+# **get2**
+> ContentGenerationStats get2(content_generation_id)
 
 Get
 
@@ -22,10 +22,10 @@ from wordlift_client.models.content_generation_stats import ContentGenerationSta
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "http://localhost"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -47,11 +47,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Get
-        api_response = await api_instance.get4(content_generation_id)
-        print("The response of ContentGenerationStatsApi->get4:\n")
+        api_response = await api_instance.get2(content_generation_id)
+        print("The response of ContentGenerationStatsApi->get2:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling ContentGenerationStatsApi->get4: %s\n" % e)
+        print("Exception when calling ContentGenerationStatsApi->get2: %s\n" % e)
 ```
 
 

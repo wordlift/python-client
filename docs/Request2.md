@@ -1,11 +1,20 @@
 # Request2
 
+The request
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**redeem_code** | **str** |  | [optional] 
+**html** | [**Html**](Html.md) |  | [optional] 
+**url** | **str** | The url of the page to analyze. | [optional] 
+**url_client** | **str** | The client which the analysis should use to extract the content, by default chrome is used. | [optional] 
+**language** | **str** | The content language, 2 letters code, e.g. &#39;en&#39;. | 
+**text** | **str** | A textual fragment. | [optional] 
+**exclude** | **List[str]** | An array of item IDs to exclude from the analysis results. | [optional] 
+**scope** | **str** | The scope of the analysis, one of &#39;local&#39;, &#39;network&#39;, &#39;cloud-only&#39;, &#39;network-only&#39; or &#39;all&#39;. | 
+**matches** | **int** | Filter out results that don&#39;t have at least the specified number of occurrences. By default 1. | [optional] 
+**links** | **str** | When returning an interpolated HTML results, matches should have the &#39;wl-link&#39; class. By default &#39;no&#39;. | [optional] 
 
 ## Example
 

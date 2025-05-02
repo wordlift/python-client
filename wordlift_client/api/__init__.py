@@ -3,6 +3,7 @@
 # import apis into api package
 from wordlift_client.api.account_api import AccountApi
 from wordlift_client.api.account_stats_api import AccountStatsApi
+from wordlift_client.api.account_google_search_console_api import AccountGoogleSearchConsoleApi
 from wordlift_client.api.accounts_api import AccountsApi
 from wordlift_client.api.add_ons_api import AddOnsApi
 from wordlift_client.api.agent_api import AgentApi
@@ -38,6 +39,7 @@ from wordlift_client.api.google_merchants_api import GoogleMerchantsApi
 from wordlift_client.api.google_search_console_api import GoogleSearchConsoleApi
 from wordlift_client.api.google_search_console_o_auth2_api import GoogleSearchConsoleOAuth2Api
 from wordlift_client.api.google_search_console_searches_api import GoogleSearchConsoleSearchesApi
+from wordlift_client.api.google_search_console_websites_api import GoogleSearchConsoleWebsitesApi
 from wordlift_client.api.graph_ql_api import GraphQLApi
 from wordlift_client.api.image_to_text_api import ImageToTextApi
 from wordlift_client.api.include_excludes_api import IncludeExcludesApi

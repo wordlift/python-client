@@ -4,6 +4,8 @@
 README.md
 docs/Account.md
 docs/AccountApi.md
+docs/AccountConfig.md
+docs/AccountGoogleSearchConsoleApi.md
 docs/AccountInfo.md
 docs/AccountStats.md
 docs/AccountStatsApi.md
@@ -103,6 +105,7 @@ docs/GoogleMerchantsApi.md
 docs/GoogleSearchConsoleApi.md
 docs/GoogleSearchConsoleOAuth2Api.md
 docs/GoogleSearchConsoleSearchesApi.md
+docs/GoogleSearchConsoleWebsitesApi.md
 docs/GraphQLApi.md
 docs/GraphqlRequest.md
 docs/HTTPValidationError.md
@@ -205,6 +208,7 @@ docs/UpdateAccountRequest.md
 docs/UpdateQuestionAndAnswerRequest.md
 docs/UpdateRecordRequest.md
 docs/UpdateRecordsRequest.md
+docs/UpdateSiteUrlRequest.md
 docs/ValidationError.md
 docs/ValidationFix.md
 docs/ValidationResult.md
@@ -239,23 +243,15 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_content_evaluation_request.py
-test/test_content_evaluation_response.py
-test/test_content_evaluation_response_metadata.py
-test/test_content_evaluation_response_metadata_performance.py
-test/test_content_evaluation_response_metadata_sentiment.py
-test/test_content_evaluation_response_quality_score.py
-test/test_content_evaluation_response_quality_score_breakdown.py
-test/test_content_evaluation_response_quality_score_breakdown_content.py
-test/test_content_evaluation_response_quality_score_breakdown_readability.py
-test/test_content_evaluation_response_quality_score_breakdown_readability_complex_sentences.py
-test/test_content_evaluation_response_quality_score_breakdown_seo.py
-test/test_content_evaluation_response_quality_score_breakdown_seo_top_entities_value_inner.py
-test/test_content_evaluations_api.py
+test/test_account_config.py
+test/test_account_google_search_console_api.py
+test/test_google_search_console_websites_api.py
+test/test_update_site_url_request.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
 wordlift_client/api/account_api.py
+wordlift_client/api/account_google_search_console_api.py
 wordlift_client/api/account_stats_api.py
 wordlift_client/api/accounts_api.py
 wordlift_client/api/add_ons_api.py
@@ -292,6 +288,7 @@ wordlift_client/api/google_merchants_api.py
 wordlift_client/api/google_search_console_api.py
 wordlift_client/api/google_search_console_o_auth2_api.py
 wordlift_client/api/google_search_console_searches_api.py
+wordlift_client/api/google_search_console_websites_api.py
 wordlift_client/api/graph_ql_api.py
 wordlift_client/api/image_to_text_api.py
 wordlift_client/api/include_excludes_api.py
@@ -324,6 +321,7 @@ wordlift_client/configuration.py
 wordlift_client/exceptions.py
 wordlift_client/models/__init__.py
 wordlift_client/models/account.py
+wordlift_client/models/account_config.py
 wordlift_client/models/account_info.py
 wordlift_client/models/account_stats.py
 wordlift_client/models/account_subscription.py
@@ -468,6 +466,7 @@ wordlift_client/models/update_account_request.py
 wordlift_client/models/update_question_and_answer_request.py
 wordlift_client/models/update_record_request.py
 wordlift_client/models/update_records_request.py
+wordlift_client/models/update_site_url_request.py
 wordlift_client/models/validation_error.py
 wordlift_client/models/validation_fix.py
 wordlift_client/models/validation_result.py
