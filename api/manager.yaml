@@ -1938,7 +1938,8 @@ components:
       type: object
       properties:
         account:
-          $ref: '#/components/schemas/Account'
+          type: integer
+          format: int32
         siteUrl:
           type: string
     AccountInfo:
@@ -2638,8 +2639,6 @@ components:
           description: "The webpage name, reused in the output template."
       required:
       - query
-    JsonPointer:
-      type: object
     KgEmbeddingRequest:
       type: object
       properties:
@@ -3772,8 +3771,6 @@ components:
     UpdateSiteUrlRequest:
       type: object
       properties:
-        siteUrlPointer:
-          $ref: '#/components/schemas/JsonPointer'
         site_url:
           type: string
           pattern: ^(https?://|sc-domain:)\S+
