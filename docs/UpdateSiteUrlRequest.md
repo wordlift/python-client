@@ -5,7 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**site_url_pointer** | **object** |  | [optional] 
 **site_url** | **str** |  | [optional] 
 
 ## Example

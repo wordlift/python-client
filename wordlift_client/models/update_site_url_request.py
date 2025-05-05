@@ -28,9 +28,8 @@ class UpdateSiteUrlRequest(BaseModel):
     """
     UpdateSiteUrlRequest
     """ # noqa: E501
-    site_url_pointer: Optional[Dict[str, Any]] = Field(default=None, alias="siteUrlPointer")
     site_url: Optional[Annotated[str, Field(strict=True)]] = None
-    __properties: ClassVar[List[str]] = ["siteUrlPointer", "site_url"]
+    __properties: ClassVar[List[str]] = ["site_url"]
 
     @field_validator('site_url')
     def site_url_validate_regular_expression(cls, value):
@@ -93,7 +92,6 @@ class UpdateSiteUrlRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "siteUrlPointer": obj.get("siteUrlPointer"),
             "site_url": obj.get("site_url")
         })
         return _obj

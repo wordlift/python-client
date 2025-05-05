@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**account** | [**Account**](Account.md) |  | [optional] 
+**account** | **int** |  | [optional] 
 **site_url** | **str** |  | [optional] 
 
 ## Example

@@ -243,10 +243,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_account_config.py
-test/test_account_google_search_console_api.py
-test/test_google_search_console_websites_api.py
-test/test_update_site_url_request.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py

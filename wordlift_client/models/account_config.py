@@ -18,9 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from wordlift_client.models.account import Account
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +27,7 @@ class AccountConfig(BaseModel):
     """
     AccountConfig
     """ # noqa: E501
-    account: Optional[Account] = None
+    account: Optional[StrictInt] = None
     site_url: Optional[StrictStr] = Field(default=None, alias="siteUrl")
     __properties: ClassVar[List[str]] = ["account", "siteUrl"]
 
@@ -71,9 +70,6 @@ class AccountConfig(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of account
-        if self.account:
-            _dict['account'] = self.account.to_dict()
         return _dict
 
     @classmethod
@@ -86,7 +82,7 @@ class AccountConfig(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "account": Account.from_dict(obj["account"]) if obj.get("account") is not None else None,
+            "account": obj.get("account"),
             "siteUrl": obj.get("siteUrl")
         })
         return _obj
