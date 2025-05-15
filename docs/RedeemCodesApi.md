@@ -1,6 +1,6 @@
 # wordlift_client.RedeemCodesApi
 
-All URIs are relative to *https://api.wordlift.io*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,47 +8,36 @@ Method | HTTP request | Description
 
 
 # **redeem_code**
-> Response1 redeem_code(request1)
+> Response redeem_code(request)
 
 Redeem the provided code and get a key
 
 ### Example
 
-* Api Key Authentication (ApiKey):
 
 ```python
 import wordlift_client
-from wordlift_client.models.request1 import Request1
-from wordlift_client.models.response1 import Response1
+from wordlift_client.models.request import Request
+from wordlift_client.models.response import Response
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.wordlift.io
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
+    host = "http://localhost"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: ApiKey
-configuration.api_key['ApiKey'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.RedeemCodesApi(api_client)
-    request1 = wordlift_client.Request1() # Request1 | 
+    request = wordlift_client.Request() # Request | 
 
     try:
         # Redeem the provided code and get a key
-        api_response = await api_instance.redeem_code(request1)
+        api_response = await api_instance.redeem_code(request)
         print("The response of RedeemCodesApi->redeem_code:\n")
         pprint(api_response)
     except Exception as e:
@@ -62,15 +51,15 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request1** | [**Request1**](Request1.md)|  | 
+ **request** | [**Request**](Request.md)|  | 
 
 ### Return type
 
-[**Response1**](Response1.md)
+[**Response**](Response.md)
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+No authorization required
 
 ### HTTP request headers
 

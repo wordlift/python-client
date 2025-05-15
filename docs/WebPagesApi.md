@@ -1,24 +1,25 @@
-# wordlift_client.SEOScoresApi
+# wordlift_client.WebPagesApi
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_seo_score**](SEOScoresApi.md#create_seo_score) | **POST** /score | Create
+[**get_web_page**](WebPagesApi.md#get_web_page) | **GET** /web-pages | Get
 
 
-# **create_seo_score**
-> CreateSEOScore200Response create_seo_score(create_seo_score_request)
+# **get_web_page**
+> WebPage get_web_page(url)
 
-Create
+Get
+
+Get extracted web page content
 
 ### Example
 
 
 ```python
 import wordlift_client
-from wordlift_client.models.create_seo_score200_response import CreateSEOScore200Response
-from wordlift_client.models.create_seo_score_request import CreateSEOScoreRequest
+from wordlift_client.models.web_page import WebPage
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -32,16 +33,16 @@ configuration = wordlift_client.Configuration(
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = wordlift_client.SEOScoresApi(api_client)
-    create_seo_score_request = wordlift_client.CreateSEOScoreRequest() # CreateSEOScoreRequest | body
+    api_instance = wordlift_client.WebPagesApi(api_client)
+    url = 'url_example' # str | Url to extract
 
     try:
-        # Create
-        api_response = await api_instance.create_seo_score(create_seo_score_request)
-        print("The response of SEOScoresApi->create_seo_score:\n")
+        # Get
+        api_response = await api_instance.get_web_page(url)
+        print("The response of WebPagesApi->get_web_page:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SEOScoresApi->create_seo_score: %s\n" % e)
+        print("Exception when calling WebPagesApi->get_web_page: %s\n" % e)
 ```
 
 
@@ -51,11 +52,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_seo_score_request** | [**CreateSEOScoreRequest**](CreateSEOScoreRequest.md)| body | 
+ **url** | **str**| Url to extract | 
 
 ### Return type
 
-[**CreateSEOScore200Response**](CreateSEOScore200Response.md)
+[**WebPage**](WebPage.md)
 
 ### Authorization
 
@@ -63,17 +64,15 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad request |  -  |
-**401** | Unauthorized |  -  |
-**500** | Internal server error |  -  |
+**200** | Success |  -  |
+**401** | Authentication Failure |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

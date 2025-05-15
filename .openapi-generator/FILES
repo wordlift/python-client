@@ -226,6 +226,7 @@ docs/WebAsync.md
 docs/WebAsyncsMetadataApi.md
 docs/WebAsyncsResponsesApi.md
 docs/WebPage.md
+docs/WebPagesApi.md
 docs/WebpageProperties.md
 docs/Website.md
 docs/WebsiteSearch.md
@@ -243,6 +244,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_web_pages_api.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -311,6 +313,7 @@ wordlift_client/api/vector_search_queries_api.py
 wordlift_client/api/vector_search_questions_api.py
 wordlift_client/api/web_asyncs_metadata_api.py
 wordlift_client/api/web_asyncs_responses_api.py
+wordlift_client/api/web_pages_api.py
 wordlift_client/api_client.py
 wordlift_client/api_response.py
 wordlift_client/configuration.py
