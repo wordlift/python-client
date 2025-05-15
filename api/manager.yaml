@@ -28,6 +28,8 @@ tags:
   name: Google Merchants
 - description: Data about performed search analytics synchronizations to the KG
   name: Analytics syncs
+- description: Extract web page content
+  name: Web pages
 - description: Manage Platform Consumptions
   name: Platform Consumptions
 - description: Get answers to questions.
@@ -1875,6 +1877,31 @@ paths:
       summary: Create
       tags:
       - Vector Search Questions
+  /web-pages:
+    get:
+      description: Get extracted web page content
+      operationId: getWebPage
+      parameters:
+      - description: Url to extract
+        in: query
+        name: url
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebPage'
+          description: Success
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+      summary: Get
+      tags:
+      - Web pages
 components:
   schemas:
     Account:
