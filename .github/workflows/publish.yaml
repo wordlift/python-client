@@ -28,7 +28,7 @@ jobs:
       - name: Install openapi-merge-cli
         run: |
           npm i openapi-merge-cli ajv uri-js
-          npm i @openapitools/openapi-generator-cli@^2.19.0
+          npm i @openapitools/openapi-generator-cli@~2.20.2
 
       # Step 4: Set up Python
       - name: Set up Python

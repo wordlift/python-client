@@ -1,0 +1,24 @@
+components:
+  securitySchemes:
+    ApiKey:
+      description: "`Key {your key}`"
+      in: header
+      name: Authorization
+      type: apiKey
+    BasicAuth:
+      description: "`Basic {encoded username:password}`"
+      in: header
+      name: Authorization
+      scheme: basic
+      type: http
+    OAuth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: https://s.wordlift.io/oauth/authorize/
+          scopes:
+            basic: basic scope
+          tokenUrl: https://s.wordlift.io/oauth/token/
+      type: oauth2
+servers:
+  - url: https://api.wordlift.io
+    description: WordLift API
