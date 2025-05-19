@@ -1,6 +1,6 @@
 # wordlift_client.MerchantSyncsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -16,7 +16,7 @@ Start
 
 ### Example
 
-* Api Key Authentication (ApiKey):
+* OAuth Authentication (OAuth2):
 
 ```python
 import wordlift_client
@@ -24,10 +24,10 @@ from wordlift_client.models.merchant_sync import MerchantSync
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "http://localhost"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -35,11 +35,7 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKey
-configuration.api_key['ApiKey'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -71,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -96,7 +92,7 @@ Get by id
 
 ### Example
 
-* Api Key Authentication (ApiKey):
+* OAuth Authentication (OAuth2):
 
 ```python
 import wordlift_client
@@ -104,10 +100,10 @@ from wordlift_client.models.merchant_sync import MerchantSync
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "http://localhost"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -115,11 +111,7 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKey
-configuration.api_key['ApiKey'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -153,7 +145,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -179,7 +171,7 @@ List the Merchants Syncs
 
 ### Example
 
-* Api Key Authentication (ApiKey):
+* OAuth Authentication (OAuth2):
 
 ```python
 import wordlift_client
@@ -187,10 +179,10 @@ from wordlift_client.models.page_merchant_sync import PageMerchantSync
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "http://localhost"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -198,11 +190,7 @@ configuration = wordlift_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: ApiKey
-configuration.api_key['ApiKey'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -240,7 +228,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 

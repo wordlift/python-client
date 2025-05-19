@@ -1,6 +1,6 @@
 # wordlift_client.AccountStatsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -16,6 +16,7 @@ Get the Account statistics, such the number of products, product groups and urls
 
 ### Example
 
+* OAuth Authentication (OAuth2):
 * Api Key Authentication (ApiKey):
 
 ```python
@@ -24,16 +25,18 @@ from wordlift_client.models.account_stats import AccountStats
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "http://localhost"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Configure API key authorization: ApiKey
 configuration.api_key['ApiKey'] = os.environ["API_KEY"]
@@ -67,7 +70,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+[OAuth2](../README.md#OAuth2), [ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 

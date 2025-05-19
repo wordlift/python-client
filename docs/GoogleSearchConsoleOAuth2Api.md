@@ -1,6 +1,6 @@
 # wordlift_client.GoogleSearchConsoleOAuth2Api
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -30,10 +30,10 @@ from wordlift_client.models.exchange_auth_code_response import ExchangeAuthCodeR
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "http://localhost"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -112,10 +112,10 @@ from wordlift_client.models.build_authorize_uri_response import BuildAuthorizeUr
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "http://localhost"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -192,10 +192,10 @@ import wordlift_client
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "http://localhost"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -265,10 +265,10 @@ from wordlift_client.models.duplicate_authorization_request import DuplicateAuth
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "http://localhost"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -345,10 +345,10 @@ from wordlift_client.models.authorization import Authorization
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "http://localhost"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -423,10 +423,10 @@ import wordlift_client
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to https://api.wordlift.io
 # See configuration.py for a list of all supported configuration parameters.
 configuration = wordlift_client.Configuration(
-    host = "http://localhost"
+    host = "https://api.wordlift.io"
 )
 
 # The client must configure the authentication and authorization parameters
