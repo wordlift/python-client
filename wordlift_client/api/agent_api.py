@@ -290,7 +290,7 @@ class AgentApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'APIKeyHeader'
+            'ApiKey'
         ]
 
         return self.api_client.param_serialize(

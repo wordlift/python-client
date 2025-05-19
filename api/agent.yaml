@@ -32,7 +32,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       security:
-        - APIKeyHeader: []
+        - ApiKey: []
 components:
   schemas:
     AskRequest:
@@ -92,7 +92,7 @@ components:
         - type
       title: ValidationError
   securitySchemes:
-    APIKeyHeader:
+    ApiKey:
       type: apiKey
       in: header
       name: authorization

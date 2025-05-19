@@ -398,8 +398,8 @@ Class | Method | HTTP request | Description
 
 
 Authentication schemes defined for the API:
-<a id="APIKeyHeader"></a>
-### APIKeyHeader
+<a id="ApiKey"></a>
+### ApiKey
 
 - **Type**: API key
 - **API key parameter name**: authorization

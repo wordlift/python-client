@@ -375,13 +375,13 @@ conf = wordlift_client.Configuration(
         :return: The Auth Settings information dict.
         """
         auth = {}
-        if 'APIKeyHeader' in self.api_key:
-            auth['APIKeyHeader'] = {
+        if 'ApiKey' in self.api_key:
+            auth['ApiKey'] = {
                 'type': 'api_key',
                 'in': 'header',
                 'key': 'authorization',
                 'value': self.get_api_key_with_prefix(
-                    'APIKeyHeader',
+                    'ApiKey',
                 ),
             }
         return auth
