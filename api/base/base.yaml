@@ -1,3 +1,15 @@
+info:
+  contact:
+    email: hello@wordlift.io
+    name: WordLift
+    url: https://wordlift.io
+  description: WordLift API
+  license:
+    name: (c) copyright 2022-present WordLift
+    url: https://wordlift.io
+  termsOfService: https://wordlift.io/terms-of-service/
+  title: WordLift API
+  version: "1.0"
 components:
   securitySchemes:
     ApiKey:
@@ -21,4 +33,3 @@ components:
       type: oauth2
 servers:
   - url: https://api.wordlift.io
-    description: WordLift API
