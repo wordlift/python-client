@@ -21,8 +21,13 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "wordlift-client"
+<<<<<<< HEAD
 VERSION = "1.99.0"
 PYTHON_REQUIRES = ">=3.8"
+=======
+VERSION = "1.100.0"
+PYTHON_REQUIRES = ">=3.7"
+>>>>>>> 9a9a1edb3c05ca9e95ce9f14ae5cd964518eb70b
 REQUIRES = [
     "urllib3 >= 1.25.3, < 2.1.0",
     "python-dateutil",

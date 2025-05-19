@@ -385,6 +385,7 @@ class GoogleSearchConsoleApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'ApiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -664,6 +665,7 @@ class GoogleSearchConsoleApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'ApiKey'
         ]
 
         return self.api_client.param_serialize(

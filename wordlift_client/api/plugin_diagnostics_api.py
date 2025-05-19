@@ -309,6 +309,7 @@ class PluginDiagnosticsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'ApiKey'
         ]
 
         return self.api_client.param_serialize(
