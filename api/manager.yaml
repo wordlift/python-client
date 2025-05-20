@@ -3941,6 +3941,8 @@ components:
           format: date
         headline:
           type: string
+        html:
+          type: string
         image:
           type: string
         markdown:
