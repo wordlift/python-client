@@ -31,12 +31,13 @@ class WebPage(BaseModel):
     abstract: Optional[StrictStr] = None
     date_published: Optional[date] = None
     headline: Optional[StrictStr] = None
+    html: Optional[StrictStr] = None
     image: Optional[StrictStr] = None
     markdown: Optional[StrictStr] = None
     text: Optional[StrictStr] = None
     types: Optional[List[StrictStr]] = None
     url: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["abstract", "date_published", "headline", "image", "markdown", "text", "types", "url"]
+    __properties: ClassVar[List[str]] = ["abstract", "date_published", "headline", "html", "image", "markdown", "text", "types", "url"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,6 +93,7 @@ class WebPage(BaseModel):
             "abstract": obj.get("abstract"),
             "date_published": obj.get("date_published"),
             "headline": obj.get("headline"),
+            "html": obj.get("html"),
             "image": obj.get("image"),
             "markdown": obj.get("markdown"),
             "text": obj.get("text"),

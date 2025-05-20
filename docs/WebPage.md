@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **abstract** | **str** |  | [optional] 
 **date_published** | **date** |  | [optional] 
 **headline** | **str** |  | [optional] 
+**html** | **str** |  | [optional] 
 **image** | **str** |  | [optional] 
 **markdown** | **str** |  | [optional] 
 **text** | **str** |  | [optional] 
