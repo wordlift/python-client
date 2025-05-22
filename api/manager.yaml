@@ -36,6 +36,8 @@ tags:
   name: Vector Search Questions
 - description: Manage OAuth2 Authorized Clients
   name: OAuth2 Authorized Clients
+- description: Import Web Pages to the Graph
+  name: Web Pages Imports
 - description: Get a list of all properties from google search console related to
     an account.
   name: Google Search Console Websites
@@ -1877,6 +1879,30 @@ paths:
       summary: Create
       tags:
       - Vector Search Questions
+  /web-page-imports:
+    post:
+      description: Create a Web Page Import
+      operationId: createWebPageImports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebPageImportRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebPageImportResponse'
+          description: Success
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+      summary: Create
+      tags:
+      - Web Pages Imports
   /web-pages:
     get:
       description: Get extracted web page content
@@ -3933,6 +3959,7 @@ components:
           type: string
     WebPage:
       type: object
+      description: The Web Page data
       properties:
         abstract:
           type: string
@@ -3956,6 +3983,45 @@ components:
           uniqueItems: true
         url:
           type: string
+    WebPageImportRequest:
+      type: object
+      description: The Web Page Import request
+      properties:
+        embedding:
+          $ref: '#/components/schemas/EmbeddingRequest'
+        id_generator:
+          type: string
+          default: default
+          description: "The entity id generator, by default uses the web page path."
+          enum:
+          - default
+          - headline-with-url-hash
+        output_types:
+          type: array
+          default:
+          - http://schema.org/WebPage
+          description: "The type of the generated entities, by default `http://schema.org/WebPage`."
+          items:
+            type: string
+            default: "[\"http://schema.org/WebPage\"]"
+            description: "The type of the generated entities, by default `http://schema.org/WebPage`."
+          uniqueItems: true
+        url:
+          type: string
+          description: The Web Page url to import
+      required:
+      - url
+    WebPageImportResponse:
+      type: object
+      description: Web Page Import Response
+      properties:
+        model:
+          type: string
+        web_page:
+          $ref: '#/components/schemas/WebPage'
+      required:
+      - model
+      - web_page
     Website:
       type: object
       description: A Website
