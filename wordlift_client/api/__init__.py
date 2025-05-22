@@ -66,5 +66,6 @@ from wordlift_client.api.vector_search_queries_api import VectorSearchQueriesApi
 from wordlift_client.api.vector_search_questions_api import VectorSearchQuestionsApi
 from wordlift_client.api.web_asyncs_metadata_api import WebAsyncsMetadataApi
 from wordlift_client.api.web_asyncs_responses_api import WebAsyncsResponsesApi
+from wordlift_client.api.web_pages_imports_api import WebPagesImportsApi
 from wordlift_client.api.web_pages_api import WebPagesApi
 

@@ -18,26 +18,31 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import date
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from wordlift_client.models.embedding_request import EmbeddingRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
-class WebPage(BaseModel):
+class WebPageImportRequest(BaseModel):
     """
-    The Web Page data
+    The Web Page Import request
     """ # noqa: E501
-    abstract: Optional[StrictStr] = None
-    date_published: Optional[date] = None
-    headline: Optional[StrictStr] = None
-    html: Optional[StrictStr] = None
-    image: Optional[StrictStr] = None
-    markdown: Optional[StrictStr] = None
-    text: Optional[StrictStr] = None
-    types: Optional[List[StrictStr]] = None
-    url: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["abstract", "date_published", "headline", "html", "image", "markdown", "text", "types", "url"]
+    embedding: Optional[EmbeddingRequest] = None
+    id_generator: Optional[StrictStr] = Field(default='default', description="The entity id generator, by default uses the web page path.")
+    output_types: Optional[List[StrictStr]] = Field(default=None, description="The type of the generated entities, by default `http://schema.org/WebPage`.")
+    url: StrictStr = Field(description="The Web Page url to import")
+    __properties: ClassVar[List[str]] = ["embedding", "id_generator", "output_types", "url"]
+
+    @field_validator('id_generator')
+    def id_generator_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['default', 'headline-with-url-hash']):
+            raise ValueError("must be one of enum values ('default', 'headline-with-url-hash')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -57,7 +62,7 @@ class WebPage(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of WebPage from a JSON string"""
+        """Create an instance of WebPageImportRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -78,11 +83,14 @@ class WebPage(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of embedding
+        if self.embedding:
+            _dict['embedding'] = self.embedding.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of WebPage from a dict"""
+        """Create an instance of WebPageImportRequest from a dict"""
         if obj is None:
             return None
 
@@ -90,14 +98,9 @@ class WebPage(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "abstract": obj.get("abstract"),
-            "date_published": obj.get("date_published"),
-            "headline": obj.get("headline"),
-            "html": obj.get("html"),
-            "image": obj.get("image"),
-            "markdown": obj.get("markdown"),
-            "text": obj.get("text"),
-            "types": obj.get("types"),
+            "embedding": EmbeddingRequest.from_dict(obj["embedding"]) if obj.get("embedding") is not None else None,
+            "id_generator": obj.get("id_generator") if obj.get("id_generator") is not None else 'default',
+            "output_types": obj.get("output_types"),
             "url": obj.get("url")
         })
         return _obj

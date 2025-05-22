@@ -18,26 +18,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import date
 from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
+from wordlift_client.models.web_page import WebPage
 from typing import Optional, Set
 from typing_extensions import Self
 
-class WebPage(BaseModel):
+class WebPageImportResponse(BaseModel):
     """
-    The Web Page data
+    Web Page Import Response
     """ # noqa: E501
-    abstract: Optional[StrictStr] = None
-    date_published: Optional[date] = None
-    headline: Optional[StrictStr] = None
-    html: Optional[StrictStr] = None
-    image: Optional[StrictStr] = None
-    markdown: Optional[StrictStr] = None
-    text: Optional[StrictStr] = None
-    types: Optional[List[StrictStr]] = None
-    url: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["abstract", "date_published", "headline", "html", "image", "markdown", "text", "types", "url"]
+    model: StrictStr
+    web_page: WebPage
+    __properties: ClassVar[List[str]] = ["model", "web_page"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -57,7 +50,7 @@ class WebPage(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of WebPage from a JSON string"""
+        """Create an instance of WebPageImportResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -78,11 +71,14 @@ class WebPage(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of web_page
+        if self.web_page:
+            _dict['web_page'] = self.web_page.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of WebPage from a dict"""
+        """Create an instance of WebPageImportResponse from a dict"""
         if obj is None:
             return None
 
@@ -90,15 +86,8 @@ class WebPage(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "abstract": obj.get("abstract"),
-            "date_published": obj.get("date_published"),
-            "headline": obj.get("headline"),
-            "html": obj.get("html"),
-            "image": obj.get("image"),
-            "markdown": obj.get("markdown"),
-            "text": obj.get("text"),
-            "types": obj.get("types"),
-            "url": obj.get("url")
+            "model": obj.get("model"),
+            "web_page": WebPage.from_dict(obj["web_page"]) if obj.get("web_page") is not None else None
         })
         return _obj
 

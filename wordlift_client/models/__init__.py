@@ -174,6 +174,8 @@ from wordlift_client.models.vector_search_question_request import VectorSearchQu
 from wordlift_client.models.vector_search_question_response_item import VectorSearchQuestionResponseItem
 from wordlift_client.models.web_async import WebAsync
 from wordlift_client.models.web_page import WebPage
+from wordlift_client.models.web_page_import_request import WebPageImportRequest
+from wordlift_client.models.web_page_import_response import WebPageImportResponse
 from wordlift_client.models.webpage_properties import WebpageProperties
 from wordlift_client.models.website import Website
 from wordlift_client.models.website_search import WebsiteSearch
