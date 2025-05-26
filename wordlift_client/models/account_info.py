@@ -21,6 +21,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.network_account_info import NetworkAccountInfo
+from wordlift_client.models.tokens import Tokens
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -41,10 +42,11 @@ class AccountInfo(BaseModel):
     networks: List[NetworkAccountInfo] = Field(description="A list of connected Account Information")
     ng_dataset_id: Optional[StrictStr] = Field(default=None, alias="ngDatasetId")
     subscription_id: StrictInt = Field(description="The Subscription Id", alias="subscriptionId")
+    tokens: Optional[Dict[str, Tokens]] = Field(default=None, description="Tokens associated with this account/graph.")
     url: Optional[StrictStr] = Field(default=None, description="The website URL")
     wp_admin: Optional[StrictStr] = Field(default=None, description="If WordPress, the WP-ADMIN URL", alias="wpAdmin")
     wp_json: Optional[StrictStr] = Field(default=None, description="If WordPress, the WP-JSON end-point", alias="wpJson")
-    __properties: ClassVar[List[str]] = ["accountId", "country_code", "datasetId", "datasetUri", "defaultDataFormatter", "features", "googleSearchConsoleSiteUrl", "includeExcludeDefault", "key", "language", "networks", "ngDatasetId", "subscriptionId", "url", "wpAdmin", "wpJson"]
+    __properties: ClassVar[List[str]] = ["accountId", "country_code", "datasetId", "datasetUri", "defaultDataFormatter", "features", "googleSearchConsoleSiteUrl", "includeExcludeDefault", "key", "language", "networks", "ngDatasetId", "subscriptionId", "tokens", "url", "wpAdmin", "wpJson"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,6 +93,7 @@ class AccountInfo(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
             "account_id",
@@ -105,6 +108,7 @@ class AccountInfo(BaseModel):
             "language",
             "networks",
             "subscription_id",
+            "tokens",
             "url",
             "wp_admin",
             "wp_json",
@@ -122,6 +126,13 @@ class AccountInfo(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['networks'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each value in tokens (dict)
+        _field_dict = {}
+        if self.tokens:
+            for _key in self.tokens:
+                if self.tokens[_key]:
+                    _field_dict[_key] = self.tokens[_key].to_dict()
+            _dict['tokens'] = _field_dict
         return _dict
 
     @classmethod
@@ -147,6 +158,12 @@ class AccountInfo(BaseModel):
             "networks": [NetworkAccountInfo.from_dict(_item) for _item in obj["networks"]] if obj.get("networks") is not None else None,
             "ngDatasetId": obj.get("ngDatasetId"),
             "subscriptionId": obj.get("subscriptionId"),
+            "tokens": dict(
+                (_k, Tokens.from_dict(_v))
+                for _k, _v in obj["tokens"].items()
+            )
+            if obj.get("tokens") is not None
+            else None,
             "url": obj.get("url"),
             "wpAdmin": obj.get("wpAdmin"),
             "wpJson": obj.get("wpJson")

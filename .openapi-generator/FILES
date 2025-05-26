@@ -203,6 +203,7 @@ docs/SmartContentRequest.md
 docs/SubmitFactCheck200Response.md
 docs/SubmitFactCheckRequest.md
 docs/SummarizationsApi.md
+docs/Tokens.md
 docs/Topic.md
 docs/UpdateAccountRequest.md
 docs/UpdateQuestionAndAnswerRequest.md
@@ -247,9 +248,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_web_page_import_request.py
-test/test_web_page_import_response.py
-test/test_web_pages_imports_api.py
+test/test_tokens.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -466,6 +465,7 @@ wordlift_client/models/smart_content.py
 wordlift_client/models/smart_content_request.py
 wordlift_client/models/submit_fact_check200_response.py
 wordlift_client/models/submit_fact_check_request.py
+wordlift_client/models/tokens.py
 wordlift_client/models/topic.py
 wordlift_client/models/update_account_request.py
 wordlift_client/models/update_question_and_answer_request.py

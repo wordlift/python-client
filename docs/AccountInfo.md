@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **networks** | [**List[NetworkAccountInfo]**](NetworkAccountInfo.md) | A list of connected Account Information | [readonly] 
 **ng_dataset_id** | **str** |  | [optional] 
 **subscription_id** | **int** | The Subscription Id | [readonly] 
+**tokens** | [**Dict[str, Tokens]**](Tokens.md) | Tokens associated with this account/graph. | [optional] [readonly] 
 **url** | **str** | The website URL | [optional] [readonly] 
 **wp_admin** | **str** | If WordPress, the WP-ADMIN URL | [optional] [readonly] 
 **wp_json** | **str** | If WordPress, the WP-JSON end-point | [optional] [readonly] 
