@@ -51,6 +51,8 @@ tags:
   name: Custom Domains
 - description: The list of included or excluded URLs
   name: Include Excludes
+- description: Read tokens connected to Graphs.
+  name: Token Imports
 - description: Create structured data for authors.
   name: Authors
 - description: Add embeddings to a Knowledge Graphs.
@@ -1781,6 +1783,32 @@ paths:
       summary: Create
       tags:
       - Sitemap Imports
+  /tokens:
+    get:
+      description: Get a token
+      operationId: getToken
+      parameters:
+      - description: The registration id
+        example: google-search-console
+        in: query
+        name: registration_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+          description: Success
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+      summary: Get
+      tags:
+      - Token Imports
   /validations:
     post:
       description: Check if the provided custom domain can be set for the account
@@ -3818,6 +3846,18 @@ components:
             type: string
             description: The URLs
           uniqueItems: true
+    TokenResponse:
+      type: object
+      description: The tokens to access a service
+      properties:
+        access_token:
+          type: string
+          description: The access token
+          readOnly: true
+        refresh_token:
+          type: string
+          description: The refresh token
+          readOnly: true
     Tokens:
       type: object
       description: The tokens to access a service
