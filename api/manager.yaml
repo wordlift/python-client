@@ -51,8 +51,6 @@ tags:
   name: Custom Domains
 - description: The list of included or excluded URLs
   name: Include Excludes
-- description: Read tokens connected to Graphs.
-  name: Token Imports
 - description: Create structured data for authors.
   name: Authors
 - description: Add embeddings to a Knowledge Graphs.
@@ -81,6 +79,8 @@ tags:
   name: Account - Google Search Console
 - description: Manage Platform Limits
   name: Platform Limits
+- description: Read tokens connected to Graphs.
+  name: Tokens
 - description: Manage Merchants
   name: Merchants
 - description: Synchronize Products from the Merchant Feed
@@ -1808,7 +1808,7 @@ paths:
       - ApiKey: []
       summary: Get
       tags:
-      - Token Imports
+      - Tokens
   /validations:
     post:
       description: Check if the provided custom domain can be set for the account
