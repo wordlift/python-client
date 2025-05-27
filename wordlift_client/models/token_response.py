@@ -18,6 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
@@ -28,8 +29,9 @@ class TokenResponse(BaseModel):
     The tokens to access a service
     """ # noqa: E501
     access_token: Optional[StrictStr] = Field(default=None, description="The access token")
+    access_token_expires_at: Optional[datetime] = Field(default=None, description="The access token expiration")
     refresh_token: Optional[StrictStr] = Field(default=None, description="The refresh token")
-    __properties: ClassVar[List[str]] = ["access_token", "refresh_token"]
+    __properties: ClassVar[List[str]] = ["access_token", "access_token_expires_at", "refresh_token"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -63,9 +65,11 @@ class TokenResponse(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
             "access_token",
+            "access_token_expires_at",
             "refresh_token",
         ])
 
@@ -87,6 +91,7 @@ class TokenResponse(BaseModel):
 
         _obj = cls.model_validate({
             "access_token": obj.get("access_token"),
+            "access_token_expires_at": obj.get("access_token_expires_at"),
             "refresh_token": obj.get("refresh_token")
         })
         return _obj

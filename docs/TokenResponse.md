@@ -7,6 +7,7 @@ The tokens to access a service
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **access_token** | **str** | The access token | [optional] [readonly] 
+**access_token_expires_at** | **datetime** | The access token expiration | [optional] [readonly] 
 **refresh_token** | **str** | The refresh token | [optional] [readonly] 
 
 ## Example

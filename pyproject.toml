@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "wordlift_client"
-version = "1.106.0"
+version = "1.107.0"
 description = "WordLift API"
 authors = ["WordLift <hello@wordlift.io>"]
 license = "(c) copyright 2022-present WordLift"
