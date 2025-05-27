@@ -203,9 +203,9 @@ docs/SmartContentRequest.md
 docs/SubmitFactCheck200Response.md
 docs/SubmitFactCheckRequest.md
 docs/SummarizationsApi.md
-docs/TokenImportsApi.md
 docs/TokenResponse.md
 docs/Tokens.md
+docs/TokensApi.md
 docs/Topic.md
 docs/UpdateAccountRequest.md
 docs/UpdateQuestionAndAnswerRequest.md
@@ -250,8 +250,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_token_imports_api.py
-test/test_token_response.py
+test/test_tokens_api.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -315,7 +314,7 @@ wordlift_client/api/seo_scores_api.py
 wordlift_client/api/sitemap_generator_api.py
 wordlift_client/api/sitemap_imports_api.py
 wordlift_client/api/summarizations_api.py
-wordlift_client/api/token_imports_api.py
+wordlift_client/api/tokens_api.py
 wordlift_client/api/vector_search_nodes_api.py
 wordlift_client/api/vector_search_queries_api.py
 wordlift_client/api/vector_search_questions_api.py
