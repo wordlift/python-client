@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_account**](AccountsApi.md#get_account) | **GET** /accounts/{id} | Get an account.
 [**list_accounts**](AccountsApi.md#list_accounts) | **GET** /accounts | List
+[**patch_account**](AccountsApi.md#patch_account) | **PATCH** /accounts/{id} | Patch an account.
 [**update_account**](AccountsApi.md#update_account) | **PUT** /accounts/{id} | Update an account.
 
 
@@ -187,6 +188,92 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Found |  -  |
 **401** | Authentication Failure |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **patch_account**
+> Account patch_account(id, body)
+
+Patch an account.
+
+Patch an account.
+
+### Example
+
+* OAuth Authentication (OAuth2):
+* Basic Authentication (BasicAuth):
+
+```python
+import wordlift_client
+from wordlift_client.models.account import Account
+from wordlift_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.wordlift.io
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wordlift_client.Configuration(
+    host = "https://api.wordlift.io"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure HTTP basic authorization: BasicAuth
+configuration = wordlift_client.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+# Enter a context with an instance of the API client
+async with wordlift_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wordlift_client.AccountsApi(api_client)
+    id = 56 # int | 
+    body = None # object | 
+
+    try:
+        # Patch an account.
+        api_response = await api_instance.patch_account(id, body)
+        print("The response of AccountsApi->patch_account:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AccountsApi->patch_account: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **body** | **object**|  | 
+
+### Return type
+
+[**Account**](Account.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Found |  -  |
+**401** | Authentication Failure |  -  |
+**404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
