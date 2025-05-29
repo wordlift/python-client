@@ -439,6 +439,39 @@ paths:
       summary: Get an account.
       tags:
       - Accounts
+    patch:
+      description: Patch an account.
+      operationId: patchAccount
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/JsonPatch'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+          description: Found
+        "401":
+          description: Authentication Failure
+        "404":
+          description: Not Found
+      security:
+      - BasicAuth: []
+      - OAuth2: []
+      summary: Patch an account.
+      tags:
+      - Accounts
     put:
       description: Update the account
       operationId: updateAccount
@@ -2726,6 +2759,8 @@ components:
           description: "The webpage name, reused in the output template."
       required:
       - query
+    JsonPatch:
+      type: object
     KgEmbeddingRequest:
       type: object
       properties:
