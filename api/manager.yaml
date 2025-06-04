@@ -4088,6 +4088,9 @@ components:
       properties:
         embedding:
           $ref: '#/components/schemas/EmbeddingRequest'
+        id:
+          type: string
+          description: The Web Page id (or iri) in Graph when available.
         id_generator:
           type: string
           default: default
