@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
 from wordlift_client.models.web_page import WebPage
 from typing import Optional, Set
@@ -28,9 +28,10 @@ class WebPageImportResponse(BaseModel):
     """
     Web Page Import Response
     """ # noqa: E501
+    id: StrictStr = Field(description="The id/iri of the web page in the Graph.")
     model: StrictStr
     web_page: WebPage
-    __properties: ClassVar[List[str]] = ["model", "web_page"]
+    __properties: ClassVar[List[str]] = ["id", "model", "web_page"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,6 +87,7 @@ class WebPageImportResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "id": obj.get("id"),
             "model": obj.get("model"),
             "web_page": WebPage.from_dict(obj["web_page"]) if obj.get("web_page") is not None else None
         })

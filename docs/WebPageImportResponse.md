@@ -6,6 +6,7 @@ Web Page Import Response
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **str** | The id/iri of the web page in the Graph. | 
 **model** | **str** |  | 
 **web_page** | [**WebPage**](WebPage.md) |  | 
 
