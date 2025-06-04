@@ -22,7 +22,7 @@ from pydantic import Field, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
 from wordlift_client.models.event import Event
-from wordlift_client.models.request3 import Request3
+from wordlift_client.models.request2 import Request2
 from wordlift_client.models.response2 import Response2
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
@@ -46,7 +46,7 @@ class PluginEventsApi:
     @validate_call
     async def create_event(
         self,
-        request3: Request3,
+        request2: Request2,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -64,8 +64,8 @@ class PluginEventsApi:
 
         Create an event
 
-        :param request3: (required)
-        :type request3: Request3
+        :param request2: (required)
+        :type request2: Request2
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -89,7 +89,7 @@ class PluginEventsApi:
         """ # noqa: E501
 
         _param = self._create_event_serialize(
-            request3=request3,
+            request2=request2,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -114,7 +114,7 @@ class PluginEventsApi:
     @validate_call
     async def create_event_with_http_info(
         self,
-        request3: Request3,
+        request2: Request2,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -132,8 +132,8 @@ class PluginEventsApi:
 
         Create an event
 
-        :param request3: (required)
-        :type request3: Request3
+        :param request2: (required)
+        :type request2: Request2
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -157,7 +157,7 @@ class PluginEventsApi:
         """ # noqa: E501
 
         _param = self._create_event_serialize(
-            request3=request3,
+            request2=request2,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -182,7 +182,7 @@ class PluginEventsApi:
     @validate_call
     async def create_event_without_preload_content(
         self,
-        request3: Request3,
+        request2: Request2,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -200,8 +200,8 @@ class PluginEventsApi:
 
         Create an event
 
-        :param request3: (required)
-        :type request3: Request3
+        :param request2: (required)
+        :type request2: Request2
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -225,7 +225,7 @@ class PluginEventsApi:
         """ # noqa: E501
 
         _param = self._create_event_serialize(
-            request3=request3,
+            request2=request2,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -245,7 +245,7 @@ class PluginEventsApi:
 
     def _create_event_serialize(
         self,
-        request3,
+        request2,
         _request_auth,
         _content_type,
         _headers,
@@ -269,8 +269,8 @@ class PluginEventsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request3 is not None:
-            _body_params = request3
+        if request2 is not None:
+            _body_params = request2
 
 
         # set the HTTP header `Accept`

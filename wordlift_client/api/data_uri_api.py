@@ -39,7 +39,7 @@ class DataURIApi:
 
 
     @validate_call
-    async def get1(
+    async def get2(
         self,
         u: Annotated[StrictStr, Field(description="The Web Page URL.")],
         _request_timeout: Union[
@@ -83,7 +83,7 @@ class DataURIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get1_serialize(
+        _param = self._get2_serialize(
             u=u,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -106,7 +106,7 @@ class DataURIApi:
 
 
     @validate_call
-    async def get1_with_http_info(
+    async def get2_with_http_info(
         self,
         u: Annotated[StrictStr, Field(description="The Web Page URL.")],
         _request_timeout: Union[
@@ -150,7 +150,7 @@ class DataURIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get1_serialize(
+        _param = self._get2_serialize(
             u=u,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -173,7 +173,7 @@ class DataURIApi:
 
 
     @validate_call
-    async def get1_without_preload_content(
+    async def get2_without_preload_content(
         self,
         u: Annotated[StrictStr, Field(description="The Web Page URL.")],
         _request_timeout: Union[
@@ -217,7 +217,7 @@ class DataURIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get1_serialize(
+        _param = self._get2_serialize(
             u=u,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -235,7 +235,7 @@ class DataURIApi:
         return response_data.response
 
 
-    def _get1_serialize(
+    def _get2_serialize(
         self,
         u,
         _request_auth,

@@ -29,10 +29,11 @@ class WebPageImportRequest(BaseModel):
     The Web Page Import request
     """ # noqa: E501
     embedding: Optional[EmbeddingRequest] = None
+    id: Optional[StrictStr] = Field(default=None, description="The Web Page id (or iri) in Graph when available.")
     id_generator: Optional[StrictStr] = Field(default='default', description="The entity id generator, by default uses the web page path.")
     output_types: Optional[List[StrictStr]] = Field(default=None, description="The type of the generated entities, by default `http://schema.org/WebPage`.")
     url: StrictStr = Field(description="The Web Page url to import")
-    __properties: ClassVar[List[str]] = ["embedding", "id_generator", "output_types", "url"]
+    __properties: ClassVar[List[str]] = ["embedding", "id", "id_generator", "output_types", "url"]
 
     @field_validator('id_generator')
     def id_generator_validate_enum(cls, value):
@@ -99,6 +100,7 @@ class WebPageImportRequest(BaseModel):
 
         _obj = cls.model_validate({
             "embedding": EmbeddingRequest.from_dict(obj["embedding"]) if obj.get("embedding") is not None else None,
+            "id": obj.get("id"),
             "id_generator": obj.get("id_generator") if obj.get("id_generator") is not None else 'default',
             "output_types": obj.get("output_types"),
             "url": obj.get("url")
