@@ -4117,11 +4117,15 @@ components:
       type: object
       description: Web Page Import Response
       properties:
+        id:
+          type: string
+          description: The id/iri of the web page in the Graph.
         model:
           type: string
         web_page:
           $ref: '#/components/schemas/WebPage'
       required:
+      - id
       - model
       - web_page
     Website:
