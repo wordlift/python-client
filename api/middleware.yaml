@@ -477,9 +477,9 @@ components:
         mainType:
           type: string
           description: Schema type slug
-        label:
-          type: string
         value:
+          type: string
+        label:
           type: string
         displayTypes:
           type: string
