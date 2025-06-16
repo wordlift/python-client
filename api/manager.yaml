@@ -1582,6 +1582,26 @@ paths:
       summary: Create or update the Platform Consumption
       tags:
       - Platform Consumptions
+  /platform-limit/consumptions/{id}:
+    delete:
+      description: Allow admins to delete platform consumptions.
+      operationId: deletePlatformConsumption
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: Done
+      security:
+      - ApiKey: []
+      - OAuth2: []
+      summary: Delete Platform Consumption
+      tags:
+      - Platform Consumptions
   /platform-limit/limits:
     get:
       description: List the platform limits.
