@@ -4,11 +4,11 @@ All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get**](InspectorApi.md#get) | **GET** /inspect | Inspect
+[**get1**](InspectorApi.md#get1) | **GET** /inspect | Inspect
 
 
-# **get**
-> InspectResponse get(u, f, classes=classes)
+# **get1**
+> InspectResponse get1(u, f, classes=classes)
 
 Inspect
 
@@ -51,11 +51,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Inspect
-        api_response = await api_instance.get(u, f, classes=classes)
-        print("The response of InspectorApi->get:\n")
+        api_response = await api_instance.get1(u, f, classes=classes)
+        print("The response of InspectorApi->get1:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling InspectorApi->get: %s\n" % e)
+        print("Exception when calling InspectorApi->get1: %s\n" % e)
 ```
 
 

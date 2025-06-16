@@ -25,10 +25,12 @@ from typing_extensions import Self
 
 class Request(BaseModel):
     """
-    Request
+    The Event request
     """ # noqa: E501
-    redeem_code: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["redeem_code"]
+    source: Optional[StrictStr] = None
+    args: Optional[Dict[str, Any]] = None
+    url: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["source", "args", "url"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,7 +83,9 @@ class Request(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "redeem_code": obj.get("redeem_code")
+            "source": obj.get("source"),
+            "args": obj.get("args"),
+            "url": obj.get("url")
         })
         return _obj
 

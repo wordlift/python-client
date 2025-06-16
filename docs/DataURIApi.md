@@ -4,11 +4,11 @@ All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get2**](DataURIApi.md#get2) | **GET** /data-uri | Get the Web Data URI for a Web Page URL.
+[**get4**](DataURIApi.md#get4) | **GET** /data-uri | Get the Web Data URI for a Web Page URL.
 
 
-# **get2**
-> get2(u)
+# **get4**
+> get4(u)
 
 Get the Web Data URI for a Web Page URL.
 
@@ -48,9 +48,9 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # Get the Web Data URI for a Web Page URL.
-        await api_instance.get2(u)
+        await api_instance.get4(u)
     except Exception as e:
-        print("Exception when calling DataURIApi->get2: %s\n" % e)
+        print("Exception when calling DataURIApi->get4: %s\n" % e)
 ```
 
 

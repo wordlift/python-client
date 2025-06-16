@@ -41,7 +41,7 @@ class WebAsyncsMetadataApi:
 
 
     @validate_call
-    async def get1(
+    async def get(
         self,
         id: Annotated[StrictStr, Field(description="The Web Async id")],
         _request_timeout: Union[
@@ -85,7 +85,7 @@ class WebAsyncsMetadataApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get1_serialize(
+        _param = self._get_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -110,7 +110,7 @@ class WebAsyncsMetadataApi:
 
 
     @validate_call
-    async def get1_with_http_info(
+    async def get_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="The Web Async id")],
         _request_timeout: Union[
@@ -154,7 +154,7 @@ class WebAsyncsMetadataApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get1_serialize(
+        _param = self._get_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -179,7 +179,7 @@ class WebAsyncsMetadataApi:
 
 
     @validate_call
-    async def get1_without_preload_content(
+    async def get_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="The Web Async id")],
         _request_timeout: Union[
@@ -223,7 +223,7 @@ class WebAsyncsMetadataApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get1_serialize(
+        _param = self._get_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -243,7 +243,7 @@ class WebAsyncsMetadataApi:
         return response_data.response
 
 
-    def _get1_serialize(
+    def _get_serialize(
         self,
         id,
         _request_auth,

@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **analyse**
-> Response1 analyse(request1)
+> Response2 analyse(request3)
 
 Analyse content
 
@@ -23,8 +23,8 @@ Analyze the content provided with the request.
 
 ```python
 import wordlift_client
-from wordlift_client.models.request1 import Request1
-from wordlift_client.models.response1 import Response1
+from wordlift_client.models.request3 import Request3
+from wordlift_client.models.response2 import Response2
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -49,11 +49,11 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.AnalysesApi(api_client)
-    request1 = wordlift_client.Request1() # Request1 | 
+    request3 = wordlift_client.Request3() # Request3 | 
 
     try:
         # Analyse content
-        api_response = await api_instance.analyse(request1)
+        api_response = await api_instance.analyse(request3)
         print("The response of AnalysesApi->analyse:\n")
         pprint(api_response)
     except Exception as e:
@@ -67,11 +67,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request1** | [**Request1**](Request1.md)|  | 
+ **request3** | [**Request3**](Request3.md)|  | 
 
 ### Return type
 
-[**Response1**](Response1.md)
+[**Response2**](Response2.md)
 
 ### Authorization
 
@@ -175,7 +175,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **merge**
-> str merge(request1)
+> str merge(request3)
 
 Analyse and Merge
 
@@ -187,7 +187,7 @@ Analyze content and return the results merged as HTML code.
 
 ```python
 import wordlift_client
-from wordlift_client.models.request1 import Request1
+from wordlift_client.models.request3 import Request3
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -212,11 +212,11 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.AnalysesApi(api_client)
-    request1 = wordlift_client.Request1() # Request1 | 
+    request3 = wordlift_client.Request3() # Request3 | 
 
     try:
         # Analyse and Merge
-        api_response = await api_instance.merge(request1)
+        api_response = await api_instance.merge(request3)
         print("The response of AnalysesApi->merge:\n")
         pprint(api_response)
     except Exception as e:
@@ -230,7 +230,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request1** | [**Request1**](Request1.md)|  | 
+ **request3** | [**Request3**](Request3.md)|  | 
 
 ### Return type
 
@@ -256,7 +256,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **v2_analysis**
-> Response1 v2_analysis(request1)
+> Response2 v2_analysis(request3)
 
 Analyse Web Page
 
@@ -268,8 +268,8 @@ Analyse the content of a webpage by using the `url` property of the request.
 
 ```python
 import wordlift_client
-from wordlift_client.models.request1 import Request1
-from wordlift_client.models.response1 import Response1
+from wordlift_client.models.request3 import Request3
+from wordlift_client.models.response2 import Response2
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -294,11 +294,11 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.AnalysesApi(api_client)
-    request1 = wordlift_client.Request1() # Request1 | 
+    request3 = wordlift_client.Request3() # Request3 | 
 
     try:
         # Analyse Web Page
-        api_response = await api_instance.v2_analysis(request1)
+        api_response = await api_instance.v2_analysis(request3)
         print("The response of AnalysesApi->v2_analysis:\n")
         pprint(api_response)
     except Exception as e:
@@ -312,11 +312,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request1** | [**Request1**](Request1.md)|  | 
+ **request3** | [**Request3**](Request3.md)|  | 
 
 ### Return type
 
-[**Response1**](Response1.md)
+[**Response2**](Response2.md)
 
 ### Authorization
 
