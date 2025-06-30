@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **id_generator** | **str** | The entity id generator, by default uses the web page path. | [optional] [default to 'default']
 **output_types** | **List[str]** | The type of the generated entities, by default &#x60;http://schema.org/WebPage&#x60;. | [optional] [default to ["http://schema.org/WebPage"]]
 **url** | **str** | The Web Page url to import | 
+**write_strategy** | **str** | The strategy used to write to the Graph: &#x60;createOrUpdateModel&#x60; (default) will replace existing entities; &#x60;patchReplaceModel&#x60; will replace the &#x60;type&#x60;, &#x60;headline&#x60;, &#x60;abstract&#x60; and &#x60;text&#x60; properties. | [optional] [default to 'createOrUpdateModel']
 
 ## Example
 

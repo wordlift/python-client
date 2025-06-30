@@ -33,7 +33,8 @@ class WebPageImportRequest(BaseModel):
     id_generator: Optional[StrictStr] = Field(default='default', description="The entity id generator, by default uses the web page path.")
     output_types: Optional[List[StrictStr]] = Field(default=None, description="The type of the generated entities, by default `http://schema.org/WebPage`.")
     url: StrictStr = Field(description="The Web Page url to import")
-    __properties: ClassVar[List[str]] = ["embedding", "id", "id_generator", "output_types", "url"]
+    write_strategy: Optional[StrictStr] = Field(default='createOrUpdateModel', description="The strategy used to write to the Graph: `createOrUpdateModel` (default) will replace existing entities; `patchReplaceModel` will replace the `type`, `headline`, `abstract` and `text` properties.")
+    __properties: ClassVar[List[str]] = ["embedding", "id", "id_generator", "output_types", "url", "write_strategy"]
 
     @field_validator('id_generator')
     def id_generator_validate_enum(cls, value):
@@ -103,7 +104,8 @@ class WebPageImportRequest(BaseModel):
             "id": obj.get("id"),
             "id_generator": obj.get("id_generator") if obj.get("id_generator") is not None else 'default',
             "output_types": obj.get("output_types"),
-            "url": obj.get("url")
+            "url": obj.get("url"),
+            "write_strategy": obj.get("write_strategy") if obj.get("write_strategy") is not None else 'createOrUpdateModel'
         })
         return _obj
 
