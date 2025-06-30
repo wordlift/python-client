@@ -4131,6 +4131,12 @@ components:
         url:
           type: string
           description: The Web Page url to import
+        write_strategy:
+          type: string
+          default: createOrUpdateModel
+          description: "The strategy used to write to the Graph: `createOrUpdateModel`\
+            \ (default) will replace existing entities; `patchReplaceModel` will replace\
+            \ the `type`, `headline`, `abstract` and `text` properties."
       required:
       - url
     WebPageImportResponse:
