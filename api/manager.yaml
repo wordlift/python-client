@@ -1109,9 +1109,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  additionalProperties:
-                    type: string
+                  $ref: '#/components/schemas/KgEmbeddingResponse'
           description: Success
         "401":
           description: Authentication Failure
@@ -2784,13 +2782,27 @@ components:
     KgEmbeddingRequest:
       type: object
       properties:
+        embedding:
+          $ref: '#/components/schemas/EmbeddingRequest'
         graphql_query:
           type: string
-        properties:
-          type: array
-          items:
-            type: string
-          uniqueItems: true
+          description: The GraphQL query used to select entities to create embedding
+            vectors for.
+      required:
+      - embedding
+      - graphql_query
+    KgEmbeddingResponse:
+      type: object
+      description: Graph Embedding Response
+      properties:
+        id:
+          type: string
+          description: The id/iri of the web page in the Graph.
+        model:
+          type: string
+      required:
+      - id
+      - model
     Merchant:
       type: object
       description: A Merchant project.
