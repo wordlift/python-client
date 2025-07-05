@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**graphql_query** | **str** |  | [optional] 
-**properties** | **List[str]** |  | [optional] 
+**embedding** | [**EmbeddingRequest**](EmbeddingRequest.md) |  | 
+**graphql_query** | **str** | The GraphQL query used to select entities to create embedding vectors for. | 
 
 ## Example
 

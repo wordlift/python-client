@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **create_embedding**
-> List[Dict[str, str]] create_embedding(kg_embedding_request)
+> List[KgEmbeddingResponse] create_embedding(kg_embedding_request)
 
 Create
 
@@ -21,6 +21,7 @@ Create the embedding for the IRIs for the provided query.
 ```python
 import wordlift_client
 from wordlift_client.models.kg_embedding_request import KgEmbeddingRequest
+from wordlift_client.models.kg_embedding_response import KgEmbeddingResponse
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -67,7 +68,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[Dict[str, str]]**
+[**List[KgEmbeddingResponse]**](KgEmbeddingResponse.md)
 
 ### Authorization
 

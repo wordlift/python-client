@@ -95,6 +95,7 @@ from wordlift_client.models.internal_link_request import InternalLinkRequest
 from wordlift_client.models.internal_link_source import InternalLinkSource
 from wordlift_client.models.item import Item
 from wordlift_client.models.kg_embedding_request import KgEmbeddingRequest
+from wordlift_client.models.kg_embedding_response import KgEmbeddingResponse
 from wordlift_client.models.level_enum import LevelEnum
 from wordlift_client.models.location_inner import LocationInner
 from wordlift_client.models.longtail_response import LongtailResponse

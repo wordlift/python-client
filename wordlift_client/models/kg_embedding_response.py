@@ -20,17 +20,16 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
-from wordlift_client.models.embedding_request import EmbeddingRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
-class KgEmbeddingRequest(BaseModel):
+class KgEmbeddingResponse(BaseModel):
     """
-    KgEmbeddingRequest
+    Graph Embedding Response
     """ # noqa: E501
-    embedding: EmbeddingRequest
-    graphql_query: StrictStr = Field(description="The GraphQL query used to select entities to create embedding vectors for.")
-    __properties: ClassVar[List[str]] = ["embedding", "graphql_query"]
+    id: StrictStr = Field(description="The id/iri of the web page in the Graph.")
+    model: StrictStr
+    __properties: ClassVar[List[str]] = ["id", "model"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +49,7 @@ class KgEmbeddingRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of KgEmbeddingRequest from a JSON string"""
+        """Create an instance of KgEmbeddingResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,14 +70,11 @@ class KgEmbeddingRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of embedding
-        if self.embedding:
-            _dict['embedding'] = self.embedding.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of KgEmbeddingRequest from a dict"""
+        """Create an instance of KgEmbeddingResponse from a dict"""
         if obj is None:
             return None
 
@@ -86,8 +82,8 @@ class KgEmbeddingRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "embedding": EmbeddingRequest.from_dict(obj["embedding"]) if obj.get("embedding") is not None else None,
-            "graphql_query": obj.get("graphql_query")
+            "id": obj.get("id"),
+            "model": obj.get("model")
         })
         return _obj
 

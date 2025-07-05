@@ -17,9 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictStr
-from typing import Dict, List
+from typing import List
 from wordlift_client.models.kg_embedding_request import KgEmbeddingRequest
+from wordlift_client.models.kg_embedding_response import KgEmbeddingResponse
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
 from wordlift_client.api_response import ApiResponse
@@ -55,7 +55,7 @@ class EmbeddingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[Dict[str, str]]:
+    ) -> List[KgEmbeddingResponse]:
         """Create
 
         Create the embedding for the IRIs for the provided query.
@@ -93,7 +93,7 @@ class EmbeddingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "List[Dict[str, str]]",
+            '201': "List[KgEmbeddingResponse]",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -123,7 +123,7 @@ class EmbeddingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[Dict[str, str]]]:
+    ) -> ApiResponse[List[KgEmbeddingResponse]]:
         """Create
 
         Create the embedding for the IRIs for the provided query.
@@ -161,7 +161,7 @@ class EmbeddingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "List[Dict[str, str]]",
+            '201': "List[KgEmbeddingResponse]",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -229,7 +229,7 @@ class EmbeddingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "List[Dict[str, str]]",
+            '201': "List[KgEmbeddingResponse]",
             '401': None,
         }
         response_data = await self.api_client.call_api(
