@@ -59,6 +59,8 @@ tags:
   name: Google Search Console Searches
 - description: Access Google Search Console data
   name: Google Search Console
+- description: Link Groups
+  name: Link Groups
 - description: Account Statistics
   name: Account Stats
 - description: "Import Analytics data to the KG using different sources, e.g. Google\
@@ -505,6 +507,39 @@ paths:
       summary: Update an account.
       tags:
       - Accounts
+  /accounts/{id}/link-groups:
+    get:
+      description: Get Link Groups
+      operationId: getLinkGroups
+      parameters:
+      - description: Graph id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - description: One or more URLs.
+        in: query
+        name: url
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkGroupResponse'
+          description: Success
+        "401":
+          description: Authentication Failure
+      summary: Get
+      tags:
+      - Link Groups
   /addon/configurations:
     get:
       description: List the Add-ons configurations
@@ -2803,6 +2838,25 @@ components:
       required:
       - id
       - model
+    LinkGroup:
+      type: object
+      properties:
+        identifier:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        name:
+          type: string
+    LinkGroupResponse:
+      type: object
+      properties:
+        link_groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/LinkGroup'
+          uniqueItems: true
     Merchant:
       type: object
       description: A Merchant project.
