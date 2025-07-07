@@ -128,6 +128,9 @@ docs/Item.md
 docs/KgEmbeddingRequest.md
 docs/KgEmbeddingResponse.md
 docs/LevelEnum.md
+docs/LinkGroup.md
+docs/LinkGroupResponse.md
+docs/LinkGroupsApi.md
 docs/LocationInner.md
 docs/LongTailsApi.md
 docs/LongtailResponse.md
@@ -251,7 +254,9 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_kg_embedding_response.py
+test/test_link_group.py
+test/test_link_group_response.py
+test/test_link_groups_api.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -299,6 +304,7 @@ wordlift_client/api/image_to_text_api.py
 wordlift_client/api/include_excludes_api.py
 wordlift_client/api/inspector_api.py
 wordlift_client/api/internal_links_api.py
+wordlift_client/api/link_groups_api.py
 wordlift_client/api/long_tails_api.py
 wordlift_client/api/merchant_syncs_api.py
 wordlift_client/api/merchants_api.py
@@ -410,6 +416,8 @@ wordlift_client/models/item.py
 wordlift_client/models/kg_embedding_request.py
 wordlift_client/models/kg_embedding_response.py
 wordlift_client/models/level_enum.py
+wordlift_client/models/link_group.py
+wordlift_client/models/link_group_response.py
 wordlift_client/models/location_inner.py
 wordlift_client/models/longtail_response.py
 wordlift_client/models/merchant.py

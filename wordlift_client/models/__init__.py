@@ -97,6 +97,8 @@ from wordlift_client.models.item import Item
 from wordlift_client.models.kg_embedding_request import KgEmbeddingRequest
 from wordlift_client.models.kg_embedding_response import KgEmbeddingResponse
 from wordlift_client.models.level_enum import LevelEnum
+from wordlift_client.models.link_group import LinkGroup
+from wordlift_client.models.link_group_response import LinkGroupResponse
 from wordlift_client.models.location_inner import LocationInner
 from wordlift_client.models.longtail_response import LongtailResponse
 from wordlift_client.models.merchant import Merchant

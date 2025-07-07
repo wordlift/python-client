@@ -45,6 +45,7 @@ from wordlift_client.api.image_to_text_api import ImageToTextApi
 from wordlift_client.api.include_excludes_api import IncludeExcludesApi
 from wordlift_client.api.inspector_api import InspectorApi
 from wordlift_client.api.internal_links_api import InternalLinksApi
+from wordlift_client.api.link_groups_api import LinkGroupsApi
 from wordlift_client.api.long_tails_api import LongTailsApi
 from wordlift_client.api.merchant_syncs_api import MerchantSyncsApi
 from wordlift_client.api.merchants_api import MerchantsApi
