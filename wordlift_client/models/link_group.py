@@ -29,9 +29,10 @@ class LinkGroup(BaseModel):
     LinkGroup
     """ # noqa: E501
     identifier: Optional[StrictStr] = None
+    iri: Optional[StrictStr] = None
     items: Optional[List[Item]] = None
     name: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["identifier", "items", "name"]
+    __properties: ClassVar[List[str]] = ["identifier", "iri", "items", "name"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,6 +93,7 @@ class LinkGroup(BaseModel):
 
         _obj = cls.model_validate({
             "identifier": obj.get("identifier"),
+            "iri": obj.get("iri"),
             "items": [Item.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
             "name": obj.get("name")
         })

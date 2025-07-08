@@ -254,9 +254,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_link_group.py
-test/test_link_group_response.py
-test/test_link_groups_api.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py

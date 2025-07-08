@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **identifier** | **str** |  | [optional] 
+**iri** | **str** |  | [optional] 
 **items** | [**List[Item]**](Item.md) |  | [optional] 
 **name** | **str** |  | [optional] 
 
