@@ -2843,6 +2843,8 @@ components:
       properties:
         identifier:
           type: string
+        iri:
+          type: string
         items:
           type: array
           items:
