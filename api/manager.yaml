@@ -1617,8 +1617,9 @@ paths:
       - Platform Consumptions
   /platform-limit/consumptions/{id}:
     delete:
+      deprecated: true
       description: Allow admins to delete platform consumptions.
-      operationId: deletePlatformConsumption
+      operationId: deletePlatformConsumptionById
       parameters:
       - in: path
         name: id
@@ -1626,6 +1627,39 @@ paths:
         schema:
           type: integer
           format: int64
+      responses:
+        "204":
+          description: Done
+      security:
+      - ApiKey: []
+      - OAuth2: []
+      summary: Delete Platform Consumption by ID
+      tags:
+      - Platform Consumptions
+  /platform-limit/consumptions/{referenceType}/{referenceId}/{appliesTo}:
+    delete:
+      description: Allow admins to delete platform consumptions.
+      operationId: deletePlatformConsumption
+      parameters:
+      - in: path
+        name: referenceType
+        required: true
+        schema:
+          type: string
+          enum:
+          - SUBSCRIPTION
+          - ACCOUNT
+      - in: path
+        name: referenceId
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - in: path
+        name: appliesTo
+        required: true
+        schema:
+          type: string
       responses:
         "204":
           description: Done
