@@ -34,8 +34,8 @@ class WithLimits(BaseModel):
     consumption: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     id: Optional[StrictInt] = None
     limits: Optional[StrictInt] = None
-    reference_id: Optional[StrictInt] = None
-    reference_type: Optional[StrictStr] = None
+    reference_id: StrictInt
+    reference_type: StrictStr
     remaining: Optional[StrictInt] = None
     resets_in_seconds: Optional[StrictInt] = None
     subscription_limits: Optional[StrictInt] = None
@@ -44,9 +44,6 @@ class WithLimits(BaseModel):
     @field_validator('reference_type')
     def reference_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
         if value not in set(['SUBSCRIPTION', 'ACCOUNT']):
             raise ValueError("must be one of enum values ('SUBSCRIPTION', 'ACCOUNT')")
         return value

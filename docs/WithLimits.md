@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **consumption** | **int** |  | [optional] 
 **id** | **int** |  | [optional] 
 **limits** | **int** |  | [optional] 
-**reference_id** | **int** |  | [optional] 
-**reference_type** | **str** |  | [optional] 
+**reference_id** | **int** |  | 
+**reference_type** | **str** |  | 
 **remaining** | **int** |  | [optional] 
 **resets_in_seconds** | **int** |  | [optional] 
 **subscription_limits** | **int** |  | [optional] 
