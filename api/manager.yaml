@@ -4351,6 +4351,8 @@ components:
           format: int32
       required:
       - applies_to
+      - reference_id
+      - reference_type
   securitySchemes:
     ApiKey:
       description: "`Key {your key}`"
