@@ -4325,7 +4325,6 @@ components:
         consumption:
           type: integer
           format: int32
-          minimum: 1
         id:
           type: integer
           format: int64
