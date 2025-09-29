@@ -18,9 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,7 +30,7 @@ class WithLimits(BaseModel):
     account_limits: Optional[StrictInt] = None
     applies_to: StrictStr
     block: Optional[StrictBool] = None
-    consumption: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    consumption: Optional[StrictInt] = None
     id: Optional[StrictInt] = None
     limits: Optional[StrictInt] = None
     reference_id: StrictInt

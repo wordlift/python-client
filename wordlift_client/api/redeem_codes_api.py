@@ -17,7 +17,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from wordlift_client.models.request2 import Request2
+from wordlift_client.models.request1 import Request1
 from wordlift_client.models.response1 import Response1
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
@@ -41,7 +41,7 @@ class RedeemCodesApi:
     @validate_call
     async def redeem_code(
         self,
-        request2: Request2,
+        request1: Request1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -58,8 +58,8 @@ class RedeemCodesApi:
         """Redeem the provided code and get a key
 
 
-        :param request2: (required)
-        :type request2: Request2
+        :param request1: (required)
+        :type request1: Request1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -83,7 +83,7 @@ class RedeemCodesApi:
         """ # noqa: E501
 
         _param = self._redeem_code_serialize(
-            request2=request2,
+            request1=request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -110,7 +110,7 @@ class RedeemCodesApi:
     @validate_call
     async def redeem_code_with_http_info(
         self,
-        request2: Request2,
+        request1: Request1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -127,8 +127,8 @@ class RedeemCodesApi:
         """Redeem the provided code and get a key
 
 
-        :param request2: (required)
-        :type request2: Request2
+        :param request1: (required)
+        :type request1: Request1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -152,7 +152,7 @@ class RedeemCodesApi:
         """ # noqa: E501
 
         _param = self._redeem_code_serialize(
-            request2=request2,
+            request1=request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -179,7 +179,7 @@ class RedeemCodesApi:
     @validate_call
     async def redeem_code_without_preload_content(
         self,
-        request2: Request2,
+        request1: Request1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -196,8 +196,8 @@ class RedeemCodesApi:
         """Redeem the provided code and get a key
 
 
-        :param request2: (required)
-        :type request2: Request2
+        :param request1: (required)
+        :type request1: Request1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -221,7 +221,7 @@ class RedeemCodesApi:
         """ # noqa: E501
 
         _param = self._redeem_code_serialize(
-            request2=request2,
+            request1=request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -243,7 +243,7 @@ class RedeemCodesApi:
 
     def _redeem_code_serialize(
         self,
-        request2,
+        request1,
         _request_auth,
         _content_type,
         _headers,
@@ -267,8 +267,8 @@ class RedeemCodesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request2 is not None:
-            _body_params = request2
+        if request1 is not None:
+            _body_params = request1
 
 
         # set the HTTP header `Accept`

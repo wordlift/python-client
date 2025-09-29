@@ -18,18 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
 class Properties1(BaseModel):
     """
-    Properties1
+    The entity properties.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The name of the entity.")
-    same_as: Optional[List[StrictStr]] = Field(default=None, description="A list of sameAs entity URIs.", alias="sameAs")
-    __properties: ClassVar[List[str]] = ["name", "sameAs"]
+    latitude: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The latitude.")
+    longitude: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The longitude.")
+    __properties: ClassVar[List[str]] = ["latitude", "longitude"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,8 +82,8 @@ class Properties1(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "name": obj.get("name"),
-            "sameAs": obj.get("sameAs")
+            "latitude": obj.get("latitude"),
+            "longitude": obj.get("longitude")
         })
         return _obj
 

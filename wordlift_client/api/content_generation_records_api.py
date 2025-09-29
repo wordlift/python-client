@@ -22,7 +22,7 @@ from typing import List, Optional
 from typing_extensions import Annotated
 from wordlift_client.models.page_record import PageRecord
 from wordlift_client.models.record import Record
-from wordlift_client.models.request1 import Request1
+from wordlift_client.models.request2 import Request2
 from wordlift_client.models.update_record_request import UpdateRecordRequest
 from wordlift_client.models.update_records_request import UpdateRecordsRequest
 
@@ -886,7 +886,7 @@ class ContentGenerationRecordsApi:
         self,
         content_generation_id: Annotated[StrictInt, Field(description="The Content Generation id.")],
         record_id: Annotated[StrictInt, Field(description="The Record id.")],
-        request1: Request1,
+        request2: Request2,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -907,8 +907,8 @@ class ContentGenerationRecordsApi:
         :type content_generation_id: int
         :param record_id: The Record id. (required)
         :type record_id: int
-        :param request1: (required)
-        :type request1: Request1
+        :param request2: (required)
+        :type request2: Request2
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -934,7 +934,7 @@ class ContentGenerationRecordsApi:
         _param = self._update_record_serialize(
             content_generation_id=content_generation_id,
             record_id=record_id,
-            request1=request1,
+            request2=request2,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -962,7 +962,7 @@ class ContentGenerationRecordsApi:
         self,
         content_generation_id: Annotated[StrictInt, Field(description="The Content Generation id.")],
         record_id: Annotated[StrictInt, Field(description="The Record id.")],
-        request1: Request1,
+        request2: Request2,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -983,8 +983,8 @@ class ContentGenerationRecordsApi:
         :type content_generation_id: int
         :param record_id: The Record id. (required)
         :type record_id: int
-        :param request1: (required)
-        :type request1: Request1
+        :param request2: (required)
+        :type request2: Request2
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1010,7 +1010,7 @@ class ContentGenerationRecordsApi:
         _param = self._update_record_serialize(
             content_generation_id=content_generation_id,
             record_id=record_id,
-            request1=request1,
+            request2=request2,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1038,7 +1038,7 @@ class ContentGenerationRecordsApi:
         self,
         content_generation_id: Annotated[StrictInt, Field(description="The Content Generation id.")],
         record_id: Annotated[StrictInt, Field(description="The Record id.")],
-        request1: Request1,
+        request2: Request2,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1059,8 +1059,8 @@ class ContentGenerationRecordsApi:
         :type content_generation_id: int
         :param record_id: The Record id. (required)
         :type record_id: int
-        :param request1: (required)
-        :type request1: Request1
+        :param request2: (required)
+        :type request2: Request2
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1086,7 +1086,7 @@ class ContentGenerationRecordsApi:
         _param = self._update_record_serialize(
             content_generation_id=content_generation_id,
             record_id=record_id,
-            request1=request1,
+            request2=request2,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1109,7 +1109,7 @@ class ContentGenerationRecordsApi:
         self,
         content_generation_id,
         record_id,
-        request1,
+        request2,
         _request_auth,
         _content_type,
         _headers,
@@ -1137,8 +1137,8 @@ class ContentGenerationRecordsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request1 is not None:
-            _body_params = request1
+        if request2 is not None:
+            _body_params = request2
 
 
         # set the HTTP header `Accept`
