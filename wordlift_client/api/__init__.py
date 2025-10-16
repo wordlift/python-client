@@ -10,6 +10,7 @@ from wordlift_client.api.agent_api import AgentApi
 from wordlift_client.api.analyses_api import AnalysesApi
 from wordlift_client.api.analytics_imports_api import AnalyticsImportsApi
 from wordlift_client.api.analytics_syncs_api import AnalyticsSyncsApi
+from wordlift_client.api.audit_api import AuditApi
 from wordlift_client.api.authors_api import AuthorsApi
 from wordlift_client.api.autocomplete_api import AutocompleteApi
 from wordlift_client.api.botify_crawl_imports_api import BotifyCrawlImportsApi
