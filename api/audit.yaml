@@ -1,0 +1,399 @@
+openapi: 3.1.0
+info:
+  title: WordLift Audit API
+  description: |
+    The WordLift Audit API provides comprehensive SEO and AI-readiness analysis for websites.
+    It evaluates site files, SEO fundamentals, structured data, content structure, image accessibility,
+    automation readiness, and JavaScript rendering to provide actionable insights for improving
+    both search engine and AI agent discoverability.
+  version: 1.0.0
+servers:
+  - url: https://api.wordlift.io
+    description: Production server
+paths:
+  /audit:
+    post:
+      tags:
+        - Audit
+      summary: Website Audit
+      description: |
+        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes:
+        - Site files (robots.txt, llms.txt)
+        - SEO fundamentals (title, description, headings)
+        - Structured data (Schema.org, JSON-LD)
+        - Content structure and semantic HTML
+        - Image accessibility
+        - Automation readiness for AI agents
+        - JavaScript rendering and bot accessibility
+
+        Returns an overall score (0-100) and detailed recommendations for improvement.
+      operationId: audit_website
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuditRequest'
+            examples:
+              basic:
+                summary: Basic audit request
+                value:
+                  url: "https://example.com"
+      responses:
+        '200':
+          description: Successful audit response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditResponse'
+              examples:
+                successful:
+                  summary: Successful audit
+                  value:
+                    success: true
+                    data:
+                      url: "https://example.com/"
+                      domain: "https://example.com"
+                      timestamp: "2025-10-16T07:52:01.581Z"
+                      overallScore: 35
+                      summary: "The website is a basic example domain, primarily intended for documentation."
+                      siteFiles:
+                        status: "Poor"
+                        explanation: "Neither robots.txt nor llms.txt are present."
+                        robotsTxt: "not_found"
+                        llmsTxt: "not_found"
+                        botAccess:
+                          gptbot: "not_specified"
+                          claude: "not_specified"
+                          googlebot: "not_specified"
+                      seoFundamentals:
+                        status: "Poor"
+                        explanation: "The site has a title tag but lacks a meta description."
+                        title: "Example Domain"
+                        description: null
+                        h1Count: 1
+                      structuredData:
+                        status: "Poor"
+                        explanation: "No schema.org markup is present."
+                        hasSchema: false
+                        hasJsonLd: false
+                        detectedSchemas: []
+                      contentStructure:
+                        status: "Needs Improvement"
+                        explanation: "The content is very basic."
+                        semanticHtmlScore: 6
+                      imageAccessibility:
+                        status: "Not Applicable"
+                        explanation: "There are no images on the page."
+                        missingAltPercentage: 0
+                        totalImages: 0
+                        imagesWithoutAlt: 0
+                      automationReadiness:
+                        status: "Poor"
+                        explanation: "The lack of structured data and robots.txt/llms.txt hinders automation."
+                        issues:
+                          - "Missing robots.txt"
+                          - "Missing llms.txt"
+                          - "Lack of structured data"
+                      jsRendering:
+                        status: "Good"
+                        explanation: "The website appears to be statically rendered with minimal to no JavaScript."
+                        frameworkDetected: "None"
+                        renderingType: "Static"
+                        aiAccessibility: "Excellent"
+                        contentAvailability: "All content in HTML"
+                        recommendations: []
+                      quickWins:
+                        - title: "Add a Meta Description"
+                          description: "Implement a meta description tag in the <head> section."
+                          impact: "Medium"
+                        - title: "Implement robots.txt"
+                          description: "Create a robots.txt file to explicitly define crawling rules."
+                          impact: "Medium"
+                      status: "completed"
+                      accountId: 216
+                      accountUrl: "https://example.com"
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation Error - Invalid request format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      security:
+        - ApiKey: []
+components:
+  schemas:
+    AuditRequest:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          format: uri
+          title: URL
+          description: The full URL of the website to audit
+          example: "https://example.com"
+
+    AuditResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Indicates if the audit was successful
+        data:
+          $ref: '#/components/schemas/AuditData'
+
+    AuditData:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The audited URL (may include trailing slash)
+        domain:
+          type: string
+          description: The base domain of the audited URL
+        timestamp:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the audit was performed
+        overallScore:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Overall SEO and AI-readiness score (0-100)
+        summary:
+          type: string
+          description: High-level summary of the audit findings
+        siteFiles:
+          $ref: '#/components/schemas/SiteFiles'
+        seoFundamentals:
+          $ref: '#/components/schemas/SeoFundamentals'
+        structuredData:
+          $ref: '#/components/schemas/StructuredData'
+        contentStructure:
+          $ref: '#/components/schemas/ContentStructure'
+        imageAccessibility:
+          $ref: '#/components/schemas/ImageAccessibility'
+        automationReadiness:
+          $ref: '#/components/schemas/AutomationReadiness'
+        jsRendering:
+          $ref: '#/components/schemas/JsRendering'
+        quickWins:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuickWin'
+        status:
+          type: string
+          enum: [completed, pending, failed]
+          description: Status of the audit process
+        accountId:
+          type: integer
+          description: Account ID associated with the audit
+        accountUrl:
+          type: string
+          description: Account URL associated with the audit
+
+    SiteFiles:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [Excellent, Good, Needs Improvement, Poor, Not Applicable]
+          description: Overall status of site files
+        explanation:
+          type: string
+          description: Detailed explanation of site files evaluation
+        robotsTxt:
+          type: string
+          enum: [found, not_found, error]
+          description: Status of robots.txt file
+        llmsTxt:
+          type: string
+          enum: [found, not_found, error]
+          description: Status of llms.txt file (AI model instructions)
+        botAccess:
+          type: object
+          properties:
+            gptbot:
+              type: string
+              enum: [allowed, disallowed, not_specified]
+            claude:
+              type: string
+              enum: [allowed, disallowed, not_specified]
+            googlebot:
+              type: string
+              enum: [allowed, disallowed, not_specified]
+
+    SeoFundamentals:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [Excellent, Good, Needs Improvement, Poor, Not Applicable]
+        explanation:
+          type: string
+        title:
+          type: string
+          nullable: true
+          description: Page title tag content
+        description:
+          type: string
+          nullable: true
+          description: Meta description content
+        h1Count:
+          type: integer
+          description: Number of H1 headings on the page
+
+    StructuredData:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [Excellent, Good, Needs Improvement, Poor, Not Applicable]
+        explanation:
+          type: string
+        hasSchema:
+          type: boolean
+          description: Whether schema.org markup is present
+        hasJsonLd:
+          type: boolean
+          description: Whether JSON-LD structured data is present
+        detectedSchemas:
+          type: array
+          items:
+            type: string
+          description: List of detected schema types
+
+    ContentStructure:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [Excellent, Good, Needs Improvement, Poor, Not Applicable]
+        explanation:
+          type: string
+        semanticHtmlScore:
+          type: integer
+          minimum: 0
+          maximum: 10
+          description: Score for semantic HTML usage (0-10)
+
+    ImageAccessibility:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [Excellent, Good, Needs Improvement, Poor, Not Applicable]
+        explanation:
+          type: string
+        missingAltPercentage:
+          type: number
+          minimum: 0
+          maximum: 100
+          description: Percentage of images missing alt text
+        totalImages:
+          type: integer
+          description: Total number of images on the page
+        imagesWithoutAlt:
+          type: integer
+          description: Number of images without alt text
+
+    AutomationReadiness:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [Excellent, Good, Needs Improvement, Poor, Not Applicable]
+        explanation:
+          type: string
+        issues:
+          type: array
+          items:
+            type: string
+          description: List of issues affecting automation readiness
+
+    JsRendering:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [Excellent, Good, Needs Improvement, Poor, Not Applicable]
+        explanation:
+          type: string
+        frameworkDetected:
+          type: string
+          description: Detected JavaScript framework (React, Vue, Angular, etc.)
+        renderingType:
+          type: string
+          enum: [Static, SSR, CSR, Hybrid]
+          description: Type of rendering used by the site
+        aiAccessibility:
+          type: string
+          enum: [Excellent, Good, Fair, Poor]
+          description: How accessible the content is to AI agents
+        contentAvailability:
+          type: string
+          description: Description of content availability in HTML
+        recommendations:
+          type: array
+          items:
+            type: string
+          description: Recommendations for improving JS rendering
+
+    QuickWin:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of the quick win recommendation
+        description:
+          type: string
+          description: Detailed description of the recommendation
+        impact:
+          type: string
+          enum: [High, Medium, Low]
+          description: Expected impact of implementing this recommendation
+
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+          description: Error message
+
+    ValidationError:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            type: object
+            properties:
+              loc:
+                type: array
+                items:
+                  type: string
+              msg:
+                type: string
+              type:
+                type: string
+
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: |
+        API Key authentication. Use the format: `Key [your-wordlift-key]`
+
+        Example: `Authorization: Key wl_abc123def456`
