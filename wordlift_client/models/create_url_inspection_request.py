@@ -18,21 +18,17 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-class AccountStats(BaseModel):
+class CreateUrlInspectionRequest(BaseModel):
     """
-    The Account statistics
+    A URL inspection request.
     """ # noqa: E501
-    account_id: StrictInt = Field(description="The account ID.")
-    entities: StrictInt = Field(description="The number of entities.")
-    entities_with_url: StrictInt = Field(description="The number of entities with URL.")
-    product_groups: StrictInt = Field(description="The number of product groups in the KG.")
-    products: StrictInt = Field(description="The number of products in the KG.")
-    __properties: ClassVar[List[str]] = ["account_id", "entities", "entities_with_url", "product_groups", "products"]
+    url: StrictStr = Field(description="The URL to analyze.")
+    __properties: ClassVar[List[str]] = ["url"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +48,7 @@ class AccountStats(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of AccountStats from a JSON string"""
+        """Create an instance of CreateUrlInspectionRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -77,7 +73,7 @@ class AccountStats(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of AccountStats from a dict"""
+        """Create an instance of CreateUrlInspectionRequest from a dict"""
         if obj is None:
             return None
 
@@ -85,11 +81,7 @@ class AccountStats(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "account_id": obj.get("account_id"),
-            "entities": obj.get("entities"),
-            "entities_with_url": obj.get("entities_with_url"),
-            "product_groups": obj.get("product_groups"),
-            "products": obj.get("products")
+            "url": obj.get("url")
         })
         return _obj
 

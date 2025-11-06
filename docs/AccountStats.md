@@ -6,6 +6,7 @@ The Account statistics
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**account_id** | **int** | The account ID. | 
 **entities** | **int** | The number of entities. | 
 **entities_with_url** | **int** | The number of entities with URL. | 
 **product_groups** | **int** | The number of product groups in the KG. | 
