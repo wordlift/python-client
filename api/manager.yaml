@@ -47,6 +47,8 @@ tags:
   name: Google Search Console OAuth2
 - description: Update Plugin Diagnostics data for WordPress clients.
   name: Plugin Diagnostics
+- description: Google Search Console methods.
+  name: Google Search Console
 - description: Manage Custom Domains
   name: Custom Domains
 - description: The list of included or excluded URLs
@@ -1075,6 +1077,31 @@ paths:
       summary: Get Google Search Console sites
       tags:
       - Google Search Console Websites
+  /gsc/url-inspections:
+    post:
+      description: Inspect a URL using the Google Search Console connected to the
+        authenticated account.
+      operationId: createUrlInspection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUrlInspectionRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Success
+        "301":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+      summary: Create
+      tags:
+      - Google Search Console
   /internal-links:
     post:
       description: Create Internal Links.
@@ -2234,6 +2261,10 @@ components:
       type: object
       description: The Account statistics
       properties:
+        account_id:
+          type: integer
+          format: int64
+          description: The account ID.
         entities:
           type: integer
           format: int64
@@ -2251,6 +2282,7 @@ components:
           format: int64
           description: The number of products in the KG.
       required:
+      - account_id
       - entities
       - entities_with_url
       - product_groups
@@ -2545,6 +2577,15 @@ components:
             URI.
       required:
       - authorize_uri
+    CreateUrlInspectionRequest:
+      type: object
+      description: A URL inspection request.
+      properties:
+        url:
+          type: string
+          description: The URL to analyze.
+      required:
+      - url
     DiagnosticPlugin:
       type: object
       description: Plugin Data used for diagnostics
