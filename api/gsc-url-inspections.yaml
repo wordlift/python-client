@@ -1,0 +1,60 @@
+openapi: 3.0.3
+info:
+  title: Google Search Console - URL Inspections
+  version: 1.0.0
+  description: API for requesting Google Search Console URL inspections via WordLift Manager API.
+  contact:
+    name: WordLift
+    url: https://wordlift.io
+    email: hello@wordlift.io
+servers:
+  - url: https://api.wordlift.io
+tags:
+  - name: Google Search Console
+paths:
+  /gsc/url-inspections:
+    post:
+      tags:
+        - Google Search Console
+      summary: Inspect a URL using Google Search Console
+      operationId: postGscUrlInspections
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+                  description: The URL to inspect
+              required:
+                - url
+            example:
+              url: "https://www.glasses.com/gl-us/burberry/8056262081037"
+      responses:
+        '200':
+          description: Inspection request accepted / result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  data:
+                    type: object
+        '400':
+          description: Bad Request
+        '401':
+          description: Authentication Failure
+      security:
+        - ApiKey: []
+components:
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: "`Key {your key}`"
