@@ -32,19 +32,153 @@ paths:
               required:
                 - url
             example:
-              url: "https://www.glasses.com/gl-us/burberry/8056262081037"
+              url: "https://www.example.com/product/12345"
       responses:
         '200':
-          description: Inspection request accepted / result
+          description: URL inspection result from Google Search Console
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  status:
-                    type: string
-                  data:
+                  inspectionResult:
                     type: object
+                    properties:
+                      inspectionResultLink:
+                        type: string
+                        format: uri
+                        description: Link to view the full inspection result in Google Search Console
+                      indexStatusResult:
+                        type: object
+                        properties:
+                          verdict:
+                            type: string
+                            description: Overall indexing verdict
+                            enum: [PASS, FAIL, NEUTRAL]
+                          coverageState:
+                            type: string
+                            description: Current coverage state of the URL
+                          robotsTxtState:
+                            type: string
+                            description: Whether robots.txt allows indexing
+                            enum: [ALLOWED, DISALLOWED]
+                          indexingState:
+                            type: string
+                            description: Current indexing state
+                          lastCrawlTime:
+                            type: string
+                            format: date-time
+                            description: Timestamp of the last crawl
+                          pageFetchState:
+                            type: string
+                            description: Status of the page fetch
+                          googleCanonical:
+                            type: string
+                            format: uri
+                            description: Canonical URL detected by Google
+                          userCanonical:
+                            type: string
+                            format: uri
+                            description: Canonical URL specified by the user
+                          sitemap:
+                            type: array
+                            items:
+                              type: string
+                              format: uri
+                            description: Sitemaps that reference this URL
+                          referringUrls:
+                            type: array
+                            items:
+                              type: string
+                              format: uri
+                            description: URLs that link to this page
+                          crawledAs:
+                            type: string
+                            description: Device type used for crawling
+                            enum: [MOBILE, DESKTOP]
+                      mobileUsabilityResult:
+                        type: object
+                        properties:
+                          verdict:
+                            type: string
+                            description: Mobile usability verdict
+                      richResultsResult:
+                        type: object
+                        properties:
+                          verdict:
+                            type: string
+                            description: Rich results verdict
+                            enum: [PASS, FAIL, NEUTRAL, VERDICT_UNSPECIFIED]
+                          detectedItems:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                richResultType:
+                                  type: string
+                                  description: Type of rich result detected
+                                items:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      name:
+                                        type: string
+                                        description: Name of the detected item
+                                      issues:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            issueMessage:
+                                              type: string
+                                              description: Description of the issue
+                                            severity:
+                                              type: string
+                                              description: Severity level of the issue
+                                              enum: [WARNING, ERROR]
+              example:
+                inspectionResult:
+                  inspectionResultLink: "https://search.google.com/search-console/inspect?resource_id=sc-domain:example.com&id=3LKVoOqyHSOj12br3NiNoQ&utm_medium=link&utm_source=api"
+                  indexStatusResult:
+                    verdict: "PASS"
+                    coverageState: "Submitted and indexed"
+                    robotsTxtState: "ALLOWED"
+                    indexingState: "INDEXING_ALLOWED"
+                    lastCrawlTime: "2025-11-04T02:36:47Z"
+                    pageFetchState: "SUCCESSFUL"
+                    googleCanonical: "https://www.example.com/product/12345"
+                    userCanonical: "https://www.example.com/product/12345"
+                    sitemap:
+                      - "https://www.example.com/sitemap.xml"
+                    referringUrls:
+                      - "https://www.example.com/sitemap.xml"
+                      - "https://www.example.com/product-listing"
+                    crawledAs: "MOBILE"
+                  mobileUsabilityResult:
+                    verdict: "VERDICT_UNSPECIFIED"
+                  richResultsResult:
+                    verdict: "PASS"
+                    detectedItems:
+                      - richResultType: "Product snippets"
+                        items:
+                          - name: "Sample Product Name"
+                            issues:
+                              - issueMessage: "Missing field \"review\""
+                                severity: "WARNING"
+                              - issueMessage: "Missing field \"aggregateRating\""
+                                severity: "WARNING"
+                      - richResultType: "Merchant listings"
+                        items:
+                          - name: "Sample Product Name"
+                            issues:
+                              - issueMessage: "Missing field \"shippingDetails\""
+                                severity: "WARNING"
+                              - issueMessage: "Missing field \"hasMerchantReturnPolicy\""
+                                severity: "WARNING"
+                      - richResultType: "Breadcrumbs"
+                        items:
+                          - name: "Unnamed item"
         '400':
           description: Bad Request
         '401':
