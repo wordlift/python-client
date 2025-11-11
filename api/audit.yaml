@@ -205,7 +205,7 @@ components:
       properties:
         status:
           type: string
-          enum: [Excellent, Good, Needs Improvement, Poor, Not Applicable]
+          enum: [Good, Needs Improvement, Poor]
           description: Overall status of site files
         explanation:
           type: string
@@ -223,20 +223,20 @@ components:
           properties:
             gptbot:
               type: string
-              enum: [allowed, disallowed, not_specified]
+              enum: [allowed, blocked, not_specified]
             claude:
               type: string
-              enum: [allowed, disallowed, not_specified]
+              enum: [allowed, blocked, not_specified]
             googlebot:
               type: string
-              enum: [allowed, disallowed, not_specified]
+              enum: [allowed, blocked, not_specified]
 
     SeoFundamentals:
       type: object
       properties:
         status:
           type: string
-          enum: [Excellent, Good, Needs Improvement, Poor, Not Applicable]
+          enum: [Good, Needs Improvement, Poor]
         explanation:
           type: string
         title:
@@ -256,7 +256,7 @@ components:
       properties:
         status:
           type: string
-          enum: [Excellent, Good, Needs Improvement, Poor, Not Applicable]
+          enum: [Good, Needs Improvement, Poor]
         explanation:
           type: string
         hasSchema:
@@ -276,7 +276,7 @@ components:
       properties:
         status:
           type: string
-          enum: [Excellent, Good, Needs Improvement, Poor, Not Applicable]
+          enum: [Good, Needs Improvement, Poor]
         explanation:
           type: string
         semanticHtmlScore:
@@ -290,7 +290,7 @@ components:
       properties:
         status:
           type: string
-          enum: [Excellent, Good, Needs Improvement, Poor, Not Applicable]
+          enum: [Good, Needs Improvement, Poor]
         explanation:
           type: string
         missingAltPercentage:
@@ -310,7 +310,7 @@ components:
       properties:
         status:
           type: string
-          enum: [Excellent, Good, Needs Improvement, Poor, Not Applicable]
+          enum: [Good, Needs Improvement, Poor]
         explanation:
           type: string
         issues:
@@ -324,7 +324,7 @@ components:
       properties:
         status:
           type: string
-          enum: [Excellent, Good, Needs Improvement, Poor, Not Applicable]
+          enum: [Good, Needs Improvement, Poor]
         explanation:
           type: string
         frameworkDetected:
@@ -332,11 +332,11 @@ components:
           description: Detected JavaScript framework (React, Vue, Angular, etc.)
         renderingType:
           type: string
-          enum: [Static, SSR, CSR, Hybrid]
+          enum: [Static, SSR, SSG, CSR, Hybrid]
           description: Type of rendering used by the site
         aiAccessibility:
           type: string
-          enum: [Excellent, Good, Fair, Poor]
+          enum: [Excellent, Good, Limited, Blocked]
           description: How accessible the content is to AI agents
         contentAvailability:
           type: string
