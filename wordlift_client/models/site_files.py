@@ -41,8 +41,8 @@ class SiteFiles(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Excellent', 'Good', 'Needs Improvement', 'Poor', 'Not Applicable']):
-            raise ValueError("must be one of enum values ('Excellent', 'Good', 'Needs Improvement', 'Poor', 'Not Applicable')")
+        if value not in set(['Good', 'Needs Improvement', 'Poor']):
+            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor')")
         return value
 
     @field_validator('robots_txt')

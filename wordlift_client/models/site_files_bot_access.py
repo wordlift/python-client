@@ -38,8 +38,8 @@ class SiteFilesBotAccess(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['allowed', 'disallowed', 'not_specified']):
-            raise ValueError("must be one of enum values ('allowed', 'disallowed', 'not_specified')")
+        if value not in set(['allowed', 'blocked', 'not_specified']):
+            raise ValueError("must be one of enum values ('allowed', 'blocked', 'not_specified')")
         return value
 
     @field_validator('claude')
@@ -48,8 +48,8 @@ class SiteFilesBotAccess(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['allowed', 'disallowed', 'not_specified']):
-            raise ValueError("must be one of enum values ('allowed', 'disallowed', 'not_specified')")
+        if value not in set(['allowed', 'blocked', 'not_specified']):
+            raise ValueError("must be one of enum values ('allowed', 'blocked', 'not_specified')")
         return value
 
     @field_validator('googlebot')
@@ -58,8 +58,8 @@ class SiteFilesBotAccess(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['allowed', 'disallowed', 'not_specified']):
-            raise ValueError("must be one of enum values ('allowed', 'disallowed', 'not_specified')")
+        if value not in set(['allowed', 'blocked', 'not_specified']):
+            raise ValueError("must be one of enum values ('allowed', 'blocked', 'not_specified')")
         return value
 
     model_config = ConfigDict(

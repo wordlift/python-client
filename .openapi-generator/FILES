@@ -80,8 +80,6 @@ docs/ContentGenerationWordBiasesApi.md
 docs/ContentGenerationsApi.md
 docs/ContentStructure.md
 docs/CreateEmbeddingsInput.md
-docs/CreateSEOScore200Response.md
-docs/CreateSEOScoreRequest.md
 docs/CreateUrlInspectionRequest.md
 docs/CustomDomainsApi.md
 docs/DataURIApi.md
@@ -208,7 +206,6 @@ docs/Response2.md
 docs/Rule.md
 docs/RuleRequest.md
 docs/RulesApi.md
-docs/SEOScoresApi.md
 docs/Scope.md
 docs/SeoFundamentals.md
 docs/SiteFiles.md
@@ -271,7 +268,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_create_url_inspection_request.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -333,7 +329,6 @@ wordlift_client/api/plugin_events_api.py
 wordlift_client/api/questions_and_answers_api.py
 wordlift_client/api/redeem_codes_api.py
 wordlift_client/api/rules_api.py
-wordlift_client/api/seo_scores_api.py
 wordlift_client/api/sitemap_generator_api.py
 wordlift_client/api/sitemap_imports_api.py
 wordlift_client/api/summarizations_api.py
@@ -401,8 +396,6 @@ wordlift_client/models/content_generation_request.py
 wordlift_client/models/content_generation_stats.py
 wordlift_client/models/content_structure.py
 wordlift_client/models/create_embeddings_input.py
-wordlift_client/models/create_seo_score200_response.py
-wordlift_client/models/create_seo_score_request.py
 wordlift_client/models/create_url_inspection_request.py
 wordlift_client/models/diagnostic_plugin.py
 wordlift_client/models/diagnostic_plugin_request.py

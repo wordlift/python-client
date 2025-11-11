@@ -42,8 +42,8 @@ class JsRendering(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Excellent', 'Good', 'Needs Improvement', 'Poor', 'Not Applicable']):
-            raise ValueError("must be one of enum values ('Excellent', 'Good', 'Needs Improvement', 'Poor', 'Not Applicable')")
+        if value not in set(['Good', 'Needs Improvement', 'Poor']):
+            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor')")
         return value
 
     @field_validator('rendering_type')
@@ -52,8 +52,8 @@ class JsRendering(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Static', 'SSR', 'CSR', 'Hybrid']):
-            raise ValueError("must be one of enum values ('Static', 'SSR', 'CSR', 'Hybrid')")
+        if value not in set(['Static', 'SSR', 'SSG', 'CSR', 'Hybrid']):
+            raise ValueError("must be one of enum values ('Static', 'SSR', 'SSG', 'CSR', 'Hybrid')")
         return value
 
     @field_validator('ai_accessibility')
@@ -62,8 +62,8 @@ class JsRendering(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Excellent', 'Good', 'Fair', 'Poor']):
-            raise ValueError("must be one of enum values ('Excellent', 'Good', 'Fair', 'Poor')")
+        if value not in set(['Excellent', 'Good', 'Limited', 'Blocked']):
+            raise ValueError("must be one of enum values ('Excellent', 'Good', 'Limited', 'Blocked')")
         return value
 
     model_config = ConfigDict(

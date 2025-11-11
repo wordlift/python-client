@@ -59,7 +59,6 @@ from wordlift_client.api.plugin_events_api import PluginEventsApi
 from wordlift_client.api.questions_and_answers_api import QuestionsAndAnswersApi
 from wordlift_client.api.redeem_codes_api import RedeemCodesApi
 from wordlift_client.api.rules_api import RulesApi
-from wordlift_client.api.seo_scores_api import SEOScoresApi
 from wordlift_client.api.sitemap_generator_api import SitemapGeneratorApi
 from wordlift_client.api.sitemap_imports_api import SitemapImportsApi
 from wordlift_client.api.summarizations_api import SummarizationsApi
