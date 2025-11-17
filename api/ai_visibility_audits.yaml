@@ -1,0 +1,100 @@
+openapi: 3.1.0
+info:
+  title: Query Fan-Out API
+  description: Simulates Google's AI search query fan-out process
+  version: 0.1.0
+paths:
+  "/ai-visibility-audits":
+    post:
+      tags:
+      - ai-visibility
+      summary: Create AI visibility audits for Query Fan-Out
+      operationId: create_ai_visibility_audit
+      parameters:
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AnalyzeURLRequest"
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+components:
+  schemas:
+    AnalyzeURLRequest:
+      properties:
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+          description: The URL to analyze
+          examples:
+          - https://example.com/article
+        num_queries:
+          type: integer
+          maximum: 20
+          minimum: 1
+          title: Num Queries
+          description: Number of synthetic queries to generate
+          default: 10
+        coverage_threshold:
+          type: number
+          maximum: 1
+          minimum: 0
+          title: Coverage Threshold
+          description: The threshold for answering synthetic queries
+          default: 0.65
+      type: object
+      required:
+      - url
+      title: AnalyzeURLRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            "$ref": "#/components/schemas/ValidationError"
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
