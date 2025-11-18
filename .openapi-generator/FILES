@@ -15,6 +15,7 @@ docs/ActiveAccount.md
 docs/AddOnConfiguration.md
 docs/AddOnsApi.md
 docs/AgentApi.md
+docs/AiVisibilityApi.md
 docs/AnalysesApi.md
 docs/AnalysesRequest.md
 docs/AnalysesResponse.md
@@ -24,6 +25,7 @@ docs/AnalyticsImportsApi.md
 docs/AnalyticsSync.md
 docs/AnalyticsSyncRequest.md
 docs/AnalyticsSyncsApi.md
+docs/AnalyzeURLRequest.md
 docs/AnchorText.md
 docs/Annotation.md
 docs/AskRequest.md
@@ -268,6 +270,8 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_ai_visibility_api.py
+test/test_analyze_url_request.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -277,6 +281,7 @@ wordlift_client/api/account_stats_api.py
 wordlift_client/api/accounts_api.py
 wordlift_client/api/add_ons_api.py
 wordlift_client/api/agent_api.py
+wordlift_client/api/ai_visibility_api.py
 wordlift_client/api/analyses_api.py
 wordlift_client/api/analytics_imports_api.py
 wordlift_client/api/analytics_syncs_api.py
@@ -358,6 +363,7 @@ wordlift_client/models/analyses_response_item.py
 wordlift_client/models/analytics_import_request.py
 wordlift_client/models/analytics_sync.py
 wordlift_client/models/analytics_sync_request.py
+wordlift_client/models/analyze_url_request.py
 wordlift_client/models/anchor_text.py
 wordlift_client/models/annotation.py
 wordlift_client/models/ask_request.py

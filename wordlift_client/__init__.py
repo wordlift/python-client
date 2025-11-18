@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.125.0"
+__version__ = "1.126.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -87,6 +87,7 @@ from wordlift_client.api.web_asyncs_metadata_api import WebAsyncsMetadataApi
 from wordlift_client.api.web_asyncs_responses_api import WebAsyncsResponsesApi
 from wordlift_client.api.web_pages_imports_api import WebPagesImportsApi
 from wordlift_client.api.web_pages_api import WebPagesApi
+from wordlift_client.api.ai_visibility_api import AiVisibilityApi
 
 # import ApiClient
 from wordlift_client.api_response import ApiResponse
@@ -113,6 +114,7 @@ from wordlift_client.models.analyses_response_item import AnalysesResponseItem
 from wordlift_client.models.analytics_import_request import AnalyticsImportRequest
 from wordlift_client.models.analytics_sync import AnalyticsSync
 from wordlift_client.models.analytics_sync_request import AnalyticsSyncRequest
+from wordlift_client.models.analyze_url_request import AnalyzeURLRequest
 from wordlift_client.models.anchor_text import AnchorText
 from wordlift_client.models.annotation import Annotation
 from wordlift_client.models.ask_request import AskRequest
