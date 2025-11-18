@@ -48,8 +48,6 @@ components:
           format: uri
           title: Url
           description: The URL to analyze
-          examples:
-          - https://example.com/article
         num_queries:
           type: integer
           maximum: 20
