@@ -30,7 +30,8 @@ paths:
           description: Successful Response
           content:
             application/json:
-              schema: {}
+              schema:
+                "$ref": "#/components/schemas/AIVisibilityAnalysisResult"
         '422':
           description: Validation Error
           content:
@@ -39,6 +40,54 @@ paths:
                 "$ref": "#/components/schemas/HTTPValidationError"
 components:
   schemas:
+    AIVisibilityAnalysisResult:
+      properties:
+        url:
+          type: string
+          title: Url
+        num_queries_requested:
+          type: integer
+          title: Num Queries Requested
+        coverage_threshold:
+          type: number
+          title: Coverage Threshold
+        entity_name:
+          type: string
+          title: Entity Name
+        query_reasoning:
+          type: string
+          title: Query Reasoning
+        covered_count:
+          type: integer
+          title: Covered Count
+        total_queries:
+          type: integer
+          title: Total Queries
+        query_details:
+          items:
+            "$ref": "#/components/schemas/QueryCoverage"
+          type: array
+          title: Query Details
+        content_chunks_count:
+          type: integer
+          title: Content Chunks Count
+        coverage_score:
+          type: number
+          title: Coverage Score
+          readOnly: true
+      type: object
+      required:
+      - url
+      - num_queries_requested
+      - coverage_threshold
+      - entity_name
+      - query_reasoning
+      - covered_count
+      - total_queries
+      - query_details
+      - content_chunks_count
+      - coverage_score
+      title: AIVisibilityAnalysisResult
     AnalyzeURLRequest:
       properties:
         url:
@@ -75,6 +124,27 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    QueryCoverage:
+      properties:
+        query:
+          type: string
+          title: Query
+        is_covered:
+          type: boolean
+          title: Is Covered
+        similarity:
+          type: number
+          title: Similarity
+        best_chunk_preview:
+          type: string
+          title: Best Chunk Preview
+      type: object
+      required:
+      - query
+      - is_covered
+      - similarity
+      - best_chunk_preview
+      title: QueryCoverage
     ValidationError:
       properties:
         loc:
