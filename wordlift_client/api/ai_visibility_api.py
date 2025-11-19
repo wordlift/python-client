@@ -18,7 +18,8 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import StrictStr
-from typing import Any, Optional
+from typing import Optional
+from wordlift_client.models.ai_visibility_analysis_result import AIVisibilityAnalysisResult
 from wordlift_client.models.analyze_url_request import AnalyzeURLRequest
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
@@ -56,7 +57,7 @@ class AiVisibilityApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> AIVisibilityAnalysisResult:
         """Create AI visibility audits for Query Fan-Out
 
 
@@ -96,7 +97,7 @@ class AiVisibilityApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "AIVisibilityAnalysisResult",
             '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -127,7 +128,7 @@ class AiVisibilityApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[AIVisibilityAnalysisResult]:
         """Create AI visibility audits for Query Fan-Out
 
 
@@ -167,7 +168,7 @@ class AiVisibilityApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "AIVisibilityAnalysisResult",
             '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -238,7 +239,7 @@ class AiVisibilityApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "AIVisibilityAnalysisResult",
             '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(

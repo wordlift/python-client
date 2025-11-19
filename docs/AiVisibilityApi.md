@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **create_ai_visibility_audit**
-> object create_ai_visibility_audit(analyze_url_request, authorization=authorization)
+> AIVisibilityAnalysisResult create_ai_visibility_audit(analyze_url_request, authorization=authorization)
 
 Create AI visibility audits for Query Fan-Out
 
@@ -18,6 +18,7 @@ Create AI visibility audits for Query Fan-Out
 
 ```python
 import wordlift_client
+from wordlift_client.models.ai_visibility_analysis_result import AIVisibilityAnalysisResult
 from wordlift_client.models.analyze_url_request import AnalyzeURLRequest
 from wordlift_client.rest import ApiException
 from pprint import pprint
@@ -67,7 +68,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**AIVisibilityAnalysisResult**](AIVisibilityAnalysisResult.md)
 
 ### Authorization
 
