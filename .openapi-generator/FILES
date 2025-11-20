@@ -191,7 +191,7 @@ docs/ProblemDetail.md
 docs/ProjectType.md
 docs/Properties.md
 docs/Properties1.md
-docs/QueryCoverage.md
+docs/QueryCoverageOutput.md
 docs/QuestionAndAnswer.md
 docs/QuestionAndAnswerRequest.md
 docs/QuestionsAndAnswersApi.md
@@ -272,8 +272,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_ai_visibility_analysis_result.py
-test/test_query_coverage.py
+test/test_query_coverage_output.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -485,7 +484,7 @@ wordlift_client/models/problem_detail.py
 wordlift_client/models/project_type.py
 wordlift_client/models/properties.py
 wordlift_client/models/properties1.py
-wordlift_client/models/query_coverage.py
+wordlift_client/models/query_coverage_output.py
 wordlift_client/models/question_and_answer.py
 wordlift_client/models/question_and_answer_request.py
 wordlift_client/models/quick_win.py

@@ -18,27 +18,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Union
-from wordlift_client.models.query_coverage_output import QueryCoverageOutput
 from typing import Optional, Set
 from typing_extensions import Self
 
-class AIVisibilityAnalysisResult(BaseModel):
+class QueryCoverageOutput(BaseModel):
     """
-    AIVisibilityAnalysisResult
+    QueryCoverageOutput
     """ # noqa: E501
-    url: StrictStr
-    num_queries_requested: StrictInt
-    coverage_threshold: Union[StrictFloat, StrictInt]
-    entity_name: StrictStr
-    query_reasoning: StrictStr
-    covered_count: StrictInt
-    total_queries: StrictInt
-    query_details: List[QueryCoverageOutput]
-    content_chunks_count: StrictInt
-    coverage_score: Union[StrictFloat, StrictInt]
-    __properties: ClassVar[List[str]] = ["url", "num_queries_requested", "coverage_threshold", "entity_name", "query_reasoning", "covered_count", "total_queries", "query_details", "content_chunks_count", "coverage_score"]
+    query: StrictStr
+    is_covered: StrictBool
+    similarity: Union[StrictFloat, StrictInt]
+    __properties: ClassVar[List[str]] = ["query", "is_covered", "similarity"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -58,7 +50,7 @@ class AIVisibilityAnalysisResult(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of AIVisibilityAnalysisResult from a JSON string"""
+        """Create an instance of QueryCoverageOutput from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,10 +62,8 @@ class AIVisibilityAnalysisResult(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
-            "coverage_score",
         ])
 
         _dict = self.model_dump(
@@ -81,18 +71,11 @@ class AIVisibilityAnalysisResult(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in query_details (list)
-        _items = []
-        if self.query_details:
-            for _item in self.query_details:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['query_details'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of AIVisibilityAnalysisResult from a dict"""
+        """Create an instance of QueryCoverageOutput from a dict"""
         if obj is None:
             return None
 
@@ -100,16 +83,9 @@ class AIVisibilityAnalysisResult(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "url": obj.get("url"),
-            "num_queries_requested": obj.get("num_queries_requested"),
-            "coverage_threshold": obj.get("coverage_threshold"),
-            "entity_name": obj.get("entity_name"),
-            "query_reasoning": obj.get("query_reasoning"),
-            "covered_count": obj.get("covered_count"),
-            "total_queries": obj.get("total_queries"),
-            "query_details": [QueryCoverageOutput.from_dict(_item) for _item in obj["query_details"]] if obj.get("query_details") is not None else None,
-            "content_chunks_count": obj.get("content_chunks_count"),
-            "coverage_score": obj.get("coverage_score")
+            "query": obj.get("query"),
+            "is_covered": obj.get("is_covered"),
+            "similarity": obj.get("similarity")
         })
         return _obj
 

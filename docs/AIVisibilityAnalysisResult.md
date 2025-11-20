@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **query_reasoning** | **str** |  | 
 **covered_count** | **int** |  | 
 **total_queries** | **int** |  | 
-**query_details** | [**List[QueryCoverage]**](QueryCoverage.md) |  | 
+**query_details** | [**List[QueryCoverageOutput]**](QueryCoverageOutput.md) |  | 
 **content_chunks_count** | **int** |  | 
 **coverage_score** | **float** |  | [readonly] 
 
