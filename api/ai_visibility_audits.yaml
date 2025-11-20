@@ -65,7 +65,7 @@ components:
           title: Total Queries
         query_details:
           items:
-            "$ref": "#/components/schemas/QueryCoverage"
+            "$ref": "#/components/schemas/QueryCoverageOutput"
           type: array
           title: Query Details
         content_chunks_count:
@@ -124,7 +124,7 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    QueryCoverage:
+    QueryCoverageOutput:
       properties:
         query:
           type: string
@@ -135,16 +135,12 @@ components:
         similarity:
           type: number
           title: Similarity
-        best_chunk_preview:
-          type: string
-          title: Best Chunk Preview
       type: object
       required:
       - query
       - is_covered
       - similarity
-      - best_chunk_preview
-      title: QueryCoverage
+      title: QueryCoverageOutput
     ValidationError:
       properties:
         loc:
