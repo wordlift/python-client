@@ -7,7 +7,7 @@ paths:
   "/ai-visibility-audits":
     post:
       tags:
-      - ai-visibility
+      - Query Fan-Out
       summary: Create AI visibility audits for Query Fan-Out
       operationId: create_ai_visibility_audit
       parameters:
