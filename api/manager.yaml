@@ -534,7 +534,7 @@ paths:
       - description: Zero or more Link Group identifiers.
         in: query
         name: link-group
-        required: true
+        required: false
         schema:
           type: array
           items:
