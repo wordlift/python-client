@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_link_groups**
-> LinkGroupResponse get_link_groups(id, url, link_group)
+> LinkGroupResponse get_link_groups(id, url, link_group=link_group)
 
 Get
 
@@ -47,11 +47,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     api_instance = wordlift_client.LinkGroupsApi(api_client)
     id = 56 # int | Graph id
     url = ['url_example'] # List[str] | One or more URLs.
-    link_group = ['link_group_example'] # List[str] | Zero or more Link Group identifiers.
+    link_group = ['link_group_example'] # List[str] | Zero or more Link Group identifiers. (optional)
 
     try:
         # Get
-        api_response = await api_instance.get_link_groups(id, url, link_group)
+        api_response = await api_instance.get_link_groups(id, url, link_group=link_group)
         print("The response of LinkGroupsApi->get_link_groups:\n")
         pprint(api_response)
     except Exception as e:
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**| Graph id | 
  **url** | [**List[str]**](str.md)| One or more URLs. | 
- **link_group** | [**List[str]**](str.md)| Zero or more Link Group identifiers. | 
+ **link_group** | [**List[str]**](str.md)| Zero or more Link Group identifiers. | [optional] 
 
 ### Return type
 

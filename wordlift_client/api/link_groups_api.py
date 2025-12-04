@@ -18,7 +18,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import List
+from typing import List, Optional
 from typing_extensions import Annotated
 from wordlift_client.models.link_group_response import LinkGroupResponse
 
@@ -45,7 +45,7 @@ class LinkGroupsApi:
         self,
         id: Annotated[StrictInt, Field(description="Graph id")],
         url: Annotated[List[StrictStr], Field(description="One or more URLs.")],
-        link_group: Annotated[List[StrictStr], Field(description="Zero or more Link Group identifiers.")],
+        link_group: Annotated[Optional[List[StrictStr]], Field(description="Zero or more Link Group identifiers.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -67,7 +67,7 @@ class LinkGroupsApi:
         :type id: int
         :param url: One or more URLs. (required)
         :type url: List[str]
-        :param link_group: Zero or more Link Group identifiers. (required)
+        :param link_group: Zero or more Link Group identifiers.
         :type link_group: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -121,7 +121,7 @@ class LinkGroupsApi:
         self,
         id: Annotated[StrictInt, Field(description="Graph id")],
         url: Annotated[List[StrictStr], Field(description="One or more URLs.")],
-        link_group: Annotated[List[StrictStr], Field(description="Zero or more Link Group identifiers.")],
+        link_group: Annotated[Optional[List[StrictStr]], Field(description="Zero or more Link Group identifiers.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -143,7 +143,7 @@ class LinkGroupsApi:
         :type id: int
         :param url: One or more URLs. (required)
         :type url: List[str]
-        :param link_group: Zero or more Link Group identifiers. (required)
+        :param link_group: Zero or more Link Group identifiers.
         :type link_group: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -197,7 +197,7 @@ class LinkGroupsApi:
         self,
         id: Annotated[StrictInt, Field(description="Graph id")],
         url: Annotated[List[StrictStr], Field(description="One or more URLs.")],
-        link_group: Annotated[List[StrictStr], Field(description="Zero or more Link Group identifiers.")],
+        link_group: Annotated[Optional[List[StrictStr]], Field(description="Zero or more Link Group identifiers.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -219,7 +219,7 @@ class LinkGroupsApi:
         :type id: int
         :param url: One or more URLs. (required)
         :type url: List[str]
-        :param link_group: Zero or more Link Group identifiers. (required)
+        :param link_group: Zero or more Link Group identifiers.
         :type link_group: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
