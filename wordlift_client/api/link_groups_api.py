@@ -45,6 +45,7 @@ class LinkGroupsApi:
         self,
         id: Annotated[StrictInt, Field(description="Graph id")],
         url: Annotated[List[StrictStr], Field(description="One or more URLs.")],
+        link_group: Annotated[List[StrictStr], Field(description="Zero or more Link Group identifiers.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -66,6 +67,8 @@ class LinkGroupsApi:
         :type id: int
         :param url: One or more URLs. (required)
         :type url: List[str]
+        :param link_group: Zero or more Link Group identifiers. (required)
+        :type link_group: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -91,6 +94,7 @@ class LinkGroupsApi:
         _param = self._get_link_groups_serialize(
             id=id,
             url=url,
+            link_group=link_group,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -117,6 +121,7 @@ class LinkGroupsApi:
         self,
         id: Annotated[StrictInt, Field(description="Graph id")],
         url: Annotated[List[StrictStr], Field(description="One or more URLs.")],
+        link_group: Annotated[List[StrictStr], Field(description="Zero or more Link Group identifiers.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -138,6 +143,8 @@ class LinkGroupsApi:
         :type id: int
         :param url: One or more URLs. (required)
         :type url: List[str]
+        :param link_group: Zero or more Link Group identifiers. (required)
+        :type link_group: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -163,6 +170,7 @@ class LinkGroupsApi:
         _param = self._get_link_groups_serialize(
             id=id,
             url=url,
+            link_group=link_group,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -189,6 +197,7 @@ class LinkGroupsApi:
         self,
         id: Annotated[StrictInt, Field(description="Graph id")],
         url: Annotated[List[StrictStr], Field(description="One or more URLs.")],
+        link_group: Annotated[List[StrictStr], Field(description="Zero or more Link Group identifiers.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -210,6 +219,8 @@ class LinkGroupsApi:
         :type id: int
         :param url: One or more URLs. (required)
         :type url: List[str]
+        :param link_group: Zero or more Link Group identifiers. (required)
+        :type link_group: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -235,6 +246,7 @@ class LinkGroupsApi:
         _param = self._get_link_groups_serialize(
             id=id,
             url=url,
+            link_group=link_group,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -256,6 +268,7 @@ class LinkGroupsApi:
         self,
         id,
         url,
+        link_group,
         _request_auth,
         _content_type,
         _headers,
@@ -266,6 +279,7 @@ class LinkGroupsApi:
 
         _collection_formats: Dict[str, str] = {
             'url': 'multi',
+            'link-group': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -282,6 +296,10 @@ class LinkGroupsApi:
         if url is not None:
             
             _query_params.append(('url', url))
+            
+        if link_group is not None:
+            
+            _query_params.append(('link-group', link_group))
             
         # process the header parameters
         # process the form parameters
