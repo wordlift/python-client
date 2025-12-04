@@ -530,6 +530,17 @@ paths:
           items:
             type: string
           uniqueItems: true
+        style: form
+      - description: Zero or more Link Group identifiers.
+        in: query
+        name: link-group
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        style: form
       responses:
         "200":
           content:
