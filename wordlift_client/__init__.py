@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.131.0"
+__version__ = "1.132.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -59,7 +59,6 @@ from wordlift_client.api.google_search_console_o_auth2_api import GoogleSearchCo
 from wordlift_client.api.google_search_console_searches_api import GoogleSearchConsoleSearchesApi
 from wordlift_client.api.google_search_console_websites_api import GoogleSearchConsoleWebsitesApi
 from wordlift_client.api.graph_ql_api import GraphQLApi
-from wordlift_client.api.image_to_text_api import ImageToTextApi
 from wordlift_client.api.include_excludes_api import IncludeExcludesApi
 from wordlift_client.api.inspector_api import InspectorApi
 from wordlift_client.api.internal_links_api import InternalLinksApi
@@ -178,8 +177,6 @@ from wordlift_client.models.http_validation_error import HTTPValidationError
 from wordlift_client.models.html import Html
 from wordlift_client.models.image import Image
 from wordlift_client.models.image_accessibility import ImageAccessibility
-from wordlift_client.models.image_to_text_request import ImageToTextRequest
-from wordlift_client.models.image_to_text_response import ImageToTextResponse
 from wordlift_client.models.include_exclude import IncludeExclude
 from wordlift_client.models.include_exclude_request import IncludeExcludeRequest
 from wordlift_client.models.inspect_response import InspectResponse
