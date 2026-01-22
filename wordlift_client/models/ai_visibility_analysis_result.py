@@ -28,7 +28,6 @@ class AIVisibilityAnalysisResult(BaseModel):
     """
     AIVisibilityAnalysisResult
     """ # noqa: E501
-    url: StrictStr
     num_queries_requested: StrictInt
     coverage_threshold: Union[StrictFloat, StrictInt]
     entity_name: StrictStr
@@ -38,7 +37,7 @@ class AIVisibilityAnalysisResult(BaseModel):
     query_details: List[QueryCoverageOutput]
     content_chunks_count: StrictInt
     coverage_score: Union[StrictFloat, StrictInt]
-    __properties: ClassVar[List[str]] = ["url", "num_queries_requested", "coverage_threshold", "entity_name", "query_reasoning", "covered_count", "total_queries", "query_details", "content_chunks_count", "coverage_score"]
+    __properties: ClassVar[List[str]] = ["num_queries_requested", "coverage_threshold", "entity_name", "query_reasoning", "covered_count", "total_queries", "query_details", "content_chunks_count", "coverage_score"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,7 +99,6 @@ class AIVisibilityAnalysisResult(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "url": obj.get("url"),
             "num_queries_requested": obj.get("num_queries_requested"),
             "coverage_threshold": obj.get("coverage_threshold"),
             "entity_name": obj.get("entity_name"),

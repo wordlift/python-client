@@ -25,7 +25,7 @@ docs/AnalyticsImportsApi.md
 docs/AnalyticsSync.md
 docs/AnalyticsSyncRequest.md
 docs/AnalyticsSyncsApi.md
-docs/AnalyzeURLRequest.md
+docs/AnalyzeContentRequest.md
 docs/AnchorText.md
 docs/Annotation.md
 docs/AskRequest.md
@@ -269,6 +269,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_analyze_content_request.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -360,7 +361,7 @@ wordlift_client/models/analyses_response_item.py
 wordlift_client/models/analytics_import_request.py
 wordlift_client/models/analytics_sync.py
 wordlift_client/models/analytics_sync_request.py
-wordlift_client/models/analyze_url_request.py
+wordlift_client/models/analyze_content_request.py
 wordlift_client/models/anchor_text.py
 wordlift_client/models/annotation.py
 wordlift_client/models/ask_request.py

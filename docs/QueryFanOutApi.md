@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **create_ai_visibility_audit**
-> AIVisibilityAnalysisResult create_ai_visibility_audit(analyze_url_request, authorization=authorization)
+> AIVisibilityAnalysisResult create_ai_visibility_audit(analyze_content_request, authorization=authorization)
 
 Create AI visibility audits for Query Fan-Out
 
@@ -19,7 +19,7 @@ Create AI visibility audits for Query Fan-Out
 ```python
 import wordlift_client
 from wordlift_client.models.ai_visibility_analysis_result import AIVisibilityAnalysisResult
-from wordlift_client.models.analyze_url_request import AnalyzeURLRequest
+from wordlift_client.models.analyze_content_request import AnalyzeContentRequest
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -44,12 +44,12 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.QueryFanOutApi(api_client)
-    analyze_url_request = wordlift_client.AnalyzeURLRequest() # AnalyzeURLRequest | 
+    analyze_content_request = wordlift_client.AnalyzeContentRequest() # AnalyzeContentRequest | 
     authorization = 'authorization_example' # str |  (optional)
 
     try:
         # Create AI visibility audits for Query Fan-Out
-        api_response = await api_instance.create_ai_visibility_audit(analyze_url_request, authorization=authorization)
+        api_response = await api_instance.create_ai_visibility_audit(analyze_content_request, authorization=authorization)
         print("The response of QueryFanOutApi->create_ai_visibility_audit:\n")
         pprint(api_response)
     except Exception as e:
@@ -63,7 +63,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **analyze_url_request** | [**AnalyzeURLRequest**](AnalyzeURLRequest.md)|  | 
+ **analyze_content_request** | [**AnalyzeContentRequest**](AnalyzeContentRequest.md)|  | 
  **authorization** | **str**|  | [optional] 
 
 ### Return type

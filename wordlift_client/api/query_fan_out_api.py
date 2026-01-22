@@ -20,7 +20,7 @@ from typing_extensions import Annotated
 from pydantic import StrictStr
 from typing import Optional
 from wordlift_client.models.ai_visibility_analysis_result import AIVisibilityAnalysisResult
-from wordlift_client.models.analyze_url_request import AnalyzeURLRequest
+from wordlift_client.models.analyze_content_request import AnalyzeContentRequest
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
 from wordlift_client.api_response import ApiResponse
@@ -43,7 +43,7 @@ class QueryFanOutApi:
     @validate_call
     async def create_ai_visibility_audit(
         self,
-        analyze_url_request: AnalyzeURLRequest,
+        analyze_content_request: AnalyzeContentRequest,
         authorization: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -61,8 +61,8 @@ class QueryFanOutApi:
         """Create AI visibility audits for Query Fan-Out
 
 
-        :param analyze_url_request: (required)
-        :type analyze_url_request: AnalyzeURLRequest
+        :param analyze_content_request: (required)
+        :type analyze_content_request: AnalyzeContentRequest
         :param authorization:
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
@@ -88,7 +88,7 @@ class QueryFanOutApi:
         """ # noqa: E501
 
         _param = self._create_ai_visibility_audit_serialize(
-            analyze_url_request=analyze_url_request,
+            analyze_content_request=analyze_content_request,
             authorization=authorization,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -114,7 +114,7 @@ class QueryFanOutApi:
     @validate_call
     async def create_ai_visibility_audit_with_http_info(
         self,
-        analyze_url_request: AnalyzeURLRequest,
+        analyze_content_request: AnalyzeContentRequest,
         authorization: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -132,8 +132,8 @@ class QueryFanOutApi:
         """Create AI visibility audits for Query Fan-Out
 
 
-        :param analyze_url_request: (required)
-        :type analyze_url_request: AnalyzeURLRequest
+        :param analyze_content_request: (required)
+        :type analyze_content_request: AnalyzeContentRequest
         :param authorization:
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
@@ -159,7 +159,7 @@ class QueryFanOutApi:
         """ # noqa: E501
 
         _param = self._create_ai_visibility_audit_serialize(
-            analyze_url_request=analyze_url_request,
+            analyze_content_request=analyze_content_request,
             authorization=authorization,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -185,7 +185,7 @@ class QueryFanOutApi:
     @validate_call
     async def create_ai_visibility_audit_without_preload_content(
         self,
-        analyze_url_request: AnalyzeURLRequest,
+        analyze_content_request: AnalyzeContentRequest,
         authorization: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -203,8 +203,8 @@ class QueryFanOutApi:
         """Create AI visibility audits for Query Fan-Out
 
 
-        :param analyze_url_request: (required)
-        :type analyze_url_request: AnalyzeURLRequest
+        :param analyze_content_request: (required)
+        :type analyze_content_request: AnalyzeContentRequest
         :param authorization:
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
@@ -230,7 +230,7 @@ class QueryFanOutApi:
         """ # noqa: E501
 
         _param = self._create_ai_visibility_audit_serialize(
-            analyze_url_request=analyze_url_request,
+            analyze_content_request=analyze_content_request,
             authorization=authorization,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -251,7 +251,7 @@ class QueryFanOutApi:
 
     def _create_ai_visibility_audit_serialize(
         self,
-        analyze_url_request,
+        analyze_content_request,
         authorization,
         _request_auth,
         _content_type,
@@ -278,8 +278,8 @@ class QueryFanOutApi:
             _header_params['authorization'] = authorization
         # process the form parameters
         # process the body parameter
-        if analyze_url_request is not None:
-            _body_params = analyze_url_request
+        if analyze_content_request is not None:
+            _body_params = analyze_content_request
 
 
         # set the HTTP header `Accept`

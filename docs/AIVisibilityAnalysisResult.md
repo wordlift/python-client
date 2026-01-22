@@ -5,7 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **str** |  | 
 **num_queries_requested** | **int** |  | 
 **coverage_threshold** | **float** |  | 
 **entity_name** | **str** |  | 
