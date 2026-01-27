@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.134.0"
+__version__ = "1.135.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -126,8 +126,10 @@ from wordlift_client.models.author_request import AuthorRequest
 from wordlift_client.models.authorization import Authorization
 from wordlift_client.models.authorization_status import AuthorizationStatus
 from wordlift_client.models.autocomplete_result import AutocompleteResult
+from wordlift_client.models.automation_issue import AutomationIssue
 from wordlift_client.models.automation_readiness import AutomationReadiness
 from wordlift_client.models.batch_request import BatchRequest
+from wordlift_client.models.bot_status import BotStatus
 from wordlift_client.models.botify_crawl_import_request import BotifyCrawlImportRequest
 from wordlift_client.models.build_authorize_uri_request import BuildAuthorizeUriRequest
 from wordlift_client.models.build_authorize_uri_response import BuildAuthorizeUriResponse
@@ -148,12 +150,14 @@ from wordlift_client.models.content_evaluation_response_quality_score_breakdown_
 from wordlift_client.models.content_evaluation_response_quality_score_breakdown_seo_top_entities_value_inner import ContentEvaluationResponseQualityScoreBreakdownSeoTopEntitiesValueInner
 from wordlift_client.models.content_expansion_request import ContentExpansionRequest
 from wordlift_client.models.content_expansion_response import ContentExpansionResponse
+from wordlift_client.models.content_freshness import ContentFreshness
 from wordlift_client.models.content_generation import ContentGeneration
 from wordlift_client.models.content_generation_request import ContentGenerationRequest
 from wordlift_client.models.content_generation_stats import ContentGenerationStats
 from wordlift_client.models.content_structure import ContentStructure
 from wordlift_client.models.create_embeddings_input import CreateEmbeddingsInput
 from wordlift_client.models.create_url_inspection_request import CreateUrlInspectionRequest
+from wordlift_client.models.detected_schema import DetectedSchema
 from wordlift_client.models.diagnostic_plugin import DiagnosticPlugin
 from wordlift_client.models.diagnostic_plugin_request import DiagnosticPluginRequest
 from wordlift_client.models.domain_validation_request import DomainValidationRequest
@@ -175,6 +179,7 @@ from wordlift_client.models.generate_sitemap_request import GenerateSitemapReque
 from wordlift_client.models.graphql_request import GraphqlRequest
 from wordlift_client.models.http_validation_error import HTTPValidationError
 from wordlift_client.models.html import Html
+from wordlift_client.models.html_semantics import HtmlSemantics
 from wordlift_client.models.image import Image
 from wordlift_client.models.image_accessibility import ImageAccessibility
 from wordlift_client.models.include_exclude import IncludeExclude
@@ -184,6 +189,7 @@ from wordlift_client.models.internal_link import InternalLink
 from wordlift_client.models.internal_link_destination import InternalLinkDestination
 from wordlift_client.models.internal_link_request import InternalLinkRequest
 from wordlift_client.models.internal_link_source import InternalLinkSource
+from wordlift_client.models.internal_linking import InternalLinking
 from wordlift_client.models.item import Item
 from wordlift_client.models.js_rendering import JsRendering
 from wordlift_client.models.kg_embedding_request import KgEmbeddingRequest
@@ -235,6 +241,7 @@ from wordlift_client.models.query_coverage_output import QueryCoverageOutput
 from wordlift_client.models.question_and_answer import QuestionAndAnswer
 from wordlift_client.models.question_and_answer_request import QuestionAndAnswerRequest
 from wordlift_client.models.quick_win import QuickWin
+from wordlift_client.models.quick_wins_result import QuickWinsResult
 from wordlift_client.models.rank_entities import RankEntities
 from wordlift_client.models.record import Record
 from wordlift_client.models.render_request import RenderRequest
@@ -247,10 +254,10 @@ from wordlift_client.models.response1 import Response1
 from wordlift_client.models.response2 import Response2
 from wordlift_client.models.rule import Rule
 from wordlift_client.models.rule_request import RuleRequest
+from wordlift_client.models.schema_recommendation import SchemaRecommendation
 from wordlift_client.models.scope import Scope
 from wordlift_client.models.seo_fundamentals import SeoFundamentals
 from wordlift_client.models.site_files import SiteFiles
-from wordlift_client.models.site_files_bot_access import SiteFilesBotAccess
 from wordlift_client.models.sitemap_import_request import SitemapImportRequest
 from wordlift_client.models.smart_content import SmartContent
 from wordlift_client.models.smart_content_request import SmartContentRequest
@@ -284,6 +291,7 @@ from wordlift_client.models.web_page_import_response import WebPageImportRespons
 from wordlift_client.models.webpage_properties import WebpageProperties
 from wordlift_client.models.website import Website
 from wordlift_client.models.website_search import WebsiteSearch
+from wordlift_client.models.well_known_files import WellKnownFiles
 from wordlift_client.models.what_operand_lhs import WhatOperandLhs
 from wordlift_client.models.what_operator import WhatOperator
 from wordlift_client.models.when_operator import WhenOperator

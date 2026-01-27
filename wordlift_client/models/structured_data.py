@@ -20,6 +20,9 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
+from wordlift_client.models.detected_schema import DetectedSchema
+from wordlift_client.models.schema_recommendation import SchemaRecommendation
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,12 +30,15 @@ class StructuredData(BaseModel):
     """
     StructuredData
     """ # noqa: E501
+    score: Optional[Annotated[int, Field(le=15, strict=True, ge=0)]] = Field(default=None, description="Numeric score for structured data (0-15)")
     status: Optional[StrictStr] = None
     explanation: Optional[StrictStr] = None
     has_schema: Optional[StrictBool] = Field(default=None, description="Whether schema.org markup is present", alias="hasSchema")
     has_json_ld: Optional[StrictBool] = Field(default=None, description="Whether JSON-LD structured data is present", alias="hasJsonLd")
-    detected_schemas: Optional[List[StrictStr]] = Field(default=None, description="List of detected schema types", alias="detectedSchemas")
-    __properties: ClassVar[List[str]] = ["status", "explanation", "hasSchema", "hasJsonLd", "detectedSchemas"]
+    has_microdata: Optional[StrictBool] = Field(default=None, description="Whether Microdata structured data is present", alias="hasMicrodata")
+    detected_schemas: Optional[List[DetectedSchema]] = Field(default=None, description="List of detected schema types with their formats", alias="detectedSchemas")
+    recommendations: Optional[List[SchemaRecommendation]] = Field(default=None, description="Recommendations for improving structured data")
+    __properties: ClassVar[List[str]] = ["score", "status", "explanation", "hasSchema", "hasJsonLd", "hasMicrodata", "detectedSchemas", "recommendations"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -40,8 +46,8 @@ class StructuredData(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Good', 'Needs Improvement', 'Poor']):
-            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor')")
+        if value not in set(['Good', 'Needs Improvement', 'Poor', 'Unknown']):
+            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor', 'Unknown')")
         return value
 
     model_config = ConfigDict(
@@ -83,6 +89,20 @@ class StructuredData(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in detected_schemas (list)
+        _items = []
+        if self.detected_schemas:
+            for _item in self.detected_schemas:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['detectedSchemas'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in recommendations (list)
+        _items = []
+        if self.recommendations:
+            for _item in self.recommendations:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['recommendations'] = _items
         return _dict
 
     @classmethod
@@ -95,11 +115,14 @@ class StructuredData(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "score": obj.get("score"),
             "status": obj.get("status"),
             "explanation": obj.get("explanation"),
             "hasSchema": obj.get("hasSchema"),
             "hasJsonLd": obj.get("hasJsonLd"),
-            "detectedSchemas": obj.get("detectedSchemas")
+            "hasMicrodata": obj.get("hasMicrodata"),
+            "detectedSchemas": [DetectedSchema.from_dict(_item) for _item in obj["detectedSchemas"]] if obj.get("detectedSchemas") is not None else None,
+            "recommendations": [SchemaRecommendation.from_dict(_item) for _item in obj["recommendations"]] if obj.get("recommendations") is not None else None
         })
         return _obj
 

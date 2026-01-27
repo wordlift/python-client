@@ -18,9 +18,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from wordlift_client.models.site_files_bot_access import SiteFilesBotAccess
+from typing_extensions import Annotated
+from wordlift_client.models.bot_status import BotStatus
+from wordlift_client.models.well_known_files import WellKnownFiles
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,12 +30,15 @@ class SiteFiles(BaseModel):
     """
     SiteFiles
     """ # noqa: E501
+    score: Optional[Annotated[int, Field(le=10, strict=True, ge=0)]] = Field(default=None, description="Numeric score for site files (0-10)")
     status: Optional[StrictStr] = Field(default=None, description="Overall status of site files")
     explanation: Optional[StrictStr] = Field(default=None, description="Detailed explanation of site files evaluation")
     robots_txt: Optional[StrictStr] = Field(default=None, description="Status of robots.txt file", alias="robotsTxt")
     llms_txt: Optional[StrictStr] = Field(default=None, description="Status of llms.txt file (AI model instructions)", alias="llmsTxt")
-    bot_access: Optional[SiteFilesBotAccess] = Field(default=None, alias="botAccess")
-    __properties: ClassVar[List[str]] = ["status", "explanation", "robotsTxt", "llmsTxt", "botAccess"]
+    has_llms_txt: Optional[StrictBool] = Field(default=None, description="Whether llms.txt file exists", alias="hasLlmsTxt")
+    bot_status: Optional[List[BotStatus]] = Field(default=None, description="Access status for various bots", alias="botStatus")
+    well_known: Optional[WellKnownFiles] = Field(default=None, alias="wellKnown")
+    __properties: ClassVar[List[str]] = ["score", "status", "explanation", "robotsTxt", "llmsTxt", "hasLlmsTxt", "botStatus", "wellKnown"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -41,8 +46,8 @@ class SiteFiles(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Good', 'Needs Improvement', 'Poor']):
-            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor')")
+        if value not in set(['Good', 'Needs Improvement', 'Poor', 'Unknown']):
+            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor', 'Unknown')")
         return value
 
     @field_validator('robots_txt')
@@ -104,9 +109,16 @@ class SiteFiles(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of bot_access
-        if self.bot_access:
-            _dict['botAccess'] = self.bot_access.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in bot_status (list)
+        _items = []
+        if self.bot_status:
+            for _item in self.bot_status:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['botStatus'] = _items
+        # override the default output from pydantic by calling `to_dict()` of well_known
+        if self.well_known:
+            _dict['wellKnown'] = self.well_known.to_dict()
         return _dict
 
     @classmethod
@@ -119,11 +131,14 @@ class SiteFiles(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "score": obj.get("score"),
             "status": obj.get("status"),
             "explanation": obj.get("explanation"),
             "robotsTxt": obj.get("robotsTxt"),
             "llmsTxt": obj.get("llmsTxt"),
-            "botAccess": SiteFilesBotAccess.from_dict(obj["botAccess"]) if obj.get("botAccess") is not None else None
+            "hasLlmsTxt": obj.get("hasLlmsTxt"),
+            "botStatus": [BotStatus.from_dict(_item) for _item in obj["botStatus"]] if obj.get("botStatus") is not None else None,
+            "wellKnown": WellKnownFiles.from_dict(obj["wellKnown"]) if obj.get("wellKnown") is not None else None
         })
         return _obj
 

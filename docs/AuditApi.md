@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 Website Audit
 
-Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD) - Content structure and semantic HTML - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility  Returns an overall score (0-100) and detailed recommendations for improvement. 
+Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt, .well-known directory) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD, Microdata) - Content structure and semantic HTML - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility - Content freshness (legacy field, status Unknown) - Internal linking (legacy field, status Unknown) - HTML semantics (legacy field, status Unknown)  Returns an overall score (0-100) and detailed recommendations for improvement. 
 
 ### Example
 
@@ -84,8 +84,12 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful audit response |  -  |
+**400** | Bad Request - Invalid URL format or domain |  -  |
 **401** | Unauthorized - Invalid or missing API key |  -  |
+**403** | Forbidden - Bot protection detected |  -  |
+**404** | Not Found - Page not found |  -  |
 **422** | Validation Error - Invalid request format |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

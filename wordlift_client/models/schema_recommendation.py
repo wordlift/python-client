@@ -18,32 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
-from wordlift_client.models.automation_issue import AutomationIssue
 from typing import Optional, Set
 from typing_extensions import Self
 
-class AutomationReadiness(BaseModel):
+class SchemaRecommendation(BaseModel):
     """
-    AutomationReadiness
+    SchemaRecommendation
     """ # noqa: E501
-    score: Optional[Annotated[int, Field(le=10, strict=True, ge=0)]] = Field(default=None, description="Numeric score for automation readiness (0-10)")
-    status: Optional[StrictStr] = None
-    explanation: Optional[StrictStr] = None
-    issues: Optional[List[AutomationIssue]] = Field(default=None, description="List of structured automation readiness issues")
-    __properties: ClassVar[List[str]] = ["score", "status", "explanation", "issues"]
-
-    @field_validator('status')
-    def status_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['Good', 'Needs Improvement', 'Poor', 'Unknown']):
-            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor', 'Unknown')")
-        return value
+    title: Optional[StrictStr] = Field(default=None, description="Title of the schema recommendation")
+    description: Optional[StrictStr] = Field(default=None, description="Detailed description of the recommendation")
+    __properties: ClassVar[List[str]] = ["title", "description"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -63,7 +49,7 @@ class AutomationReadiness(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of AutomationReadiness from a JSON string"""
+        """Create an instance of SchemaRecommendation from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -84,18 +70,11 @@ class AutomationReadiness(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in issues (list)
-        _items = []
-        if self.issues:
-            for _item in self.issues:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['issues'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of AutomationReadiness from a dict"""
+        """Create an instance of SchemaRecommendation from a dict"""
         if obj is None:
             return None
 
@@ -103,10 +82,8 @@ class AutomationReadiness(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "score": obj.get("score"),
-            "status": obj.get("status"),
-            "explanation": obj.get("explanation"),
-            "issues": [AutomationIssue.from_dict(_item) for _item in obj["issues"]] if obj.get("issues") is not None else None
+            "title": obj.get("title"),
+            "description": obj.get("description")
         })
         return _obj
 

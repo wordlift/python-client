@@ -5,9 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**score** | **int** | Numeric score for content structure (0-15) | [optional] 
 **status** | **str** |  | [optional] 
 **explanation** | **str** |  | [optional] 
-**semantic_html_score** | **int** | Score for semantic HTML usage (0-10) | [optional] 
+**has_semantic_elements** | **bool** | Whether semantic HTML elements are used | [optional] 
+**has_landmarks** | **bool** | Whether ARIA landmarks are present | [optional] 
 
 ## Example
 

@@ -5,11 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**score** | **int** | Numeric score for site files (0-10) | [optional] 
 **status** | **str** | Overall status of site files | [optional] 
 **explanation** | **str** | Detailed explanation of site files evaluation | [optional] 
 **robots_txt** | **str** | Status of robots.txt file | [optional] 
 **llms_txt** | **str** | Status of llms.txt file (AI model instructions) | [optional] 
-**bot_access** | [**SiteFilesBotAccess**](SiteFilesBotAccess.md) |  | [optional] 
+**has_llms_txt** | **bool** | Whether llms.txt file exists | [optional] 
+**bot_status** | [**List[BotStatus]**](BotStatus.md) | Access status for various bots | [optional] 
+**well_known** | [**WellKnownFiles**](WellKnownFiles.md) |  | [optional] 
 
 ## Example
 

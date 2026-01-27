@@ -6,7 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **bool** |  | [optional] 
-**error** | **str** | Error message | [optional] 
+**error** | **str** | Error type/category | [optional] 
+**message** | **str** | Detailed error message | [optional] 
 
 ## Example
 

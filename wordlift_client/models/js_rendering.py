@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,14 +28,14 @@ class JsRendering(BaseModel):
     """
     JsRendering
     """ # noqa: E501
+    score: Optional[Annotated[int, Field(le=15, strict=True, ge=0)]] = Field(default=None, description="Numeric score for JavaScript rendering (0-15)")
     status: Optional[StrictStr] = None
     explanation: Optional[StrictStr] = None
-    framework_detected: Optional[StrictStr] = Field(default=None, description="Detected JavaScript framework (React, Vue, Angular, etc.)", alias="frameworkDetected")
+    framework_detected: Optional[StrictStr] = Field(default=None, description="Detected JavaScript framework (None, React, Vue, Angular, Next.js, Nuxt, Gatsby, Other)", alias="frameworkDetected")
     rendering_type: Optional[StrictStr] = Field(default=None, description="Type of rendering used by the site", alias="renderingType")
-    ai_accessibility: Optional[StrictStr] = Field(default=None, description="How accessible the content is to AI agents", alias="aiAccessibility")
-    content_availability: Optional[StrictStr] = Field(default=None, description="Description of content availability in HTML", alias="contentAvailability")
+    content_availability: Optional[StrictStr] = Field(default=None, description="Description of content availability in HTML (e.g., \"All content in HTML\", \"Mostly in HTML\", \"Partially in JS\", \"Mostly in JS\")", alias="contentAvailability")
     recommendations: Optional[List[StrictStr]] = Field(default=None, description="Recommendations for improving JS rendering")
-    __properties: ClassVar[List[str]] = ["status", "explanation", "frameworkDetected", "renderingType", "aiAccessibility", "contentAvailability", "recommendations"]
+    __properties: ClassVar[List[str]] = ["score", "status", "explanation", "frameworkDetected", "renderingType", "contentAvailability", "recommendations"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -42,8 +43,8 @@ class JsRendering(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Good', 'Needs Improvement', 'Poor']):
-            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor')")
+        if value not in set(['Good', 'Needs Improvement', 'Poor', 'Unknown']):
+            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor', 'Unknown')")
         return value
 
     @field_validator('rendering_type')
@@ -54,16 +55,6 @@ class JsRendering(BaseModel):
 
         if value not in set(['Static', 'SSR', 'SSG', 'CSR', 'Hybrid']):
             raise ValueError("must be one of enum values ('Static', 'SSR', 'SSG', 'CSR', 'Hybrid')")
-        return value
-
-    @field_validator('ai_accessibility')
-    def ai_accessibility_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['Excellent', 'Good', 'Limited', 'Blocked']):
-            raise ValueError("must be one of enum values ('Excellent', 'Good', 'Limited', 'Blocked')")
         return value
 
     model_config = ConfigDict(
@@ -117,11 +108,11 @@ class JsRendering(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "score": obj.get("score"),
             "status": obj.get("status"),
             "explanation": obj.get("explanation"),
             "frameworkDetected": obj.get("frameworkDetected"),
             "renderingType": obj.get("renderingType"),
-            "aiAccessibility": obj.get("aiAccessibility"),
             "contentAvailability": obj.get("contentAvailability"),
             "recommendations": obj.get("recommendations")
         })

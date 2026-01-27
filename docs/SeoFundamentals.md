@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**score** | **int** | Numeric score for SEO fundamentals (0-20) | [optional] 
 **status** | **str** |  | [optional] 
 **explanation** | **str** |  | [optional] 
 **title** | **str** | Page title tag content | [optional] 

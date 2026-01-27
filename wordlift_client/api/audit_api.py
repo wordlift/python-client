@@ -57,7 +57,7 @@ class AuditApi:
     ) -> AuditResponse:
         """Website Audit
 
-        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD) - Content structure and semantic HTML - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility  Returns an overall score (0-100) and detailed recommendations for improvement. 
+        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt, .well-known directory) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD, Microdata) - Content structure and semantic HTML - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility - Content freshness (legacy field, status Unknown) - Internal linking (legacy field, status Unknown) - HTML semantics (legacy field, status Unknown)  Returns an overall score (0-100) and detailed recommendations for improvement. 
 
         :param audit_request: (required)
         :type audit_request: AuditRequest
@@ -93,8 +93,12 @@ class AuditApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuditResponse",
+            '400': "ErrorResponse",
             '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
             '422': "ValidationError1",
+            '500': "ErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -126,7 +130,7 @@ class AuditApi:
     ) -> ApiResponse[AuditResponse]:
         """Website Audit
 
-        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD) - Content structure and semantic HTML - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility  Returns an overall score (0-100) and detailed recommendations for improvement. 
+        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt, .well-known directory) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD, Microdata) - Content structure and semantic HTML - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility - Content freshness (legacy field, status Unknown) - Internal linking (legacy field, status Unknown) - HTML semantics (legacy field, status Unknown)  Returns an overall score (0-100) and detailed recommendations for improvement. 
 
         :param audit_request: (required)
         :type audit_request: AuditRequest
@@ -162,8 +166,12 @@ class AuditApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuditResponse",
+            '400': "ErrorResponse",
             '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
             '422': "ValidationError1",
+            '500': "ErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -195,7 +203,7 @@ class AuditApi:
     ) -> RESTResponseType:
         """Website Audit
 
-        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD) - Content structure and semantic HTML - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility  Returns an overall score (0-100) and detailed recommendations for improvement. 
+        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt, .well-known directory) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD, Microdata) - Content structure and semantic HTML - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility - Content freshness (legacy field, status Unknown) - Internal linking (legacy field, status Unknown) - HTML semantics (legacy field, status Unknown)  Returns an overall score (0-100) and detailed recommendations for improvement. 
 
         :param audit_request: (required)
         :type audit_request: AuditRequest
@@ -231,8 +239,12 @@ class AuditApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuditResponse",
+            '400': "ErrorResponse",
             '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
             '422': "ValidationError1",
+            '500': "ErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

@@ -5,11 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**score** | **int** | Numeric score for image accessibility (0-5) | [optional] 
 **status** | **str** |  | [optional] 
 **explanation** | **str** |  | [optional] 
-**missing_alt_percentage** | **float** | Percentage of images missing alt text | [optional] 
 **total_images** | **int** | Total number of images on the page | [optional] 
 **images_without_alt** | **int** | Number of images without alt text | [optional] 
+**missing_alt_text_images** | **List[str]** | Sample URLs or descriptions of images missing alt text | [optional] 
 
 ## Example
 

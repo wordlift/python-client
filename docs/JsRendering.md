@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**score** | **int** | Numeric score for JavaScript rendering (0-15) | [optional] 
 **status** | **str** |  | [optional] 
 **explanation** | **str** |  | [optional] 
-**framework_detected** | **str** | Detected JavaScript framework (React, Vue, Angular, etc.) | [optional] 
+**framework_detected** | **str** | Detected JavaScript framework (None, React, Vue, Angular, Next.js, Nuxt, Gatsby, Other) | [optional] 
 **rendering_type** | **str** | Type of rendering used by the site | [optional] 
-**ai_accessibility** | **str** | How accessible the content is to AI agents | [optional] 
-**content_availability** | **str** | Description of content availability in HTML | [optional] 
+**content_availability** | **str** | Description of content availability in HTML (e.g., \&quot;All content in HTML\&quot;, \&quot;Mostly in HTML\&quot;, \&quot;Partially in JS\&quot;, \&quot;Mostly in JS\&quot;) | [optional] 
 **recommendations** | **List[str]** | Recommendations for improving JS rendering | [optional] 
 
 ## Example

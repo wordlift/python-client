@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,12 +28,13 @@ class SeoFundamentals(BaseModel):
     """
     SeoFundamentals
     """ # noqa: E501
+    score: Optional[Annotated[int, Field(le=20, strict=True, ge=0)]] = Field(default=None, description="Numeric score for SEO fundamentals (0-20)")
     status: Optional[StrictStr] = None
     explanation: Optional[StrictStr] = None
     title: Optional[StrictStr] = Field(default=None, description="Page title tag content")
     description: Optional[StrictStr] = Field(default=None, description="Meta description content")
     h1_count: Optional[StrictInt] = Field(default=None, description="Number of H1 headings on the page", alias="h1Count")
-    __properties: ClassVar[List[str]] = ["status", "explanation", "title", "description", "h1Count"]
+    __properties: ClassVar[List[str]] = ["score", "status", "explanation", "title", "description", "h1Count"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -40,8 +42,8 @@ class SeoFundamentals(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Good', 'Needs Improvement', 'Poor']):
-            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor')")
+        if value not in set(['Good', 'Needs Improvement', 'Poor', 'Unknown']):
+            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor', 'Unknown')")
         return value
 
     model_config = ConfigDict(
@@ -105,6 +107,7 @@ class SeoFundamentals(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "score": obj.get("score"),
             "status": obj.get("status"),
             "explanation": obj.get("explanation"),
             "title": obj.get("title"),

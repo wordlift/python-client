@@ -28,8 +28,9 @@ class ErrorResponse(BaseModel):
     ErrorResponse
     """ # noqa: E501
     success: Optional[StrictBool] = None
-    error: Optional[StrictStr] = Field(default=None, description="Error message")
-    __properties: ClassVar[List[str]] = ["success", "error"]
+    error: Optional[StrictStr] = Field(default=None, description="Error type/category")
+    message: Optional[StrictStr] = Field(default=None, description="Detailed error message")
+    __properties: ClassVar[List[str]] = ["success", "error", "message"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,7 +84,8 @@ class ErrorResponse(BaseModel):
 
         _obj = cls.model_validate({
             "success": obj.get("success"),
-            "error": obj.get("error")
+            "error": obj.get("error"),
+            "message": obj.get("message")
         })
         return _obj
 

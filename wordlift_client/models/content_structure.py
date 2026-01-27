@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
@@ -28,10 +28,12 @@ class ContentStructure(BaseModel):
     """
     ContentStructure
     """ # noqa: E501
+    score: Optional[Annotated[int, Field(le=15, strict=True, ge=0)]] = Field(default=None, description="Numeric score for content structure (0-15)")
     status: Optional[StrictStr] = None
     explanation: Optional[StrictStr] = None
-    semantic_html_score: Optional[Annotated[int, Field(le=10, strict=True, ge=0)]] = Field(default=None, description="Score for semantic HTML usage (0-10)", alias="semanticHtmlScore")
-    __properties: ClassVar[List[str]] = ["status", "explanation", "semanticHtmlScore"]
+    has_semantic_elements: Optional[StrictBool] = Field(default=None, description="Whether semantic HTML elements are used", alias="hasSemanticElements")
+    has_landmarks: Optional[StrictBool] = Field(default=None, description="Whether ARIA landmarks are present", alias="hasLandmarks")
+    __properties: ClassVar[List[str]] = ["score", "status", "explanation", "hasSemanticElements", "hasLandmarks"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -39,8 +41,8 @@ class ContentStructure(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Good', 'Needs Improvement', 'Poor']):
-            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor')")
+        if value not in set(['Good', 'Needs Improvement', 'Poor', 'Unknown']):
+            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor', 'Unknown')")
         return value
 
     model_config = ConfigDict(
@@ -94,9 +96,11 @@ class ContentStructure(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "score": obj.get("score"),
             "status": obj.get("status"),
             "explanation": obj.get("explanation"),
-            "semanticHtmlScore": obj.get("semanticHtmlScore")
+            "hasSemanticElements": obj.get("hasSemanticElements"),
+            "hasLandmarks": obj.get("hasLandmarks")
         })
         return _obj
 

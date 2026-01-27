@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,12 +28,13 @@ class ImageAccessibility(BaseModel):
     """
     ImageAccessibility
     """ # noqa: E501
+    score: Optional[Annotated[int, Field(le=5, strict=True, ge=0)]] = Field(default=None, description="Numeric score for image accessibility (0-5)")
     status: Optional[StrictStr] = None
     explanation: Optional[StrictStr] = None
-    missing_alt_percentage: Optional[Union[Annotated[float, Field(le=100, strict=True, ge=0)], Annotated[int, Field(le=100, strict=True, ge=0)]]] = Field(default=None, description="Percentage of images missing alt text", alias="missingAltPercentage")
     total_images: Optional[StrictInt] = Field(default=None, description="Total number of images on the page", alias="totalImages")
     images_without_alt: Optional[StrictInt] = Field(default=None, description="Number of images without alt text", alias="imagesWithoutAlt")
-    __properties: ClassVar[List[str]] = ["status", "explanation", "missingAltPercentage", "totalImages", "imagesWithoutAlt"]
+    missing_alt_text_images: Optional[List[StrictStr]] = Field(default=None, description="Sample URLs or descriptions of images missing alt text", alias="missingAltTextImages")
+    __properties: ClassVar[List[str]] = ["score", "status", "explanation", "totalImages", "imagesWithoutAlt", "missingAltTextImages"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -41,8 +42,8 @@ class ImageAccessibility(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Good', 'Needs Improvement', 'Poor']):
-            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor')")
+        if value not in set(['Good', 'Needs Improvement', 'Poor', 'Unknown']):
+            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor', 'Unknown')")
         return value
 
     model_config = ConfigDict(
@@ -96,11 +97,12 @@ class ImageAccessibility(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "score": obj.get("score"),
             "status": obj.get("status"),
             "explanation": obj.get("explanation"),
-            "missingAltPercentage": obj.get("missingAltPercentage"),
             "totalImages": obj.get("totalImages"),
-            "imagesWithoutAlt": obj.get("imagesWithoutAlt")
+            "imagesWithoutAlt": obj.get("imagesWithoutAlt"),
+            "missingAltTextImages": obj.get("missingAltTextImages")
         })
         return _obj
 
