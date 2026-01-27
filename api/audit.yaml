@@ -3,9 +3,9 @@ info:
   title: WordLift Audit API
   description: |
     The WordLift Audit API provides comprehensive SEO and AI-readiness analysis for websites.
-    It evaluates site files, SEO fundamentals, structured data, content structure, image accessibility,
-    automation readiness, and JavaScript rendering to provide actionable insights for improving
-    both search engine and AI agent discoverability.
+    It evaluates site files (including .well-known directory), SEO fundamentals, structured data,
+    content structure, image accessibility, automation readiness, and JavaScript rendering to provide
+    actionable insights for improving both search engine and AI agent discoverability.
   version: 1.0.0
 servers:
   - url: https://api.wordlift.io
@@ -18,13 +18,16 @@ paths:
       summary: Website Audit
       description: |
         Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes:
-        - Site files (robots.txt, llms.txt)
+        - Site files (robots.txt, llms.txt, .well-known directory)
         - SEO fundamentals (title, description, headings)
-        - Structured data (Schema.org, JSON-LD)
+        - Structured data (Schema.org, JSON-LD, Microdata)
         - Content structure and semantic HTML
         - Image accessibility
         - Automation readiness for AI agents
         - JavaScript rendering and bot accessibility
+        - Content freshness (legacy field, status Unknown)
+        - Internal linking (legacy field, status Unknown)
+        - HTML semantics (legacy field, status Unknown)
 
         Returns an overall score (0-100) and detailed recommendations for improvement.
       operationId: audit_website
@@ -52,79 +55,186 @@ paths:
                   value:
                     success: true
                     data:
-                      url: "https://example.com/"
-                      domain: "https://example.com"
-                      timestamp: "2025-10-16T07:52:01.581Z"
-                      overallScore: 35
-                      summary: "The website is a basic example domain, primarily intended for documentation."
+                      url: "https://www.wordlift.io/"
+                      domain: "https://www.wordlift.io"
+                      timestamp: "2026-01-27T16:55:07.918Z"
+                      overallScore: 43
+                      score: 43
+                      summary: "Wordlift.io presents itself as an AI-powered SEO platform..."
                       siteFiles:
-                        status: "Poor"
-                        explanation: "Neither robots.txt nor llms.txt are present."
-                        robotsTxt: "not_found"
-                        llmsTxt: "not_found"
-                        botAccess:
-                          gptbot: "not_specified"
-                          claude: "not_specified"
-                          googlebot: "not_specified"
+                        score: 7
+                        status: "Needs Improvement"
+                        explanation: "The site provides a robots.txt and llms.txt file..."
+                        robotsTxt: "found"
+                        llmsTxt: "found"
+                        hasLlmsTxt: true
+                        botStatus:
+                          - name: "GPTBot"
+                            vendor: "OpenAI"
+                            status: "Allowed"
+                          - name: "Claude-Web"
+                            vendor: "Anthropic"
+                            status: "Allowed"
+                        wellKnown:
+                          aiPlugin: false
+                          ucp: false
+                          security: false
+                          assetLinks: false
+                          appleAssociation: false
+                          llmsTxt: false
                       seoFundamentals:
-                        status: "Poor"
-                        explanation: "The site has a title tag but lacks a meta description."
-                        title: "Example Domain"
-                        description: null
-                        h1Count: 1
+                        score: 15
+                        status: "Needs Improvement"
+                        explanation: "The site has a title tag and meta description..."
+                        title: "Home - AI-Powered SEO • WordLift"
+                        description: "WordLift is the AI-powered SEO platform..."
+                        h1Count: 0
                       structuredData:
-                        status: "Poor"
-                        explanation: "No schema.org markup is present."
+                        score: 8
+                        status: "Needs Improvement"
+                        explanation: "Structured data presence is not clearly identifiable..."
                         hasSchema: false
                         hasJsonLd: false
+                        hasMicrodata: false
                         detectedSchemas: []
+                        recommendations:
+                          - title: "Implement JSON-LD Schema Markup"
+                            description: "Add schema.org markup using JSON-LD..."
                       contentStructure:
+                        score: 10
                         status: "Needs Improvement"
-                        explanation: "The content is very basic."
-                        semanticHtmlScore: 6
+                        explanation: "The site likely uses semantic HTML elements..."
+                        hasSemanticElements: true
+                        hasLandmarks: true
                       imageAccessibility:
-                        status: "Not Applicable"
-                        explanation: "There are no images on the page."
-                        missingAltPercentage: 0
+                        score: 3
+                        status: "Needs Improvement"
+                        explanation: "Insufficient data. Image accessibility requires alt text..."
                         totalImages: 0
                         imagesWithoutAlt: 0
+                        missingAltTextImages: []
                       automationReadiness:
+                        score: 4
                         status: "Poor"
-                        explanation: "The lack of structured data and robots.txt/llms.txt hinders automation."
+                        explanation: "The provided HTML lacks identifiable form elements..."
                         issues:
-                          - "Missing robots.txt"
-                          - "Missing llms.txt"
-                          - "Lack of structured data"
+                          - priority: "P1"
+                            criterion: "WCAG 4.1.2 Name, Role, Value"
+                            what: "Many HTML elements are dynamically created..."
+                            where: "Dynamically generated sections of the site..."
+                            why: "Assistive technologies, like screen readers..."
+                            how: "Ensure every interactive element has appropriate ARIA..."
+                            compliance: "Severe impact on WCAG compliance..."
                       jsRendering:
-                        status: "Good"
-                        explanation: "The website appears to be statically rendered with minimal to no JavaScript."
-                        frameworkDetected: "None"
-                        renderingType: "Static"
-                        aiAccessibility: "Excellent"
-                        contentAvailability: "All content in HTML"
-                        recommendations: []
+                        score: 6
+                        status: "Poor"
+                        explanation: "The presence of Rocket Lazy Load Scripts..."
+                        frameworkDetected: "Other"
+                        renderingType: "CSR"
+                        contentAvailability: "Partially in JS"
+                        recommendations:
+                          - "Implement Server-Side Rendering (SSR)..."
                       quickWins:
-                        - title: "Add a Meta Description"
-                          description: "Implement a meta description tag in the <head> section."
-                          impact: "Medium"
-                        - title: "Implement robots.txt"
-                          description: "Create a robots.txt file to explicitly define crawling rules."
-                          impact: "Medium"
+                        status: "Needs Improvement"
+                        explanation: "4 quick wins identified"
+                        wins:
+                          - title: "Implement JSON-LD Schema Markup"
+                            description: "Add relevant schema markup..."
+                            impact: "High"
+                          - title: "Add Alt Text to All Images"
+                            description: "Ensure all images have descriptive alt text..."
+                            impact: "Medium"
+                      htmlSemantics:
+                        status: "Unknown"
+                        explanation: "HTML semantics analysis integrated into Content Structure criterion"
+                      contentFreshness:
+                        status: "Unknown"
+                        explanation: "Content freshness not currently analyzed"
+                        category: "N/A"
+                        publicationDate: "N/A"
+                        lastUpdatedDate: "N/A"
+                      internalLinking:
+                        status: "Unknown"
+                        explanation: "Internal linking analysis integrated into Content Structure criterion"
                       status: "completed"
                       accountId: 216
-                      accountUrl: "https://example.com"
+                      accountUrl: "https://wordlift.io/blog/en"
+        '400':
+          description: Bad Request - Invalid URL format or domain
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalid_url:
+                  summary: Invalid URL format
+                  value:
+                    error: "Invalid URL format"
+                    message: "Please provide a valid URL"
+                invalid_domain:
+                  summary: Invalid domain
+                  value:
+                    error: "Invalid domain"
+                    message: "The URL's domain name appears to be invalid or is not a public domain"
         '401':
           description: Unauthorized - Invalid or missing API key
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                missing_auth:
+                  summary: Missing authorization
+                  value:
+                    error: "Authentication required"
+                    message: "Please provide Authorization header with WordLift Key"
+                invalid_key:
+                  summary: Invalid key
+                  value:
+                    error: "Invalid WordLift key"
+                    message: "The provided key is not valid or has expired"
+        '403':
+          description: Forbidden - Bot protection detected
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                bot_protection:
+                  summary: Bot protection
+                  value:
+                    error: "Bot protection detected"
+                    message: "Bot protection detected for: https://example.com"
+        '404':
+          description: Not Found - Page not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                page_not_found:
+                  summary: Page not found
+                  value:
+                    error: "Page not found"
+                    message: "Page not found: https://example.com/missing"
         '422':
           description: Validation Error - Invalid request format
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                server_error:
+                  summary: Internal error
+                  value:
+                    error: "Internal server error"
+                    message: "An unexpected error occurred"
       security:
         - ApiKey: []
 components:
@@ -168,9 +278,14 @@ components:
           minimum: 0
           maximum: 100
           description: Overall SEO and AI-readiness score (0-100)
+        score:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Legacy field - same as overallScore
         summary:
           type: string
-          description: High-level summary of the audit findings
+          description: High-level summary of the audit findings in markdown format
         siteFiles:
           $ref: '#/components/schemas/SiteFiles'
         seoFundamentals:
@@ -181,14 +296,18 @@ components:
           $ref: '#/components/schemas/ContentStructure'
         imageAccessibility:
           $ref: '#/components/schemas/ImageAccessibility'
+        htmlSemantics:
+          $ref: '#/components/schemas/HtmlSemantics'
+        contentFreshness:
+          $ref: '#/components/schemas/ContentFreshness'
+        internalLinking:
+          $ref: '#/components/schemas/InternalLinking'
         automationReadiness:
           $ref: '#/components/schemas/AutomationReadiness'
         jsRendering:
           $ref: '#/components/schemas/JsRendering'
         quickWins:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuickWin'
+          $ref: '#/components/schemas/QuickWinsResult'
         status:
           type: string
           enum: [completed, pending, failed]
@@ -200,12 +319,54 @@ components:
           type: string
           description: Account URL associated with the audit
 
+    BotStatus:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the bot (e.g., GPTBot, Claude-Web, Googlebot)
+        vendor:
+          type: string
+          description: Vendor of the bot (e.g., OpenAI, Anthropic, Google)
+        status:
+          type: string
+          enum: [Allowed, Blocked]
+          description: Access status for this bot
+
+    WellKnownFiles:
+      type: object
+      description: Status of .well-known directory files
+      properties:
+        aiPlugin:
+          type: boolean
+          description: Whether .well-known/ai-plugin.json exists (ChatGPT/OpenAI plugins)
+        ucp:
+          type: boolean
+          description: Whether .well-known/ucp.json exists (Universal Commerce Protocol)
+        security:
+          type: boolean
+          description: Whether .well-known/security.txt exists (security contact info)
+        assetLinks:
+          type: boolean
+          description: Whether .well-known/assetlinks.json exists (Android deep linking)
+        appleAssociation:
+          type: boolean
+          description: Whether .well-known/apple-app-site-association exists (iOS deep linking)
+        llmsTxt:
+          type: boolean
+          description: Whether .well-known/llms.txt exists (alternative LLM instructions location)
+
     SiteFiles:
       type: object
       properties:
+        score:
+          type: integer
+          minimum: 0
+          maximum: 10
+          description: Numeric score for site files (0-10)
         status:
           type: string
-          enum: [Good, Needs Improvement, Poor]
+          enum: [Good, Needs Improvement, Poor, Unknown]
           description: Overall status of site files
         explanation:
           type: string
@@ -218,25 +379,28 @@ components:
           type: string
           enum: [found, not_found, error]
           description: Status of llms.txt file (AI model instructions)
-        botAccess:
-          type: object
-          properties:
-            gptbot:
-              type: string
-              enum: [allowed, blocked, not_specified]
-            claude:
-              type: string
-              enum: [allowed, blocked, not_specified]
-            googlebot:
-              type: string
-              enum: [allowed, blocked, not_specified]
+        hasLlmsTxt:
+          type: boolean
+          description: Whether llms.txt file exists
+        botStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/BotStatus'
+          description: Access status for various bots
+        wellKnown:
+          $ref: '#/components/schemas/WellKnownFiles'
 
     SeoFundamentals:
       type: object
       properties:
+        score:
+          type: integer
+          minimum: 0
+          maximum: 20
+          description: Numeric score for SEO fundamentals (0-20)
         status:
           type: string
-          enum: [Good, Needs Improvement, Poor]
+          enum: [Good, Needs Improvement, Poor, Unknown]
         explanation:
           type: string
         title:
@@ -251,12 +415,38 @@ components:
           type: integer
           description: Number of H1 headings on the page
 
+    SchemaRecommendation:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of the schema recommendation
+        description:
+          type: string
+          description: Detailed description of the recommendation
+
+    DetectedSchema:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Schema.org type (e.g., Organization, WebSite, Article)
+        format:
+          type: string
+          enum: [JSON-LD, Microdata]
+          description: Format of the structured data
+
     StructuredData:
       type: object
       properties:
+        score:
+          type: integer
+          minimum: 0
+          maximum: 15
+          description: Numeric score for structured data (0-15)
         status:
           type: string
-          enum: [Good, Needs Improvement, Poor]
+          enum: [Good, Needs Improvement, Poor, Unknown]
         explanation:
           type: string
         hasSchema:
@@ -265,82 +455,178 @@ components:
         hasJsonLd:
           type: boolean
           description: Whether JSON-LD structured data is present
+        hasMicrodata:
+          type: boolean
+          description: Whether Microdata structured data is present
         detectedSchemas:
           type: array
           items:
-            type: string
-          description: List of detected schema types
+            $ref: '#/components/schemas/DetectedSchema'
+          description: List of detected schema types with their formats
+        recommendations:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaRecommendation'
+          description: Recommendations for improving structured data
 
     ContentStructure:
       type: object
       properties:
-        status:
-          type: string
-          enum: [Good, Needs Improvement, Poor]
-        explanation:
-          type: string
-        semanticHtmlScore:
+        score:
           type: integer
           minimum: 0
-          maximum: 10
-          description: Score for semantic HTML usage (0-10)
+          maximum: 15
+          description: Numeric score for content structure (0-15)
+        status:
+          type: string
+          enum: [Good, Needs Improvement, Poor, Unknown]
+        explanation:
+          type: string
+        hasSemanticElements:
+          type: boolean
+          description: Whether semantic HTML elements are used
+        hasLandmarks:
+          type: boolean
+          description: Whether ARIA landmarks are present
 
     ImageAccessibility:
       type: object
       properties:
+        score:
+          type: integer
+          minimum: 0
+          maximum: 5
+          description: Numeric score for image accessibility (0-5)
         status:
           type: string
-          enum: [Good, Needs Improvement, Poor]
+          enum: [Good, Needs Improvement, Poor, Unknown]
         explanation:
           type: string
-        missingAltPercentage:
-          type: number
-          minimum: 0
-          maximum: 100
-          description: Percentage of images missing alt text
         totalImages:
           type: integer
           description: Total number of images on the page
         imagesWithoutAlt:
           type: integer
           description: Number of images without alt text
+        missingAltTextImages:
+          type: array
+          items:
+            type: string
+          description: Sample URLs or descriptions of images missing alt text
+
+    HtmlSemantics:
+      type: object
+      description: Legacy field - always returns status Unknown
+      properties:
+        status:
+          type: string
+          enum: [Unknown]
+          description: Always returns Unknown as this analysis is integrated into Content Structure
+        explanation:
+          type: string
+          description: Explanation that this is integrated into Content Structure
+
+    ContentFreshness:
+      type: object
+      description: Legacy field - always returns status Unknown
+      properties:
+        status:
+          type: string
+          enum: [Unknown]
+          description: Always returns Unknown as this is not currently analyzed
+        explanation:
+          type: string
+          description: Explanation that this is not currently analyzed
+        category:
+          type: string
+          description: Always returns "N/A"
+        publicationDate:
+          type: string
+          description: Always returns "N/A"
+        lastUpdatedDate:
+          type: string
+          description: Always returns "N/A"
+
+    InternalLinking:
+      type: object
+      description: Legacy field - always returns status Unknown
+      properties:
+        status:
+          type: string
+          enum: [Unknown]
+          description: Always returns Unknown as this analysis is integrated into Content Structure
+        explanation:
+          type: string
+          description: Explanation that this is integrated into Content Structure
+
+    AutomationIssue:
+      type: object
+      properties:
+        priority:
+          type: string
+          enum: [P1, P2, P3, P4]
+          description: Priority level of the issue
+        criterion:
+          type: string
+          description: WCAG or accessibility criterion reference
+        what:
+          type: string
+          description: Description of the issue
+        where:
+          type: string
+          description: Location of the issue on the page
+        why:
+          type: string
+          description: Why this issue matters
+        how:
+          type: string
+          description: How to fix the issue
+        compliance:
+          type: string
+          description: Compliance impact description
 
     AutomationReadiness:
       type: object
       properties:
+        score:
+          type: integer
+          minimum: 0
+          maximum: 10
+          description: Numeric score for automation readiness (0-10)
         status:
           type: string
-          enum: [Good, Needs Improvement, Poor]
+          enum: [Good, Needs Improvement, Poor, Unknown]
         explanation:
           type: string
         issues:
           type: array
           items:
-            type: string
-          description: List of issues affecting automation readiness
+            $ref: '#/components/schemas/AutomationIssue'
+          description: List of structured automation readiness issues
 
     JsRendering:
       type: object
       properties:
+        score:
+          type: integer
+          minimum: 0
+          maximum: 15
+          description: Numeric score for JavaScript rendering (0-15)
         status:
           type: string
-          enum: [Good, Needs Improvement, Poor]
+          enum: [Good, Needs Improvement, Poor, Unknown]
         explanation:
           type: string
         frameworkDetected:
           type: string
-          description: Detected JavaScript framework (React, Vue, Angular, etc.)
+          description: Detected JavaScript framework (None, React, Vue, Angular, Next.js, Nuxt, Gatsby, Other)
         renderingType:
           type: string
           enum: [Static, SSR, SSG, CSR, Hybrid]
           description: Type of rendering used by the site
-        aiAccessibility:
-          type: string
-          enum: [Excellent, Good, Limited, Blocked]
-          description: How accessible the content is to AI agents
         contentAvailability:
           type: string
-          description: Description of content availability in HTML
+          description: Description of content availability in HTML (e.g., "All content in HTML", "Mostly in HTML", "Partially in JS", "Mostly in JS")
         recommendations:
           type: array
           items:
@@ -361,6 +647,22 @@ components:
           enum: [High, Medium, Low]
           description: Expected impact of implementing this recommendation
 
+    QuickWinsResult:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [Good, Needs Improvement, Poor, Unknown]
+          description: Overall quick wins status
+        explanation:
+          type: string
+          description: Explanation of quick wins findings
+        wins:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuickWin'
+          description: List of quick win recommendations
+
     ErrorResponse:
       type: object
       properties:
@@ -369,7 +671,10 @@ components:
           example: false
         error:
           type: string
-          description: Error message
+          description: Error type/category
+        message:
+          type: string
+          description: Detailed error message
 
     ValidationError:
       type: object
