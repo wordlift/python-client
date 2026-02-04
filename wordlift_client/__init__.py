@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.135.0"
+__version__ = "1.136.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -87,6 +87,7 @@ from wordlift_client.api.web_asyncs_metadata_api import WebAsyncsMetadataApi
 from wordlift_client.api.web_asyncs_responses_api import WebAsyncsResponsesApi
 from wordlift_client.api.web_pages_imports_api import WebPagesImportsApi
 from wordlift_client.api.web_pages_api import WebPagesApi
+from wordlift_client.api.default_api import DefaultApi
 
 # import ApiClient
 from wordlift_client.api_response import ApiResponse
@@ -178,6 +179,7 @@ from wordlift_client.models.generate_sitemap200_response import GenerateSitemap2
 from wordlift_client.models.generate_sitemap_request import GenerateSitemapRequest
 from wordlift_client.models.graphql_request import GraphqlRequest
 from wordlift_client.models.http_validation_error import HTTPValidationError
+from wordlift_client.models.http_validation_error1 import HTTPValidationError1
 from wordlift_client.models.html import Html
 from wordlift_client.models.html_semantics import HtmlSemantics
 from wordlift_client.models.image import Image
@@ -206,6 +208,10 @@ from wordlift_client.models.merchant_sync import MerchantSync
 from wordlift_client.models.merchant_view import MerchantView
 from wordlift_client.models.model import Model
 from wordlift_client.models.model_field import ModelField
+from wordlift_client.models.monitor_result_item import MonitorResultItem
+from wordlift_client.models.monitor_state import MonitorState
+from wordlift_client.models.monitor_summary_item import MonitorSummaryItem
+from wordlift_client.models.neighbors import Neighbors
 from wordlift_client.models.network_account_info import NetworkAccountInfo
 from wordlift_client.models.node_request import NodeRequest
 from wordlift_client.models.node_request_metadata_value import NodeRequestMetadataValue
@@ -215,6 +221,7 @@ from wordlift_client.models.page_active_account import PageActiveAccount
 from wordlift_client.models.page_add_on_configuration import PageAddOnConfiguration
 from wordlift_client.models.page_content_generation import PageContentGeneration
 from wordlift_client.models.page_field import PageField
+from wordlift_client.models.page_info import PageInfo
 from wordlift_client.models.page_merchant_entry import PageMerchantEntry
 from wordlift_client.models.page_merchant_sync import PageMerchantSync
 from wordlift_client.models.page_merchant_view import PageMerchantView
@@ -249,6 +256,8 @@ from wordlift_client.models.request import Request
 from wordlift_client.models.request1 import Request1
 from wordlift_client.models.request2 import Request2
 from wordlift_client.models.request3 import Request3
+from wordlift_client.models.resource_request import ResourceRequest
+from wordlift_client.models.resource_type import ResourceType
 from wordlift_client.models.response import Response
 from wordlift_client.models.response1 import Response1
 from wordlift_client.models.response2 import Response2
@@ -272,9 +281,14 @@ from wordlift_client.models.update_question_and_answer_request import UpdateQues
 from wordlift_client.models.update_record_request import UpdateRecordRequest
 from wordlift_client.models.update_records_request import UpdateRecordsRequest
 from wordlift_client.models.update_site_url_request import UpdateSiteUrlRequest
+from wordlift_client.models.url_list_item import UrlListItem
+from wordlift_client.models.url_list_response import UrlListResponse
+from wordlift_client.models.url_results_response import UrlResultsResponse
+from wordlift_client.models.url_summary_response import UrlSummaryResponse
 from wordlift_client.models.validation_error import ValidationError
 from wordlift_client.models.validation_error1 import ValidationError1
-from wordlift_client.models.validation_error1_detail_inner import ValidationError1DetailInner
+from wordlift_client.models.validation_error2 import ValidationError2
+from wordlift_client.models.validation_error2_detail_inner import ValidationError2DetailInner
 from wordlift_client.models.validation_fix import ValidationFix
 from wordlift_client.models.validation_result import ValidationResult
 from wordlift_client.models.validation_type_enum import ValidationTypeEnum

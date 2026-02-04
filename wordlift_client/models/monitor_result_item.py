@@ -18,22 +18,25 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from wordlift_client.models.location_inner import LocationInner
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from wordlift_client.models.monitor_state import MonitorState
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ValidationError1(BaseModel):
+class MonitorResultItem(BaseModel):
     """
-    ValidationError1
+    MonitorResultItem
     """ # noqa: E501
-    loc: List[LocationInner]
-    msg: StrictStr
-    type: StrictStr
-    input: Optional[Any] = None
-    ctx: Optional[Dict[str, Any]] = None
-    __properties: ClassVar[List[str]] = ["loc", "msg", "type", "input", "ctx"]
+    monitor_name: StrictStr
+    state: MonitorState
+    details: Optional[StrictStr] = None
+    score: Optional[Union[StrictFloat, StrictInt]] = None
+    metadata: Optional[Dict[str, Any]] = None
+    created_at: datetime
+    processed_at: Optional[datetime] = None
+    __properties: ClassVar[List[str]] = ["monitor_name", "state", "details", "score", "metadata", "created_at", "processed_at"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -53,7 +56,7 @@ class ValidationError1(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ValidationError1 from a JSON string"""
+        """Create an instance of MonitorResultItem from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -74,23 +77,26 @@ class ValidationError1(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in loc (list)
-        _items = []
-        if self.loc:
-            for _item in self.loc:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['loc'] = _items
-        # set to None if input (nullable) is None
+        # set to None if details (nullable) is None
         # and model_fields_set contains the field
-        if self.input is None and "input" in self.model_fields_set:
-            _dict['input'] = None
+        if self.details is None and "details" in self.model_fields_set:
+            _dict['details'] = None
+
+        # set to None if score (nullable) is None
+        # and model_fields_set contains the field
+        if self.score is None and "score" in self.model_fields_set:
+            _dict['score'] = None
+
+        # set to None if processed_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.processed_at is None and "processed_at" in self.model_fields_set:
+            _dict['processed_at'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ValidationError1 from a dict"""
+        """Create an instance of MonitorResultItem from a dict"""
         if obj is None:
             return None
 
@@ -98,11 +104,13 @@ class ValidationError1(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "loc": [LocationInner.from_dict(_item) for _item in obj["loc"]] if obj.get("loc") is not None else None,
-            "msg": obj.get("msg"),
-            "type": obj.get("type"),
-            "input": obj.get("input"),
-            "ctx": obj.get("ctx")
+            "monitor_name": obj.get("monitor_name"),
+            "state": obj.get("state"),
+            "details": obj.get("details"),
+            "score": obj.get("score"),
+            "metadata": obj.get("metadata"),
+            "created_at": obj.get("created_at"),
+            "processed_at": obj.get("processed_at")
         })
         return _obj
 

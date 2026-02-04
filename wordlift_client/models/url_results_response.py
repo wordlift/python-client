@@ -18,22 +18,24 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from wordlift_client.models.location_inner import LocationInner
+from typing_extensions import Annotated
+from wordlift_client.models.monitor_result_item import MonitorResultItem
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ValidationError1(BaseModel):
+class UrlResultsResponse(BaseModel):
     """
-    ValidationError1
+    UrlResultsResponse
     """ # noqa: E501
-    loc: List[LocationInner]
-    msg: StrictStr
-    type: StrictStr
-    input: Optional[Any] = None
-    ctx: Optional[Dict[str, Any]] = None
-    __properties: ClassVar[List[str]] = ["loc", "msg", "type", "input", "ctx"]
+    url: Annotated[str, Field(min_length=1, strict=True, max_length=2083)]
+    run_id: Optional[StrictStr] = None
+    created_at: Optional[datetime] = None
+    processed_at: Optional[datetime] = None
+    results: List[MonitorResultItem]
+    __properties: ClassVar[List[str]] = ["url", "run_id", "created_at", "processed_at", "results"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -53,7 +55,7 @@ class ValidationError1(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ValidationError1 from a JSON string"""
+        """Create an instance of UrlResultsResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -74,23 +76,33 @@ class ValidationError1(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in loc (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
         _items = []
-        if self.loc:
-            for _item in self.loc:
+        if self.results:
+            for _item in self.results:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['loc'] = _items
-        # set to None if input (nullable) is None
+            _dict['results'] = _items
+        # set to None if run_id (nullable) is None
         # and model_fields_set contains the field
-        if self.input is None and "input" in self.model_fields_set:
-            _dict['input'] = None
+        if self.run_id is None and "run_id" in self.model_fields_set:
+            _dict['run_id'] = None
+
+        # set to None if created_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.created_at is None and "created_at" in self.model_fields_set:
+            _dict['created_at'] = None
+
+        # set to None if processed_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.processed_at is None and "processed_at" in self.model_fields_set:
+            _dict['processed_at'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ValidationError1 from a dict"""
+        """Create an instance of UrlResultsResponse from a dict"""
         if obj is None:
             return None
 
@@ -98,11 +110,11 @@ class ValidationError1(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "loc": [LocationInner.from_dict(_item) for _item in obj["loc"]] if obj.get("loc") is not None else None,
-            "msg": obj.get("msg"),
-            "type": obj.get("type"),
-            "input": obj.get("input"),
-            "ctx": obj.get("ctx")
+            "url": obj.get("url"),
+            "run_id": obj.get("run_id"),
+            "created_at": obj.get("created_at"),
+            "processed_at": obj.get("processed_at"),
+            "results": [MonitorResultItem.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
         })
         return _obj
 

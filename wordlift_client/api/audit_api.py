@@ -97,7 +97,7 @@ class AuditApi:
             '401': "ErrorResponse",
             '403': "ErrorResponse",
             '404': "ErrorResponse",
-            '422': "ValidationError1",
+            '422': "ValidationError2",
             '500': "ErrorResponse",
         }
         response_data = await self.api_client.call_api(
@@ -170,7 +170,7 @@ class AuditApi:
             '401': "ErrorResponse",
             '403': "ErrorResponse",
             '404': "ErrorResponse",
-            '422': "ValidationError1",
+            '422': "ValidationError2",
             '500': "ErrorResponse",
         }
         response_data = await self.api_client.call_api(
@@ -243,7 +243,7 @@ class AuditApi:
             '401': "ErrorResponse",
             '403': "ErrorResponse",
             '404': "ErrorResponse",
-            '422': "ValidationError1",
+            '422': "ValidationError2",
             '500': "ErrorResponse",
         }
         response_data = await self.api_client.call_api(
