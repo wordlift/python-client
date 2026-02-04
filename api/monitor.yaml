@@ -1,0 +1,562 @@
+openapi: 3.1.0
+info:
+  title: WordLift Monitor API
+  version: 0.1.0
+paths:
+  /monitor/graphs/{graph_id}/resources:
+    put:
+      summary: Add Resource
+      description: 'Adds a resource to the graph.
+
+        If it''s a sitemap, triggers a discovery job.'
+      operationId: add_resource_monitor_graphs__graph_id__resources_put
+      parameters:
+      - name: graph_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Graph Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResourceRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /monitor/graphs/{graph_id}/urls:
+    get:
+      summary: List Graph Urls
+      operationId: list_graph_urls_monitor_graphs__graph_id__urls_get
+      parameters:
+      - name: graph_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Graph Id
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          default: 50
+          title: Limit
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cursor
+      - name: status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          title: Status
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Q
+      - name: from
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: From
+      - name: to
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: To
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UrlListResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /monitor/graphs/{graph_id}/urls/summary:
+    get:
+      summary: Get Url Summary
+      operationId: get_url_summary_monitor_graphs__graph_id__urls_summary_get
+      parameters:
+      - name: graph_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Graph Id
+      - name: url
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uri
+          minLength: 1
+          maxLength: 2083
+          title: Url
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UrlSummaryResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /monitor/graphs/{graph_id}/urls/results:
+    get:
+      summary: Get Url Results
+      operationId: get_url_results_monitor_graphs__graph_id__urls_results_get
+      parameters:
+      - name: graph_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Graph Id
+      - name: url
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uri
+          minLength: 1
+          maxLength: 2083
+          title: Url
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UrlResultsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /monitor/graphs/{graph_id}/jobs/{job_id}:
+    get:
+      summary: Get Job Status
+      description: 'Returns the status and progress of a job.
+
+        Ensures the job belongs to the graph.'
+      operationId: get_job_status_monitor_graphs__graph_id__jobs__job_id__get
+      parameters:
+      - name: graph_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Graph Id
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Job Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /monitor/graphs/{graph_id}/jobs:
+    get:
+      summary: List Jobs
+      description: Lists recent jobs for a graph.
+      operationId: list_jobs_monitor_graphs__graph_id__jobs_get
+      parameters:
+      - name: graph_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Graph Id
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /health:
+    get:
+      summary: Health
+      operationId: health_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    MonitorResultItem:
+      properties:
+        monitor_name:
+          type: string
+          title: Monitor Name
+        state:
+          $ref: '#/components/schemas/MonitorState'
+        details:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Details
+        score:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Score
+        metadata:
+          additionalProperties: true
+          type: object
+          title: Metadata
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        processed_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Processed At
+      type: object
+      required:
+      - monitor_name
+      - state
+      - created_at
+      title: MonitorResultItem
+    MonitorState:
+      type: string
+      enum:
+      - OK
+      - WARN
+      - FAIL
+      title: MonitorState
+    MonitorSummaryItem:
+      properties:
+        name:
+          type: string
+          title: Name
+        state:
+          $ref: '#/components/schemas/MonitorState'
+        details:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Details
+        score:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Score
+      type: object
+      required:
+      - name
+      - state
+      title: MonitorSummaryItem
+    Neighbors:
+      properties:
+        previous:
+          anyOf:
+          - type: string
+            maxLength: 2083
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Previous
+        next:
+          anyOf:
+          - type: string
+            maxLength: 2083
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Next
+      type: object
+      title: Neighbors
+    PageInfo:
+      properties:
+        limit:
+          type: integer
+          title: Limit
+        cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cursor
+      type: object
+      required:
+      - limit
+      title: PageInfo
+    ResourceRequest:
+      properties:
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+        type:
+          $ref: '#/components/schemas/ResourceType'
+          default: page
+      type: object
+      required:
+      - url
+      title: ResourceRequest
+    ResourceType:
+      type: string
+      enum:
+      - page
+      - sitemap
+      - config
+      - asset
+      title: ResourceType
+    UrlListItem:
+      properties:
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+        resource_type:
+          $ref: '#/components/schemas/ResourceType'
+        is_enabled:
+          type: boolean
+          title: Is Enabled
+        status:
+          type: string
+          title: Status
+        last_run:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Run
+        last_success:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Success
+        score:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Score
+        ttfb_ms:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Ttfb Ms
+        response_time_ms:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Response Time Ms
+      type: object
+      required:
+      - url
+      - resource_type
+      - is_enabled
+      - status
+      title: UrlListItem
+    UrlListResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/UrlListItem'
+          type: array
+          title: Items
+        page:
+          $ref: '#/components/schemas/PageInfo'
+        links:
+          additionalProperties:
+            type: string
+          type: object
+          title: Links
+      type: object
+      required:
+      - items
+      - page
+      - links
+      title: UrlListResponse
+    UrlResultsResponse:
+      properties:
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+        run_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Run Id
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        processed_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Processed At
+        results:
+          items:
+            $ref: '#/components/schemas/MonitorResultItem'
+          type: array
+          title: Results
+      type: object
+      required:
+      - url
+      - results
+      title: UrlResultsResponse
+    UrlSummaryResponse:
+      properties:
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+        status:
+          type: string
+          title: Status
+        last_run:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Run
+        score:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Score
+        ttfb_ms:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Ttfb Ms
+        response_time_ms:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Response Time Ms
+        monitors:
+          items:
+            $ref: '#/components/schemas/MonitorSummaryItem'
+          type: array
+          title: Monitors
+        neighbors:
+          $ref: '#/components/schemas/Neighbors'
+      type: object
+      required:
+      - url
+      - status
+      - monitors
+      - neighbors
+      title: UrlSummaryResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
