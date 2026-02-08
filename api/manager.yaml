@@ -4232,30 +4232,51 @@ components:
           type: string
     WebPage:
       type: object
-      description: The Web Page data
+      description: Represents a web page and its extracted content.
       properties:
         abstract:
           type: string
+          description: A short abstract or excerpt of the web page content.
         date_published:
           type: string
           format: date
+          description: The publication date of the web page.
         headline:
           type: string
+          description: The headline or title of the web page.
+          example: "WordLift: The AI SEO Tool for Google Search"
         html:
           type: string
+          description: The full HTML content of the web page.
         image:
           type: string
+          description: The URL of the primary image of the web page.
+          example: https://example.com/image.jpg
         markdown:
           type: string
+          description: The extracted content of the web page in Markdown format.
+        status_code:
+          type: integer
+          format: int32
+          description: The HTTP status code returned when fetching the URL.
+          example: 200
         text:
           type: string
+          description: The extracted main text content of the web page.
         types:
           type: array
+          default:
+          - http://schema.org/WebPage
+          description: The RDF types for the web page entity.
           items:
             type: string
+            default: "[\"http://schema.org/WebPage\"]"
+            description: The RDF types for the web page entity.
           uniqueItems: true
         url:
           type: string
+          description: The canonical URL of the web page.
+          example: https://example.com/page
     WebPageImportFetchOptions:
       type: object
       description: Fetch Options for Web Page Import
