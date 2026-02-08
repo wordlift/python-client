@@ -7,6 +7,7 @@ The Web Page Import request
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **embedding** | [**EmbeddingRequest**](EmbeddingRequest.md) |  | [optional] 
+**fetch_options** | [**WebPageImportFetchOptions**](WebPageImportFetchOptions.md) |  | [optional] 
 **id** | **str** | The Web Page id (or iri) in Graph when available. | [optional] 
 **id_generator** | **str** | The entity id generator, by default uses the web page path. | [optional] [default to 'default']
 **output_types** | **List[str]** | The type of the generated entities, by default &#x60;http://schema.org/WebPage&#x60;. | [optional] [default to ["http://schema.org/WebPage"]]

@@ -21,6 +21,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.embedding_request import EmbeddingRequest
+from wordlift_client.models.web_page_import_fetch_options import WebPageImportFetchOptions
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,12 +30,13 @@ class WebPageImportRequest(BaseModel):
     The Web Page Import request
     """ # noqa: E501
     embedding: Optional[EmbeddingRequest] = None
+    fetch_options: Optional[WebPageImportFetchOptions] = None
     id: Optional[StrictStr] = Field(default=None, description="The Web Page id (or iri) in Graph when available.")
     id_generator: Optional[StrictStr] = Field(default='default', description="The entity id generator, by default uses the web page path.")
     output_types: Optional[List[StrictStr]] = Field(default=None, description="The type of the generated entities, by default `http://schema.org/WebPage`.")
     url: StrictStr = Field(description="The Web Page url to import")
     write_strategy: Optional[StrictStr] = Field(default='createOrUpdateModel', description="The strategy used to write to the Graph: `createOrUpdateModel` (default) will replace existing entities; `patchReplaceModel` will replace the `type`, `headline`, `abstract` and `text` properties.")
-    __properties: ClassVar[List[str]] = ["embedding", "id", "id_generator", "output_types", "url", "write_strategy"]
+    __properties: ClassVar[List[str]] = ["embedding", "fetch_options", "id", "id_generator", "output_types", "url", "write_strategy"]
 
     @field_validator('id_generator')
     def id_generator_validate_enum(cls, value):
@@ -88,6 +90,9 @@ class WebPageImportRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of embedding
         if self.embedding:
             _dict['embedding'] = self.embedding.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of fetch_options
+        if self.fetch_options:
+            _dict['fetch_options'] = self.fetch_options.to_dict()
         return _dict
 
     @classmethod
@@ -101,6 +106,7 @@ class WebPageImportRequest(BaseModel):
 
         _obj = cls.model_validate({
             "embedding": EmbeddingRequest.from_dict(obj["embedding"]) if obj.get("embedding") is not None else None,
+            "fetch_options": WebPageImportFetchOptions.from_dict(obj["fetch_options"]) if obj.get("fetch_options") is not None else None,
             "id": obj.get("id"),
             "id_generator": obj.get("id_generator") if obj.get("id_generator") is not None else 'default',
             "output_types": obj.get("output_types"),

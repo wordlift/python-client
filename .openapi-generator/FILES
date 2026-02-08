@@ -269,6 +269,7 @@ docs/WebAsync.md
 docs/WebAsyncsMetadataApi.md
 docs/WebAsyncsResponsesApi.md
 docs/WebPage.md
+docs/WebPageImportFetchOptions.md
 docs/WebPageImportRequest.md
 docs/WebPageImportResponse.md
 docs/WebPagesApi.md
@@ -291,20 +292,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_http_validation_error1.py
-test/test_monitor_result_item.py
-test/test_monitor_state.py
-test/test_monitor_summary_item.py
-test/test_neighbors.py
-test/test_page_info.py
-test/test_resource_request.py
-test/test_resource_type.py
-test/test_url_list_item.py
-test/test_url_list_response.py
-test/test_url_results_response.py
-test/test_url_summary_response.py
-test/test_validation_error2.py
-test/test_validation_error2_detail_inner.py
+test/test_web_page_import_fetch_options.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -582,6 +570,7 @@ wordlift_client/models/vector_search_question_request.py
 wordlift_client/models/vector_search_question_response_item.py
 wordlift_client/models/web_async.py
 wordlift_client/models/web_page.py
+wordlift_client/models/web_page_import_fetch_options.py
 wordlift_client/models/web_page_import_request.py
 wordlift_client/models/web_page_import_response.py
 wordlift_client/models/webpage_properties.py
