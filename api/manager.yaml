@@ -4256,12 +4256,47 @@ components:
           uniqueItems: true
         url:
           type: string
+    WebPageImportFetchOptions:
+      type: object
+      description: Fetch Options for Web Page Import
+      properties:
+        block_ads:
+          type: boolean
+          description: Block ads to save bandwidth (premium_scraper only).
+        country_code:
+          type: string
+          description: Country code for the proxy (premium_scraper only).
+        mode:
+          type: string
+          default: default
+          description: "The fetching mode: `default` (smart fallback), `proxy` or\
+            \ `premium_scraper`."
+          enum:
+          - default
+          - proxy
+          - premium_scraper
+        premium_proxy:
+          type: boolean
+          description: Use premium proxy (premium_scraper only).
+        render_js:
+          type: boolean
+          description: Render JavaScript on the target page (premium_scraper only).
+        timeout:
+          type: integer
+          format: int32
+          description: Timeout in milliseconds (premium_scraper only).
+        wait_for:
+          type: string
+          description: CSS selector to wait for before returning (premium_scraper
+            only).
     WebPageImportRequest:
       type: object
       description: The Web Page Import request
       properties:
         embedding:
           $ref: '#/components/schemas/EmbeddingRequest'
+        fetch_options:
+          $ref: '#/components/schemas/WebPageImportFetchOptions'
         id:
           type: string
           description: The Web Page id (or iri) in Graph when available.
