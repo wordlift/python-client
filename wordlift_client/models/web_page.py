@@ -19,25 +19,26 @@ import re  # noqa: F401
 import json
 
 from datetime import date
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class WebPage(BaseModel):
     """
-    The Web Page data
+    Represents a web page and its extracted content.
     """ # noqa: E501
-    abstract: Optional[StrictStr] = None
-    date_published: Optional[date] = None
-    headline: Optional[StrictStr] = None
-    html: Optional[StrictStr] = None
-    image: Optional[StrictStr] = None
-    markdown: Optional[StrictStr] = None
-    text: Optional[StrictStr] = None
-    types: Optional[List[StrictStr]] = None
-    url: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["abstract", "date_published", "headline", "html", "image", "markdown", "text", "types", "url"]
+    abstract: Optional[StrictStr] = Field(default=None, description="A short abstract or excerpt of the web page content.")
+    date_published: Optional[date] = Field(default=None, description="The publication date of the web page.")
+    headline: Optional[StrictStr] = Field(default=None, description="The headline or title of the web page.")
+    html: Optional[StrictStr] = Field(default=None, description="The full HTML content of the web page.")
+    image: Optional[StrictStr] = Field(default=None, description="The URL of the primary image of the web page.")
+    markdown: Optional[StrictStr] = Field(default=None, description="The extracted content of the web page in Markdown format.")
+    status_code: Optional[StrictInt] = Field(default=None, description="The HTTP status code returned when fetching the URL.")
+    text: Optional[StrictStr] = Field(default=None, description="The extracted main text content of the web page.")
+    types: Optional[List[StrictStr]] = Field(default=None, description="The RDF types for the web page entity.")
+    url: Optional[StrictStr] = Field(default=None, description="The canonical URL of the web page.")
+    __properties: ClassVar[List[str]] = ["abstract", "date_published", "headline", "html", "image", "markdown", "status_code", "text", "types", "url"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,6 +97,7 @@ class WebPage(BaseModel):
             "html": obj.get("html"),
             "image": obj.get("image"),
             "markdown": obj.get("markdown"),
+            "status_code": obj.get("status_code"),
             "text": obj.get("text"),
             "types": obj.get("types"),
             "url": obj.get("url")

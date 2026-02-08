@@ -1,20 +1,21 @@
 # WebPage
 
-The Web Page data
+Represents a web page and its extracted content.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**abstract** | **str** |  | [optional] 
-**date_published** | **date** |  | [optional] 
-**headline** | **str** |  | [optional] 
-**html** | **str** |  | [optional] 
-**image** | **str** |  | [optional] 
-**markdown** | **str** |  | [optional] 
-**text** | **str** |  | [optional] 
-**types** | **List[str]** |  | [optional] 
-**url** | **str** |  | [optional] 
+**abstract** | **str** | A short abstract or excerpt of the web page content. | [optional] 
+**date_published** | **date** | The publication date of the web page. | [optional] 
+**headline** | **str** | The headline or title of the web page. | [optional] 
+**html** | **str** | The full HTML content of the web page. | [optional] 
+**image** | **str** | The URL of the primary image of the web page. | [optional] 
+**markdown** | **str** | The extracted content of the web page in Markdown format. | [optional] 
+**status_code** | **int** | The HTTP status code returned when fetching the URL. | [optional] 
+**text** | **str** | The extracted main text content of the web page. | [optional] 
+**types** | **List[str]** | The RDF types for the web page entity. | [optional] [default to ["http://schema.org/WebPage"]]
+**url** | **str** | The canonical URL of the web page. | [optional] 
 
 ## Example
 
