@@ -5,11 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**loc** | [**List[LocationInner]**](LocationInner.md) |  | 
-**msg** | **str** |  | 
-**type** | **str** |  | 
-**input** | **object** |  | [optional] 
-**ctx** | **object** |  | [optional] 
+**detail** | [**List[ValidationError1DetailInner]**](ValidationError1DetailInner.md) |  | [optional] 
 
 ## Example
 

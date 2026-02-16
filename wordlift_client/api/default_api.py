@@ -1405,6 +1405,7 @@ class DefaultApi:
         limit: Optional[Annotated[int, Field(le=200, strict=True, ge=1)]] = None,
         cursor: Optional[StrictStr] = None,
         status: Optional[List[StrictStr]] = None,
+        resource_type: Optional[List[StrictStr]] = None,
         q: Optional[StrictStr] = None,
         var_from: Optional[StrictStr] = None,
         to: Optional[StrictStr] = None,
@@ -1432,6 +1433,8 @@ class DefaultApi:
         :type cursor: str
         :param status:
         :type status: List[str]
+        :param resource_type:
+        :type resource_type: List[str]
         :param q:
         :type q: str
         :param var_from:
@@ -1465,6 +1468,7 @@ class DefaultApi:
             limit=limit,
             cursor=cursor,
             status=status,
+            resource_type=resource_type,
             q=q,
             var_from=var_from,
             to=to,
@@ -1496,6 +1500,7 @@ class DefaultApi:
         limit: Optional[Annotated[int, Field(le=200, strict=True, ge=1)]] = None,
         cursor: Optional[StrictStr] = None,
         status: Optional[List[StrictStr]] = None,
+        resource_type: Optional[List[StrictStr]] = None,
         q: Optional[StrictStr] = None,
         var_from: Optional[StrictStr] = None,
         to: Optional[StrictStr] = None,
@@ -1523,6 +1528,8 @@ class DefaultApi:
         :type cursor: str
         :param status:
         :type status: List[str]
+        :param resource_type:
+        :type resource_type: List[str]
         :param q:
         :type q: str
         :param var_from:
@@ -1556,6 +1563,7 @@ class DefaultApi:
             limit=limit,
             cursor=cursor,
             status=status,
+            resource_type=resource_type,
             q=q,
             var_from=var_from,
             to=to,
@@ -1587,6 +1595,7 @@ class DefaultApi:
         limit: Optional[Annotated[int, Field(le=200, strict=True, ge=1)]] = None,
         cursor: Optional[StrictStr] = None,
         status: Optional[List[StrictStr]] = None,
+        resource_type: Optional[List[StrictStr]] = None,
         q: Optional[StrictStr] = None,
         var_from: Optional[StrictStr] = None,
         to: Optional[StrictStr] = None,
@@ -1614,6 +1623,8 @@ class DefaultApi:
         :type cursor: str
         :param status:
         :type status: List[str]
+        :param resource_type:
+        :type resource_type: List[str]
         :param q:
         :type q: str
         :param var_from:
@@ -1647,6 +1658,7 @@ class DefaultApi:
             limit=limit,
             cursor=cursor,
             status=status,
+            resource_type=resource_type,
             q=q,
             var_from=var_from,
             to=to,
@@ -1673,6 +1685,7 @@ class DefaultApi:
         limit,
         cursor,
         status,
+        resource_type,
         q,
         var_from,
         to,
@@ -1686,6 +1699,7 @@ class DefaultApi:
 
         _collection_formats: Dict[str, str] = {
             'status': 'multi',
+            'resource_type': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1710,6 +1724,10 @@ class DefaultApi:
         if status is not None:
             
             _query_params.append(('status', status))
+            
+        if resource_type is not None:
+            
+            _query_params.append(('resource_type', resource_type))
             
         if q is not None:
             

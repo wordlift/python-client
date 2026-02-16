@@ -409,7 +409,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_graph_urls_monitor_graphs_graph_id_urls_get**
-> UrlListResponse list_graph_urls_monitor_graphs_graph_id_urls_get(graph_id, limit=limit, cursor=cursor, status=status, q=q, var_from=var_from, to=to)
+> UrlListResponse list_graph_urls_monitor_graphs_graph_id_urls_get(graph_id, limit=limit, cursor=cursor, status=status, resource_type=resource_type, q=q, var_from=var_from, to=to)
 
 List Graph Urls
 
@@ -448,13 +448,14 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     limit = 50 # int |  (optional) (default to 50)
     cursor = 'cursor_example' # str |  (optional)
     status = ['status_example'] # List[str] |  (optional)
+    resource_type = ['resource_type_example'] # List[str] |  (optional)
     q = 'q_example' # str |  (optional)
     var_from = 'var_from_example' # str |  (optional)
     to = 'to_example' # str |  (optional)
 
     try:
         # List Graph Urls
-        api_response = await api_instance.list_graph_urls_monitor_graphs_graph_id_urls_get(graph_id, limit=limit, cursor=cursor, status=status, q=q, var_from=var_from, to=to)
+        api_response = await api_instance.list_graph_urls_monitor_graphs_graph_id_urls_get(graph_id, limit=limit, cursor=cursor, status=status, resource_type=resource_type, q=q, var_from=var_from, to=to)
         print("The response of DefaultApi->list_graph_urls_monitor_graphs_graph_id_urls_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -472,6 +473,7 @@ Name | Type | Description  | Notes
  **limit** | **int**|  | [optional] [default to 50]
  **cursor** | **str**|  | [optional] 
  **status** | [**List[str]**](str.md)|  | [optional] 
+ **resource_type** | [**List[str]**](str.md)|  | [optional] 
  **q** | **str**|  | [optional] 
  **var_from** | **str**|  | [optional] 
  **to** | **str**|  | [optional] 
