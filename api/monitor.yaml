@@ -73,6 +73,16 @@ paths:
               type: string
           - type: 'null'
           title: Status
+      - name: resource_type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          title: Resource Type
       - name: q
         in: query
         required: false
