@@ -63,6 +63,8 @@ tags:
   name: Google Search Console
 - description: Link Groups
   name: Link Groups
+- description: Web Page Scrape API
+  name: Web Page Scrape
 - description: Account Statistics
   name: Account Stats
 - description: "Import Analytics data to the KG using different sources, e.g. Google\
@@ -2089,6 +2091,30 @@ paths:
       summary: Create
       tags:
       - Web Pages Imports
+  /web-page-scrapes:
+    post:
+      description: Scrape a Web Page.
+      operationId: createWebPageScrape
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebPageScrapeRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebPageScrapeResponse'
+          description: Web Page Scrape Response
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+      summary: Web Page Scrape
+      tags:
+      - Web Page Scrape
   /web-pages:
     get:
       description: Get extracted web page content
@@ -4363,6 +4389,25 @@ components:
       required:
       - id
       - model
+      - web_page
+    WebPageScrapeRequest:
+      type: object
+      description: Web Page Scrape Request
+      properties:
+        fetch_options:
+          $ref: '#/components/schemas/WebPageImportFetchOptions'
+        url:
+          type: string
+          description: The Web Page url to scrape
+      required:
+      - url
+    WebPageScrapeResponse:
+      type: object
+      description: Web Page Scrape Response
+      properties:
+        web_page:
+          $ref: '#/components/schemas/WebPage'
+      required:
       - web_page
     Website:
       type: object
