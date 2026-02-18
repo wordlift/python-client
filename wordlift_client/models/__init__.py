@@ -217,6 +217,8 @@ from wordlift_client.models.web_page import WebPage
 from wordlift_client.models.web_page_import_fetch_options import WebPageImportFetchOptions
 from wordlift_client.models.web_page_import_request import WebPageImportRequest
 from wordlift_client.models.web_page_import_response import WebPageImportResponse
+from wordlift_client.models.web_page_scrape_request import WebPageScrapeRequest
+from wordlift_client.models.web_page_scrape_response import WebPageScrapeResponse
 from wordlift_client.models.webpage_properties import WebpageProperties
 from wordlift_client.models.website import Website
 from wordlift_client.models.website_search import WebsiteSearch
