@@ -30,7 +30,7 @@ class SiteFiles(BaseModel):
     """
     SiteFiles
     """ # noqa: E501
-    score: Optional[Annotated[int, Field(le=10, strict=True, ge=0)]] = Field(default=None, description="Numeric score for site files (0-10)")
+    score: Optional[Annotated[int, Field(le=12, strict=True, ge=0)]] = Field(default=None, description="Numeric score for site files (0-12; up to +2 bonus for WebMCP support)")
     status: Optional[StrictStr] = Field(default=None, description="Overall status of site files")
     explanation: Optional[StrictStr] = Field(default=None, description="Detailed explanation of site files evaluation")
     robots_txt: Optional[StrictStr] = Field(default=None, description="Status of robots.txt file", alias="robotsTxt")

@@ -12,6 +12,9 @@ Name | Type | Description | Notes
 **asset_links** | **bool** | Whether .well-known/assetlinks.json exists (Android deep linking) | [optional] 
 **apple_association** | **bool** | Whether .well-known/apple-app-site-association exists (iOS deep linking) | [optional] 
 **llms_txt** | **bool** | Whether .well-known/llms.txt exists (alternative LLM instructions location) | [optional] 
+**mcp_json** | **bool** | Whether .well-known/mcp.json exists (WebMCP manifest exposing callable tools to AI agents) | [optional] 
+**mcp_link_tag** | **bool** | Whether a &lt;link rel&#x3D;\&quot;mcp\&quot;&gt; discovery tag was detected in the page HTML | [optional] 
+**mcp_endpoint** | **str** | The href value of the &lt;link rel&#x3D;\&quot;mcp\&quot;&gt; tag, if present; null otherwise | [optional] 
 
 ## Example
 

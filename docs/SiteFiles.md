@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**score** | **int** | Numeric score for site files (0-10) | [optional] 
+**score** | **int** | Numeric score for site files (0-12; up to +2 bonus for WebMCP support) | [optional] 
 **status** | **str** | Overall status of site files | [optional] 
 **explanation** | **str** | Detailed explanation of site files evaluation | [optional] 
 **robots_txt** | **str** | Status of robots.txt file | [optional] 

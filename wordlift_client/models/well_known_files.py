@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -33,7 +33,10 @@ class WellKnownFiles(BaseModel):
     asset_links: Optional[StrictBool] = Field(default=None, description="Whether .well-known/assetlinks.json exists (Android deep linking)", alias="assetLinks")
     apple_association: Optional[StrictBool] = Field(default=None, description="Whether .well-known/apple-app-site-association exists (iOS deep linking)", alias="appleAssociation")
     llms_txt: Optional[StrictBool] = Field(default=None, description="Whether .well-known/llms.txt exists (alternative LLM instructions location)", alias="llmsTxt")
-    __properties: ClassVar[List[str]] = ["aiPlugin", "ucp", "security", "assetLinks", "appleAssociation", "llmsTxt"]
+    mcp_json: Optional[StrictBool] = Field(default=None, description="Whether .well-known/mcp.json exists (WebMCP manifest exposing callable tools to AI agents)", alias="mcpJson")
+    mcp_link_tag: Optional[StrictBool] = Field(default=None, description="Whether a <link rel=\"mcp\"> discovery tag was detected in the page HTML", alias="mcpLinkTag")
+    mcp_endpoint: Optional[StrictStr] = Field(default=None, description="The href value of the <link rel=\"mcp\"> tag, if present; null otherwise", alias="mcpEndpoint")
+    __properties: ClassVar[List[str]] = ["aiPlugin", "ucp", "security", "assetLinks", "appleAssociation", "llmsTxt", "mcpJson", "mcpLinkTag", "mcpEndpoint"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -74,6 +77,11 @@ class WellKnownFiles(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if mcp_endpoint (nullable) is None
+        # and model_fields_set contains the field
+        if self.mcp_endpoint is None and "mcp_endpoint" in self.model_fields_set:
+            _dict['mcpEndpoint'] = None
+
         return _dict
 
     @classmethod
@@ -91,7 +99,10 @@ class WellKnownFiles(BaseModel):
             "security": obj.get("security"),
             "assetLinks": obj.get("assetLinks"),
             "appleAssociation": obj.get("appleAssociation"),
-            "llmsTxt": obj.get("llmsTxt")
+            "llmsTxt": obj.get("llmsTxt"),
+            "mcpJson": obj.get("mcpJson"),
+            "mcpLinkTag": obj.get("mcpLinkTag"),
+            "mcpEndpoint": obj.get("mcpEndpoint")
         })
         return _obj
 
