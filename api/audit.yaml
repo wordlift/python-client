@@ -6,7 +6,7 @@ info:
     It evaluates site files (including .well-known directory), SEO fundamentals, structured data,
     content structure, image accessibility, automation readiness, and JavaScript rendering to provide
     actionable insights for improving both search engine and AI agent discoverability.
-  version: 1.0.0
+  version: 1.1.0
 servers:
   - url: https://api.wordlift.io
     description: Production server
@@ -25,6 +25,7 @@ paths:
         - Image accessibility
         - Automation readiness for AI agents
         - JavaScript rendering and bot accessibility
+        - WebMCP support (.well-known/mcp.json manifest and <link rel="mcp"> tag detection)
         - Content freshness (legacy field, status Unknown)
         - Internal linking (legacy field, status Unknown)
         - HTML semantics (legacy field, status Unknown)
@@ -82,6 +83,9 @@ paths:
                           assetLinks: false
                           appleAssociation: false
                           llmsTxt: false
+                          mcpJson: false
+                          mcpLinkTag: false
+                          mcpEndpoint: null
                       seoFundamentals:
                         score: 15
                         status: "Needs Improvement"
@@ -355,6 +359,16 @@ components:
         llmsTxt:
           type: boolean
           description: Whether .well-known/llms.txt exists (alternative LLM instructions location)
+        mcpJson:
+          type: boolean
+          description: Whether .well-known/mcp.json exists (WebMCP manifest exposing callable tools to AI agents)
+        mcpLinkTag:
+          type: boolean
+          description: Whether a <link rel="mcp"> discovery tag was detected in the page HTML
+        mcpEndpoint:
+          type: string
+          nullable: true
+          description: The href value of the <link rel="mcp"> tag, if present; null otherwise
 
     SiteFiles:
       type: object
@@ -362,8 +376,8 @@ components:
         score:
           type: integer
           minimum: 0
-          maximum: 10
-          description: Numeric score for site files (0-10)
+          maximum: 12
+          description: Numeric score for site files (0-12; up to +2 bonus for WebMCP support)
         status:
           type: string
           enum: [Good, Needs Improvement, Poor, Unknown]
