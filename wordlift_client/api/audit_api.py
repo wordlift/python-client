@@ -57,7 +57,7 @@ class AuditApi:
     ) -> AuditResponse:
         """Website Audit
 
-        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt, .well-known directory) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD, Microdata) - Content structure and semantic HTML - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility - WebMCP support (.well-known/mcp.json manifest and <link rel=\"mcp\"> tag detection) - Content freshness (legacy field, status Unknown) - Internal linking (legacy field, status Unknown) - HTML semantics (legacy field, status Unknown)  Returns an overall score (0-100) and detailed recommendations for improvement. 
+        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt, .well-known directory) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD, Microdata) - Content structure and semantic HTML - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility - WebMCP support (.well-known/mcp.json manifest and `<link rel=\"mcp\">` tag detection) - Content freshness (legacy field, status Unknown) - Internal linking (legacy field, status Unknown) - HTML semantics (legacy field, status Unknown)  Returns an overall score (0-100) and detailed recommendations for improvement. 
 
         :param audit_request: (required)
         :type audit_request: AuditRequest
@@ -97,7 +97,7 @@ class AuditApi:
             '401': "ErrorResponse",
             '403': "ErrorResponse",
             '404': "ErrorResponse",
-            '422': "ValidationError1",
+            '422': "ValidationError2",
             '500': "ErrorResponse",
         }
         response_data = await self.api_client.call_api(
@@ -130,7 +130,7 @@ class AuditApi:
     ) -> ApiResponse[AuditResponse]:
         """Website Audit
 
-        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt, .well-known directory) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD, Microdata) - Content structure and semantic HTML - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility - WebMCP support (.well-known/mcp.json manifest and <link rel=\"mcp\"> tag detection) - Content freshness (legacy field, status Unknown) - Internal linking (legacy field, status Unknown) - HTML semantics (legacy field, status Unknown)  Returns an overall score (0-100) and detailed recommendations for improvement. 
+        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt, .well-known directory) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD, Microdata) - Content structure and semantic HTML - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility - WebMCP support (.well-known/mcp.json manifest and `<link rel=\"mcp\">` tag detection) - Content freshness (legacy field, status Unknown) - Internal linking (legacy field, status Unknown) - HTML semantics (legacy field, status Unknown)  Returns an overall score (0-100) and detailed recommendations for improvement. 
 
         :param audit_request: (required)
         :type audit_request: AuditRequest
@@ -170,7 +170,7 @@ class AuditApi:
             '401': "ErrorResponse",
             '403': "ErrorResponse",
             '404': "ErrorResponse",
-            '422': "ValidationError1",
+            '422': "ValidationError2",
             '500': "ErrorResponse",
         }
         response_data = await self.api_client.call_api(
@@ -203,7 +203,7 @@ class AuditApi:
     ) -> RESTResponseType:
         """Website Audit
 
-        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt, .well-known directory) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD, Microdata) - Content structure and semantic HTML - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility - WebMCP support (.well-known/mcp.json manifest and <link rel=\"mcp\"> tag detection) - Content freshness (legacy field, status Unknown) - Internal linking (legacy field, status Unknown) - HTML semantics (legacy field, status Unknown)  Returns an overall score (0-100) and detailed recommendations for improvement. 
+        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt, .well-known directory) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD, Microdata) - Content structure and semantic HTML - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility - WebMCP support (.well-known/mcp.json manifest and `<link rel=\"mcp\">` tag detection) - Content freshness (legacy field, status Unknown) - Internal linking (legacy field, status Unknown) - HTML semantics (legacy field, status Unknown)  Returns an overall score (0-100) and detailed recommendations for improvement. 
 
         :param audit_request: (required)
         :type audit_request: AuditRequest
@@ -243,7 +243,7 @@ class AuditApi:
             '401': "ErrorResponse",
             '403': "ErrorResponse",
             '404': "ErrorResponse",
-            '422': "ValidationError1",
+            '422': "ValidationError2",
             '500': "ErrorResponse",
         }
         response_data = await self.api_client.call_api(

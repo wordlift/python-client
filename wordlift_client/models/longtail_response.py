@@ -20,7 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from wordlift_client.models.entity1 import Entity1
+from wordlift_client.models.entity import Entity
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +29,7 @@ class LongtailResponse(BaseModel):
     LongtailResponse
     """ # noqa: E501
     summary: Optional[StrictStr] = Field(default=None, description="The page summary.")
-    entities: Optional[List[Entity1]] = Field(default=None, description="The list of entities matching the query.")
+    entities: Optional[List[Entity]] = Field(default=None, description="The list of entities matching the query.")
     __properties: ClassVar[List[str]] = ["summary", "entities"]
 
     model_config = ConfigDict(
@@ -91,7 +91,7 @@ class LongtailResponse(BaseModel):
 
         _obj = cls.model_validate({
             "summary": obj.get("summary"),
-            "entities": [Entity1.from_dict(_item) for _item in obj["entities"]] if obj.get("entities") is not None else None
+            "entities": [Entity.from_dict(_item) for _item in obj["entities"]] if obj.get("entities") is not None else None
         })
         return _obj
 

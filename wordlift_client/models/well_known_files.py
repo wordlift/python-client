@@ -34,8 +34,8 @@ class WellKnownFiles(BaseModel):
     apple_association: Optional[StrictBool] = Field(default=None, description="Whether .well-known/apple-app-site-association exists (iOS deep linking)", alias="appleAssociation")
     llms_txt: Optional[StrictBool] = Field(default=None, description="Whether .well-known/llms.txt exists (alternative LLM instructions location)", alias="llmsTxt")
     mcp_json: Optional[StrictBool] = Field(default=None, description="Whether .well-known/mcp.json exists (WebMCP manifest exposing callable tools to AI agents)", alias="mcpJson")
-    mcp_link_tag: Optional[StrictBool] = Field(default=None, description="Whether a <link rel=\"mcp\"> discovery tag was detected in the page HTML", alias="mcpLinkTag")
-    mcp_endpoint: Optional[StrictStr] = Field(default=None, description="The href value of the <link rel=\"mcp\"> tag, if present; null otherwise", alias="mcpEndpoint")
+    mcp_link_tag: Optional[StrictBool] = Field(default=None, description="Whether a `<link rel=\"mcp\">` discovery tag was detected in the page HTML", alias="mcpLinkTag")
+    mcp_endpoint: Optional[StrictStr] = Field(default=None, description="The href value of the `<link rel=\"mcp\">` tag, if present; null otherwise", alias="mcpEndpoint")
     __properties: ClassVar[List[str]] = ["aiPlugin", "ucp", "security", "assetLinks", "appleAssociation", "llmsTxt", "mcpJson", "mcpLinkTag", "mcpEndpoint"]
 
     model_config = ConfigDict(

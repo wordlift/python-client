@@ -251,8 +251,8 @@ docs/UrlResultsResponse.md
 docs/UrlSummaryResponse.md
 docs/ValidationError.md
 docs/ValidationError1.md
-docs/ValidationError1DetailInner.md
 docs/ValidationError2.md
+docs/ValidationError2DetailInner.md
 docs/ValidationFix.md
 docs/ValidationResult.md
 docs/ValidationTypeEnum.md
@@ -560,8 +560,8 @@ wordlift_client/models/url_results_response.py
 wordlift_client/models/url_summary_response.py
 wordlift_client/models/validation_error.py
 wordlift_client/models/validation_error1.py
-wordlift_client/models/validation_error1_detail_inner.py
 wordlift_client/models/validation_error2.py
+wordlift_client/models/validation_error2_detail_inner.py
 wordlift_client/models/validation_fix.py
 wordlift_client/models/validation_result.py
 wordlift_client/models/validation_type_enum.py
