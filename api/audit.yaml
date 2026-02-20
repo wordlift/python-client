@@ -25,7 +25,7 @@ paths:
         - Image accessibility
         - Automation readiness for AI agents
         - JavaScript rendering and bot accessibility
-        - WebMCP support (.well-known/mcp.json manifest and <link rel="mcp"> tag detection)
+        - WebMCP support (.well-known/mcp.json manifest and `<link rel="mcp">` tag detection)
         - Content freshness (legacy field, status Unknown)
         - Internal linking (legacy field, status Unknown)
         - HTML semantics (legacy field, status Unknown)
@@ -364,11 +364,11 @@ components:
           description: Whether .well-known/mcp.json exists (WebMCP manifest exposing callable tools to AI agents)
         mcpLinkTag:
           type: boolean
-          description: Whether a <link rel="mcp"> discovery tag was detected in the page HTML
+          description: Whether a `<link rel="mcp">` discovery tag was detected in the page HTML
         mcpEndpoint:
           type: string
           nullable: true
-          description: The href value of the <link rel="mcp"> tag, if present; null otherwise
+          description: The href value of the `<link rel="mcp">` tag, if present; null otherwise
 
     SiteFiles:
       type: object
