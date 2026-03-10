@@ -397,6 +397,25 @@ paths:
       summary: Update
       tags:
       - Plugin Diagnostics
+  /accounts/me/reset:
+    post:
+      description: Reset the current account identified by its key.
+      operationId: resetMe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetAccountRequest'
+      responses:
+        "204":
+          description: Reset
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+      summary: Reset
+      tags:
+      - Account
   /accounts/me/stats:
     get:
       description: "Get the Account statistics, such the number of products, product\
@@ -4035,6 +4054,15 @@ components:
       properties:
         redeem_code:
           type: string
+    ResetAccountRequest:
+      type: object
+      properties:
+        keep_country:
+          type: boolean
+        keep_language:
+          type: boolean
+        keep_url:
+          type: boolean
     Response:
       type: object
       properties:
