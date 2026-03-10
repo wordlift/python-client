@@ -215,6 +215,7 @@ docs/Request.md
 docs/Request1.md
 docs/Request2.md
 docs/Request3.md
+docs/ResetAccountRequest.md
 docs/ResourceRequest.md
 docs/ResourceType.md
 docs/Response.md
@@ -251,8 +252,8 @@ docs/UrlResultsResponse.md
 docs/UrlSummaryResponse.md
 docs/ValidationError.md
 docs/ValidationError1.md
+docs/ValidationError1DetailInner.md
 docs/ValidationError2.md
-docs/ValidationError2DetailInner.md
 docs/ValidationFix.md
 docs/ValidationResult.md
 docs/ValidationTypeEnum.md
@@ -295,6 +296,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_reset_account_request.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -529,6 +531,7 @@ wordlift_client/models/request.py
 wordlift_client/models/request1.py
 wordlift_client/models/request2.py
 wordlift_client/models/request3.py
+wordlift_client/models/reset_account_request.py
 wordlift_client/models/resource_request.py
 wordlift_client/models/resource_type.py
 wordlift_client/models/response.py
@@ -560,8 +563,8 @@ wordlift_client/models/url_results_response.py
 wordlift_client/models/url_summary_response.py
 wordlift_client/models/validation_error.py
 wordlift_client/models/validation_error1.py
+wordlift_client/models/validation_error1_detail_inner.py
 wordlift_client/models/validation_error2.py
-wordlift_client/models/validation_error2_detail_inner.py
 wordlift_client/models/validation_fix.py
 wordlift_client/models/validation_result.py
 wordlift_client/models/validation_type_enum.py

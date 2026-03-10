@@ -18,19 +18,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
-from wordlift_client.models.properties1 import Properties1
 from typing import Optional, Set
 from typing_extensions import Self
 
-class Entity1(BaseModel):
+class ResetAccountRequest(BaseModel):
     """
-    The list of entities matching the query.
+    ResetAccountRequest
     """ # noqa: E501
-    reference: Optional[StrictStr] = Field(default=None, description="The referenced entity URI")
-    properties: Optional[Properties1] = None
-    __properties: ClassVar[List[str]] = ["reference", "properties"]
+    keep_country: Optional[StrictBool] = None
+    keep_language: Optional[StrictBool] = None
+    keep_url: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["keep_country", "keep_language", "keep_url"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +50,7 @@ class Entity1(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Entity1 from a JSON string"""
+        """Create an instance of ResetAccountRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,14 +71,11 @@ class Entity1(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of properties
-        if self.properties:
-            _dict['properties'] = self.properties.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Entity1 from a dict"""
+        """Create an instance of ResetAccountRequest from a dict"""
         if obj is None:
             return None
 
@@ -86,8 +83,9 @@ class Entity1(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "reference": obj.get("reference"),
-            "properties": Properties1.from_dict(obj["properties"]) if obj.get("properties") is not None else None
+            "keep_country": obj.get("keep_country"),
+            "keep_language": obj.get("keep_language"),
+            "keep_url": obj.get("keep_url")
         })
         return _obj
 

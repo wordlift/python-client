@@ -20,7 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
-from wordlift_client.models.validation_error1 import ValidationError1
+from wordlift_client.models.validation_error2 import ValidationError2
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +28,7 @@ class HTTPValidationError1(BaseModel):
     """
     HTTPValidationError1
     """ # noqa: E501
-    detail: Optional[List[ValidationError1]] = None
+    detail: Optional[List[ValidationError2]] = None
     __properties: ClassVar[List[str]] = ["detail"]
 
     model_config = ConfigDict(
@@ -89,7 +89,7 @@ class HTTPValidationError1(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "detail": [ValidationError1.from_dict(_item) for _item in obj["detail"]] if obj.get("detail") is not None else None
+            "detail": [ValidationError2.from_dict(_item) for _item in obj["detail"]] if obj.get("detail") is not None else None
         })
         return _obj
 

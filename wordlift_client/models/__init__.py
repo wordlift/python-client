@@ -170,6 +170,7 @@ from wordlift_client.models.request import Request
 from wordlift_client.models.request1 import Request1
 from wordlift_client.models.request2 import Request2
 from wordlift_client.models.request3 import Request3
+from wordlift_client.models.reset_account_request import ResetAccountRequest
 from wordlift_client.models.resource_request import ResourceRequest
 from wordlift_client.models.resource_type import ResourceType
 from wordlift_client.models.response import Response
@@ -201,8 +202,8 @@ from wordlift_client.models.url_results_response import UrlResultsResponse
 from wordlift_client.models.url_summary_response import UrlSummaryResponse
 from wordlift_client.models.validation_error import ValidationError
 from wordlift_client.models.validation_error1 import ValidationError1
+from wordlift_client.models.validation_error1_detail_inner import ValidationError1DetailInner
 from wordlift_client.models.validation_error2 import ValidationError2
-from wordlift_client.models.validation_error2_detail_inner import ValidationError2DetailInner
 from wordlift_client.models.validation_fix import ValidationFix
 from wordlift_client.models.validation_result import ValidationResult
 from wordlift_client.models.validation_type_enum import ValidationTypeEnum

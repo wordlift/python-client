@@ -1,21 +1,13 @@
 # Entity1
 
-Entity
+The list of entities matching the query.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entity_id** | **str** | The entity URI. | [optional] 
-**confidence** | **float** | Confidence score representing the entity match level. | [optional] 
-**main_type** | **str** | The main schema type for the current entity. | [optional] 
-**types** | **List[str]** | The list of schema types which the entity can be classified to. | [optional] 
-**label** | **str** | The title of the entity. | [optional] 
-**description** | **str** | The description about the entity. | [optional] 
-**images** | **List[str]** | The list of entity image URIs. | [optional] 
-**same_as** | **List[str]** | The list of entity sameas URIs. | [optional] 
+**reference** | **str** | The referenced entity URI | [optional] 
 **properties** | [**Properties1**](Properties1.md) |  | [optional] 
-**synonyms** | **List[str]** |  | [optional] 
 
 ## Example
 

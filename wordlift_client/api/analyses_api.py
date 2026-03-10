@@ -20,7 +20,7 @@ from typing_extensions import Annotated
 from pydantic import StrictStr
 from wordlift_client.models.analyses_request import AnalysesRequest
 from wordlift_client.models.analyses_response import AnalysesResponse
-from wordlift_client.models.request3 import Request3
+from wordlift_client.models.request2 import Request2
 from wordlift_client.models.response2 import Response2
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
@@ -44,7 +44,7 @@ class AnalysesApi:
     @validate_call
     async def analyse(
         self,
-        request3: Request3,
+        request2: Request2,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -62,8 +62,8 @@ class AnalysesApi:
 
         Analyze the content provided with the request.
 
-        :param request3: (required)
-        :type request3: Request3
+        :param request2: (required)
+        :type request2: Request2
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -87,7 +87,7 @@ class AnalysesApi:
         """ # noqa: E501
 
         _param = self._analyse_serialize(
-            request3=request3,
+            request2=request2,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -113,7 +113,7 @@ class AnalysesApi:
     @validate_call
     async def analyse_with_http_info(
         self,
-        request3: Request3,
+        request2: Request2,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -131,8 +131,8 @@ class AnalysesApi:
 
         Analyze the content provided with the request.
 
-        :param request3: (required)
-        :type request3: Request3
+        :param request2: (required)
+        :type request2: Request2
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -156,7 +156,7 @@ class AnalysesApi:
         """ # noqa: E501
 
         _param = self._analyse_serialize(
-            request3=request3,
+            request2=request2,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -182,7 +182,7 @@ class AnalysesApi:
     @validate_call
     async def analyse_without_preload_content(
         self,
-        request3: Request3,
+        request2: Request2,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -200,8 +200,8 @@ class AnalysesApi:
 
         Analyze the content provided with the request.
 
-        :param request3: (required)
-        :type request3: Request3
+        :param request2: (required)
+        :type request2: Request2
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -225,7 +225,7 @@ class AnalysesApi:
         """ # noqa: E501
 
         _param = self._analyse_serialize(
-            request3=request3,
+            request2=request2,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -246,7 +246,7 @@ class AnalysesApi:
 
     def _analyse_serialize(
         self,
-        request3,
+        request2,
         _request_auth,
         _content_type,
         _headers,
@@ -270,8 +270,8 @@ class AnalysesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request3 is not None:
-            _body_params = request3
+        if request2 is not None:
+            _body_params = request2
 
 
         # set the HTTP header `Accept`
@@ -598,7 +598,7 @@ class AnalysesApi:
     @validate_call
     async def merge(
         self,
-        request3: Request3,
+        request2: Request2,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -616,8 +616,8 @@ class AnalysesApi:
 
         Analyze content and return the results merged as HTML code.
 
-        :param request3: (required)
-        :type request3: Request3
+        :param request2: (required)
+        :type request2: Request2
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -641,7 +641,7 @@ class AnalysesApi:
         """ # noqa: E501
 
         _param = self._merge_serialize(
-            request3=request3,
+            request2=request2,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -667,7 +667,7 @@ class AnalysesApi:
     @validate_call
     async def merge_with_http_info(
         self,
-        request3: Request3,
+        request2: Request2,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -685,8 +685,8 @@ class AnalysesApi:
 
         Analyze content and return the results merged as HTML code.
 
-        :param request3: (required)
-        :type request3: Request3
+        :param request2: (required)
+        :type request2: Request2
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -710,7 +710,7 @@ class AnalysesApi:
         """ # noqa: E501
 
         _param = self._merge_serialize(
-            request3=request3,
+            request2=request2,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -736,7 +736,7 @@ class AnalysesApi:
     @validate_call
     async def merge_without_preload_content(
         self,
-        request3: Request3,
+        request2: Request2,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -754,8 +754,8 @@ class AnalysesApi:
 
         Analyze content and return the results merged as HTML code.
 
-        :param request3: (required)
-        :type request3: Request3
+        :param request2: (required)
+        :type request2: Request2
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -779,7 +779,7 @@ class AnalysesApi:
         """ # noqa: E501
 
         _param = self._merge_serialize(
-            request3=request3,
+            request2=request2,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -800,7 +800,7 @@ class AnalysesApi:
 
     def _merge_serialize(
         self,
-        request3,
+        request2,
         _request_auth,
         _content_type,
         _headers,
@@ -824,8 +824,8 @@ class AnalysesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request3 is not None:
-            _body_params = request3
+        if request2 is not None:
+            _body_params = request2
 
 
         # set the HTTP header `Accept`
@@ -875,7 +875,7 @@ class AnalysesApi:
     @validate_call
     async def v2_analysis(
         self,
-        request3: Request3,
+        request2: Request2,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -893,8 +893,8 @@ class AnalysesApi:
 
         Analyse the content of a webpage by using the `url` property of the request.
 
-        :param request3: (required)
-        :type request3: Request3
+        :param request2: (required)
+        :type request2: Request2
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -918,7 +918,7 @@ class AnalysesApi:
         """ # noqa: E501
 
         _param = self._v2_analysis_serialize(
-            request3=request3,
+            request2=request2,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -944,7 +944,7 @@ class AnalysesApi:
     @validate_call
     async def v2_analysis_with_http_info(
         self,
-        request3: Request3,
+        request2: Request2,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -962,8 +962,8 @@ class AnalysesApi:
 
         Analyse the content of a webpage by using the `url` property of the request.
 
-        :param request3: (required)
-        :type request3: Request3
+        :param request2: (required)
+        :type request2: Request2
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -987,7 +987,7 @@ class AnalysesApi:
         """ # noqa: E501
 
         _param = self._v2_analysis_serialize(
-            request3=request3,
+            request2=request2,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1013,7 +1013,7 @@ class AnalysesApi:
     @validate_call
     async def v2_analysis_without_preload_content(
         self,
-        request3: Request3,
+        request2: Request2,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1031,8 +1031,8 @@ class AnalysesApi:
 
         Analyse the content of a webpage by using the `url` property of the request.
 
-        :param request3: (required)
-        :type request3: Request3
+        :param request2: (required)
+        :type request2: Request2
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1056,7 +1056,7 @@ class AnalysesApi:
         """ # noqa: E501
 
         _param = self._v2_analysis_serialize(
-            request3=request3,
+            request2=request2,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1077,7 +1077,7 @@ class AnalysesApi:
 
     def _v2_analysis_serialize(
         self,
-        request3,
+        request2,
         _request_auth,
         _content_type,
         _headers,
@@ -1101,8 +1101,8 @@ class AnalysesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request3 is not None:
-            _body_params = request3
+        if request2 is not None:
+            _body_params = request2
 
 
         # set the HTTP header `Accept`
