@@ -1,23 +1,80 @@
 openapi: 3.1.0
 info:
   title: WordLift Graph KPI API
-  description: Historical graph KPI ancillary service backed by MongoDB, Postgres,
-    helper Mongo, and wordlift_sdk.
-  version: 0.1.5
+  description: "Historical graph KPI ancillary service for WordLift knowledge graphs.\n\
+    \nThis API exposes daily KPI snapshots for a graph identified by the public WordLift\n\
+    `account.id` (`graph_id` in the path). Internally, requests can be resolved to\
+    \ the\nunderlying dataset by `X-Ng-Dataset-Id` or through the WordLift Accounts\
+    \ API.\n\n## Data model\n\n- `graph_id`: the public WordLift account identifier.\n\
+    - `snapshot_date`: the logical KPI day in `YYYY-MM-DD` format used for time-series\
+    \ charts.\n- `started_at` / `finished_at` / `heartbeat_at`: operational timestamps\
+    \ for job execution.\n\n## Request examples\n\n- List snapshot history:\n  - `GET\
+    \ https://api.wordlift.io/kpi/graphs/1506805/snapshots?date_from=2026-03-01&date_to=2026-03-13&limit=30`\n\
+    - Read one snapshot:\n  - `GET https://api.wordlift.io/kpi/graphs/1506805/snapshots/2026-03-13`\n\
+    - Submit one job:\n  - `POST https://api.wordlift.io/kpi/graphs/1506805/jobs`\n\
+    - Read one job:\n  - `GET https://api.wordlift.io/kpi/graphs/1506805/jobs/job_20260313_5bdaac21`\n\
+    \n## KPI visibility model\n\nMost graph-wide KPIs are split into three visibility\
+    \ buckets:\n\n- `all_*`: the complete graph snapshot.\n- `public_*`: the public\
+    \ view of the graph.\n- `private_*`: the private view of the graph.\n\nPrivate/public\
+    \ visibility is derived from dataset-configured private properties and\nprivate\
+    \ namespaces.\n\nRich snippets and schema compliance KPIs are public-only and\
+    \ remain unprefixed.\n\n## KPI glossary\n\n- `all_total_entities`: all entities\
+    \ in the graph snapshot.\n- `public_total_entities`: entities that have at least\
+    \ one public assertion.\n- `private_total_entities`: entities that have no public\
+    \ assertions.\n- `all_total_properties`: all non-`rdf:type` assertions in the\
+    \ snapshot.\n- `public_total_properties`: non-`rdf:type` assertions whose predicate\
+    \ is public.\n- `private_total_properties`: non-`rdf:type` assertions whose predicate\
+    \ is private.\n- `all_total_triples`: all assertions in the snapshot, including\
+    \ `rdf:type`.\n- `public_total_triples`: assertions whose predicate is public.\n\
+    - `private_total_triples`: assertions whose predicate is private.\n- `all_edges_count`:\
+    \ all internal and external links, excluding literals and `rdf:type`.\n- `public_edges_count`:\
+    \ edges created by public assertions only.\n- `private_edges_count`: edges created\
+    \ by private assertions only.\n- `all_edge_node_ratio`: all edges divided by all\
+    \ entities.\n- `public_edge_node_ratio`: public edges divided by public entities.\n\
+    - `private_edge_node_ratio`: private edges divided by private entities.\n- `all_unique_urls_count`:\
+    \ distinct `schema:url` values in the snapshot.\n- `public_unique_urls_count`:\
+    \ same as `all_unique_urls_count` because `schema:url` is public.\n- `private_unique_urls_count`:\
+    \ always `0` because `schema:url` is not private.\n- `all_orphans_count`: public\
+    \ orphans plus private orphans.\n- `public_orphans_count`: public entities that\
+    \ are never targets of public internal edges.\n- `private_orphans_count`: private\
+    \ entities that are never targets of any internal edges.\n- `all_broken_links_count`:\
+    \ public broken links plus private broken links.\n- `public_broken_links_count`:\
+    \ missing targets referenced by public internal edges.\n- `private_broken_links_count`:\
+    \ missing targets referenced by private internal edges.\n- `all_isolated_graphs_count`:\
+    \ public isolated graphs plus private isolated graphs.\n- `public_isolated_graphs_count`:\
+    \ connected components built from public entities and public internal edges.\n\
+    - `private_isolated_graphs_count`: connected components for private entities using\
+    \ public internal edges that connect private entities.\n- `all_duplicates_count`:\
+    \ duplicate groups sharing the same `schema:url`.\n- `public_duplicates_count`:\
+    \ same as `all_duplicates_count` because `schema:url` is public.\n- `private_duplicates_count`:\
+    \ always `0` because `schema:url` is not private.\n- `rich_snippets_valid_count`:\
+    \ public rich-snippet items that passed validation.\n- `rich_snippets_invalid_count`:\
+    \ public rich-snippet items that failed validation.\n- `schema_compliance_errors`:\
+    \ schema-compliance errors found in public URL-generated subgraphs.\n- `schema_compliance_warnings`:\
+    \ schema-compliance warnings found in public URL-generated subgraphs.\n- `schema_compliance_urls_checked`:\
+    \ number of public URLs validated for schema compliance."
+  version: 0.1.6
 paths:
-  /kpis/graphs/{graph_id}/snapshots:
+  /kpi/graphs/{graph_id}/snapshots:
     get:
       tags:
       - snapshots
-      summary: List Snapshots
-      operationId: list_snapshots_kpis_graphs__graph_id__snapshots_get
+      summary: List daily KPI snapshots
+      description: Returns a time-series of daily graph KPI snapshots for a single
+        public graph identifier. Use the `metrics` query parameter to request a compact
+        projection suitable for charts.
+      operationId: list_snapshots_kpi_graphs__graph_id__snapshots_get
       parameters:
       - name: graph_id
         in: path
         required: true
         schema:
           type: string
+          description: Public WordLift graph identifier (`account.id`).
+          examples:
+          - '1506805'
           title: Graph Id
+        description: Public WordLift graph identifier (`account.id`).
       - name: date_from
         in: query
         required: false
@@ -25,7 +82,11 @@ paths:
           anyOf:
           - type: string
           - type: 'null'
+          description: Inclusive lower snapshot date bound in `YYYY-MM-DD` format.
+          examples:
+          - '2026-03-01'
           title: Date From
+        description: Inclusive lower snapshot date bound in `YYYY-MM-DD` format.
       - name: date_to
         in: query
         required: false
@@ -33,15 +94,24 @@ paths:
           anyOf:
           - type: string
           - type: 'null'
+          description: Inclusive upper snapshot date bound in `YYYY-MM-DD` format.
+          examples:
+          - '2026-03-13'
           title: Date To
+        description: Inclusive upper snapshot date bound in `YYYY-MM-DD` format.
       - name: limit
         in: query
         required: false
         schema:
           anyOf:
           - type: integer
+            minimum: 1
           - type: 'null'
+          description: Maximum number of snapshot rows to return.
+          examples:
+          - 30
           title: Limit
+        description: Maximum number of snapshot rows to return.
       - name: metrics
         in: query
         required: false
@@ -49,69 +119,195 @@ paths:
           anyOf:
           - type: string
           - type: 'null'
+          description: Comma-separated KPI field projection for compact chart responses.
+          examples:
+          - all_total_entities,all_total_triples,all_edges_count
           title: Metrics
+        description: Comma-separated KPI field projection for compact chart responses.
       responses:
         '200':
-          description: Successful Response
+          description: Daily KPI snapshot history for the graph.
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
-                title: Response List Snapshots Kpis Graphs  Graph Id  Snapshots Get
+                $ref: '#/components/schemas/SnapshotListResponse'
+              example:
+                items:
+                - graph_id: '1506805'
+                  snapshot_date: '2026-03-13'
+                  all_total_entities: 58730
+                  public_total_entities: 56211
+                  private_total_entities: 2519
+                  all_total_triples: 488511
+                  all_edges_count: 176597
+                  rich_snippets_valid_count: 320
+                  schema_compliance_warnings: 11441
+                page: {}
+        '400':
+          description: The request was syntactically valid but semantically invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: The caller is not authorized to operate on the requested graph.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: The requested resource was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: Validation Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-  /kpis/graphs/{graph_id}/snapshots/{date}:
+  /kpi/graphs/{graph_id}/snapshots/{date}:
     get:
       tags:
       - snapshots
-      summary: Get Snapshot
-      operationId: get_snapshot_kpis_graphs__graph_id__snapshots__date__get
+      summary: Get one daily KPI snapshot
+      description: Returns the complete daily KPI snapshot for a graph, including
+        graph-wide `all_` / `public_` / `private_` metrics and the public-only SHACL
+        validation outputs.
+      operationId: get_snapshot_kpi_graphs__graph_id__snapshots__date__get
       parameters:
       - name: graph_id
         in: path
         required: true
         schema:
           type: string
+          description: Public WordLift graph identifier (`account.id`).
+          examples:
+          - '1506805'
           title: Graph Id
+        description: Public WordLift graph identifier (`account.id`).
       - name: date
         in: path
         required: true
         schema:
           type: string
+          description: Logical KPI day in `YYYY-MM-DD` format.
+          examples:
+          - '2026-03-13'
           title: Date
+        description: Logical KPI day in `YYYY-MM-DD` format.
       responses:
         '200':
-          description: Successful Response
+          description: Complete daily snapshot payload.
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
-                title: Response Get Snapshot Kpis Graphs  Graph Id  Snapshots  Date  Get
+                $ref: '#/components/schemas/SnapshotResponse'
+              example:
+                graph_id: '1506805'
+                snapshot_date: '2026-03-13'
+                calculated_at: '2026-03-13T17:42:11Z'
+                validated_at: '2026-03-13T17:50:02Z'
+                all_total_entities: 58730
+                public_total_entities: 56211
+                private_total_entities: 2519
+                all_total_properties: 430122
+                public_total_properties: 402991
+                private_total_properties: 27131
+                all_total_triples: 488511
+                public_total_triples: 457184
+                private_total_triples: 31327
+                all_edges_count: 176597
+                public_edges_count: 165901
+                private_edges_count: 10696
+                all_edge_node_ratio: 3.01
+                public_edge_node_ratio: 2.95
+                private_edge_node_ratio: 4.25
+                all_unique_urls_count: 217
+                public_unique_urls_count: 217
+                private_unique_urls_count: 0
+                all_orphans_count: 47938
+                public_orphans_count: 45501
+                private_orphans_count: 2437
+                all_broken_links_count: 4
+                public_broken_links_count: 4
+                private_broken_links_count: 0
+                all_isolated_graphs_count: 3514
+                public_isolated_graphs_count: 3468
+                private_isolated_graphs_count: 46
+                all_duplicates_count: 105
+                public_duplicates_count: 105
+                private_duplicates_count: 0
+                all_entity_types:
+                  http://schema.org/Product: 1200
+                public_entity_types:
+                  http://schema.org/Product: 1180
+                private_entity_types:
+                  http://data.wordlift.io/private/HiddenProduct: 20
+                all_properties_by_predicate:
+                  schema:name: 58730
+                  schema:offers: 1191
+                public_properties_by_predicate:
+                  schema:name: 56211
+                  schema:offers: 1188
+                private_properties_by_predicate:
+                  http://data.wordlift.io/private/internalCode: 2519
+                rich_snippets_valid_count: 320
+                rich_snippets_invalid_count: 188
+                rich_snippets_by_type:
+                  eligible_valid:
+                    http://schema.org/Product: 167
+                  eligible_invalid:
+                    http://schema.org/Product: 98
+                schema_compliance_errors: 42
+                schema_compliance_warnings: 11441
+                schema_compliance_urls_checked: 217
+        '400':
+          description: The request was syntactically valid but semantically invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: The caller is not authorized to operate on the requested graph.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: The requested resource was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: Validation Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-  /kpis/graphs/{graph_id}/jobs:
+  /kpi/graphs/{graph_id}/jobs:
     post:
       tags:
       - jobs
-      summary: Create Job
-      operationId: create_job_kpis_graphs__graph_id__jobs_post
+      summary: Submit a KPI job
+      description: Creates or reuses a KPI calculation job for the requested graph
+        and snapshot day. By default the service rejects submits when a job is active
+        or a successful run finished within the last 24 hours. Set `force_rerun=true`
+        to replace an active job and bypass the freshness rule.
+      operationId: create_job_kpi_graphs__graph_id__jobs_post
       parameters:
       - name: graph_id
         in: path
         required: true
         schema:
           type: string
+          description: Public WordLift graph identifier (`account.id`).
+          examples:
+          - '1506805'
           title: Graph Id
+        description: Public WordLift graph identifier (`account.id`).
       - name: X-Ng-Dataset-Id
         in: header
         required: false
@@ -119,56 +315,147 @@ paths:
           anyOf:
           - type: string
           - type: 'null'
+          description: Optional internal dataset identifier override used only after
+            authorization succeeds.
           title: X-Ng-Dataset-Id
+        description: Optional internal dataset identifier override used only after
+          authorization succeeds.
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/SubmitJobBody'
+              description: Job submission payload. `limit_documents` and `limit_urls`
+                are intended for bounded smoke runs and operational debugging.
+              examples:
+              - snapshot_date: '2026-03-13'
+                stage_retries: 1
+                force_rerun: false
+                skip_validation: false
       responses:
         '202':
-          description: Successful Response
+          description: Job accepted or existing reusable job returned.
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
-                title: Response Create Job Kpis Graphs  Graph Id  Jobs Post
+                $ref: '#/components/schemas/JobResponse'
+              example:
+                job_id: job_20260313_5bdaac21
+                graph_id: '1506805'
+                snapshot_date: '2026-03-13'
+                status: completed
+                stage: validate
+                started_at: '2026-03-13T17:40:22Z'
+                finished_at: '2026-03-13T17:50:02Z'
+                heartbeat_at: '2026-03-13T17:49:55Z'
+                documents_seen: 58730
+                documents_transformed: 58730
+                triple_rows_written: 49499
+                issues_written: 11534
+                retry_count: 0
+                account_dataset_id: 677fe88046061868443428fa
+                website_url: https://www.busesforsale.com
+                stage_timings_json:
+                  calculate: 55.11
+                  validate: 67.66
+        '400':
+          description: The request was syntactically valid but semantically invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: The caller is not authorized to operate on the requested graph.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: The requested resource was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: The request conflicts with current job state or freshness rules.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: Validation Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-  /kpis/graphs/{graph_id}/jobs/{job_id}:
+  /kpi/graphs/{graph_id}/jobs/{job_id}:
     get:
       tags:
       - jobs
-      summary: Get Job
-      operationId: get_job_kpis_graphs__graph_id__jobs__job_id__get
+      summary: Get job status
+      description: Returns the current persisted job state, including operational
+        timestamps, stage, heartbeat, counters, and stage timings.
+      operationId: get_job_kpi_graphs__graph_id__jobs__job_id__get
       parameters:
       - name: graph_id
         in: path
         required: true
         schema:
           type: string
+          description: Public WordLift graph identifier (`account.id`).
+          examples:
+          - '1506805'
           title: Graph Id
+        description: Public WordLift graph identifier (`account.id`).
       - name: job_id
         in: path
         required: true
         schema:
           type: string
+          description: Unique job identifier.
+          examples:
+          - job_20260313_5bdaac21
           title: Job Id
+        description: Unique job identifier.
       responses:
         '200':
-          description: Successful Response
+          description: Job status.
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
-                title: Response Get Job Kpis Graphs  Graph Id  Jobs  Job Id  Get
+                $ref: '#/components/schemas/JobResponse'
+              example:
+                job_id: job_20260313_5bdaac21
+                graph_id: '1506805'
+                snapshot_date: '2026-03-13'
+                status: completed
+                stage: validate
+                started_at: '2026-03-13T17:40:22Z'
+                finished_at: '2026-03-13T17:50:02Z'
+                heartbeat_at: '2026-03-13T17:49:55Z'
+                documents_seen: 58730
+                documents_transformed: 58730
+                triple_rows_written: 49499
+                issues_written: 11534
+                retry_count: 0
+                account_dataset_id: 677fe88046061868443428fa
+                website_url: https://www.busesforsale.com
+                stage_timings_json:
+                  calculate: 55.11
+                  validate: 67.66
+        '403':
+          description: The caller is not authorized to operate on the requested graph.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: The requested resource was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: Validation Error
           content:
@@ -177,6 +464,19 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    CursorPage:
+      properties:
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+          description: Opaque cursor for the next page. `null` means there is no next
+            page.
+          examples:
+          - null
+      type: object
+      title: CursorPage
     HTTPValidationError:
       properties:
         detail:
@@ -186,36 +486,575 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    JobResponse:
+      properties:
+        job_id:
+          type: string
+          title: Job Id
+          description: Unique job identifier.
+          examples:
+          - job_20260313_5bdaac21
+        graph_id:
+          type: string
+          title: Graph Id
+          description: Public WordLift graph identifier.
+          examples:
+          - '1506805'
+        snapshot_date:
+          type: string
+          title: Snapshot Date
+          description: Logical KPI day targeted by the job.
+          examples:
+          - '2026-03-13'
+        status:
+          type: string
+          title: Status
+          description: Current job status.
+          examples:
+          - completed
+        stage:
+          type: string
+          title: Stage
+          description: Current or last completed job stage.
+          examples:
+          - validate
+        started_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Started At
+          description: Timestamp when the job started.
+          examples:
+          - '2026-03-13T17:40:22Z'
+        finished_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Finished At
+          description: Timestamp when the job finished, if complete.
+          examples:
+          - '2026-03-13T17:50:02Z'
+        heartbeat_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Heartbeat At
+          description: Last heartbeat timestamp emitted by the worker.
+          examples:
+          - '2026-03-13T17:49:55Z'
+        documents_seen:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Documents Seen
+          description: Number of source documents scanned so far.
+        documents_transformed:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Documents Transformed
+          description: Number of source documents transformed so far.
+        triple_rows_written:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Triple Rows Written
+          description: Number of helper/assertion rows materialized so far.
+        issues_written:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Issues Written
+          description: Number of validation issue rows persisted so far.
+        retry_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Retry Count
+          description: How many stage retries were used.
+        error_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Code
+          description: Machine-readable failure code, if any.
+        error_message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Message
+          description: Human-readable failure message, if any.
+        account_dataset_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Dataset Id
+          description: Resolved internal dataset identifier used for Mongo access.
+        website_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Website Url
+          description: Configured website URL resolved for the graph.
+        stage_timings_json:
+          anyOf:
+          - additionalProperties:
+              type: number
+            type: object
+          - type: 'null'
+          title: Stage Timings Json
+          description: Per-stage elapsed time in seconds.
+      additionalProperties: true
+      type: object
+      required:
+      - job_id
+      - graph_id
+      - snapshot_date
+      - status
+      - stage
+      title: JobResponse
+    SnapshotListResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/SnapshotResponse'
+          type: array
+          title: Items
+        page:
+          $ref: '#/components/schemas/CursorPage'
+      type: object
+      required:
+      - items
+      - page
+      title: SnapshotListResponse
+    SnapshotResponse:
+      properties:
+        graph_id:
+          type: string
+          title: Graph Id
+          description: Public WordLift graph identifier.
+          examples:
+          - '1506805'
+        snapshot_date:
+          type: string
+          title: Snapshot Date
+          description: Logical KPI day for this snapshot in `YYYY-MM-DD` format.
+          examples:
+          - '2026-03-13'
+        calculated_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Calculated At
+          description: Timestamp when the graph-wide KPI calculation finished.
+          examples:
+          - '2026-03-13T17:42:11Z'
+        validated_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Validated At
+          description: Timestamp when SHACL/rich-snippet validation finished.
+          examples:
+          - '2026-03-13T17:50:02Z'
+        all_total_entities:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: All Total Entities
+          description: All entities in the graph snapshot.
+        public_total_entities:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Public Total Entities
+          description: Entities that have at least one public assertion.
+        private_total_entities:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Private Total Entities
+          description: Entities that have no public assertions.
+        all_total_properties:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: All Total Properties
+          description: All non-`rdf:type` assertions in the snapshot.
+        public_total_properties:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Public Total Properties
+          description: Non-`rdf:type` assertions whose predicate is public.
+        private_total_properties:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Private Total Properties
+          description: Non-`rdf:type` assertions whose predicate is private.
+        all_total_triples:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: All Total Triples
+          description: All assertions in the snapshot, including `rdf:type`.
+        public_total_triples:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Public Total Triples
+          description: Assertions whose predicate is public.
+        private_total_triples:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Private Total Triples
+          description: Assertions whose predicate is private.
+        all_internal_edges_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: All Internal Edges Count
+          description: Internal links across all assertions, excluding literals and
+            `rdf:type`.
+        public_internal_edges_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Public Internal Edges Count
+          description: Internal links created by public assertions.
+        private_internal_edges_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Private Internal Edges Count
+          description: Internal links created by private assertions.
+        all_external_edges_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: All External Edges Count
+          description: External links across all assertions, excluding literals and
+            `rdf:type`.
+        public_external_edges_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Public External Edges Count
+          description: External links created by public assertions.
+        private_external_edges_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Private External Edges Count
+          description: External links created by private assertions.
+        all_edges_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: All Edges Count
+          description: All internal and external links, excluding literals and `rdf:type`.
+        public_edges_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Public Edges Count
+          description: Edges created by public assertions only.
+        private_edges_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Private Edges Count
+          description: Edges created by private assertions only.
+        all_edge_node_ratio:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: All Edge Node Ratio
+          description: All edges divided by all entities.
+        public_edge_node_ratio:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Public Edge Node Ratio
+          description: Public edges divided by public entities.
+        private_edge_node_ratio:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Private Edge Node Ratio
+          description: Private edges divided by private entities.
+        all_edge_node_ratio_edges:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: All Edge Node Ratio Edges
+          description: Numerator used for `all_edge_node_ratio`.
+        public_edge_node_ratio_edges:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Public Edge Node Ratio Edges
+          description: Numerator used for `public_edge_node_ratio`.
+        private_edge_node_ratio_edges:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Private Edge Node Ratio Edges
+          description: Numerator used for `private_edge_node_ratio`.
+        all_edge_node_ratio_nodes:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: All Edge Node Ratio Nodes
+          description: Denominator used for `all_edge_node_ratio`.
+        public_edge_node_ratio_nodes:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Public Edge Node Ratio Nodes
+          description: Denominator used for `public_edge_node_ratio`.
+        private_edge_node_ratio_nodes:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Private Edge Node Ratio Nodes
+          description: Denominator used for `private_edge_node_ratio`.
+        all_unique_urls_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: All Unique Urls Count
+          description: Distinct `schema:url` values in the snapshot.
+        public_unique_urls_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Public Unique Urls Count
+          description: Same as `all_unique_urls_count` because `schema:url` is public.
+        private_unique_urls_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Private Unique Urls Count
+          description: Always `0` because `schema:url` is not private.
+        all_orphans_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: All Orphans Count
+          description: Public orphans plus private orphans.
+        public_orphans_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Public Orphans Count
+          description: Public entities that are never targets of public internal edges.
+        private_orphans_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Private Orphans Count
+          description: Private entities that are never targets of any internal edges.
+        all_broken_links_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: All Broken Links Count
+          description: Public broken links plus private broken links.
+        public_broken_links_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Public Broken Links Count
+          description: Missing targets referenced by public internal edges.
+        private_broken_links_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Private Broken Links Count
+          description: Missing targets referenced by private internal edges.
+        all_isolated_graphs_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: All Isolated Graphs Count
+          description: Public isolated graphs plus private isolated graphs.
+        public_isolated_graphs_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Public Isolated Graphs Count
+          description: Connected components built from public entities and public
+            internal edges.
+        private_isolated_graphs_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Private Isolated Graphs Count
+          description: Connected components for private entities using public internal
+            edges that connect private entities.
+        all_duplicates_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: All Duplicates Count
+          description: Duplicate groups sharing the same `schema:url`.
+        public_duplicates_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Public Duplicates Count
+          description: Same as `all_duplicates_count` because `schema:url` is public.
+        private_duplicates_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Private Duplicates Count
+          description: Always `0` because `schema:url` is not private.
+        all_entity_types:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          title: All Entity Types
+          description: Counts of all `rdf:type` assertions grouped by type IRI.
+        public_entity_types:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          title: Public Entity Types
+          description: Counts of `rdf:type` assertions whose type IRI is not in a
+            private namespace.
+        private_entity_types:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          title: Private Entity Types
+          description: Counts of `rdf:type` assertions whose type IRI is in a private
+            namespace.
+        all_properties_by_predicate:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          title: All Properties By Predicate
+          description: Counts of non-`rdf:type` assertions grouped by predicate.
+        public_properties_by_predicate:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          title: Public Properties By Predicate
+          description: Counts of non-`rdf:type` assertions grouped by public predicate.
+        private_properties_by_predicate:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          title: Private Properties By Predicate
+          description: Counts of non-`rdf:type` assertions grouped by private predicate.
+        rich_snippets_valid_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Rich Snippets Valid Count
+          description: Public rich-snippet items that passed validation.
+        rich_snippets_invalid_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Rich Snippets Invalid Count
+          description: Public rich-snippet items that failed validation.
+        rich_snippets_by_type:
+          anyOf:
+          - additionalProperties:
+              additionalProperties:
+                type: integer
+              type: object
+            type: object
+          - type: 'null'
+          title: Rich Snippets By Type
+          description: Public rich-snippet counts grouped by type and eligibility
+            bucket.
+        schema_compliance_errors:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Schema Compliance Errors
+          description: Schema-compliance errors found in public URL-generated subgraphs.
+        schema_compliance_warnings:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Schema Compliance Warnings
+          description: Schema-compliance warnings found in public URL-generated subgraphs.
+        schema_compliance_urls_checked:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Schema Compliance Urls Checked
+          description: Number of public URLs validated for schema compliance.
+      additionalProperties: true
+      type: object
+      required:
+      - graph_id
+      - snapshot_date
+      title: SnapshotResponse
     SubmitJobBody:
       properties:
         snapshot_date:
           type: string
           title: Snapshot Date
+          description: Logical KPI day to calculate in `YYYY-MM-DD` format.
+          examples:
+          - '2026-03-13'
         force_rerun:
           type: boolean
           title: Force Rerun
+          description: If `true`, ignore the 24-hour freshness rule and replace a
+            currently active job.
           default: false
         stage_retries:
           type: integer
+          minimum: 0.0
           title: Stage Retries
+          description: Number of retries allowed for each stage before the job fails.
           default: 1
         limit_documents:
           anyOf:
           - type: integer
+            minimum: 1.0
           - type: 'null'
           title: Limit Documents
+          description: Optional source document cap for bounded testing and smoke
+            jobs.
         limit_urls:
           anyOf:
           - type: integer
+            minimum: 1.0
           - type: 'null'
           title: Limit Urls
+          description: Optional URL validation cap for bounded testing and smoke jobs.
         skip_validation:
           type: boolean
           title: Skip Validation
+          description: If `true`, skip the SHACL/rich-snippet validation stage.
           default: false
         replace_validation:
           type: boolean
           title: Replace Validation
+          description: If `true`, replace previously persisted validation output for
+            the same graph/day.
           default: false
       additionalProperties: false
       type: object
@@ -258,16 +1097,26 @@ components:
       properties:
         type:
           type: string
+          description: Problem type URI.
           example: about:blank
         title:
           type: string
+          description: Short, human-readable summary of the problem.
           example: Forbidden
         status:
           type: integer
+          description: HTTP status code for this problem response.
           example: 403
         detail:
           type: string
+          description: Human-readable explanation specific to this occurrence of the
+            problem.
           example: Administrator access is required for this endpoint.
+      example:
+        type: about:blank
+        title: Forbidden
+        status: 403
+        detail: Administrator access is required for this endpoint.
   securitySchemes:
     ApiKey:
       type: apiKey
@@ -288,3 +1137,8 @@ security:
 - ApiKey: []
 - security_oauth2:
   - basic
+tags:
+- name: snapshots
+  description: Daily graph KPI snapshot retrieval endpoints.
+- name: jobs
+  description: Per-graph job submission and job status endpoints.
