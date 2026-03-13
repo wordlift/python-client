@@ -1,0 +1,290 @@
+openapi: 3.1.0
+info:
+  title: WordLift Graph KPI API
+  description: Historical graph KPI ancillary service backed by MongoDB, Postgres,
+    helper Mongo, and wordlift_sdk.
+  version: 0.1.1
+paths:
+  /kpis/graphs/{graph_id}/snapshots:
+    get:
+      tags:
+      - snapshots
+      summary: List Snapshots
+      operationId: list_snapshots_kpis_graphs__graph_id__snapshots_get
+      parameters:
+      - name: graph_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Graph Id
+      - name: date_from
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Date From
+      - name: date_to
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Date To
+      - name: limit
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Limit
+      - name: metrics
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metrics
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+                title: Response List Snapshots Kpis Graphs  Graph Id  Snapshots Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /kpis/graphs/{graph_id}/snapshots/{date}:
+    get:
+      tags:
+      - snapshots
+      summary: Get Snapshot
+      operationId: get_snapshot_kpis_graphs__graph_id__snapshots__date__get
+      parameters:
+      - name: graph_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Graph Id
+      - name: date
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Date
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+                title: Response Get Snapshot Kpis Graphs  Graph Id  Snapshots  Date  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /kpis/graphs/{graph_id}/jobs:
+    post:
+      tags:
+      - jobs
+      summary: Create Job
+      operationId: create_job_kpis_graphs__graph_id__jobs_post
+      parameters:
+      - name: graph_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Graph Id
+      - name: X-Ng-Dataset-Id
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Ng-Dataset-Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitJobBody'
+      responses:
+        '202':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+                title: Response Create Job Kpis Graphs  Graph Id  Jobs Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /kpis/graphs/{graph_id}/jobs/{job_id}:
+    get:
+      tags:
+      - jobs
+      summary: Get Job
+      operationId: get_job_kpis_graphs__graph_id__jobs__job_id__get
+      parameters:
+      - name: graph_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Graph Id
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Job Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+                title: Response Get Job Kpis Graphs  Graph Id  Jobs  Job Id  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    SubmitJobBody:
+      properties:
+        snapshot_date:
+          type: string
+          title: Snapshot Date
+        force_rerun:
+          type: boolean
+          title: Force Rerun
+          default: false
+        stage_retries:
+          type: integer
+          title: Stage Retries
+          default: 1
+        limit_documents:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Limit Documents
+        limit_urls:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Limit Urls
+        skip_validation:
+          type: boolean
+          title: Skip Validation
+          default: false
+        replace_validation:
+          type: boolean
+          title: Replace Validation
+          default: false
+      additionalProperties: false
+      type: object
+      required:
+      - snapshot_date
+      title: SubmitJobBody
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Problem:
+      type: object
+      required:
+      - type
+      - title
+      - status
+      - detail
+      properties:
+        type:
+          type: string
+          example: about:blank
+        title:
+          type: string
+          example: Forbidden
+        status:
+          type: integer
+          example: 403
+        detail:
+          type: string
+          example: Administrator access is required for this endpoint.
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: '`Key {your key}`'
+    security_oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://s.wordlift.io/oauth/authorize/
+          tokenUrl: https://s.wordlift.io/oauth/token/
+          scopes:
+            basic: basic scope
+servers:
+- url: https://api.wordlift.io
+security:
+- ApiKey: []
+- security_oauth2:
+  - basic
