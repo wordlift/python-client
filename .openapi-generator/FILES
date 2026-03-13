@@ -302,12 +302,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_http_validation_error2.py
-test/test_jobs_api.py
-test/test_problem.py
-test/test_snapshots_api.py
-test/test_submit_job_body.py
-test/test_validation_error3.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
