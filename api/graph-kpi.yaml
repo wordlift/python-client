@@ -3,7 +3,7 @@ info:
   title: WordLift Graph KPI API
   description: Historical graph KPI ancillary service backed by MongoDB, Postgres,
     helper Mongo, and wordlift_sdk.
-  version: 0.1.4
+  version: 0.1.5
 paths:
   /kpis/graphs/{graph_id}/snapshots:
     get:
