@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.143.0"
+__version__ = "1.144.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -89,6 +89,8 @@ from wordlift_client.api.web_page_scrape_api import WebPageScrapeApi
 from wordlift_client.api.web_pages_imports_api import WebPagesImportsApi
 from wordlift_client.api.web_pages_api import WebPagesApi
 from wordlift_client.api.default_api import DefaultApi
+from wordlift_client.api.jobs_api import JobsApi
+from wordlift_client.api.snapshots_api import SnapshotsApi
 
 # import ApiClient
 from wordlift_client.api_response import ApiResponse
@@ -181,6 +183,7 @@ from wordlift_client.models.generate_sitemap_request import GenerateSitemapReque
 from wordlift_client.models.graphql_request import GraphqlRequest
 from wordlift_client.models.http_validation_error import HTTPValidationError
 from wordlift_client.models.http_validation_error1 import HTTPValidationError1
+from wordlift_client.models.http_validation_error2 import HTTPValidationError2
 from wordlift_client.models.html import Html
 from wordlift_client.models.html_semantics import HtmlSemantics
 from wordlift_client.models.image import Image
@@ -241,6 +244,7 @@ from wordlift_client.models.page_word import PageWord
 from wordlift_client.models.platform_limit import PlatformLimit
 from wordlift_client.models.platform_limit_request import PlatformLimitRequest
 from wordlift_client.models.preset import Preset
+from wordlift_client.models.problem import Problem
 from wordlift_client.models.problem_detail import ProblemDetail
 from wordlift_client.models.project_type import ProjectType
 from wordlift_client.models.properties import Properties
@@ -275,6 +279,7 @@ from wordlift_client.models.smart_content_request import SmartContentRequest
 from wordlift_client.models.structured_data import StructuredData
 from wordlift_client.models.submit_fact_check200_response import SubmitFactCheck200Response
 from wordlift_client.models.submit_fact_check_request import SubmitFactCheckRequest
+from wordlift_client.models.submit_job_body import SubmitJobBody
 from wordlift_client.models.token_response import TokenResponse
 from wordlift_client.models.tokens import Tokens
 from wordlift_client.models.topic import Topic
@@ -291,6 +296,7 @@ from wordlift_client.models.validation_error import ValidationError
 from wordlift_client.models.validation_error1 import ValidationError1
 from wordlift_client.models.validation_error1_detail_inner import ValidationError1DetailInner
 from wordlift_client.models.validation_error2 import ValidationError2
+from wordlift_client.models.validation_error3 import ValidationError3
 from wordlift_client.models.validation_fix import ValidationFix
 from wordlift_client.models.validation_result import ValidationResult
 from wordlift_client.models.validation_type_enum import ValidationTypeEnum

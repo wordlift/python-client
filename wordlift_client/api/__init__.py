@@ -72,4 +72,6 @@ from wordlift_client.api.web_page_scrape_api import WebPageScrapeApi
 from wordlift_client.api.web_pages_imports_api import WebPagesImportsApi
 from wordlift_client.api.web_pages_api import WebPagesApi
 from wordlift_client.api.default_api import DefaultApi
+from wordlift_client.api.jobs_api import JobsApi
+from wordlift_client.api.snapshots_api import SnapshotsApi
 

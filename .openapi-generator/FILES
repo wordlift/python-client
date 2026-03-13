@@ -123,6 +123,7 @@ docs/GraphQLApi.md
 docs/GraphqlRequest.md
 docs/HTTPValidationError.md
 docs/HTTPValidationError1.md
+docs/HTTPValidationError2.md
 docs/Html.md
 docs/HtmlSemantics.md
 docs/Image.md
@@ -139,6 +140,7 @@ docs/InternalLinkSource.md
 docs/InternalLinking.md
 docs/InternalLinksApi.md
 docs/Item.md
+docs/JobsApi.md
 docs/JsRendering.md
 docs/KgEmbeddingRequest.md
 docs/KgEmbeddingResponse.md
@@ -196,6 +198,7 @@ docs/PlatformLimitsApi.md
 docs/PluginDiagnosticsApi.md
 docs/PluginEventsApi.md
 docs/Preset.md
+docs/Problem.md
 docs/ProblemDetail.md
 docs/ProjectType.md
 docs/Properties.md
@@ -233,9 +236,11 @@ docs/SitemapImportRequest.md
 docs/SitemapImportsApi.md
 docs/SmartContent.md
 docs/SmartContentRequest.md
+docs/SnapshotsApi.md
 docs/StructuredData.md
 docs/SubmitFactCheck200Response.md
 docs/SubmitFactCheckRequest.md
+docs/SubmitJobBody.md
 docs/SummarizationsApi.md
 docs/TokenResponse.md
 docs/Tokens.md
@@ -254,6 +259,7 @@ docs/ValidationError.md
 docs/ValidationError1.md
 docs/ValidationError1DetailInner.md
 docs/ValidationError2.md
+docs/ValidationError3.md
 docs/ValidationFix.md
 docs/ValidationResult.md
 docs/ValidationTypeEnum.md
@@ -296,7 +302,12 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_reset_account_request.py
+test/test_http_validation_error2.py
+test/test_jobs_api.py
+test/test_problem.py
+test/test_snapshots_api.py
+test/test_submit_job_body.py
+test/test_validation_error3.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -345,6 +356,7 @@ wordlift_client/api/graph_ql_api.py
 wordlift_client/api/include_excludes_api.py
 wordlift_client/api/inspector_api.py
 wordlift_client/api/internal_links_api.py
+wordlift_client/api/jobs_api.py
 wordlift_client/api/link_groups_api.py
 wordlift_client/api/long_tails_api.py
 wordlift_client/api/merchant_syncs_api.py
@@ -361,6 +373,7 @@ wordlift_client/api/redeem_codes_api.py
 wordlift_client/api/rules_api.py
 wordlift_client/api/sitemap_generator_api.py
 wordlift_client/api/sitemap_imports_api.py
+wordlift_client/api/snapshots_api.py
 wordlift_client/api/summarizations_api.py
 wordlift_client/api/tokens_api.py
 wordlift_client/api/vector_search_nodes_api.py
@@ -457,6 +470,7 @@ wordlift_client/models/html.py
 wordlift_client/models/html_semantics.py
 wordlift_client/models/http_validation_error.py
 wordlift_client/models/http_validation_error1.py
+wordlift_client/models/http_validation_error2.py
 wordlift_client/models/image.py
 wordlift_client/models/image_accessibility.py
 wordlift_client/models/include_exclude.py
@@ -515,6 +529,7 @@ wordlift_client/models/page_word.py
 wordlift_client/models/platform_limit.py
 wordlift_client/models/platform_limit_request.py
 wordlift_client/models/preset.py
+wordlift_client/models/problem.py
 wordlift_client/models/problem_detail.py
 wordlift_client/models/project_type.py
 wordlift_client/models/properties.py
@@ -549,6 +564,7 @@ wordlift_client/models/smart_content_request.py
 wordlift_client/models/structured_data.py
 wordlift_client/models/submit_fact_check200_response.py
 wordlift_client/models/submit_fact_check_request.py
+wordlift_client/models/submit_job_body.py
 wordlift_client/models/token_response.py
 wordlift_client/models/tokens.py
 wordlift_client/models/topic.py
@@ -565,6 +581,7 @@ wordlift_client/models/validation_error.py
 wordlift_client/models/validation_error1.py
 wordlift_client/models/validation_error1_detail_inner.py
 wordlift_client/models/validation_error2.py
+wordlift_client/models/validation_error3.py
 wordlift_client/models/validation_fix.py
 wordlift_client/models/validation_result.py
 wordlift_client/models/validation_type_enum.py
