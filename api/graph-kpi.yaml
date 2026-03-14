@@ -53,7 +53,7 @@ info:
     \ schema-compliance errors found in public URL-generated subgraphs.\n- `schema_compliance_warnings`:\
     \ schema-compliance warnings found in public URL-generated subgraphs.\n- `schema_compliance_urls_checked`:\
     \ number of public URLs validated for schema compliance."
-  version: 0.2.0
+  version: 0.2.5
 paths:
   /kpi/graphs/{graph_id}/snapshots:
     get:
@@ -208,6 +208,11 @@ paths:
                 graph_id: '1506805'
                 snapshot_date: '2026-03-13'
                 calculated_at: '2026-03-13T17:42:11Z'
+                dataset_id: 677fe88046061868443428fa
+                snapshot_origin: calculated
+                source_watermark: '2026-03-13T17:35:19+00:00'
+                kpi_worker_version: 0.2.5
+                validation_rules_fingerprint: d80c5dfb1c704f738f7662ee2a650c4a21ddbbf95d5af4f4fefb162eb4d53f04
                 validated_at: '2026-03-13T17:50:02Z'
                 all_total_entities: 58730
                 public_total_entities: 56211
@@ -293,9 +298,11 @@ paths:
       - jobs
       summary: Submit a KPI job
       description: Creates or reuses a KPI calculation job for the requested graph
-        and snapshot day. By default the service rejects submits when a job is active
-        or a successful run finished within the last 24 hours. Set `force_rerun=true`
-        to replace an active job and bypass the freshness rule.
+        and snapshot day. When the latest source watermark, worker major.minor version,
+        and validation-policy fingerprint match the newest validated snapshot, the
+        service completes the request immediately by cloning that snapshot instead
+        of running the worker. Set `force_rerun=true` to bypass reuse and require
+        a fresh worker run.
       operationId: create_job_kpi_graphs__graph_id__jobs_post
       parameters:
       - name: graph_id
@@ -367,6 +374,95 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '409':
           description: The request conflicts with current job state or freshness rules.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - jobs
+      summary: List jobs for a graph
+      description: Returns persisted jobs for one graph ordered by most recently updated
+        first. Use the opaque `cursor` token from a previous page to continue pagination.
+      operationId: list_jobs_for_graph_kpi_graphs__graph_id__jobs_get
+      parameters:
+      - name: graph_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Public WordLift graph identifier (`account.id`).
+          examples:
+          - '1506805'
+          title: Graph Id
+        description: Public WordLift graph identifier (`account.id`).
+      - name: limit
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          description: Maximum number of jobs to return.
+          examples:
+          - 20
+          title: Limit
+        description: Maximum number of jobs to return.
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Opaque cursor returned by a previous page.
+          examples:
+          - 2026-03-14T06:43:42+00:00|job_20260314_ae0783b4
+          title: Cursor
+        description: Opaque cursor returned by a previous page.
+      responses:
+        '200':
+          description: Graph-specific jobs ordered descending by recency.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobListResponse'
+              example:
+                items:
+                - job_id: job_20260313_5bdaac21
+                  graph_id: '1506805'
+                  snapshot_date: '2026-03-13'
+                  status: completed
+                  stage: validate
+                  started_at: '2026-03-13T17:40:22Z'
+                  finished_at: '2026-03-13T17:50:02Z'
+                  heartbeat_at: '2026-03-13T17:49:55Z'
+                  documents_seen: 58730
+                  documents_transformed: 58730
+                  triple_rows_written: 49499
+                  issues_written: 11534
+                  retry_count: 0
+                  account_dataset_id: 677fe88046061868443428fa
+                  website_url: https://www.busesforsale.com
+                  stage_timings_json:
+                    calculate: 55.11
+                    validate: 67.66
+                page: {}
+        '403':
+          description: The caller is not authorized to operate on the requested graph.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: The requested resource was not found.
           content:
             application/problem+json:
               schema:
@@ -474,6 +570,20 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    JobListResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/JobResponse'
+          type: array
+          title: Items
+        page:
+          $ref: '#/components/schemas/CursorPage'
+      type: object
+      required:
+      - items
+      - page
+      title: JobListResponse
     JobResponse:
       properties:
         job_id:
@@ -503,7 +613,7 @@ components:
         stage:
           type: string
           title: Stage
-          description: Current or last completed job stage.
+          description: Current or last completed job stage. Cloned snapshots use `clone`.
           examples:
           - validate
         started_at:
@@ -637,6 +747,61 @@ components:
           description: Timestamp when the graph-wide KPI calculation finished.
           examples:
           - '2026-03-13T17:42:11Z'
+        dataset_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dataset Id
+          description: Dataset identity used to compute this snapshot. Clone reuse
+            is allowed only when the current dataset identity matches this value.
+          examples:
+          - 677fe88046061868443428fa
+        snapshot_origin:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Snapshot Origin
+          description: 'How this snapshot was produced: `calculated` for a full worker
+            run or `cloned` when the previous validated snapshot was reused because
+            the graph source watermark and worker policy inputs had not changed.'
+          examples:
+          - calculated
+        cloned_from_snapshot_date:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cloned From Snapshot Date
+          description: When `snapshot_origin=cloned`, the source snapshot day copied
+            into this row.
+          examples:
+          - '2026-03-12'
+        source_watermark:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Watermark
+          description: Latest source-graph `_modified_` watermark observed for the
+            dataset when this snapshot was produced.
+          examples:
+          - '2026-03-13T17:35:19+00:00'
+        kpi_worker_version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Kpi Worker Version
+          description: Worker package version used for clone eligibility and snapshot
+            provenance.
+          examples:
+          - 0.2.1
+        validation_rules_fingerprint:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Validation Rules Fingerprint
+          description: Stable fingerprint of the validation selector and options that
+            affect SHACL/rich-snippet outcomes.
+          examples:
+          - d80c5dfb1c704f738f7662ee2a650c4a21ddbbf95d5af4f4fefb162eb4d53f04
         validated_at:
           anyOf:
           - type: string
