@@ -53,7 +53,7 @@ info:
     \ schema-compliance errors found in public URL-generated subgraphs.\n- `schema_compliance_warnings`:\
     \ schema-compliance warnings found in public URL-generated subgraphs.\n- `schema_compliance_urls_checked`:\
     \ number of public URLs validated for schema compliance."
-  version: 0.1.6
+  version: 0.2.0
 paths:
   /kpi/graphs/{graph_id}/snapshots:
     get:
@@ -308,18 +308,6 @@ paths:
           - '1506805'
           title: Graph Id
         description: Public WordLift graph identifier (`account.id`).
-      - name: X-Ng-Dataset-Id
-        in: header
-        required: false
-        schema:
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Optional internal dataset identifier override used only after
-            authorization succeeds.
-          title: X-Ng-Dataset-Id
-        description: Optional internal dataset identifier override used only after
-          authorization succeeds.
       requestBody:
         required: true
         content:
