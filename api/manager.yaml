@@ -1957,6 +1957,14 @@ paths:
           description: Success
         "401":
           description: Authentication Failure
+        "422":
+          content:
+            application/x-ndjson:
+              schema:
+                type: array
+                items:
+                  type: string
+          description: Validation error
       security:
       - ApiKey: []
       summary: Create
@@ -4097,17 +4105,26 @@ components:
           description: Whether to overwrite existing entities.
         sitemap_url:
           type: string
-          description: The sitemap URL
+          description: URL of a sitemap to crawl and import. Only http/https scheme
+            and publicly routable addresses are accepted.
+          example: https://example.com/sitemap.xml
         sitemap_url_regex:
           type: string
           description: "A regex filter to apply to discovered URLs, it only applies\
             \ to URLs in sitemaps."
         urls:
           type: array
-          description: The URLs
+          description: Explicit list of page URLs to import. Only http/https scheme
+            and publicly routable addresses are accepted.
+          example:
+          - https://example.com/page1
+          - https://example.com/page2
           items:
             type: string
-            description: The URLs
+            description: Explicit list of page URLs to import. Only http/https scheme
+              and publicly routable addresses are accepted.
+            example: "[\"https://example.com/page1\",\"https://example.com/page2\"\
+              ]"
           uniqueItems: true
     TokenResponse:
       type: object
