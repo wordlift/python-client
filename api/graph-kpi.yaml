@@ -52,8 +52,10 @@ info:
     \ public rich-snippet items that failed validation.\n- `schema_compliance_errors`:\
     \ schema-compliance errors found in public URL-generated subgraphs.\n- `schema_compliance_warnings`:\
     \ schema-compliance warnings found in public URL-generated subgraphs.\n- `schema_compliance_urls_checked`:\
-    \ number of public URLs validated for schema compliance."
-  version: 0.2.5
+    \ number of public URLs validated for schema compliance.\n- `graph_health_score`:\
+    \ composite `0..100` graph health score derived from validation, structure, public\
+    \ footprint, and freshness."
+  version: 0.2.17
 paths:
   /kpi/graphs/{graph_id}/snapshots:
     get:
@@ -211,7 +213,7 @@ paths:
                 dataset_id: 677fe88046061868443428fa
                 snapshot_origin: calculated
                 source_watermark: '2026-03-13T17:35:19+00:00'
-                kpi_worker_version: 0.2.5
+                kpi_worker_version: 0.2.17
                 validation_rules_fingerprint: d80c5dfb1c704f738f7662ee2a650c4a21ddbbf95d5af4f4fefb162eb4d53f04
                 validated_at: '2026-03-13T17:50:02Z'
                 all_total_entities: 58730
@@ -268,6 +270,11 @@ paths:
                 schema_compliance_errors: 42
                 schema_compliance_warnings: 11441
                 schema_compliance_urls_checked: 217
+                graph_health_score: 76
+                graph_health_validation_health: 67
+                graph_health_structural_integrity: 71
+                graph_health_public_footprint_quality: 97
+                graph_health_freshness_momentum: 90
         '400':
           description: The request was syntactically valid but semantically invalid.
           content:
@@ -1157,6 +1164,37 @@ components:
           - type: 'null'
           title: Schema Compliance Urls Checked
           description: Number of public URLs validated for schema compliance.
+        graph_health_score:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Graph Health Score
+          description: Composite graph health score from `0` to `100` based on validation,
+            structure, public footprint, and freshness.
+        graph_health_validation_health:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Graph Health Validation Health
+          description: Validation-health subscore used in `graph_health_score`.
+        graph_health_structural_integrity:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Graph Health Structural Integrity
+          description: Structural-integrity subscore used in `graph_health_score`.
+        graph_health_public_footprint_quality:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Graph Health Public Footprint Quality
+          description: Public-footprint-quality subscore used in `graph_health_score`.
+        graph_health_freshness_momentum:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Graph Health Freshness Momentum
+          description: Freshness-and-momentum subscore used in `graph_health_score`.
       additionalProperties: true
       type: object
       required:
