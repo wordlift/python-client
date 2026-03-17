@@ -73,9 +73,8 @@ paths:
         schema:
           type: string
           description: Public WordLift graph identifier (`account.id`).
-          examples:
-          - '1506805'
           title: Graph Id
+          example: '1506805'
         description: Public WordLift graph identifier (`account.id`).
       - name: date_from
         in: query
@@ -85,9 +84,8 @@ paths:
           - type: string
           - type: 'null'
           description: Inclusive lower snapshot date bound in `YYYY-MM-DD` format.
-          examples:
-          - '2026-03-01'
           title: Date From
+          example: '2026-03-01'
         description: Inclusive lower snapshot date bound in `YYYY-MM-DD` format.
       - name: date_to
         in: query
@@ -97,9 +95,8 @@ paths:
           - type: string
           - type: 'null'
           description: Inclusive upper snapshot date bound in `YYYY-MM-DD` format.
-          examples:
-          - '2026-03-13'
           title: Date To
+          example: '2026-03-13'
         description: Inclusive upper snapshot date bound in `YYYY-MM-DD` format.
       - name: limit
         in: query
@@ -110,9 +107,8 @@ paths:
             minimum: 1
           - type: 'null'
           description: Maximum number of snapshot rows to return.
-          examples:
-          - 30
           title: Limit
+          example: 30
         description: Maximum number of snapshot rows to return.
       - name: metrics
         in: query
@@ -122,9 +118,8 @@ paths:
           - type: string
           - type: 'null'
           description: Comma-separated KPI field projection for compact chart responses.
-          examples:
-          - all_total_entities,all_total_triples,all_edges_count
           title: Metrics
+          example: all_total_entities,all_total_triples,all_edges_count
         description: Comma-separated KPI field projection for compact chart responses.
       responses:
         '200':
@@ -185,9 +180,8 @@ paths:
         schema:
           type: string
           description: Public WordLift graph identifier (`account.id`).
-          examples:
-          - '1506805'
           title: Graph Id
+          example: '1506805'
         description: Public WordLift graph identifier (`account.id`).
       - name: date
         in: path
@@ -195,9 +189,8 @@ paths:
         schema:
           type: string
           description: Logical KPI day in `YYYY-MM-DD` format.
-          examples:
-          - '2026-03-13'
           title: Date
+          example: '2026-03-13'
         description: Logical KPI day in `YYYY-MM-DD` format.
       responses:
         '200':
@@ -318,9 +311,8 @@ paths:
         schema:
           type: string
           description: Public WordLift graph identifier (`account.id`).
-          examples:
-          - '1506805'
           title: Graph Id
+          example: '1506805'
         description: Public WordLift graph identifier (`account.id`).
       requestBody:
         required: true
@@ -330,8 +322,8 @@ paths:
               $ref: '#/components/schemas/SubmitJobBody'
               description: Job submission payload. `limit_documents` and `limit_urls`
                 are intended for bounded smoke runs and operational debugging.
-              examples:
-              - snapshot_date: '2026-03-13'
+              example:
+                snapshot_date: '2026-03-13'
                 stage_retries: 1
                 force_rerun: false
                 skip_validation: false
@@ -405,9 +397,8 @@ paths:
         schema:
           type: string
           description: Public WordLift graph identifier (`account.id`).
-          examples:
-          - '1506805'
           title: Graph Id
+          example: '1506805'
         description: Public WordLift graph identifier (`account.id`).
       - name: limit
         in: query
@@ -418,9 +409,8 @@ paths:
             minimum: 1
           - type: 'null'
           description: Maximum number of jobs to return.
-          examples:
-          - 20
           title: Limit
+          example: 20
         description: Maximum number of jobs to return.
       - name: cursor
         in: query
@@ -430,9 +420,8 @@ paths:
           - type: string
           - type: 'null'
           description: Opaque cursor returned by a previous page.
-          examples:
-          - 2026-03-14T06:43:42+00:00|job_20260314_ae0783b4
           title: Cursor
+          example: 2026-03-14T06:43:42+00:00|job_20260314_ae0783b4
         description: Opaque cursor returned by a previous page.
       responses:
         '200':
@@ -495,9 +484,8 @@ paths:
         schema:
           type: string
           description: Public WordLift graph identifier (`account.id`).
-          examples:
-          - '1506805'
           title: Graph Id
+          example: '1506805'
         description: Public WordLift graph identifier (`account.id`).
       - name: job_id
         in: path
@@ -505,9 +493,8 @@ paths:
         schema:
           type: string
           description: Unique job identifier.
-          examples:
-          - job_20260313_5bdaac21
           title: Job Id
+          example: job_20260313_5bdaac21
         description: Unique job identifier.
       responses:
         '200':
@@ -564,8 +551,6 @@ components:
           title: Next Cursor
           description: Opaque cursor for the next page. `null` means there is no next
             page.
-          examples:
-          - null
       type: object
       title: CursorPage
     HTTPValidationError:
@@ -597,56 +582,48 @@ components:
           type: string
           title: Job Id
           description: Unique job identifier.
-          examples:
-          - job_20260313_5bdaac21
+          example: job_20260313_5bdaac21
         graph_id:
           type: string
           title: Graph Id
           description: Public WordLift graph identifier.
-          examples:
-          - '1506805'
+          example: '1506805'
         snapshot_date:
           type: string
           title: Snapshot Date
           description: Logical KPI day targeted by the job.
-          examples:
-          - '2026-03-13'
+          example: '2026-03-13'
         status:
           type: string
           title: Status
           description: Current job status.
-          examples:
-          - completed
+          example: completed
         stage:
           type: string
           title: Stage
           description: Current or last completed job stage. Cloned snapshots use `clone`.
-          examples:
-          - validate
+          example: validate
         started_at:
           anyOf:
           - type: string
           - type: 'null'
           title: Started At
           description: Timestamp when the job started.
-          examples:
-          - '2026-03-13T17:40:22Z'
+          example: '2026-03-13T17:40:22Z'
         finished_at:
           anyOf:
           - type: string
           - type: 'null'
           title: Finished At
           description: Timestamp when the job finished, if complete.
-          examples:
-          - '2026-03-13T17:50:02Z'
+          example: '2026-03-13T17:50:02Z'
         heartbeat_at:
           anyOf:
           - type: string
           - type: 'null'
           title: Heartbeat At
           description: Last heartbeat timestamp emitted by the worker.
-          examples:
-          - '2026-03-13T17:49:55Z'
+          example: '2026-03-13T17:49:55Z'
         documents_seen:
           anyOf:
           - type: integer
@@ -746,22 +723,19 @@ components:
           type: string
           title: Graph Id
           description: Public WordLift graph identifier.
-          examples:
-          - '1506805'
+          example: '1506805'
         snapshot_date:
           type: string
           title: Snapshot Date
           description: Logical KPI day for this snapshot in `YYYY-MM-DD` format.
-          examples:
-          - '2026-03-13'
+          example: '2026-03-13'
         calculated_at:
           anyOf:
           - type: string
           - type: 'null'
           title: Calculated At
           description: Timestamp when the graph-wide KPI calculation finished.
-          examples:
-          - '2026-03-13T17:42:11Z'
+          example: '2026-03-13T17:42:11Z'
         dataset_id:
           anyOf:
           - type: string
@@ -769,8 +743,7 @@ components:
           title: Dataset Id
           description: Dataset identity used to compute this snapshot. Clone reuse
             is allowed only when the current dataset identity matches this value.
-          examples:
-          - 677fe88046061868443428fa
+          example: 677fe88046061868443428fa
         snapshot_origin:
           anyOf:
           - type: string
@@ -779,8 +752,7 @@ components:
           description: 'How this snapshot was produced: `calculated` for a full worker
             run or `cloned` when the previous validated snapshot was reused because
             the graph source watermark and worker policy inputs had not changed.'
-          examples:
-          - calculated
+          example: calculated
         cloned_from_snapshot_date:
           anyOf:
           - type: string
@@ -788,8 +760,7 @@ components:
           title: Cloned From Snapshot Date
           description: When `snapshot_origin=cloned`, the source snapshot day copied
             into this row.
-          examples:
-          - '2026-03-12'
+          example: '2026-03-12'
         source_watermark:
           anyOf:
           - type: string
@@ -797,8 +768,7 @@ components:
           title: Source Watermark
           description: Latest source-graph `_modified_` watermark observed for the
             dataset when this snapshot was produced.
-          examples:
-          - '2026-03-13T17:35:19+00:00'
+          example: '2026-03-13T17:35:19+00:00'
         kpi_worker_version:
           anyOf:
           - type: string
@@ -806,8 +776,7 @@ components:
           title: Kpi Worker Version
           description: Worker package version used for clone eligibility and snapshot
             provenance.
-          examples:
-          - 0.2.1
+          example: 0.2.1
         validation_rules_fingerprint:
           anyOf:
           - type: string
@@ -815,16 +784,14 @@ components:
           title: Validation Rules Fingerprint
           description: Stable fingerprint of the validation selector and options that
             affect SHACL/rich-snippet outcomes.
-          examples:
-          - d80c5dfb1c704f738f7662ee2a650c4a21ddbbf95d5af4f4fefb162eb4d53f04
+          example: d80c5dfb1c704f738f7662ee2a650c4a21ddbbf95d5af4f4fefb162eb4d53f04
         validated_at:
           anyOf:
           - type: string
           - type: 'null'
           title: Validated At
           description: Timestamp when SHACL/rich-snippet validation finished.
-          examples:
-          - '2026-03-13T17:50:02Z'
+          example: '2026-03-13T17:50:02Z'
         all_total_entities:
           anyOf:
           - type: integer
@@ -1215,8 +1182,7 @@ components:
           type: string
           title: Snapshot Date
           description: Logical KPI day to calculate in `YYYY-MM-DD` format.
-          examples:
-          - '2026-03-13'
+          example: '2026-03-13'
         force_rerun:
           type: boolean
           title: Force Rerun
