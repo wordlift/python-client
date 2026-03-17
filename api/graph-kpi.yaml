@@ -709,6 +709,14 @@ components:
           - type: 'null'
           title: Stage Timings Json
           description: Per-stage elapsed time in seconds.
+        runtime_profile_json:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Runtime Profile Json
+          description: Structured calculate-stage runtime profile including fetch/analyze/flush
+            timings and Mongo batch latency stats.
       additionalProperties: true
       type: object
       required:
