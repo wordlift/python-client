@@ -17,8 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictStr
-from typing import Any, Dict, Optional
+from pydantic import Field, StrictStr
+from typing import Optional
+from typing_extensions import Annotated
+from wordlift_client.models.job_list_response import JobListResponse
+from wordlift_client.models.job_response import JobResponse
 from wordlift_client.models.submit_job_body import SubmitJobBody
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
@@ -40,11 +43,10 @@ class JobsApi:
 
 
     @validate_call
-    async def create_job_kpis_graphs_graph_id_jobs_post(
+    async def create_job_kpi_graphs_graph_id_jobs_post(
         self,
-        graph_id: StrictStr,
+        graph_id: Annotated[StrictStr, Field(description="Public WordLift graph identifier (`account.id`).")],
         submit_job_body: SubmitJobBody,
-        x_ng_dataset_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -57,16 +59,15 @@ class JobsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Dict[str, object]:
-        """Create Job
+    ) -> JobResponse:
+        """Submit a KPI job
 
+        Creates or reuses a KPI calculation job for the requested graph and snapshot day. When the latest source watermark, worker major.minor version, and validation-policy fingerprint match the newest validated snapshot, the service completes the request immediately by cloning that snapshot instead of running the worker. Set `force_rerun=true` to bypass reuse and require a fresh worker run.
 
-        :param graph_id: (required)
+        :param graph_id: Public WordLift graph identifier (`account.id`). (required)
         :type graph_id: str
         :param submit_job_body: (required)
         :type submit_job_body: SubmitJobBody
-        :param x_ng_dataset_id:
-        :type x_ng_dataset_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -89,10 +90,9 @@ class JobsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_job_kpis_graphs_graph_id_jobs_post_serialize(
+        _param = self._create_job_kpi_graphs_graph_id_jobs_post_serialize(
             graph_id=graph_id,
             submit_job_body=submit_job_body,
-            x_ng_dataset_id=x_ng_dataset_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -100,7 +100,11 @@ class JobsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "Dict[str, object]",
+            '202': "JobResponse",
+            '400': "Problem",
+            '403': "Problem",
+            '404': "Problem",
+            '409': "Problem",
             '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
@@ -115,11 +119,10 @@ class JobsApi:
 
 
     @validate_call
-    async def create_job_kpis_graphs_graph_id_jobs_post_with_http_info(
+    async def create_job_kpi_graphs_graph_id_jobs_post_with_http_info(
         self,
-        graph_id: StrictStr,
+        graph_id: Annotated[StrictStr, Field(description="Public WordLift graph identifier (`account.id`).")],
         submit_job_body: SubmitJobBody,
-        x_ng_dataset_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -132,16 +135,15 @@ class JobsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Dict[str, object]]:
-        """Create Job
+    ) -> ApiResponse[JobResponse]:
+        """Submit a KPI job
 
+        Creates or reuses a KPI calculation job for the requested graph and snapshot day. When the latest source watermark, worker major.minor version, and validation-policy fingerprint match the newest validated snapshot, the service completes the request immediately by cloning that snapshot instead of running the worker. Set `force_rerun=true` to bypass reuse and require a fresh worker run.
 
-        :param graph_id: (required)
+        :param graph_id: Public WordLift graph identifier (`account.id`). (required)
         :type graph_id: str
         :param submit_job_body: (required)
         :type submit_job_body: SubmitJobBody
-        :param x_ng_dataset_id:
-        :type x_ng_dataset_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -164,10 +166,9 @@ class JobsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_job_kpis_graphs_graph_id_jobs_post_serialize(
+        _param = self._create_job_kpi_graphs_graph_id_jobs_post_serialize(
             graph_id=graph_id,
             submit_job_body=submit_job_body,
-            x_ng_dataset_id=x_ng_dataset_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -175,7 +176,11 @@ class JobsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "Dict[str, object]",
+            '202': "JobResponse",
+            '400': "Problem",
+            '403': "Problem",
+            '404': "Problem",
+            '409': "Problem",
             '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
@@ -190,11 +195,10 @@ class JobsApi:
 
 
     @validate_call
-    async def create_job_kpis_graphs_graph_id_jobs_post_without_preload_content(
+    async def create_job_kpi_graphs_graph_id_jobs_post_without_preload_content(
         self,
-        graph_id: StrictStr,
+        graph_id: Annotated[StrictStr, Field(description="Public WordLift graph identifier (`account.id`).")],
         submit_job_body: SubmitJobBody,
-        x_ng_dataset_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -208,15 +212,14 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create Job
+        """Submit a KPI job
 
+        Creates or reuses a KPI calculation job for the requested graph and snapshot day. When the latest source watermark, worker major.minor version, and validation-policy fingerprint match the newest validated snapshot, the service completes the request immediately by cloning that snapshot instead of running the worker. Set `force_rerun=true` to bypass reuse and require a fresh worker run.
 
-        :param graph_id: (required)
+        :param graph_id: Public WordLift graph identifier (`account.id`). (required)
         :type graph_id: str
         :param submit_job_body: (required)
         :type submit_job_body: SubmitJobBody
-        :param x_ng_dataset_id:
-        :type x_ng_dataset_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -239,10 +242,9 @@ class JobsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_job_kpis_graphs_graph_id_jobs_post_serialize(
+        _param = self._create_job_kpi_graphs_graph_id_jobs_post_serialize(
             graph_id=graph_id,
             submit_job_body=submit_job_body,
-            x_ng_dataset_id=x_ng_dataset_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -250,7 +252,11 @@ class JobsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "Dict[str, object]",
+            '202': "JobResponse",
+            '400': "Problem",
+            '403': "Problem",
+            '404': "Problem",
+            '409': "Problem",
             '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
@@ -260,11 +266,10 @@ class JobsApi:
         return response_data.response
 
 
-    def _create_job_kpis_graphs_graph_id_jobs_post_serialize(
+    def _create_job_kpi_graphs_graph_id_jobs_post_serialize(
         self,
         graph_id,
         submit_job_body,
-        x_ng_dataset_id,
         _request_auth,
         _content_type,
         _headers,
@@ -288,8 +293,6 @@ class JobsApi:
             _path_params['graph_id'] = graph_id
         # process the query parameters
         # process the header parameters
-        if x_ng_dataset_id is not None:
-            _header_params['X-Ng-Dataset-Id'] = x_ng_dataset_id
         # process the form parameters
         # process the body parameter
         if submit_job_body is not None:
@@ -299,7 +302,8 @@ class JobsApi:
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(
             [
-                'application/json'
+                'application/json', 
+                'application/problem+json'
             ]
         )
 
@@ -324,7 +328,7 @@ class JobsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/kpis/graphs/{graph_id}/jobs',
+            resource_path='/kpi/graphs/{graph_id}/jobs',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -341,10 +345,10 @@ class JobsApi:
 
 
     @validate_call
-    async def get_job_kpis_graphs_graph_id_jobs_job_id_get(
+    async def get_job_kpi_graphs_graph_id_jobs_job_id_get(
         self,
-        graph_id: StrictStr,
-        job_id: StrictStr,
+        graph_id: Annotated[StrictStr, Field(description="Public WordLift graph identifier (`account.id`).")],
+        job_id: Annotated[StrictStr, Field(description="Unique job identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -357,13 +361,14 @@ class JobsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Dict[str, object]:
-        """Get Job
+    ) -> JobResponse:
+        """Get job status
 
+        Returns the current persisted job state, including operational timestamps, stage, heartbeat, counters, and stage timings.
 
-        :param graph_id: (required)
+        :param graph_id: Public WordLift graph identifier (`account.id`). (required)
         :type graph_id: str
-        :param job_id: (required)
+        :param job_id: Unique job identifier. (required)
         :type job_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -387,7 +392,7 @@ class JobsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_job_kpis_graphs_graph_id_jobs_job_id_get_serialize(
+        _param = self._get_job_kpi_graphs_graph_id_jobs_job_id_get_serialize(
             graph_id=graph_id,
             job_id=job_id,
             _request_auth=_request_auth,
@@ -397,7 +402,9 @@ class JobsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, object]",
+            '200': "JobResponse",
+            '403': "Problem",
+            '404': "Problem",
             '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
@@ -412,10 +419,10 @@ class JobsApi:
 
 
     @validate_call
-    async def get_job_kpis_graphs_graph_id_jobs_job_id_get_with_http_info(
+    async def get_job_kpi_graphs_graph_id_jobs_job_id_get_with_http_info(
         self,
-        graph_id: StrictStr,
-        job_id: StrictStr,
+        graph_id: Annotated[StrictStr, Field(description="Public WordLift graph identifier (`account.id`).")],
+        job_id: Annotated[StrictStr, Field(description="Unique job identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -428,13 +435,14 @@ class JobsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Dict[str, object]]:
-        """Get Job
+    ) -> ApiResponse[JobResponse]:
+        """Get job status
 
+        Returns the current persisted job state, including operational timestamps, stage, heartbeat, counters, and stage timings.
 
-        :param graph_id: (required)
+        :param graph_id: Public WordLift graph identifier (`account.id`). (required)
         :type graph_id: str
-        :param job_id: (required)
+        :param job_id: Unique job identifier. (required)
         :type job_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -458,7 +466,7 @@ class JobsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_job_kpis_graphs_graph_id_jobs_job_id_get_serialize(
+        _param = self._get_job_kpi_graphs_graph_id_jobs_job_id_get_serialize(
             graph_id=graph_id,
             job_id=job_id,
             _request_auth=_request_auth,
@@ -468,7 +476,9 @@ class JobsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, object]",
+            '200': "JobResponse",
+            '403': "Problem",
+            '404': "Problem",
             '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
@@ -483,10 +493,10 @@ class JobsApi:
 
 
     @validate_call
-    async def get_job_kpis_graphs_graph_id_jobs_job_id_get_without_preload_content(
+    async def get_job_kpi_graphs_graph_id_jobs_job_id_get_without_preload_content(
         self,
-        graph_id: StrictStr,
-        job_id: StrictStr,
+        graph_id: Annotated[StrictStr, Field(description="Public WordLift graph identifier (`account.id`).")],
+        job_id: Annotated[StrictStr, Field(description="Unique job identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -500,12 +510,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get Job
+        """Get job status
 
+        Returns the current persisted job state, including operational timestamps, stage, heartbeat, counters, and stage timings.
 
-        :param graph_id: (required)
+        :param graph_id: Public WordLift graph identifier (`account.id`). (required)
         :type graph_id: str
-        :param job_id: (required)
+        :param job_id: Unique job identifier. (required)
         :type job_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -529,7 +540,7 @@ class JobsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_job_kpis_graphs_graph_id_jobs_job_id_get_serialize(
+        _param = self._get_job_kpi_graphs_graph_id_jobs_job_id_get_serialize(
             graph_id=graph_id,
             job_id=job_id,
             _request_auth=_request_auth,
@@ -539,7 +550,9 @@ class JobsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, object]",
+            '200': "JobResponse",
+            '403': "Problem",
+            '404': "Problem",
             '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
@@ -549,7 +562,7 @@ class JobsApi:
         return response_data.response
 
 
-    def _get_job_kpis_graphs_graph_id_jobs_job_id_get_serialize(
+    def _get_job_kpi_graphs_graph_id_jobs_job_id_get_serialize(
         self,
         graph_id,
         job_id,
@@ -585,7 +598,8 @@ class JobsApi:
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(
             [
-                'application/json'
+                'application/json', 
+                'application/problem+json'
             ]
         )
 
@@ -597,7 +611,309 @@ class JobsApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/kpis/graphs/{graph_id}/jobs/{job_id}',
+            resource_path='/kpi/graphs/{graph_id}/jobs/{job_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def list_jobs_for_graph_kpi_graphs_graph_id_jobs_get(
+        self,
+        graph_id: Annotated[StrictStr, Field(description="Public WordLift graph identifier (`account.id`).")],
+        limit: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Maximum number of jobs to return.")] = None,
+        cursor: Annotated[Optional[StrictStr], Field(description="Opaque cursor returned by a previous page.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> JobListResponse:
+        """List jobs for a graph
+
+        Returns persisted jobs for one graph ordered by most recently updated first. Use the opaque `cursor` token from a previous page to continue pagination.
+
+        :param graph_id: Public WordLift graph identifier (`account.id`). (required)
+        :type graph_id: str
+        :param limit: Maximum number of jobs to return.
+        :type limit: int
+        :param cursor: Opaque cursor returned by a previous page.
+        :type cursor: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_jobs_for_graph_kpi_graphs_graph_id_jobs_get_serialize(
+            graph_id=graph_id,
+            limit=limit,
+            cursor=cursor,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "JobListResponse",
+            '403': "Problem",
+            '404': "Problem",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def list_jobs_for_graph_kpi_graphs_graph_id_jobs_get_with_http_info(
+        self,
+        graph_id: Annotated[StrictStr, Field(description="Public WordLift graph identifier (`account.id`).")],
+        limit: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Maximum number of jobs to return.")] = None,
+        cursor: Annotated[Optional[StrictStr], Field(description="Opaque cursor returned by a previous page.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[JobListResponse]:
+        """List jobs for a graph
+
+        Returns persisted jobs for one graph ordered by most recently updated first. Use the opaque `cursor` token from a previous page to continue pagination.
+
+        :param graph_id: Public WordLift graph identifier (`account.id`). (required)
+        :type graph_id: str
+        :param limit: Maximum number of jobs to return.
+        :type limit: int
+        :param cursor: Opaque cursor returned by a previous page.
+        :type cursor: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_jobs_for_graph_kpi_graphs_graph_id_jobs_get_serialize(
+            graph_id=graph_id,
+            limit=limit,
+            cursor=cursor,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "JobListResponse",
+            '403': "Problem",
+            '404': "Problem",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def list_jobs_for_graph_kpi_graphs_graph_id_jobs_get_without_preload_content(
+        self,
+        graph_id: Annotated[StrictStr, Field(description="Public WordLift graph identifier (`account.id`).")],
+        limit: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Maximum number of jobs to return.")] = None,
+        cursor: Annotated[Optional[StrictStr], Field(description="Opaque cursor returned by a previous page.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """List jobs for a graph
+
+        Returns persisted jobs for one graph ordered by most recently updated first. Use the opaque `cursor` token from a previous page to continue pagination.
+
+        :param graph_id: Public WordLift graph identifier (`account.id`). (required)
+        :type graph_id: str
+        :param limit: Maximum number of jobs to return.
+        :type limit: int
+        :param cursor: Opaque cursor returned by a previous page.
+        :type cursor: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_jobs_for_graph_kpi_graphs_graph_id_jobs_get_serialize(
+            graph_id=graph_id,
+            limit=limit,
+            cursor=cursor,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "JobListResponse",
+            '403': "Problem",
+            '404': "Problem",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_jobs_for_graph_kpi_graphs_graph_id_jobs_get_serialize(
+        self,
+        graph_id,
+        limit,
+        cursor,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if graph_id is not None:
+            _path_params['graph_id'] = graph_id
+        # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if cursor is not None:
+            
+            _query_params.append(('cursor', cursor))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json', 
+                'application/problem+json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/kpi/graphs/{graph_id}/jobs',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

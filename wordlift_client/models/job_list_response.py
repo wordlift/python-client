@@ -18,20 +18,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List
+from wordlift_client.models.cursor_page import CursorPage
+from wordlift_client.models.job_response import JobResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
-class Problem(BaseModel):
+class JobListResponse(BaseModel):
     """
-    Problem
+    JobListResponse
     """ # noqa: E501
-    type: StrictStr = Field(description="Problem type URI.")
-    title: StrictStr = Field(description="Short, human-readable summary of the problem.")
-    status: StrictInt = Field(description="HTTP status code for this problem response.")
-    detail: StrictStr = Field(description="Human-readable explanation specific to this occurrence of the problem.")
-    __properties: ClassVar[List[str]] = ["type", "title", "status", "detail"]
+    items: List[JobResponse]
+    page: CursorPage
+    __properties: ClassVar[List[str]] = ["items", "page"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -51,7 +51,7 @@ class Problem(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Problem from a JSON string"""
+        """Create an instance of JobListResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,11 +72,21 @@ class Problem(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in items (list)
+        _items = []
+        if self.items:
+            for _item in self.items:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['items'] = _items
+        # override the default output from pydantic by calling `to_dict()` of page
+        if self.page:
+            _dict['page'] = self.page.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Problem from a dict"""
+        """Create an instance of JobListResponse from a dict"""
         if obj is None:
             return None
 
@@ -84,10 +94,8 @@ class Problem(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "title": obj.get("title"),
-            "status": obj.get("status"),
-            "detail": obj.get("detail")
+            "items": [JobResponse.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
+            "page": CursorPage.from_dict(obj["page"]) if obj.get("page") is not None else None
         })
         return _obj
 

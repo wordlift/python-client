@@ -18,8 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,13 +28,13 @@ class SubmitJobBody(BaseModel):
     """
     SubmitJobBody
     """ # noqa: E501
-    snapshot_date: StrictStr
-    force_rerun: Optional[StrictBool] = False
-    stage_retries: Optional[StrictInt] = 1
-    limit_documents: Optional[StrictInt] = None
-    limit_urls: Optional[StrictInt] = None
-    skip_validation: Optional[StrictBool] = False
-    replace_validation: Optional[StrictBool] = False
+    snapshot_date: StrictStr = Field(description="Logical KPI day to calculate in `YYYY-MM-DD` format.")
+    force_rerun: Optional[StrictBool] = Field(default=False, description="If `true`, ignore the 24-hour freshness rule and replace a currently active job.")
+    stage_retries: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=1, description="Number of retries allowed for each stage before the job fails.")
+    limit_documents: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    limit_urls: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    skip_validation: Optional[StrictBool] = Field(default=False, description="If `true`, skip the SHACL/rich-snippet validation stage.")
+    replace_validation: Optional[StrictBool] = Field(default=False, description="If `true`, replace previously persisted validation output for the same graph/day.")
     __properties: ClassVar[List[str]] = ["snapshot_date", "force_rerun", "stage_retries", "limit_documents", "limit_urls", "skip_validation", "replace_validation"]
 
     model_config = ConfigDict(

@@ -84,6 +84,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success |  -  |
 **401** | Authentication Failure |  -  |
+**422** | Validation error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

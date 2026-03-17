@@ -72,6 +72,7 @@ from wordlift_client.models.content_generation_stats import ContentGenerationSta
 from wordlift_client.models.content_structure import ContentStructure
 from wordlift_client.models.create_embeddings_input import CreateEmbeddingsInput
 from wordlift_client.models.create_url_inspection_request import CreateUrlInspectionRequest
+from wordlift_client.models.cursor_page import CursorPage
 from wordlift_client.models.detected_schema import DetectedSchema
 from wordlift_client.models.diagnostic_plugin import DiagnosticPlugin
 from wordlift_client.models.diagnostic_plugin_request import DiagnosticPluginRequest
@@ -108,6 +109,8 @@ from wordlift_client.models.internal_link_request import InternalLinkRequest
 from wordlift_client.models.internal_link_source import InternalLinkSource
 from wordlift_client.models.internal_linking import InternalLinking
 from wordlift_client.models.item import Item
+from wordlift_client.models.job_list_response import JobListResponse
+from wordlift_client.models.job_response import JobResponse
 from wordlift_client.models.js_rendering import JsRendering
 from wordlift_client.models.kg_embedding_request import KgEmbeddingRequest
 from wordlift_client.models.kg_embedding_response import KgEmbeddingResponse
@@ -187,6 +190,8 @@ from wordlift_client.models.site_files import SiteFiles
 from wordlift_client.models.sitemap_import_request import SitemapImportRequest
 from wordlift_client.models.smart_content import SmartContent
 from wordlift_client.models.smart_content_request import SmartContentRequest
+from wordlift_client.models.snapshot_list_response import SnapshotListResponse
+from wordlift_client.models.snapshot_response import SnapshotResponse
 from wordlift_client.models.structured_data import StructuredData
 from wordlift_client.models.submit_fact_check200_response import SubmitFactCheck200Response
 from wordlift_client.models.submit_fact_check_request import SubmitFactCheckRequest

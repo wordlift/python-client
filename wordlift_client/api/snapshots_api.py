@@ -17,8 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictInt, StrictStr
-from typing import Any, Dict, Optional
+from pydantic import Field, StrictStr
+from typing import Optional
+from typing_extensions import Annotated
+from wordlift_client.models.snapshot_list_response import SnapshotListResponse
+from wordlift_client.models.snapshot_response import SnapshotResponse
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
 from wordlift_client.api_response import ApiResponse
@@ -39,10 +42,10 @@ class SnapshotsApi:
 
 
     @validate_call
-    async def get_snapshot_kpis_graphs_graph_id_snapshots_date_get(
+    async def get_snapshot_kpi_graphs_graph_id_snapshots_date_get(
         self,
-        graph_id: StrictStr,
-        var_date: StrictStr,
+        graph_id: Annotated[StrictStr, Field(description="Public WordLift graph identifier (`account.id`).")],
+        var_date: Annotated[StrictStr, Field(description="Logical KPI day in `YYYY-MM-DD` format.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -55,13 +58,14 @@ class SnapshotsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Dict[str, object]:
-        """Get Snapshot
+    ) -> SnapshotResponse:
+        """Get one daily KPI snapshot
 
+        Returns the complete daily KPI snapshot for a graph, including graph-wide `all_` / `public_` / `private_` metrics and the public-only SHACL validation outputs.
 
-        :param graph_id: (required)
+        :param graph_id: Public WordLift graph identifier (`account.id`). (required)
         :type graph_id: str
-        :param var_date: (required)
+        :param var_date: Logical KPI day in `YYYY-MM-DD` format. (required)
         :type var_date: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -85,7 +89,7 @@ class SnapshotsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_snapshot_kpis_graphs_graph_id_snapshots_date_get_serialize(
+        _param = self._get_snapshot_kpi_graphs_graph_id_snapshots_date_get_serialize(
             graph_id=graph_id,
             var_date=var_date,
             _request_auth=_request_auth,
@@ -95,7 +99,10 @@ class SnapshotsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, object]",
+            '200': "SnapshotResponse",
+            '400': "Problem",
+            '403': "Problem",
+            '404': "Problem",
             '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
@@ -110,10 +117,10 @@ class SnapshotsApi:
 
 
     @validate_call
-    async def get_snapshot_kpis_graphs_graph_id_snapshots_date_get_with_http_info(
+    async def get_snapshot_kpi_graphs_graph_id_snapshots_date_get_with_http_info(
         self,
-        graph_id: StrictStr,
-        var_date: StrictStr,
+        graph_id: Annotated[StrictStr, Field(description="Public WordLift graph identifier (`account.id`).")],
+        var_date: Annotated[StrictStr, Field(description="Logical KPI day in `YYYY-MM-DD` format.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -126,13 +133,14 @@ class SnapshotsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Dict[str, object]]:
-        """Get Snapshot
+    ) -> ApiResponse[SnapshotResponse]:
+        """Get one daily KPI snapshot
 
+        Returns the complete daily KPI snapshot for a graph, including graph-wide `all_` / `public_` / `private_` metrics and the public-only SHACL validation outputs.
 
-        :param graph_id: (required)
+        :param graph_id: Public WordLift graph identifier (`account.id`). (required)
         :type graph_id: str
-        :param var_date: (required)
+        :param var_date: Logical KPI day in `YYYY-MM-DD` format. (required)
         :type var_date: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -156,7 +164,7 @@ class SnapshotsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_snapshot_kpis_graphs_graph_id_snapshots_date_get_serialize(
+        _param = self._get_snapshot_kpi_graphs_graph_id_snapshots_date_get_serialize(
             graph_id=graph_id,
             var_date=var_date,
             _request_auth=_request_auth,
@@ -166,7 +174,10 @@ class SnapshotsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, object]",
+            '200': "SnapshotResponse",
+            '400': "Problem",
+            '403': "Problem",
+            '404': "Problem",
             '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
@@ -181,10 +192,10 @@ class SnapshotsApi:
 
 
     @validate_call
-    async def get_snapshot_kpis_graphs_graph_id_snapshots_date_get_without_preload_content(
+    async def get_snapshot_kpi_graphs_graph_id_snapshots_date_get_without_preload_content(
         self,
-        graph_id: StrictStr,
-        var_date: StrictStr,
+        graph_id: Annotated[StrictStr, Field(description="Public WordLift graph identifier (`account.id`).")],
+        var_date: Annotated[StrictStr, Field(description="Logical KPI day in `YYYY-MM-DD` format.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -198,12 +209,13 @@ class SnapshotsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get Snapshot
+        """Get one daily KPI snapshot
 
+        Returns the complete daily KPI snapshot for a graph, including graph-wide `all_` / `public_` / `private_` metrics and the public-only SHACL validation outputs.
 
-        :param graph_id: (required)
+        :param graph_id: Public WordLift graph identifier (`account.id`). (required)
         :type graph_id: str
-        :param var_date: (required)
+        :param var_date: Logical KPI day in `YYYY-MM-DD` format. (required)
         :type var_date: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -227,7 +239,7 @@ class SnapshotsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_snapshot_kpis_graphs_graph_id_snapshots_date_get_serialize(
+        _param = self._get_snapshot_kpi_graphs_graph_id_snapshots_date_get_serialize(
             graph_id=graph_id,
             var_date=var_date,
             _request_auth=_request_auth,
@@ -237,7 +249,10 @@ class SnapshotsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, object]",
+            '200': "SnapshotResponse",
+            '400': "Problem",
+            '403': "Problem",
+            '404': "Problem",
             '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
@@ -247,7 +262,7 @@ class SnapshotsApi:
         return response_data.response
 
 
-    def _get_snapshot_kpis_graphs_graph_id_snapshots_date_get_serialize(
+    def _get_snapshot_kpi_graphs_graph_id_snapshots_date_get_serialize(
         self,
         graph_id,
         var_date,
@@ -283,7 +298,8 @@ class SnapshotsApi:
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(
             [
-                'application/json'
+                'application/json', 
+                'application/problem+json'
             ]
         )
 
@@ -295,7 +311,7 @@ class SnapshotsApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/kpis/graphs/{graph_id}/snapshots/{date}',
+            resource_path='/kpi/graphs/{graph_id}/snapshots/{date}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -312,13 +328,13 @@ class SnapshotsApi:
 
 
     @validate_call
-    async def list_snapshots_kpis_graphs_graph_id_snapshots_get(
+    async def list_snapshots_kpi_graphs_graph_id_snapshots_get(
         self,
-        graph_id: StrictStr,
-        date_from: Optional[StrictStr] = None,
-        date_to: Optional[StrictStr] = None,
-        limit: Optional[StrictInt] = None,
-        metrics: Optional[StrictStr] = None,
+        graph_id: Annotated[StrictStr, Field(description="Public WordLift graph identifier (`account.id`).")],
+        date_from: Annotated[Optional[StrictStr], Field(description="Inclusive lower snapshot date bound in `YYYY-MM-DD` format.")] = None,
+        date_to: Annotated[Optional[StrictStr], Field(description="Inclusive upper snapshot date bound in `YYYY-MM-DD` format.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Maximum number of snapshot rows to return.")] = None,
+        metrics: Annotated[Optional[StrictStr], Field(description="Comma-separated KPI field projection for compact chart responses.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -331,19 +347,20 @@ class SnapshotsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Dict[str, object]:
-        """List Snapshots
+    ) -> SnapshotListResponse:
+        """List daily KPI snapshots
 
+        Returns a time-series of daily graph KPI snapshots for a single public graph identifier. Use the `metrics` query parameter to request a compact projection suitable for charts.
 
-        :param graph_id: (required)
+        :param graph_id: Public WordLift graph identifier (`account.id`). (required)
         :type graph_id: str
-        :param date_from:
+        :param date_from: Inclusive lower snapshot date bound in `YYYY-MM-DD` format.
         :type date_from: str
-        :param date_to:
+        :param date_to: Inclusive upper snapshot date bound in `YYYY-MM-DD` format.
         :type date_to: str
-        :param limit:
+        :param limit: Maximum number of snapshot rows to return.
         :type limit: int
-        :param metrics:
+        :param metrics: Comma-separated KPI field projection for compact chart responses.
         :type metrics: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -367,7 +384,7 @@ class SnapshotsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_snapshots_kpis_graphs_graph_id_snapshots_get_serialize(
+        _param = self._list_snapshots_kpi_graphs_graph_id_snapshots_get_serialize(
             graph_id=graph_id,
             date_from=date_from,
             date_to=date_to,
@@ -380,7 +397,10 @@ class SnapshotsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, object]",
+            '200': "SnapshotListResponse",
+            '400': "Problem",
+            '403': "Problem",
+            '404': "Problem",
             '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
@@ -395,13 +415,13 @@ class SnapshotsApi:
 
 
     @validate_call
-    async def list_snapshots_kpis_graphs_graph_id_snapshots_get_with_http_info(
+    async def list_snapshots_kpi_graphs_graph_id_snapshots_get_with_http_info(
         self,
-        graph_id: StrictStr,
-        date_from: Optional[StrictStr] = None,
-        date_to: Optional[StrictStr] = None,
-        limit: Optional[StrictInt] = None,
-        metrics: Optional[StrictStr] = None,
+        graph_id: Annotated[StrictStr, Field(description="Public WordLift graph identifier (`account.id`).")],
+        date_from: Annotated[Optional[StrictStr], Field(description="Inclusive lower snapshot date bound in `YYYY-MM-DD` format.")] = None,
+        date_to: Annotated[Optional[StrictStr], Field(description="Inclusive upper snapshot date bound in `YYYY-MM-DD` format.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Maximum number of snapshot rows to return.")] = None,
+        metrics: Annotated[Optional[StrictStr], Field(description="Comma-separated KPI field projection for compact chart responses.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -414,19 +434,20 @@ class SnapshotsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Dict[str, object]]:
-        """List Snapshots
+    ) -> ApiResponse[SnapshotListResponse]:
+        """List daily KPI snapshots
 
+        Returns a time-series of daily graph KPI snapshots for a single public graph identifier. Use the `metrics` query parameter to request a compact projection suitable for charts.
 
-        :param graph_id: (required)
+        :param graph_id: Public WordLift graph identifier (`account.id`). (required)
         :type graph_id: str
-        :param date_from:
+        :param date_from: Inclusive lower snapshot date bound in `YYYY-MM-DD` format.
         :type date_from: str
-        :param date_to:
+        :param date_to: Inclusive upper snapshot date bound in `YYYY-MM-DD` format.
         :type date_to: str
-        :param limit:
+        :param limit: Maximum number of snapshot rows to return.
         :type limit: int
-        :param metrics:
+        :param metrics: Comma-separated KPI field projection for compact chart responses.
         :type metrics: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -450,7 +471,7 @@ class SnapshotsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_snapshots_kpis_graphs_graph_id_snapshots_get_serialize(
+        _param = self._list_snapshots_kpi_graphs_graph_id_snapshots_get_serialize(
             graph_id=graph_id,
             date_from=date_from,
             date_to=date_to,
@@ -463,7 +484,10 @@ class SnapshotsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, object]",
+            '200': "SnapshotListResponse",
+            '400': "Problem",
+            '403': "Problem",
+            '404': "Problem",
             '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
@@ -478,13 +502,13 @@ class SnapshotsApi:
 
 
     @validate_call
-    async def list_snapshots_kpis_graphs_graph_id_snapshots_get_without_preload_content(
+    async def list_snapshots_kpi_graphs_graph_id_snapshots_get_without_preload_content(
         self,
-        graph_id: StrictStr,
-        date_from: Optional[StrictStr] = None,
-        date_to: Optional[StrictStr] = None,
-        limit: Optional[StrictInt] = None,
-        metrics: Optional[StrictStr] = None,
+        graph_id: Annotated[StrictStr, Field(description="Public WordLift graph identifier (`account.id`).")],
+        date_from: Annotated[Optional[StrictStr], Field(description="Inclusive lower snapshot date bound in `YYYY-MM-DD` format.")] = None,
+        date_to: Annotated[Optional[StrictStr], Field(description="Inclusive upper snapshot date bound in `YYYY-MM-DD` format.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Maximum number of snapshot rows to return.")] = None,
+        metrics: Annotated[Optional[StrictStr], Field(description="Comma-separated KPI field projection for compact chart responses.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -498,18 +522,19 @@ class SnapshotsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """List Snapshots
+        """List daily KPI snapshots
 
+        Returns a time-series of daily graph KPI snapshots for a single public graph identifier. Use the `metrics` query parameter to request a compact projection suitable for charts.
 
-        :param graph_id: (required)
+        :param graph_id: Public WordLift graph identifier (`account.id`). (required)
         :type graph_id: str
-        :param date_from:
+        :param date_from: Inclusive lower snapshot date bound in `YYYY-MM-DD` format.
         :type date_from: str
-        :param date_to:
+        :param date_to: Inclusive upper snapshot date bound in `YYYY-MM-DD` format.
         :type date_to: str
-        :param limit:
+        :param limit: Maximum number of snapshot rows to return.
         :type limit: int
-        :param metrics:
+        :param metrics: Comma-separated KPI field projection for compact chart responses.
         :type metrics: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -533,7 +558,7 @@ class SnapshotsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_snapshots_kpis_graphs_graph_id_snapshots_get_serialize(
+        _param = self._list_snapshots_kpi_graphs_graph_id_snapshots_get_serialize(
             graph_id=graph_id,
             date_from=date_from,
             date_to=date_to,
@@ -546,7 +571,10 @@ class SnapshotsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, object]",
+            '200': "SnapshotListResponse",
+            '400': "Problem",
+            '403': "Problem",
+            '404': "Problem",
             '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
@@ -556,7 +584,7 @@ class SnapshotsApi:
         return response_data.response
 
 
-    def _list_snapshots_kpis_graphs_graph_id_snapshots_get_serialize(
+    def _list_snapshots_kpi_graphs_graph_id_snapshots_get_serialize(
         self,
         graph_id,
         date_from,
@@ -609,7 +637,8 @@ class SnapshotsApi:
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(
             [
-                'application/json'
+                'application/json', 
+                'application/problem+json'
             ]
         )
 
@@ -621,7 +650,7 @@ class SnapshotsApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/kpis/graphs/{graph_id}/snapshots',
+            resource_path='/kpi/graphs/{graph_id}/snapshots',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

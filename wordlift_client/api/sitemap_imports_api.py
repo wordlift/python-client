@@ -95,6 +95,7 @@ class SitemapImportsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[str]",
             '401': None,
+            '422': "List[str]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -163,6 +164,7 @@ class SitemapImportsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[str]",
             '401': None,
+            '422': "List[str]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -231,6 +233,7 @@ class SitemapImportsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[str]",
             '401': None,
+            '422': "List[str]",
         }
         response_data = await self.api_client.call_api(
             *_param,

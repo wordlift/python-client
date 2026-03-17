@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** |  | 
-**title** | **str** |  | 
-**status** | **int** |  | 
-**detail** | **str** |  | 
+**type** | **str** | Problem type URI. | 
+**title** | **str** | Short, human-readable summary of the problem. | 
+**status** | **int** | HTTP status code for this problem response. | 
+**detail** | **str** | Human-readable explanation specific to this occurrence of the problem. | 
 
 ## Example
 

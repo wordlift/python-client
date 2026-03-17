@@ -18,20 +18,17 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class Problem(BaseModel):
+class CursorPage(BaseModel):
     """
-    Problem
+    CursorPage
     """ # noqa: E501
-    type: StrictStr = Field(description="Problem type URI.")
-    title: StrictStr = Field(description="Short, human-readable summary of the problem.")
-    status: StrictInt = Field(description="HTTP status code for this problem response.")
-    detail: StrictStr = Field(description="Human-readable explanation specific to this occurrence of the problem.")
-    __properties: ClassVar[List[str]] = ["type", "title", "status", "detail"]
+    next_cursor: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["next_cursor"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -51,7 +48,7 @@ class Problem(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Problem from a JSON string"""
+        """Create an instance of CursorPage from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,11 +69,16 @@ class Problem(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if next_cursor (nullable) is None
+        # and model_fields_set contains the field
+        if self.next_cursor is None and "next_cursor" in self.model_fields_set:
+            _dict['next_cursor'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Problem from a dict"""
+        """Create an instance of CursorPage from a dict"""
         if obj is None:
             return None
 
@@ -84,10 +86,7 @@ class Problem(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "title": obj.get("title"),
-            "status": obj.get("status"),
-            "detail": obj.get("detail")
+            "next_cursor": obj.get("next_cursor")
         })
         return _obj
 

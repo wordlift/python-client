@@ -32,9 +32,9 @@ class SitemapImportRequest(BaseModel):
     id_generator: Optional[StrictStr] = Field(default='default', description="The entity id generator, by default uses the web page path.")
     output_types: Optional[List[StrictStr]] = Field(default=None, description="The type of the generated entities, by default `http://schema.org/WebPage`.")
     overwrite: Optional[StrictBool] = Field(default=False, description="Whether to overwrite existing entities.")
-    sitemap_url: Optional[StrictStr] = Field(default=None, description="The sitemap URL")
+    sitemap_url: Optional[StrictStr] = Field(default=None, description="URL of a sitemap to crawl and import. Only http/https scheme and publicly routable addresses are accepted.")
     sitemap_url_regex: Optional[StrictStr] = Field(default=None, description="A regex filter to apply to discovered URLs, it only applies to URLs in sitemaps.")
-    urls: Optional[List[StrictStr]] = Field(default=None, description="The URLs")
+    urls: Optional[List[StrictStr]] = Field(default=None, description="Explicit list of page URLs to import. Only http/https scheme and publicly routable addresses are accepted.")
     __properties: ClassVar[List[str]] = ["embedding", "id_generator", "output_types", "overwrite", "sitemap_url", "sitemap_url_regex", "urls"]
 
     @field_validator('id_generator')
