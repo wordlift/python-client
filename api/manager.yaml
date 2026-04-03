@@ -183,6 +183,20 @@ paths:
       summary: Get
       tags:
       - Account
+  /accounts/me/cache:
+    delete:
+      description: Clear the cache for the current account identified by its key.
+      operationId: clearCache
+      responses:
+        "204":
+          description: Cache cleared
+        "401":
+          description: Authentication Failure
+      security:
+      - ApiKey: []
+      summary: Clear Cache
+      tags:
+      - Account
   /accounts/me/google-search-console:
     patch:
       description: Update the Google Search Console siteUrl for the authenticated
