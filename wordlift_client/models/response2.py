@@ -21,7 +21,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.annotation import Annotation
-from wordlift_client.models.entity import Entity
+from wordlift_client.models.entity1 import Entity1
 from wordlift_client.models.image import Image
 from wordlift_client.models.topic import Topic
 from typing import Optional, Set
@@ -31,7 +31,7 @@ class Response2(BaseModel):
     """
     Response
     """ # noqa: E501
-    entities: Optional[Dict[str, Entity]] = Field(default=None, description="A map of entity URI to the respective entity.")
+    entities: Optional[Dict[str, Entity1]] = Field(default=None, description="A map of entity URI to the respective entity.")
     annotations: Optional[Dict[str, Annotation]] = Field(default=None, description="A map of annotation id to the respective annotation.")
     images: Optional[List[Image]] = Field(default=None, description="A list of images.")
     languages: Optional[List[StrictStr]] = Field(default=None, description="A list of languages.")
@@ -119,7 +119,7 @@ class Response2(BaseModel):
 
         _obj = cls.model_validate({
             "entities": dict(
-                (_k, Entity.from_dict(_v))
+                (_k, Entity1.from_dict(_v))
                 for _k, _v in obj["entities"].items()
             )
             if obj.get("entities") is not None

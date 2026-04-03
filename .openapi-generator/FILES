@@ -262,8 +262,8 @@ docs/UrlResultsResponse.md
 docs/UrlSummaryResponse.md
 docs/ValidationError.md
 docs/ValidationError1.md
-docs/ValidationError1DetailInner.md
 docs/ValidationError2.md
+docs/ValidationError2DetailInner.md
 docs/ValidationError3.md
 docs/ValidationFix.md
 docs/ValidationResult.md
@@ -307,11 +307,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_cursor_page.py
-test/test_job_list_response.py
-test/test_job_response.py
-test/test_snapshot_list_response.py
-test/test_snapshot_response.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -588,8 +583,8 @@ wordlift_client/models/url_results_response.py
 wordlift_client/models/url_summary_response.py
 wordlift_client/models/validation_error.py
 wordlift_client/models/validation_error1.py
-wordlift_client/models/validation_error1_detail_inner.py
 wordlift_client/models/validation_error2.py
+wordlift_client/models/validation_error2_detail_inner.py
 wordlift_client/models/validation_error3.py
 wordlift_client/models/validation_fix.py
 wordlift_client/models/validation_result.py

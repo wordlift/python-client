@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.148.0"
+__version__ = "1.149.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -299,8 +299,8 @@ from wordlift_client.models.url_results_response import UrlResultsResponse
 from wordlift_client.models.url_summary_response import UrlSummaryResponse
 from wordlift_client.models.validation_error import ValidationError
 from wordlift_client.models.validation_error1 import ValidationError1
-from wordlift_client.models.validation_error1_detail_inner import ValidationError1DetailInner
 from wordlift_client.models.validation_error2 import ValidationError2
+from wordlift_client.models.validation_error2_detail_inner import ValidationError2DetailInner
 from wordlift_client.models.validation_error3 import ValidationError3
 from wordlift_client.models.validation_fix import ValidationFix
 from wordlift_client.models.validation_result import ValidationResult
