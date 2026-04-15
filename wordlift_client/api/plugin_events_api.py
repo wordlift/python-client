@@ -23,7 +23,7 @@ from typing import List, Optional
 from typing_extensions import Annotated
 from wordlift_client.models.event import Event
 from wordlift_client.models.request1 import Request1
-from wordlift_client.models.response import Response
+from wordlift_client.models.response1 import Response1
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
 from wordlift_client.api_response import ApiResponse
@@ -337,7 +337,7 @@ class PluginEventsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Response:
+    ) -> Response1:
         """List
 
         List the events bound to the authenticated account.
@@ -387,8 +387,8 @@ class PluginEventsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Response",
-            '401': "Response",
+            '200': "Response1",
+            '401': "Response1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -421,7 +421,7 @@ class PluginEventsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Response]:
+    ) -> ApiResponse[Response1]:
         """List
 
         List the events bound to the authenticated account.
@@ -471,8 +471,8 @@ class PluginEventsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Response",
-            '401': "Response",
+            '200': "Response1",
+            '401': "Response1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -555,8 +555,8 @@ class PluginEventsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Response",
-            '401': "Response",
+            '200': "Response1",
+            '401': "Response1",
         }
         response_data = await self.api_client.call_api(
             *_param,

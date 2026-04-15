@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_events**
-> Response list_events(url=url, date_greater_than=date_greater_than, date_less_than=date_less_than, cursor=cursor, limit=limit)
+> Response1 list_events(url=url, date_greater_than=date_greater_than, date_less_than=date_less_than, cursor=cursor, limit=limit)
 
 List
 
@@ -102,7 +102,7 @@ List the events bound to the authenticated account.
 
 ```python
 import wordlift_client
-from wordlift_client.models.response import Response
+from wordlift_client.models.response1 import Response1
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Response**](Response.md)
+[**Response1**](Response1.md)
 
 ### Authorization
 

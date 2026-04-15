@@ -17,13 +17,24 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
-from typing import Any, List, Optional
+from datetime import datetime
+from pydantic import Field, StrictStr
+from typing import List, Optional, Union
 from typing_extensions import Annotated
-from wordlift_client.models.resource_request import ResourceRequest
-from wordlift_client.models.url_list_response import UrlListResponse
-from wordlift_client.models.url_results_response import UrlResultsResponse
-from wordlift_client.models.url_summary_response import UrlSummaryResponse
+from wordlift_client.models.add_resource_request import AddResourceRequest
+from wordlift_client.models.check_timeseries_response import CheckTimeseriesResponse
+from wordlift_client.models.health_response import HealthResponse
+from wordlift_client.models.list_monitor_status_response import ListMonitorStatusResponse
+from wordlift_client.models.list_monitors_response import ListMonitorsResponse
+from wordlift_client.models.list_runs_response import ListRunsResponse
+from wordlift_client.models.monitor_response import MonitorResponse
+from wordlift_client.models.monitor_status import MonitorStatus
+from wordlift_client.models.monitor_status_order_by import MonitorStatusOrderBy
+from wordlift_client.models.monitor_status_response import MonitorStatusResponse
+from wordlift_client.models.readiness_response import ReadinessResponse
+from wordlift_client.models.replace_monitors_request import ReplaceMonitorsRequest
+from wordlift_client.models.run_response import RunResponse
+from wordlift_client.models.sort_direction import SortDirection
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
 from wordlift_client.api_response import ApiResponse
@@ -44,10 +55,10 @@ class DefaultApi:
 
 
     @validate_call
-    async def add_resource_monitor_graphs_graph_id_resources_put(
+    async def abort_run_accounts_account_id_monitoring_runs_run_id_delete(
         self,
-        graph_id: StrictStr,
-        resource_request: ResourceRequest,
+        run_id: StrictStr,
+        account_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -60,15 +71,14 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
-        """Add Resource
+    ) -> RunResponse:
+        """Abort Run
 
-        Adds a resource to the graph. If it's a sitemap, triggers a discovery job.
 
-        :param graph_id: (required)
-        :type graph_id: str
-        :param resource_request: (required)
-        :type resource_request: ResourceRequest
+        :param run_id: (required)
+        :type run_id: str
+        :param account_id: (required)
+        :type account_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -91,9 +101,9 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_resource_monitor_graphs_graph_id_resources_put_serialize(
-            graph_id=graph_id,
-            resource_request=resource_request,
+        _param = self._abort_run_accounts_account_id_monitoring_runs_run_id_delete_serialize(
+            run_id=run_id,
+            account_id=account_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -101,8 +111,8 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '422': "HTTPValidationError2",
+            '200': "RunResponse",
+            '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -116,10 +126,10 @@ class DefaultApi:
 
 
     @validate_call
-    async def add_resource_monitor_graphs_graph_id_resources_put_with_http_info(
+    async def abort_run_accounts_account_id_monitoring_runs_run_id_delete_with_http_info(
         self,
-        graph_id: StrictStr,
-        resource_request: ResourceRequest,
+        run_id: StrictStr,
+        account_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -132,15 +142,14 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
-        """Add Resource
+    ) -> ApiResponse[RunResponse]:
+        """Abort Run
 
-        Adds a resource to the graph. If it's a sitemap, triggers a discovery job.
 
-        :param graph_id: (required)
-        :type graph_id: str
-        :param resource_request: (required)
-        :type resource_request: ResourceRequest
+        :param run_id: (required)
+        :type run_id: str
+        :param account_id: (required)
+        :type account_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -163,9 +172,9 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_resource_monitor_graphs_graph_id_resources_put_serialize(
-            graph_id=graph_id,
-            resource_request=resource_request,
+        _param = self._abort_run_accounts_account_id_monitoring_runs_run_id_delete_serialize(
+            run_id=run_id,
+            account_id=account_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -173,8 +182,8 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '422': "HTTPValidationError2",
+            '200': "RunResponse",
+            '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -188,10 +197,10 @@ class DefaultApi:
 
 
     @validate_call
-    async def add_resource_monitor_graphs_graph_id_resources_put_without_preload_content(
+    async def abort_run_accounts_account_id_monitoring_runs_run_id_delete_without_preload_content(
         self,
-        graph_id: StrictStr,
-        resource_request: ResourceRequest,
+        run_id: StrictStr,
+        account_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -205,14 +214,13 @@ class DefaultApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Add Resource
+        """Abort Run
 
-        Adds a resource to the graph. If it's a sitemap, triggers a discovery job.
 
-        :param graph_id: (required)
-        :type graph_id: str
-        :param resource_request: (required)
-        :type resource_request: ResourceRequest
+        :param run_id: (required)
+        :type run_id: str
+        :param account_id: (required)
+        :type account_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -235,9 +243,9 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_resource_monitor_graphs_graph_id_resources_put_serialize(
-            graph_id=graph_id,
-            resource_request=resource_request,
+        _param = self._abort_run_accounts_account_id_monitoring_runs_run_id_delete_serialize(
+            run_id=run_id,
+            account_id=account_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -245,8 +253,8 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '422': "HTTPValidationError2",
+            '200': "RunResponse",
+            '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -255,10 +263,10 @@ class DefaultApi:
         return response_data.response
 
 
-    def _add_resource_monitor_graphs_graph_id_resources_put_serialize(
+    def _abort_run_accounts_account_id_monitoring_runs_run_id_delete_serialize(
         self,
-        graph_id,
-        resource_request,
+        run_id,
+        account_id,
         _request_auth,
         _content_type,
         _headers,
@@ -278,14 +286,290 @@ class DefaultApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if graph_id is not None:
-            _path_params['graph_id'] = graph_id
+        if run_id is not None:
+            _path_params['run_id'] = run_id
+        if account_id is not None:
+            _path_params['account_id'] = account_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if resource_request is not None:
-            _body_params = resource_request
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path='/accounts/{account_id}/monitoring/runs/{run_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def add_monitor_accounts_account_id_monitoring_monitors_post(
+        self,
+        account_id: StrictStr,
+        add_resource_request: AddResourceRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> MonitorResponse:
+        """Add Monitor
+
+        Adds a URL to the monitoring list for the given account.
+
+        :param account_id: (required)
+        :type account_id: str
+        :param add_resource_request: (required)
+        :type add_resource_request: AddResourceRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._add_monitor_accounts_account_id_monitoring_monitors_post_serialize(
+            account_id=account_id,
+            add_resource_request=add_resource_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "MonitorResponse",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def add_monitor_accounts_account_id_monitoring_monitors_post_with_http_info(
+        self,
+        account_id: StrictStr,
+        add_resource_request: AddResourceRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[MonitorResponse]:
+        """Add Monitor
+
+        Adds a URL to the monitoring list for the given account.
+
+        :param account_id: (required)
+        :type account_id: str
+        :param add_resource_request: (required)
+        :type add_resource_request: AddResourceRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._add_monitor_accounts_account_id_monitoring_monitors_post_serialize(
+            account_id=account_id,
+            add_resource_request=add_resource_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "MonitorResponse",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def add_monitor_accounts_account_id_monitoring_monitors_post_without_preload_content(
+        self,
+        account_id: StrictStr,
+        add_resource_request: AddResourceRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Add Monitor
+
+        Adds a URL to the monitoring list for the given account.
+
+        :param account_id: (required)
+        :type account_id: str
+        :param add_resource_request: (required)
+        :type add_resource_request: AddResourceRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._add_monitor_accounts_account_id_monitoring_monitors_post_serialize(
+            account_id=account_id,
+            add_resource_request=add_resource_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "MonitorResponse",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _add_monitor_accounts_account_id_monitoring_monitors_post_serialize(
+        self,
+        account_id,
+        add_resource_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if account_id is not None:
+            _path_params['account_id'] = account_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if add_resource_request is not None:
+            _body_params = add_resource_request
 
 
         # set the HTTP header `Accept`
@@ -315,8 +599,8 @@ class DefaultApi:
         ]
 
         return self.api_client.param_serialize(
-            method='PUT',
-            resource_path='/monitor/graphs/{graph_id}/resources',
+            method='POST',
+            resource_path='/accounts/{account_id}/monitoring/monitors',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -333,10 +617,10 @@ class DefaultApi:
 
 
     @validate_call
-    async def get_job_status_monitor_graphs_graph_id_jobs_job_id_get(
+    async def delete_monitor_accounts_account_id_monitoring_monitors_monitor_id_delete(
         self,
-        graph_id: StrictStr,
-        job_id: StrictStr,
+        monitor_id: StrictStr,
+        account_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -349,15 +633,14 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
-        """Get Job Status
+    ) -> None:
+        """Delete Monitor
 
-        Returns the status and progress of a job. Ensures the job belongs to the graph.
 
-        :param graph_id: (required)
-        :type graph_id: str
-        :param job_id: (required)
-        :type job_id: str
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param account_id: (required)
+        :type account_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -380,9 +663,9 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_job_status_monitor_graphs_graph_id_jobs_job_id_get_serialize(
-            graph_id=graph_id,
-            job_id=job_id,
+        _param = self._delete_monitor_accounts_account_id_monitoring_monitors_monitor_id_delete_serialize(
+            monitor_id=monitor_id,
+            account_id=account_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -390,8 +673,8 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '422': "HTTPValidationError2",
+            '204': None,
+            '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -405,10 +688,10 @@ class DefaultApi:
 
 
     @validate_call
-    async def get_job_status_monitor_graphs_graph_id_jobs_job_id_get_with_http_info(
+    async def delete_monitor_accounts_account_id_monitoring_monitors_monitor_id_delete_with_http_info(
         self,
-        graph_id: StrictStr,
-        job_id: StrictStr,
+        monitor_id: StrictStr,
+        account_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -421,15 +704,14 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
-        """Get Job Status
+    ) -> ApiResponse[None]:
+        """Delete Monitor
 
-        Returns the status and progress of a job. Ensures the job belongs to the graph.
 
-        :param graph_id: (required)
-        :type graph_id: str
-        :param job_id: (required)
-        :type job_id: str
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param account_id: (required)
+        :type account_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -452,9 +734,9 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_job_status_monitor_graphs_graph_id_jobs_job_id_get_serialize(
-            graph_id=graph_id,
-            job_id=job_id,
+        _param = self._delete_monitor_accounts_account_id_monitoring_monitors_monitor_id_delete_serialize(
+            monitor_id=monitor_id,
+            account_id=account_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -462,8 +744,8 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '422': "HTTPValidationError2",
+            '204': None,
+            '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -477,10 +759,10 @@ class DefaultApi:
 
 
     @validate_call
-    async def get_job_status_monitor_graphs_graph_id_jobs_job_id_get_without_preload_content(
+    async def delete_monitor_accounts_account_id_monitoring_monitors_monitor_id_delete_without_preload_content(
         self,
-        graph_id: StrictStr,
-        job_id: StrictStr,
+        monitor_id: StrictStr,
+        account_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -494,14 +776,13 @@ class DefaultApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get Job Status
+        """Delete Monitor
 
-        Returns the status and progress of a job. Ensures the job belongs to the graph.
 
-        :param graph_id: (required)
-        :type graph_id: str
-        :param job_id: (required)
-        :type job_id: str
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param account_id: (required)
+        :type account_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -524,9 +805,9 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_job_status_monitor_graphs_graph_id_jobs_job_id_get_serialize(
-            graph_id=graph_id,
-            job_id=job_id,
+        _param = self._delete_monitor_accounts_account_id_monitoring_monitors_monitor_id_delete_serialize(
+            monitor_id=monitor_id,
+            account_id=account_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -534,8 +815,8 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '422': "HTTPValidationError2",
+            '204': None,
+            '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -544,10 +825,10 @@ class DefaultApi:
         return response_data.response
 
 
-    def _get_job_status_monitor_graphs_graph_id_jobs_job_id_get_serialize(
+    def _delete_monitor_accounts_account_id_monitoring_monitors_monitor_id_delete_serialize(
         self,
-        graph_id,
-        job_id,
+        monitor_id,
+        account_id,
         _request_auth,
         _content_type,
         _headers,
@@ -567,10 +848,10 @@ class DefaultApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if graph_id is not None:
-            _path_params['graph_id'] = graph_id
-        if job_id is not None:
-            _path_params['job_id'] = job_id
+        if monitor_id is not None:
+            _path_params['monitor_id'] = monitor_id
+        if account_id is not None:
+            _path_params['account_id'] = account_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -591,8 +872,8 @@ class DefaultApi:
         ]
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/monitor/graphs/{graph_id}/jobs/{job_id}',
+            method='DELETE',
+            resource_path='/accounts/{account_id}/monitoring/monitors/{monitor_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -609,10 +890,15 @@ class DefaultApi:
 
 
     @validate_call
-    async def get_url_results_monitor_graphs_graph_id_urls_results_get(
+    async def get_check_timeseries_accounts_account_id_monitoring_monitors_monitor_id_checks_check_name_get(
         self,
-        graph_id: StrictStr,
-        url: Annotated[str, Field(min_length=1, strict=True, max_length=2083)],
+        monitor_id: StrictStr,
+        check_name: StrictStr,
+        account_id: StrictStr,
+        since: Annotated[Optional[datetime], Field(description="Return results on or after this RFC 3339 timestamp (inclusive).")] = None,
+        to: Annotated[Optional[datetime], Field(description="Return results on or before this RFC 3339 timestamp (inclusive).")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="Maximum number of data points to return.")] = None,
+        sort: Annotated[Optional[SortDirection], Field(description="Sort order: 'asc' for oldest-first (graphs), 'desc' for newest-first (history).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -625,14 +911,24 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UrlResultsResponse:
-        """Get Url Results
+    ) -> CheckTimeseriesResponse:
+        """Get Check Timeseries
 
 
-        :param graph_id: (required)
-        :type graph_id: str
-        :param url: (required)
-        :type url: str
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param check_name: (required)
+        :type check_name: str
+        :param account_id: (required)
+        :type account_id: str
+        :param since: Return results on or after this RFC 3339 timestamp (inclusive).
+        :type since: datetime
+        :param to: Return results on or before this RFC 3339 timestamp (inclusive).
+        :type to: datetime
+        :param limit: Maximum number of data points to return.
+        :type limit: int
+        :param sort: Sort order: 'asc' for oldest-first (graphs), 'desc' for newest-first (history).
+        :type sort: SortDirection
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -655,9 +951,14 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_url_results_monitor_graphs_graph_id_urls_results_get_serialize(
-            graph_id=graph_id,
-            url=url,
+        _param = self._get_check_timeseries_accounts_account_id_monitoring_monitors_monitor_id_checks_check_name_get_serialize(
+            monitor_id=monitor_id,
+            check_name=check_name,
+            account_id=account_id,
+            since=since,
+            to=to,
+            limit=limit,
+            sort=sort,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -665,8 +966,8 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UrlResultsResponse",
-            '422': "HTTPValidationError2",
+            '200': "CheckTimeseriesResponse",
+            '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -680,10 +981,15 @@ class DefaultApi:
 
 
     @validate_call
-    async def get_url_results_monitor_graphs_graph_id_urls_results_get_with_http_info(
+    async def get_check_timeseries_accounts_account_id_monitoring_monitors_monitor_id_checks_check_name_get_with_http_info(
         self,
-        graph_id: StrictStr,
-        url: Annotated[str, Field(min_length=1, strict=True, max_length=2083)],
+        monitor_id: StrictStr,
+        check_name: StrictStr,
+        account_id: StrictStr,
+        since: Annotated[Optional[datetime], Field(description="Return results on or after this RFC 3339 timestamp (inclusive).")] = None,
+        to: Annotated[Optional[datetime], Field(description="Return results on or before this RFC 3339 timestamp (inclusive).")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="Maximum number of data points to return.")] = None,
+        sort: Annotated[Optional[SortDirection], Field(description="Sort order: 'asc' for oldest-first (graphs), 'desc' for newest-first (history).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -696,14 +1002,24 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[UrlResultsResponse]:
-        """Get Url Results
+    ) -> ApiResponse[CheckTimeseriesResponse]:
+        """Get Check Timeseries
 
 
-        :param graph_id: (required)
-        :type graph_id: str
-        :param url: (required)
-        :type url: str
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param check_name: (required)
+        :type check_name: str
+        :param account_id: (required)
+        :type account_id: str
+        :param since: Return results on or after this RFC 3339 timestamp (inclusive).
+        :type since: datetime
+        :param to: Return results on or before this RFC 3339 timestamp (inclusive).
+        :type to: datetime
+        :param limit: Maximum number of data points to return.
+        :type limit: int
+        :param sort: Sort order: 'asc' for oldest-first (graphs), 'desc' for newest-first (history).
+        :type sort: SortDirection
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -726,9 +1042,14 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_url_results_monitor_graphs_graph_id_urls_results_get_serialize(
-            graph_id=graph_id,
-            url=url,
+        _param = self._get_check_timeseries_accounts_account_id_monitoring_monitors_monitor_id_checks_check_name_get_serialize(
+            monitor_id=monitor_id,
+            check_name=check_name,
+            account_id=account_id,
+            since=since,
+            to=to,
+            limit=limit,
+            sort=sort,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -736,8 +1057,8 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UrlResultsResponse",
-            '422': "HTTPValidationError2",
+            '200': "CheckTimeseriesResponse",
+            '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -751,10 +1072,15 @@ class DefaultApi:
 
 
     @validate_call
-    async def get_url_results_monitor_graphs_graph_id_urls_results_get_without_preload_content(
+    async def get_check_timeseries_accounts_account_id_monitoring_monitors_monitor_id_checks_check_name_get_without_preload_content(
         self,
-        graph_id: StrictStr,
-        url: Annotated[str, Field(min_length=1, strict=True, max_length=2083)],
+        monitor_id: StrictStr,
+        check_name: StrictStr,
+        account_id: StrictStr,
+        since: Annotated[Optional[datetime], Field(description="Return results on or after this RFC 3339 timestamp (inclusive).")] = None,
+        to: Annotated[Optional[datetime], Field(description="Return results on or before this RFC 3339 timestamp (inclusive).")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="Maximum number of data points to return.")] = None,
+        sort: Annotated[Optional[SortDirection], Field(description="Sort order: 'asc' for oldest-first (graphs), 'desc' for newest-first (history).")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -768,13 +1094,23 @@ class DefaultApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get Url Results
+        """Get Check Timeseries
 
 
-        :param graph_id: (required)
-        :type graph_id: str
-        :param url: (required)
-        :type url: str
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param check_name: (required)
+        :type check_name: str
+        :param account_id: (required)
+        :type account_id: str
+        :param since: Return results on or after this RFC 3339 timestamp (inclusive).
+        :type since: datetime
+        :param to: Return results on or before this RFC 3339 timestamp (inclusive).
+        :type to: datetime
+        :param limit: Maximum number of data points to return.
+        :type limit: int
+        :param sort: Sort order: 'asc' for oldest-first (graphs), 'desc' for newest-first (history).
+        :type sort: SortDirection
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -797,9 +1133,14 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_url_results_monitor_graphs_graph_id_urls_results_get_serialize(
-            graph_id=graph_id,
-            url=url,
+        _param = self._get_check_timeseries_accounts_account_id_monitoring_monitors_monitor_id_checks_check_name_get_serialize(
+            monitor_id=monitor_id,
+            check_name=check_name,
+            account_id=account_id,
+            since=since,
+            to=to,
+            limit=limit,
+            sort=sort,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -807,8 +1148,8 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UrlResultsResponse",
-            '422': "HTTPValidationError2",
+            '200': "CheckTimeseriesResponse",
+            '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -817,10 +1158,15 @@ class DefaultApi:
         return response_data.response
 
 
-    def _get_url_results_monitor_graphs_graph_id_urls_results_get_serialize(
+    def _get_check_timeseries_accounts_account_id_monitoring_monitors_monitor_id_checks_check_name_get_serialize(
         self,
-        graph_id,
-        url,
+        monitor_id,
+        check_name,
+        account_id,
+        since,
+        to,
+        limit,
+        sort,
         _request_auth,
         _content_type,
         _headers,
@@ -840,287 +1186,46 @@ class DefaultApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if graph_id is not None:
-            _path_params['graph_id'] = graph_id
+        if monitor_id is not None:
+            _path_params['monitor_id'] = monitor_id
+        if check_name is not None:
+            _path_params['check_name'] = check_name
+        if account_id is not None:
+            _path_params['account_id'] = account_id
         # process the query parameters
-        if url is not None:
+        if since is not None:
+            if isinstance(since, datetime):
+                _query_params.append(
+                    (
+                        'since',
+                        since.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('since', since))
             
-            _query_params.append(('url', url))
+        if to is not None:
+            if isinstance(to, datetime):
+                _query_params.append(
+                    (
+                        'to',
+                        to.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('to', to))
             
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'ApiKey'
-        ]
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/monitor/graphs/{graph_id}/urls/results',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    async def get_url_summary_monitor_graphs_graph_id_urls_summary_get(
-        self,
-        graph_id: StrictStr,
-        url: Annotated[str, Field(min_length=1, strict=True, max_length=2083)],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UrlSummaryResponse:
-        """Get Url Summary
-
-
-        :param graph_id: (required)
-        :type graph_id: str
-        :param url: (required)
-        :type url: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_url_summary_monitor_graphs_graph_id_urls_summary_get_serialize(
-            graph_id=graph_id,
-            url=url,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UrlSummaryResponse",
-            '422': "HTTPValidationError2",
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        await response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    async def get_url_summary_monitor_graphs_graph_id_urls_summary_get_with_http_info(
-        self,
-        graph_id: StrictStr,
-        url: Annotated[str, Field(min_length=1, strict=True, max_length=2083)],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[UrlSummaryResponse]:
-        """Get Url Summary
-
-
-        :param graph_id: (required)
-        :type graph_id: str
-        :param url: (required)
-        :type url: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_url_summary_monitor_graphs_graph_id_urls_summary_get_serialize(
-            graph_id=graph_id,
-            url=url,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UrlSummaryResponse",
-            '422': "HTTPValidationError2",
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        await response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    async def get_url_summary_monitor_graphs_graph_id_urls_summary_get_without_preload_content(
-        self,
-        graph_id: StrictStr,
-        url: Annotated[str, Field(min_length=1, strict=True, max_length=2083)],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Get Url Summary
-
-
-        :param graph_id: (required)
-        :type graph_id: str
-        :param url: (required)
-        :type url: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_url_summary_monitor_graphs_graph_id_urls_summary_get_serialize(
-            graph_id=graph_id,
-            url=url,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UrlSummaryResponse",
-            '422': "HTTPValidationError2",
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _get_url_summary_monitor_graphs_graph_id_urls_summary_get_serialize(
-        self,
-        graph_id,
-        url,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if graph_id is not None:
-            _path_params['graph_id'] = graph_id
-        # process the query parameters
-        if url is not None:
+        if limit is not None:
             
-            _query_params.append(('url', url))
+            _query_params.append(('limit', limit))
+            
+        if sort is not None:
+            
+            _query_params.append(('sort', sort.value))
             
         # process the header parameters
         # process the form parameters
@@ -1142,7 +1247,826 @@ class DefaultApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/monitor/graphs/{graph_id}/urls/summary',
+            resource_path='/accounts/{account_id}/monitoring/monitors/{monitor_id}/checks/{check_name}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def get_monitor_accounts_account_id_monitoring_monitors_monitor_id_get(
+        self,
+        monitor_id: StrictStr,
+        account_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> MonitorResponse:
+        """Get Monitor
+
+
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_monitor_accounts_account_id_monitoring_monitors_monitor_id_get_serialize(
+            monitor_id=monitor_id,
+            account_id=account_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MonitorResponse",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def get_monitor_accounts_account_id_monitoring_monitors_monitor_id_get_with_http_info(
+        self,
+        monitor_id: StrictStr,
+        account_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[MonitorResponse]:
+        """Get Monitor
+
+
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_monitor_accounts_account_id_monitoring_monitors_monitor_id_get_serialize(
+            monitor_id=monitor_id,
+            account_id=account_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MonitorResponse",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def get_monitor_accounts_account_id_monitoring_monitors_monitor_id_get_without_preload_content(
+        self,
+        monitor_id: StrictStr,
+        account_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Monitor
+
+
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_monitor_accounts_account_id_monitoring_monitors_monitor_id_get_serialize(
+            monitor_id=monitor_id,
+            account_id=account_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MonitorResponse",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_monitor_accounts_account_id_monitoring_monitors_monitor_id_get_serialize(
+        self,
+        monitor_id,
+        account_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if monitor_id is not None:
+            _path_params['monitor_id'] = monitor_id
+        if account_id is not None:
+            _path_params['account_id'] = account_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/accounts/{account_id}/monitoring/monitors/{monitor_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def get_monitor_status_accounts_account_id_monitoring_monitors_monitor_id_status_get(
+        self,
+        monitor_id: StrictStr,
+        account_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> MonitorStatusResponse:
+        """Get Monitor Status
+
+
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_monitor_status_accounts_account_id_monitoring_monitors_monitor_id_status_get_serialize(
+            monitor_id=monitor_id,
+            account_id=account_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MonitorStatusResponse",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def get_monitor_status_accounts_account_id_monitoring_monitors_monitor_id_status_get_with_http_info(
+        self,
+        monitor_id: StrictStr,
+        account_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[MonitorStatusResponse]:
+        """Get Monitor Status
+
+
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_monitor_status_accounts_account_id_monitoring_monitors_monitor_id_status_get_serialize(
+            monitor_id=monitor_id,
+            account_id=account_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MonitorStatusResponse",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def get_monitor_status_accounts_account_id_monitoring_monitors_monitor_id_status_get_without_preload_content(
+        self,
+        monitor_id: StrictStr,
+        account_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Monitor Status
+
+
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_monitor_status_accounts_account_id_monitoring_monitors_monitor_id_status_get_serialize(
+            monitor_id=monitor_id,
+            account_id=account_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MonitorStatusResponse",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_monitor_status_accounts_account_id_monitoring_monitors_monitor_id_status_get_serialize(
+        self,
+        monitor_id,
+        account_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if monitor_id is not None:
+            _path_params['monitor_id'] = monitor_id
+        if account_id is not None:
+            _path_params['account_id'] = account_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/accounts/{account_id}/monitoring/monitors/{monitor_id}/status',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def get_run_accounts_account_id_monitoring_runs_run_id_get(
+        self,
+        run_id: StrictStr,
+        account_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RunResponse:
+        """Get Run
+
+
+        :param run_id: (required)
+        :type run_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_run_accounts_account_id_monitoring_runs_run_id_get_serialize(
+            run_id=run_id,
+            account_id=account_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "RunResponse",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def get_run_accounts_account_id_monitoring_runs_run_id_get_with_http_info(
+        self,
+        run_id: StrictStr,
+        account_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[RunResponse]:
+        """Get Run
+
+
+        :param run_id: (required)
+        :type run_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_run_accounts_account_id_monitoring_runs_run_id_get_serialize(
+            run_id=run_id,
+            account_id=account_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "RunResponse",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def get_run_accounts_account_id_monitoring_runs_run_id_get_without_preload_content(
+        self,
+        run_id: StrictStr,
+        account_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Run
+
+
+        :param run_id: (required)
+        :type run_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_run_accounts_account_id_monitoring_runs_run_id_get_serialize(
+            run_id=run_id,
+            account_id=account_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "RunResponse",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_run_accounts_account_id_monitoring_runs_run_id_get_serialize(
+        self,
+        run_id,
+        account_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if run_id is not None:
+            _path_params['run_id'] = run_id
+        if account_id is not None:
+            _path_params['account_id'] = account_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/accounts/{account_id}/monitoring/runs/{run_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1173,7 +2097,7 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> HealthResponse:
         """Health
 
 
@@ -1207,7 +2131,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "HealthResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1235,7 +2159,7 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[HealthResponse]:
         """Health
 
 
@@ -1269,7 +2193,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "HealthResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1331,7 +2255,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "HealthResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1377,7 +2301,6 @@ class DefaultApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'ApiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -1399,16 +2322,16 @@ class DefaultApi:
 
 
     @validate_call
-    async def list_graph_urls_monitor_graphs_graph_id_urls_get(
+    async def list_monitor_statuses_accounts_account_id_monitoring_status_get(
         self,
-        graph_id: StrictStr,
-        limit: Optional[Annotated[int, Field(le=200, strict=True, ge=1)]] = None,
-        cursor: Optional[StrictStr] = None,
-        status: Optional[List[StrictStr]] = None,
-        resource_type: Optional[List[StrictStr]] = None,
-        q: Optional[StrictStr] = None,
-        var_from: Optional[StrictStr] = None,
-        to: Optional[StrictStr] = None,
+        account_id: StrictStr,
+        url: Annotated[Optional[StrictStr], Field(description="Glob pattern to filter by URL (e.g. `*example.com*`).")] = None,
+        score_min: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Minimum score (inclusive).")] = None,
+        score_max: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Maximum score (inclusive).")] = None,
+        order_by: Annotated[Optional[MonitorStatusOrderBy], Field(description="Field to sort by.")] = None,
+        sort: Annotated[Optional[SortDirection], Field(description="Sort direction.")] = None,
+        cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=50, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1421,26 +2344,26 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UrlListResponse:
-        """List Graph Urls
+    ) -> ListMonitorStatusResponse:
+        """List Monitor Statuses
 
 
-        :param graph_id: (required)
-        :type graph_id: str
-        :param limit:
-        :type limit: int
-        :param cursor:
+        :param account_id: (required)
+        :type account_id: str
+        :param url: Glob pattern to filter by URL (e.g. `*example.com*`).
+        :type url: str
+        :param score_min: Minimum score (inclusive).
+        :type score_min: float
+        :param score_max: Maximum score (inclusive).
+        :type score_max: float
+        :param order_by: Field to sort by.
+        :type order_by: MonitorStatusOrderBy
+        :param sort: Sort direction.
+        :type sort: SortDirection
+        :param cursor: Opaque pagination cursor from a previous response.
         :type cursor: str
-        :param status:
-        :type status: List[str]
-        :param resource_type:
-        :type resource_type: List[str]
-        :param q:
-        :type q: str
-        :param var_from:
-        :type var_from: str
-        :param to:
-        :type to: str
+        :param limit: Maximum number of items to return.
+        :type limit: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1463,15 +2386,15 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_graph_urls_monitor_graphs_graph_id_urls_get_serialize(
-            graph_id=graph_id,
-            limit=limit,
+        _param = self._list_monitor_statuses_accounts_account_id_monitoring_status_get_serialize(
+            account_id=account_id,
+            url=url,
+            score_min=score_min,
+            score_max=score_max,
+            order_by=order_by,
+            sort=sort,
             cursor=cursor,
-            status=status,
-            resource_type=resource_type,
-            q=q,
-            var_from=var_from,
-            to=to,
+            limit=limit,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1479,8 +2402,8 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UrlListResponse",
-            '422': "HTTPValidationError2",
+            '200': "ListMonitorStatusResponse",
+            '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1494,16 +2417,16 @@ class DefaultApi:
 
 
     @validate_call
-    async def list_graph_urls_monitor_graphs_graph_id_urls_get_with_http_info(
+    async def list_monitor_statuses_accounts_account_id_monitoring_status_get_with_http_info(
         self,
-        graph_id: StrictStr,
-        limit: Optional[Annotated[int, Field(le=200, strict=True, ge=1)]] = None,
-        cursor: Optional[StrictStr] = None,
-        status: Optional[List[StrictStr]] = None,
-        resource_type: Optional[List[StrictStr]] = None,
-        q: Optional[StrictStr] = None,
-        var_from: Optional[StrictStr] = None,
-        to: Optional[StrictStr] = None,
+        account_id: StrictStr,
+        url: Annotated[Optional[StrictStr], Field(description="Glob pattern to filter by URL (e.g. `*example.com*`).")] = None,
+        score_min: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Minimum score (inclusive).")] = None,
+        score_max: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Maximum score (inclusive).")] = None,
+        order_by: Annotated[Optional[MonitorStatusOrderBy], Field(description="Field to sort by.")] = None,
+        sort: Annotated[Optional[SortDirection], Field(description="Sort direction.")] = None,
+        cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=50, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1516,26 +2439,26 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[UrlListResponse]:
-        """List Graph Urls
+    ) -> ApiResponse[ListMonitorStatusResponse]:
+        """List Monitor Statuses
 
 
-        :param graph_id: (required)
-        :type graph_id: str
-        :param limit:
-        :type limit: int
-        :param cursor:
+        :param account_id: (required)
+        :type account_id: str
+        :param url: Glob pattern to filter by URL (e.g. `*example.com*`).
+        :type url: str
+        :param score_min: Minimum score (inclusive).
+        :type score_min: float
+        :param score_max: Maximum score (inclusive).
+        :type score_max: float
+        :param order_by: Field to sort by.
+        :type order_by: MonitorStatusOrderBy
+        :param sort: Sort direction.
+        :type sort: SortDirection
+        :param cursor: Opaque pagination cursor from a previous response.
         :type cursor: str
-        :param status:
-        :type status: List[str]
-        :param resource_type:
-        :type resource_type: List[str]
-        :param q:
-        :type q: str
-        :param var_from:
-        :type var_from: str
-        :param to:
-        :type to: str
+        :param limit: Maximum number of items to return.
+        :type limit: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1558,15 +2481,15 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_graph_urls_monitor_graphs_graph_id_urls_get_serialize(
-            graph_id=graph_id,
-            limit=limit,
+        _param = self._list_monitor_statuses_accounts_account_id_monitoring_status_get_serialize(
+            account_id=account_id,
+            url=url,
+            score_min=score_min,
+            score_max=score_max,
+            order_by=order_by,
+            sort=sort,
             cursor=cursor,
-            status=status,
-            resource_type=resource_type,
-            q=q,
-            var_from=var_from,
-            to=to,
+            limit=limit,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1574,8 +2497,8 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UrlListResponse",
-            '422': "HTTPValidationError2",
+            '200': "ListMonitorStatusResponse",
+            '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1589,16 +2512,16 @@ class DefaultApi:
 
 
     @validate_call
-    async def list_graph_urls_monitor_graphs_graph_id_urls_get_without_preload_content(
+    async def list_monitor_statuses_accounts_account_id_monitoring_status_get_without_preload_content(
         self,
-        graph_id: StrictStr,
-        limit: Optional[Annotated[int, Field(le=200, strict=True, ge=1)]] = None,
-        cursor: Optional[StrictStr] = None,
-        status: Optional[List[StrictStr]] = None,
-        resource_type: Optional[List[StrictStr]] = None,
-        q: Optional[StrictStr] = None,
-        var_from: Optional[StrictStr] = None,
-        to: Optional[StrictStr] = None,
+        account_id: StrictStr,
+        url: Annotated[Optional[StrictStr], Field(description="Glob pattern to filter by URL (e.g. `*example.com*`).")] = None,
+        score_min: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Minimum score (inclusive).")] = None,
+        score_max: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Maximum score (inclusive).")] = None,
+        order_by: Annotated[Optional[MonitorStatusOrderBy], Field(description="Field to sort by.")] = None,
+        sort: Annotated[Optional[SortDirection], Field(description="Sort direction.")] = None,
+        cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=50, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1612,25 +2535,25 @@ class DefaultApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """List Graph Urls
+        """List Monitor Statuses
 
 
-        :param graph_id: (required)
-        :type graph_id: str
-        :param limit:
-        :type limit: int
-        :param cursor:
+        :param account_id: (required)
+        :type account_id: str
+        :param url: Glob pattern to filter by URL (e.g. `*example.com*`).
+        :type url: str
+        :param score_min: Minimum score (inclusive).
+        :type score_min: float
+        :param score_max: Maximum score (inclusive).
+        :type score_max: float
+        :param order_by: Field to sort by.
+        :type order_by: MonitorStatusOrderBy
+        :param sort: Sort direction.
+        :type sort: SortDirection
+        :param cursor: Opaque pagination cursor from a previous response.
         :type cursor: str
-        :param status:
-        :type status: List[str]
-        :param resource_type:
-        :type resource_type: List[str]
-        :param q:
-        :type q: str
-        :param var_from:
-        :type var_from: str
-        :param to:
-        :type to: str
+        :param limit: Maximum number of items to return.
+        :type limit: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1653,15 +2576,15 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_graph_urls_monitor_graphs_graph_id_urls_get_serialize(
-            graph_id=graph_id,
-            limit=limit,
+        _param = self._list_monitor_statuses_accounts_account_id_monitoring_status_get_serialize(
+            account_id=account_id,
+            url=url,
+            score_min=score_min,
+            score_max=score_max,
+            order_by=order_by,
+            sort=sort,
             cursor=cursor,
-            status=status,
-            resource_type=resource_type,
-            q=q,
-            var_from=var_from,
-            to=to,
+            limit=limit,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1669,8 +2592,8 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UrlListResponse",
-            '422': "HTTPValidationError2",
+            '200': "ListMonitorStatusResponse",
+            '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1679,16 +2602,16 @@ class DefaultApi:
         return response_data.response
 
 
-    def _list_graph_urls_monitor_graphs_graph_id_urls_get_serialize(
+    def _list_monitor_statuses_accounts_account_id_monitoring_status_get_serialize(
         self,
-        graph_id,
-        limit,
+        account_id,
+        url,
+        score_min,
+        score_max,
+        order_by,
+        sort,
         cursor,
-        status,
-        resource_type,
-        q,
-        var_from,
-        to,
+        limit,
         _request_auth,
         _content_type,
         _headers,
@@ -1698,8 +2621,6 @@ class DefaultApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'status': 'multi',
-            'resource_type': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1710,36 +2631,36 @@ class DefaultApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if graph_id is not None:
-            _path_params['graph_id'] = graph_id
+        if account_id is not None:
+            _path_params['account_id'] = account_id
         # process the query parameters
-        if limit is not None:
+        if url is not None:
             
-            _query_params.append(('limit', limit))
+            _query_params.append(('url', url))
+            
+        if score_min is not None:
+            
+            _query_params.append(('score_min', score_min))
+            
+        if score_max is not None:
+            
+            _query_params.append(('score_max', score_max))
+            
+        if order_by is not None:
+            
+            _query_params.append(('order_by', order_by.value))
+            
+        if sort is not None:
+            
+            _query_params.append(('sort', sort.value))
             
         if cursor is not None:
             
             _query_params.append(('cursor', cursor))
             
-        if status is not None:
+        if limit is not None:
             
-            _query_params.append(('status', status))
-            
-        if resource_type is not None:
-            
-            _query_params.append(('resource_type', resource_type))
-            
-        if q is not None:
-            
-            _query_params.append(('q', q))
-            
-        if var_from is not None:
-            
-            _query_params.append(('from', var_from))
-            
-        if to is not None:
-            
-            _query_params.append(('to', to))
+            _query_params.append(('limit', limit))
             
         # process the header parameters
         # process the form parameters
@@ -1761,7 +2682,7 @@ class DefaultApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/monitor/graphs/{graph_id}/urls',
+            resource_path='/accounts/{account_id}/monitoring/status',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1778,10 +2699,12 @@ class DefaultApi:
 
 
     @validate_call
-    async def list_jobs_monitor_graphs_graph_id_jobs_get(
+    async def list_monitors_accounts_account_id_monitoring_monitors_get(
         self,
-        graph_id: StrictStr,
-        limit: Optional[StrictInt] = None,
+        account_id: StrictStr,
+        status: Annotated[Optional[MonitorStatus], Field(description="Filter by monitor status.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
+        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Number of items to skip.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1794,15 +2717,18 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
-        """List Jobs
+    ) -> ListMonitorsResponse:
+        """List Monitors
 
-        Lists recent jobs for a graph.
 
-        :param graph_id: (required)
-        :type graph_id: str
-        :param limit:
+        :param account_id: (required)
+        :type account_id: str
+        :param status: Filter by monitor status.
+        :type status: MonitorStatus
+        :param limit: Maximum number of items to return.
         :type limit: int
+        :param offset: Number of items to skip.
+        :type offset: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1825,9 +2751,11 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_jobs_monitor_graphs_graph_id_jobs_get_serialize(
-            graph_id=graph_id,
+        _param = self._list_monitors_accounts_account_id_monitoring_monitors_get_serialize(
+            account_id=account_id,
+            status=status,
             limit=limit,
+            offset=offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1835,8 +2763,8 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '422': "HTTPValidationError2",
+            '200': "ListMonitorsResponse",
+            '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1850,10 +2778,12 @@ class DefaultApi:
 
 
     @validate_call
-    async def list_jobs_monitor_graphs_graph_id_jobs_get_with_http_info(
+    async def list_monitors_accounts_account_id_monitoring_monitors_get_with_http_info(
         self,
-        graph_id: StrictStr,
-        limit: Optional[StrictInt] = None,
+        account_id: StrictStr,
+        status: Annotated[Optional[MonitorStatus], Field(description="Filter by monitor status.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
+        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Number of items to skip.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1866,15 +2796,18 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
-        """List Jobs
+    ) -> ApiResponse[ListMonitorsResponse]:
+        """List Monitors
 
-        Lists recent jobs for a graph.
 
-        :param graph_id: (required)
-        :type graph_id: str
-        :param limit:
+        :param account_id: (required)
+        :type account_id: str
+        :param status: Filter by monitor status.
+        :type status: MonitorStatus
+        :param limit: Maximum number of items to return.
         :type limit: int
+        :param offset: Number of items to skip.
+        :type offset: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1897,9 +2830,11 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_jobs_monitor_graphs_graph_id_jobs_get_serialize(
-            graph_id=graph_id,
+        _param = self._list_monitors_accounts_account_id_monitoring_monitors_get_serialize(
+            account_id=account_id,
+            status=status,
             limit=limit,
+            offset=offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1907,8 +2842,8 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '422': "HTTPValidationError2",
+            '200': "ListMonitorsResponse",
+            '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1922,10 +2857,12 @@ class DefaultApi:
 
 
     @validate_call
-    async def list_jobs_monitor_graphs_graph_id_jobs_get_without_preload_content(
+    async def list_monitors_accounts_account_id_monitoring_monitors_get_without_preload_content(
         self,
-        graph_id: StrictStr,
-        limit: Optional[StrictInt] = None,
+        account_id: StrictStr,
+        status: Annotated[Optional[MonitorStatus], Field(description="Filter by monitor status.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
+        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Number of items to skip.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1939,14 +2876,17 @@ class DefaultApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """List Jobs
+        """List Monitors
 
-        Lists recent jobs for a graph.
 
-        :param graph_id: (required)
-        :type graph_id: str
-        :param limit:
+        :param account_id: (required)
+        :type account_id: str
+        :param status: Filter by monitor status.
+        :type status: MonitorStatus
+        :param limit: Maximum number of items to return.
         :type limit: int
+        :param offset: Number of items to skip.
+        :type offset: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1969,9 +2909,11 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_jobs_monitor_graphs_graph_id_jobs_get_serialize(
-            graph_id=graph_id,
+        _param = self._list_monitors_accounts_account_id_monitoring_monitors_get_serialize(
+            account_id=account_id,
+            status=status,
             limit=limit,
+            offset=offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1979,8 +2921,8 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '422': "HTTPValidationError2",
+            '200': "ListMonitorsResponse",
+            '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1989,10 +2931,12 @@ class DefaultApi:
         return response_data.response
 
 
-    def _list_jobs_monitor_graphs_graph_id_jobs_get_serialize(
+    def _list_monitors_accounts_account_id_monitoring_monitors_get_serialize(
         self,
-        graph_id,
+        account_id,
+        status,
         limit,
+        offset,
         _request_auth,
         _content_type,
         _headers,
@@ -2012,12 +2956,20 @@ class DefaultApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if graph_id is not None:
-            _path_params['graph_id'] = graph_id
+        if account_id is not None:
+            _path_params['account_id'] = account_id
         # process the query parameters
+        if status is not None:
+            
+            _query_params.append(('status', status.value))
+            
         if limit is not None:
             
             _query_params.append(('limit', limit))
+            
+        if offset is not None:
+            
+            _query_params.append(('offset', offset))
             
         # process the header parameters
         # process the form parameters
@@ -2039,7 +2991,1128 @@ class DefaultApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/monitor/graphs/{graph_id}/jobs',
+            resource_path='/accounts/{account_id}/monitoring/monitors',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def list_runs_accounts_account_id_monitoring_runs_get(
+        self,
+        account_id: StrictStr,
+        limit: Annotated[Optional[Annotated[int, Field(le=20, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
+        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Number of items to skip.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ListRunsResponse:
+        """List Runs
+
+
+        :param account_id: (required)
+        :type account_id: str
+        :param limit: Maximum number of items to return.
+        :type limit: int
+        :param offset: Number of items to skip.
+        :type offset: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_runs_accounts_account_id_monitoring_runs_get_serialize(
+            account_id=account_id,
+            limit=limit,
+            offset=offset,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListRunsResponse",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def list_runs_accounts_account_id_monitoring_runs_get_with_http_info(
+        self,
+        account_id: StrictStr,
+        limit: Annotated[Optional[Annotated[int, Field(le=20, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
+        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Number of items to skip.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ListRunsResponse]:
+        """List Runs
+
+
+        :param account_id: (required)
+        :type account_id: str
+        :param limit: Maximum number of items to return.
+        :type limit: int
+        :param offset: Number of items to skip.
+        :type offset: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_runs_accounts_account_id_monitoring_runs_get_serialize(
+            account_id=account_id,
+            limit=limit,
+            offset=offset,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListRunsResponse",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def list_runs_accounts_account_id_monitoring_runs_get_without_preload_content(
+        self,
+        account_id: StrictStr,
+        limit: Annotated[Optional[Annotated[int, Field(le=20, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
+        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Number of items to skip.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """List Runs
+
+
+        :param account_id: (required)
+        :type account_id: str
+        :param limit: Maximum number of items to return.
+        :type limit: int
+        :param offset: Number of items to skip.
+        :type offset: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_runs_accounts_account_id_monitoring_runs_get_serialize(
+            account_id=account_id,
+            limit=limit,
+            offset=offset,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListRunsResponse",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_runs_accounts_account_id_monitoring_runs_get_serialize(
+        self,
+        account_id,
+        limit,
+        offset,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if account_id is not None:
+            _path_params['account_id'] = account_id
+        # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if offset is not None:
+            
+            _query_params.append(('offset', offset))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/accounts/{account_id}/monitoring/runs',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def readiness_health_ready_get(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ReadinessResponse:
+        """Readiness
+
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._readiness_health_ready_get_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ReadinessResponse",
+            '503': "ReadinessResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def readiness_health_ready_get_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ReadinessResponse]:
+        """Readiness
+
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._readiness_health_ready_get_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ReadinessResponse",
+            '503': "ReadinessResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def readiness_health_ready_get_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Readiness
+
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._readiness_health_ready_get_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ReadinessResponse",
+            '503': "ReadinessResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _readiness_health_ready_get_serialize(
+        self,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/health/ready',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def replace_monitors_accounts_account_id_monitoring_monitors_put(
+        self,
+        account_id: StrictStr,
+        replace_monitors_request: ReplaceMonitorsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> List[MonitorResponse]:
+        """Replace Monitors
+
+
+        :param account_id: (required)
+        :type account_id: str
+        :param replace_monitors_request: (required)
+        :type replace_monitors_request: ReplaceMonitorsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._replace_monitors_accounts_account_id_monitoring_monitors_put_serialize(
+            account_id=account_id,
+            replace_monitors_request=replace_monitors_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[MonitorResponse]",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def replace_monitors_accounts_account_id_monitoring_monitors_put_with_http_info(
+        self,
+        account_id: StrictStr,
+        replace_monitors_request: ReplaceMonitorsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[List[MonitorResponse]]:
+        """Replace Monitors
+
+
+        :param account_id: (required)
+        :type account_id: str
+        :param replace_monitors_request: (required)
+        :type replace_monitors_request: ReplaceMonitorsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._replace_monitors_accounts_account_id_monitoring_monitors_put_serialize(
+            account_id=account_id,
+            replace_monitors_request=replace_monitors_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[MonitorResponse]",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def replace_monitors_accounts_account_id_monitoring_monitors_put_without_preload_content(
+        self,
+        account_id: StrictStr,
+        replace_monitors_request: ReplaceMonitorsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Replace Monitors
+
+
+        :param account_id: (required)
+        :type account_id: str
+        :param replace_monitors_request: (required)
+        :type replace_monitors_request: ReplaceMonitorsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._replace_monitors_accounts_account_id_monitoring_monitors_put_serialize(
+            account_id=account_id,
+            replace_monitors_request=replace_monitors_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[MonitorResponse]",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _replace_monitors_accounts_account_id_monitoring_monitors_put_serialize(
+        self,
+        account_id,
+        replace_monitors_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if account_id is not None:
+            _path_params['account_id'] = account_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if replace_monitors_request is not None:
+            _body_params = replace_monitors_request
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/accounts/{account_id}/monitoring/monitors',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def update_monitor_accounts_account_id_monitoring_monitors_monitor_id_put(
+        self,
+        monitor_id: StrictStr,
+        account_id: StrictStr,
+        add_resource_request: AddResourceRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> MonitorResponse:
+        """Update Monitor
+
+
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param add_resource_request: (required)
+        :type add_resource_request: AddResourceRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_monitor_accounts_account_id_monitoring_monitors_monitor_id_put_serialize(
+            monitor_id=monitor_id,
+            account_id=account_id,
+            add_resource_request=add_resource_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MonitorResponse",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def update_monitor_accounts_account_id_monitoring_monitors_monitor_id_put_with_http_info(
+        self,
+        monitor_id: StrictStr,
+        account_id: StrictStr,
+        add_resource_request: AddResourceRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[MonitorResponse]:
+        """Update Monitor
+
+
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param add_resource_request: (required)
+        :type add_resource_request: AddResourceRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_monitor_accounts_account_id_monitoring_monitors_monitor_id_put_serialize(
+            monitor_id=monitor_id,
+            account_id=account_id,
+            add_resource_request=add_resource_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MonitorResponse",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def update_monitor_accounts_account_id_monitoring_monitors_monitor_id_put_without_preload_content(
+        self,
+        monitor_id: StrictStr,
+        account_id: StrictStr,
+        add_resource_request: AddResourceRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Update Monitor
+
+
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param add_resource_request: (required)
+        :type add_resource_request: AddResourceRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_monitor_accounts_account_id_monitoring_monitors_monitor_id_put_serialize(
+            monitor_id=monitor_id,
+            account_id=account_id,
+            add_resource_request=add_resource_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MonitorResponse",
+            '422': "HTTPValidationError1",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _update_monitor_accounts_account_id_monitoring_monitors_monitor_id_put_serialize(
+        self,
+        monitor_id,
+        account_id,
+        add_resource_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if monitor_id is not None:
+            _path_params['monitor_id'] = monitor_id
+        if account_id is not None:
+            _path_params['account_id'] = account_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if add_resource_request is not None:
+            _body_params = add_resource_request
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/accounts/{account_id}/monitoring/monitors/{monitor_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
