@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.0.3
+  version: 2.0.4
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -397,6 +397,18 @@ paths:
           description: Glob pattern to filter by URL (e.g. `*example.com*`).
           title: Url
         description: Glob pattern to filter by URL (e.g. `*example.com*`).
+      - name: status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/MonitorStatusCheckStatus'
+          - type: 'null'
+          description: Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).
+          title: Status
+        description: Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).
       - name: score_min
         in: query
         required: false
@@ -796,6 +808,14 @@ components:
       - disabled
       - all
       title: MonitorStatus
+    MonitorStatusCheckStatus:
+      type: string
+      enum:
+      - OK
+      - WARNING
+      - ERROR
+      - PENDING
+      title: MonitorStatusCheckStatus
     MonitorStatusOrderBy:
       type: string
       enum:
@@ -813,10 +833,7 @@ components:
           type: string
           title: Url
         status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Status
+          $ref: '#/components/schemas/MonitorStatusCheckStatus'
         score:
           anyOf:
           - type: number
@@ -863,6 +880,7 @@ components:
       required:
       - monitor_id
       - url
+      - status
       title: MonitorStatusResponse
     ReadinessResponse:
       properties:
