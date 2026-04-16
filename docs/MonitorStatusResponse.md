@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **monitor_id** | **str** |  | 
 **url** | **str** |  | 
-**status** | **str** |  | [optional] 
+**status** | [**MonitorStatusCheckStatus**](MonitorStatusCheckStatus.md) |  | 
 **score** | **float** |  | [optional] 
 **ttfb_ms** | **float** |  | [optional] 
 **response_time_ms** | **float** |  | [optional] 

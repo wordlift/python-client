@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.151.0"
+__version__ = "1.152.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -225,6 +225,7 @@ from wordlift_client.models.model_field import ModelField
 from wordlift_client.models.monitor_response import MonitorResponse
 from wordlift_client.models.monitor_run_status import MonitorRunStatus
 from wordlift_client.models.monitor_status import MonitorStatus
+from wordlift_client.models.monitor_status_check_status import MonitorStatusCheckStatus
 from wordlift_client.models.monitor_status_order_by import MonitorStatusOrderBy
 from wordlift_client.models.monitor_status_response import MonitorStatusResponse
 from wordlift_client.models.network_account_info import NetworkAccountInfo

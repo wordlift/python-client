@@ -29,6 +29,7 @@ from wordlift_client.models.list_monitors_response import ListMonitorsResponse
 from wordlift_client.models.list_runs_response import ListRunsResponse
 from wordlift_client.models.monitor_response import MonitorResponse
 from wordlift_client.models.monitor_status import MonitorStatus
+from wordlift_client.models.monitor_status_check_status import MonitorStatusCheckStatus
 from wordlift_client.models.monitor_status_order_by import MonitorStatusOrderBy
 from wordlift_client.models.monitor_status_response import MonitorStatusResponse
 from wordlift_client.models.readiness_response import ReadinessResponse
@@ -2326,6 +2327,7 @@ class DefaultApi:
         self,
         account_id: StrictStr,
         url: Annotated[Optional[StrictStr], Field(description="Glob pattern to filter by URL (e.g. `*example.com*`).")] = None,
+        status: Annotated[Optional[List[MonitorStatusCheckStatus]], Field(description="Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).")] = None,
         score_min: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Minimum score (inclusive).")] = None,
         score_max: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Maximum score (inclusive).")] = None,
         order_by: Annotated[Optional[MonitorStatusOrderBy], Field(description="Field to sort by.")] = None,
@@ -2352,6 +2354,8 @@ class DefaultApi:
         :type account_id: str
         :param url: Glob pattern to filter by URL (e.g. `*example.com*`).
         :type url: str
+        :param status: Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).
+        :type status: List[MonitorStatusCheckStatus]
         :param score_min: Minimum score (inclusive).
         :type score_min: float
         :param score_max: Maximum score (inclusive).
@@ -2389,6 +2393,7 @@ class DefaultApi:
         _param = self._list_monitor_statuses_accounts_account_id_monitoring_status_get_serialize(
             account_id=account_id,
             url=url,
+            status=status,
             score_min=score_min,
             score_max=score_max,
             order_by=order_by,
@@ -2421,6 +2426,7 @@ class DefaultApi:
         self,
         account_id: StrictStr,
         url: Annotated[Optional[StrictStr], Field(description="Glob pattern to filter by URL (e.g. `*example.com*`).")] = None,
+        status: Annotated[Optional[List[MonitorStatusCheckStatus]], Field(description="Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).")] = None,
         score_min: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Minimum score (inclusive).")] = None,
         score_max: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Maximum score (inclusive).")] = None,
         order_by: Annotated[Optional[MonitorStatusOrderBy], Field(description="Field to sort by.")] = None,
@@ -2447,6 +2453,8 @@ class DefaultApi:
         :type account_id: str
         :param url: Glob pattern to filter by URL (e.g. `*example.com*`).
         :type url: str
+        :param status: Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).
+        :type status: List[MonitorStatusCheckStatus]
         :param score_min: Minimum score (inclusive).
         :type score_min: float
         :param score_max: Maximum score (inclusive).
@@ -2484,6 +2492,7 @@ class DefaultApi:
         _param = self._list_monitor_statuses_accounts_account_id_monitoring_status_get_serialize(
             account_id=account_id,
             url=url,
+            status=status,
             score_min=score_min,
             score_max=score_max,
             order_by=order_by,
@@ -2516,6 +2525,7 @@ class DefaultApi:
         self,
         account_id: StrictStr,
         url: Annotated[Optional[StrictStr], Field(description="Glob pattern to filter by URL (e.g. `*example.com*`).")] = None,
+        status: Annotated[Optional[List[MonitorStatusCheckStatus]], Field(description="Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).")] = None,
         score_min: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Minimum score (inclusive).")] = None,
         score_max: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Maximum score (inclusive).")] = None,
         order_by: Annotated[Optional[MonitorStatusOrderBy], Field(description="Field to sort by.")] = None,
@@ -2542,6 +2552,8 @@ class DefaultApi:
         :type account_id: str
         :param url: Glob pattern to filter by URL (e.g. `*example.com*`).
         :type url: str
+        :param status: Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).
+        :type status: List[MonitorStatusCheckStatus]
         :param score_min: Minimum score (inclusive).
         :type score_min: float
         :param score_max: Maximum score (inclusive).
@@ -2579,6 +2591,7 @@ class DefaultApi:
         _param = self._list_monitor_statuses_accounts_account_id_monitoring_status_get_serialize(
             account_id=account_id,
             url=url,
+            status=status,
             score_min=score_min,
             score_max=score_max,
             order_by=order_by,
@@ -2606,6 +2619,7 @@ class DefaultApi:
         self,
         account_id,
         url,
+        status,
         score_min,
         score_max,
         order_by,
@@ -2621,6 +2635,7 @@ class DefaultApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'status': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2637,6 +2652,10 @@ class DefaultApi:
         if url is not None:
             
             _query_params.append(('url', url))
+            
+        if status is not None:
+            
+            _query_params.append(('status', status))
             
         if score_min is not None:
             

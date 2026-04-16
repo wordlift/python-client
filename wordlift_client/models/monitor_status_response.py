@@ -21,6 +21,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from wordlift_client.models.monitor_status_check_status import MonitorStatusCheckStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +31,7 @@ class MonitorStatusResponse(BaseModel):
     """ # noqa: E501
     monitor_id: StrictStr
     url: StrictStr
-    status: Optional[StrictStr] = None
+    status: MonitorStatusCheckStatus
     score: Optional[Union[StrictFloat, StrictInt]] = None
     ttfb_ms: Optional[Union[StrictFloat, StrictInt]] = None
     response_time_ms: Optional[Union[StrictFloat, StrictInt]] = None
@@ -80,11 +81,6 @@ class MonitorStatusResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if status (nullable) is None
-        # and model_fields_set contains the field
-        if self.status is None and "status" in self.model_fields_set:
-            _dict['status'] = None
-
         # set to None if score (nullable) is None
         # and model_fields_set contains the field
         if self.score is None and "score" in self.model_fields_set:

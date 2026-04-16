@@ -654,7 +654,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_monitor_statuses_accounts_account_id_monitoring_status_get**
-> ListMonitorStatusResponse list_monitor_statuses_accounts_account_id_monitoring_status_get(account_id, url=url, score_min=score_min, score_max=score_max, order_by=order_by, sort=sort, cursor=cursor, limit=limit)
+> ListMonitorStatusResponse list_monitor_statuses_accounts_account_id_monitoring_status_get(account_id, url=url, status=status, score_min=score_min, score_max=score_max, order_by=order_by, sort=sort, cursor=cursor, limit=limit)
 
 List Monitor Statuses
 
@@ -665,6 +665,7 @@ List Monitor Statuses
 ```python
 import wordlift_client
 from wordlift_client.models.list_monitor_status_response import ListMonitorStatusResponse
+from wordlift_client.models.monitor_status_check_status import MonitorStatusCheckStatus
 from wordlift_client.models.monitor_status_order_by import MonitorStatusOrderBy
 from wordlift_client.models.sort_direction import SortDirection
 from wordlift_client.rest import ApiException
@@ -693,6 +694,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     api_instance = wordlift_client.DefaultApi(api_client)
     account_id = 'account_id_example' # str | 
     url = 'url_example' # str | Glob pattern to filter by URL (e.g. `*example.com*`). (optional)
+    status = [wordlift_client.MonitorStatusCheckStatus()] # List[MonitorStatusCheckStatus] | Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`). (optional)
     score_min = 3.4 # float | Minimum score (inclusive). (optional)
     score_max = 3.4 # float | Maximum score (inclusive). (optional)
     order_by = wordlift_client.MonitorStatusOrderBy() # MonitorStatusOrderBy | Field to sort by. (optional)
@@ -702,7 +704,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # List Monitor Statuses
-        api_response = await api_instance.list_monitor_statuses_accounts_account_id_monitoring_status_get(account_id, url=url, score_min=score_min, score_max=score_max, order_by=order_by, sort=sort, cursor=cursor, limit=limit)
+        api_response = await api_instance.list_monitor_statuses_accounts_account_id_monitoring_status_get(account_id, url=url, status=status, score_min=score_min, score_max=score_max, order_by=order_by, sort=sort, cursor=cursor, limit=limit)
         print("The response of DefaultApi->list_monitor_statuses_accounts_account_id_monitoring_status_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -718,6 +720,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **account_id** | **str**|  | 
  **url** | **str**| Glob pattern to filter by URL (e.g. &#x60;*example.com*&#x60;). | [optional] 
+ **status** | [**List[MonitorStatusCheckStatus]**](MonitorStatusCheckStatus.md)| Filter by check status (repeatable, e.g. &#x60;?status&#x3D;ERROR&amp;status&#x3D;WARNING&#x60;). | [optional] 
  **score_min** | **float**| Minimum score (inclusive). | [optional] 
  **score_max** | **float**| Maximum score (inclusive). | [optional] 
  **order_by** | [**MonitorStatusOrderBy**](.md)| Field to sort by. | [optional] 
