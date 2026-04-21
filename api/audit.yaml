@@ -6,7 +6,7 @@ info:
     It evaluates site files (including .well-known directory), SEO fundamentals, structured data,
     content structure, image accessibility, automation readiness, and JavaScript rendering to provide
     actionable insights for improving both search engine and AI agent discoverability.
-  version: 1.1.0
+  version: 1.2.0
 servers:
   - url: https://api.wordlift.io
     description: Production server
@@ -18,19 +18,28 @@ paths:
       summary: Website Audit
       description: |
         Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes:
-        - Site files (robots.txt, llms.txt, .well-known directory)
+        - Site files (robots.txt, llms.txt, SKILL.md, .well-known directory)
         - SEO fundamentals (title, description, headings)
         - Structured data (Schema.org, JSON-LD, Microdata)
-        - Content structure and semantic HTML
+        - Content structure, semantic HTML, and token budget
         - Image accessibility
         - Automation readiness for AI agents
         - JavaScript rendering and bot accessibility
-        - WebMCP support (.well-known/mcp.json manifest and `<link rel="mcp">` tag detection)
+        - MCP / WebMCP discovery surfaces:
+          - `<link rel="mcp">` HTML discovery tag
+          - `/.well-known/mcp.json` (legacy MCP manifest)
+          - `/.well-known/mcp/server-card.json` (MCP server card, SEP-1649 draft)
+          - `/.well-known/webmcp/tools.json` (Chrome Labs WebMCP tools manifest)
+        - Agent Skills Discovery (`/.well-known/agent-skills/index.json`, Cloudflare RFC v0.2.0) and top-level `SKILL.md`
+        - Deterministic token budget (Readability + Turndown, chars/4 heuristic)
         - Content freshness (legacy field, status Unknown)
         - Internal linking (legacy field, status Unknown)
         - HTML semantics (legacy field, status Unknown)
 
-        Returns an overall score (0-100) and detailed recommendations for improvement.
+        Returns an overall score (0-100) and detailed recommendations for improvement. The overall score is
+        the clamped sum of the per-criterion scores emitted by the LLM plus post-hoc bonuses:
+        +1 for `<link rel="mcp">`, +1 for WebMCP `tools.json`, +1 for legacy `mcp.json` or `mcp/server-card.json`,
+        +2 for Agent Skills Discovery or top-level `SKILL.md`, and +2 when the estimated token budget is ≤ 30 000.
       operationId: audit_website
       requestBody:
         required: true
@@ -59,8 +68,8 @@ paths:
                       url: "https://www.wordlift.io/"
                       domain: "https://www.wordlift.io"
                       timestamp: "2026-01-27T16:55:07.918Z"
-                      overallScore: 43
-                      score: 43
+                      overallScore: 55
+                      score: 55
                       summary: "Wordlift.io presents itself as an AI-powered SEO platform..."
                       siteFiles:
                         score: 7
@@ -69,6 +78,7 @@ paths:
                         robotsTxt: "found"
                         llmsTxt: "found"
                         hasLlmsTxt: true
+                        hasSkillMd: false
                         botStatus:
                           - name: "GPTBot"
                             vendor: "OpenAI"
@@ -77,15 +87,13 @@ paths:
                             vendor: "Anthropic"
                             status: "Allowed"
                         wellKnown:
-                          aiPlugin: false
-                          ucp: false
-                          security: false
-                          assetLinks: false
-                          appleAssociation: false
-                          llmsTxt: false
                           mcpJson: false
+                          mcpServerCard: false
+                          webmcpToolsJson: false
                           mcpLinkTag: false
                           mcpEndpoint: null
+                          agentSkillsIndex: false
+                          agentSkillsCount: 0
                       seoFundamentals:
                         score: 15
                         status: "Needs Improvement"
@@ -110,6 +118,8 @@ paths:
                         explanation: "The site likely uses semantic HTML elements..."
                         hasSemanticElements: true
                         hasLandmarks: true
+                        tokenCount: 18342
+                        tokenBudgetStatus: "Good"
                       imageAccessibility:
                         score: 3
                         status: "Needs Improvement"
@@ -339,29 +349,17 @@ components:
 
     WellKnownFiles:
       type: object
-      description: Status of .well-known directory files
+      description: MCP / WebMCP / Agent Skills discovery surfaces detected under .well-known and in the page HTML.
       properties:
-        aiPlugin:
-          type: boolean
-          description: Whether .well-known/ai-plugin.json exists (ChatGPT/OpenAI plugins)
-        ucp:
-          type: boolean
-          description: Whether .well-known/ucp.json exists (Universal Commerce Protocol)
-        security:
-          type: boolean
-          description: Whether .well-known/security.txt exists (security contact info)
-        assetLinks:
-          type: boolean
-          description: Whether .well-known/assetlinks.json exists (Android deep linking)
-        appleAssociation:
-          type: boolean
-          description: Whether .well-known/apple-app-site-association exists (iOS deep linking)
-        llmsTxt:
-          type: boolean
-          description: Whether .well-known/llms.txt exists (alternative LLM instructions location)
         mcpJson:
           type: boolean
-          description: Whether .well-known/mcp.json exists (WebMCP manifest exposing callable tools to AI agents)
+          description: Whether `/.well-known/mcp.json` exists (legacy MCP server manifest path)
+        mcpServerCard:
+          type: boolean
+          description: Whether `/.well-known/mcp/server-card.json` exists (MCP server card, SEP-1649 draft)
+        webmcpToolsJson:
+          type: boolean
+          description: Whether `/.well-known/webmcp/tools.json` exists (Chrome Labs WebMCP tools manifest)
         mcpLinkTag:
           type: boolean
           description: Whether a `<link rel="mcp">` discovery tag was detected in the page HTML
@@ -369,6 +367,13 @@ components:
           type: string
           nullable: true
           description: The href value of the `<link rel="mcp">` tag, if present; null otherwise
+        agentSkillsIndex:
+          type: boolean
+          description: Whether `/.well-known/agent-skills/index.json` exists (Agent Skills Discovery, Cloudflare RFC v0.2.0)
+        agentSkillsCount:
+          type: integer
+          minimum: 0
+          description: Number of skills listed in the Agent Skills Discovery index (0 when the index is absent or empty)
 
     SiteFiles:
       type: object
@@ -376,8 +381,10 @@ components:
         score:
           type: integer
           minimum: 0
-          maximum: 12
-          description: Numeric score for site files (0-12; up to +2 bonus for WebMCP support)
+          maximum: 10
+          description: |
+            Numeric score for site files (0-10). MCP / WebMCP / Agent Skills / SKILL.md signals are
+            applied as post-hoc bonuses on `overallScore`, not on this per-criterion score.
         status:
           type: string
           enum: [Good, Needs Improvement, Poor, Unknown]
@@ -396,6 +403,9 @@ components:
         hasLlmsTxt:
           type: boolean
           description: Whether llms.txt file exists
+        hasSkillMd:
+          type: boolean
+          description: Whether a top-level `SKILL.md` file exists (Agent Skills convention)
         botStatus:
           type: array
           items:
@@ -502,6 +512,20 @@ components:
         hasLandmarks:
           type: boolean
           description: Whether ARIA landmarks are present
+        tokenCount:
+          type: integer
+          minimum: 0
+          description: |
+            Deterministic token-budget estimate for the main content. Computed by running Mozilla
+            Readability on the page, converting the extracted article to Markdown via Turndown, and
+            dividing the character count by 4 (coarse tokens≈chars/4 heuristic).
+        tokenBudgetStatus:
+          type: string
+          enum: [Good, Fair, Exceeded]
+          description: |
+            Qualitative bucket for `tokenCount` relative to typical LLM context budgets
+            (Good ≤ 20 000, Fair ≤ 30 000, Exceeded otherwise). The `overallScore`
+            receives a +2 bonus when `tokenCount ≤ 30 000`.
 
     ImageAccessibility:
       type: object
