@@ -1,20 +1,18 @@
 # WellKnownFiles
 
-Status of .well-known directory files
+MCP / WebMCP / Agent Skills discovery surfaces detected under .well-known and in the page HTML.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ai_plugin** | **bool** | Whether .well-known/ai-plugin.json exists (ChatGPT/OpenAI plugins) | [optional] 
-**ucp** | **bool** | Whether .well-known/ucp.json exists (Universal Commerce Protocol) | [optional] 
-**security** | **bool** | Whether .well-known/security.txt exists (security contact info) | [optional] 
-**asset_links** | **bool** | Whether .well-known/assetlinks.json exists (Android deep linking) | [optional] 
-**apple_association** | **bool** | Whether .well-known/apple-app-site-association exists (iOS deep linking) | [optional] 
-**llms_txt** | **bool** | Whether .well-known/llms.txt exists (alternative LLM instructions location) | [optional] 
-**mcp_json** | **bool** | Whether .well-known/mcp.json exists (WebMCP manifest exposing callable tools to AI agents) | [optional] 
+**mcp_json** | **bool** | Whether &#x60;/.well-known/mcp.json&#x60; exists (legacy MCP server manifest path) | [optional] 
+**mcp_server_card** | **bool** | Whether &#x60;/.well-known/mcp/server-card.json&#x60; exists (MCP server card, SEP-1649 draft) | [optional] 
+**webmcp_tools_json** | **bool** | Whether &#x60;/.well-known/webmcp/tools.json&#x60; exists (Chrome Labs WebMCP tools manifest) | [optional] 
 **mcp_link_tag** | **bool** | Whether a &#x60;&lt;link rel&#x3D;\&quot;mcp\&quot;&gt;&#x60; discovery tag was detected in the page HTML | [optional] 
 **mcp_endpoint** | **str** | The href value of the &#x60;&lt;link rel&#x3D;\&quot;mcp\&quot;&gt;&#x60; tag, if present; null otherwise | [optional] 
+**agent_skills_index** | **bool** | Whether &#x60;/.well-known/agent-skills/index.json&#x60; exists (Agent Skills Discovery, Cloudflare RFC v0.2.0) | [optional] 
+**agent_skills_count** | **int** | Number of skills listed in the Agent Skills Discovery index (0 when the index is absent or empty) | [optional] 
 
 ## Example
 

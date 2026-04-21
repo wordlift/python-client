@@ -33,7 +33,9 @@ class ContentStructure(BaseModel):
     explanation: Optional[StrictStr] = None
     has_semantic_elements: Optional[StrictBool] = Field(default=None, description="Whether semantic HTML elements are used", alias="hasSemanticElements")
     has_landmarks: Optional[StrictBool] = Field(default=None, description="Whether ARIA landmarks are present", alias="hasLandmarks")
-    __properties: ClassVar[List[str]] = ["score", "status", "explanation", "hasSemanticElements", "hasLandmarks"]
+    token_count: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="Deterministic token-budget estimate for the main content. Computed by running Mozilla Readability on the page, converting the extracted article to Markdown via Turndown, and dividing the character count by 4 (coarse tokens≈chars/4 heuristic). ", alias="tokenCount")
+    token_budget_status: Optional[StrictStr] = Field(default=None, description="Qualitative bucket for `tokenCount` relative to typical LLM context budgets (Good ≤ 20 000, Fair ≤ 30 000, Exceeded otherwise). The `overallScore` receives a +2 bonus when `tokenCount ≤ 30 000`. ", alias="tokenBudgetStatus")
+    __properties: ClassVar[List[str]] = ["score", "status", "explanation", "hasSemanticElements", "hasLandmarks", "tokenCount", "tokenBudgetStatus"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -43,6 +45,16 @@ class ContentStructure(BaseModel):
 
         if value not in set(['Good', 'Needs Improvement', 'Poor', 'Unknown']):
             raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor', 'Unknown')")
+        return value
+
+    @field_validator('token_budget_status')
+    def token_budget_status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['Good', 'Fair', 'Exceeded']):
+            raise ValueError("must be one of enum values ('Good', 'Fair', 'Exceeded')")
         return value
 
     model_config = ConfigDict(
@@ -100,7 +112,9 @@ class ContentStructure(BaseModel):
             "status": obj.get("status"),
             "explanation": obj.get("explanation"),
             "hasSemanticElements": obj.get("hasSemanticElements"),
-            "hasLandmarks": obj.get("hasLandmarks")
+            "hasLandmarks": obj.get("hasLandmarks"),
+            "tokenCount": obj.get("tokenCount"),
+            "tokenBudgetStatus": obj.get("tokenBudgetStatus")
         })
         return _obj
 

@@ -20,23 +20,22 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
 class WellKnownFiles(BaseModel):
     """
-    Status of .well-known directory files
+    MCP / WebMCP / Agent Skills discovery surfaces detected under .well-known and in the page HTML.
     """ # noqa: E501
-    ai_plugin: Optional[StrictBool] = Field(default=None, description="Whether .well-known/ai-plugin.json exists (ChatGPT/OpenAI plugins)", alias="aiPlugin")
-    ucp: Optional[StrictBool] = Field(default=None, description="Whether .well-known/ucp.json exists (Universal Commerce Protocol)")
-    security: Optional[StrictBool] = Field(default=None, description="Whether .well-known/security.txt exists (security contact info)")
-    asset_links: Optional[StrictBool] = Field(default=None, description="Whether .well-known/assetlinks.json exists (Android deep linking)", alias="assetLinks")
-    apple_association: Optional[StrictBool] = Field(default=None, description="Whether .well-known/apple-app-site-association exists (iOS deep linking)", alias="appleAssociation")
-    llms_txt: Optional[StrictBool] = Field(default=None, description="Whether .well-known/llms.txt exists (alternative LLM instructions location)", alias="llmsTxt")
-    mcp_json: Optional[StrictBool] = Field(default=None, description="Whether .well-known/mcp.json exists (WebMCP manifest exposing callable tools to AI agents)", alias="mcpJson")
+    mcp_json: Optional[StrictBool] = Field(default=None, description="Whether `/.well-known/mcp.json` exists (legacy MCP server manifest path)", alias="mcpJson")
+    mcp_server_card: Optional[StrictBool] = Field(default=None, description="Whether `/.well-known/mcp/server-card.json` exists (MCP server card, SEP-1649 draft)", alias="mcpServerCard")
+    webmcp_tools_json: Optional[StrictBool] = Field(default=None, description="Whether `/.well-known/webmcp/tools.json` exists (Chrome Labs WebMCP tools manifest)", alias="webmcpToolsJson")
     mcp_link_tag: Optional[StrictBool] = Field(default=None, description="Whether a `<link rel=\"mcp\">` discovery tag was detected in the page HTML", alias="mcpLinkTag")
     mcp_endpoint: Optional[StrictStr] = Field(default=None, description="The href value of the `<link rel=\"mcp\">` tag, if present; null otherwise", alias="mcpEndpoint")
-    __properties: ClassVar[List[str]] = ["aiPlugin", "ucp", "security", "assetLinks", "appleAssociation", "llmsTxt", "mcpJson", "mcpLinkTag", "mcpEndpoint"]
+    agent_skills_index: Optional[StrictBool] = Field(default=None, description="Whether `/.well-known/agent-skills/index.json` exists (Agent Skills Discovery, Cloudflare RFC v0.2.0)", alias="agentSkillsIndex")
+    agent_skills_count: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="Number of skills listed in the Agent Skills Discovery index (0 when the index is absent or empty)", alias="agentSkillsCount")
+    __properties: ClassVar[List[str]] = ["mcpJson", "mcpServerCard", "webmcpToolsJson", "mcpLinkTag", "mcpEndpoint", "agentSkillsIndex", "agentSkillsCount"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,15 +93,13 @@ class WellKnownFiles(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "aiPlugin": obj.get("aiPlugin"),
-            "ucp": obj.get("ucp"),
-            "security": obj.get("security"),
-            "assetLinks": obj.get("assetLinks"),
-            "appleAssociation": obj.get("appleAssociation"),
-            "llmsTxt": obj.get("llmsTxt"),
             "mcpJson": obj.get("mcpJson"),
+            "mcpServerCard": obj.get("mcpServerCard"),
+            "webmcpToolsJson": obj.get("webmcpToolsJson"),
             "mcpLinkTag": obj.get("mcpLinkTag"),
-            "mcpEndpoint": obj.get("mcpEndpoint")
+            "mcpEndpoint": obj.get("mcpEndpoint"),
+            "agentSkillsIndex": obj.get("agentSkillsIndex"),
+            "agentSkillsCount": obj.get("agentSkillsCount")
         })
         return _obj
 

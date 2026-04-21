@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **explanation** | **str** |  | [optional] 
 **has_semantic_elements** | **bool** | Whether semantic HTML elements are used | [optional] 
 **has_landmarks** | **bool** | Whether ARIA landmarks are present | [optional] 
+**token_count** | **int** | Deterministic token-budget estimate for the main content. Computed by running Mozilla Readability on the page, converting the extracted article to Markdown via Turndown, and dividing the character count by 4 (coarse tokens≈chars/4 heuristic).  | [optional] 
+**token_budget_status** | **str** | Qualitative bucket for &#x60;tokenCount&#x60; relative to typical LLM context budgets (Good ≤ 20 000, Fair ≤ 30 000, Exceeded otherwise). The &#x60;overallScore&#x60; receives a +2 bonus when &#x60;tokenCount ≤ 30 000&#x60;.  | [optional] 
 
 ## Example
 

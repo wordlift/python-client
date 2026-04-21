@@ -30,15 +30,16 @@ class SiteFiles(BaseModel):
     """
     SiteFiles
     """ # noqa: E501
-    score: Optional[Annotated[int, Field(le=12, strict=True, ge=0)]] = Field(default=None, description="Numeric score for site files (0-12; up to +2 bonus for WebMCP support)")
+    score: Optional[Annotated[int, Field(le=10, strict=True, ge=0)]] = Field(default=None, description="Numeric score for site files (0-10). MCP / WebMCP / Agent Skills / SKILL.md signals are applied as post-hoc bonuses on `overallScore`, not on this per-criterion score. ")
     status: Optional[StrictStr] = Field(default=None, description="Overall status of site files")
     explanation: Optional[StrictStr] = Field(default=None, description="Detailed explanation of site files evaluation")
     robots_txt: Optional[StrictStr] = Field(default=None, description="Status of robots.txt file", alias="robotsTxt")
     llms_txt: Optional[StrictStr] = Field(default=None, description="Status of llms.txt file (AI model instructions)", alias="llmsTxt")
     has_llms_txt: Optional[StrictBool] = Field(default=None, description="Whether llms.txt file exists", alias="hasLlmsTxt")
+    has_skill_md: Optional[StrictBool] = Field(default=None, description="Whether a top-level `SKILL.md` file exists (Agent Skills convention)", alias="hasSkillMd")
     bot_status: Optional[List[BotStatus]] = Field(default=None, description="Access status for various bots", alias="botStatus")
     well_known: Optional[WellKnownFiles] = Field(default=None, alias="wellKnown")
-    __properties: ClassVar[List[str]] = ["score", "status", "explanation", "robotsTxt", "llmsTxt", "hasLlmsTxt", "botStatus", "wellKnown"]
+    __properties: ClassVar[List[str]] = ["score", "status", "explanation", "robotsTxt", "llmsTxt", "hasLlmsTxt", "hasSkillMd", "botStatus", "wellKnown"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -137,6 +138,7 @@ class SiteFiles(BaseModel):
             "robotsTxt": obj.get("robotsTxt"),
             "llmsTxt": obj.get("llmsTxt"),
             "hasLlmsTxt": obj.get("hasLlmsTxt"),
+            "hasSkillMd": obj.get("hasSkillMd"),
             "botStatus": [BotStatus.from_dict(_item) for _item in obj["botStatus"]] if obj.get("botStatus") is not None else None,
             "wellKnown": WellKnownFiles.from_dict(obj["wellKnown"]) if obj.get("wellKnown") is not None else None
         })
