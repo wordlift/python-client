@@ -40,7 +40,7 @@ class ContentGenerationStatsApi:
 
 
     @validate_call
-    async def get4(
+    async def get2(
         self,
         content_generation_id: Annotated[StrictInt, Field(description="The Content Generation id.")],
         _request_timeout: Union[
@@ -83,7 +83,7 @@ class ContentGenerationStatsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get4_serialize(
+        _param = self._get2_serialize(
             content_generation_id=content_generation_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -108,7 +108,7 @@ class ContentGenerationStatsApi:
 
 
     @validate_call
-    async def get4_with_http_info(
+    async def get2_with_http_info(
         self,
         content_generation_id: Annotated[StrictInt, Field(description="The Content Generation id.")],
         _request_timeout: Union[
@@ -151,7 +151,7 @@ class ContentGenerationStatsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get4_serialize(
+        _param = self._get2_serialize(
             content_generation_id=content_generation_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -176,7 +176,7 @@ class ContentGenerationStatsApi:
 
 
     @validate_call
-    async def get4_without_preload_content(
+    async def get2_without_preload_content(
         self,
         content_generation_id: Annotated[StrictInt, Field(description="The Content Generation id.")],
         _request_timeout: Union[
@@ -219,7 +219,7 @@ class ContentGenerationStatsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get4_serialize(
+        _param = self._get2_serialize(
             content_generation_id=content_generation_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -239,7 +239,7 @@ class ContentGenerationStatsApi:
         return response_data.response
 
 
-    def _get4_serialize(
+    def _get2_serialize(
         self,
         content_generation_id,
         _request_auth,

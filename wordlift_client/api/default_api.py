@@ -113,7 +113,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RunResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -184,7 +184,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RunResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -255,7 +255,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RunResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -387,7 +387,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "MonitorResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -459,7 +459,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "MonitorResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -531,7 +531,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "MonitorResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -675,7 +675,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': None,
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -746,7 +746,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': None,
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -817,7 +817,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': None,
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -968,7 +968,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckTimeseriesResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1059,7 +1059,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckTimeseriesResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1150,7 +1150,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckTimeseriesResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1322,7 +1322,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MonitorResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1393,7 +1393,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MonitorResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1464,7 +1464,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MonitorResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1595,7 +1595,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MonitorStatusResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1666,7 +1666,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MonitorStatusResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1737,7 +1737,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MonitorStatusResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1868,7 +1868,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RunResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1939,7 +1939,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RunResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2010,7 +2010,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RunResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2408,7 +2408,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListMonitorStatusResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2507,7 +2507,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListMonitorStatusResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2606,7 +2606,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListMonitorStatusResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2783,7 +2783,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListMonitorsResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2862,7 +2862,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListMonitorsResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2941,7 +2941,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListMonitorsResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3088,7 +3088,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListRunsResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3163,7 +3163,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListRunsResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3238,7 +3238,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListRunsResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3618,7 +3618,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[MonitorResponse]",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3689,7 +3689,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[MonitorResponse]",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3760,7 +3760,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[MonitorResponse]",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3908,7 +3908,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MonitorResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3983,7 +3983,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MonitorResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4058,7 +4058,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MonitorResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,

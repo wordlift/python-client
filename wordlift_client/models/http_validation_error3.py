@@ -18,19 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
+from wordlift_client.models.validation_error4 import ValidationError4
 from typing import Optional, Set
 from typing_extensions import Self
 
-class Request(BaseModel):
+class HTTPValidationError3(BaseModel):
     """
-    The Event request
+    HTTPValidationError3
     """ # noqa: E501
-    source: Optional[StrictStr] = None
-    args: Optional[Dict[str, Any]] = None
-    url: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["source", "args", "url"]
+    detail: Optional[List[ValidationError4]] = None
+    __properties: ClassVar[List[str]] = ["detail"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +49,7 @@ class Request(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Request from a JSON string"""
+        """Create an instance of HTTPValidationError3 from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,11 +70,18 @@ class Request(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in detail (list)
+        _items = []
+        if self.detail:
+            for _item in self.detail:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['detail'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Request from a dict"""
+        """Create an instance of HTTPValidationError3 from a dict"""
         if obj is None:
             return None
 
@@ -83,9 +89,7 @@ class Request(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "source": obj.get("source"),
-            "args": obj.get("args"),
-            "url": obj.get("url")
+            "detail": [ValidationError4.from_dict(_item) for _item in obj["detail"]] if obj.get("detail") is not None else None
         })
         return _obj
 

@@ -23,14 +23,14 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class Request(BaseModel):
+class ValidationError3DetailInner(BaseModel):
     """
-    The Event request
+    ValidationError3DetailInner
     """ # noqa: E501
-    source: Optional[StrictStr] = None
-    args: Optional[Dict[str, Any]] = None
-    url: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["source", "args", "url"]
+    loc: Optional[List[StrictStr]] = None
+    msg: Optional[StrictStr] = None
+    type: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["loc", "msg", "type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +50,7 @@ class Request(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Request from a JSON string"""
+        """Create an instance of ValidationError3DetailInner from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,7 +75,7 @@ class Request(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Request from a dict"""
+        """Create an instance of ValidationError3DetailInner from a dict"""
         if obj is None:
             return None
 
@@ -83,9 +83,9 @@ class Request(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "source": obj.get("source"),
-            "args": obj.get("args"),
-            "url": obj.get("url")
+            "loc": obj.get("loc"),
+            "msg": obj.get("msg"),
+            "type": obj.get("type")
         })
         return _obj
 

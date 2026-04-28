@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.157.0"
+__version__ = "1.158.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -188,6 +188,7 @@ from wordlift_client.models.graphql_request import GraphqlRequest
 from wordlift_client.models.http_validation_error import HTTPValidationError
 from wordlift_client.models.http_validation_error1 import HTTPValidationError1
 from wordlift_client.models.http_validation_error2 import HTTPValidationError2
+from wordlift_client.models.http_validation_error3 import HTTPValidationError3
 from wordlift_client.models.health_response import HealthResponse
 from wordlift_client.models.html import Html
 from wordlift_client.models.html_semantics import HtmlSemantics
@@ -307,9 +308,10 @@ from wordlift_client.models.update_records_request import UpdateRecordsRequest
 from wordlift_client.models.update_site_url_request import UpdateSiteUrlRequest
 from wordlift_client.models.validation_error import ValidationError
 from wordlift_client.models.validation_error1 import ValidationError1
-from wordlift_client.models.validation_error1_detail_inner import ValidationError1DetailInner
 from wordlift_client.models.validation_error2 import ValidationError2
 from wordlift_client.models.validation_error3 import ValidationError3
+from wordlift_client.models.validation_error3_detail_inner import ValidationError3DetailInner
+from wordlift_client.models.validation_error4 import ValidationError4
 from wordlift_client.models.validation_fix import ValidationFix
 from wordlift_client.models.validation_result import ValidationResult
 from wordlift_client.models.validation_type_enum import ValidationTypeEnum

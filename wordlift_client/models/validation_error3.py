@@ -18,9 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
-from wordlift_client.models.location_inner import LocationInner
+from wordlift_client.models.validation_error3_detail_inner import ValidationError3DetailInner
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,12 +28,8 @@ class ValidationError3(BaseModel):
     """
     ValidationError3
     """ # noqa: E501
-    loc: List[LocationInner]
-    msg: StrictStr
-    type: StrictStr
-    input: Optional[Any] = None
-    ctx: Optional[Dict[str, Any]] = None
-    __properties: ClassVar[List[str]] = ["loc", "msg", "type", "input", "ctx"]
+    detail: Optional[List[ValidationError3DetailInner]] = None
+    __properties: ClassVar[List[str]] = ["detail"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -74,18 +70,13 @@ class ValidationError3(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in loc (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in detail (list)
         _items = []
-        if self.loc:
-            for _item in self.loc:
+        if self.detail:
+            for _item in self.detail:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['loc'] = _items
-        # set to None if input (nullable) is None
-        # and model_fields_set contains the field
-        if self.input is None and "input" in self.model_fields_set:
-            _dict['input'] = None
-
+            _dict['detail'] = _items
         return _dict
 
     @classmethod
@@ -98,11 +89,7 @@ class ValidationError3(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "loc": [LocationInner.from_dict(_item) for _item in obj["loc"]] if obj.get("loc") is not None else None,
-            "msg": obj.get("msg"),
-            "type": obj.get("type"),
-            "input": obj.get("input"),
-            "ctx": obj.get("ctx")
+            "detail": [ValidationError3DetailInner.from_dict(_item) for _item in obj["detail"]] if obj.get("detail") is not None else None
         })
         return _obj
 

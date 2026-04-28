@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**detail** | [**List[ValidationError3]**](ValidationError3.md) |  | [optional] 
+**detail** | [**List[ValidationError2]**](ValidationError2.md) |  | [optional] 
 
 ## Example
 

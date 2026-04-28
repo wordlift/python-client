@@ -98,7 +98,7 @@ class QueryFanOutApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AIVisibilityAnalysisResult",
-            '422': "HTTPValidationError",
+            '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -169,7 +169,7 @@ class QueryFanOutApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AIVisibilityAnalysisResult",
-            '422': "HTTPValidationError",
+            '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -240,7 +240,7 @@ class QueryFanOutApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AIVisibilityAnalysisResult",
-            '422': "HTTPValidationError",
+            '422': "HTTPValidationError1",
         }
         response_data = await self.api_client.call_api(
             *_param,

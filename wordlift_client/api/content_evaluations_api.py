@@ -93,7 +93,7 @@ class ContentEvaluationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ContentEvaluationResponse",
-            '422': "HTTPValidationError",
+            '422': "HTTPValidationError3",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -161,7 +161,7 @@ class ContentEvaluationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ContentEvaluationResponse",
-            '422': "HTTPValidationError",
+            '422': "HTTPValidationError3",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -229,7 +229,7 @@ class ContentEvaluationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ContentEvaluationResponse",
-            '422': "HTTPValidationError",
+            '422': "HTTPValidationError3",
         }
         response_data = await self.api_client.call_api(
             *_param,
