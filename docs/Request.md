@@ -1,14 +1,11 @@
 # Request
 
-The Event request
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**source** | **str** |  | [optional] 
-**args** | **object** |  | [optional] 
-**url** | **str** |  | [optional] 
+**redeem_code** | **str** |  | [optional] 
 
 ## Example
 

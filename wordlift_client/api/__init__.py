@@ -65,7 +65,6 @@ from wordlift_client.api.summarizations_api import SummarizationsApi
 from wordlift_client.api.tokens_api import TokensApi
 from wordlift_client.api.vector_search_nodes_api import VectorSearchNodesApi
 from wordlift_client.api.vector_search_queries_api import VectorSearchQueriesApi
-from wordlift_client.api.vector_search_questions_api import VectorSearchQuestionsApi
 from wordlift_client.api.web_asyncs_metadata_api import WebAsyncsMetadataApi
 from wordlift_client.api.web_asyncs_responses_api import WebAsyncsResponsesApi
 from wordlift_client.api.web_page_scrape_api import WebPageScrapeApi

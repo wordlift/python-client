@@ -128,7 +128,6 @@ docs/GraphqlRequest.md
 docs/HTTPValidationError.md
 docs/HTTPValidationError1.md
 docs/HTTPValidationError2.md
-docs/HTTPValidationError3.md
 docs/HealthResponse.md
 docs/Html.md
 docs/HtmlSemantics.md
@@ -198,7 +197,6 @@ docs/PagePreset.md
 docs/PageRecord.md
 docs/PageRule.md
 docs/PageVectorSearchQueryResponseItem.md
-docs/PageVectorSearchQuestionResponseItem.md
 docs/PageWebsite.md
 docs/PageWebsiteSearch.md
 docs/PageWithLimits.md
@@ -271,10 +269,9 @@ docs/UpdateRecordsRequest.md
 docs/UpdateSiteUrlRequest.md
 docs/ValidationError.md
 docs/ValidationError1.md
+docs/ValidationError1DetailInner.md
 docs/ValidationError2.md
 docs/ValidationError3.md
-docs/ValidationError3DetailInner.md
-docs/ValidationError4.md
 docs/ValidationFix.md
 docs/ValidationResult.md
 docs/ValidationTypeEnum.md
@@ -284,9 +281,6 @@ docs/VectorSearchQueryRequest.md
 docs/VectorSearchQueryResponseItem.md
 docs/VectorSearchQueryResponseItemFieldsValueInner.md
 docs/VectorSearchQueryResponseItemMetadataValue.md
-docs/VectorSearchQuestionRequest.md
-docs/VectorSearchQuestionResponseItem.md
-docs/VectorSearchQuestionsApi.md
 docs/WebAsync.md
 docs/WebAsyncsMetadataApi.md
 docs/WebAsyncsResponsesApi.md
@@ -317,9 +311,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_http_validation_error3.py
-test/test_validation_error3_detail_inner.py
-test/test_validation_error4.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -390,7 +381,6 @@ wordlift_client/api/summarizations_api.py
 wordlift_client/api/tokens_api.py
 wordlift_client/api/vector_search_nodes_api.py
 wordlift_client/api/vector_search_queries_api.py
-wordlift_client/api/vector_search_questions_api.py
 wordlift_client/api/web_asyncs_metadata_api.py
 wordlift_client/api/web_asyncs_responses_api.py
 wordlift_client/api/web_page_scrape_api.py
@@ -488,7 +478,6 @@ wordlift_client/models/html_semantics.py
 wordlift_client/models/http_validation_error.py
 wordlift_client/models/http_validation_error1.py
 wordlift_client/models/http_validation_error2.py
-wordlift_client/models/http_validation_error3.py
 wordlift_client/models/image.py
 wordlift_client/models/image_accessibility.py
 wordlift_client/models/include_exclude.py
@@ -545,7 +534,6 @@ wordlift_client/models/page_preset.py
 wordlift_client/models/page_record.py
 wordlift_client/models/page_rule.py
 wordlift_client/models/page_vector_search_query_response_item.py
-wordlift_client/models/page_vector_search_question_response_item.py
 wordlift_client/models/page_website.py
 wordlift_client/models/page_website_search.py
 wordlift_client/models/page_with_limits.py
@@ -605,10 +593,9 @@ wordlift_client/models/update_records_request.py
 wordlift_client/models/update_site_url_request.py
 wordlift_client/models/validation_error.py
 wordlift_client/models/validation_error1.py
+wordlift_client/models/validation_error1_detail_inner.py
 wordlift_client/models/validation_error2.py
 wordlift_client/models/validation_error3.py
-wordlift_client/models/validation_error3_detail_inner.py
-wordlift_client/models/validation_error4.py
 wordlift_client/models/validation_fix.py
 wordlift_client/models/validation_result.py
 wordlift_client/models/validation_type_enum.py
@@ -616,8 +603,6 @@ wordlift_client/models/vector_search_query_request.py
 wordlift_client/models/vector_search_query_response_item.py
 wordlift_client/models/vector_search_query_response_item_fields_value_inner.py
 wordlift_client/models/vector_search_query_response_item_metadata_value.py
-wordlift_client/models/vector_search_question_request.py
-wordlift_client/models/vector_search_question_response_item.py
 wordlift_client/models/web_async.py
 wordlift_client/models/web_page.py
 wordlift_client/models/web_page_import_fetch_options.py

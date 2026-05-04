@@ -41,7 +41,7 @@ class AutocompleteApi:
 
 
     @validate_call
-    async def get4(
+    async def get3(
         self,
         query: Annotated[StrictStr, Field(description="Autocomplete query")],
         language: Annotated[StrictStr, Field(description="2-letter language code, e.g. 'en'.")],
@@ -97,7 +97,7 @@ class AutocompleteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get4_serialize(
+        _param = self._get3_serialize(
             query=query,
             language=language,
             scope=scope,
@@ -126,7 +126,7 @@ class AutocompleteApi:
 
 
     @validate_call
-    async def get4_with_http_info(
+    async def get3_with_http_info(
         self,
         query: Annotated[StrictStr, Field(description="Autocomplete query")],
         language: Annotated[StrictStr, Field(description="2-letter language code, e.g. 'en'.")],
@@ -182,7 +182,7 @@ class AutocompleteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get4_serialize(
+        _param = self._get3_serialize(
             query=query,
             language=language,
             scope=scope,
@@ -211,7 +211,7 @@ class AutocompleteApi:
 
 
     @validate_call
-    async def get4_without_preload_content(
+    async def get3_without_preload_content(
         self,
         query: Annotated[StrictStr, Field(description="Autocomplete query")],
         language: Annotated[StrictStr, Field(description="2-letter language code, e.g. 'en'.")],
@@ -267,7 +267,7 @@ class AutocompleteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get4_serialize(
+        _param = self._get3_serialize(
             query=query,
             language=language,
             scope=scope,
@@ -291,7 +291,7 @@ class AutocompleteApi:
         return response_data.response
 
 
-    def _get4_serialize(
+    def _get3_serialize(
         self,
         query,
         language,

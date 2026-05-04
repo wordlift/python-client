@@ -99,7 +99,6 @@ from wordlift_client.models.graphql_request import GraphqlRequest
 from wordlift_client.models.http_validation_error import HTTPValidationError
 from wordlift_client.models.http_validation_error1 import HTTPValidationError1
 from wordlift_client.models.http_validation_error2 import HTTPValidationError2
-from wordlift_client.models.http_validation_error3 import HTTPValidationError3
 from wordlift_client.models.health_response import HealthResponse
 from wordlift_client.models.html import Html
 from wordlift_client.models.html_semantics import HtmlSemantics
@@ -159,7 +158,6 @@ from wordlift_client.models.page_preset import PagePreset
 from wordlift_client.models.page_record import PageRecord
 from wordlift_client.models.page_rule import PageRule
 from wordlift_client.models.page_vector_search_query_response_item import PageVectorSearchQueryResponseItem
-from wordlift_client.models.page_vector_search_question_response_item import PageVectorSearchQuestionResponseItem
 from wordlift_client.models.page_website import PageWebsite
 from wordlift_client.models.page_website_search import PageWebsiteSearch
 from wordlift_client.models.page_with_limits import PageWithLimits
@@ -219,10 +217,9 @@ from wordlift_client.models.update_records_request import UpdateRecordsRequest
 from wordlift_client.models.update_site_url_request import UpdateSiteUrlRequest
 from wordlift_client.models.validation_error import ValidationError
 from wordlift_client.models.validation_error1 import ValidationError1
+from wordlift_client.models.validation_error1_detail_inner import ValidationError1DetailInner
 from wordlift_client.models.validation_error2 import ValidationError2
 from wordlift_client.models.validation_error3 import ValidationError3
-from wordlift_client.models.validation_error3_detail_inner import ValidationError3DetailInner
-from wordlift_client.models.validation_error4 import ValidationError4
 from wordlift_client.models.validation_fix import ValidationFix
 from wordlift_client.models.validation_result import ValidationResult
 from wordlift_client.models.validation_type_enum import ValidationTypeEnum
@@ -230,8 +227,6 @@ from wordlift_client.models.vector_search_query_request import VectorSearchQuery
 from wordlift_client.models.vector_search_query_response_item import VectorSearchQueryResponseItem
 from wordlift_client.models.vector_search_query_response_item_fields_value_inner import VectorSearchQueryResponseItemFieldsValueInner
 from wordlift_client.models.vector_search_query_response_item_metadata_value import VectorSearchQueryResponseItemMetadataValue
-from wordlift_client.models.vector_search_question_request import VectorSearchQuestionRequest
-from wordlift_client.models.vector_search_question_response_item import VectorSearchQuestionResponseItem
 from wordlift_client.models.web_async import WebAsync
 from wordlift_client.models.web_page import WebPage
 from wordlift_client.models.web_page_import_fetch_options import WebPageImportFetchOptions

@@ -18,9 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List
-from wordlift_client.models.location_inner import LocationInner
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
+from wordlift_client.models.validation_error1_detail_inner import ValidationError1DetailInner
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,10 +28,8 @@ class ValidationError1(BaseModel):
     """
     ValidationError1
     """ # noqa: E501
-    loc: List[LocationInner]
-    msg: StrictStr
-    type: StrictStr
-    __properties: ClassVar[List[str]] = ["loc", "msg", "type"]
+    detail: Optional[List[ValidationError1DetailInner]] = None
+    __properties: ClassVar[List[str]] = ["detail"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -72,13 +70,13 @@ class ValidationError1(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in loc (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in detail (list)
         _items = []
-        if self.loc:
-            for _item in self.loc:
+        if self.detail:
+            for _item in self.detail:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['loc'] = _items
+            _dict['detail'] = _items
         return _dict
 
     @classmethod
@@ -91,9 +89,7 @@ class ValidationError1(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "loc": [LocationInner.from_dict(_item) for _item in obj["loc"]] if obj.get("loc") is not None else None,
-            "msg": obj.get("msg"),
-            "type": obj.get("type")
+            "detail": [ValidationError1DetailInner.from_dict(_item) for _item in obj["detail"]] if obj.get("detail") is not None else None
         })
         return _obj
 
