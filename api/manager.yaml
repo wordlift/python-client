@@ -32,8 +32,6 @@ tags:
   name: Web pages
 - description: Manage Platform Consumptions
   name: Platform Consumptions
-- description: Get answers to questions.
-  name: Vector Search Questions
 - description: Manage OAuth2 Authorized Clients
   name: OAuth2 Authorized Clients
 - description: Import Web Pages to the Graph
@@ -2083,31 +2081,6 @@ paths:
       summary: Create
       tags:
       - Vector Search Queries
-  /vector-search/questions-collection:
-    post:
-      operationId: createVectorSearchQuestion
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VectorSearchQuestionRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PageVectorSearchQuestionResponseItem'
-          description: Found.
-        "401":
-          description: Authentication Failure
-        "404":
-          description: Not Found
-      security:
-      - ApiKey: []
-      summary: Create
-      tags:
-      - Vector Search Questions
   /web-page-imports:
     post:
       description: Create a Web Page Import
@@ -3833,43 +3806,6 @@ components:
       - next
       - prev
       - self
-    PageVectorSearchQuestionResponseItem:
-      type: object
-      description: A page object with links to move to other pages and the list of
-        objects.
-      properties:
-        first:
-          type: string
-          description: The link to the first page.
-          nullable: true
-        items:
-          type: array
-          description: An array of objects.
-          items:
-            $ref: '#/components/schemas/VectorSearchQuestionResponseItem'
-        last:
-          type: string
-          description: The link to the last page.
-          nullable: true
-        next:
-          type: string
-          description: The link to the next page or `null` if there's no page.
-          nullable: true
-        prev:
-          type: string
-          description: The link to the previous page or `null` if there's no page.
-          nullable: true
-        self:
-          type: string
-          description: The link to the current page.
-          nullable: true
-      required:
-      - first
-      - items
-      - last
-      - next
-      - prev
-      - self
     PageWebsite:
       type: object
       description: A page object with links to move to other pages and the list of
@@ -4292,29 +4228,6 @@ components:
       required:
       - iri
       - score
-    VectorSearchQuestionRequest:
-      type: object
-      description: One or more questions.
-      properties:
-        language:
-          type: string
-          description: The desired language of the answer.
-        questions:
-          type: array
-          description: The list of questions.
-          items:
-            type: string
-            description: The list of questions.
-      required:
-      - questions
-    VectorSearchQuestionResponseItem:
-      type: object
-      description: An array of objects.
-      properties:
-        answer:
-          type: string
-        question:
-          type: string
     WebPage:
       type: object
       description: Represents a web page and its extracted content.
