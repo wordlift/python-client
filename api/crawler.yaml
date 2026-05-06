@@ -1,0 +1,1558 @@
+openapi: 3.1.0
+info:
+  title: WordLift Crawler API
+  summary: WordLift crawler API
+  description: API for creating, listing, and inspecting crawl jobs. This schema is
+    generated from FastAPI route/model annotations.
+  version: 0.7.2
+paths:
+  /crawl-jobs:
+    post:
+      tags:
+      - Jobs
+      summary: Create crawl job
+      description: Creates a crawl job and triggers asynchronous execution. The endpoint
+        returns immediately with accepted job metadata.
+      operationId: create_crawl_job_crawl_jobs_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CrawlJobInput'
+              description: Crawl job configuration and runtime controls.
+            examples:
+              basic:
+                summary: Basic sitemap crawl
+                value:
+                  website_url: https://www.example.org/
+                  sitemaps:
+                  - https://www.example.org/sitemap.xml
+                  discovery_sources: sitemap-only
+                  js_render_mode: auto
+                  max_pages: 10000
+                  max_retries: 2
+                  respect_robots: true
+      responses:
+        '202':
+          description: Crawl job accepted for asynchronous processing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrawlJobCreateResponse'
+              example:
+                id: 127c9b3c-f6b5-47e7-935a-3e5d8c23f20a
+                run_id: 051a52f6-c568-4dd6-82b5-d87f7086aa5d
+                status: queued
+                created_at: '2026-03-26T12:04:08.090908Z'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - Jobs
+      summary: List crawl jobs
+      description: Returns crawl jobs ordered by creation time descending (newest
+        first).
+      operationId: list_crawl_jobs_crawl_jobs_get
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          default: 50
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      responses:
+        '200':
+          description: Crawl job summaries.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrawlJobListResponse'
+              example:
+                items:
+                - id: 127c9b3c-f6b5-47e7-935a-3e5d8c23f20a
+                  run_id: 051a52f6-c568-4dd6-82b5-d87f7086aa5d
+                  status: running
+                  created_at: '2026-03-26T12:04:08.090908Z'
+                  started_at: '2026-03-26T12:04:08.107113Z'
+                  website_url: https://www.example.org/
+                  sitemaps:
+                  - https://www.example.org/sitemap.xml
+                  pages_count: 23
+                page:
+                  offset: 0
+                  limit: 50
+                  total: 1
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /crawl-jobs/{job_id}:
+    get:
+      tags:
+      - Jobs
+      summary: Get crawl job details
+      description: Returns a single crawl job metadata record (without embedded page
+        payloads).
+      operationId: get_crawl_job_crawl_jobs__job_id__get
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Job Id
+      responses:
+        '200':
+          description: Crawl job details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrawlJobResponse'
+              example:
+                id: 127c9b3c-f6b5-47e7-935a-3e5d8c23f20a
+                run_id: 051a52f6-c568-4dd6-82b5-d87f7086aa5d
+                status: completed
+                created_at: '2026-03-26T12:04:08.090908Z'
+                started_at: '2026-03-26T12:04:08.107113Z'
+                finished_at: '2026-03-26T12:05:42.995001Z'
+                input:
+                  website_url: https://www.example.org/
+                  sitemaps:
+                  - https://www.example.org/sitemap.xml
+                  discovery_sources: sitemap-only
+                  js_render_mode: auto
+                  max_pages: 10000
+                  max_retries: 2
+                  respect_robots: true
+                pages_total: 23
+                pages_with_error: 2
+        '404':
+          description: Crawl job was not found.
+          content:
+            application/json:
+              example:
+                detail: Crawl job not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /crawl-jobs/{job_id}/pages:
+    get:
+      tags:
+      - Jobs
+      summary: List crawl job pages
+      description: Returns paginated page summaries for a crawl job without large
+        page artifacts.
+      operationId: list_crawl_job_pages_crawl_jobs__job_id__pages_get
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Job Id
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          default: 50
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      responses:
+        '200':
+          description: Page summaries.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrawlJobPageListResponse'
+              example:
+                items:
+                - page_id: 9876
+                  last_crawled_at: '2026-03-26T12:05:42.995001Z'
+                  status: ok
+                  url_requested: https://www.example.org/
+                  url_final: https://www.example.org/
+                  canonical_url: https://www.example.org/
+                  status_code: 200
+                page:
+                  offset: 0
+                  limit: 50
+                  total: 1
+        '404':
+          description: Crawl job was not found.
+          content:
+            application/json:
+              example:
+                detail: Crawl job not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /websites/{host}/pages:
+    get:
+      tags:
+      - Pages Explorer
+      summary: List crawled pages by host
+      description: Returns crawled pages for a host with optional status, run, time
+        and URL filters. When `url` is provided, returns direct page data in a single
+        response.
+      operationId: list_website_pages_websites__host__pages_get
+      parameters:
+      - name: host
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Host
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          default: 50
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+            minimum: 1
+          - type: 'null'
+          title: Cursor
+      - name: status
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CrawlPageStatus'
+          default: all
+      - name: url_pattern
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url Pattern
+      - name: url
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url
+      - name: run_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Run Id
+      - name: as_of
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: As Of
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/WebsitePageListResponse'
+                - $ref: '#/components/schemas/WebsitePageResolvedResponse'
+                title: Response List Website Pages Websites  Host  Pages Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /websites/{host}/pages/{page_id}:
+    get:
+      tags:
+      - Pages Explorer
+      summary: Get crawled page by host and page id
+      description: Returns page metadata and artifact availability flags.
+      operationId: get_website_page_websites__host__pages__page_id__get
+      parameters:
+      - name: host
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Host
+      - name: page_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Page Id
+      - name: run_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Run Id
+      - name: as_of
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: As Of
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebsitePageResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /websites/{host}/pages/{page_id}/artifacts/{artifact_type}:
+    get:
+      tags:
+      - Pages Explorer
+      summary: Get page artifact
+      description: Returns a single page artifact payload (`xhtml` or `markdown`).
+      operationId: get_page_artifact_websites__host__pages__page_id__artifacts__artifact_type__get
+      parameters:
+      - name: host
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Host
+      - name: page_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Page Id
+      - name: artifact_type
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Artifact Type
+      - name: run_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Run Id
+      - name: as_of
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: As Of
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebsitePageArtifactResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /websites/{host}/artifacts:query:
+    post:
+      tags:
+      - Pages Explorer
+      summary: Batch query page artifacts
+      description: Returns artifacts for multiple page ids in one request.
+      operationId: query_page_artifacts_websites__host__artifacts_query_post
+      parameters:
+      - name: host
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Host
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PageArtifactQueryRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageArtifactQueryResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /crawler/fetch:
+    get:
+      tags:
+      - Fetch
+      summary: Fetch a single page
+      description: Fetches a URL synchronously and returns its content.
+      operationId: fetch_page_fetch_get
+      parameters:
+      - name: url
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uri
+          minLength: 1
+          maxLength: 2083
+          description: The URL to fetch. Must be an HTML or text page; binary resource
+            URLs (PDFs, images, archives, media, fonts, stylesheets) are rejected.
+          title: Url
+        description: The URL to fetch. Must be an HTML or text page; binary resource
+          URLs (PDFs, images, archives, media, fonts, stylesheets) are rejected.
+      - name: js_render_mode
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/FetchJsRenderMode'
+          description: 'JS rendering mode: auto lets the system decide, disabled forces
+            static fetch, enabled forces JS rendering.'
+          default: auto
+        description: 'JS rendering mode: auto lets the system decide, disabled forces
+          static fetch, enabled forces JS rendering.'
+      - name: force
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: When true, bypasses the result cache and forces a fresh fetch.
+          default: false
+          title: Force
+        description: When true, bypasses the result cache and forces a fresh fetch.
+      - name: proxy_mode
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/ProxyMode'
+          description: Proxy mode to use for this fetch.
+          default: disabled
+        description: Proxy mode to use for this fetch.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FetchResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    CrawlJobCreateResponse:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Server-generated crawl job identifier.
+        run_id:
+          type: string
+          title: Run Id
+          description: Execution run identifier used to correlate pages and logs.
+        status:
+          $ref: '#/components/schemas/JobStatus'
+          description: Current lifecycle status of the job.
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: Job creation timestamp (UTC).
+      type: object
+      required:
+      - id
+      - run_id
+      - status
+      - created_at
+      title: CrawlJobCreateResponse
+      example:
+        created_at: '2026-03-26T12:04:08.090908Z'
+        id: 127c9b3c-f6b5-47e7-935a-3e5d8c23f20a
+        run_id: 051a52f6-c568-4dd6-82b5-d87f7086aa5d
+        status: queued
+    CrawlJobInput:
+      properties:
+        website_url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Website Url
+          description: Canonical website URL used as crawl boundary.
+        sitemaps:
+          items:
+            type: string
+            maxLength: 2083
+            minLength: 1
+            format: uri
+          type: array
+          minItems: 1
+          title: Sitemaps
+          description: One or more sitemap URLs used as seed sources.
+        max_concurrent_requests:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Max Concurrent Requests
+          description: Per-job cap for concurrent URL processing.
+        max_pages:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Max Pages
+          description: Maximum number of pages to crawl before stopping.
+          default: 10000
+        request_timeout_ms:
+          type: integer
+          title: Request Timeout Ms
+          description: HTTP request timeout in milliseconds.
+          default: 10000
+        render_timeout_ms:
+          type: integer
+          title: Render Timeout Ms
+          description: Browser navigation timeout in milliseconds.
+          default: 7000
+        request_handler_timeout_ms:
+          type: integer
+          title: Request Handler Timeout Ms
+          description: Per-request handler timeout in milliseconds.
+          default: 18000
+        max_retries:
+          type: integer
+          title: Max Retries
+          description: Maximum retry attempts per URL.
+          default: 2
+        respect_robots:
+          type: boolean
+          title: Respect Robots
+          description: Whether to enforce robots.txt directives.
+          default: true
+        crawl_delay_override:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Crawl Delay Override
+          description: Optional delay (seconds) before processing each page.
+        js_render_mode:
+          $ref: '#/components/schemas/JsRenderMode'
+          description: Rendering mode for URL fetching.
+          default: auto
+        discovery_sources:
+          $ref: '#/components/schemas/DiscoverySources'
+          description: 'URL discovery source: sitemap-only or sitemap-and-links.'
+          default: sitemap-only
+        render_wait_until:
+          $ref: '#/components/schemas/RenderWaitUntil'
+          description: Primary browser wait strategy before capture.
+          default: domcontentloaded
+        render_wait_for_selector:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Render Wait For Selector
+          description: Optional CSS selector to wait for before capture.
+        render_wait_for_timeout_ms:
+          type: integer
+          title: Render Wait For Timeout Ms
+          description: Additional fixed wait after navigation in milliseconds.
+          default: 1500
+        render_wait_for_js:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Render Wait For Js
+          description: Optional JavaScript condition evaluated until truthy.
+        render_max_total_wait_ms:
+          type: integer
+          title: Render Max Total Wait Ms
+          description: Absolute cap for total render wait budget in milliseconds.
+          default: 11000
+      type: object
+      required:
+      - website_url
+      - sitemaps
+      title: CrawlJobInput
+      example:
+        discovery_sources: sitemap-only
+        js_render_mode: auto
+        max_pages: 10000
+        max_retries: 2
+        respect_robots: true
+        sitemaps:
+        - https://www.example.org/sitemap.xml
+        website_url: https://www.example.org/
+    CrawlJobListPaginationInfo:
+      properties:
+        offset:
+          type: integer
+          title: Offset
+          description: Zero-based list offset.
+        limit:
+          type: integer
+          title: Limit
+          description: Maximum number of items requested.
+        total:
+          type: integer
+          title: Total
+          description: Total number of matching crawl jobs.
+      type: object
+      required:
+      - offset
+      - limit
+      - total
+      title: CrawlJobListPaginationInfo
+    CrawlJobListResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/CrawlJobSummary'
+          type: array
+          title: Items
+          description: List of crawl jobs ordered by newest first.
+        page:
+          $ref: '#/components/schemas/CrawlJobListPaginationInfo'
+          description: Pagination metadata for this list response.
+      type: object
+      required:
+      - items
+      - page
+      title: CrawlJobListResponse
+      example:
+        items:
+        - created_at: '2026-03-26T12:04:08.090908Z'
+          id: 127c9b3c-f6b5-47e7-935a-3e5d8c23f20a
+          pages_count: 23
+          run_id: 051a52f6-c568-4dd6-82b5-d87f7086aa5d
+          sitemaps:
+          - https://www.example.org/sitemap.xml
+          started_at: '2026-03-26T12:04:08.107113Z'
+          status: running
+          website_url: https://www.example.org/
+        page:
+          limit: 50
+          offset: 0
+          total: 1
+    CrawlJobPageListResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/CrawlJobPageSummary'
+          type: array
+          title: Items
+          description: Page summaries for this crawl job.
+        page:
+          $ref: '#/components/schemas/CrawlJobListPaginationInfo'
+          description: Pagination metadata for this page list response.
+      type: object
+      required:
+      - items
+      - page
+      title: CrawlJobPageListResponse
+    CrawlJobPageSummary:
+      properties:
+        page_id:
+          type: integer
+          title: Page Id
+          description: Persisted page identifier within this crawl job.
+        last_crawled_at:
+          type: string
+          format: date-time
+          title: Last Crawled At
+          description: Timestamp when this page record finished processing.
+        status:
+          $ref: '#/components/schemas/CrawlPageStatus'
+          description: Derived status for this page result.
+        url_requested:
+          type: string
+          title: Url Requested
+          description: URL originally requested.
+        url_final:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url Final
+          description: Final URL after redirects.
+        canonical_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Canonical Url
+          description: Canonical URL extracted from the page.
+        status_code:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Status Code
+          description: HTTP status code captured for the page.
+        error_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Code
+          description: Error code when page processing failed.
+        error_message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Message
+          description: Error details when page processing failed.
+      type: object
+      required:
+      - page_id
+      - last_crawled_at
+      - status
+      - url_requested
+      title: CrawlJobPageSummary
+    CrawlJobResponse:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Job identifier.
+        run_id:
+          type: string
+          title: Run Id
+          description: Execution run identifier.
+        status:
+          $ref: '#/components/schemas/JobStatus'
+          description: Current lifecycle status of the job.
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: Job creation timestamp (UTC).
+        started_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Started At
+          description: Job start timestamp (UTC).
+        finished_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Finished At
+          description: Job completion timestamp (UTC).
+        input:
+          $ref: '#/components/schemas/CrawlJobInput'
+          description: Original submitted crawl parameters.
+        pages_total:
+          type: integer
+          title: Pages Total
+          description: Total number of persisted page results for this job.
+          default: 0
+        pages_with_error:
+          type: integer
+          title: Pages With Error
+          description: Number of persisted page results with crawl/HTTP errors.
+          default: 0
+        error_message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Message
+          description: Terminal error message when the job fails.
+      additionalProperties: true
+      type: object
+      required:
+      - id
+      - run_id
+      - status
+      - created_at
+      - input
+      title: CrawlJobResponse
+      example:
+        created_at: '2026-03-26T12:04:08.090908Z'
+        finished_at: '2026-03-26T12:05:42.995001Z'
+        id: 127c9b3c-f6b5-47e7-935a-3e5d8c23f20a
+        input:
+          discovery_sources: sitemap-only
+          js_render_mode: auto
+          max_pages: 10000
+          max_retries: 2
+          respect_robots: true
+          sitemaps:
+          - https://www.example.org/sitemap.xml
+          website_url: https://www.example.org/
+        pages_total: 23
+        pages_with_error: 2
+        run_id: 051a52f6-c568-4dd6-82b5-d87f7086aa5d
+        started_at: '2026-03-26T12:04:08.107113Z'
+        status: completed
+    CrawlJobSummary:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Job identifier.
+        run_id:
+          type: string
+          title: Run Id
+          description: Execution run identifier.
+        status:
+          $ref: '#/components/schemas/JobStatus'
+          description: Current lifecycle status of the job.
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: Job creation timestamp (UTC).
+        started_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Started At
+          description: Job start timestamp (UTC).
+        finished_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Finished At
+          description: Job completion timestamp (UTC).
+        website_url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Website Url
+          description: Canonical website URL used as crawl boundary.
+        sitemaps:
+          items:
+            type: string
+            maxLength: 2083
+            minLength: 1
+            format: uri
+          type: array
+          title: Sitemaps
+          description: Sitemap URLs configured for this crawl job.
+        pages_count:
+          type: integer
+          title: Pages Count
+          description: Number of persisted page results for this job.
+          default: 0
+      type: object
+      required:
+      - id
+      - run_id
+      - status
+      - created_at
+      - website_url
+      - sitemaps
+      title: CrawlJobSummary
+      example:
+        created_at: '2026-03-26T12:04:08.090908Z'
+        id: 127c9b3c-f6b5-47e7-935a-3e5d8c23f20a
+        pages_count: 23
+        run_id: 051a52f6-c568-4dd6-82b5-d87f7086aa5d
+        sitemaps:
+        - https://www.example.org/sitemap.xml
+        started_at: '2026-03-26T12:04:08.107113Z'
+        status: running
+        website_url: https://www.example.org/
+    CrawlPageStatus:
+      type: string
+      enum:
+      - ok
+      - failed
+      - all
+      title: CrawlPageStatus
+    DiscoverySources:
+      type: string
+      enum:
+      - sitemap-only
+      - sitemap-and-links
+      title: DiscoverySources
+    DomainJsRenderMode:
+      type: string
+      enum:
+      - enabled
+      - disabled
+      title: DomainJsRenderMode
+    DomainPolicyListResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/DomainPolicyResponse'
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+        limit:
+          type: integer
+          title: Limit
+        offset:
+          type: integer
+          title: Offset
+      type: object
+      required:
+      - items
+      - total
+      - limit
+      - offset
+      title: DomainPolicyListResponse
+    DomainPolicyRequest:
+      properties:
+        js_render_mode:
+          anyOf:
+          - $ref: '#/components/schemas/DomainJsRenderMode'
+          - type: 'null'
+          description: Rendering mode override. Omit or set to null to use system
+            default.
+        max_concurrency:
+          anyOf:
+          - type: integer
+            minimum: 1.0
+          - type: 'null'
+          title: Max Concurrency
+          description: Maximum concurrent requests to this domain. Omit for no limit.
+        refresh_interval_minutes:
+          anyOf:
+          - type: integer
+            maximum: 43200.0
+            minimum: 1.0
+          - type: 'null'
+          title: Refresh Interval Minutes
+          description: "Scheduled refresh interval in minutes (1\u201343200). Omit\
+            \ to disable. Upper bound matches the 30-day fetch result retention period."
+        proxy_mode:
+          anyOf:
+          - $ref: '#/components/schemas/ProxyMode'
+          - type: 'null'
+          description: Proxy mode override for this domain. Omit or set to null to
+            use system default.
+      type: object
+      title: DomainPolicyRequest
+    DomainPolicyResponse:
+      properties:
+        origin:
+          type: string
+          title: Origin
+        js_render_mode:
+          anyOf:
+          - $ref: '#/components/schemas/DomainJsRenderMode'
+          - type: 'null'
+        max_concurrency:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Max Concurrency
+        refresh_interval_minutes:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Refresh Interval Minutes
+        proxy_mode:
+          anyOf:
+          - $ref: '#/components/schemas/ProxyMode'
+          - type: 'null'
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - origin
+      - js_render_mode
+      - max_concurrency
+      - refresh_interval_minutes
+      - proxy_mode
+      - created_at
+      - updated_at
+      title: DomainPolicyResponse
+    FetchJsRenderMode:
+      type: string
+      enum:
+      - disabled
+      - auto
+      - enabled
+      title: FetchJsRenderMode
+    FetchResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+          description: Whether the fetch completed successfully.
+        url_requested:
+          type: string
+          title: Url Requested
+          description: The URL originally requested.
+        url_final:
+          type: string
+          title: Url Final
+          description: The final URL after any redirects.
+        status_code:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Status Code
+          description: HTTP response status code.
+        content_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Content Type
+          description: Response Content-Type header value.
+        html:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Html
+          description: Raw HTML of the fetched page.
+        original_charset:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Original Charset
+          description: Original charset declared by the page before normalization
+            to UTF-8.
+        markdown:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Markdown
+          description: Page content extracted as Markdown.
+        error_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Code
+          description: Machine-readable error code if the fetch failed.
+        error_message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Message
+          description: Human-readable error detail if the fetch failed.
+        ttfb_ms:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Ttfb Ms
+          description: Time to first byte in milliseconds.
+        response_time_ms:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Response Time Ms
+          description: Total response time in milliseconds (from request sent to body
+            received).
+        fetched_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Fetched At
+          description: When the page was fetched. Significantly older than now means
+            the result was served from cache.
+        from_cache:
+          type: boolean
+          title: From Cache
+          description: True when the response was served from a previously stored
+            fetch result.
+          default: false
+      type: object
+      required:
+      - success
+      - url_requested
+      - url_final
+      title: FetchResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    HealthResponse:
+      properties:
+        status:
+          type: string
+          title: Status
+      type: object
+      required:
+      - status
+      title: HealthResponse
+    JobStatus:
+      type: string
+      enum:
+      - queued
+      - running
+      - completed
+      - failed
+      title: JobStatus
+    JsRenderMode:
+      type: string
+      enum:
+      - never
+      - auto
+      - always
+      title: JsRenderMode
+    PageArtifactQueryItem:
+      properties:
+        page_id:
+          type: integer
+          title: Page Id
+        artifact_type:
+          type: string
+          title: Artifact Type
+      type: object
+      required:
+      - page_id
+      - artifact_type
+      title: PageArtifactQueryItem
+    PageArtifactQueryRequest:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PageArtifactQueryItem'
+          type: array
+          minItems: 1
+          title: Items
+        run_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Run Id
+        as_of:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: As Of
+      type: object
+      required:
+      - items
+      title: PageArtifactQueryRequest
+    PageArtifactQueryResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PageArtifactQueryResultItem'
+          type: array
+          title: Items
+      type: object
+      required:
+      - items
+      title: PageArtifactQueryResponse
+    PageArtifactQueryResultItem:
+      properties:
+        page_id:
+          type: integer
+          title: Page Id
+        artifact_type:
+          type: string
+          title: Artifact Type
+        content_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Content Type
+        content:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Content
+        error_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Code
+        error_message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Message
+      type: object
+      required:
+      - page_id
+      - artifact_type
+      title: PageArtifactQueryResultItem
+    PaginationInfo:
+      properties:
+        offset:
+          type: integer
+          title: Offset
+        limit:
+          type: integer
+          title: Limit
+        total:
+          type: integer
+          title: Total
+        next_cursor:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - offset
+      - limit
+      - total
+      title: PaginationInfo
+    ProxyMode:
+      type: string
+      enum:
+      - disabled
+      - simple
+      - standard
+      - premium
+      - auto
+      title: ProxyMode
+    ReadinessResponse:
+      properties:
+        status:
+          type: string
+          title: Status
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+        services:
+          additionalProperties:
+            type: string
+          type: object
+          title: Services
+        errors:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Errors
+      type: object
+      required:
+      - status
+      - timestamp
+      - services
+      title: ReadinessResponse
+    RenderWaitUntil:
+      type: string
+      enum:
+      - domcontentloaded
+      - load
+      - networkidle
+      title: RenderWaitUntil
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    WebsitePageArtifactResponse:
+      properties:
+        host:
+          type: string
+          title: Host
+        page_id:
+          type: integer
+          title: Page Id
+        run_id:
+          type: string
+          title: Run Id
+        artifact_type:
+          type: string
+          title: Artifact Type
+        as_of:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: As Of
+        content_type:
+          type: string
+          title: Content Type
+        content:
+          type: string
+          title: Content
+      type: object
+      required:
+      - host
+      - page_id
+      - run_id
+      - artifact_type
+      - content_type
+      - content
+      title: WebsitePageArtifactResponse
+    WebsitePageListResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/WebsitePageSummary'
+          type: array
+          title: Items
+        page:
+          $ref: '#/components/schemas/PaginationInfo'
+      type: object
+      required:
+      - items
+      - page
+      title: WebsitePageListResponse
+    WebsitePageResolvedResponse:
+      properties:
+        page_id:
+          type: integer
+          title: Page Id
+        host:
+          type: string
+          title: Host
+        run_id:
+          type: string
+          title: Run Id
+        last_crawled_at:
+          type: string
+          format: date-time
+          title: Last Crawled At
+        url_requested:
+          type: string
+          title: Url Requested
+        url_final:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url Final
+        canonical_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Canonical Url
+        status_code:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Status Code
+        xhtml:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Xhtml
+        markdown:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Markdown
+      type: object
+      required:
+      - page_id
+      - host
+      - run_id
+      - last_crawled_at
+      - url_requested
+      title: WebsitePageResolvedResponse
+    WebsitePageResponse:
+      properties:
+        page_id:
+          type: integer
+          title: Page Id
+        host:
+          type: string
+          title: Host
+        run_id:
+          type: string
+          title: Run Id
+        last_crawled_at:
+          type: string
+          format: date-time
+          title: Last Crawled At
+        url_requested:
+          type: string
+          title: Url Requested
+        url_final:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url Final
+        canonical_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Canonical Url
+        status_code:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Status Code
+        xhtml_available:
+          type: boolean
+          title: Xhtml Available
+          default: false
+        markdown_available:
+          type: boolean
+          title: Markdown Available
+          default: false
+      type: object
+      required:
+      - page_id
+      - host
+      - run_id
+      - last_crawled_at
+      - url_requested
+      title: WebsitePageResponse
+    WebsitePageSummary:
+      properties:
+        page_id:
+          type: integer
+          title: Page Id
+        host:
+          type: string
+          title: Host
+        run_id:
+          type: string
+          title: Run Id
+        last_crawled_at:
+          type: string
+          format: date-time
+          title: Last Crawled At
+        status:
+          $ref: '#/components/schemas/CrawlPageStatus'
+        url_requested:
+          type: string
+          title: Url Requested
+        url_final:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url Final
+        canonical_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Canonical Url
+        status_code:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Status Code
+      type: object
+      required:
+      - page_id
+      - host
+      - run_id
+      - last_crawled_at
+      - status
+      - url_requested
+      title: WebsitePageSummary
+  securitySchemes:
+    WordliftApiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Use ''Authorization: Key <WORDLIFT_API_KEY>''.'
+servers:
+- url: https://api.wordlift.io
+security:
+- WordliftApiKey: []
