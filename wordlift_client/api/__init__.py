@@ -36,6 +36,7 @@ from wordlift_client.api.embeddings_api import EmbeddingsApi
 from wordlift_client.api.entities_api import EntitiesApi
 from wordlift_client.api.entity_gaps_api import EntityGapsApi
 from wordlift_client.api.fact_check_api import FactCheckApi
+from wordlift_client.api.fetch_api import FetchApi
 from wordlift_client.api.google_merchants_api import GoogleMerchantsApi
 from wordlift_client.api.google_search_console_api import GoogleSearchConsoleApi
 from wordlift_client.api.google_search_console_o_auth2_api import GoogleSearchConsoleOAuth2Api
@@ -45,12 +46,14 @@ from wordlift_client.api.graph_ql_api import GraphQLApi
 from wordlift_client.api.include_excludes_api import IncludeExcludesApi
 from wordlift_client.api.inspector_api import InspectorApi
 from wordlift_client.api.internal_links_api import InternalLinksApi
+from wordlift_client.api.jobs_api import JobsApi
 from wordlift_client.api.link_groups_api import LinkGroupsApi
 from wordlift_client.api.long_tails_api import LongTailsApi
 from wordlift_client.api.merchant_syncs_api import MerchantSyncsApi
 from wordlift_client.api.merchants_api import MerchantsApi
 from wordlift_client.api.microdata_api import MicrodataApi
 from wordlift_client.api.o_auth2_authorized_clients_api import OAuth2AuthorizedClientsApi
+from wordlift_client.api.pages_explorer_api import PagesExplorerApi
 from wordlift_client.api.platform_consumptions_api import PlatformConsumptionsApi
 from wordlift_client.api.platform_limits_api import PlatformLimitsApi
 from wordlift_client.api.plugin_diagnostics_api import PluginDiagnosticsApi

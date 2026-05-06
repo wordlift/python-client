@@ -73,12 +73,26 @@ from wordlift_client.models.content_generation import ContentGeneration
 from wordlift_client.models.content_generation_request import ContentGenerationRequest
 from wordlift_client.models.content_generation_stats import ContentGenerationStats
 from wordlift_client.models.content_structure import ContentStructure
+from wordlift_client.models.crawl_job_create_response import CrawlJobCreateResponse
+from wordlift_client.models.crawl_job_input import CrawlJobInput
+from wordlift_client.models.crawl_job_list_pagination_info import CrawlJobListPaginationInfo
+from wordlift_client.models.crawl_job_list_response import CrawlJobListResponse
+from wordlift_client.models.crawl_job_page_list_response import CrawlJobPageListResponse
+from wordlift_client.models.crawl_job_page_summary import CrawlJobPageSummary
+from wordlift_client.models.crawl_job_response import CrawlJobResponse
+from wordlift_client.models.crawl_job_summary import CrawlJobSummary
+from wordlift_client.models.crawl_page_status import CrawlPageStatus
 from wordlift_client.models.create_embeddings_input import CreateEmbeddingsInput
 from wordlift_client.models.create_url_inspection_request import CreateUrlInspectionRequest
 from wordlift_client.models.cursor_page import CursorPage
 from wordlift_client.models.detected_schema import DetectedSchema
 from wordlift_client.models.diagnostic_plugin import DiagnosticPlugin
 from wordlift_client.models.diagnostic_plugin_request import DiagnosticPluginRequest
+from wordlift_client.models.discovery_sources import DiscoverySources
+from wordlift_client.models.domain_js_render_mode import DomainJsRenderMode
+from wordlift_client.models.domain_policy_list_response import DomainPolicyListResponse
+from wordlift_client.models.domain_policy_request import DomainPolicyRequest
+from wordlift_client.models.domain_policy_response import DomainPolicyResponse
 from wordlift_client.models.domain_validation_request import DomainValidationRequest
 from wordlift_client.models.duplicate_authorization_request import DuplicateAuthorizationRequest
 from wordlift_client.models.embedding_request import EmbeddingRequest
@@ -91,6 +105,8 @@ from wordlift_client.models.error_response import ErrorResponse
 from wordlift_client.models.event import Event
 from wordlift_client.models.exchange_auth_code_request import ExchangeAuthCodeRequest
 from wordlift_client.models.exchange_auth_code_response import ExchangeAuthCodeResponse
+from wordlift_client.models.fetch_js_render_mode import FetchJsRenderMode
+from wordlift_client.models.fetch_response import FetchResponse
 from wordlift_client.models.filter import Filter
 from wordlift_client.models.filter_value import FilterValue
 from wordlift_client.models.generate_sitemap200_response import GenerateSitemap200Response
@@ -99,6 +115,7 @@ from wordlift_client.models.graphql_request import GraphqlRequest
 from wordlift_client.models.http_validation_error import HTTPValidationError
 from wordlift_client.models.http_validation_error1 import HTTPValidationError1
 from wordlift_client.models.http_validation_error2 import HTTPValidationError2
+from wordlift_client.models.http_validation_error3 import HTTPValidationError3
 from wordlift_client.models.health_response import HealthResponse
 from wordlift_client.models.html import Html
 from wordlift_client.models.html_semantics import HtmlSemantics
@@ -115,6 +132,8 @@ from wordlift_client.models.internal_linking import InternalLinking
 from wordlift_client.models.item import Item
 from wordlift_client.models.job_list_response import JobListResponse
 from wordlift_client.models.job_response import JobResponse
+from wordlift_client.models.job_status import JobStatus
+from wordlift_client.models.js_render_mode import JsRenderMode
 from wordlift_client.models.js_rendering import JsRendering
 from wordlift_client.models.kg_embedding_request import KgEmbeddingRequest
 from wordlift_client.models.kg_embedding_response import KgEmbeddingResponse
@@ -146,6 +165,10 @@ from wordlift_client.models.o_auth2_authorized_client import OAuth2AuthorizedCli
 from wordlift_client.models.o_auth2_authorized_client_request import OAuth2AuthorizedClientRequest
 from wordlift_client.models.page_active_account import PageActiveAccount
 from wordlift_client.models.page_add_on_configuration import PageAddOnConfiguration
+from wordlift_client.models.page_artifact_query_item import PageArtifactQueryItem
+from wordlift_client.models.page_artifact_query_request import PageArtifactQueryRequest
+from wordlift_client.models.page_artifact_query_response import PageArtifactQueryResponse
+from wordlift_client.models.page_artifact_query_result_item import PageArtifactQueryResultItem
 from wordlift_client.models.page_content_generation import PageContentGeneration
 from wordlift_client.models.page_field import PageField
 from wordlift_client.models.page_merchant_entry import PageMerchantEntry
@@ -162,6 +185,7 @@ from wordlift_client.models.page_website import PageWebsite
 from wordlift_client.models.page_website_search import PageWebsiteSearch
 from wordlift_client.models.page_with_limits import PageWithLimits
 from wordlift_client.models.page_word import PageWord
+from wordlift_client.models.pagination_info import PaginationInfo
 from wordlift_client.models.platform_limit import PlatformLimit
 from wordlift_client.models.platform_limit_request import PlatformLimitRequest
 from wordlift_client.models.preset import Preset
@@ -170,6 +194,7 @@ from wordlift_client.models.problem_detail import ProblemDetail
 from wordlift_client.models.project_type import ProjectType
 from wordlift_client.models.properties import Properties
 from wordlift_client.models.properties1 import Properties1
+from wordlift_client.models.proxy_mode import ProxyMode
 from wordlift_client.models.query_coverage_output import QueryCoverageOutput
 from wordlift_client.models.question_and_answer import QuestionAndAnswer
 from wordlift_client.models.question_and_answer_request import QuestionAndAnswerRequest
@@ -179,6 +204,7 @@ from wordlift_client.models.rank_entities import RankEntities
 from wordlift_client.models.readiness_response import ReadinessResponse
 from wordlift_client.models.record import Record
 from wordlift_client.models.render_request import RenderRequest
+from wordlift_client.models.render_wait_until import RenderWaitUntil
 from wordlift_client.models.replace_monitor_item import ReplaceMonitorItem
 from wordlift_client.models.replace_monitors_request import ReplaceMonitorsRequest
 from wordlift_client.models.request import Request
@@ -190,6 +216,7 @@ from wordlift_client.models.resource_type import ResourceType
 from wordlift_client.models.response import Response
 from wordlift_client.models.response1 import Response1
 from wordlift_client.models.response2 import Response2
+from wordlift_client.models.response_list_website_pages_websites_host_pages_get import ResponseListWebsitePagesWebsitesHostPagesGet
 from wordlift_client.models.rule import Rule
 from wordlift_client.models.rule_request import RuleRequest
 from wordlift_client.models.run_response import RunResponse
@@ -220,6 +247,7 @@ from wordlift_client.models.validation_error1 import ValidationError1
 from wordlift_client.models.validation_error1_detail_inner import ValidationError1DetailInner
 from wordlift_client.models.validation_error2 import ValidationError2
 from wordlift_client.models.validation_error3 import ValidationError3
+from wordlift_client.models.validation_error4 import ValidationError4
 from wordlift_client.models.validation_fix import ValidationFix
 from wordlift_client.models.validation_result import ValidationResult
 from wordlift_client.models.validation_type_enum import ValidationTypeEnum
@@ -236,6 +264,11 @@ from wordlift_client.models.web_page_scrape_request import WebPageScrapeRequest
 from wordlift_client.models.web_page_scrape_response import WebPageScrapeResponse
 from wordlift_client.models.webpage_properties import WebpageProperties
 from wordlift_client.models.website import Website
+from wordlift_client.models.website_page_artifact_response import WebsitePageArtifactResponse
+from wordlift_client.models.website_page_list_response import WebsitePageListResponse
+from wordlift_client.models.website_page_resolved_response import WebsitePageResolvedResponse
+from wordlift_client.models.website_page_response import WebsitePageResponse
+from wordlift_client.models.website_page_summary import WebsitePageSummary
 from wordlift_client.models.website_search import WebsiteSearch
 from wordlift_client.models.well_known_files import WellKnownFiles
 from wordlift_client.models.what_operand_lhs import WhatOperandLhs
