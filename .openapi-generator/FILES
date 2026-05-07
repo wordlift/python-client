@@ -16,6 +16,7 @@ docs/ActiveAccount.md
 docs/AddOnConfiguration.md
 docs/AddOnsApi.md
 docs/AddResourceRequest.md
+docs/AddSegmentGlobRequest.md
 docs/AgentApi.md
 docs/AnalysesApi.md
 docs/AnalysesRequest.md
@@ -179,6 +180,9 @@ docs/LinkGroupsApi.md
 docs/ListMonitorStatusResponse.md
 docs/ListMonitorsResponse.md
 docs/ListRunsResponse.md
+docs/ListSegmentGlobsResponse.md
+docs/ListSegmentUrlsResponse.md
+docs/ListSegmentsResponse.md
 docs/LocationInner.md
 docs/LongTailsApi.md
 docs/LongtailResponse.md
@@ -256,6 +260,7 @@ docs/RenderRequest.md
 docs/RenderWaitUntil.md
 docs/ReplaceMonitorItem.md
 docs/ReplaceMonitorsRequest.md
+docs/ReplaceSegmentGlobsRequest.md
 docs/Request.md
 docs/Request1.md
 docs/Request2.md
@@ -272,6 +277,10 @@ docs/RulesApi.md
 docs/RunResponse.md
 docs/SchemaRecommendation.md
 docs/Scope.md
+docs/SegmentGlobResponse.md
+docs/SegmentRequest.md
+docs/SegmentResponse.md
+docs/SegmentUrlResponse.md
 docs/SeoFundamentals.md
 docs/SiteFiles.md
 docs/SitemapGeneratorApi.md
@@ -347,6 +356,15 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_add_segment_glob_request.py
+test/test_list_segment_globs_response.py
+test/test_list_segment_urls_response.py
+test/test_list_segments_response.py
+test/test_replace_segment_globs_request.py
+test/test_segment_glob_response.py
+test/test_segment_request.py
+test/test_segment_response.py
+test/test_segment_url_response.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -438,6 +456,7 @@ wordlift_client/models/account_subscription.py
 wordlift_client/models/active_account.py
 wordlift_client/models/add_on_configuration.py
 wordlift_client/models/add_resource_request.py
+wordlift_client/models/add_segment_glob_request.py
 wordlift_client/models/ai_visibility_analysis_result.py
 wordlift_client/models/analyses_request.py
 wordlift_client/models/analyses_response.py
@@ -558,6 +577,9 @@ wordlift_client/models/link_group_response.py
 wordlift_client/models/list_monitor_status_response.py
 wordlift_client/models/list_monitors_response.py
 wordlift_client/models/list_runs_response.py
+wordlift_client/models/list_segment_globs_response.py
+wordlift_client/models/list_segment_urls_response.py
+wordlift_client/models/list_segments_response.py
 wordlift_client/models/location_inner.py
 wordlift_client/models/longtail_response.py
 wordlift_client/models/merchant.py
@@ -622,6 +644,7 @@ wordlift_client/models/render_request.py
 wordlift_client/models/render_wait_until.py
 wordlift_client/models/replace_monitor_item.py
 wordlift_client/models/replace_monitors_request.py
+wordlift_client/models/replace_segment_globs_request.py
 wordlift_client/models/request.py
 wordlift_client/models/request1.py
 wordlift_client/models/request2.py
@@ -637,6 +660,10 @@ wordlift_client/models/rule_request.py
 wordlift_client/models/run_response.py
 wordlift_client/models/schema_recommendation.py
 wordlift_client/models/scope.py
+wordlift_client/models/segment_glob_response.py
+wordlift_client/models/segment_request.py
+wordlift_client/models/segment_response.py
+wordlift_client/models/segment_url_response.py
 wordlift_client/models/seo_fundamentals.py
 wordlift_client/models/site_files.py
 wordlift_client/models/sitemap_import_request.py

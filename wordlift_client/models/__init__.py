@@ -24,6 +24,7 @@ from wordlift_client.models.account_subscription import AccountSubscription
 from wordlift_client.models.active_account import ActiveAccount
 from wordlift_client.models.add_on_configuration import AddOnConfiguration
 from wordlift_client.models.add_resource_request import AddResourceRequest
+from wordlift_client.models.add_segment_glob_request import AddSegmentGlobRequest
 from wordlift_client.models.analyses_request import AnalysesRequest
 from wordlift_client.models.analyses_response import AnalysesResponse
 from wordlift_client.models.analyses_response_item import AnalysesResponseItem
@@ -143,6 +144,9 @@ from wordlift_client.models.link_group_response import LinkGroupResponse
 from wordlift_client.models.list_monitor_status_response import ListMonitorStatusResponse
 from wordlift_client.models.list_monitors_response import ListMonitorsResponse
 from wordlift_client.models.list_runs_response import ListRunsResponse
+from wordlift_client.models.list_segment_globs_response import ListSegmentGlobsResponse
+from wordlift_client.models.list_segment_urls_response import ListSegmentUrlsResponse
+from wordlift_client.models.list_segments_response import ListSegmentsResponse
 from wordlift_client.models.location_inner import LocationInner
 from wordlift_client.models.longtail_response import LongtailResponse
 from wordlift_client.models.merchant import Merchant
@@ -207,6 +211,7 @@ from wordlift_client.models.render_request import RenderRequest
 from wordlift_client.models.render_wait_until import RenderWaitUntil
 from wordlift_client.models.replace_monitor_item import ReplaceMonitorItem
 from wordlift_client.models.replace_monitors_request import ReplaceMonitorsRequest
+from wordlift_client.models.replace_segment_globs_request import ReplaceSegmentGlobsRequest
 from wordlift_client.models.request import Request
 from wordlift_client.models.request1 import Request1
 from wordlift_client.models.request2 import Request2
@@ -222,6 +227,10 @@ from wordlift_client.models.rule_request import RuleRequest
 from wordlift_client.models.run_response import RunResponse
 from wordlift_client.models.schema_recommendation import SchemaRecommendation
 from wordlift_client.models.scope import Scope
+from wordlift_client.models.segment_glob_response import SegmentGlobResponse
+from wordlift_client.models.segment_request import SegmentRequest
+from wordlift_client.models.segment_response import SegmentResponse
+from wordlift_client.models.segment_url_response import SegmentUrlResponse
 from wordlift_client.models.seo_fundamentals import SeoFundamentals
 from wordlift_client.models.site_files import SiteFiles
 from wordlift_client.models.sitemap_import_request import SitemapImportRequest
