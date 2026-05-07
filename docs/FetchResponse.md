@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **response_time_ms** | **int** |  | [optional] 
 **fetched_at** | **datetime** |  | [optional] 
 **from_cache** | **bool** | True when the response was served from a previously stored fetch result. | [optional] [default to False]
+**har** | **Dict[str, object]** |  | [optional] 
 
 ## Example
 

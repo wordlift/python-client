@@ -42,7 +42,8 @@ class FetchResponse(BaseModel):
     response_time_ms: Optional[StrictInt] = None
     fetched_at: Optional[datetime] = None
     from_cache: Optional[StrictBool] = Field(default=False, description="True when the response was served from a previously stored fetch result.")
-    __properties: ClassVar[List[str]] = ["success", "url_requested", "url_final", "status_code", "content_type", "html", "original_charset", "markdown", "error_code", "error_message", "ttfb_ms", "response_time_ms", "fetched_at", "from_cache"]
+    har: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["success", "url_requested", "url_final", "status_code", "content_type", "html", "original_charset", "markdown", "error_code", "error_message", "ttfb_ms", "response_time_ms", "fetched_at", "from_cache", "har"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -133,6 +134,11 @@ class FetchResponse(BaseModel):
         if self.fetched_at is None and "fetched_at" in self.model_fields_set:
             _dict['fetched_at'] = None
 
+        # set to None if har (nullable) is None
+        # and model_fields_set contains the field
+        if self.har is None and "har" in self.model_fields_set:
+            _dict['har'] = None
+
         return _dict
 
     @classmethod
@@ -158,7 +164,8 @@ class FetchResponse(BaseModel):
             "ttfb_ms": obj.get("ttfb_ms"),
             "response_time_ms": obj.get("response_time_ms"),
             "fetched_at": obj.get("fetched_at"),
-            "from_cache": obj.get("from_cache") if obj.get("from_cache") is not None else False
+            "from_cache": obj.get("from_cache") if obj.get("from_cache") is not None else False,
+            "har": obj.get("har")
         })
         return _obj
 
