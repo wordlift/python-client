@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.1.4
+  version: 2.2.0
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -376,6 +376,480 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/monitoring/segments:
+    post:
+      summary: Create Segment
+      description: Create a segment for the account.
+      operationId: create_segment_accounts__account_id__monitoring_segments_post
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentRequest'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      summary: List Segments
+      operationId: list_segments_accounts__account_id__monitoring_segments_get
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Opaque pagination cursor from a previous response.
+          title: Cursor
+        description: Opaque pagination cursor from a previous response.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          description: Maximum number of segments to return.
+          default: 50
+          title: Limit
+        description: Maximum number of segments to return.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSegmentsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/monitoring/segments/{segment_id}:
+    get:
+      summary: Get Segment
+      operationId: get_segment_accounts__account_id__monitoring_segments__segment_id__get
+      parameters:
+      - name: segment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Segment Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      summary: Update Segment
+      description: Replace the segment's mutable fields.
+      operationId: update_segment_accounts__account_id__monitoring_segments__segment_id__put
+      parameters:
+      - name: segment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Segment Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      summary: Delete Segment
+      operationId: delete_segment_accounts__account_id__monitoring_segments__segment_id__delete
+      parameters:
+      - name: segment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Segment Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/monitoring/segments/{segment_id}/globs:
+    get:
+      summary: List Segment Globs
+      description: Return a page of glob matchers, ordered by ``(created_at, id)``.
+      operationId: list_segment_globs_accounts__account_id__monitoring_segments__segment_id__globs_get
+      parameters:
+      - name: segment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Segment Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Opaque pagination cursor from a previous response.
+          title: Cursor
+        description: Opaque pagination cursor from a previous response.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 1
+          description: Max glob matchers per page.
+          default: 100
+          title: Limit
+        description: Max glob matchers per page.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSegmentGlobsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      summary: Add Segment Glob
+      description: Add a single glob matcher; idempotent on duplicate.
+      operationId: add_segment_glob_accounts__account_id__monitoring_segments__segment_id__globs_post
+      parameters:
+      - name: segment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Segment Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddSegmentGlobRequest'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentGlobResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      summary: Replace Segment Globs
+      description: Wholesale replace all glob matchers for the segment.
+      operationId: replace_segment_globs_accounts__account_id__monitoring_segments__segment_id__globs_put
+      parameters:
+      - name: segment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Segment Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReplaceSegmentGlobsRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SegmentGlobResponse'
+                title: Response Replace Segment Globs Accounts  Account Id  Monitoring
+                  Segments  Segment Id  Globs Put
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/monitoring/segments/{segment_id}/globs/{glob_id}:
+    delete:
+      summary: Delete Segment Glob
+      operationId: delete_segment_glob_accounts__account_id__monitoring_segments__segment_id__globs__glob_id__delete
+      parameters:
+      - name: segment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Segment Id
+      - name: glob_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Glob Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/monitoring/segments/{segment_id}/urls:
+    get:
+      summary: List Segment Urls
+      description: Return a page of URL matchers, ordered by ``(created_at, id)``.
+      operationId: list_segment_urls_accounts__account_id__monitoring_segments__segment_id__urls_get
+      parameters:
+      - name: segment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Segment Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Opaque pagination cursor from a previous response.
+          title: Cursor
+        description: Opaque pagination cursor from a previous response.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 1
+          description: Max URL matchers per page.
+          default: 100
+          title: Limit
+        description: Max URL matchers per page.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSegmentUrlsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      summary: Add Segment Url
+      description: Add a single URL matcher; idempotent on duplicate.
+      operationId: add_segment_url_accounts__account_id__monitoring_segments__segment_id__urls_post
+      parameters:
+      - name: segment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Segment Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentUrlResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      summary: Replace Segment Urls
+      description: Wholesale replace all URL matchers for the segment.
+      operationId: replace_segment_urls_accounts__account_id__monitoring_segments__segment_id__urls_put
+      parameters:
+      - name: segment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Segment Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SegmentUrlResponse'
+                title: Response Replace Segment Urls Accounts  Account Id  Monitoring
+                  Segments  Segment Id  Urls Put
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/monitoring/segments/{segment_id}/urls/{url_id}:
+    delete:
+      summary: Delete Segment Url
+      operationId: delete_segment_url_accounts__account_id__monitoring_segments__segment_id__urls__url_id__delete
+      parameters:
+      - name: segment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Segment Id
+      - name: url_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Url Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /accounts/{account_id}/monitoring/status:
     get:
       summary: List Monitor Statuses
@@ -624,6 +1098,17 @@ paths:
       security: []
 components:
   schemas:
+    AddSegmentGlobRequest:
+      properties:
+        pattern:
+          type: string
+          minLength: 1
+          title: Pattern
+      type: object
+      required:
+      - pattern
+      title: AddSegmentGlobRequest
+      description: Body for ``POST /segments/{id}/globs``.
     CheckResultItem:
       properties:
         created_at:
@@ -759,6 +1244,66 @@ components:
       - limit
       - offset
       title: ListRunsResponse
+    ListSegmentGlobsResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/SegmentGlobResponse'
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - items
+      - total
+      title: ListSegmentGlobsResponse
+    ListSegmentUrlsResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/SegmentUrlResponse'
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - items
+      - total
+      title: ListSegmentUrlsResponse
+    ListSegmentsResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/SegmentResponse'
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - items
+      - total
+      title: ListSegmentsResponse
     MonitorResponse:
       properties:
         id:
@@ -909,6 +1454,18 @@ components:
       - timestamp
       - services
       title: ReadinessResponse
+    ReplaceSegmentGlobsRequest:
+      properties:
+        patterns:
+          items:
+            type: string
+          type: array
+          title: Patterns
+      type: object
+      required:
+      - patterns
+      title: ReplaceSegmentGlobsRequest
+      description: Body for ``PUT /segments/{id}/globs``.
     ResourceType:
       type: string
       enum:
@@ -961,6 +1518,88 @@ components:
       - last_progress_at
       - created_at
       title: RunResponse
+    SegmentGlobResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        segment_id:
+          type: string
+          title: Segment Id
+        pattern:
+          type: string
+          title: Pattern
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+      type: object
+      required:
+      - id
+      - segment_id
+      - pattern
+      - created_at
+      title: SegmentGlobResponse
+    SegmentRequest:
+      properties:
+        name:
+          type: string
+          maxLength: 200
+          minLength: 1
+          title: Name
+      type: object
+      required:
+      - name
+      title: SegmentRequest
+      description: Body for ``POST /segments`` and ``PUT /segments/{id}``.
+    SegmentResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - name
+      - created_at
+      - updated_at
+      title: SegmentResponse
+    SegmentUrlResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        segment_id:
+          type: string
+          title: Segment Id
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+      type: object
+      required:
+      - id
+      - segment_id
+      - url
+      - created_at
+      title: SegmentUrlResponse
     SortDirection:
       type: string
       enum:
