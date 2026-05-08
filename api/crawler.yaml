@@ -4,7 +4,7 @@ info:
   summary: WordLift crawler API
   description: API for creating, listing, and inspecting crawl jobs. This schema is
     generated from FastAPI route/model annotations.
-  version: 0.8.1
+  version: 0.8.4
 paths:
   /crawl-jobs:
     post:
@@ -513,6 +513,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FetchResponse'
+        '429':
+          description: Concurrency limit reached for the target origin or fetch worker.
+            Retry after the number of seconds indicated in the Retry-After header.
+          headers:
+            Retry-After:
+              description: Seconds to wait before retrying.
+              schema:
+                type: integer
         '422':
           description: Validation Error
           content:
@@ -998,11 +1006,12 @@ components:
           anyOf:
           - type: integer
             maximum: 43200.0
-            minimum: 1.0
+            minimum: 10.0
           - type: 'null'
           title: Refresh Interval Minutes
-          description: "Scheduled refresh interval in minutes (1\u201343200). Omit\
-            \ to disable. Upper bound matches the 30-day fetch result retention period."
+          description: "Scheduled refresh interval in minutes (10\u201343200). Must\
+            \ be >= the staleness buffer (10 min) or the entry would always appear\
+            \ stale. Upper bound matches the 30-day fetch result retention period."
         proxy_mode:
           anyOf:
           - $ref: '#/components/schemas/ProxyMode'
