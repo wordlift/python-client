@@ -92,6 +92,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Concurrency limit reached for the target origin or fetch worker. Retry after the number of seconds indicated in the Retry-After header. |  * Retry-After - Seconds to wait before retrying. <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

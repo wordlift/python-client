@@ -356,15 +356,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_add_segment_glob_request.py
-test/test_list_segment_globs_response.py
-test/test_list_segment_urls_response.py
-test/test_list_segments_response.py
-test/test_replace_segment_globs_request.py
-test/test_segment_glob_response.py
-test/test_segment_request.py
-test/test_segment_response.py
-test/test_segment_url_response.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py

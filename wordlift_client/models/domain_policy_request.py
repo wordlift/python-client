@@ -32,7 +32,7 @@ class DomainPolicyRequest(BaseModel):
     """ # noqa: E501
     js_render_mode: Optional[DomainJsRenderMode] = None
     max_concurrency: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
-    refresh_interval_minutes: Optional[Annotated[int, Field(le=43200, strict=True, ge=1)]] = None
+    refresh_interval_minutes: Optional[Annotated[int, Field(le=43200, strict=True, ge=10)]] = None
     proxy_mode: Optional[ProxyMode] = None
     __properties: ClassVar[List[str]] = ["js_render_mode", "max_concurrency", "refresh_interval_minutes", "proxy_mode"]
 

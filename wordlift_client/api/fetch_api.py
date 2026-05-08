@@ -110,6 +110,7 @@ class FetchApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FetchResponse",
             '422': "HTTPValidationError1",
+            '429': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -190,6 +191,7 @@ class FetchApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FetchResponse",
             '422': "HTTPValidationError1",
+            '429': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -270,6 +272,7 @@ class FetchApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FetchResponse",
             '422': "HTTPValidationError1",
+            '429': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
