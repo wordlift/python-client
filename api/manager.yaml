@@ -70,6 +70,8 @@ tags:
   name: Analytics Imports
 - description: Manage vector search nodes embeddings.
   name: Vector Search Nodes
+- description: Manage account chunksets
+  name: Account Chunksets
 - description: Authorize Google Search Console API client.
   name: Google Search Console OAuth2
 - description: Create Internal Links.
@@ -448,6 +450,254 @@ paths:
       summary: Get my Account statistics
       tags:
       - Account Stats
+  /accounts/{account-id}/chunksets:
+    get:
+      operationId: listAccountChunksets
+      parameters:
+      - description: The account id
+        in: path
+        name: account-id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChunksetListResponse'
+          description: Found
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Authentication Failure
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Forbidden
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Not Found
+        "502":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Bad Gateway
+        "504":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Gateway Timeout
+      security:
+      - OAuth2: []
+      summary: List account chunksets
+      tags:
+      - Account Chunksets
+  /accounts/{account-id}/chunksets/{chunkset-slug}:
+    delete:
+      operationId: deleteAccountChunkset
+      parameters:
+      - description: The account id
+        in: path
+        name: account-id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - description: The chunkset slug
+        in: path
+        name: chunkset-slug
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Deleted
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Authentication Failure
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Forbidden
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Not Found
+        "502":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Bad Gateway
+        "504":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Gateway Timeout
+      security:
+      - OAuth2: []
+      summary: Delete account chunkset
+      tags:
+      - Account Chunksets
+    get:
+      operationId: getAccountChunkset
+      parameters:
+      - description: The account id
+        in: path
+        name: account-id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - description: The chunkset slug
+        in: path
+        name: chunkset-slug
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChunksetResponse'
+          description: Found
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Authentication Failure
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Forbidden
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Not Found
+        "502":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Bad Gateway
+        "504":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Gateway Timeout
+      security:
+      - OAuth2: []
+      summary: Get account chunkset
+      tags:
+      - Account Chunksets
+    put:
+      operationId: putAccountChunkset
+      parameters:
+      - description: The account id
+        in: path
+        name: account-id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - description: The chunkset slug
+        in: path
+        name: chunkset-slug
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChunksetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChunksetResponse'
+          description: Updated
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Authentication Failure
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Forbidden
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Not Found
+        "409":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Conflict
+        "415":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Unsupported Media Type
+        "502":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Bad Gateway
+        "504":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Gateway Timeout
+      security:
+      - OAuth2: []
+      summary: Create or replace account chunkset
+      tags:
+      - Account Chunksets
   /accounts/{id}:
     get:
       description: Get the account
@@ -2628,6 +2878,57 @@ components:
             URI.
       required:
       - authorize_uri
+    ChunksetListResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChunksetResponse'
+    ChunksetRequest:
+      type: object
+      properties:
+        chunk_properties:
+          type: array
+          items:
+            type: string
+        chunking_strategy:
+          type: string
+        entity_filters:
+          type: string
+        index_properties:
+          type: array
+          items:
+            type: string
+        slug:
+          type: string
+        vector_model:
+          type: string
+    ChunksetResponse:
+      type: object
+      properties:
+        chunk_properties:
+          type: array
+          items:
+            type: string
+        chunking_strategy:
+          type: string
+        entity_filters:
+          type: string
+        id:
+          type: string
+        index_properties:
+          type: array
+          items:
+            type: string
+        previous_ids:
+          type: array
+          items:
+            type: string
+        slug:
+          type: string
+        vector_model:
+          type: string
     CreateUrlInspectionRequest:
       type: object
       description: A URL inspection request.
