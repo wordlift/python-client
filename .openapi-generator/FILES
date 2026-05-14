@@ -5,6 +5,7 @@ README.md
 docs/AIVisibilityAnalysisResult.md
 docs/Account.md
 docs/AccountApi.md
+docs/AccountChunksetsApi.md
 docs/AccountConfig.md
 docs/AccountGoogleSearchConsoleApi.md
 docs/AccountInfo.md
@@ -52,6 +53,9 @@ docs/BuildAuthorizeUriRequest.md
 docs/BuildAuthorizeUriResponse.md
 docs/CheckResultItem.md
 docs/CheckTimeseriesResponse.md
+docs/ChunksetListResponse.md
+docs/ChunksetRequest.md
+docs/ChunksetResponse.md
 docs/ClassificationRequest.md
 docs/ClassificationResponse.md
 docs/ClassificationsApi.md
@@ -356,10 +360,15 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_account_chunksets_api.py
+test/test_chunkset_list_response.py
+test/test_chunkset_request.py
+test/test_chunkset_response.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
 wordlift_client/api/account_api.py
+wordlift_client/api/account_chunksets_api.py
 wordlift_client/api/account_google_search_console_api.py
 wordlift_client/api/account_stats_api.py
 wordlift_client/api/accounts_api.py
@@ -476,6 +485,9 @@ wordlift_client/models/build_authorize_uri_request.py
 wordlift_client/models/build_authorize_uri_response.py
 wordlift_client/models/check_result_item.py
 wordlift_client/models/check_timeseries_response.py
+wordlift_client/models/chunkset_list_response.py
+wordlift_client/models/chunkset_request.py
+wordlift_client/models/chunkset_response.py
 wordlift_client/models/classification_request.py
 wordlift_client/models/classification_response.py
 wordlift_client/models/completion_request.py

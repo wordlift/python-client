@@ -52,6 +52,9 @@ from wordlift_client.models.build_authorize_uri_request import BuildAuthorizeUri
 from wordlift_client.models.build_authorize_uri_response import BuildAuthorizeUriResponse
 from wordlift_client.models.check_result_item import CheckResultItem
 from wordlift_client.models.check_timeseries_response import CheckTimeseriesResponse
+from wordlift_client.models.chunkset_list_response import ChunksetListResponse
+from wordlift_client.models.chunkset_request import ChunksetRequest
+from wordlift_client.models.chunkset_response import ChunksetResponse
 from wordlift_client.models.classification_request import ClassificationRequest
 from wordlift_client.models.classification_response import ClassificationResponse
 from wordlift_client.models.completion_request import CompletionRequest

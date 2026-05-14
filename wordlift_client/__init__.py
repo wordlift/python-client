@@ -15,10 +15,11 @@
 """  # noqa: E501
 
 
-__version__ = "1.164.0"
+__version__ = "1.165.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
+from wordlift_client.api.account_chunksets_api import AccountChunksetsApi
 from wordlift_client.api.account_stats_api import AccountStatsApi
 from wordlift_client.api.account_google_search_console_api import AccountGoogleSearchConsoleApi
 from wordlift_client.api.accounts_api import AccountsApi
@@ -143,6 +144,9 @@ from wordlift_client.models.build_authorize_uri_request import BuildAuthorizeUri
 from wordlift_client.models.build_authorize_uri_response import BuildAuthorizeUriResponse
 from wordlift_client.models.check_result_item import CheckResultItem
 from wordlift_client.models.check_timeseries_response import CheckTimeseriesResponse
+from wordlift_client.models.chunkset_list_response import ChunksetListResponse
+from wordlift_client.models.chunkset_request import ChunksetRequest
+from wordlift_client.models.chunkset_response import ChunksetResponse
 from wordlift_client.models.classification_request import ClassificationRequest
 from wordlift_client.models.classification_response import ClassificationResponse
 from wordlift_client.models.completion_request import CompletionRequest

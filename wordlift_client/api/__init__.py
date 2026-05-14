@@ -2,6 +2,7 @@
 
 # import apis into api package
 from wordlift_client.api.account_api import AccountApi
+from wordlift_client.api.account_chunksets_api import AccountChunksetsApi
 from wordlift_client.api.account_stats_api import AccountStatsApi
 from wordlift_client.api.account_google_search_console_api import AccountGoogleSearchConsoleApi
 from wordlift_client.api.accounts_api import AccountsApi
