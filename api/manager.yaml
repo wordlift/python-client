@@ -2489,6 +2489,13 @@ components:
           type: string
           description: The country code
           readOnly: true
+        data_api_route:
+          type: string
+          description: The data API route
+          enum:
+          - data_service
+          - platform_ng
+          readOnly: true
         datasetId:
           type: string
           description: The Dataset Id
