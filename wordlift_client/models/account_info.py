@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.network_account_info import NetworkAccountInfo
 from wordlift_client.models.tokens import Tokens
@@ -31,6 +31,7 @@ class AccountInfo(BaseModel):
     """ # noqa: E501
     account_id: StrictInt = Field(description="The Account Id", alias="accountId")
     country_code: Optional[StrictStr] = Field(default=None, description="The country code")
+    data_api_route: Optional[StrictStr] = Field(default=None, description="The data API route")
     dataset_id: Optional[StrictStr] = Field(default=None, description="The Dataset Id", alias="datasetId")
     dataset_uri: StrictStr = Field(description="The dataset URI", alias="datasetUri")
     default_data_formatter: Optional[StrictStr] = Field(default=None, description="The default data formatter used by the account to format the JSON+LD of the data from the KG.", alias="defaultDataFormatter")
@@ -46,7 +47,17 @@ class AccountInfo(BaseModel):
     url: Optional[StrictStr] = Field(default=None, description="The website URL")
     wp_admin: Optional[StrictStr] = Field(default=None, description="If WordPress, the WP-ADMIN URL", alias="wpAdmin")
     wp_json: Optional[StrictStr] = Field(default=None, description="If WordPress, the WP-JSON end-point", alias="wpJson")
-    __properties: ClassVar[List[str]] = ["accountId", "country_code", "datasetId", "datasetUri", "defaultDataFormatter", "features", "googleSearchConsoleSiteUrl", "includeExcludeDefault", "key", "language", "networks", "ngDatasetId", "subscriptionId", "tokens", "url", "wpAdmin", "wpJson"]
+    __properties: ClassVar[List[str]] = ["accountId", "country_code", "data_api_route", "datasetId", "datasetUri", "defaultDataFormatter", "features", "googleSearchConsoleSiteUrl", "includeExcludeDefault", "key", "language", "networks", "ngDatasetId", "subscriptionId", "tokens", "url", "wpAdmin", "wpJson"]
+
+    @field_validator('data_api_route')
+    def data_api_route_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['data_service', 'platform_ng']):
+            raise ValueError("must be one of enum values ('data_service', 'platform_ng')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,10 +105,12 @@ class AccountInfo(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
             "account_id",
             "country_code",
+            "data_api_route",
             "dataset_id",
             "dataset_uri",
             "default_data_formatter",
@@ -147,6 +160,7 @@ class AccountInfo(BaseModel):
         _obj = cls.model_validate({
             "accountId": obj.get("accountId"),
             "country_code": obj.get("country_code"),
+            "data_api_route": obj.get("data_api_route"),
             "datasetId": obj.get("datasetId"),
             "datasetUri": obj.get("datasetUri"),
             "defaultDataFormatter": obj.get("defaultDataFormatter"),
