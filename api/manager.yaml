@@ -2426,6 +2426,11 @@ components:
           description: The collection hosing the Knowledge Graph.
         country:
           type: string
+        data_api_route:
+          type: string
+          enum:
+          - data_service
+          - platform_ng
         datasetId:
           type: string
           deprecated: true
