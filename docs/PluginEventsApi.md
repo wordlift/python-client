@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **create_event**
-> Event create_event(request1)
+> Event create_event(request2)
 
 Create
 
@@ -22,7 +22,7 @@ Create an event
 ```python
 import wordlift_client
 from wordlift_client.models.event import Event
-from wordlift_client.models.request1 import Request1
+from wordlift_client.models.request2 import Request2
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -47,11 +47,11 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.PluginEventsApi(api_client)
-    request1 = wordlift_client.Request1() # Request1 | 
+    request2 = wordlift_client.Request2() # Request2 | 
 
     try:
         # Create
-        api_response = await api_instance.create_event(request1)
+        api_response = await api_instance.create_event(request2)
         print("The response of PluginEventsApi->create_event:\n")
         pprint(api_response)
     except Exception as e:
@@ -65,7 +65,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request1** | [**Request1**](Request1.md)|  | 
+ **request2** | [**Request2**](Request2.md)|  | 
 
 ### Return type
 

@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -34,6 +34,7 @@ class Account(BaseModel):
     botify_username: Optional[StrictStr] = None
     collection: Optional[StrictStr] = Field(default='entity', description="The collection hosing the Knowledge Graph.")
     country: Optional[StrictStr] = None
+    data_api_route: Optional[StrictStr] = None
     dataset_id: Optional[StrictStr] = Field(default=None, alias="datasetId")
     dataset_uri: Optional[StrictStr] = Field(default=None, alias="datasetUri")
     default_data_formatter: Optional[StrictStr] = None
@@ -51,7 +52,17 @@ class Account(BaseModel):
     wp_admin: Optional[StrictStr] = Field(default=None, alias="wpAdmin")
     wp_json: Optional[StrictStr] = Field(default=None, alias="wpJson")
     wp_include_exclude_default: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["analytics_client_factory", "analyzerId", "botify_project", "botify_token", "botify_username", "collection", "country", "datasetId", "datasetUri", "default_data_formatter", "domainUri", "google_search_console_site_url", "id", "indexed", "is_wordpress", "key", "language", "ngDatasetId", "resolvedUrl", "subscriptionId", "url", "wpAdmin", "wpJson", "wp_include_exclude_default"]
+    __properties: ClassVar[List[str]] = ["analytics_client_factory", "analyzerId", "botify_project", "botify_token", "botify_username", "collection", "country", "data_api_route", "datasetId", "datasetUri", "default_data_formatter", "domainUri", "google_search_console_site_url", "id", "indexed", "is_wordpress", "key", "language", "ngDatasetId", "resolvedUrl", "subscriptionId", "url", "wpAdmin", "wpJson", "wp_include_exclude_default"]
+
+    @field_validator('data_api_route')
+    def data_api_route_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['data_service', 'platform_ng']):
+            raise ValueError("must be one of enum values ('data_service', 'platform_ng')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,6 +122,7 @@ class Account(BaseModel):
             "botify_username": obj.get("botify_username"),
             "collection": obj.get("collection") if obj.get("collection") is not None else 'entity',
             "country": obj.get("country"),
+            "data_api_route": obj.get("data_api_route"),
             "datasetId": obj.get("datasetId"),
             "datasetUri": obj.get("datasetUri"),
             "default_data_formatter": obj.get("default_data_formatter"),

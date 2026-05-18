@@ -117,7 +117,7 @@ class PagesExplorerApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebsitePageArtifactResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -201,7 +201,7 @@ class PagesExplorerApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebsitePageArtifactResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -285,7 +285,7 @@ class PagesExplorerApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebsitePageArtifactResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -447,7 +447,7 @@ class PagesExplorerApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebsitePageResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -527,7 +527,7 @@ class PagesExplorerApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebsitePageResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -607,7 +607,7 @@ class PagesExplorerApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebsitePageResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -786,7 +786,7 @@ class PagesExplorerApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ResponseListWebsitePagesWebsitesHostPagesGet",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -886,7 +886,7 @@ class PagesExplorerApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ResponseListWebsitePagesWebsitesHostPagesGet",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -986,7 +986,7 @@ class PagesExplorerApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ResponseListWebsitePagesWebsitesHostPagesGet",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1164,7 +1164,7 @@ class PagesExplorerApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PageArtifactQueryResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1236,7 +1236,7 @@ class PagesExplorerApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PageArtifactQueryResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1308,7 +1308,7 @@ class PagesExplorerApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PageArtifactQueryResponse",
-            '422': "HTTPValidationError1",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,

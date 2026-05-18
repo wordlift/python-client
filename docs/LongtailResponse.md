@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **summary** | **str** | The page summary. | [optional] 
-**entities** | [**List[Entity]**](Entity.md) | The list of entities matching the query. | [optional] 
+**entities** | [**List[Entity1]**](Entity1.md) | The list of entities matching the query. | [optional] 
 
 ## Example
 

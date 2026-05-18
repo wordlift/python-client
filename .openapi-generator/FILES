@@ -360,10 +360,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_account_chunksets_api.py
-test/test_chunkset_list_response.py
-test/test_chunkset_request.py
-test/test_chunkset_response.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py

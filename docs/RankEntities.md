@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **rank** | **int** |  | [optional] 
-**entities** | [**List[Entity]**](Entity.md) |  | [optional] 
+**entities** | [**List[Entity1]**](Entity1.md) |  | [optional] 
 
 ## Example
 

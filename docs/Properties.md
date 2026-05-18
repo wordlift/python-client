@@ -1,12 +1,13 @@
 # Properties
 
+The entity properties.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The name of the entity. | [optional] 
-**same_as** | **List[str]** | A list of sameAs entity URIs. | [optional] 
+**latitude** | **float** | The latitude. | [optional] 
+**longitude** | **float** | The longitude. | [optional] 
 
 ## Example
 
