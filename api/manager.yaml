@@ -2489,7 +2489,7 @@ components:
           type: string
           description: The country code
           readOnly: true
-        data_api_route:
+        dataApiRoute:
           type: string
           description: The data API route
           enum:
