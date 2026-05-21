@@ -36,6 +36,9 @@ class FetchResponse(BaseModel):
     html: Optional[StrictStr] = None
     original_charset: Optional[StrictStr] = None
     markdown: Optional[StrictStr] = None
+    title: Optional[StrictStr] = None
+    description: Optional[StrictStr] = None
+    text: Optional[StrictStr] = None
     error_code: Optional[StrictStr] = None
     error_message: Optional[StrictStr] = None
     ttfb_ms: Optional[StrictInt] = None
@@ -43,7 +46,7 @@ class FetchResponse(BaseModel):
     fetched_at: Optional[datetime] = None
     from_cache: Optional[StrictBool] = Field(default=False, description="True when the response was served from a previously stored fetch result.")
     har: Optional[Dict[str, Any]] = None
-    __properties: ClassVar[List[str]] = ["success", "url_requested", "url_final", "status_code", "content_type", "html", "original_charset", "markdown", "error_code", "error_message", "ttfb_ms", "response_time_ms", "fetched_at", "from_cache", "har"]
+    __properties: ClassVar[List[str]] = ["success", "url_requested", "url_final", "status_code", "content_type", "html", "original_charset", "markdown", "title", "description", "text", "error_code", "error_message", "ttfb_ms", "response_time_ms", "fetched_at", "from_cache", "har"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -109,6 +112,21 @@ class FetchResponse(BaseModel):
         if self.markdown is None and "markdown" in self.model_fields_set:
             _dict['markdown'] = None
 
+        # set to None if title (nullable) is None
+        # and model_fields_set contains the field
+        if self.title is None and "title" in self.model_fields_set:
+            _dict['title'] = None
+
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if text (nullable) is None
+        # and model_fields_set contains the field
+        if self.text is None and "text" in self.model_fields_set:
+            _dict['text'] = None
+
         # set to None if error_code (nullable) is None
         # and model_fields_set contains the field
         if self.error_code is None and "error_code" in self.model_fields_set:
@@ -159,6 +177,9 @@ class FetchResponse(BaseModel):
             "html": obj.get("html"),
             "original_charset": obj.get("original_charset"),
             "markdown": obj.get("markdown"),
+            "title": obj.get("title"),
+            "description": obj.get("description"),
+            "text": obj.get("text"),
             "error_code": obj.get("error_code"),
             "error_message": obj.get("error_message"),
             "ttfb_ms": obj.get("ttfb_ms"),
