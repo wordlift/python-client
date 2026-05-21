@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.2.0
+  version: 2.6.0
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -850,6 +850,299 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/monitoring/expectations:
+    post:
+      summary: Create Expectation
+      description: Create a rule. Attachments are managed via the segments sub-resource.
+      operationId: create_expectation_accounts__account_id__monitoring_expectations_post
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpectationRequest'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpectationResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      summary: List Expectations
+      operationId: list_expectations_accounts__account_id__monitoring_expectations_get
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Opaque pagination cursor from a previous response.
+          title: Cursor
+        description: Opaque pagination cursor from a previous response.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          description: Maximum number of expectations to return.
+          default: 50
+          title: Limit
+        description: Maximum number of expectations to return.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListExpectationsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/monitoring/expectations/{expectation_id}:
+    get:
+      summary: Get Expectation
+      operationId: get_expectation_accounts__account_id__monitoring_expectations__expectation_id__get
+      parameters:
+      - name: expectation_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Expectation Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpectationResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      summary: Delete Expectation
+      operationId: delete_expectation_accounts__account_id__monitoring_expectations__expectation_id__delete
+      parameters:
+      - name: expectation_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Expectation Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/monitoring/expectations/{expectation_id}/segments:
+    get:
+      summary: List Expectation Segments
+      description: Return a page of segments attached to the rule, ordered by ``(created_at,
+        id)``.
+      operationId: list_expectation_segments_accounts__account_id__monitoring_expectations__expectation_id__segments_get
+      parameters:
+      - name: expectation_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Expectation Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Opaque pagination cursor from a previous response.
+          title: Cursor
+        description: Opaque pagination cursor from a previous response.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          description: Maximum number of segments to return.
+          default: 50
+          title: Limit
+        description: Maximum number of segments to return.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSegmentsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      summary: Replace Expectation Segments
+      description: Replace the rule's set of attached segments wholesale. Returns
+        the new attached set.
+      operationId: replace_expectation_segments_accounts__account_id__monitoring_expectations__expectation_id__segments_put
+      parameters:
+      - name: expectation_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Expectation Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReplaceExpectationSegmentsRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SegmentResponse'
+                title: Response Replace Expectation Segments Accounts  Account Id  Monitoring
+                  Expectations  Expectation Id  Segments Put
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/monitoring/expectations/{expectation_id}/segments/{segment_id}:
+    put:
+      summary: Attach Expectation Segment
+      description: Attach a segment to a rule. Idempotent. Returns the attached segment.
+      operationId: attach_expectation_segment_accounts__account_id__monitoring_expectations__expectation_id__segments__segment_id__put
+      parameters:
+      - name: expectation_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Expectation Id
+      - name: segment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Segment Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      summary: Detach Expectation Segment
+      description: Detach a segment from a rule. Idempotent.
+      operationId: detach_expectation_segment_accounts__account_id__monitoring_expectations__expectation_id__segments__segment_id__delete
+      parameters:
+      - name: expectation_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Expectation Id
+      - name: segment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Segment Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /accounts/{account_id}/monitoring/status:
     get:
       summary: List Monitor Statuses
@@ -1156,6 +1449,54 @@ components:
       - check_name
       - items
       title: CheckTimeseriesResponse
+    ExpectationRequest:
+      properties:
+        check_name:
+          $ref: '#/components/schemas/MonitorCheckName'
+        severity:
+          $ref: '#/components/schemas/ExpectationSeverity'
+        config:
+          $ref: '#/components/schemas/StructuredDataExpectationConfig'
+      type: object
+      required:
+      - check_name
+      - severity
+      - config
+      title: ExpectationRequest
+      description: "Body for ``POST /expectations``.\n\n``config`` is typed as ``AnyExpectationConfig``\
+        \ \u2014 the extension point\nthat will hold a union once a second check type\
+        \ ships. Pydantic\nvalidates the concrete shape per-field (422 on bad input).\
+        \ Segment\nattachments are managed via the dedicated\n``PUT/DELETE /expectations/{e}/segments[/{s}]``\
+        \ endpoints."
+    ExpectationResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        check_name:
+          $ref: '#/components/schemas/MonitorCheckName'
+        severity:
+          $ref: '#/components/schemas/ExpectationSeverity'
+        config:
+          $ref: '#/components/schemas/StructuredDataExpectationConfig'
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+      type: object
+      required:
+      - id
+      - check_name
+      - severity
+      - config
+      - created_at
+      title: ExpectationResponse
+    ExpectationSeverity:
+      type: string
+      enum:
+      - required
+      - recommended
+      title: ExpectationSeverity
     HTTPValidationError:
       properties:
         detail:
@@ -1174,6 +1515,26 @@ components:
       required:
       - status
       title: HealthResponse
+    ListExpectationsResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/ExpectationResponse'
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - items
+      - total
+      title: ListExpectationsResponse
     ListMonitorStatusResponse:
       properties:
         items:
@@ -1304,6 +1665,25 @@ components:
       - items
       - total
       title: ListSegmentsResponse
+    MonitorCheckName:
+      type: string
+      enum:
+      - structured_data_check
+      title: MonitorCheckName
+      description: 'Identifier of a monitor check plugin.
+
+
+        Mirrors the ``name`` returned by SDK monitor plugins and the
+
+        ``check_name`` column on ``monitor_check_results``. Listed here for
+
+        type-safety on the domain and API models that reference a check.
+
+        Each value imports its string from the plugin package that owns it,
+
+        so writer (this enum) and reader (the plugin''s ``Monitor.name``) can''t
+
+        drift.'
     MonitorResponse:
       properties:
         id:
@@ -1454,6 +1834,18 @@ components:
       - timestamp
       - services
       title: ReadinessResponse
+    ReplaceExpectationSegmentsRequest:
+      properties:
+        segment_ids:
+          items:
+            type: string
+          type: array
+          title: Segment Ids
+      type: object
+      required:
+      - segment_ids
+      title: ReplaceExpectationSegmentsRequest
+      description: Body for ``PUT /expectations/{id}/segments``.
     ReplaceSegmentGlobsRequest:
       properties:
         patterns:
@@ -1606,6 +1998,43 @@ components:
       - asc
       - desc
       title: SortDirection
+    StructuredDataConstraint:
+      type: string
+      enum:
+      - present
+      - absent
+      title: StructuredDataConstraint
+      description: Whether the structured-data shape must be observed or must not
+        be.
+    StructuredDataExpectationConfig:
+      properties:
+        entity_type:
+          type: string
+          minLength: 1
+          title: Entity Type
+        property_path:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Property Path
+        constraint:
+          $ref: '#/components/schemas/StructuredDataConstraint'
+      additionalProperties: false
+      type: object
+      required:
+      - entity_type
+      - constraint
+      title: StructuredDataExpectationConfig
+      description: "Config payload for an expectation triggered by ``structured_data_check``.\n\
+        \nEach field describes a structured-data assertion specifically \u2014 the\n\
+        naming is intentionally not generic, since a future check (e.g. a\nlatency\
+        \ assertion) will get its own config class with its own\ndomain-specific field\
+        \ names rather than reusing this shape.\n\n``property_path`` distinguishes\
+        \ entity-level rules (``None``) from\nproperty-level rules (set) \u2014 there\
+        \ is no cross-field validator; the\nnullability of ``property_path`` does\
+        \ the work.\n\nThe domain shape is always the current version; payload-version\n\
+        tracking and upgrades live at the storage boundary in\n``expectation_repository``."
     ValidationError:
       properties:
         loc:
