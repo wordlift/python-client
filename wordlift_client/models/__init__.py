@@ -109,6 +109,9 @@ from wordlift_client.models.error_response import ErrorResponse
 from wordlift_client.models.event import Event
 from wordlift_client.models.exchange_auth_code_request import ExchangeAuthCodeRequest
 from wordlift_client.models.exchange_auth_code_response import ExchangeAuthCodeResponse
+from wordlift_client.models.expectation_request import ExpectationRequest
+from wordlift_client.models.expectation_response import ExpectationResponse
+from wordlift_client.models.expectation_severity import ExpectationSeverity
 from wordlift_client.models.fetch_js_render_mode import FetchJsRenderMode
 from wordlift_client.models.fetch_response import FetchResponse
 from wordlift_client.models.filter import Filter
@@ -144,6 +147,7 @@ from wordlift_client.models.kg_embedding_response import KgEmbeddingResponse
 from wordlift_client.models.level_enum import LevelEnum
 from wordlift_client.models.link_group import LinkGroup
 from wordlift_client.models.link_group_response import LinkGroupResponse
+from wordlift_client.models.list_expectations_response import ListExpectationsResponse
 from wordlift_client.models.list_monitor_status_response import ListMonitorStatusResponse
 from wordlift_client.models.list_monitors_response import ListMonitorsResponse
 from wordlift_client.models.list_runs_response import ListRunsResponse
@@ -159,6 +163,7 @@ from wordlift_client.models.merchant_sync import MerchantSync
 from wordlift_client.models.merchant_view import MerchantView
 from wordlift_client.models.model import Model
 from wordlift_client.models.model_field import ModelField
+from wordlift_client.models.monitor_check_name import MonitorCheckName
 from wordlift_client.models.monitor_response import MonitorResponse
 from wordlift_client.models.monitor_run_status import MonitorRunStatus
 from wordlift_client.models.monitor_status import MonitorStatus
@@ -212,6 +217,7 @@ from wordlift_client.models.readiness_response import ReadinessResponse
 from wordlift_client.models.record import Record
 from wordlift_client.models.render_request import RenderRequest
 from wordlift_client.models.render_wait_until import RenderWaitUntil
+from wordlift_client.models.replace_expectation_segments_request import ReplaceExpectationSegmentsRequest
 from wordlift_client.models.replace_monitor_item import ReplaceMonitorItem
 from wordlift_client.models.replace_monitors_request import ReplaceMonitorsRequest
 from wordlift_client.models.replace_segment_globs_request import ReplaceSegmentGlobsRequest
@@ -243,6 +249,8 @@ from wordlift_client.models.snapshot_list_response import SnapshotListResponse
 from wordlift_client.models.snapshot_response import SnapshotResponse
 from wordlift_client.models.sort_direction import SortDirection
 from wordlift_client.models.structured_data import StructuredData
+from wordlift_client.models.structured_data_constraint import StructuredDataConstraint
+from wordlift_client.models.structured_data_expectation_config import StructuredDataExpectationConfig
 from wordlift_client.models.submit_fact_check200_response import SubmitFactCheck200Response
 from wordlift_client.models.submit_fact_check_request import SubmitFactCheckRequest
 from wordlift_client.models.submit_job_body import SubmitJobBody

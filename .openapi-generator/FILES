@@ -132,6 +132,9 @@ docs/ErrorResponse.md
 docs/Event.md
 docs/ExchangeAuthCodeRequest.md
 docs/ExchangeAuthCodeResponse.md
+docs/ExpectationRequest.md
+docs/ExpectationResponse.md
+docs/ExpectationSeverity.md
 docs/FactCheckApi.md
 docs/FetchApi.md
 docs/FetchJsRenderMode.md
@@ -181,6 +184,7 @@ docs/LevelEnum.md
 docs/LinkGroup.md
 docs/LinkGroupResponse.md
 docs/LinkGroupsApi.md
+docs/ListExpectationsResponse.md
 docs/ListMonitorStatusResponse.md
 docs/ListMonitorsResponse.md
 docs/ListRunsResponse.md
@@ -200,6 +204,7 @@ docs/MerchantsApi.md
 docs/MicrodataApi.md
 docs/Model.md
 docs/ModelField.md
+docs/MonitorCheckName.md
 docs/MonitorResponse.md
 docs/MonitorRunStatus.md
 docs/MonitorStatus.md
@@ -262,6 +267,7 @@ docs/Record.md
 docs/RedeemCodesApi.md
 docs/RenderRequest.md
 docs/RenderWaitUntil.md
+docs/ReplaceExpectationSegmentsRequest.md
 docs/ReplaceMonitorItem.md
 docs/ReplaceMonitorsRequest.md
 docs/ReplaceSegmentGlobsRequest.md
@@ -297,6 +303,8 @@ docs/SnapshotResponse.md
 docs/SnapshotsApi.md
 docs/SortDirection.md
 docs/StructuredData.md
+docs/StructuredDataConstraint.md
+docs/StructuredDataExpectationConfig.md
 docs/SubmitFactCheck200Response.md
 docs/SubmitFactCheckRequest.md
 docs/SubmitJobBody.md
@@ -360,6 +368,14 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_expectation_request.py
+test/test_expectation_response.py
+test/test_expectation_severity.py
+test/test_list_expectations_response.py
+test/test_monitor_check_name.py
+test/test_replace_expectation_segments_request.py
+test/test_structured_data_constraint.py
+test/test_structured_data_expectation_config.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -538,6 +554,9 @@ wordlift_client/models/error_response.py
 wordlift_client/models/event.py
 wordlift_client/models/exchange_auth_code_request.py
 wordlift_client/models/exchange_auth_code_response.py
+wordlift_client/models/expectation_request.py
+wordlift_client/models/expectation_response.py
+wordlift_client/models/expectation_severity.py
 wordlift_client/models/fetch_js_render_mode.py
 wordlift_client/models/fetch_response.py
 wordlift_client/models/filter.py
@@ -573,6 +592,7 @@ wordlift_client/models/kg_embedding_response.py
 wordlift_client/models/level_enum.py
 wordlift_client/models/link_group.py
 wordlift_client/models/link_group_response.py
+wordlift_client/models/list_expectations_response.py
 wordlift_client/models/list_monitor_status_response.py
 wordlift_client/models/list_monitors_response.py
 wordlift_client/models/list_runs_response.py
@@ -588,6 +608,7 @@ wordlift_client/models/merchant_sync.py
 wordlift_client/models/merchant_view.py
 wordlift_client/models/model.py
 wordlift_client/models/model_field.py
+wordlift_client/models/monitor_check_name.py
 wordlift_client/models/monitor_response.py
 wordlift_client/models/monitor_run_status.py
 wordlift_client/models/monitor_status.py
@@ -641,6 +662,7 @@ wordlift_client/models/readiness_response.py
 wordlift_client/models/record.py
 wordlift_client/models/render_request.py
 wordlift_client/models/render_wait_until.py
+wordlift_client/models/replace_expectation_segments_request.py
 wordlift_client/models/replace_monitor_item.py
 wordlift_client/models/replace_monitors_request.py
 wordlift_client/models/replace_segment_globs_request.py
@@ -672,6 +694,8 @@ wordlift_client/models/snapshot_list_response.py
 wordlift_client/models/snapshot_response.py
 wordlift_client/models/sort_direction.py
 wordlift_client/models/structured_data.py
+wordlift_client/models/structured_data_constraint.py
+wordlift_client/models/structured_data_expectation_config.py
 wordlift_client/models/submit_fact_check200_response.py
 wordlift_client/models/submit_fact_check_request.py
 wordlift_client/models/submit_job_body.py
