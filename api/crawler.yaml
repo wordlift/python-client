@@ -4,7 +4,7 @@ info:
   summary: WordLift crawler API
   description: API for creating, listing, and inspecting crawl jobs. This schema is
     generated from FastAPI route/model annotations.
-  version: 0.8.4
+  version: 0.11.3
 paths:
   /crawl-jobs:
     post:
@@ -1113,6 +1113,24 @@ components:
           - type: 'null'
           title: Markdown
           description: Page content extracted as Markdown.
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+          description: Page title extracted by trafilatura.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Page description/abstract extracted by trafilatura.
+        text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Text
+          description: Plain text content extracted by trafilatura.
         error_code:
           anyOf:
           - type: string
