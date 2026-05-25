@@ -15,11 +15,13 @@
 """  # noqa: E501
 
 
-__version__ = "1.172.0"
+__version__ = "1.173.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
 from wordlift_client.api.account_chunksets_api import AccountChunksetsApi
+from wordlift_client.api.account_connector_fields_api import AccountConnectorFieldsApi
+from wordlift_client.api.account_o_auth2_connectors_api import AccountOAuth2ConnectorsApi
 from wordlift_client.api.account_stats_api import AccountStatsApi
 from wordlift_client.api.accounts_api import AccountsApi
 from wordlift_client.api.add_ons_api import AddOnsApi
@@ -68,6 +70,7 @@ from wordlift_client.api.merchant_syncs_api import MerchantSyncsApi
 from wordlift_client.api.merchants_api import MerchantsApi
 from wordlift_client.api.microdata_api import MicrodataApi
 from wordlift_client.api.o_auth2_authorized_clients_api import OAuth2AuthorizedClientsApi
+from wordlift_client.api.o_auth2_connectors_api import OAuth2ConnectorsApi
 from wordlift_client.api.pages_explorer_api import PagesExplorerApi
 from wordlift_client.api.platform_consumptions_api import PlatformConsumptionsApi
 from wordlift_client.api.platform_limits_api import PlatformLimitsApi
@@ -88,11 +91,8 @@ from wordlift_client.api.web_asyncs_responses_api import WebAsyncsResponsesApi
 from wordlift_client.api.web_page_scrape_api import WebPageScrapeApi
 from wordlift_client.api.web_pages_imports_api import WebPagesImportsApi
 from wordlift_client.api.web_pages_api import WebPagesApi
-from wordlift_client.api.account_connector_field_controller_api import AccountConnectorFieldControllerApi
-from wordlift_client.api.account_o_auth2_connector_controller_api import AccountOAuth2ConnectorControllerApi
 from wordlift_client.api.default_api import DefaultApi
 from wordlift_client.api.jobs_api import JobsApi
-from wordlift_client.api.o_auth2_connector_controller_api import OAuth2ConnectorControllerApi
 from wordlift_client.api.snapshots_api import SnapshotsApi
 
 # import ApiClient
