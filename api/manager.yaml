@@ -2372,6 +2372,12 @@ components:
           type: string
           default: entity
           description: The collection hosing the Knowledge Graph.
+        connector_fields:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
         country:
           type: string
         data_api_route:
@@ -2424,6 +2430,21 @@ components:
           type: integer
           format: int64
           description: The Account Id
+          readOnly: true
+        connector_fields:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+              description: Non-secret connector fields keyed by connector id and field
+                name
+              readOnly: true
+            description: Non-secret connector fields keyed by connector id and field
+              name
+            readOnly: true
+          description: Non-secret connector fields keyed by connector id and field
+            name
           readOnly: true
         country_code:
           type: string
