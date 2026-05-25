@@ -36,13 +36,8 @@ tags:
   name: OAuth2 Authorized Clients
 - description: Import Web Pages to the Graph
   name: Web Pages Imports
-- description: Get a list of all properties from google search console related to
-    an account.
-  name: Google Search Console Websites
 - description: Manage Accounts
   name: Accounts
-- description: Configure Google Search Console OAuth2 authorized access codes.
-  name: Google Search Console OAuth2
 - description: Update Plugin Diagnostics data for WordPress clients.
   name: Plugin Diagnostics
 - description: Google Search Console methods.
@@ -72,17 +67,12 @@ tags:
   name: Vector Search Nodes
 - description: Manage account chunksets
   name: Account Chunksets
-- description: Authorize Google Search Console API client.
-  name: Google Search Console OAuth2
 - description: Create Internal Links.
   name: Internal Links
 - description: Manage redeem codes.
   name: Redeem Codes
 - description: Create vector search queries.
   name: Vector Search Queries
-- description: Manage the relationship between the account and the Google Search Console
-    siteUrl.
-  name: Account - Google Search Console
 - description: Manage Platform Limits
   name: Platform Limits
 - description: Read tokens connected to Graphs.
@@ -197,47 +187,6 @@ paths:
       summary: Clear Cache
       tags:
       - Account
-  /accounts/me/google-search-console:
-    patch:
-      description: Update the Google Search Console siteUrl for the authenticated
-        account.
-      operationId: updateAccountConfig
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateSiteUrlRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/AccountConfig'
-          description: Google Search Console configuration updated on the account
-        "401":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/AccountConfig'
-          description: Unauthorized
-        "412":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/AccountConfig'
-          description: GSC api denied or missing
-        "422":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/AccountConfig'
-          description: Validation error
-      security:
-      - ApiKey: []
-      summary: Account configuration update
-      tags:
-      - Account - Google Search Console
   /accounts/me/google/searches:
     get:
       description: List the Website Search performance data
@@ -698,6 +647,160 @@ paths:
       summary: Create or replace account chunkset
       tags:
       - Account Chunksets
+  /accounts/{account_id}/oauth2/connectors/{connector_id}/authorization:
+    delete:
+      operationId: deleteAuthorization
+      parameters:
+      - in: path
+        name: account_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - in: path
+        name: connector_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+      tags:
+      - account-o-auth-2-connector-controller
+    get:
+      operationId: authorization
+      parameters:
+      - in: path
+        name: account_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - in: path
+        name: connector_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OAuth2ConnectorAuthorizationResponse'
+          description: OK
+      tags:
+      - account-o-auth-2-connector-controller
+  /accounts/{account_id}/oauth2/connectors/{connector_id}/authorization-requests:
+    post:
+      operationId: createAuthorizationRequest
+      parameters:
+      - in: path
+        name: account_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - in: path
+        name: connector_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAuth2ConnectorAuthorizationRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OAuth2ConnectorAuthorizationRequestResponse'
+          description: OK
+      tags:
+      - account-o-auth-2-connector-controller
+  /accounts/{account_id}/oauth2/connectors/{connector_id}/fields:
+    get:
+      operationId: fields
+      parameters:
+      - in: path
+        name: account_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - in: path
+        name: connector_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+          description: OK
+      tags:
+      - account-connector-field-controller
+  /accounts/{account_id}/oauth2/connectors/{connector_id}/fields/{field_name}:
+    delete:
+      operationId: deleteField
+      parameters:
+      - in: path
+        name: account_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - in: path
+        name: connector_id
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: field_name
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+      tags:
+      - account-connector-field-controller
+    put:
+      operationId: putField
+      parameters:
+      - in: path
+        name: account_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - in: path
+        name: connector_id
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: field_name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FieldValueRequest'
+        required: true
+      responses:
+        "204":
+          description: No Content
+      tags:
+      - account-connector-field-controller
   /accounts/{id}:
     get:
       description: Get the account
@@ -1173,204 +1276,6 @@ paths:
       summary: List
       tags:
       - Google Merchants
-  /google-search-console/authorization:
-    delete:
-      description: Retrieve the authorizations of the authenticated user.
-      operationId: deleteAuthorization
-      responses:
-        "202":
-          description: Authorization of the account authenticated is deleted.
-      security:
-      - ApiKey: []
-      summary: Delete an authorization
-      tags:
-      - Google Search Console OAuth2
-  /google-search-console/authorizations:
-    get:
-      description: Retrieve the authorizations of the authenticated user.
-      operationId: getAuthorizations
-      parameters:
-      - in: query
-        name: account_key
-        required: false
-        schema:
-          type: array
-          items:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Authorization'
-          description: The authorizations of the user
-      summary: Get the authorizations
-      tags:
-      - Google Search Console OAuth2
-  /google-search-console/authorize/duplicate:
-    post:
-      description: Call this API to duplicate an existing google search console connection
-        to another accounts.
-      operationId: duplicate
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DuplicateAuthorizationRequest'
-        required: true
-      responses:
-        "201":
-          content:
-            '*/*':
-              schema:
-                type: object
-          description: The connection has been duplicated
-        "422":
-          content:
-            '*/*':
-              schema:
-                type: object
-          description: The account keys are invalid
-      summary: Duplicate the Google Search Console connection through accounts
-      tags:
-      - Google Search Console OAuth2
-  /google-search-console/authorize/init:
-    get:
-      description: Call this API to go to the login page of the Google Search Console.
-      operationId: login
-      parameters:
-      - description: The account key
-        in: query
-        name: accountKey
-        required: true
-        schema:
-          type: string
-      - description: The redirect URI to redirect to after the login
-        in: query
-        name: redirectUri
-        required: true
-        schema:
-          type: string
-          format: uri
-      - description: The state to maintain after authorize.
-        in: query
-        name: state
-        required: false
-        schema:
-          type: string
-      responses:
-        "307":
-          description: Redirect to redirectUri value
-          headers:
-            Location:
-              description: Redirect to google login page
-              schema: {}
-              style: simple
-      summary: Login to the Google Search Console API client
-      tags:
-      - Google Search Console OAuth2
-  /google-search-console/oauth2/auth-code-exchanges:
-    post:
-      deprecated: true
-      description: Call this API to have the Platform receive an Authentication Token
-        to access the Analytics data via Google Search Console.
-      operationId: createAuthCodeExchange
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ExchangeAuthCodeRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExchangeAuthCodeResponse'
-          description: Found
-        "401":
-          description: Authentication Failure
-        "404":
-          description: Not Found
-      security:
-      - ApiKey: []
-      summary: Get an Access Code
-      tags:
-      - Google Search Console OAuth2
-  /google-search-console/oauth2/authorize-uris:
-    post:
-      deprecated: true
-      description: Call this API to get an authorization URI needed to interactively
-        get an authorization token. Then call the `exchangeAuthCode` to exchange it
-        with an authorization token.
-      operationId: createAuthorizeUri
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/BuildAuthorizeUriRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BuildAuthorizeUriResponse'
-          description: Found
-        "401":
-          description: Authentication Failure
-        "404":
-          description: Not Found
-      security:
-      - ApiKey: []
-      summary: Create an Authorization URI
-      tags:
-      - Google Search Console OAuth2
-  /google-search-console/sites:
-    get:
-      description: List all of sites from the authenticated google search console
-        in account.
-      operationId: getGscSites
-      parameters:
-      - description: "Filters the list to include only site URLs that are equal to\
-          \ or related to the given site URL, including its parent or base URLs."
-        in: query
-        name: relatedSiteUrl
-        required: false
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Website'
-          description: List of GSC sites
-        "401":
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Website'
-          description: Unauthorized
-        "412":
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Website'
-          description: When the account is not connected to any Google Search Console
-      security:
-      - ApiKey: []
-      summary: Get Google Search Console sites
-      tags:
-      - Google Search Console Websites
   /gsc/url-inspections:
     post:
       description: Inspect a URL using the Google Search Console connected to the
@@ -1865,6 +1770,49 @@ paths:
       summary: Update
       tags:
       - OAuth2 Authorized Clients
+  /oauth2/connectors:
+    get:
+      operationId: connectors
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OAuth2ConnectorResponse'
+          description: OK
+      tags:
+      - o-auth-2-connector-controller
+  /oauth2/connectors/{connectorId}/authorize/complete:
+    get:
+      operationId: authorizeError
+      parameters:
+      - in: path
+        name: connectorId
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: error
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: state
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: code
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+      tags:
+      - o-auth-2-connector-controller
   /platform-limit/consumptions/me:
     get:
       description: Get the Platform Consumption for the authenticated user.
@@ -2468,14 +2416,6 @@ components:
           type: string
         wp_include_exclude_default:
           type: string
-    AccountConfig:
-      type: object
-      properties:
-        account:
-          type: integer
-          format: int32
-        siteUrl:
-          type: string
     AccountInfo:
       type: object
       description: Account Information
@@ -2809,35 +2749,6 @@ components:
           description: "The name of the author, e.g. `John Smith`."
       required:
       - name
-    Authorization:
-      type: object
-      properties:
-        access_token_issued_at:
-          type: string
-          format: date-time
-          description: When the access token was issued
-          readOnly: true
-        account:
-          type: string
-          description: Account key
-          readOnly: true
-        refresh_token_issued_at:
-          type: string
-          format: date-time
-          description: When the refresh token was issued
-          readOnly: true
-        status:
-          $ref: '#/components/schemas/AuthorizationStatus'
-      required:
-      - access_token_issued_at
-      - account
-      - status
-    AuthorizationStatus:
-      type: string
-      description: The connections status
-      enum:
-      - connected
-      readOnly: true
     BotifyCrawlImportRequest:
       type: object
       description: The Botify Crawl Import request
@@ -2870,26 +2781,6 @@ components:
           uniqueItems: true
         url:
           type: string
-    BuildAuthorizeUriRequest:
-      type: object
-      description: The request of the `buildAuthorizeUri` endpoint.
-      properties:
-        redirect_uri:
-          type: string
-          description: The Redirect URI to where redirect the Client after successful
-            authentication.
-      required:
-      - redirect_uri
-    BuildAuthorizeUriResponse:
-      type: object
-      description: The response of the `buildAuthorizeUri` endpoint.
-      properties:
-        authorize_uri:
-          type: string
-          description: The Authorization URI. The Client should be redirected to this
-            URI.
-      required:
-      - authorize_uri
     ChunksetListResponse:
       type: object
       properties:
@@ -3003,18 +2894,6 @@ components:
       required:
       - dataset_domain
       - dataset_name
-    DuplicateAuthorizationRequest:
-      type: object
-      properties:
-        from_account_key:
-          type: string
-        to_account_keys:
-          type: array
-          items:
-            type: string
-      required:
-      - from_account_key
-      - to_account_keys
     EmbeddingRequest:
       type: object
       description: A request to generate the embeddings.
@@ -3030,41 +2909,13 @@ components:
             type: string
             description: The list of properties to use to generate the embeddings.
           uniqueItems: true
-    ExchangeAuthCodeRequest:
+    FieldValueRequest:
       type: object
-      description: The request of the `exchangeAuthCode` endpoint.
       properties:
-        code:
+        value:
           type: string
-          description: The Authorization Code. The API will use the Authorization
-            Code to exchange it with an Access Token.
-        google_search_console_resource_id:
-          type: string
-          description: "The Google Search Console Resource Id as it shows in the Google\
-            \ Search Console, e.g. sc-domain:example.org."
       required:
-      - code
-      - google_search_console_resource_id
-    ExchangeAuthCodeResponse:
-      type: object
-      description: The response of the `buildAuthorizeUri` endpoint.
-      properties:
-        access_token:
-          type: string
-          description: The access token
-        expires_in:
-          type: integer
-          format: int32
-          description: The number of seconds for the access token to expire
-        refresh_token:
-          type: string
-          description: The refresh token
-        scope:
-          type: string
-          description: The scope
-        token_type:
-          type: string
-          description: "The token type, usually Bearer"
+      - value
     Filter:
       type: object
       description: A query request filter.
@@ -3823,6 +3674,52 @@ components:
         refresh_token_value:
           type: string
           description: The Refresh Token Value
+    OAuth2ConnectorAuthorizationRequest:
+      type: object
+      properties:
+        redirect_uri:
+          type: string
+          format: uri
+        state_id:
+          type: string
+      required:
+      - redirect_uri
+      - state_id
+    OAuth2ConnectorAuthorizationRequestResponse:
+      type: object
+      properties:
+        authorization_url:
+          type: string
+          format: uri
+    OAuth2ConnectorAuthorizationResponse:
+      type: object
+      properties:
+        access_token_issued_at:
+          type: string
+          format: date-time
+        account_id:
+          type: integer
+          format: int64
+        connector_id:
+          type: string
+        refresh_token_issued_at:
+          type: string
+          format: date-time
+        status:
+          type: string
+    OAuth2ConnectorResponse:
+      type: object
+      properties:
+        connector_id:
+          type: string
+        display_name:
+          type: string
+        registration_id:
+          type: string
+        scopes:
+          type: array
+          items:
+            type: string
     PageActiveAccount:
       type: object
       description: A page object with links to move to other pages and the list of
@@ -4428,12 +4325,6 @@ components:
           type: string
         url:
           type: string
-    UpdateSiteUrlRequest:
-      type: object
-      properties:
-        site_url:
-          type: string
-          pattern: ^(https?://|sc-domain:)\S+
     VectorSearchQueryRequest:
       type: object
       description: A query request.
