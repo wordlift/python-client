@@ -30,6 +30,7 @@ class AccountInfo(BaseModel):
     Account Information
     """ # noqa: E501
     account_id: StrictInt = Field(description="The Account Id", alias="accountId")
+    connector_fields: Optional[Dict[str, Dict[str, StrictStr]]] = Field(default=None, description="Non-secret connector fields keyed by connector id and field name")
     country_code: Optional[StrictStr] = Field(default=None, description="The country code")
     data_api_route: Optional[StrictStr] = Field(default=None, description="The data API route", alias="dataApiRoute")
     dataset_id: Optional[StrictStr] = Field(default=None, description="The Dataset Id", alias="datasetId")
@@ -47,7 +48,7 @@ class AccountInfo(BaseModel):
     url: Optional[StrictStr] = Field(default=None, description="The website URL")
     wp_admin: Optional[StrictStr] = Field(default=None, description="If WordPress, the WP-ADMIN URL", alias="wpAdmin")
     wp_json: Optional[StrictStr] = Field(default=None, description="If WordPress, the WP-JSON end-point", alias="wpJson")
-    __properties: ClassVar[List[str]] = ["accountId", "country_code", "dataApiRoute", "datasetId", "datasetUri", "defaultDataFormatter", "features", "googleSearchConsoleSiteUrl", "includeExcludeDefault", "key", "language", "networks", "ngDatasetId", "subscriptionId", "tokens", "url", "wpAdmin", "wpJson"]
+    __properties: ClassVar[List[str]] = ["accountId", "connector_fields", "country_code", "dataApiRoute", "datasetId", "datasetUri", "defaultDataFormatter", "features", "googleSearchConsoleSiteUrl", "includeExcludeDefault", "key", "language", "networks", "ngDatasetId", "subscriptionId", "tokens", "url", "wpAdmin", "wpJson"]
 
     @field_validator('data_api_route')
     def data_api_route_validate_enum(cls, value):
@@ -106,9 +107,11 @@ class AccountInfo(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
             "account_id",
+            "connector_fields",
             "country_code",
             "data_api_route",
             "dataset_id",
@@ -159,6 +162,7 @@ class AccountInfo(BaseModel):
 
         _obj = cls.model_validate({
             "accountId": obj.get("accountId"),
+            "connector_fields": obj.get("connector_fields"),
             "country_code": obj.get("country_code"),
             "dataApiRoute": obj.get("dataApiRoute"),
             "datasetId": obj.get("datasetId"),

@@ -364,14 +364,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_account_connector_field_controller_api.py
-test/test_account_o_auth2_connector_controller_api.py
-test/test_field_value_request.py
-test/test_o_auth2_connector_authorization_request.py
-test/test_o_auth2_connector_authorization_request_response.py
-test/test_o_auth2_connector_authorization_response.py
-test/test_o_auth2_connector_controller_api.py
-test/test_o_auth2_connector_response.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py

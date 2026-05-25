@@ -7,6 +7,7 @@ Account Information
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **account_id** | **int** | The Account Id | [readonly] 
+**connector_fields** | **Dict[str, Dict[str, str]]** | Non-secret connector fields keyed by connector id and field name | [optional] [readonly] 
 **country_code** | **str** | The country code | [optional] [readonly] 
 **data_api_route** | **str** | The data API route | [optional] [readonly] 
 **dataset_id** | **str** | The Dataset Id | [optional] [readonly] 

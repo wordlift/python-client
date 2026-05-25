@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **botify_token** | **str** |  | [optional] 
 **botify_username** | **str** |  | [optional] 
 **collection** | **str** | The collection hosing the Knowledge Graph. | [optional] [default to 'entity']
+**connector_fields** | **Dict[str, Dict[str, str]]** |  | [optional] 
 **country** | **str** |  | [optional] 
 **data_api_route** | **str** |  | [optional] 
 **dataset_id** | **str** |  | [optional] 
