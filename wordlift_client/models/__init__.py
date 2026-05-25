@@ -17,7 +17,6 @@
 # import models into model package
 from wordlift_client.models.ai_visibility_analysis_result import AIVisibilityAnalysisResult
 from wordlift_client.models.account import Account
-from wordlift_client.models.account_config import AccountConfig
 from wordlift_client.models.account_info import AccountInfo
 from wordlift_client.models.account_stats import AccountStats
 from wordlift_client.models.account_subscription import AccountSubscription
@@ -40,16 +39,12 @@ from wordlift_client.models.audit_data import AuditData
 from wordlift_client.models.audit_request import AuditRequest
 from wordlift_client.models.audit_response import AuditResponse
 from wordlift_client.models.author_request import AuthorRequest
-from wordlift_client.models.authorization import Authorization
-from wordlift_client.models.authorization_status import AuthorizationStatus
 from wordlift_client.models.autocomplete_result import AutocompleteResult
 from wordlift_client.models.automation_issue import AutomationIssue
 from wordlift_client.models.automation_readiness import AutomationReadiness
 from wordlift_client.models.batch_request import BatchRequest
 from wordlift_client.models.bot_status import BotStatus
 from wordlift_client.models.botify_crawl_import_request import BotifyCrawlImportRequest
-from wordlift_client.models.build_authorize_uri_request import BuildAuthorizeUriRequest
-from wordlift_client.models.build_authorize_uri_response import BuildAuthorizeUriResponse
 from wordlift_client.models.check_result_item import CheckResultItem
 from wordlift_client.models.check_timeseries_response import CheckTimeseriesResponse
 from wordlift_client.models.chunkset_list_response import ChunksetListResponse
@@ -98,7 +93,6 @@ from wordlift_client.models.domain_policy_list_response import DomainPolicyListR
 from wordlift_client.models.domain_policy_request import DomainPolicyRequest
 from wordlift_client.models.domain_policy_response import DomainPolicyResponse
 from wordlift_client.models.domain_validation_request import DomainValidationRequest
-from wordlift_client.models.duplicate_authorization_request import DuplicateAuthorizationRequest
 from wordlift_client.models.embedding_request import EmbeddingRequest
 from wordlift_client.models.entity import Entity
 from wordlift_client.models.entity1 import Entity1
@@ -107,13 +101,12 @@ from wordlift_client.models.entity_match import EntityMatch
 from wordlift_client.models.entity_patch_request import EntityPatchRequest
 from wordlift_client.models.error_response import ErrorResponse
 from wordlift_client.models.event import Event
-from wordlift_client.models.exchange_auth_code_request import ExchangeAuthCodeRequest
-from wordlift_client.models.exchange_auth_code_response import ExchangeAuthCodeResponse
 from wordlift_client.models.expectation_request import ExpectationRequest
 from wordlift_client.models.expectation_response import ExpectationResponse
 from wordlift_client.models.expectation_severity import ExpectationSeverity
 from wordlift_client.models.fetch_js_render_mode import FetchJsRenderMode
 from wordlift_client.models.fetch_response import FetchResponse
+from wordlift_client.models.field_value_request import FieldValueRequest
 from wordlift_client.models.filter import Filter
 from wordlift_client.models.filter_value import FilterValue
 from wordlift_client.models.generate_sitemap200_response import GenerateSitemap200Response
@@ -175,6 +168,10 @@ from wordlift_client.models.node_request import NodeRequest
 from wordlift_client.models.node_request_metadata_value import NodeRequestMetadataValue
 from wordlift_client.models.o_auth2_authorized_client import OAuth2AuthorizedClient
 from wordlift_client.models.o_auth2_authorized_client_request import OAuth2AuthorizedClientRequest
+from wordlift_client.models.o_auth2_connector_authorization_request import OAuth2ConnectorAuthorizationRequest
+from wordlift_client.models.o_auth2_connector_authorization_request_response import OAuth2ConnectorAuthorizationRequestResponse
+from wordlift_client.models.o_auth2_connector_authorization_response import OAuth2ConnectorAuthorizationResponse
+from wordlift_client.models.o_auth2_connector_response import OAuth2ConnectorResponse
 from wordlift_client.models.page_active_account import PageActiveAccount
 from wordlift_client.models.page_add_on_configuration import PageAddOnConfiguration
 from wordlift_client.models.page_artifact_query_item import PageArtifactQueryItem
@@ -261,7 +258,6 @@ from wordlift_client.models.update_account_request import UpdateAccountRequest
 from wordlift_client.models.update_question_and_answer_request import UpdateQuestionAndAnswerRequest
 from wordlift_client.models.update_record_request import UpdateRecordRequest
 from wordlift_client.models.update_records_request import UpdateRecordsRequest
-from wordlift_client.models.update_site_url_request import UpdateSiteUrlRequest
 from wordlift_client.models.validation_error import ValidationError
 from wordlift_client.models.validation_error1 import ValidationError1
 from wordlift_client.models.validation_error1_detail_inner import ValidationError1DetailInner

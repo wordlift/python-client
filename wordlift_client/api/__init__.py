@@ -4,7 +4,6 @@
 from wordlift_client.api.account_api import AccountApi
 from wordlift_client.api.account_chunksets_api import AccountChunksetsApi
 from wordlift_client.api.account_stats_api import AccountStatsApi
-from wordlift_client.api.account_google_search_console_api import AccountGoogleSearchConsoleApi
 from wordlift_client.api.accounts_api import AccountsApi
 from wordlift_client.api.add_ons_api import AddOnsApi
 from wordlift_client.api.agent_api import AgentApi
@@ -40,9 +39,7 @@ from wordlift_client.api.fact_check_api import FactCheckApi
 from wordlift_client.api.fetch_api import FetchApi
 from wordlift_client.api.google_merchants_api import GoogleMerchantsApi
 from wordlift_client.api.google_search_console_api import GoogleSearchConsoleApi
-from wordlift_client.api.google_search_console_o_auth2_api import GoogleSearchConsoleOAuth2Api
 from wordlift_client.api.google_search_console_searches_api import GoogleSearchConsoleSearchesApi
-from wordlift_client.api.google_search_console_websites_api import GoogleSearchConsoleWebsitesApi
 from wordlift_client.api.graph_ql_api import GraphQLApi
 from wordlift_client.api.include_excludes_api import IncludeExcludesApi
 from wordlift_client.api.inspector_api import InspectorApi
@@ -74,7 +71,10 @@ from wordlift_client.api.web_asyncs_responses_api import WebAsyncsResponsesApi
 from wordlift_client.api.web_page_scrape_api import WebPageScrapeApi
 from wordlift_client.api.web_pages_imports_api import WebPagesImportsApi
 from wordlift_client.api.web_pages_api import WebPagesApi
+from wordlift_client.api.account_connector_field_controller_api import AccountConnectorFieldControllerApi
+from wordlift_client.api.account_o_auth2_connector_controller_api import AccountOAuth2ConnectorControllerApi
 from wordlift_client.api.default_api import DefaultApi
 from wordlift_client.api.jobs_api import JobsApi
+from wordlift_client.api.o_auth2_connector_controller_api import OAuth2ConnectorControllerApi
 from wordlift_client.api.snapshots_api import SnapshotsApi
 
