@@ -34,12 +34,6 @@ tags:
   name: Platform Consumptions
 - description: Manage OAuth2 Authorized Clients
   name: OAuth2 Authorized Clients
-- description: Manage OAuth2 Data Source authorizations for accounts
-  name: Account OAuth2 Connectors
-- description: Manage account-level OAuth2 Data Source fields
-  name: Account Connector Fields
-- description: List and complete OAuth2 Data Source connector flows
-  name: OAuth2 Connectors
 - description: Import Web Pages to the Graph
   name: Web Pages Imports
 - description: Manage Accounts
@@ -655,7 +649,6 @@ paths:
       - Account Chunksets
   /accounts/{account_id}/oauth2/connectors/{connector_id}/authorization:
     delete:
-      description: Disconnect an OAuth2 Data Source connector from an account.
       operationId: deleteAuthorization
       parameters:
       - in: path
@@ -672,11 +665,9 @@ paths:
       responses:
         "200":
           description: OK
-      summary: Disconnect account connector authorization
       tags:
-      - Account OAuth2 Connectors
+      - account-o-auth-2-connector-controller
     get:
-      description: Get the OAuth2 authorization status for a Data Source connector on an account.
       operationId: authorization
       parameters:
       - in: path
@@ -697,12 +688,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/OAuth2ConnectorAuthorizationResponse'
           description: OK
-      summary: Get account connector authorization
       tags:
-      - Account OAuth2 Connectors
+      - account-o-auth-2-connector-controller
   /accounts/{account_id}/oauth2/connectors/{connector_id}/authorization-requests:
     post:
-      description: Create an OAuth2 authorization request for a Data Source connector.
       operationId: createAuthorizationRequest
       parameters:
       - in: path
@@ -729,12 +718,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/OAuth2ConnectorAuthorizationRequestResponse'
           description: OK
-      summary: Create account connector authorization request
       tags:
-      - Account OAuth2 Connectors
+      - account-o-auth-2-connector-controller
   /accounts/{account_id}/oauth2/connectors/{connector_id}/fields:
     get:
-      description: List configured fields for an account Data Source connector.
       operationId: fields
       parameters:
       - in: path
@@ -757,12 +744,10 @@ paths:
                 additionalProperties:
                   type: string
           description: OK
-      summary: List account connector fields
       tags:
-      - Account Connector Fields
+      - account-connector-field-controller
   /accounts/{account_id}/oauth2/connectors/{connector_id}/fields/{field_name}:
     delete:
-      description: Delete a configured field for an account Data Source connector.
       operationId: deleteField
       parameters:
       - in: path
@@ -784,11 +769,9 @@ paths:
       responses:
         "204":
           description: No Content
-      summary: Delete account connector field
       tags:
-      - Account Connector Fields
+      - account-connector-field-controller
     put:
-      description: Create or replace a configured field for an account Data Source connector.
       operationId: putField
       parameters:
       - in: path
@@ -816,9 +799,8 @@ paths:
       responses:
         "204":
           description: No Content
-      summary: Save account connector field
       tags:
-      - Account Connector Fields
+      - account-connector-field-controller
   /accounts/{id}:
     get:
       description: Get the account
@@ -1790,7 +1772,6 @@ paths:
       - OAuth2 Authorized Clients
   /oauth2/connectors:
     get:
-      description: List OAuth2 Data Source connectors available in the platform.
       operationId: connectors
       responses:
         "200":
@@ -1801,12 +1782,10 @@ paths:
                 items:
                   $ref: '#/components/schemas/OAuth2ConnectorResponse'
           description: OK
-      summary: List OAuth2 connectors
       tags:
-      - OAuth2 Connectors
+      - o-auth-2-connector-controller
   /oauth2/connectors/{connectorId}/authorize/complete:
     get:
-      description: Complete or report the result of an OAuth2 Data Source connector authorization flow.
       operationId: authorizeError
       parameters:
       - in: path
@@ -1832,9 +1811,8 @@ paths:
       responses:
         "200":
           description: OK
-      summary: Complete OAuth2 connector authorization
       tags:
-      - OAuth2 Connectors
+      - o-auth-2-connector-controller
   /platform-limit/consumptions/me:
     get:
       description: Get the Platform Consumption for the authenticated user.
