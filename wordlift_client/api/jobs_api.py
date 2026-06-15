@@ -105,7 +105,7 @@ class JobsApi:
             '403': "Problem",
             '404': "Problem",
             '409': "Problem",
-            '422': "HTTPValidationError",
+            '422': "HTTPValidationError3",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -181,7 +181,7 @@ class JobsApi:
             '403': "Problem",
             '404': "Problem",
             '409': "Problem",
-            '422': "HTTPValidationError",
+            '422': "HTTPValidationError3",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -257,7 +257,7 @@ class JobsApi:
             '403': "Problem",
             '404': "Problem",
             '409': "Problem",
-            '422': "HTTPValidationError",
+            '422': "HTTPValidationError3",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -323,7 +323,6 @@ class JobsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'ApiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -405,7 +404,7 @@ class JobsApi:
             '200': "JobResponse",
             '403': "Problem",
             '404': "Problem",
-            '422': "HTTPValidationError",
+            '422': "HTTPValidationError3",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -479,7 +478,7 @@ class JobsApi:
             '200': "JobResponse",
             '403': "Problem",
             '404': "Problem",
-            '422': "HTTPValidationError",
+            '422': "HTTPValidationError3",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -553,7 +552,7 @@ class JobsApi:
             '200': "JobResponse",
             '403': "Problem",
             '404': "Problem",
-            '422': "HTTPValidationError",
+            '422': "HTTPValidationError3",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -606,7 +605,6 @@ class JobsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'ApiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -692,7 +690,7 @@ class JobsApi:
             '200': "JobListResponse",
             '403': "Problem",
             '404': "Problem",
-            '422': "HTTPValidationError",
+            '422': "HTTPValidationError3",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -770,7 +768,7 @@ class JobsApi:
             '200': "JobListResponse",
             '403': "Problem",
             '404': "Problem",
-            '422': "HTTPValidationError",
+            '422': "HTTPValidationError3",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -848,7 +846,7 @@ class JobsApi:
             '200': "JobListResponse",
             '403': "Problem",
             '404': "Problem",
-            '422': "HTTPValidationError",
+            '422': "HTTPValidationError3",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -908,7 +906,6 @@ class JobsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'ApiKey'
         ]
 
         return self.api_client.param_serialize(

@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.174.0"
+__version__ = "1.175.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -91,6 +91,7 @@ from wordlift_client.api.web_pages_api import WebPagesApi
 from wordlift_client.api.account_connector_field_controller_api import AccountConnectorFieldControllerApi
 from wordlift_client.api.account_o_auth2_connector_controller_api import AccountOAuth2ConnectorControllerApi
 from wordlift_client.api.default_api import DefaultApi
+from wordlift_client.api.graph_sync_controller_api import GraphSyncControllerApi
 from wordlift_client.api.jobs_api import JobsApi
 from wordlift_client.api.o_auth2_connector_controller_api import OAuth2ConnectorControllerApi
 from wordlift_client.api.snapshots_api import SnapshotsApi
@@ -203,6 +204,10 @@ from wordlift_client.models.filter import Filter
 from wordlift_client.models.filter_value import FilterValue
 from wordlift_client.models.generate_sitemap200_response import GenerateSitemap200Response
 from wordlift_client.models.generate_sitemap_request import GenerateSitemapRequest
+from wordlift_client.models.graph_sync_request import GraphSyncRequest
+from wordlift_client.models.graph_sync_response import GraphSyncResponse
+from wordlift_client.models.graph_sync_run_request import GraphSyncRunRequest
+from wordlift_client.models.graph_sync_run_response import GraphSyncRunResponse
 from wordlift_client.models.graphql_request import GraphqlRequest
 from wordlift_client.models.http_validation_error import HTTPValidationError
 from wordlift_client.models.http_validation_error1 import HTTPValidationError1
@@ -352,9 +357,9 @@ from wordlift_client.models.update_record_request import UpdateRecordRequest
 from wordlift_client.models.update_records_request import UpdateRecordsRequest
 from wordlift_client.models.validation_error import ValidationError
 from wordlift_client.models.validation_error1 import ValidationError1
-from wordlift_client.models.validation_error1_detail_inner import ValidationError1DetailInner
 from wordlift_client.models.validation_error2 import ValidationError2
 from wordlift_client.models.validation_error3 import ValidationError3
+from wordlift_client.models.validation_error3_detail_inner import ValidationError3DetailInner
 from wordlift_client.models.validation_error4 import ValidationError4
 from wordlift_client.models.validation_fix import ValidationFix
 from wordlift_client.models.validation_result import ValidationResult
