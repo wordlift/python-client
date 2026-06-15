@@ -647,6 +647,137 @@ paths:
       summary: Create or replace account chunkset
       tags:
       - Account Chunksets
+  /accounts/{account_id}/graph-sync:
+    delete:
+      operationId: delete
+      parameters:
+      - in: path
+        name: account_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - in: query
+        name: delete_project
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        "204":
+          description: No Content
+      tags:
+      - graph-sync-controller
+    get:
+      operationId: get
+      parameters:
+      - in: path
+        name: account_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphSyncResponse'
+          description: OK
+      tags:
+      - graph-sync-controller
+    post:
+      operationId: create
+      parameters:
+      - in: path
+        name: account_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphSyncRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphSyncResponse'
+          description: OK
+      tags:
+      - graph-sync-controller
+    put:
+      operationId: update
+      parameters:
+      - in: path
+        name: account_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphSyncRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphSyncResponse'
+          description: OK
+      tags:
+      - graph-sync-controller
+  /accounts/{account_id}/graph-sync/runs:
+    post:
+      operationId: run
+      parameters:
+      - in: path
+        name: account_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphSyncRunRequest'
+      responses:
+        "202":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphSyncRunResponse'
+          description: Accepted
+      tags:
+      - graph-sync-controller
+  /accounts/{account_id}/graph-sync/runs/{run_id}:
+    delete:
+      operationId: cancel
+      parameters:
+      - in: path
+        name: account_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - in: path
+        name: run_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+      tags:
+      - graph-sync-controller
   /accounts/{account_id}/oauth2/connectors/{connector_id}/authorization:
     delete:
       operationId: deleteAuthorization
@@ -1104,7 +1235,7 @@ paths:
     get:
       description: |
         The service will return a Web Data URI only for existing datasets. The Web Data URI is not guaranteed to exist (i.e. it may return 404).
-      operationId: get
+      operationId: get_1
       parameters:
       - description: The Web Page URL.
         in: query
@@ -2997,6 +3128,55 @@ components:
             \ over the `value` field."
       required:
       - operator
+    GraphSyncRequest:
+      type: object
+      properties:
+        profile_name:
+          type: string
+        repository_name:
+          type: string
+        sheets_name:
+          type: string
+        sheets_service_account:
+          type: string
+        sheets_url:
+          type: string
+        sitemap_url:
+          type: string
+        sitemap_url_pattern:
+          type: string
+        source_type:
+          type: string
+        urls:
+          type: array
+          items:
+            type: string
+      required:
+      - profile_name
+      - repository_name
+    GraphSyncResponse:
+      type: object
+      properties:
+        profile_name:
+          type: string
+        project_url:
+          type: string
+        repository_name:
+          type: string
+    GraphSyncRunRequest:
+      type: object
+      properties:
+        profile_name:
+          type: string
+    GraphSyncRunResponse:
+      type: object
+      properties:
+        run_id:
+          type: string
+        status:
+          type: string
+        url:
+          type: string
     IncludeExclude:
       type: object
       properties:
