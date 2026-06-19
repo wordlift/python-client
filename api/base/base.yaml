@@ -33,3 +33,5 @@ components:
       type: oauth2
 servers:
   - url: https://api.wordlift.io
+security:
+  - ApiKey: []
