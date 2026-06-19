@@ -1,23 +1,14 @@
 # ContentGenerationRequest
 
-The Content Generation request.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**account_id** | **int** | The account id bound to this content generation. | 
-**deleted** | **bool** | The deleted flag. | [optional] [default to False]
-**graphql_query** | **str** | The GraphQL query which will be used to import entity data from the Knowledge Graph. | 
-**max_tokens** | **int** | The maximum number of tokens. | [optional] [default to 64]
-**min_words** | **int** | Minimum amount of words per completion. | [optional] [default to 0]
-**model_id** | **int** | The model ID. | [optional] [default to 1]
-**name** | **str** | The model name. | 
-**penalty** | **float** | The penalty score. | [optional] [default to 0.5]
-**prompt_template** | **str** | The prompt template. | [optional] 
-**stop** | **str** | The stop sequence. | [optional] [default to '###']
-**temperature** | **float** | The temperature score. | [optional] [default to 0.4]
-**words_to_ignore** | **List[str]** | Words to ignore when checking for words not in prompt. | [optional] 
+**completion** | **str** |  | [optional] 
+**has_upvote** | **bool** | This indicates whether the user upvoted the completion. | 
+**is_accepted** | **bool** | This indicates whether the completion is accepted by the user. | 
+**validated_at** | **datetime** | Validation time of the record - null to revalidate. | [optional] 
 
 ## Example
 

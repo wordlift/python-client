@@ -1583,7 +1583,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **health_health_get**
-> HealthResponse health_health_get()
+> MonitorHealthResponse health_health_get()
 
 Health
 
@@ -1592,7 +1592,7 @@ Health
 
 ```python
 import wordlift_client
-from wordlift_client.models.health_response import HealthResponse
+from wordlift_client.models.monitor_health_response import MonitorHealthResponse
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -1625,7 +1625,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**HealthResponse**](HealthResponse.md)
+[**MonitorHealthResponse**](MonitorHealthResponse.md)
 
 ### Authorization
 
@@ -2331,7 +2331,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **readiness_health_ready_get**
-> ReadinessResponse readiness_health_ready_get()
+> MonitorReadinessResponse readiness_health_ready_get()
 
 Readiness
 
@@ -2340,7 +2340,7 @@ Readiness
 
 ```python
 import wordlift_client
-from wordlift_client.models.readiness_response import ReadinessResponse
+from wordlift_client.models.monitor_readiness_response import MonitorReadinessResponse
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -2373,7 +2373,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ReadinessResponse**](ReadinessResponse.md)
+[**MonitorReadinessResponse**](MonitorReadinessResponse.md)
 
 ### Authorization
 

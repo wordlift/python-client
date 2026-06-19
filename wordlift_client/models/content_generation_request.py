@@ -18,29 +18,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
-from typing_extensions import Annotated
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class ContentGenerationRequest(BaseModel):
     """
-    The Content Generation request.
+    ContentGenerationRequest
     """ # noqa: E501
-    account_id: StrictInt = Field(description="The account id bound to this content generation.")
-    deleted: Optional[StrictBool] = Field(default=False, description="The deleted flag.")
-    graphql_query: StrictStr = Field(description="The GraphQL query which will be used to import entity data from the Knowledge Graph.")
-    max_tokens: Optional[Annotated[int, Field(le=2000, strict=True, ge=0)]] = Field(default=64, description="The maximum number of tokens.")
-    min_words: Optional[StrictInt] = Field(default=0, description="Minimum amount of words per completion.")
-    model_id: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=1, description="The model ID.")
-    name: Annotated[str, Field(min_length=0, strict=True, max_length=250)] = Field(description="The model name.")
-    penalty: Optional[Union[Annotated[float, Field(le=1.9, strict=True, ge=0.5)], Annotated[int, Field(le=1, strict=True, ge=1)]]] = Field(default=0.5, description="The penalty score.")
-    prompt_template: Optional[StrictStr] = Field(default=None, description="The prompt template.")
-    stop: Optional[StrictStr] = Field(default='###', description="The stop sequence.")
-    temperature: Optional[Union[Annotated[float, Field(le=0.8, strict=True, ge=0.4)], Annotated[int, Field(le=0, strict=True, ge=1)]]] = Field(default=0.4, description="The temperature score.")
-    words_to_ignore: Optional[List[StrictStr]] = Field(default=None, description="Words to ignore when checking for words not in prompt.")
-    __properties: ClassVar[List[str]] = ["account_id", "deleted", "graphql_query", "max_tokens", "min_words", "model_id", "name", "penalty", "prompt_template", "stop", "temperature", "words_to_ignore"]
+    completion: Optional[StrictStr] = None
+    has_upvote: StrictBool = Field(description="This indicates whether the user upvoted the completion.")
+    is_accepted: StrictBool = Field(description="This indicates whether the completion is accepted by the user.")
+    validated_at: Optional[datetime] = Field(default=None, description="Validation time of the record - null to revalidate.")
+    __properties: ClassVar[List[str]] = ["completion", "has_upvote", "is_accepted", "validated_at"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,18 +85,10 @@ class ContentGenerationRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "account_id": obj.get("account_id"),
-            "deleted": obj.get("deleted") if obj.get("deleted") is not None else False,
-            "graphql_query": obj.get("graphql_query"),
-            "max_tokens": obj.get("max_tokens") if obj.get("max_tokens") is not None else 64,
-            "min_words": obj.get("min_words") if obj.get("min_words") is not None else 0,
-            "model_id": obj.get("model_id") if obj.get("model_id") is not None else 1,
-            "name": obj.get("name"),
-            "penalty": obj.get("penalty") if obj.get("penalty") is not None else 0.5,
-            "prompt_template": obj.get("prompt_template"),
-            "stop": obj.get("stop") if obj.get("stop") is not None else '###',
-            "temperature": obj.get("temperature") if obj.get("temperature") is not None else 0.4,
-            "words_to_ignore": obj.get("words_to_ignore")
+            "completion": obj.get("completion"),
+            "has_upvote": obj.get("has_upvote"),
+            "is_accepted": obj.get("is_accepted"),
+            "validated_at": obj.get("validated_at")
         })
         return _obj
 

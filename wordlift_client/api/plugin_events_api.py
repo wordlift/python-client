@@ -22,8 +22,8 @@ from pydantic import Field, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
 from wordlift_client.models.event import Event
-from wordlift_client.models.request2 import Request2
-from wordlift_client.models.response1 import Response1
+from wordlift_client.models.events_request import EventsRequest
+from wordlift_client.models.events_response import EventsResponse
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
 from wordlift_client.api_response import ApiResponse
@@ -46,7 +46,7 @@ class PluginEventsApi:
     @validate_call
     async def create_event(
         self,
-        request2: Request2,
+        events_request: EventsRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -64,8 +64,8 @@ class PluginEventsApi:
 
         Create an event
 
-        :param request2: (required)
-        :type request2: Request2
+        :param events_request: (required)
+        :type events_request: EventsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -89,7 +89,7 @@ class PluginEventsApi:
         """ # noqa: E501
 
         _param = self._create_event_serialize(
-            request2=request2,
+            events_request=events_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -114,7 +114,7 @@ class PluginEventsApi:
     @validate_call
     async def create_event_with_http_info(
         self,
-        request2: Request2,
+        events_request: EventsRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -132,8 +132,8 @@ class PluginEventsApi:
 
         Create an event
 
-        :param request2: (required)
-        :type request2: Request2
+        :param events_request: (required)
+        :type events_request: EventsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -157,7 +157,7 @@ class PluginEventsApi:
         """ # noqa: E501
 
         _param = self._create_event_serialize(
-            request2=request2,
+            events_request=events_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -182,7 +182,7 @@ class PluginEventsApi:
     @validate_call
     async def create_event_without_preload_content(
         self,
-        request2: Request2,
+        events_request: EventsRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -200,8 +200,8 @@ class PluginEventsApi:
 
         Create an event
 
-        :param request2: (required)
-        :type request2: Request2
+        :param events_request: (required)
+        :type events_request: EventsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -225,7 +225,7 @@ class PluginEventsApi:
         """ # noqa: E501
 
         _param = self._create_event_serialize(
-            request2=request2,
+            events_request=events_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -245,7 +245,7 @@ class PluginEventsApi:
 
     def _create_event_serialize(
         self,
-        request2,
+        events_request,
         _request_auth,
         _content_type,
         _headers,
@@ -269,8 +269,8 @@ class PluginEventsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request2 is not None:
-            _body_params = request2
+        if events_request is not None:
+            _body_params = events_request
 
 
         # set the HTTP header `Accept`
@@ -337,7 +337,7 @@ class PluginEventsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Response1:
+    ) -> EventsResponse:
         """List
 
         List the events bound to the authenticated account.
@@ -387,8 +387,8 @@ class PluginEventsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Response1",
-            '401': "Response1",
+            '200': "EventsResponse",
+            '401': "EventsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -421,7 +421,7 @@ class PluginEventsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Response1]:
+    ) -> ApiResponse[EventsResponse]:
         """List
 
         List the events bound to the authenticated account.
@@ -471,8 +471,8 @@ class PluginEventsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Response1",
-            '401': "Response1",
+            '200': "EventsResponse",
+            '401': "EventsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -555,8 +555,8 @@ class PluginEventsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Response1",
-            '401': "Response1",
+            '200': "EventsResponse",
+            '401': "EventsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

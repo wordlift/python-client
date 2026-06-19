@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.177.0"
+__version__ = "1.178.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -117,6 +117,8 @@ from wordlift_client.models.active_account import ActiveAccount
 from wordlift_client.models.add_on_configuration import AddOnConfiguration
 from wordlift_client.models.add_resource_request import AddResourceRequest
 from wordlift_client.models.add_segment_glob_request import AddSegmentGlobRequest
+from wordlift_client.models.ai_visibility_audits_http_validation_error import AiVisibilityAuditsHTTPValidationError
+from wordlift_client.models.ai_visibility_audits_validation_error import AiVisibilityAuditsValidationError
 from wordlift_client.models.analyses_request import AnalysesRequest
 from wordlift_client.models.analyses_response import AnalysesResponse
 from wordlift_client.models.analyses_response_item import AnalysesResponseItem
@@ -131,6 +133,8 @@ from wordlift_client.models.ask_response import AskResponse
 from wordlift_client.models.audit_data import AuditData
 from wordlift_client.models.audit_request import AuditRequest
 from wordlift_client.models.audit_response import AuditResponse
+from wordlift_client.models.audit_validation_error import AuditValidationError
+from wordlift_client.models.audit_validation_error_detail_inner import AuditValidationErrorDetailInner
 from wordlift_client.models.author_request import AuthorRequest
 from wordlift_client.models.autocomplete_result import AutocompleteResult
 from wordlift_client.models.automation_issue import AutomationIssue
@@ -158,6 +162,8 @@ from wordlift_client.models.content_evaluation_response_quality_score_breakdown_
 from wordlift_client.models.content_evaluation_response_quality_score_breakdown_readability_complex_sentences import ContentEvaluationResponseQualityScoreBreakdownReadabilityComplexSentences
 from wordlift_client.models.content_evaluation_response_quality_score_breakdown_seo import ContentEvaluationResponseQualityScoreBreakdownSeo
 from wordlift_client.models.content_evaluation_response_quality_score_breakdown_seo_top_entities_value_inner import ContentEvaluationResponseQualityScoreBreakdownSeoTopEntitiesValueInner
+from wordlift_client.models.content_evaluations_http_validation_error import ContentEvaluationsHTTPValidationError
+from wordlift_client.models.content_evaluations_validation_error import ContentEvaluationsValidationError
 from wordlift_client.models.content_expansion_request import ContentExpansionRequest
 from wordlift_client.models.content_expansion_response import ContentExpansionResponse
 from wordlift_client.models.content_freshness import ContentFreshness
@@ -174,6 +180,8 @@ from wordlift_client.models.crawl_job_page_summary import CrawlJobPageSummary
 from wordlift_client.models.crawl_job_response import CrawlJobResponse
 from wordlift_client.models.crawl_job_summary import CrawlJobSummary
 from wordlift_client.models.crawl_page_status import CrawlPageStatus
+from wordlift_client.models.crawler_http_validation_error import CrawlerHTTPValidationError
+from wordlift_client.models.crawler_validation_error import CrawlerValidationError
 from wordlift_client.models.create_embeddings_input import CreateEmbeddingsInput
 from wordlift_client.models.create_url_inspection_request import CreateUrlInspectionRequest
 from wordlift_client.models.cursor_page import CursorPage
@@ -188,12 +196,13 @@ from wordlift_client.models.domain_policy_response import DomainPolicyResponse
 from wordlift_client.models.domain_validation_request import DomainValidationRequest
 from wordlift_client.models.embedding_request import EmbeddingRequest
 from wordlift_client.models.entity import Entity
-from wordlift_client.models.entity1 import Entity1
 from wordlift_client.models.entity_gap_request import EntityGapRequest
 from wordlift_client.models.entity_match import EntityMatch
 from wordlift_client.models.entity_patch_request import EntityPatchRequest
 from wordlift_client.models.error_response import ErrorResponse
 from wordlift_client.models.event import Event
+from wordlift_client.models.events_request import EventsRequest
+from wordlift_client.models.events_response import EventsResponse
 from wordlift_client.models.expectation_request import ExpectationRequest
 from wordlift_client.models.expectation_response import ExpectationResponse
 from wordlift_client.models.expectation_severity import ExpectationSeverity
@@ -204,15 +213,14 @@ from wordlift_client.models.filter import Filter
 from wordlift_client.models.filter_value import FilterValue
 from wordlift_client.models.generate_sitemap200_response import GenerateSitemap200Response
 from wordlift_client.models.generate_sitemap_request import GenerateSitemapRequest
+from wordlift_client.models.graph_kpi_http_validation_error import GraphKpiHTTPValidationError
+from wordlift_client.models.graph_kpi_validation_error import GraphKpiValidationError
 from wordlift_client.models.graph_sync_request import GraphSyncRequest
 from wordlift_client.models.graph_sync_response import GraphSyncResponse
 from wordlift_client.models.graph_sync_run_request import GraphSyncRunRequest
 from wordlift_client.models.graph_sync_run_response import GraphSyncRunResponse
 from wordlift_client.models.graphql_request import GraphqlRequest
 from wordlift_client.models.http_validation_error import HTTPValidationError
-from wordlift_client.models.http_validation_error1 import HTTPValidationError1
-from wordlift_client.models.http_validation_error2 import HTTPValidationError2
-from wordlift_client.models.http_validation_error3 import HTTPValidationError3
 from wordlift_client.models.health_response import HealthResponse
 from wordlift_client.models.html import Html
 from wordlift_client.models.html_semantics import HtmlSemantics
@@ -245,7 +253,11 @@ from wordlift_client.models.list_segment_globs_response import ListSegmentGlobsR
 from wordlift_client.models.list_segment_urls_response import ListSegmentUrlsResponse
 from wordlift_client.models.list_segments_response import ListSegmentsResponse
 from wordlift_client.models.location_inner import LocationInner
+from wordlift_client.models.long_tail_entity import LongTailEntity
+from wordlift_client.models.long_tail_properties import LongTailProperties
 from wordlift_client.models.longtail_response import LongtailResponse
+from wordlift_client.models.manager_request import ManagerRequest
+from wordlift_client.models.manager_response import ManagerResponse
 from wordlift_client.models.merchant import Merchant
 from wordlift_client.models.merchant_entry import MerchantEntry
 from wordlift_client.models.merchant_request import MerchantRequest
@@ -254,12 +266,16 @@ from wordlift_client.models.merchant_view import MerchantView
 from wordlift_client.models.model import Model
 from wordlift_client.models.model_field import ModelField
 from wordlift_client.models.monitor_check_name import MonitorCheckName
+from wordlift_client.models.monitor_http_validation_error import MonitorHTTPValidationError
+from wordlift_client.models.monitor_health_response import MonitorHealthResponse
+from wordlift_client.models.monitor_readiness_response import MonitorReadinessResponse
 from wordlift_client.models.monitor_response import MonitorResponse
 from wordlift_client.models.monitor_run_status import MonitorRunStatus
 from wordlift_client.models.monitor_status import MonitorStatus
 from wordlift_client.models.monitor_status_check_status import MonitorStatusCheckStatus
 from wordlift_client.models.monitor_status_order_by import MonitorStatusOrderBy
 from wordlift_client.models.monitor_status_response import MonitorStatusResponse
+from wordlift_client.models.monitor_validation_error import MonitorValidationError
 from wordlift_client.models.network_account_info import NetworkAccountInfo
 from wordlift_client.models.node_request import NodeRequest
 from wordlift_client.models.node_request_metadata_value import NodeRequestMetadataValue
@@ -299,7 +315,6 @@ from wordlift_client.models.problem import Problem
 from wordlift_client.models.problem_detail import ProblemDetail
 from wordlift_client.models.project_type import ProjectType
 from wordlift_client.models.properties import Properties
-from wordlift_client.models.properties1 import Properties1
 from wordlift_client.models.proxy_mode import ProxyMode
 from wordlift_client.models.query_coverage_output import QueryCoverageOutput
 from wordlift_client.models.question_and_answer import QuestionAndAnswer
@@ -316,14 +331,9 @@ from wordlift_client.models.replace_monitor_item import ReplaceMonitorItem
 from wordlift_client.models.replace_monitors_request import ReplaceMonitorsRequest
 from wordlift_client.models.replace_segment_globs_request import ReplaceSegmentGlobsRequest
 from wordlift_client.models.request import Request
-from wordlift_client.models.request1 import Request1
-from wordlift_client.models.request2 import Request2
-from wordlift_client.models.request3 import Request3
 from wordlift_client.models.reset_account_request import ResetAccountRequest
 from wordlift_client.models.resource_type import ResourceType
 from wordlift_client.models.response import Response
-from wordlift_client.models.response1 import Response1
-from wordlift_client.models.response2 import Response2
 from wordlift_client.models.response_list_website_pages_websites_host_pages_get import ResponseListWebsitePagesWebsitesHostPagesGet
 from wordlift_client.models.rule import Rule
 from wordlift_client.models.rule_request import RuleRequest
@@ -356,11 +366,6 @@ from wordlift_client.models.update_question_and_answer_request import UpdateQues
 from wordlift_client.models.update_record_request import UpdateRecordRequest
 from wordlift_client.models.update_records_request import UpdateRecordsRequest
 from wordlift_client.models.validation_error import ValidationError
-from wordlift_client.models.validation_error1 import ValidationError1
-from wordlift_client.models.validation_error1_detail_inner import ValidationError1DetailInner
-from wordlift_client.models.validation_error2 import ValidationError2
-from wordlift_client.models.validation_error3 import ValidationError3
-from wordlift_client.models.validation_error4 import ValidationError4
 from wordlift_client.models.validation_fix import ValidationFix
 from wordlift_client.models.validation_result import ValidationResult
 from wordlift_client.models.validation_type_enum import ValidationTypeEnum
