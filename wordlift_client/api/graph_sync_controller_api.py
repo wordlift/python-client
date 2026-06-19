@@ -285,6 +285,7 @@ class GraphSyncControllerApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'ApiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -567,6 +568,7 @@ class GraphSyncControllerApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'ApiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -832,6 +834,7 @@ class GraphSyncControllerApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'ApiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -853,7 +856,7 @@ class GraphSyncControllerApi:
 
 
     @validate_call
-    async def get4(
+    async def get3(
         self,
         account_id: StrictInt,
         _request_timeout: Union[
@@ -869,7 +872,7 @@ class GraphSyncControllerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GraphSyncResponse:
-        """get4
+        """get3
 
 
         :param account_id: (required)
@@ -896,7 +899,7 @@ class GraphSyncControllerApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get4_serialize(
+        _param = self._get3_serialize(
             account_id=account_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -919,7 +922,7 @@ class GraphSyncControllerApi:
 
 
     @validate_call
-    async def get4_with_http_info(
+    async def get3_with_http_info(
         self,
         account_id: StrictInt,
         _request_timeout: Union[
@@ -935,7 +938,7 @@ class GraphSyncControllerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GraphSyncResponse]:
-        """get4
+        """get3
 
 
         :param account_id: (required)
@@ -962,7 +965,7 @@ class GraphSyncControllerApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get4_serialize(
+        _param = self._get3_serialize(
             account_id=account_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -985,7 +988,7 @@ class GraphSyncControllerApi:
 
 
     @validate_call
-    async def get4_without_preload_content(
+    async def get3_without_preload_content(
         self,
         account_id: StrictInt,
         _request_timeout: Union[
@@ -1001,7 +1004,7 @@ class GraphSyncControllerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get4
+        """get3
 
 
         :param account_id: (required)
@@ -1028,7 +1031,7 @@ class GraphSyncControllerApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get4_serialize(
+        _param = self._get3_serialize(
             account_id=account_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1046,7 +1049,7 @@ class GraphSyncControllerApi:
         return response_data.response
 
 
-    def _get4_serialize(
+    def _get3_serialize(
         self,
         account_id,
         _request_auth,
@@ -1086,6 +1089,7 @@ class GraphSyncControllerApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'ApiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -1368,6 +1372,7 @@ class GraphSyncControllerApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'ApiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -1650,6 +1655,7 @@ class GraphSyncControllerApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'ApiKey'
         ]
 
         return self.api_client.param_serialize(

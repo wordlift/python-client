@@ -321,9 +321,9 @@ docs/UpdateRecordRequest.md
 docs/UpdateRecordsRequest.md
 docs/ValidationError.md
 docs/ValidationError1.md
+docs/ValidationError1DetailInner.md
 docs/ValidationError2.md
 docs/ValidationError3.md
-docs/ValidationError3DetailInner.md
 docs/ValidationError4.md
 docs/ValidationFix.md
 docs/ValidationResult.md
@@ -369,11 +369,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_graph_sync_controller_api.py
-test/test_graph_sync_request.py
-test/test_graph_sync_response.py
-test/test_graph_sync_run_request.py
-test/test_graph_sync_run_response.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -708,9 +703,9 @@ wordlift_client/models/update_record_request.py
 wordlift_client/models/update_records_request.py
 wordlift_client/models/validation_error.py
 wordlift_client/models/validation_error1.py
+wordlift_client/models/validation_error1_detail_inner.py
 wordlift_client/models/validation_error2.py
 wordlift_client/models/validation_error3.py
-wordlift_client/models/validation_error3_detail_inner.py
 wordlift_client/models/validation_error4.py
 wordlift_client/models/validation_fix.py
 wordlift_client/models/validation_result.py

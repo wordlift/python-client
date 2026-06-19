@@ -164,6 +164,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+      security: &id001
+      - ApiKey: []
+      - security_oauth2:
+        - basic
   /kpi/graphs/{graph_id}/snapshots/{date}:
     get:
       tags:
@@ -292,6 +296,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+      security: *id001
   /kpi/graphs/{graph_id}/jobs:
     post:
       tags:
@@ -383,6 +388,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+      security: *id001
     get:
       tags:
       - jobs
@@ -469,6 +475,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+      security: *id001
   /kpi/graphs/{graph_id}/jobs/{job_id}:
     get:
       tags:
@@ -540,6 +547,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+      security: *id001
 components:
   schemas:
     CursorPage:
@@ -1298,10 +1306,6 @@ components:
             basic: basic scope
 servers:
 - url: https://api.wordlift.io
-security:
-- ApiKey: []
-- security_oauth2:
-  - basic
 tags:
 - name: snapshots
   description: Daily graph KPI snapshot retrieval endpoints.

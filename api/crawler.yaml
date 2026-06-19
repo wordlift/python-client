@@ -51,6 +51,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+      security: &id001
+      - WordliftApiKey: []
     get:
       tags:
       - Jobs
@@ -104,6 +106,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+      security: *id001
   /crawl-jobs/{job_id}:
     get:
       tags:
@@ -157,6 +160,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+      security: *id001
   /crawl-jobs/{job_id}/pages:
     get:
       tags:
@@ -222,6 +226,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+      security: *id001
   /websites/{host}/pages:
     get:
       tags:
@@ -319,6 +324,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+      security: *id001
   /websites/{host}/pages/{page_id}:
     get:
       tags:
@@ -369,6 +375,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+      security: *id001
   /websites/{host}/pages/{page_id}/artifacts/{artifact_type}:
     get:
       tags:
@@ -425,6 +432,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+      security: *id001
   /websites/{host}/artifacts:query:
     post:
       tags:
@@ -458,6 +466,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+      security: *id001
   /crawler/fetch:
     get:
       tags:
@@ -527,6 +536,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+      security: *id001
 components:
   schemas:
     CrawlJobCreateResponse:
@@ -1009,9 +1019,9 @@ components:
             minimum: 10.0
           - type: 'null'
           title: Refresh Interval Minutes
-          description: "Scheduled refresh interval in minutes (10\u201343200). Must\
-            \ be >= the staleness buffer (10 min) or the entry would always appear\
-            \ stale. Upper bound matches the 30-day fetch result retention period."
+          description: Scheduled refresh interval in minutes (10–43200). Must be >=
+            the staleness buffer (10 min) or the entry would always appear stale.
+            Upper bound matches the 30-day fetch result retention period.
         proxy_mode:
           anyOf:
           - $ref: '#/components/schemas/ProxyMode'
@@ -1589,5 +1599,3 @@ components:
       description: 'Use ''Authorization: Key <WORDLIFT_API_KEY>''.'
 servers:
 - url: https://api.wordlift.io
-security:
-- WordliftApiKey: []

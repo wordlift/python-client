@@ -264,9 +264,9 @@ from wordlift_client.models.update_record_request import UpdateRecordRequest
 from wordlift_client.models.update_records_request import UpdateRecordsRequest
 from wordlift_client.models.validation_error import ValidationError
 from wordlift_client.models.validation_error1 import ValidationError1
+from wordlift_client.models.validation_error1_detail_inner import ValidationError1DetailInner
 from wordlift_client.models.validation_error2 import ValidationError2
 from wordlift_client.models.validation_error3 import ValidationError3
-from wordlift_client.models.validation_error3_detail_inner import ValidationError3DetailInner
 from wordlift_client.models.validation_error4 import ValidationError4
 from wordlift_client.models.validation_fix import ValidationFix
 from wordlift_client.models.validation_result import ValidationResult

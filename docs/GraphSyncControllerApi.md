@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**cancel**](GraphSyncControllerApi.md#cancel) | **DELETE** /accounts/{account_id}/graph-sync/runs/{run_id} | 
 [**create1**](GraphSyncControllerApi.md#create1) | **POST** /accounts/{account_id}/graph-sync | 
 [**delete**](GraphSyncControllerApi.md#delete) | **DELETE** /accounts/{account_id}/graph-sync | 
-[**get4**](GraphSyncControllerApi.md#get4) | **GET** /accounts/{account_id}/graph-sync | 
+[**get3**](GraphSyncControllerApi.md#get3) | **GET** /accounts/{account_id}/graph-sync | 
 [**run**](GraphSyncControllerApi.md#run) | **POST** /accounts/{account_id}/graph-sync/runs | 
 [**update**](GraphSyncControllerApi.md#update) | **PUT** /accounts/{account_id}/graph-sync | 
 
@@ -19,6 +19,7 @@ Method | HTTP request | Description
 
 ### Example
 
+* Api Key Authentication (ApiKey):
 
 ```python
 import wordlift_client
@@ -31,6 +32,16 @@ configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -61,7 +72,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -83,6 +94,7 @@ No authorization required
 
 ### Example
 
+* Api Key Authentication (ApiKey):
 
 ```python
 import wordlift_client
@@ -97,6 +109,16 @@ configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -129,7 +151,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -151,6 +173,7 @@ No authorization required
 
 ### Example
 
+* Api Key Authentication (ApiKey):
 
 ```python
 import wordlift_client
@@ -163,6 +186,16 @@ configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -193,7 +226,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -208,13 +241,14 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get4**
-> GraphSyncResponse get4(account_id)
+# **get3**
+> GraphSyncResponse get3(account_id)
 
 
 
 ### Example
 
+* Api Key Authentication (ApiKey):
 
 ```python
 import wordlift_client
@@ -228,6 +262,16 @@ configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -236,11 +280,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     account_id = 56 # int | 
 
     try:
-        api_response = await api_instance.get4(account_id)
-        print("The response of GraphSyncControllerApi->get4:\n")
+        api_response = await api_instance.get3(account_id)
+        print("The response of GraphSyncControllerApi->get3:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling GraphSyncControllerApi->get4: %s\n" % e)
+        print("Exception when calling GraphSyncControllerApi->get3: %s\n" % e)
 ```
 
 
@@ -258,7 +302,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -280,6 +324,7 @@ No authorization required
 
 ### Example
 
+* Api Key Authentication (ApiKey):
 
 ```python
 import wordlift_client
@@ -294,6 +339,16 @@ configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -326,7 +381,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -348,6 +403,7 @@ No authorization required
 
 ### Example
 
+* Api Key Authentication (ApiKey):
 
 ```python
 import wordlift_client
@@ -362,6 +418,16 @@ configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -394,7 +460,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
