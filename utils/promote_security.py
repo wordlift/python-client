@@ -7,6 +7,7 @@ After this runs, the openapi-merge step has nothing to race over:
 every operation carries its own security declaration, so the ordering
 of specs in the merge is irrelevant to auth correctness.
 """
+import copy
 import os
 import sys
 import yaml
@@ -43,7 +44,7 @@ for fname in sorted(os.listdir(api_dir)):
             if not isinstance(operation, dict):
                 continue
             if 'security' not in operation:
-                operation['security'] = global_security
+                operation['security'] = copy.deepcopy(global_security)
                 promoted += 1
 
     del spec['security']

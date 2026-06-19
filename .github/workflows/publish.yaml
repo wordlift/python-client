@@ -92,6 +92,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git tag -a $VERSION -m "Release version $VERSION"
+          git checkout api/
           git add .
           git commit -m "Update client to version $VERSION [skip ci]"
           git push --follow-tags origin main

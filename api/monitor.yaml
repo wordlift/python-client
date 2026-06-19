@@ -52,8 +52,6 @@ paths:
               - url
               title: AddResourceRequest
               type: object
-      security: &id001
-      - WordliftApiKey: []
     get:
       summary: List Monitors
       operationId: list_monitors_accounts__account_id__monitoring_monitors_get
@@ -106,7 +104,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
     put:
       summary: Replace Monitors
       operationId: replace_monitors_accounts__account_id__monitoring_monitors_put
@@ -167,7 +164,6 @@ paths:
               - items
               title: ReplaceMonitorsRequest
               type: object
-      security: *id001
   /accounts/{account_id}/monitoring/monitors/{monitor_id}:
     get:
       summary: Get Monitor
@@ -198,7 +194,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
     put:
       summary: Update Monitor
       operationId: update_monitor_accounts__account_id__monitoring_monitors__monitor_id__put
@@ -252,7 +247,6 @@ paths:
               - url
               title: AddResourceRequest
               type: object
-      security: *id001
     delete:
       summary: Delete Monitor
       operationId: delete_monitor_accounts__account_id__monitoring_monitors__monitor_id__delete
@@ -278,7 +272,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
   /accounts/{account_id}/monitoring/runs:
     get:
       summary: List Runs
@@ -324,7 +317,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
   /accounts/{account_id}/monitoring/runs/{run_id}:
     get:
       summary: Get Run
@@ -355,7 +347,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
     delete:
       summary: Abort Run
       operationId: abort_run_accounts__account_id__monitoring_runs__run_id__delete
@@ -385,7 +376,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
   /accounts/{account_id}/monitoring/segments:
     post:
       summary: Create Segment
@@ -417,7 +407,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
     get:
       summary: List Segments
       operationId: list_segments_accounts__account_id__monitoring_segments_get
@@ -462,7 +451,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
   /accounts/{account_id}/monitoring/segments/{segment_id}:
     get:
       summary: Get Segment
@@ -493,7 +481,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
     put:
       summary: Update Segment
       description: Replace the segment's mutable fields.
@@ -530,7 +517,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
     delete:
       summary: Delete Segment
       operationId: delete_segment_accounts__account_id__monitoring_segments__segment_id__delete
@@ -556,7 +542,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
   /accounts/{account_id}/monitoring/segments/{segment_id}/globs:
     get:
       summary: List Segment Globs
@@ -609,7 +594,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
     post:
       summary: Add Segment Glob
       description: Add a single glob matcher; idempotent on duplicate.
@@ -646,7 +630,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
     put:
       summary: Replace Segment Globs
       description: Wholesale replace all glob matchers for the segment.
@@ -687,7 +670,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
   /accounts/{account_id}/monitoring/segments/{segment_id}/globs/{glob_id}:
     delete:
       summary: Delete Segment Glob
@@ -720,7 +702,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
   /accounts/{account_id}/monitoring/segments/{segment_id}/urls:
     get:
       summary: List Segment Urls
@@ -773,7 +754,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
     post:
       summary: Add Segment Url
       description: Add a single URL matcher; idempotent on duplicate.
@@ -804,7 +784,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
     put:
       summary: Replace Segment Urls
       description: Wholesale replace all URL matchers for the segment.
@@ -839,7 +818,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
   /accounts/{account_id}/monitoring/segments/{segment_id}/urls/{url_id}:
     delete:
       summary: Delete Segment Url
@@ -872,7 +850,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
   /accounts/{account_id}/monitoring/expectations:
     post:
       summary: Create Expectation
@@ -904,7 +881,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
     get:
       summary: List Expectations
       operationId: list_expectations_accounts__account_id__monitoring_expectations_get
@@ -949,7 +925,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
   /accounts/{account_id}/monitoring/expectations/{expectation_id}:
     get:
       summary: Get Expectation
@@ -980,7 +955,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
     delete:
       summary: Delete Expectation
       operationId: delete_expectation_accounts__account_id__monitoring_expectations__expectation_id__delete
@@ -1006,7 +980,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
   /accounts/{account_id}/monitoring/expectations/{expectation_id}/segments:
     get:
       summary: List Expectation Segments
@@ -1060,7 +1033,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
     put:
       summary: Replace Expectation Segments
       description: Replace the rule's set of attached segments wholesale. Returns
@@ -1102,7 +1074,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
   /accounts/{account_id}/monitoring/expectations/{expectation_id}/segments/{segment_id}:
     put:
       summary: Attach Expectation Segment
@@ -1140,7 +1111,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
     delete:
       summary: Detach Expectation Segment
       description: Detach a segment from a rule. Idempotent.
@@ -1173,7 +1143,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
   /accounts/{account_id}/monitoring/status:
     get:
       summary: List Monitor Statuses
@@ -1281,7 +1250,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
   /accounts/{account_id}/monitoring/monitors/{monitor_id}/status:
     get:
       summary: Get Monitor Status
@@ -1312,7 +1280,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
   /accounts/{account_id}/monitoring/monitors/{monitor_id}/checks/{check_name}:
     get:
       summary: Get Check Timeseries
@@ -1392,7 +1359,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      security: *id001
   /health:
     get:
       summary: Health
@@ -1497,18 +1463,11 @@ components:
       - severity
       - config
       title: ExpectationRequest
-      description: 'Body for ``POST /expectations``.
-
-
-        ``config`` is typed as ``AnyExpectationConfig`` — the extension point
-
-        that will hold a union once a second check type ships. Pydantic
-
-        validates the concrete shape per-field (422 on bad input). Segment
-
-        attachments are managed via the dedicated
-
-        ``PUT/DELETE /expectations/{e}/segments[/{s}]`` endpoints.'
+      description: "Body for ``POST /expectations``.\n\n``config`` is typed as ``AnyExpectationConfig``\
+        \ \u2014 the extension point\nthat will hold a union once a second check type\
+        \ ships. Pydantic\nvalidates the concrete shape per-field (422 on bad input).\
+        \ Segment\nattachments are managed via the dedicated\n``PUT/DELETE /expectations/{e}/segments[/{s}]``\
+        \ endpoints."
     ExpectationResponse:
       properties:
         id:
@@ -2067,30 +2026,15 @@ components:
       - entity_type
       - constraint
       title: StructuredDataExpectationConfig
-      description: 'Config payload for an expectation triggered by ``structured_data_check``.
-
-
-        Each field describes a structured-data assertion specifically — the
-
-        naming is intentionally not generic, since a future check (e.g. a
-
-        latency assertion) will get its own config class with its own
-
-        domain-specific field names rather than reusing this shape.
-
-
-        ``property_path`` distinguishes entity-level rules (``None``) from
-
-        property-level rules (set) — there is no cross-field validator; the
-
-        nullability of ``property_path`` does the work.
-
-
-        The domain shape is always the current version; payload-version
-
-        tracking and upgrades live at the storage boundary in
-
-        ``expectation_repository``.'
+      description: "Config payload for an expectation triggered by ``structured_data_check``.\n\
+        \nEach field describes a structured-data assertion specifically \u2014 the\n\
+        naming is intentionally not generic, since a future check (e.g. a\nlatency\
+        \ assertion) will get its own config class with its own\ndomain-specific field\
+        \ names rather than reusing this shape.\n\n``property_path`` distinguishes\
+        \ entity-level rules (``None``) from\nproperty-level rules (set) \u2014 there\
+        \ is no cross-field validator; the\nnullability of ``property_path`` does\
+        \ the work.\n\nThe domain shape is always the current version; payload-version\n\
+        tracking and upgrades live at the storage boundary in\n``expectation_repository``."
     ValidationError:
       properties:
         loc:
@@ -2125,3 +2069,5 @@ components:
       description: 'Use ''Authorization: Key <WORDLIFT_API_KEY>''.'
 servers:
 - url: https://api.wordlift.io
+security:
+- WordliftApiKey: []
