@@ -29,6 +29,11 @@ echo "==> promote_security"
 (cd "$WORK_DIR" && python3 "$REPO/utils/promote_security.py")
 echo
 
+# ── 2b. Rename duplicate schemas with spec-based prefixes ────────────────────
+echo "==> rename_duplicate_schemas"
+(cd "$WORK_DIR" && python3 "$REPO/utils/rename_duplicate_schemas.py")
+echo
+
 # ── 3. Generate merge config pointing at the temp api/ copy ─────────────────
 #    Paths must be RELATIVE to the config file location (openapi-merge-cli
 #    uses path.join, not path.resolve, so absolute paths get doubled).

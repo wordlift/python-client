@@ -52,6 +52,10 @@ jobs:
       - name: Promote global security to operation level
         run: python3 ./utils/promote_security.py
 
+      # Step 7b: Rename duplicate schema names with spec-based prefixes
+      - name: Rename duplicate schemas
+        run: python3 ./utils/rename_duplicate_schemas.py
+
       # Step 8: Merge the YAML files
       - name: Merge the yaml files
         run: npx openapi-merge-cli --config ./openapi-merge.json
