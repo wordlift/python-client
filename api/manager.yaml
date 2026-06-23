@@ -34,6 +34,8 @@ tags:
   name: Platform Consumptions
 - description: Manage OAuth2 Authorized Clients
   name: OAuth2 Authorized Clients
+- description: Account-scoped graph KPI snapshots calculated by graph-sync.
+  name: Account Graph KPIs
 - description: Import Web Pages to the Graph
   name: Web Pages Imports
 - description: Manage Accounts
@@ -647,6 +649,270 @@ paths:
       summary: Create or replace account chunkset
       tags:
       - Account Chunksets
+  /accounts/{account_id}/graph-kpis:
+    get:
+      description: |
+        Lists dated graph KPI snapshots for the account. Reads support account-owned
+        bearer tokens, account keys, and privileged tokens.
+      operationId: listAccountGraphKpiSnapshots
+      parameters:
+      - description: WordLift account id.
+        example: 1506805
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - description: Earliest snapshot date to include.
+        example: 2026-06-01
+        in: query
+        name: date_from
+        required: false
+        schema:
+          type: string
+          format: date
+      - description: Latest snapshot date to include.
+        example: 2026-06-23
+        in: query
+        name: date_to
+        required: false
+        schema:
+          type: string
+          format: date
+      - description: "Maximum number of snapshots to return. Allowed range: 1-365."
+        example: 30
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 30
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshotPage'
+          description: Graph KPI snapshots.
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshotPage'
+          description: Invalid query parameters.
+        "401":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshotPage'
+          description: Authentication is required.
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshotPage'
+          description: The account key does not match the requested account.
+        "404":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshotPage'
+          description: The authenticated user cannot access the requested account.
+      security:
+      - ApiKey: []
+      summary: List graph KPI snapshots
+      tags:
+      - Account Graph KPIs
+    post:
+      description: |
+        Creates a graph KPI snapshot. Intended for graph-sync ingestion after a
+        graph-sync run completes. Requires an account key for the same account or a
+        privileged token. The request body must include `snapshot_date`.
+      operationId: createAccountGraphKpiSnapshot
+      parameters:
+      - description: WordLift account id.
+        example: 1506805
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphKpiSnapshotRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshot'
+          description: Graph KPI snapshot created.
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshot'
+          description: Required identity fields are missing or invalid.
+        "401":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshot'
+          description: Authentication is required.
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshot'
+          description: The caller cannot write KPI snapshots for this account.
+        "409":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshot'
+          description: A snapshot already exists for the account and date.
+        "422":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshot'
+          description: The KPI payload is invalid.
+      security:
+      - ApiKey: []
+      summary: Create a graph KPI snapshot
+      tags:
+      - Account Graph KPIs
+  /accounts/{account_id}/graph-kpis/{snapshot_date}:
+    get:
+      description: |
+        Gets one graph KPI snapshot by account and snapshot date. Reads support
+        account-owned bearer tokens, account keys, and privileged tokens.
+      operationId: getAccountGraphKpiSnapshot
+      parameters:
+      - description: WordLift account id.
+        example: 1506805
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - description: Snapshot date.
+        example: 2026-06-23
+        in: path
+        name: snapshot_date
+        required: true
+        schema:
+          type: string
+          format: date
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshot'
+          description: Graph KPI snapshot.
+        "401":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshot'
+          description: Authentication is required.
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshot'
+          description: The account key does not match the requested account.
+        "404":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshot'
+          description: The snapshot or account was not found.
+      security:
+      - ApiKey: []
+      summary: Get a graph KPI snapshot
+      tags:
+      - Account Graph KPIs
+    put:
+      description: |
+        Idempotently creates or replaces the graph KPI snapshot identified by the
+        path account and snapshot date. Intended for graph-sync ingestion. Requires
+        an account key for the same account or a privileged token. If
+        `snapshot_date` is present in the body, it must match the path value.
+      operationId: putAccountGraphKpiSnapshot
+      parameters:
+      - description: WordLift account id.
+        example: 1506805
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - description: Snapshot date.
+        example: 2026-06-23
+        in: path
+        name: snapshot_date
+        required: true
+        schema:
+          type: string
+          format: date
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphKpiSnapshotRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshot'
+          description: Graph KPI snapshot replaced.
+        "201":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshot'
+          description: Graph KPI snapshot created.
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshot'
+          description: The body snapshot date does not match the path date.
+        "401":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshot'
+          description: Authentication is required.
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshot'
+          description: The caller cannot write KPI snapshots for this account.
+        "422":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GraphKpiSnapshot'
+          description: The KPI payload is invalid.
+      security:
+      - ApiKey: []
+      summary: Create or replace a graph KPI snapshot
+      tags:
+      - Account Graph KPIs
   /accounts/{account_id}/graph-sync:
     delete:
       operationId: delete
@@ -3128,6 +3394,97 @@ components:
             \ over the `value` field."
       required:
       - operator
+    GraphKpiSnapshot:
+      type: object
+      description: |
+        Dated graph KPI snapshot for one WordLift account. KPI metrics are exposed as
+        additional top-level JSON properties; metric values are non-negative numbers
+        or nested objects of non-negative numbers.
+      example:
+        account_id: 1506805
+        snapshot_date: 2026-06-23
+        calculated_at: 2026-06-23T10:00:00Z
+        snapshot_origin: calculated
+        all_total_entities: 1000
+        public_total_entities: 900
+        graph_health_score: 91.5
+        rich_snippets_by_type:
+          Article:
+            valid: 80
+            invalid: 4
+      properties:
+        account_id:
+          type: integer
+          format: int64
+          description: WordLift account id.
+          example: 1506805
+        calculated_at:
+          type: string
+          format: date-time
+          description: UTC instant when the snapshot was calculated.
+          example: 2026-06-23T10:00:00Z
+        kpis:
+          type: object
+          additionalProperties:
+            type: object
+          writeOnly: true
+        snapshot_date:
+          type: string
+          format: date
+          description: Date the graph snapshot represents.
+          example: 2026-06-23
+        snapshot_origin:
+          type: string
+          description: "Origin of the snapshot, for example `calculated`."
+          example: calculated
+    GraphKpiSnapshotPage:
+      type: object
+      description: List response for account graph KPI snapshots.
+      properties:
+        items:
+          type: array
+          description: Graph KPI snapshots ordered by `snapshot_date` descending.
+          items:
+            $ref: '#/components/schemas/GraphKpiSnapshot'
+    GraphKpiSnapshotRequest:
+      type: object
+      description: |
+        Graph KPI snapshot write payload. The account id is provided in the path. For
+        `POST`, `snapshot_date` is required in the body. For `PUT`, `snapshot_date`
+        may be omitted; when provided it must match the path date. KPI metrics are
+        additional top-level JSON properties whose values are non-negative numbers or
+        nested objects of non-negative numbers.
+      example:
+        snapshot_date: 2026-06-23
+        calculated_at: 2026-06-23T10:00:00Z
+        snapshot_origin: calculated
+        all_total_entities: 1000
+        public_total_entities: 900
+        graph_health_score: 91.5
+        rich_snippets_by_type:
+          Article:
+            valid: 80
+            invalid: 4
+      properties:
+        calculated_at:
+          type: string
+          format: date-time
+          description: UTC instant when the snapshot was calculated.
+          example: 2026-06-23T10:00:00Z
+        snapshot_date:
+          type: string
+          format: date
+          description: Snapshot date. Required for POST; optional for PUT and must
+            match the path date when present.
+          example: 2026-06-23
+        snapshot_origin:
+          type: string
+          description: "Origin of the snapshot, for example `calculated`."
+          example: calculated
+          maxLength: 32
+          minLength: 0
+      required:
+      - calculated_at
     GraphSyncRequest:
       type: object
       properties:
