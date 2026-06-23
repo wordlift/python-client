@@ -15,11 +15,12 @@
 """  # noqa: E501
 
 
-__version__ = "1.182.0"
+__version__ = "1.183.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
 from wordlift_client.api.account_chunksets_api import AccountChunksetsApi
+from wordlift_client.api.account_graph_kpis_api import AccountGraphKPIsApi
 from wordlift_client.api.account_stats_api import AccountStatsApi
 from wordlift_client.api.accounts_api import AccountsApi
 from wordlift_client.api.add_ons_api import AddOnsApi
@@ -214,6 +215,9 @@ from wordlift_client.models.filter_value import FilterValue
 from wordlift_client.models.generate_sitemap200_response import GenerateSitemap200Response
 from wordlift_client.models.generate_sitemap_request import GenerateSitemapRequest
 from wordlift_client.models.graph_kpi_http_validation_error import GraphKpiHTTPValidationError
+from wordlift_client.models.graph_kpi_snapshot import GraphKpiSnapshot
+from wordlift_client.models.graph_kpi_snapshot_page import GraphKpiSnapshotPage
+from wordlift_client.models.graph_kpi_snapshot_request import GraphKpiSnapshotRequest
 from wordlift_client.models.graph_kpi_validation_error import GraphKpiValidationError
 from wordlift_client.models.graph_sync_request import GraphSyncRequest
 from wordlift_client.models.graph_sync_response import GraphSyncResponse

@@ -3,6 +3,7 @@
 # import apis into api package
 from wordlift_client.api.account_api import AccountApi
 from wordlift_client.api.account_chunksets_api import AccountChunksetsApi
+from wordlift_client.api.account_graph_kpis_api import AccountGraphKPIsApi
 from wordlift_client.api.account_stats_api import AccountStatsApi
 from wordlift_client.api.accounts_api import AccountsApi
 from wordlift_client.api.add_ons_api import AddOnsApi

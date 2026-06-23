@@ -7,6 +7,7 @@ docs/Account.md
 docs/AccountApi.md
 docs/AccountChunksetsApi.md
 docs/AccountConnectorFieldControllerApi.md
+docs/AccountGraphKPIsApi.md
 docs/AccountInfo.md
 docs/AccountOAuth2ConnectorControllerApi.md
 docs/AccountStats.md
@@ -150,6 +151,9 @@ docs/GoogleMerchantsApi.md
 docs/GoogleSearchConsoleApi.md
 docs/GoogleSearchConsoleSearchesApi.md
 docs/GraphKpiHTTPValidationError.md
+docs/GraphKpiSnapshot.md
+docs/GraphKpiSnapshotPage.md
+docs/GraphKpiSnapshotRequest.md
 docs/GraphKpiValidationError.md
 docs/GraphQLApi.md
 docs/GraphSyncControllerApi.md
@@ -374,12 +378,17 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_account_graph_kpis_api.py
+test/test_graph_kpi_snapshot.py
+test/test_graph_kpi_snapshot_page.py
+test/test_graph_kpi_snapshot_request.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
 wordlift_client/api/account_api.py
 wordlift_client/api/account_chunksets_api.py
 wordlift_client/api/account_connector_field_controller_api.py
+wordlift_client/api/account_graph_kpis_api.py
 wordlift_client/api/account_o_auth2_connector_controller_api.py
 wordlift_client/api/account_stats_api.py
 wordlift_client/api/accounts_api.py
@@ -565,6 +574,9 @@ wordlift_client/models/filter_value.py
 wordlift_client/models/generate_sitemap200_response.py
 wordlift_client/models/generate_sitemap_request.py
 wordlift_client/models/graph_kpi_http_validation_error.py
+wordlift_client/models/graph_kpi_snapshot.py
+wordlift_client/models/graph_kpi_snapshot_page.py
+wordlift_client/models/graph_kpi_snapshot_request.py
 wordlift_client/models/graph_kpi_validation_error.py
 wordlift_client/models/graph_sync_request.py
 wordlift_client/models/graph_sync_response.py
