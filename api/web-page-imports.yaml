@@ -1,0 +1,258 @@
+openapi: 3.1.0
+info:
+  title: Web Page Batch Imports API
+  version: 0.9.6
+paths:
+  /health:
+    get:
+      tags:
+      - System
+      summary: Liveness check
+      description: Returns service liveness status for probes and local checks.
+      operationId: healthz_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+  /health/ready:
+    get:
+      tags:
+      - System
+      summary: Readiness check
+      description: Verifies connectivity to all downstream services. Returns 503 if
+        not ready.
+      operationId: readiness_health_ready_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadinessResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadinessResponse'
+  /{account_id}/web-page-import-batches:
+    post:
+      summary: Create a new batch of web page imports
+      description: Start importing a batch of URLs asynchronously into the Knowledge
+        Graph.
+      operationId: create_batch__account_id__web_page_import_batches_post
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchRequest'
+      responses:
+        '202':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /{account_id}/web-page-import-batches/{batch_id}:
+    get:
+      summary: Get Batch
+      operationId: get_batch__account_id__web_page_import_batches__batch_id__get
+      parameters:
+      - name: batch_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Batch Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    BatchRequest:
+      properties:
+        urls:
+          items:
+            type: string
+            maxLength: 2083
+            minLength: 1
+            format: uri
+          type: array
+          maxItems: 1000
+          minItems: 1
+          title: Urls
+          description: List of URLs to import into the KG
+      type: object
+      required:
+      - urls
+      title: BatchRequest
+    BatchResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        status:
+          $ref: '#/components/schemas/BatchStatus'
+        total:
+          type: integer
+          title: Total
+        completed:
+          type: integer
+          title: Completed
+        failed:
+          type: integer
+          title: Failed
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        started_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Started At
+        finished_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Finished At
+        error_message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Message
+      type: object
+      required:
+      - id
+      - status
+      - total
+      - completed
+      - failed
+      - created_at
+      title: BatchResponse
+    BatchStatus:
+      type: string
+      enum:
+      - pending
+      - running
+      - completed
+      - completed_with_errors
+      - failed
+      - cancelled
+      title: BatchStatus
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    HealthResponse:
+      properties:
+        status:
+          type: string
+          title: Status
+      type: object
+      required:
+      - status
+      title: HealthResponse
+    ReadinessResponse:
+      properties:
+        status:
+          type: string
+          title: Status
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+        services:
+          additionalProperties:
+            type: string
+          type: object
+          title: Services
+        errors:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Errors
+      type: object
+      required:
+      - status
+      - timestamp
+      - services
+      title: ReadinessResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    WordliftApiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Use ''Authorization: Key <WORDLIFT_API_KEY>''.'
+servers:
+- url: https://api.wordlift.io
+security:
+- WordliftApiKey: []
