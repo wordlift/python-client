@@ -1,43 +1,8 @@
 openapi: 3.1.0
 info:
   title: Web Page Batch Imports API
-  version: 0.9.6
+  version: 0.9.7
 paths:
-  /health:
-    get:
-      tags:
-      - System
-      summary: Liveness check
-      description: Returns service liveness status for probes and local checks.
-      operationId: healthz_health_get
-      responses:
-        '200':
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HealthResponse'
-  /health/ready:
-    get:
-      tags:
-      - System
-      summary: Readiness check
-      description: Verifies connectivity to all downstream services. Returns 503 if
-        not ready.
-      operationId: readiness_health_ready_get
-      responses:
-        '200':
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ReadinessResponse'
-        '503':
-          description: Service Unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ReadinessResponse'
   /{account_id}/web-page-import-batches:
     post:
       summary: Create a new batch of web page imports
