@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Web Page Batch Imports API
-  version: 0.9.7
+  version: 0.9.9
 paths:
   /{account_id}/web-page-import-batches:
     post:
@@ -76,7 +76,7 @@ components:
             minLength: 1
             format: uri
           type: array
-          maxItems: 1000
+          maxItems: 5000
           minItems: 1
           title: Urls
           description: List of URLs to import into the KG
