@@ -3730,14 +3730,6 @@ components:
         custom_seller:
           type: string
           description: Custom seller entity - if applicable.
-        dataset_domain:
-          type: string
-          deprecated: true
-          description: The custom domain (for example data.example.org)
-        dataset_name:
-          type: string
-          deprecated: true
-          description: The dataset path (for example /data)
         default_products_filter_action:
           type: string
           default: PROCESS
@@ -3830,26 +3822,23 @@ components:
           description: "The Knowledge Graph to use for the Merchant. Please note that\
             \ the Knowledge Graph will be reset. When not provided, this method will\
             \ use the first available Knowledge Graph."
-        dataset_domain:
-          type: string
-          description: The custom domain (for example data.example.org)
-        dataset_name:
-          type: string
-          description: The dataset path (for example "data")
         deleted:
           type: boolean
           default: false
-          description: True if the merchant has been deleted
+          description: "True if the merchant has been deleted. When omitted on an\
+            \ update, the existing value is preserved."
         google_merchant_id:
           type: integer
           format: int64
           description: The Google Merchant id
         ignore_brand:
           type: boolean
-          description: Whether to ignore the `brand` property during validation
+          description: "Whether to ignore the `brand` property during validation.\
+            \ When omitted on an update, the existing value is preserved."
         ignore_image:
           type: boolean
-          description: Whether to ignore the `image` property during validation
+          description: "Whether to ignore the `image` property during validation.\
+            \ When omitted on an update, the existing value is preserved."
         publisher_name:
           type: string
           description: The publisher name (shows in schema publisher)
@@ -3997,14 +3986,6 @@ components:
         custom_seller:
           type: string
           description: Custom seller entity - if applicable.
-        dataset_domain:
-          type: string
-          deprecated: true
-          description: The custom domain (for example data.example.org)
-        dataset_name:
-          type: string
-          deprecated: true
-          description: The dataset path (for example /data)
         default_products_filter_action:
           type: string
           default: PROCESS
