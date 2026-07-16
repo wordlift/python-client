@@ -1,0 +1,1216 @@
+openapi: 3.1.0
+info:
+  title: WordLift Graph Sync Service
+  version: 0.3.0
+paths:
+  /accounts/{account_id}/graph-sync/runs:
+    post:
+      tags:
+      - runs
+      summary: Create a run
+      operationId: create_run_accounts__account_id__graph_sync_runs_post
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: x-api-version
+        in: header
+        required: false
+        schema:
+          type: string
+          format: date
+          default: '2026-06-01'
+          title: X-Api-Version
+        examples:
+          default:
+            value: '2026-06-01'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - runs
+      summary: List runs
+      operationId: list_runs_accounts__account_id__graph_sync_runs_get
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: profile
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Profile
+      - name: status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/RunStatus'
+          - type: 'null'
+          title: Status
+      - name: since
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Since
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          default: 50
+          title: Limit
+      - name: x-api-version
+        in: header
+        required: false
+        schema:
+          type: string
+          format: date
+          default: '2026-06-01'
+          title: X-Api-Version
+        examples:
+          default:
+            value: '2026-06-01'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RunResponse'
+                title: Response List Runs Accounts  Account Id  Graph Sync Runs Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/graph-sync/runs/{run_id}/progress:
+    patch:
+      tags:
+      - runs
+      summary: Update run progress
+      operationId: update_progress_accounts__account_id__graph_sync_runs__run_id__progress_patch
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Run Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: x-api-version
+        in: header
+        required: false
+        schema:
+          type: string
+          format: date
+          default: '2026-06-01'
+          title: X-Api-Version
+        examples:
+          default:
+            value: '2026-06-01'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunProgressUpdate'
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/graph-sync/runs/{run_id}:
+    patch:
+      tags:
+      - runs
+      summary: Finalize a run
+      operationId: finalize_run_accounts__account_id__graph_sync_runs__run_id__patch
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Run Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: x-api-version
+        in: header
+        required: false
+        schema:
+          type: string
+          format: date
+          default: '2026-06-01'
+          title: X-Api-Version
+        examples:
+          default:
+            value: '2026-06-01'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunFinalize'
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - runs
+      summary: Get a run
+      operationId: get_run_accounts__account_id__graph_sync_runs__run_id__get
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Run Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: x-api-version
+        in: header
+        required: false
+        schema:
+          type: string
+          format: date
+          default: '2026-06-01'
+          title: X-Api-Version
+        examples:
+          default:
+            value: '2026-06-01'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/graph-sync/runs/{run_id}/failures:
+    post:
+      tags:
+      - failures
+      summary: Append a failure to a run
+      operationId: create_failure_accounts__account_id__graph_sync_runs__run_id__failures_post
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Run Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: x-api-version
+        in: header
+        required: false
+        schema:
+          type: string
+          format: date
+          default: '2026-06-01'
+          title: X-Api-Version
+        examples:
+          default:
+            value: '2026-06-01'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FailureCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailureResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - failures
+      summary: List failures for a run
+      operationId: list_failures_accounts__account_id__graph_sync_runs__run_id__failures_get
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Run Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 1
+          default: 100
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: x-api-version
+        in: header
+        required: false
+        schema:
+          type: string
+          format: date
+          default: '2026-06-01'
+          title: X-Api-Version
+        examples:
+          default:
+            value: '2026-06-01'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FailureResponse'
+                title: Response List Failures Accounts  Account Id  Graph Sync Runs  Run
+                  Id  Failures Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/graph-sync/runs/{run_id}/kpis:
+    post:
+      tags:
+      - kpis
+      summary: Store KPI data for a run
+      operationId: create_kpi_accounts__account_id__graph_sync_runs__run_id__kpis_post
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Run Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: x-api-version
+        in: header
+        required: false
+        schema:
+          type: string
+          format: date
+          default: '2026-06-01'
+          title: X-Api-Version
+        examples:
+          default:
+            value: '2026-06-01'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KpiCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KpiResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - kpis
+      summary: Get KPI data for a run
+      operationId: get_kpi_accounts__account_id__graph_sync_runs__run_id__kpis_get
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Run Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: x-api-version
+        in: header
+        required: false
+        schema:
+          type: string
+          format: date
+          default: '2026-06-01'
+          title: X-Api-Version
+        examples:
+          default:
+            value: '2026-06-01'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KpiResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/graph-sync/bootstrap:
+    post:
+      tags:
+      - bootstrap
+      summary: Start bootstrap
+      operationId: start_bootstrap_accounts__account_id__graph_sync_bootstrap_post
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: x-api-version
+        in: header
+        required: false
+        schema:
+          type: string
+          format: date
+          default: '2026-06-01'
+          title: X-Api-Version
+        examples:
+          default:
+            value: '2026-06-01'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BootstrapJobResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - bootstrap
+      summary: Get bootstrap status
+      operationId: get_bootstrap_accounts__account_id__graph_sync_bootstrap_get
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: x-api-version
+        in: header
+        required: false
+        schema:
+          type: string
+          format: date
+          default: '2026-06-01'
+          title: X-Api-Version
+        examples:
+          default:
+            value: '2026-06-01'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BootstrapJobResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - bootstrap
+      summary: Abort bootstrap
+      operationId: abort_bootstrap_accounts__account_id__graph_sync_bootstrap_delete
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: x-api-version
+        in: header
+        required: false
+        schema:
+          type: string
+          format: date
+          default: '2026-06-01'
+          title: X-Api-Version
+        examples:
+          default:
+            value: '2026-06-01'
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/graph-sync/bootstrap/{job_id}/logs:
+    get:
+      tags:
+      - bootstrap
+      summary: Get paginated logs for a bootstrap job
+      operationId: get_bootstrap_logs_accounts__account_id__graph_sync_bootstrap__job_id__logs_get
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Job Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 100
+          title: Limit
+      - name: x-api-version
+        in: header
+        required: false
+        schema:
+          type: string
+          format: date
+          default: '2026-06-01'
+          title: X-Api-Version
+        examples:
+          default:
+            value: '2026-06-01'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsPage'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    BootstrapJobResponse:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        account_id:
+          type: string
+          title: Account Id
+        account_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Url
+        repository_name:
+          type: string
+          title: Repository Name
+        project_url:
+          type: string
+          title: Project Url
+        profile_name:
+          type: string
+          title: Profile Name
+        status:
+          $ref: '#/components/schemas/BootstrapJobStatus'
+        attempt_number:
+          type: integer
+          title: Attempt Number
+        root_job_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Root Job Id
+        last_heartbeat:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Heartbeat
+        cancellation_reason:
+          anyOf:
+          - $ref: '#/components/schemas/CancellationReason'
+          - type: 'null'
+        failure_reason:
+          anyOf:
+          - $ref: '#/components/schemas/FailureReason'
+          - type: 'null'
+        outcome:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Outcome
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        started_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Started At
+        completed_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Completed At
+        worai_version:
+          type: string
+          title: Worai Version
+        codex_version:
+          type: string
+          title: Codex Version
+        bootstrap_md_hash:
+          type: string
+          title: Bootstrap Md Hash
+        service_version:
+          type: string
+          title: Service Version
+      type: object
+      required:
+      - id
+      - account_id
+      - account_url
+      - repository_name
+      - project_url
+      - profile_name
+      - status
+      - attempt_number
+      - root_job_id
+      - last_heartbeat
+      - cancellation_reason
+      - failure_reason
+      - outcome
+      - created_at
+      - started_at
+      - completed_at
+      - worai_version
+      - codex_version
+      - bootstrap_md_hash
+      - service_version
+      title: BootstrapJobResponse
+    BootstrapJobStatus:
+      type: string
+      enum:
+      - pending
+      - processing
+      - completed
+      - failed
+      - cancelled
+      title: BootstrapJobStatus
+    CancellationReason:
+      type: string
+      enum:
+      - user
+      - zombie
+      title: CancellationReason
+      description: Why a job's status was set to CANCELLED.
+    FailureCreate:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: UUID v7 generated by the client.
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+          description: Wall-clock time when the failure occurred.
+        url:
+          type: string
+          title: Url
+          description: URL that failed.
+        handler_name:
+          type: string
+          title: Handler Name
+          description: Name of the URL handler that raised the exception.
+        message:
+          type: string
+          title: Message
+          description: Exception message.
+      type: object
+      required:
+      - id
+      - timestamp
+      - url
+      - handler_name
+      - message
+      title: FailureCreate
+      examples:
+      - handler_name: IngestionWebPageScrapeUrlHandler
+        id: 018f3b2c-5678-7abc-8def-000000000002
+        message: HTTP error status_code=403
+        timestamp: '2026-05-29T10:16:00Z'
+        url: https://example.com/page
+    FailureReason:
+      type: string
+      enum:
+      - judge_rejected
+      - exception
+      - retries_exhausted
+      title: FailureReason
+      description: Why a job's status was set to FAILED.
+    FailureResponse:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        run_id:
+          type: string
+          format: uuid
+          title: Run Id
+        account_id:
+          type: string
+          title: Account Id
+        account_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Url
+        timestamp:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Timestamp
+        url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url
+        handler_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Handler Name
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+      type: object
+      required:
+      - id
+      - run_id
+      - account_id
+      - account_url
+      - timestamp
+      - url
+      - handler_name
+      - message
+      title: FailureResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    KpiCreate:
+      properties:
+        totals:
+          anyOf:
+          - $ref: '#/components/schemas/KpiTotals'
+          - type: 'null'
+          description: Aggregate entity and assertion counts.
+        entities_by_type:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          title: Entities By Type
+          description: Entity count per schema.org type.
+        properties_by_predicate:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          title: Properties By Predicate
+          description: Property assertion count per predicate.
+        validation:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Validation
+          description: SHACL validation summary, if enabled.
+      type: object
+      title: KpiCreate
+      examples:
+      - entities_by_type:
+          https://schema.org/Article: 1200
+        properties_by_predicate:
+          https://schema.org/name: 1650
+        totals:
+          property_assertions_total: 8900
+          total_entities: 1650
+          type_assertions_total: 3200
+    KpiResponse:
+      properties:
+        run_id:
+          type: string
+          format: uuid
+          title: Run Id
+        totals:
+          anyOf:
+          - $ref: '#/components/schemas/KpiTotals'
+          - type: 'null'
+        entities_by_type:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          title: Entities By Type
+        properties_by_predicate:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          title: Properties By Predicate
+        validation:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Validation
+      type: object
+      required:
+      - run_id
+      - totals
+      - entities_by_type
+      - properties_by_predicate
+      - validation
+      title: KpiResponse
+    KpiTotals:
+      properties:
+        total_entities:
+          type: integer
+          minimum: 0.0
+          title: Total Entities
+          description: Total entities synced in this run.
+        type_assertions_total:
+          type: integer
+          minimum: 0.0
+          title: Type Assertions Total
+          description: Total type (rdf:type) assertions.
+        property_assertions_total:
+          type: integer
+          minimum: 0.0
+          title: Property Assertions Total
+          description: Total property assertions.
+      type: object
+      required:
+      - total_entities
+      - type_assertions_total
+      - property_assertions_total
+      title: KpiTotals
+    LogEntryResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        entry:
+          additionalProperties: true
+          type: object
+          title: Entry
+        logged_at:
+          type: string
+          format: date-time
+          title: Logged At
+      type: object
+      required:
+      - id
+      - entry
+      - logged_at
+      title: LogEntryResponse
+    LogsPage:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/LogEntryResponse'
+          type: array
+          title: Items
+        offset:
+          type: integer
+          title: Offset
+        limit:
+          type: integer
+          title: Limit
+        total:
+          type: integer
+          title: Total
+      type: object
+      required:
+      - items
+      - offset
+      - limit
+      - total
+      title: LogsPage
+    RunCreate:
+      properties:
+        profile:
+          type: string
+          title: Profile
+          description: Graph sync profile name.
+        sdk_version:
+          type: string
+          title: Sdk Version
+          description: wordlift-sdk version used for this run.
+        worai_version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Worai Version
+          description: worai version, if the run was triggered via worai. Null when
+            SDK is called directly.
+        started_at:
+          type: string
+          format: date-time
+          title: Started At
+          description: Client-side wall-clock time when the run started.
+      type: object
+      required:
+      - profile
+      - sdk_version
+      - started_at
+      title: RunCreate
+      examples:
+      - profile: production
+        sdk_version: 8.3.0
+        started_at: '2026-05-29T10:15:30Z'
+        worai_version: 6.19.0
+    RunFinalize:
+      properties:
+        status:
+          $ref: '#/components/schemas/RunStatus'
+          description: Terminal status of the run.
+        url_count:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Url Count
+          description: Total URLs in this run.
+        failure_count:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Failure Count
+          description: Total URL failures.
+        ended_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Ended At
+          description: Client-side wall-clock time when the run ended.
+      type: object
+      required:
+      - status
+      title: RunFinalize
+      examples:
+      - ended_at: '2026-05-29T10:28:04Z'
+        failure_count: 0
+        status: completed
+        url_count: 1733
+    RunProgressUpdate:
+      properties:
+        urls_processed:
+          type: integer
+          minimum: 0.0
+          title: Urls Processed
+          description: Cumulative number of URLs processed so far.
+        entities_so_far:
+          type: integer
+          minimum: 0.0
+          title: Entities So Far
+          description: Cumulative number of entities synced so far.
+      type: object
+      required:
+      - urls_processed
+      - entities_so_far
+      title: RunProgressUpdate
+      examples:
+      - entities_so_far: 145
+        urls_processed: 150
+    RunResponse:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        account_id:
+          type: string
+          title: Account Id
+        account_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Url
+        profile:
+          type: string
+          title: Profile
+        status:
+          $ref: '#/components/schemas/RunStatus'
+        urls_processed:
+          type: integer
+          title: Urls Processed
+        entities_so_far:
+          type: integer
+          title: Entities So Far
+        last_progress_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Progress At
+        url_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Url Count
+        failure_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Failure Count
+        started_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Started At
+        ended_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Ended At
+        sdk_version:
+          type: string
+          title: Sdk Version
+        worai_version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Worai Version
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+      type: object
+      required:
+      - id
+      - account_id
+      - account_url
+      - profile
+      - status
+      - urls_processed
+      - entities_so_far
+      - last_progress_at
+      - url_count
+      - failure_count
+      - started_at
+      - ended_at
+      - sdk_version
+      - worai_version
+      - created_at
+      title: RunResponse
+    RunStatus:
+      type: string
+      enum:
+      - running
+      - completed
+      - aborted
+      - cancelled
+      title: RunStatus
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    WordliftApiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Use ''Authorization: Key <WORDLIFT_API_KEY>''.'
+servers:
+- url: https://api.wordlift.io
+security:
+- WordliftApiKey: []
