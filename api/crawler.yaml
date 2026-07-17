@@ -4,7 +4,7 @@ info:
   summary: WordLift crawler API
   description: API for creating, listing, and inspecting crawl jobs. This schema is
     generated from FastAPI route/model annotations.
-  version: 0.11.3
+  version: 0.11.9
 paths:
   /crawl-jobs:
     post:
@@ -958,109 +958,6 @@ components:
       - sitemap-only
       - sitemap-and-links
       title: DiscoverySources
-    DomainJsRenderMode:
-      type: string
-      enum:
-      - enabled
-      - disabled
-      title: DomainJsRenderMode
-    DomainPolicyListResponse:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/DomainPolicyResponse'
-          type: array
-          title: Items
-        total:
-          type: integer
-          title: Total
-        limit:
-          type: integer
-          title: Limit
-        offset:
-          type: integer
-          title: Offset
-      type: object
-      required:
-      - items
-      - total
-      - limit
-      - offset
-      title: DomainPolicyListResponse
-    DomainPolicyRequest:
-      properties:
-        js_render_mode:
-          anyOf:
-          - $ref: '#/components/schemas/DomainJsRenderMode'
-          - type: 'null'
-          description: Rendering mode override. Omit or set to null to use system
-            default.
-        max_concurrency:
-          anyOf:
-          - type: integer
-            minimum: 1.0
-          - type: 'null'
-          title: Max Concurrency
-          description: Maximum concurrent requests to this domain. Omit for no limit.
-        refresh_interval_minutes:
-          anyOf:
-          - type: integer
-            maximum: 43200.0
-            minimum: 10.0
-          - type: 'null'
-          title: Refresh Interval Minutes
-          description: "Scheduled refresh interval in minutes (10\u201343200). Must\
-            \ be >= the staleness buffer (10 min) or the entry would always appear\
-            \ stale. Upper bound matches the 30-day fetch result retention period."
-        proxy_mode:
-          anyOf:
-          - $ref: '#/components/schemas/ProxyMode'
-          - type: 'null'
-          description: Proxy mode override for this domain. Omit or set to null to
-            use system default.
-      type: object
-      title: DomainPolicyRequest
-    DomainPolicyResponse:
-      properties:
-        origin:
-          type: string
-          title: Origin
-        js_render_mode:
-          anyOf:
-          - $ref: '#/components/schemas/DomainJsRenderMode'
-          - type: 'null'
-        max_concurrency:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Max Concurrency
-        refresh_interval_minutes:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Refresh Interval Minutes
-        proxy_mode:
-          anyOf:
-          - $ref: '#/components/schemas/ProxyMode'
-          - type: 'null'
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-      type: object
-      required:
-      - origin
-      - js_render_mode
-      - max_concurrency
-      - refresh_interval_minutes
-      - proxy_mode
-      - created_at
-      - updated_at
-      title: DomainPolicyResponse
     FetchJsRenderMode:
       type: string
       enum:
@@ -1193,15 +1090,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    HealthResponse:
-      properties:
-        status:
-          type: string
-          title: Status
-      type: object
-      required:
-      - status
-      title: HealthResponse
     JobStatus:
       type: string
       enum:
@@ -1328,33 +1216,6 @@ components:
       - premium
       - auto
       title: ProxyMode
-    ReadinessResponse:
-      properties:
-        status:
-          type: string
-          title: Status
-        timestamp:
-          type: string
-          format: date-time
-          title: Timestamp
-        services:
-          additionalProperties:
-            type: string
-          type: object
-          title: Services
-        errors:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Errors
-      type: object
-      required:
-      - status
-      - timestamp
-      - services
-      title: ReadinessResponse
     RenderWaitUntil:
       type: string
       enum:
