@@ -20,7 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt
 from typing import Any, ClassVar, Dict, List
-from wordlift_client.models.run_response import RunResponse
+from wordlift_client.models.monitor_run_response import MonitorRunResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +28,7 @@ class ListRunsResponse(BaseModel):
     """
     ListRunsResponse
     """ # noqa: E501
-    items: List[RunResponse]
+    items: List[MonitorRunResponse]
     total: StrictInt
     limit: StrictInt
     offset: StrictInt
@@ -92,7 +92,7 @@ class ListRunsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "items": [RunResponse.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
+            "items": [MonitorRunResponse.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
             "total": obj.get("total"),
             "limit": obj.get("limit"),
             "offset": obj.get("offset")

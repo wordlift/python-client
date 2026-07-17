@@ -1,6 +1,6 @@
 # ExpectationRequest
 
-Body for ``POST /expectations``.  ``config`` is typed as ``AnyExpectationConfig`` — the extension point that will hold a union once a second check type ships. Pydantic validates the concrete shape per-field (422 on bad input). Segment attachments are managed via the dedicated ``PUT/DELETE /expectations/{e}/segments[/{s}]`` endpoints.
+Body for ``POST /expectations``. Segment attachments are managed via the dedicated ``/expectations/{e}/segments`` endpoints.
 
 ## Properties
 

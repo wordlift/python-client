@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | [**List[RunResponse]**](RunResponse.md) |  | 
+**items** | [**List[MonitorRunResponse]**](MonitorRunResponse.md) |  | 
 **total** | **int** |  | 
 **limit** | **int** |  | 
 **offset** | **int** |  | 

@@ -21,7 +21,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from wordlift_client.models.monitor_run_status import MonitorRunStatus
+from wordlift_client.models.run_status import RunStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,15 +30,21 @@ class RunResponse(BaseModel):
     RunResponse
     """ # noqa: E501
     id: StrictStr
-    status: MonitorRunStatus
-    dispatched_pages: StrictInt
-    fetched_pages: StrictInt
-    failed_fetches: StrictInt
-    checked_pages: StrictInt
-    end_at: Optional[datetime] = None
-    last_progress_at: datetime
+    account_id: StrictStr
+    account_url: Optional[StrictStr]
+    profile: StrictStr
+    status: RunStatus
+    urls_processed: StrictInt
+    entities_so_far: StrictInt
+    last_progress_at: Optional[datetime]
+    url_count: Optional[StrictInt]
+    failure_count: Optional[StrictInt]
+    started_at: Optional[datetime]
+    ended_at: Optional[datetime]
+    sdk_version: StrictStr
+    worai_version: Optional[StrictStr]
     created_at: datetime
-    __properties: ClassVar[List[str]] = ["id", "status", "dispatched_pages", "fetched_pages", "failed_fetches", "checked_pages", "end_at", "last_progress_at", "created_at"]
+    __properties: ClassVar[List[str]] = ["id", "account_id", "account_url", "profile", "status", "urls_processed", "entities_so_far", "last_progress_at", "url_count", "failure_count", "started_at", "ended_at", "sdk_version", "worai_version", "created_at"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -79,10 +85,40 @@ class RunResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if end_at (nullable) is None
+        # set to None if account_url (nullable) is None
         # and model_fields_set contains the field
-        if self.end_at is None and "end_at" in self.model_fields_set:
-            _dict['end_at'] = None
+        if self.account_url is None and "account_url" in self.model_fields_set:
+            _dict['account_url'] = None
+
+        # set to None if last_progress_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_progress_at is None and "last_progress_at" in self.model_fields_set:
+            _dict['last_progress_at'] = None
+
+        # set to None if url_count (nullable) is None
+        # and model_fields_set contains the field
+        if self.url_count is None and "url_count" in self.model_fields_set:
+            _dict['url_count'] = None
+
+        # set to None if failure_count (nullable) is None
+        # and model_fields_set contains the field
+        if self.failure_count is None and "failure_count" in self.model_fields_set:
+            _dict['failure_count'] = None
+
+        # set to None if started_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.started_at is None and "started_at" in self.model_fields_set:
+            _dict['started_at'] = None
+
+        # set to None if ended_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.ended_at is None and "ended_at" in self.model_fields_set:
+            _dict['ended_at'] = None
+
+        # set to None if worai_version (nullable) is None
+        # and model_fields_set contains the field
+        if self.worai_version is None and "worai_version" in self.model_fields_set:
+            _dict['worai_version'] = None
 
         return _dict
 
@@ -97,13 +133,19 @@ class RunResponse(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
+            "account_id": obj.get("account_id"),
+            "account_url": obj.get("account_url"),
+            "profile": obj.get("profile"),
             "status": obj.get("status"),
-            "dispatched_pages": obj.get("dispatched_pages"),
-            "fetched_pages": obj.get("fetched_pages"),
-            "failed_fetches": obj.get("failed_fetches"),
-            "checked_pages": obj.get("checked_pages"),
-            "end_at": obj.get("end_at"),
+            "urls_processed": obj.get("urls_processed"),
+            "entities_so_far": obj.get("entities_so_far"),
             "last_progress_at": obj.get("last_progress_at"),
+            "url_count": obj.get("url_count"),
+            "failure_count": obj.get("failure_count"),
+            "started_at": obj.get("started_at"),
+            "ended_at": obj.get("ended_at"),
+            "sdk_version": obj.get("sdk_version"),
+            "worai_version": obj.get("worai_version"),
             "created_at": obj.get("created_at")
         })
         return _obj

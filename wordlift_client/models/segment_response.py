@@ -20,7 +20,7 @@ import json
 
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,9 +30,10 @@ class SegmentResponse(BaseModel):
     """ # noqa: E501
     id: StrictStr
     name: StrictStr
+    description: Optional[StrictStr] = None
     created_at: datetime
     updated_at: datetime
-    __properties: ClassVar[List[str]] = ["id", "name", "created_at", "updated_at"]
+    __properties: ClassVar[List[str]] = ["id", "name", "description", "created_at", "updated_at"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,6 +74,11 @@ class SegmentResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
         return _dict
 
     @classmethod
@@ -87,6 +93,7 @@ class SegmentResponse(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "name": obj.get("name"),
+            "description": obj.get("description"),
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at")
         })

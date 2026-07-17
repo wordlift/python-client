@@ -1,6 +1,6 @@
 # MonitorCheckName
 
-Identifier of a monitor check plugin.  Mirrors the ``name`` returned by SDK monitor plugins and the ``check_name`` column on ``monitor_check_results``. Listed here for type-safety on the domain and API models that reference a check. Each value imports its string from the plugin package that owns it, so writer (this enum) and reader (the plugin's ``Monitor.name``) can't drift.
+Identifier of a monitor check plugin.  Mirrors the ``name`` reported by each ``wordlift.monitors`` entry-point plugin and the ``check_name`` column on ``monitor_check_results``. A drift-guard test asserts these values match the runtime plugin registry.
 
 ## Properties
 

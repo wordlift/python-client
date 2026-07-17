@@ -11,8 +11,6 @@ Name | Type | Description | Notes
 **automatic_synchronization** | **bool** | Whether the Merchant data will be synchronized automatically | [optional] 
 **created_at** | **datetime** | The create date-time | [optional] [readonly] 
 **custom_seller** | **str** | Custom seller entity - if applicable. | [optional] 
-**dataset_domain** | **str** | The custom domain (for example data.example.org) | [optional] 
-**dataset_name** | **str** | The dataset path (for example /data) | [optional] 
 **default_products_filter_action** | **str** | Default Products filter action to apply during sync process. | [default to 'PROCESS']
 **deleted** | **bool** | True if the merchant has been deleted | [default to False]
 **deleted_at** | **datetime** | The delete date-time | [optional] [readonly] 

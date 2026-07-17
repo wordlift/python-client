@@ -74,9 +74,13 @@ from wordlift_client.api.web_pages_imports_api import WebPagesImportsApi
 from wordlift_client.api.web_pages_api import WebPagesApi
 from wordlift_client.api.account_connector_field_controller_api import AccountConnectorFieldControllerApi
 from wordlift_client.api.account_o_auth2_connector_controller_api import AccountOAuth2ConnectorControllerApi
+from wordlift_client.api.bootstrap_api import BootstrapApi
 from wordlift_client.api.default_api import DefaultApi
+from wordlift_client.api.failures_api import FailuresApi
 from wordlift_client.api.graph_sync_controller_api import GraphSyncControllerApi
 from wordlift_client.api.jobs_api import JobsApi
+from wordlift_client.api.kpis_api import KpisApi
 from wordlift_client.api.o_auth2_connector_controller_api import OAuth2ConnectorControllerApi
+from wordlift_client.api.runs_api import RunsApi
 from wordlift_client.api.snapshots_api import SnapshotsApi
 

@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,7 +29,8 @@ class SegmentRequest(BaseModel):
     Body for ``POST /segments`` and ``PUT /segments/{id}``.
     """ # noqa: E501
     name: Annotated[str, Field(min_length=1, strict=True, max_length=200)]
-    __properties: ClassVar[List[str]] = ["name"]
+    description: Optional[Annotated[str, Field(strict=True, max_length=1000)]] = None
+    __properties: ClassVar[List[str]] = ["name", "description"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -70,6 +71,11 @@ class SegmentRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
         return _dict
 
     @classmethod
@@ -82,7 +88,8 @@ class SegmentRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "name": obj.get("name")
+            "name": obj.get("name"),
+            "description": obj.get("description")
         })
         return _obj
 

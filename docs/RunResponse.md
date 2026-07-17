@@ -6,13 +6,19 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** |  | 
-**status** | [**MonitorRunStatus**](MonitorRunStatus.md) |  | 
-**dispatched_pages** | **int** |  | 
-**fetched_pages** | **int** |  | 
-**failed_fetches** | **int** |  | 
-**checked_pages** | **int** |  | 
-**end_at** | **datetime** |  | [optional] 
+**account_id** | **str** |  | 
+**account_url** | **str** |  | 
+**profile** | **str** |  | 
+**status** | [**RunStatus**](RunStatus.md) |  | 
+**urls_processed** | **int** |  | 
+**entities_so_far** | **int** |  | 
 **last_progress_at** | **datetime** |  | 
+**url_count** | **int** |  | 
+**failure_count** | **int** |  | 
+**started_at** | **datetime** |  | 
+**ended_at** | **datetime** |  | 
+**sdk_version** | **str** |  | 
+**worai_version** | **str** |  | 
 **created_at** | **datetime** |  | 
 
 ## Example

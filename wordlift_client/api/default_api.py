@@ -23,6 +23,7 @@ from typing import List, Optional, Union
 from typing_extensions import Annotated
 from wordlift_client.models.add_resource_request import AddResourceRequest
 from wordlift_client.models.add_segment_glob_request import AddSegmentGlobRequest
+from wordlift_client.models.batch_response import BatchResponse
 from wordlift_client.models.check_timeseries_response import CheckTimeseriesResponse
 from wordlift_client.models.expectation_request import ExpectationRequest
 from wordlift_client.models.expectation_response import ExpectationResponse
@@ -33,9 +34,9 @@ from wordlift_client.models.list_runs_response import ListRunsResponse
 from wordlift_client.models.list_segment_globs_response import ListSegmentGlobsResponse
 from wordlift_client.models.list_segment_urls_response import ListSegmentUrlsResponse
 from wordlift_client.models.list_segments_response import ListSegmentsResponse
-from wordlift_client.models.monitor_health_response import MonitorHealthResponse
-from wordlift_client.models.monitor_readiness_response import MonitorReadinessResponse
+from wordlift_client.models.monitor_check_name import MonitorCheckName
 from wordlift_client.models.monitor_response import MonitorResponse
+from wordlift_client.models.monitor_run_response import MonitorRunResponse
 from wordlift_client.models.monitor_status import MonitorStatus
 from wordlift_client.models.monitor_status_check_status import MonitorStatusCheckStatus
 from wordlift_client.models.monitor_status_order_by import MonitorStatusOrderBy
@@ -43,12 +44,13 @@ from wordlift_client.models.monitor_status_response import MonitorStatusResponse
 from wordlift_client.models.replace_expectation_segments_request import ReplaceExpectationSegmentsRequest
 from wordlift_client.models.replace_monitors_request import ReplaceMonitorsRequest
 from wordlift_client.models.replace_segment_globs_request import ReplaceSegmentGlobsRequest
-from wordlift_client.models.run_response import RunResponse
 from wordlift_client.models.segment_glob_response import SegmentGlobResponse
+from wordlift_client.models.segment_order_by import SegmentOrderBy
 from wordlift_client.models.segment_request import SegmentRequest
 from wordlift_client.models.segment_response import SegmentResponse
 from wordlift_client.models.segment_url_response import SegmentUrlResponse
 from wordlift_client.models.sort_direction import SortDirection
+from wordlift_client.models.web_page_imports_batch_request import WebPageImportsBatchRequest
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
 from wordlift_client.api_response import ApiResponse
@@ -85,7 +87,7 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RunResponse:
+    ) -> MonitorRunResponse:
         """Abort Run
 
 
@@ -125,7 +127,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RunResponse",
+            '200': "MonitorRunResponse",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -156,7 +158,7 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[RunResponse]:
+    ) -> ApiResponse[MonitorRunResponse]:
         """Abort Run
 
 
@@ -196,7 +198,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RunResponse",
+            '200': "MonitorRunResponse",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -267,7 +269,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RunResponse",
+            '200': "MonitorRunResponse",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -1486,6 +1488,295 @@ class DefaultApi:
         return self.api_client.param_serialize(
             method='PUT',
             resource_path='/accounts/{account_id}/monitoring/expectations/{expectation_id}/segments/{segment_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def create_batch_account_id_web_page_import_batches_post(
+        self,
+        account_id: StrictStr,
+        web_page_imports_batch_request: WebPageImportsBatchRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> BatchResponse:
+        """Create a new batch of web page imports
+
+        Start importing a batch of URLs asynchronously into the Knowledge Graph.
+
+        :param account_id: (required)
+        :type account_id: str
+        :param web_page_imports_batch_request: (required)
+        :type web_page_imports_batch_request: WebPageImportsBatchRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_batch_account_id_web_page_import_batches_post_serialize(
+            account_id=account_id,
+            web_page_imports_batch_request=web_page_imports_batch_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '202': "BatchResponse",
+            '422': "WebPageImportsHTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def create_batch_account_id_web_page_import_batches_post_with_http_info(
+        self,
+        account_id: StrictStr,
+        web_page_imports_batch_request: WebPageImportsBatchRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[BatchResponse]:
+        """Create a new batch of web page imports
+
+        Start importing a batch of URLs asynchronously into the Knowledge Graph.
+
+        :param account_id: (required)
+        :type account_id: str
+        :param web_page_imports_batch_request: (required)
+        :type web_page_imports_batch_request: WebPageImportsBatchRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_batch_account_id_web_page_import_batches_post_serialize(
+            account_id=account_id,
+            web_page_imports_batch_request=web_page_imports_batch_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '202': "BatchResponse",
+            '422': "WebPageImportsHTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def create_batch_account_id_web_page_import_batches_post_without_preload_content(
+        self,
+        account_id: StrictStr,
+        web_page_imports_batch_request: WebPageImportsBatchRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Create a new batch of web page imports
+
+        Start importing a batch of URLs asynchronously into the Knowledge Graph.
+
+        :param account_id: (required)
+        :type account_id: str
+        :param web_page_imports_batch_request: (required)
+        :type web_page_imports_batch_request: WebPageImportsBatchRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_batch_account_id_web_page_import_batches_post_serialize(
+            account_id=account_id,
+            web_page_imports_batch_request=web_page_imports_batch_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '202': "BatchResponse",
+            '422': "WebPageImportsHTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _create_batch_account_id_web_page_import_batches_post_serialize(
+        self,
+        account_id,
+        web_page_imports_batch_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if account_id is not None:
+            _path_params['account_id'] = account_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if web_page_imports_batch_request is not None:
+            _body_params = web_page_imports_batch_request
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/{account_id}/web-page-import-batches',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3766,6 +4057,279 @@ class DefaultApi:
 
 
     @validate_call
+    async def get_batch_account_id_web_page_import_batches_batch_id_get(
+        self,
+        batch_id: StrictStr,
+        account_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> BatchResponse:
+        """Get Batch
+
+
+        :param batch_id: (required)
+        :type batch_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_batch_account_id_web_page_import_batches_batch_id_get_serialize(
+            batch_id=batch_id,
+            account_id=account_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BatchResponse",
+            '422': "WebPageImportsHTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def get_batch_account_id_web_page_import_batches_batch_id_get_with_http_info(
+        self,
+        batch_id: StrictStr,
+        account_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[BatchResponse]:
+        """Get Batch
+
+
+        :param batch_id: (required)
+        :type batch_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_batch_account_id_web_page_import_batches_batch_id_get_serialize(
+            batch_id=batch_id,
+            account_id=account_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BatchResponse",
+            '422': "WebPageImportsHTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def get_batch_account_id_web_page_import_batches_batch_id_get_without_preload_content(
+        self,
+        batch_id: StrictStr,
+        account_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Batch
+
+
+        :param batch_id: (required)
+        :type batch_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_batch_account_id_web_page_import_batches_batch_id_get_serialize(
+            batch_id=batch_id,
+            account_id=account_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BatchResponse",
+            '422': "WebPageImportsHTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_batch_account_id_web_page_import_batches_batch_id_get_serialize(
+        self,
+        batch_id,
+        account_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if batch_id is not None:
+            _path_params['batch_id'] = batch_id
+        if account_id is not None:
+            _path_params['account_id'] = account_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/{account_id}/web-page-import-batches/{batch_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     async def get_check_timeseries_accounts_account_id_monitoring_monitors_monitor_id_checks_check_name_get(
         self,
         monitor_id: StrictStr,
@@ -4975,7 +5539,7 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RunResponse:
+    ) -> MonitorRunResponse:
         """Get Run
 
 
@@ -5015,7 +5579,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RunResponse",
+            '200': "MonitorRunResponse",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -5046,7 +5610,7 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[RunResponse]:
+    ) -> ApiResponse[MonitorRunResponse]:
         """Get Run
 
 
@@ -5086,7 +5650,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RunResponse",
+            '200': "MonitorRunResponse",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -5157,7 +5721,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RunResponse",
+            '200': "MonitorRunResponse",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -5505,7 +6069,7 @@ class DefaultApi:
 
 
     @validate_call
-    async def health_health_get(
+    async def list_checks_checks_get(
         self,
         _request_timeout: Union[
             None,
@@ -5519,9 +6083,10 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> MonitorHealthResponse:
-        """Health
+    ) -> List[MonitorCheckName]:
+        """List Checks
 
+        List check identifiers — stable ids, not display labels; the UI maps them to its own labels/i18n. Deployment metadata, not tenant data, so the endpoint is unauthenticated like ``/health``.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5545,7 +6110,7 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._health_health_get_serialize(
+        _param = self._list_checks_checks_get_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5553,7 +6118,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MonitorHealthResponse",
+            '200': "List[MonitorCheckName]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5567,7 +6132,7 @@ class DefaultApi:
 
 
     @validate_call
-    async def health_health_get_with_http_info(
+    async def list_checks_checks_get_with_http_info(
         self,
         _request_timeout: Union[
             None,
@@ -5581,9 +6146,10 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[MonitorHealthResponse]:
-        """Health
+    ) -> ApiResponse[List[MonitorCheckName]]:
+        """List Checks
 
+        List check identifiers — stable ids, not display labels; the UI maps them to its own labels/i18n. Deployment metadata, not tenant data, so the endpoint is unauthenticated like ``/health``.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5607,7 +6173,7 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._health_health_get_serialize(
+        _param = self._list_checks_checks_get_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5615,7 +6181,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MonitorHealthResponse",
+            '200': "List[MonitorCheckName]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5629,7 +6195,7 @@ class DefaultApi:
 
 
     @validate_call
-    async def health_health_get_without_preload_content(
+    async def list_checks_checks_get_without_preload_content(
         self,
         _request_timeout: Union[
             None,
@@ -5644,8 +6210,9 @@ class DefaultApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Health
+        """List Checks
 
+        List check identifiers — stable ids, not display labels; the UI maps them to its own labels/i18n. Deployment metadata, not tenant data, so the endpoint is unauthenticated like ``/health``.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5669,7 +6236,7 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._health_health_get_serialize(
+        _param = self._list_checks_checks_get_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5677,7 +6244,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MonitorHealthResponse",
+            '200': "List[MonitorCheckName]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5686,7 +6253,7 @@ class DefaultApi:
         return response_data.response
 
 
-    def _health_health_get_serialize(
+    def _list_checks_checks_get_serialize(
         self,
         _request_auth,
         _content_type,
@@ -5723,11 +6290,12 @@ class DefaultApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'ApiKey'
         ]
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/health',
+            resource_path='/checks',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6057,6 +6625,8 @@ class DefaultApi:
     async def list_expectations_accounts_account_id_monitoring_expectations_get(
         self,
         account_id: StrictStr,
+        q: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring search across config entity_type and property_path.")] = None,
+        segment_id: Annotated[Optional[List[StrictStr]], Field(description="Return only expectations attached to at least one of the given segments (repeatable).")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="Maximum number of expectations to return.")] = None,
         _request_timeout: Union[
@@ -6077,6 +6647,10 @@ class DefaultApi:
 
         :param account_id: (required)
         :type account_id: str
+        :param q: Case-insensitive substring search across config entity_type and property_path.
+        :type q: str
+        :param segment_id: Return only expectations attached to at least one of the given segments (repeatable).
+        :type segment_id: List[str]
         :param cursor: Opaque pagination cursor from a previous response.
         :type cursor: str
         :param limit: Maximum number of expectations to return.
@@ -6105,6 +6679,8 @@ class DefaultApi:
 
         _param = self._list_expectations_accounts_account_id_monitoring_expectations_get_serialize(
             account_id=account_id,
+            q=q,
+            segment_id=segment_id,
             cursor=cursor,
             limit=limit,
             _request_auth=_request_auth,
@@ -6132,6 +6708,8 @@ class DefaultApi:
     async def list_expectations_accounts_account_id_monitoring_expectations_get_with_http_info(
         self,
         account_id: StrictStr,
+        q: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring search across config entity_type and property_path.")] = None,
+        segment_id: Annotated[Optional[List[StrictStr]], Field(description="Return only expectations attached to at least one of the given segments (repeatable).")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="Maximum number of expectations to return.")] = None,
         _request_timeout: Union[
@@ -6152,6 +6730,10 @@ class DefaultApi:
 
         :param account_id: (required)
         :type account_id: str
+        :param q: Case-insensitive substring search across config entity_type and property_path.
+        :type q: str
+        :param segment_id: Return only expectations attached to at least one of the given segments (repeatable).
+        :type segment_id: List[str]
         :param cursor: Opaque pagination cursor from a previous response.
         :type cursor: str
         :param limit: Maximum number of expectations to return.
@@ -6180,6 +6762,8 @@ class DefaultApi:
 
         _param = self._list_expectations_accounts_account_id_monitoring_expectations_get_serialize(
             account_id=account_id,
+            q=q,
+            segment_id=segment_id,
             cursor=cursor,
             limit=limit,
             _request_auth=_request_auth,
@@ -6207,6 +6791,8 @@ class DefaultApi:
     async def list_expectations_accounts_account_id_monitoring_expectations_get_without_preload_content(
         self,
         account_id: StrictStr,
+        q: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring search across config entity_type and property_path.")] = None,
+        segment_id: Annotated[Optional[List[StrictStr]], Field(description="Return only expectations attached to at least one of the given segments (repeatable).")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="Maximum number of expectations to return.")] = None,
         _request_timeout: Union[
@@ -6227,6 +6813,10 @@ class DefaultApi:
 
         :param account_id: (required)
         :type account_id: str
+        :param q: Case-insensitive substring search across config entity_type and property_path.
+        :type q: str
+        :param segment_id: Return only expectations attached to at least one of the given segments (repeatable).
+        :type segment_id: List[str]
         :param cursor: Opaque pagination cursor from a previous response.
         :type cursor: str
         :param limit: Maximum number of expectations to return.
@@ -6255,6 +6845,8 @@ class DefaultApi:
 
         _param = self._list_expectations_accounts_account_id_monitoring_expectations_get_serialize(
             account_id=account_id,
+            q=q,
+            segment_id=segment_id,
             cursor=cursor,
             limit=limit,
             _request_auth=_request_auth,
@@ -6277,6 +6869,8 @@ class DefaultApi:
     def _list_expectations_accounts_account_id_monitoring_expectations_get_serialize(
         self,
         account_id,
+        q,
+        segment_id,
         cursor,
         limit,
         _request_auth,
@@ -6288,6 +6882,7 @@ class DefaultApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'segment_id': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -6301,6 +6896,14 @@ class DefaultApi:
         if account_id is not None:
             _path_params['account_id'] = account_id
         # process the query parameters
+        if q is not None:
+            
+            _query_params.append(('q', q))
+            
+        if segment_id is not None:
+            
+            _query_params.append(('segment_id', segment_id))
+            
         if cursor is not None:
             
             _query_params.append(('cursor', cursor))
@@ -6745,6 +7348,7 @@ class DefaultApi:
         self,
         account_id: StrictStr,
         status: Annotated[Optional[MonitorStatus], Field(description="Filter by monitor status.")] = None,
+        segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitors whose URL is matched by the given segment's matchers.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
         offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Number of items to skip.")] = None,
         _request_timeout: Union[
@@ -6767,6 +7371,8 @@ class DefaultApi:
         :type account_id: str
         :param status: Filter by monitor status.
         :type status: MonitorStatus
+        :param segment_id: Return only monitors whose URL is matched by the given segment's matchers.
+        :type segment_id: str
         :param limit: Maximum number of items to return.
         :type limit: int
         :param offset: Number of items to skip.
@@ -6796,6 +7402,7 @@ class DefaultApi:
         _param = self._list_monitors_accounts_account_id_monitoring_monitors_get_serialize(
             account_id=account_id,
             status=status,
+            segment_id=segment_id,
             limit=limit,
             offset=offset,
             _request_auth=_request_auth,
@@ -6824,6 +7431,7 @@ class DefaultApi:
         self,
         account_id: StrictStr,
         status: Annotated[Optional[MonitorStatus], Field(description="Filter by monitor status.")] = None,
+        segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitors whose URL is matched by the given segment's matchers.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
         offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Number of items to skip.")] = None,
         _request_timeout: Union[
@@ -6846,6 +7454,8 @@ class DefaultApi:
         :type account_id: str
         :param status: Filter by monitor status.
         :type status: MonitorStatus
+        :param segment_id: Return only monitors whose URL is matched by the given segment's matchers.
+        :type segment_id: str
         :param limit: Maximum number of items to return.
         :type limit: int
         :param offset: Number of items to skip.
@@ -6875,6 +7485,7 @@ class DefaultApi:
         _param = self._list_monitors_accounts_account_id_monitoring_monitors_get_serialize(
             account_id=account_id,
             status=status,
+            segment_id=segment_id,
             limit=limit,
             offset=offset,
             _request_auth=_request_auth,
@@ -6903,6 +7514,7 @@ class DefaultApi:
         self,
         account_id: StrictStr,
         status: Annotated[Optional[MonitorStatus], Field(description="Filter by monitor status.")] = None,
+        segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitors whose URL is matched by the given segment's matchers.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
         offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Number of items to skip.")] = None,
         _request_timeout: Union[
@@ -6925,6 +7537,8 @@ class DefaultApi:
         :type account_id: str
         :param status: Filter by monitor status.
         :type status: MonitorStatus
+        :param segment_id: Return only monitors whose URL is matched by the given segment's matchers.
+        :type segment_id: str
         :param limit: Maximum number of items to return.
         :type limit: int
         :param offset: Number of items to skip.
@@ -6954,6 +7568,7 @@ class DefaultApi:
         _param = self._list_monitors_accounts_account_id_monitoring_monitors_get_serialize(
             account_id=account_id,
             status=status,
+            segment_id=segment_id,
             limit=limit,
             offset=offset,
             _request_auth=_request_auth,
@@ -6977,6 +7592,7 @@ class DefaultApi:
         self,
         account_id,
         status,
+        segment_id,
         limit,
         offset,
         _request_auth,
@@ -7004,6 +7620,10 @@ class DefaultApi:
         if status is not None:
             
             _query_params.append(('status', status.value))
+            
+        if segment_id is not None:
+            
+            _query_params.append(('segment_id', segment_id))
             
         if limit is not None:
             
@@ -7965,6 +8585,9 @@ class DefaultApi:
     async def list_segments_accounts_account_id_monitoring_segments_get(
         self,
         account_id: StrictStr,
+        q: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring search across name and description.")] = None,
+        order_by: Annotated[Optional[SegmentOrderBy], Field(description="Field to sort by.")] = None,
+        sort: Annotated[Optional[SortDirection], Field(description="Sort direction.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="Maximum number of segments to return.")] = None,
         _request_timeout: Union[
@@ -7985,6 +8608,12 @@ class DefaultApi:
 
         :param account_id: (required)
         :type account_id: str
+        :param q: Case-insensitive substring search across name and description.
+        :type q: str
+        :param order_by: Field to sort by.
+        :type order_by: SegmentOrderBy
+        :param sort: Sort direction.
+        :type sort: SortDirection
         :param cursor: Opaque pagination cursor from a previous response.
         :type cursor: str
         :param limit: Maximum number of segments to return.
@@ -8013,6 +8642,9 @@ class DefaultApi:
 
         _param = self._list_segments_accounts_account_id_monitoring_segments_get_serialize(
             account_id=account_id,
+            q=q,
+            order_by=order_by,
+            sort=sort,
             cursor=cursor,
             limit=limit,
             _request_auth=_request_auth,
@@ -8040,6 +8672,9 @@ class DefaultApi:
     async def list_segments_accounts_account_id_monitoring_segments_get_with_http_info(
         self,
         account_id: StrictStr,
+        q: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring search across name and description.")] = None,
+        order_by: Annotated[Optional[SegmentOrderBy], Field(description="Field to sort by.")] = None,
+        sort: Annotated[Optional[SortDirection], Field(description="Sort direction.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="Maximum number of segments to return.")] = None,
         _request_timeout: Union[
@@ -8060,6 +8695,12 @@ class DefaultApi:
 
         :param account_id: (required)
         :type account_id: str
+        :param q: Case-insensitive substring search across name and description.
+        :type q: str
+        :param order_by: Field to sort by.
+        :type order_by: SegmentOrderBy
+        :param sort: Sort direction.
+        :type sort: SortDirection
         :param cursor: Opaque pagination cursor from a previous response.
         :type cursor: str
         :param limit: Maximum number of segments to return.
@@ -8088,6 +8729,9 @@ class DefaultApi:
 
         _param = self._list_segments_accounts_account_id_monitoring_segments_get_serialize(
             account_id=account_id,
+            q=q,
+            order_by=order_by,
+            sort=sort,
             cursor=cursor,
             limit=limit,
             _request_auth=_request_auth,
@@ -8115,6 +8759,9 @@ class DefaultApi:
     async def list_segments_accounts_account_id_monitoring_segments_get_without_preload_content(
         self,
         account_id: StrictStr,
+        q: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring search across name and description.")] = None,
+        order_by: Annotated[Optional[SegmentOrderBy], Field(description="Field to sort by.")] = None,
+        sort: Annotated[Optional[SortDirection], Field(description="Sort direction.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="Maximum number of segments to return.")] = None,
         _request_timeout: Union[
@@ -8135,6 +8782,12 @@ class DefaultApi:
 
         :param account_id: (required)
         :type account_id: str
+        :param q: Case-insensitive substring search across name and description.
+        :type q: str
+        :param order_by: Field to sort by.
+        :type order_by: SegmentOrderBy
+        :param sort: Sort direction.
+        :type sort: SortDirection
         :param cursor: Opaque pagination cursor from a previous response.
         :type cursor: str
         :param limit: Maximum number of segments to return.
@@ -8163,6 +8816,9 @@ class DefaultApi:
 
         _param = self._list_segments_accounts_account_id_monitoring_segments_get_serialize(
             account_id=account_id,
+            q=q,
+            order_by=order_by,
+            sort=sort,
             cursor=cursor,
             limit=limit,
             _request_auth=_request_auth,
@@ -8185,6 +8841,9 @@ class DefaultApi:
     def _list_segments_accounts_account_id_monitoring_segments_get_serialize(
         self,
         account_id,
+        q,
+        order_by,
+        sort,
         cursor,
         limit,
         _request_auth,
@@ -8209,6 +8868,18 @@ class DefaultApi:
         if account_id is not None:
             _path_params['account_id'] = account_id
         # process the query parameters
+        if q is not None:
+            
+            _query_params.append(('q', q))
+            
+        if order_by is not None:
+            
+            _query_params.append(('order_by', order_by.value))
+            
+        if sort is not None:
+            
+            _query_params.append(('sort', sort.value))
+            
         if cursor is not None:
             
             _query_params.append(('cursor', cursor))
@@ -8238,248 +8909,6 @@ class DefaultApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/accounts/{account_id}/monitoring/segments',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    async def readiness_health_ready_get(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> MonitorReadinessResponse:
-        """Readiness
-
-
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._readiness_health_ready_get_serialize(
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MonitorReadinessResponse",
-            '503': "MonitorReadinessResponse",
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        await response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    async def readiness_health_ready_get_with_http_info(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[MonitorReadinessResponse]:
-        """Readiness
-
-
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._readiness_health_ready_get_serialize(
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MonitorReadinessResponse",
-            '503': "MonitorReadinessResponse",
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        await response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    async def readiness_health_ready_get_without_preload_content(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Readiness
-
-
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._readiness_health_ready_get_serialize(
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MonitorReadinessResponse",
-            '503': "MonitorReadinessResponse",
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _readiness_health_ready_get_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/health/ready',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9987,7 +10416,7 @@ class DefaultApi:
     ) -> SegmentResponse:
         """Update Segment
 
-        Replace the segment's mutable fields.
+        Replace the segment's mutable fields.  PUT replaces *every* mutable field; an omitted field is reset to its default. For ``description``, the default is ``null`` — so a body that omits ``description`` clears any existing value. Clients that want to preserve a field must send it explicitly.
 
         :param segment_id: (required)
         :type segment_id: str
@@ -10063,7 +10492,7 @@ class DefaultApi:
     ) -> ApiResponse[SegmentResponse]:
         """Update Segment
 
-        Replace the segment's mutable fields.
+        Replace the segment's mutable fields.  PUT replaces *every* mutable field; an omitted field is reset to its default. For ``description``, the default is ``null`` — so a body that omits ``description`` clears any existing value. Clients that want to preserve a field must send it explicitly.
 
         :param segment_id: (required)
         :type segment_id: str
@@ -10139,7 +10568,7 @@ class DefaultApi:
     ) -> RESTResponseType:
         """Update Segment
 
-        Replace the segment's mutable fields.
+        Replace the segment's mutable fields.  PUT replaces *every* mutable field; an omitted field is reset to its default. For ``description``, the default is ``null`` — so a body that omits ``description`` clears any existing value. Clients that want to preserve a field must send it explicitly.
 
         :param segment_id: (required)
         :type segment_id: str

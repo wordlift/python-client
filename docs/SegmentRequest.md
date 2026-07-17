@@ -7,6 +7,7 @@ Body for ``POST /segments`` and ``PUT /segments/{id}``.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | 
+**description** | **str** |  | [optional] 
 
 ## Example
 

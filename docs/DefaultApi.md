@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**add_segment_glob_accounts_account_id_monitoring_segments_segment_id_globs_post**](DefaultApi.md#add_segment_glob_accounts_account_id_monitoring_segments_segment_id_globs_post) | **POST** /accounts/{account_id}/monitoring/segments/{segment_id}/globs | Add Segment Glob
 [**add_segment_url_accounts_account_id_monitoring_segments_segment_id_urls_post**](DefaultApi.md#add_segment_url_accounts_account_id_monitoring_segments_segment_id_urls_post) | **POST** /accounts/{account_id}/monitoring/segments/{segment_id}/urls | Add Segment Url
 [**attach_expectation_segment_accounts_account_id_monitoring_expectations_expectation_id_segments_segment_id_put**](DefaultApi.md#attach_expectation_segment_accounts_account_id_monitoring_expectations_expectation_id_segments_segment_id_put) | **PUT** /accounts/{account_id}/monitoring/expectations/{expectation_id}/segments/{segment_id} | Attach Expectation Segment
+[**create_batch_account_id_web_page_import_batches_post**](DefaultApi.md#create_batch_account_id_web_page_import_batches_post) | **POST** /{account_id}/web-page-import-batches | Create a new batch of web page imports
 [**create_expectation_accounts_account_id_monitoring_expectations_post**](DefaultApi.md#create_expectation_accounts_account_id_monitoring_expectations_post) | **POST** /accounts/{account_id}/monitoring/expectations | Create Expectation
 [**create_segment_accounts_account_id_monitoring_segments_post**](DefaultApi.md#create_segment_accounts_account_id_monitoring_segments_post) | **POST** /accounts/{account_id}/monitoring/segments | Create Segment
 [**delete_expectation_accounts_account_id_monitoring_expectations_expectation_id_delete**](DefaultApi.md#delete_expectation_accounts_account_id_monitoring_expectations_expectation_id_delete) | **DELETE** /accounts/{account_id}/monitoring/expectations/{expectation_id} | Delete Expectation
@@ -17,13 +18,14 @@ Method | HTTP request | Description
 [**delete_segment_glob_accounts_account_id_monitoring_segments_segment_id_globs_glob_id_delete**](DefaultApi.md#delete_segment_glob_accounts_account_id_monitoring_segments_segment_id_globs_glob_id_delete) | **DELETE** /accounts/{account_id}/monitoring/segments/{segment_id}/globs/{glob_id} | Delete Segment Glob
 [**delete_segment_url_accounts_account_id_monitoring_segments_segment_id_urls_url_id_delete**](DefaultApi.md#delete_segment_url_accounts_account_id_monitoring_segments_segment_id_urls_url_id_delete) | **DELETE** /accounts/{account_id}/monitoring/segments/{segment_id}/urls/{url_id} | Delete Segment Url
 [**detach_expectation_segment_accounts_account_id_monitoring_expectations_expectation_id_segments_segment_id_delete**](DefaultApi.md#detach_expectation_segment_accounts_account_id_monitoring_expectations_expectation_id_segments_segment_id_delete) | **DELETE** /accounts/{account_id}/monitoring/expectations/{expectation_id}/segments/{segment_id} | Detach Expectation Segment
+[**get_batch_account_id_web_page_import_batches_batch_id_get**](DefaultApi.md#get_batch_account_id_web_page_import_batches_batch_id_get) | **GET** /{account_id}/web-page-import-batches/{batch_id} | Get Batch
 [**get_check_timeseries_accounts_account_id_monitoring_monitors_monitor_id_checks_check_name_get**](DefaultApi.md#get_check_timeseries_accounts_account_id_monitoring_monitors_monitor_id_checks_check_name_get) | **GET** /accounts/{account_id}/monitoring/monitors/{monitor_id}/checks/{check_name} | Get Check Timeseries
 [**get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get**](DefaultApi.md#get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get) | **GET** /accounts/{account_id}/monitoring/expectations/{expectation_id} | Get Expectation
 [**get_monitor_accounts_account_id_monitoring_monitors_monitor_id_get**](DefaultApi.md#get_monitor_accounts_account_id_monitoring_monitors_monitor_id_get) | **GET** /accounts/{account_id}/monitoring/monitors/{monitor_id} | Get Monitor
 [**get_monitor_status_accounts_account_id_monitoring_monitors_monitor_id_status_get**](DefaultApi.md#get_monitor_status_accounts_account_id_monitoring_monitors_monitor_id_status_get) | **GET** /accounts/{account_id}/monitoring/monitors/{monitor_id}/status | Get Monitor Status
 [**get_run_accounts_account_id_monitoring_runs_run_id_get**](DefaultApi.md#get_run_accounts_account_id_monitoring_runs_run_id_get) | **GET** /accounts/{account_id}/monitoring/runs/{run_id} | Get Run
 [**get_segment_accounts_account_id_monitoring_segments_segment_id_get**](DefaultApi.md#get_segment_accounts_account_id_monitoring_segments_segment_id_get) | **GET** /accounts/{account_id}/monitoring/segments/{segment_id} | Get Segment
-[**health_health_get**](DefaultApi.md#health_health_get) | **GET** /health | Health
+[**list_checks_checks_get**](DefaultApi.md#list_checks_checks_get) | **GET** /checks | List Checks
 [**list_expectation_segments_accounts_account_id_monitoring_expectations_expectation_id_segments_get**](DefaultApi.md#list_expectation_segments_accounts_account_id_monitoring_expectations_expectation_id_segments_get) | **GET** /accounts/{account_id}/monitoring/expectations/{expectation_id}/segments | List Expectation Segments
 [**list_expectations_accounts_account_id_monitoring_expectations_get**](DefaultApi.md#list_expectations_accounts_account_id_monitoring_expectations_get) | **GET** /accounts/{account_id}/monitoring/expectations | List Expectations
 [**list_monitor_statuses_accounts_account_id_monitoring_status_get**](DefaultApi.md#list_monitor_statuses_accounts_account_id_monitoring_status_get) | **GET** /accounts/{account_id}/monitoring/status | List Monitor Statuses
@@ -32,7 +34,6 @@ Method | HTTP request | Description
 [**list_segment_globs_accounts_account_id_monitoring_segments_segment_id_globs_get**](DefaultApi.md#list_segment_globs_accounts_account_id_monitoring_segments_segment_id_globs_get) | **GET** /accounts/{account_id}/monitoring/segments/{segment_id}/globs | List Segment Globs
 [**list_segment_urls_accounts_account_id_monitoring_segments_segment_id_urls_get**](DefaultApi.md#list_segment_urls_accounts_account_id_monitoring_segments_segment_id_urls_get) | **GET** /accounts/{account_id}/monitoring/segments/{segment_id}/urls | List Segment Urls
 [**list_segments_accounts_account_id_monitoring_segments_get**](DefaultApi.md#list_segments_accounts_account_id_monitoring_segments_get) | **GET** /accounts/{account_id}/monitoring/segments | List Segments
-[**readiness_health_ready_get**](DefaultApi.md#readiness_health_ready_get) | **GET** /health/ready | Readiness
 [**replace_expectation_segments_accounts_account_id_monitoring_expectations_expectation_id_segments_put**](DefaultApi.md#replace_expectation_segments_accounts_account_id_monitoring_expectations_expectation_id_segments_put) | **PUT** /accounts/{account_id}/monitoring/expectations/{expectation_id}/segments | Replace Expectation Segments
 [**replace_monitors_accounts_account_id_monitoring_monitors_put**](DefaultApi.md#replace_monitors_accounts_account_id_monitoring_monitors_put) | **PUT** /accounts/{account_id}/monitoring/monitors | Replace Monitors
 [**replace_segment_globs_accounts_account_id_monitoring_segments_segment_id_globs_put**](DefaultApi.md#replace_segment_globs_accounts_account_id_monitoring_segments_segment_id_globs_put) | **PUT** /accounts/{account_id}/monitoring/segments/{segment_id}/globs | Replace Segment Globs
@@ -42,7 +43,7 @@ Method | HTTP request | Description
 
 
 # **abort_run_accounts_account_id_monitoring_runs_run_id_delete**
-> RunResponse abort_run_accounts_account_id_monitoring_runs_run_id_delete(run_id, account_id)
+> MonitorRunResponse abort_run_accounts_account_id_monitoring_runs_run_id_delete(run_id, account_id)
 
 Abort Run
 
@@ -52,7 +53,7 @@ Abort Run
 
 ```python
 import wordlift_client
-from wordlift_client.models.run_response import RunResponse
+from wordlift_client.models.monitor_run_response import MonitorRunResponse
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -101,7 +102,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RunResponse**](RunResponse.md)
+[**MonitorRunResponse**](MonitorRunResponse.md)
 
 ### Authorization
 
@@ -451,6 +452,89 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_batch_account_id_web_page_import_batches_post**
+> BatchResponse create_batch_account_id_web_page_import_batches_post(account_id, web_page_imports_batch_request)
+
+Create a new batch of web page imports
+
+Start importing a batch of URLs asynchronously into the Knowledge Graph.
+
+### Example
+
+* Api Key Authentication (ApiKey):
+
+```python
+import wordlift_client
+from wordlift_client.models.batch_response import BatchResponse
+from wordlift_client.models.web_page_imports_batch_request import WebPageImportsBatchRequest
+from wordlift_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.wordlift.io
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wordlift_client.Configuration(
+    host = "https://api.wordlift.io"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with wordlift_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wordlift_client.DefaultApi(api_client)
+    account_id = 'account_id_example' # str | 
+    web_page_imports_batch_request = wordlift_client.WebPageImportsBatchRequest() # WebPageImportsBatchRequest | 
+
+    try:
+        # Create a new batch of web page imports
+        api_response = await api_instance.create_batch_account_id_web_page_import_batches_post(account_id, web_page_imports_batch_request)
+        print("The response of DefaultApi->create_batch_account_id_web_page_import_batches_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->create_batch_account_id_web_page_import_batches_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **account_id** | **str**|  | 
+ **web_page_imports_batch_request** | [**WebPageImportsBatchRequest**](WebPageImportsBatchRequest.md)|  | 
+
+### Return type
+
+[**BatchResponse**](BatchResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1091,6 +1175,86 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_batch_account_id_web_page_import_batches_batch_id_get**
+> BatchResponse get_batch_account_id_web_page_import_batches_batch_id_get(batch_id, account_id)
+
+Get Batch
+
+### Example
+
+* Api Key Authentication (ApiKey):
+
+```python
+import wordlift_client
+from wordlift_client.models.batch_response import BatchResponse
+from wordlift_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.wordlift.io
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wordlift_client.Configuration(
+    host = "https://api.wordlift.io"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with wordlift_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wordlift_client.DefaultApi(api_client)
+    batch_id = 'batch_id_example' # str | 
+    account_id = 'account_id_example' # str | 
+
+    try:
+        # Get Batch
+        api_response = await api_instance.get_batch_account_id_web_page_import_batches_batch_id_get(batch_id, account_id)
+        print("The response of DefaultApi->get_batch_account_id_web_page_import_batches_batch_id_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_batch_account_id_web_page_import_batches_batch_id_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **batch_id** | **str**|  | 
+ **account_id** | **str**|  | 
+
+### Return type
+
+[**BatchResponse**](BatchResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_check_timeseries_accounts_account_id_monitoring_monitors_monitor_id_checks_check_name_get**
 > CheckTimeseriesResponse get_check_timeseries_accounts_account_id_monitoring_monitors_monitor_id_checks_check_name_get(monitor_id, check_name, account_id, since=since, to=to, limit=limit, sort=sort)
 
@@ -1423,7 +1587,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_run_accounts_account_id_monitoring_runs_run_id_get**
-> RunResponse get_run_accounts_account_id_monitoring_runs_run_id_get(run_id, account_id)
+> MonitorRunResponse get_run_accounts_account_id_monitoring_runs_run_id_get(run_id, account_id)
 
 Get Run
 
@@ -1433,7 +1597,7 @@ Get Run
 
 ```python
 import wordlift_client
-from wordlift_client.models.run_response import RunResponse
+from wordlift_client.models.monitor_run_response import MonitorRunResponse
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -1482,7 +1646,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RunResponse**](RunResponse.md)
+[**MonitorRunResponse**](MonitorRunResponse.md)
 
 ### Authorization
 
@@ -1582,17 +1746,20 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **health_health_get**
-> MonitorHealthResponse health_health_get()
+# **list_checks_checks_get**
+> List[MonitorCheckName] list_checks_checks_get()
 
-Health
+List Checks
+
+List check identifiers — stable ids, not display labels; the UI maps them to its own labels/i18n. Deployment metadata, not tenant data, so the endpoint is unauthenticated like ``/health``.
 
 ### Example
 
+* Api Key Authentication (ApiKey):
 
 ```python
 import wordlift_client
-from wordlift_client.models.monitor_health_response import MonitorHealthResponse
+from wordlift_client.models.monitor_check_name import MonitorCheckName
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -1602,6 +1769,16 @@ configuration = wordlift_client.Configuration(
     host = "https://api.wordlift.io"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with wordlift_client.ApiClient(configuration) as api_client:
@@ -1609,12 +1786,12 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     api_instance = wordlift_client.DefaultApi(api_client)
 
     try:
-        # Health
-        api_response = await api_instance.health_health_get()
-        print("The response of DefaultApi->health_health_get:\n")
+        # List Checks
+        api_response = await api_instance.list_checks_checks_get()
+        print("The response of DefaultApi->list_checks_checks_get:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DefaultApi->health_health_get: %s\n" % e)
+        print("Exception when calling DefaultApi->list_checks_checks_get: %s\n" % e)
 ```
 
 
@@ -1625,11 +1802,11 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**MonitorHealthResponse**](MonitorHealthResponse.md)
+[**List[MonitorCheckName]**](MonitorCheckName.md)
 
 ### Authorization
 
-No authorization required
+[ApiKey](../README.md#ApiKey)
 
 ### HTTP request headers
 
@@ -1731,7 +1908,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_expectations_accounts_account_id_monitoring_expectations_get**
-> ListExpectationsResponse list_expectations_accounts_account_id_monitoring_expectations_get(account_id, cursor=cursor, limit=limit)
+> ListExpectationsResponse list_expectations_accounts_account_id_monitoring_expectations_get(account_id, q=q, segment_id=segment_id, cursor=cursor, limit=limit)
 
 List Expectations
 
@@ -1767,12 +1944,14 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.DefaultApi(api_client)
     account_id = 'account_id_example' # str | 
+    q = 'q_example' # str | Case-insensitive substring search across config entity_type and property_path. (optional)
+    segment_id = ['segment_id_example'] # List[str] | Return only expectations attached to at least one of the given segments (repeatable). (optional)
     cursor = 'cursor_example' # str | Opaque pagination cursor from a previous response. (optional)
     limit = 50 # int | Maximum number of expectations to return. (optional) (default to 50)
 
     try:
         # List Expectations
-        api_response = await api_instance.list_expectations_accounts_account_id_monitoring_expectations_get(account_id, cursor=cursor, limit=limit)
+        api_response = await api_instance.list_expectations_accounts_account_id_monitoring_expectations_get(account_id, q=q, segment_id=segment_id, cursor=cursor, limit=limit)
         print("The response of DefaultApi->list_expectations_accounts_account_id_monitoring_expectations_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -1787,6 +1966,8 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **account_id** | **str**|  | 
+ **q** | **str**| Case-insensitive substring search across config entity_type and property_path. | [optional] 
+ **segment_id** | [**List[str]**](str.md)| Return only expectations attached to at least one of the given segments (repeatable). | [optional] 
  **cursor** | **str**| Opaque pagination cursor from a previous response. | [optional] 
  **limit** | **int**| Maximum number of expectations to return. | [optional] [default to 50]
 
@@ -1910,7 +2091,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_monitors_accounts_account_id_monitoring_monitors_get**
-> ListMonitorsResponse list_monitors_accounts_account_id_monitoring_monitors_get(account_id, status=status, limit=limit, offset=offset)
+> ListMonitorsResponse list_monitors_accounts_account_id_monitoring_monitors_get(account_id, status=status, segment_id=segment_id, limit=limit, offset=offset)
 
 List Monitors
 
@@ -1948,12 +2129,13 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     api_instance = wordlift_client.DefaultApi(api_client)
     account_id = 'account_id_example' # str | 
     status = wordlift_client.MonitorStatus() # MonitorStatus | Filter by monitor status. (optional)
+    segment_id = 'segment_id_example' # str | Return only monitors whose URL is matched by the given segment's matchers. (optional)
     limit = 100 # int | Maximum number of items to return. (optional) (default to 100)
     offset = 0 # int | Number of items to skip. (optional) (default to 0)
 
     try:
         # List Monitors
-        api_response = await api_instance.list_monitors_accounts_account_id_monitoring_monitors_get(account_id, status=status, limit=limit, offset=offset)
+        api_response = await api_instance.list_monitors_accounts_account_id_monitoring_monitors_get(account_id, status=status, segment_id=segment_id, limit=limit, offset=offset)
         print("The response of DefaultApi->list_monitors_accounts_account_id_monitoring_monitors_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -1969,6 +2151,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **account_id** | **str**|  | 
  **status** | [**MonitorStatus**](.md)| Filter by monitor status. | [optional] 
+ **segment_id** | **str**| Return only monitors whose URL is matched by the given segment&#39;s matchers. | [optional] 
  **limit** | **int**| Maximum number of items to return. | [optional] [default to 100]
  **offset** | **int**| Number of items to skip. | [optional] [default to 0]
 
@@ -2249,7 +2432,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_segments_accounts_account_id_monitoring_segments_get**
-> ListSegmentsResponse list_segments_accounts_account_id_monitoring_segments_get(account_id, cursor=cursor, limit=limit)
+> ListSegmentsResponse list_segments_accounts_account_id_monitoring_segments_get(account_id, q=q, order_by=order_by, sort=sort, cursor=cursor, limit=limit)
 
 List Segments
 
@@ -2260,6 +2443,8 @@ List Segments
 ```python
 import wordlift_client
 from wordlift_client.models.list_segments_response import ListSegmentsResponse
+from wordlift_client.models.segment_order_by import SegmentOrderBy
+from wordlift_client.models.sort_direction import SortDirection
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -2285,12 +2470,15 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.DefaultApi(api_client)
     account_id = 'account_id_example' # str | 
+    q = 'q_example' # str | Case-insensitive substring search across name and description. (optional)
+    order_by = wordlift_client.SegmentOrderBy() # SegmentOrderBy | Field to sort by. (optional)
+    sort = wordlift_client.SortDirection() # SortDirection | Sort direction. (optional)
     cursor = 'cursor_example' # str | Opaque pagination cursor from a previous response. (optional)
     limit = 50 # int | Maximum number of segments to return. (optional) (default to 50)
 
     try:
         # List Segments
-        api_response = await api_instance.list_segments_accounts_account_id_monitoring_segments_get(account_id, cursor=cursor, limit=limit)
+        api_response = await api_instance.list_segments_accounts_account_id_monitoring_segments_get(account_id, q=q, order_by=order_by, sort=sort, cursor=cursor, limit=limit)
         print("The response of DefaultApi->list_segments_accounts_account_id_monitoring_segments_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -2305,6 +2493,9 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **account_id** | **str**|  | 
+ **q** | **str**| Case-insensitive substring search across name and description. | [optional] 
+ **order_by** | [**SegmentOrderBy**](.md)| Field to sort by. | [optional] 
+ **sort** | [**SortDirection**](.md)| Sort direction. | [optional] 
  **cursor** | **str**| Opaque pagination cursor from a previous response. | [optional] 
  **limit** | **int**| Maximum number of segments to return. | [optional] [default to 50]
 
@@ -2327,69 +2518,6 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **readiness_health_ready_get**
-> MonitorReadinessResponse readiness_health_ready_get()
-
-Readiness
-
-### Example
-
-
-```python
-import wordlift_client
-from wordlift_client.models.monitor_readiness_response import MonitorReadinessResponse
-from wordlift_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.wordlift.io
-# See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
-)
-
-
-# Enter a context with an instance of the API client
-async with wordlift_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = wordlift_client.DefaultApi(api_client)
-
-    try:
-        # Readiness
-        api_response = await api_instance.readiness_health_ready_get()
-        print("The response of DefaultApi->readiness_health_ready_get:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DefaultApi->readiness_health_ready_get: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**MonitorReadinessResponse**](MonitorReadinessResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**503** | Service Unavailable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2814,7 +2942,7 @@ Name | Type | Description  | Notes
 
 Update Segment
 
-Replace the segment's mutable fields.
+Replace the segment's mutable fields.  PUT replaces *every* mutable field; an omitted field is reset to its default. For ``description``, the default is ``null`` — so a body that omits ``description`` clears any existing value. Clients that want to preserve a field must send it explicitly.
 
 ### Example
 

@@ -8,12 +8,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **access_token** | **str** | Google Merchant access token | [optional] 
 **account_id** | **int** | The Knowledge Graph to use for the Merchant. Please note that the Knowledge Graph will be reset. When not provided, this method will use the first available Knowledge Graph. | [optional] 
-**dataset_domain** | **str** | The custom domain (for example data.example.org) | [optional] 
-**dataset_name** | **str** | The dataset path (for example \&quot;data\&quot;) | [optional] 
-**deleted** | **bool** | True if the merchant has been deleted | [optional] [default to False]
+**deleted** | **bool** | True if the merchant has been deleted. When omitted on an update, the existing value is preserved. | [optional] [default to False]
 **google_merchant_id** | **int** | The Google Merchant id | 
-**ignore_brand** | **bool** | Whether to ignore the &#x60;brand&#x60; property during validation | [optional] 
-**ignore_image** | **bool** | Whether to ignore the &#x60;image&#x60; property during validation | [optional] 
+**ignore_brand** | **bool** | Whether to ignore the &#x60;brand&#x60; property during validation. When omitted on an update, the existing value is preserved. | [optional] 
+**ignore_image** | **bool** | Whether to ignore the &#x60;image&#x60; property during validation. When omitted on an update, the existing value is preserved. | [optional] 
 **publisher_name** | **str** | The publisher name (shows in schema publisher) | 
 **refresh_token** | **str** | Google Merchant refresh token | 
 **url** | **str** | The website URL | 
