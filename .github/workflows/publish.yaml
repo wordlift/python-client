@@ -25,10 +25,11 @@ jobs:
         with:
           node-version: "20" # Specify the Node.js version to use
 
-      # Step 3: Install openapi-merge-cli and openapi-generator-cli
+      # Step 3: Install openapi-merge-cli, openapi-down-convert and openapi-generator-cli
       - name: Install openapi-merge-cli
         run: |
           npm i openapi-merge-cli ajv uri-js
+          npm i @apiture/openapi-down-convert@^0.14.2
           npm i @openapitools/openapi-generator-cli@~2.20.2
 
       # Step 4: Set up Python
@@ -59,6 +60,11 @@ jobs:
       # Step 8: Merge the YAML files
       - name: Merge the yaml files
         run: npx openapi-merge-cli --config ./openapi-merge.json
+
+      # Step 8b: Down-convert any OAS 3.1-only constructs (openapi-merge always declares
+      # 3.0.3 regardless of input, so source specs written for 3.1 need this to stay valid)
+      - name: Down-convert OpenAPI 3.1 constructs to 3.0
+        run: npx openapi-down-convert --input ./wordliftApiSpec.yaml --output ./wordliftApiSpec.yaml
 
       # Step 9: Normalize security scheme aliases in the merged spec
       - name: Normalize security scheme aliases
