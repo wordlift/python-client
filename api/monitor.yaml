@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.6.8
+  version: 2.6.9
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -1476,15 +1476,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    HealthResponse:
-      properties:
-        status:
-          type: string
-          title: Status
-      type: object
-      required:
-      - status
-      title: HealthResponse
     ListExpectationsResponse:
       properties:
         items:
@@ -1777,33 +1768,6 @@ components:
       - url
       - status
       title: MonitorStatusResponse
-    ReadinessResponse:
-      properties:
-        status:
-          type: string
-          title: Status
-        timestamp:
-          type: string
-          format: date-time
-          title: Timestamp
-        services:
-          additionalProperties:
-            type: string
-          type: object
-          title: Services
-        errors:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Errors
-      type: object
-      required:
-      - status
-      - timestamp
-      - services
-      title: ReadinessResponse
     ReplaceExpectationSegmentsRequest:
       properties:
         segment_ids:
