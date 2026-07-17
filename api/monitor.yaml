@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.6.9
+  version: 2.7.0
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -70,6 +70,18 @@ paths:
           description: Filter by monitor status.
           default: active
         description: Filter by monitor status.
+      - name: segment_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Return only monitors whose URL is matched by the given segment's
+            matchers.
+          title: Segment Id
+        description: Return only monitors whose URL is matched by the given segment's
+          matchers.
       - name: limit
         in: query
         required: false
@@ -417,6 +429,32 @@ paths:
         schema:
           type: string
           title: Account Id
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Case-insensitive substring search across name and description.
+          title: Q
+        description: Case-insensitive substring search across name and description.
+      - name: order_by
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/SegmentOrderBy'
+          description: Field to sort by.
+          default: created_at
+        description: Field to sort by.
+      - name: sort
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/SortDirection'
+          description: Sort direction.
+          default: asc
+        description: Sort direction.
       - name: cursor
         in: query
         required: false
@@ -483,7 +521,11 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     put:
       summary: Update Segment
-      description: Replace the segment's mutable fields.
+      description: "Replace the segment's mutable fields.\n\nPUT replaces *every*\
+        \ mutable field; an omitted field is reset to its\ndefault. For ``description``,\
+        \ the default is ``null`` \u2014 so a body\nthat omits ``description`` clears\
+        \ any existing value. Clients that\nwant to preserve a field must send it\
+        \ explicitly."
       operationId: update_segment_accounts__account_id__monitoring_segments__segment_id__put
       parameters:
       - name: segment_id
@@ -891,6 +933,32 @@ paths:
         schema:
           type: string
           title: Account Id
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Case-insensitive substring search across config entity_type
+            and property_path.
+          title: Q
+        description: Case-insensitive substring search across config entity_type and
+          property_path.
+      - name: segment_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Return only expectations attached to at least one of the given
+            segments (repeatable).
+          title: Segment Id
+        description: Return only expectations attached to at least one of the given
+          segments (repeatable).
       - name: cursor
         in: query
         required: false
@@ -1143,6 +1211,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /checks:
+    get:
+      summary: List Checks
+      description: "List check identifiers \u2014 stable ids, not display labels;\
+        \ the UI maps\nthem to its own labels/i18n. Deployment metadata, not tenant\
+        \ data, so the\nendpoint is unauthenticated like ``/health``."
+      operationId: list_checks_checks_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/MonitorCheckName'
+                type: array
+                title: Response List Checks Checks Get
   /accounts/{account_id}/monitoring/status:
     get:
       summary: List Monitor Statuses
@@ -1433,11 +1518,10 @@ components:
       - severity
       - config
       title: ExpectationRequest
-      description: "Body for ``POST /expectations``.\n\n``config`` is typed as ``AnyExpectationConfig``\
-        \ \u2014 the extension point\nthat will hold a union once a second check type\
-        \ ships. Pydantic\nvalidates the concrete shape per-field (422 on bad input).\
-        \ Segment\nattachments are managed via the dedicated\n``PUT/DELETE /expectations/{e}/segments[/{s}]``\
-        \ endpoints."
+      description: 'Body for ``POST /expectations``. Segment attachments are managed
+        via
+
+        the dedicated ``/expectations/{e}/segments`` endpoints.'
     ExpectationResponse:
       properties:
         id:
@@ -1630,21 +1714,23 @@ components:
       type: string
       enum:
       - structured_data_check
+      - title_check
+      - canonical_check
+      - page_meta_check
+      - status_check
+      - performance_check
+      - robots_check
+      - resource_404_check
+      - wordlift_bootstrap_check
       title: MonitorCheckName
       description: 'Identifier of a monitor check plugin.
 
 
-        Mirrors the ``name`` returned by SDK monitor plugins and the
+        Mirrors the ``name`` reported by each ``wordlift.monitors`` entry-point
 
-        ``check_name`` column on ``monitor_check_results``. Listed here for
+        plugin and the ``check_name`` column on ``monitor_check_results``. A
 
-        type-safety on the domain and API models that reference a check.
-
-        Each value imports its string from the plugin package that owns it,
-
-        so writer (this enum) and reader (the plugin''s ``Monitor.name``) can''t
-
-        drift.'
+        drift-guard test asserts these values match the runtime plugin registry.'
     MonitorResponse:
       properties:
         id:
@@ -1866,6 +1952,12 @@ components:
       - pattern
       - created_at
       title: SegmentGlobResponse
+    SegmentOrderBy:
+      type: string
+      enum:
+      - created_at
+      - name
+      title: SegmentOrderBy
     SegmentRequest:
       properties:
         name:
@@ -1873,6 +1965,12 @@ components:
           maxLength: 200
           minLength: 1
           title: Name
+        description:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Description
       type: object
       required:
       - name
@@ -1886,6 +1984,11 @@ components:
         name:
           type: string
           title: Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
         created_at:
           type: string
           format: date-time
