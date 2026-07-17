@@ -1000,50 +1000,6 @@ paths:
           description: OK
       tags:
       - graph-sync-controller
-  /accounts/{account_id}/graph-sync/runs:
-    post:
-      operationId: run
-      parameters:
-      - in: path
-        name: account_id
-        required: true
-        schema:
-          type: integer
-          format: int64
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GraphSyncRunRequest'
-      responses:
-        "202":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/GraphSyncRunResponse'
-          description: Accepted
-      tags:
-      - graph-sync-controller
-  /accounts/{account_id}/graph-sync/runs/{run_id}:
-    delete:
-      operationId: cancel
-      parameters:
-      - in: path
-        name: account_id
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - in: path
-        name: run_id
-        required: true
-        schema:
-          type: string
-      responses:
-        "204":
-          description: No Content
-      tags:
-      - graph-sync-controller
   /accounts/{account_id}/oauth2/connectors/{connector_id}/authorization:
     delete:
       operationId: deleteAuthorization
@@ -3519,20 +3475,6 @@ components:
         project_url:
           type: string
         repository_name:
-          type: string
-    GraphSyncRunRequest:
-      type: object
-      properties:
-        profile_name:
-          type: string
-    GraphSyncRunResponse:
-      type: object
-      properties:
-        run_id:
-          type: string
-        status:
-          type: string
-        url:
           type: string
     IncludeExclude:
       type: object
