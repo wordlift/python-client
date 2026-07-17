@@ -23,3 +23,7 @@
 #!docs/README.md
 
 .gitignore
+
+# Hand-maintained: the generator's default matrix includes EOL Python 3.7, which
+# GitHub-hosted Ubuntu runners no longer ship (Ubuntu 24.04 has no 3.7 build).
+.github/workflows/python.yml
