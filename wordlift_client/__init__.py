@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.184.0"
+__version__ = "1.185.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -122,6 +122,7 @@ from wordlift_client.models.active_account import ActiveAccount
 from wordlift_client.models.add_on_configuration import AddOnConfiguration
 from wordlift_client.models.add_resource_request import AddResourceRequest
 from wordlift_client.models.add_segment_glob_request import AddSegmentGlobRequest
+from wordlift_client.models.add_segment_url_request import AddSegmentUrlRequest
 from wordlift_client.models.ai_visibility_audits_http_validation_error import AiVisibilityAuditsHTTPValidationError
 from wordlift_client.models.ai_visibility_audits_validation_error import AiVisibilityAuditsValidationError
 from wordlift_client.models.analyses_request import AnalysesRequest
@@ -344,6 +345,7 @@ from wordlift_client.models.replace_expectation_segments_request import ReplaceE
 from wordlift_client.models.replace_monitor_item import ReplaceMonitorItem
 from wordlift_client.models.replace_monitors_request import ReplaceMonitorsRequest
 from wordlift_client.models.replace_segment_globs_request import ReplaceSegmentGlobsRequest
+from wordlift_client.models.replace_segment_urls_request import ReplaceSegmentUrlsRequest
 from wordlift_client.models.request import Request
 from wordlift_client.models.reset_account_request import ResetAccountRequest
 from wordlift_client.models.resource_type import ResourceType

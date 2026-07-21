@@ -23,6 +23,7 @@ from typing import List, Optional, Union
 from typing_extensions import Annotated
 from wordlift_client.models.add_resource_request import AddResourceRequest
 from wordlift_client.models.add_segment_glob_request import AddSegmentGlobRequest
+from wordlift_client.models.add_segment_url_request import AddSegmentUrlRequest
 from wordlift_client.models.batch_response import BatchResponse
 from wordlift_client.models.check_timeseries_response import CheckTimeseriesResponse
 from wordlift_client.models.expectation_request import ExpectationRequest
@@ -44,6 +45,7 @@ from wordlift_client.models.monitor_status_response import MonitorStatusResponse
 from wordlift_client.models.replace_expectation_segments_request import ReplaceExpectationSegmentsRequest
 from wordlift_client.models.replace_monitors_request import ReplaceMonitorsRequest
 from wordlift_client.models.replace_segment_globs_request import ReplaceSegmentGlobsRequest
+from wordlift_client.models.replace_segment_urls_request import ReplaceSegmentUrlsRequest
 from wordlift_client.models.segment_glob_response import SegmentGlobResponse
 from wordlift_client.models.segment_order_by import SegmentOrderBy
 from wordlift_client.models.segment_request import SegmentRequest
@@ -941,6 +943,7 @@ class DefaultApi:
         self,
         segment_id: StrictStr,
         account_id: StrictStr,
+        add_segment_url_request: AddSegmentUrlRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -962,6 +965,8 @@ class DefaultApi:
         :type segment_id: str
         :param account_id: (required)
         :type account_id: str
+        :param add_segment_url_request: (required)
+        :type add_segment_url_request: AddSegmentUrlRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -987,6 +992,7 @@ class DefaultApi:
         _param = self._add_segment_url_accounts_account_id_monitoring_segments_segment_id_urls_post_serialize(
             segment_id=segment_id,
             account_id=account_id,
+            add_segment_url_request=add_segment_url_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1013,6 +1019,7 @@ class DefaultApi:
         self,
         segment_id: StrictStr,
         account_id: StrictStr,
+        add_segment_url_request: AddSegmentUrlRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1034,6 +1041,8 @@ class DefaultApi:
         :type segment_id: str
         :param account_id: (required)
         :type account_id: str
+        :param add_segment_url_request: (required)
+        :type add_segment_url_request: AddSegmentUrlRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1059,6 +1068,7 @@ class DefaultApi:
         _param = self._add_segment_url_accounts_account_id_monitoring_segments_segment_id_urls_post_serialize(
             segment_id=segment_id,
             account_id=account_id,
+            add_segment_url_request=add_segment_url_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1085,6 +1095,7 @@ class DefaultApi:
         self,
         segment_id: StrictStr,
         account_id: StrictStr,
+        add_segment_url_request: AddSegmentUrlRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1106,6 +1117,8 @@ class DefaultApi:
         :type segment_id: str
         :param account_id: (required)
         :type account_id: str
+        :param add_segment_url_request: (required)
+        :type add_segment_url_request: AddSegmentUrlRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1131,6 +1144,7 @@ class DefaultApi:
         _param = self._add_segment_url_accounts_account_id_monitoring_segments_segment_id_urls_post_serialize(
             segment_id=segment_id,
             account_id=account_id,
+            add_segment_url_request=add_segment_url_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1152,6 +1166,7 @@ class DefaultApi:
         self,
         segment_id,
         account_id,
+        add_segment_url_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1179,6 +1194,8 @@ class DefaultApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
+        if add_segment_url_request is not None:
+            _body_params = add_segment_url_request
 
 
         # set the HTTP header `Accept`
@@ -1188,6 +1205,19 @@ class DefaultApi:
             ]
         )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -9823,6 +9853,7 @@ class DefaultApi:
         self,
         segment_id: StrictStr,
         account_id: StrictStr,
+        replace_segment_urls_request: ReplaceSegmentUrlsRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9844,6 +9875,8 @@ class DefaultApi:
         :type segment_id: str
         :param account_id: (required)
         :type account_id: str
+        :param replace_segment_urls_request: (required)
+        :type replace_segment_urls_request: ReplaceSegmentUrlsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9869,6 +9902,7 @@ class DefaultApi:
         _param = self._replace_segment_urls_accounts_account_id_monitoring_segments_segment_id_urls_put_serialize(
             segment_id=segment_id,
             account_id=account_id,
+            replace_segment_urls_request=replace_segment_urls_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9895,6 +9929,7 @@ class DefaultApi:
         self,
         segment_id: StrictStr,
         account_id: StrictStr,
+        replace_segment_urls_request: ReplaceSegmentUrlsRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9916,6 +9951,8 @@ class DefaultApi:
         :type segment_id: str
         :param account_id: (required)
         :type account_id: str
+        :param replace_segment_urls_request: (required)
+        :type replace_segment_urls_request: ReplaceSegmentUrlsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9941,6 +9978,7 @@ class DefaultApi:
         _param = self._replace_segment_urls_accounts_account_id_monitoring_segments_segment_id_urls_put_serialize(
             segment_id=segment_id,
             account_id=account_id,
+            replace_segment_urls_request=replace_segment_urls_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9967,6 +10005,7 @@ class DefaultApi:
         self,
         segment_id: StrictStr,
         account_id: StrictStr,
+        replace_segment_urls_request: ReplaceSegmentUrlsRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9988,6 +10027,8 @@ class DefaultApi:
         :type segment_id: str
         :param account_id: (required)
         :type account_id: str
+        :param replace_segment_urls_request: (required)
+        :type replace_segment_urls_request: ReplaceSegmentUrlsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -10013,6 +10054,7 @@ class DefaultApi:
         _param = self._replace_segment_urls_accounts_account_id_monitoring_segments_segment_id_urls_put_serialize(
             segment_id=segment_id,
             account_id=account_id,
+            replace_segment_urls_request=replace_segment_urls_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10034,6 +10076,7 @@ class DefaultApi:
         self,
         segment_id,
         account_id,
+        replace_segment_urls_request,
         _request_auth,
         _content_type,
         _headers,
@@ -10061,6 +10104,8 @@ class DefaultApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
+        if replace_segment_urls_request is not None:
+            _body_params = replace_segment_urls_request
 
 
         # set the HTTP header `Accept`
@@ -10070,6 +10115,19 @@ class DefaultApi:
             ]
         )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [

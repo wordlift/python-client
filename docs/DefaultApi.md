@@ -291,7 +291,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **add_segment_url_accounts_account_id_monitoring_segments_segment_id_urls_post**
-> SegmentUrlResponse add_segment_url_accounts_account_id_monitoring_segments_segment_id_urls_post(segment_id, account_id)
+> SegmentUrlResponse add_segment_url_accounts_account_id_monitoring_segments_segment_id_urls_post(segment_id, account_id, add_segment_url_request)
 
 Add Segment Url
 
@@ -303,6 +303,7 @@ Add a single URL matcher; idempotent on duplicate.
 
 ```python
 import wordlift_client
+from wordlift_client.models.add_segment_url_request import AddSegmentUrlRequest
 from wordlift_client.models.segment_url_response import SegmentUrlResponse
 from wordlift_client.rest import ApiException
 from pprint import pprint
@@ -330,10 +331,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     api_instance = wordlift_client.DefaultApi(api_client)
     segment_id = 'segment_id_example' # str | 
     account_id = 'account_id_example' # str | 
+    add_segment_url_request = wordlift_client.AddSegmentUrlRequest() # AddSegmentUrlRequest | 
 
     try:
         # Add Segment Url
-        api_response = await api_instance.add_segment_url_accounts_account_id_monitoring_segments_segment_id_urls_post(segment_id, account_id)
+        api_response = await api_instance.add_segment_url_accounts_account_id_monitoring_segments_segment_id_urls_post(segment_id, account_id, add_segment_url_request)
         print("The response of DefaultApi->add_segment_url_accounts_account_id_monitoring_segments_segment_id_urls_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -349,6 +351,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **segment_id** | **str**|  | 
  **account_id** | **str**|  | 
+ **add_segment_url_request** | [**AddSegmentUrlRequest**](AddSegmentUrlRequest.md)|  | 
 
 ### Return type
 
@@ -360,7 +363,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
@@ -2773,7 +2776,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_segment_urls_accounts_account_id_monitoring_segments_segment_id_urls_put**
-> List[SegmentUrlResponse] replace_segment_urls_accounts_account_id_monitoring_segments_segment_id_urls_put(segment_id, account_id)
+> List[SegmentUrlResponse] replace_segment_urls_accounts_account_id_monitoring_segments_segment_id_urls_put(segment_id, account_id, replace_segment_urls_request)
 
 Replace Segment Urls
 
@@ -2785,6 +2788,7 @@ Wholesale replace all URL matchers for the segment.
 
 ```python
 import wordlift_client
+from wordlift_client.models.replace_segment_urls_request import ReplaceSegmentUrlsRequest
 from wordlift_client.models.segment_url_response import SegmentUrlResponse
 from wordlift_client.rest import ApiException
 from pprint import pprint
@@ -2812,10 +2816,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     api_instance = wordlift_client.DefaultApi(api_client)
     segment_id = 'segment_id_example' # str | 
     account_id = 'account_id_example' # str | 
+    replace_segment_urls_request = wordlift_client.ReplaceSegmentUrlsRequest() # ReplaceSegmentUrlsRequest | 
 
     try:
         # Replace Segment Urls
-        api_response = await api_instance.replace_segment_urls_accounts_account_id_monitoring_segments_segment_id_urls_put(segment_id, account_id)
+        api_response = await api_instance.replace_segment_urls_accounts_account_id_monitoring_segments_segment_id_urls_put(segment_id, account_id, replace_segment_urls_request)
         print("The response of DefaultApi->replace_segment_urls_accounts_account_id_monitoring_segments_segment_id_urls_put:\n")
         pprint(api_response)
     except Exception as e:
@@ -2831,6 +2836,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **segment_id** | **str**|  | 
  **account_id** | **str**|  | 
+ **replace_segment_urls_request** | [**ReplaceSegmentUrlsRequest**](ReplaceSegmentUrlsRequest.md)|  | 
 
 ### Return type
 
@@ -2842,7 +2848,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
