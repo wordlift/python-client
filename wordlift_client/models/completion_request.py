@@ -29,6 +29,7 @@ class CompletionRequest(BaseModel):
     A request for a completion.
     """ # noqa: E501
     frequency_penalty: Optional[Union[Annotated[float, Field(le=2, strict=True, ge=-2)], Annotated[int, Field(le=2, strict=True, ge=-2)]]] = None
+    key: Optional[StrictStr] = None
     logit_bias: Optional[Dict[str, StrictInt]] = None
     max_tokens: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     min_words: Optional[Annotated[int, Field(strict=True, ge=0)]] = None
@@ -37,7 +38,7 @@ class CompletionRequest(BaseModel):
     prompt: StrictStr
     stop: Optional[StrictStr] = None
     temperature: Optional[Union[Annotated[float, Field(le=2, strict=True, ge=0)], Annotated[int, Field(le=2, strict=True, ge=0)]]] = None
-    __properties: ClassVar[List[str]] = ["frequency_penalty", "logit_bias", "max_tokens", "min_words", "model_id", "presence_penalty", "prompt", "stop", "temperature"]
+    __properties: ClassVar[List[str]] = ["frequency_penalty", "key", "logit_bias", "max_tokens", "min_words", "model_id", "presence_penalty", "prompt", "stop", "temperature"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,6 +92,7 @@ class CompletionRequest(BaseModel):
 
         _obj = cls.model_validate({
             "frequency_penalty": obj.get("frequency_penalty"),
+            "key": obj.get("key"),
             "logit_bias": obj.get("logit_bias"),
             "max_tokens": obj.get("max_tokens"),
             "min_words": obj.get("min_words"),

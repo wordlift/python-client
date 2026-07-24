@@ -7,6 +7,7 @@ A request for a completion.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **frequency_penalty** | **float** |  | [optional] 
+**key** | **str** |  | [optional] 
 **logit_bias** | **Dict[str, int]** |  | [optional] 
 **max_tokens** | **int** |  | [optional] 
 **min_words** | **int** |  | [optional] 

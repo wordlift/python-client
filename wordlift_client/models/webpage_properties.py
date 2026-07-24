@@ -18,8 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,11 +27,11 @@ class WebpageProperties(BaseModel):
     """
     WebpageProperties
     """ # noqa: E501
-    entities: List[StrictStr]
+    created_entity_gaps: List[StrictStr] = Field(description="Entity Gaps created for the Web Page.")
     iri: StrictStr
-    query: Optional[StrictStr] = None
+    selected_entity_gaps: List[StrictStr] = Field(description="Entity Gaps selected for Web Page content optimization.")
     url: StrictStr
-    __properties: ClassVar[List[str]] = ["entities", "iri", "query", "url"]
+    __properties: ClassVar[List[str]] = ["created_entity_gaps", "iri", "selected_entity_gaps", "url"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,9 +84,9 @@ class WebpageProperties(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "entities": obj.get("entities"),
+            "created_entity_gaps": obj.get("created_entity_gaps"),
             "iri": obj.get("iri"),
-            "query": obj.get("query"),
+            "selected_entity_gaps": obj.get("selected_entity_gaps"),
             "url": obj.get("url")
         })
         return _obj

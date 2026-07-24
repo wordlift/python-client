@@ -16,6 +16,7 @@
 
 # import models into model package
 from wordlift_client.models.ai_visibility_analysis_result import AIVisibilityAnalysisResult
+from wordlift_client.models.accepted_answer import AcceptedAnswer
 from wordlift_client.models.account import Account
 from wordlift_client.models.account_info import AccountInfo
 from wordlift_client.models.account_stats import AccountStats
@@ -236,7 +237,7 @@ from wordlift_client.models.properties import Properties
 from wordlift_client.models.proxy_mode import ProxyMode
 from wordlift_client.models.query_coverage_output import QueryCoverageOutput
 from wordlift_client.models.question_and_answer import QuestionAndAnswer
-from wordlift_client.models.question_and_answer_request import QuestionAndAnswerRequest
+from wordlift_client.models.question_and_answer_set import QuestionAndAnswerSet
 from wordlift_client.models.quick_win import QuickWin
 from wordlift_client.models.quick_wins_result import QuickWinsResult
 from wordlift_client.models.rank_entities import RankEntities
@@ -270,7 +271,7 @@ from wordlift_client.models.segment_url_response import SegmentUrlResponse
 from wordlift_client.models.seo_fundamentals import SeoFundamentals
 from wordlift_client.models.site_files import SiteFiles
 from wordlift_client.models.sitemap_import_request import SitemapImportRequest
-from wordlift_client.models.smart_content import SmartContent
+from wordlift_client.models.smart_content_project import SmartContentProject
 from wordlift_client.models.smart_content_request import SmartContentRequest
 from wordlift_client.models.snapshot_list_response import SnapshotListResponse
 from wordlift_client.models.snapshot_response import SnapshotResponse

@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entities** | **List[str]** |  | 
+**created_entity_gaps** | **List[str]** | Entity Gaps created for the Web Page. | 
 **iri** | **str** |  | 
-**query** | **str** |  | [optional] 
+**selected_entity_gaps** | **List[str]** | Entity Gaps selected for Web Page content optimization. | 
 **url** | **str** |  | 
 
 ## Example

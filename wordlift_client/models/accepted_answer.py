@@ -18,23 +18,17 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
-from wordlift_client.models.rule_request import RuleRequest
-from wordlift_client.models.webpage_properties import WebpageProperties
 from typing import Optional, Set
 from typing_extensions import Self
 
-class SmartContentRequest(BaseModel):
+class AcceptedAnswer(BaseModel):
     """
-    SmartContentRequest
+    AcceptedAnswer
     """ # noqa: E501
-    model_id: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=1, description="The model id.")
-    name: Optional[StrictStr] = Field(default=None, description="The name of the smart content - applicable if bulk.")
-    rules: Optional[List[RuleRequest]] = None
-    webpage_properties: Optional[List[WebpageProperties]] = None
-    __properties: ClassVar[List[str]] = ["model_id", "name", "rules", "webpage_properties"]
+    answer: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["answer"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -54,7 +48,7 @@ class SmartContentRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of SmartContentRequest from a JSON string"""
+        """Create an instance of AcceptedAnswer from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,25 +69,11 @@ class SmartContentRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in rules (list)
-        _items = []
-        if self.rules:
-            for _item in self.rules:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['rules'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in webpage_properties (list)
-        _items = []
-        if self.webpage_properties:
-            for _item in self.webpage_properties:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['webpage_properties'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of SmartContentRequest from a dict"""
+        """Create an instance of AcceptedAnswer from a dict"""
         if obj is None:
             return None
 
@@ -101,10 +81,7 @@ class SmartContentRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "model_id": obj.get("model_id") if obj.get("model_id") is not None else 1,
-            "name": obj.get("name"),
-            "rules": [RuleRequest.from_dict(_item) for _item in obj["rules"]] if obj.get("rules") is not None else None,
-            "webpage_properties": [WebpageProperties.from_dict(_item) for _item in obj["webpage_properties"]] if obj.get("webpage_properties") is not None else None
+            "answer": obj.get("answer")
         })
         return _obj
 

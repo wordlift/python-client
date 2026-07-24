@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.185.0"
+__version__ = "1.186.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -75,11 +75,13 @@ from wordlift_client.api.platform_limits_api import PlatformLimitsApi
 from wordlift_client.api.plugin_diagnostics_api import PluginDiagnosticsApi
 from wordlift_client.api.plugin_events_api import PluginEventsApi
 from wordlift_client.api.query_fan_out_api import QueryFanOutApi
+from wordlift_client.api.question_and_answer_sets_api import QuestionAndAnswerSetsApi
 from wordlift_client.api.questions_and_answers_api import QuestionsAndAnswersApi
 from wordlift_client.api.redeem_codes_api import RedeemCodesApi
 from wordlift_client.api.rules_api import RulesApi
 from wordlift_client.api.sitemap_generator_api import SitemapGeneratorApi
 from wordlift_client.api.sitemap_imports_api import SitemapImportsApi
+from wordlift_client.api.smart_contents_api import SmartContentsApi
 from wordlift_client.api.summarizations_api import SummarizationsApi
 from wordlift_client.api.tokens_api import TokensApi
 from wordlift_client.api.vector_search_nodes_api import VectorSearchNodesApi
@@ -114,6 +116,7 @@ from wordlift_client.exceptions import ApiException
 
 # import models into sdk package
 from wordlift_client.models.ai_visibility_analysis_result import AIVisibilityAnalysisResult
+from wordlift_client.models.accepted_answer import AcceptedAnswer
 from wordlift_client.models.account import Account
 from wordlift_client.models.account_info import AccountInfo
 from wordlift_client.models.account_stats import AccountStats
@@ -334,7 +337,7 @@ from wordlift_client.models.properties import Properties
 from wordlift_client.models.proxy_mode import ProxyMode
 from wordlift_client.models.query_coverage_output import QueryCoverageOutput
 from wordlift_client.models.question_and_answer import QuestionAndAnswer
-from wordlift_client.models.question_and_answer_request import QuestionAndAnswerRequest
+from wordlift_client.models.question_and_answer_set import QuestionAndAnswerSet
 from wordlift_client.models.quick_win import QuickWin
 from wordlift_client.models.quick_wins_result import QuickWinsResult
 from wordlift_client.models.rank_entities import RankEntities
@@ -368,7 +371,7 @@ from wordlift_client.models.segment_url_response import SegmentUrlResponse
 from wordlift_client.models.seo_fundamentals import SeoFundamentals
 from wordlift_client.models.site_files import SiteFiles
 from wordlift_client.models.sitemap_import_request import SitemapImportRequest
-from wordlift_client.models.smart_content import SmartContent
+from wordlift_client.models.smart_content_project import SmartContentProject
 from wordlift_client.models.smart_content_request import SmartContentRequest
 from wordlift_client.models.snapshot_list_response import SnapshotListResponse
 from wordlift_client.models.snapshot_response import SnapshotResponse

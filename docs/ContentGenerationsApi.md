@@ -325,7 +325,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_content_generations**
-> PageContentGeneration list_content_generations(cursor=cursor, limit=limit, deleted=deleted)
+> PageContentGeneration list_content_generations(cursor=cursor, limit=limit, deleted=deleted, account_id=account_id)
 
 List
 
@@ -363,10 +363,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     cursor = 'cursor_example' # str | The cursor (optional)
     limit = 10 # int | The maximum number of results (optional) (default to 10)
     deleted = True # bool | Filter for the deleted flag (optional)
+    account_id = 56 # int | Filter by account id (optional)
 
     try:
         # List
-        api_response = await api_instance.list_content_generations(cursor=cursor, limit=limit, deleted=deleted)
+        api_response = await api_instance.list_content_generations(cursor=cursor, limit=limit, deleted=deleted, account_id=account_id)
         print("The response of ContentGenerationsApi->list_content_generations:\n")
         pprint(api_response)
     except Exception as e:
@@ -383,6 +384,7 @@ Name | Type | Description  | Notes
  **cursor** | **str**| The cursor | [optional] 
  **limit** | **int**| The maximum number of results | [optional] [default to 10]
  **deleted** | **bool**| Filter for the deleted flag | [optional] 
+ **account_id** | **int**| Filter by account id | [optional] 
 
 ### Return type
 

@@ -6,19 +6,12 @@ Generated Q&A content.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**accepted_answer** | [**AcceptedAnswer**](AcceptedAnswer.md) |  | [optional] 
 **answer** | **str** | The generated answer. | [optional] 
-**created_at** | **datetime** | The create date-time. | [optional] [readonly] 
-**entity_gaps** | **List[str]** |  | [optional] 
-**errors** | [**List[ValidationResult]**](ValidationResult.md) | The set of errors found for the answer. | [optional] [readonly] 
-**id** | **int** | The unique id. | [optional] [readonly] 
-**iri** | **str** | The webpage IRI tied to this Q&amp;A. | 
-**is_deleted** | **bool** | The deleted flag. | [optional] [default to False]
-**is_published** | **bool** | The published flag. | [optional] [default to False]
-**modified_at** | **datetime** | The last modified date-time. | [optional] [readonly] 
+**errors** | [**List[ValidationResult]**](ValidationResult.md) | The set of errors found for the answer. | [readonly] 
+**id** | **str** | The unique id. | [optional] [readonly] 
 **question** | **str** | The generated question. | [optional] 
-**smart_content_id** | **int** |  | [optional] 
-**url** | **str** | The webpage URL tied to this Q&amp;A. | 
-**warnings** | [**List[ValidationResult]**](ValidationResult.md) | The set of warnings found for the answer. | [optional] [readonly] 
+**warnings** | [**List[ValidationResult]**](ValidationResult.md) | The set of warnings found for the answer. | [readonly] 
 
 ## Example
 

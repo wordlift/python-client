@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**account_id** | **int** | The account id. | 
 **model_id** | **int** | The model id. | [optional] [default to 1]
+**name** | **str** | The name of the smart content - applicable if bulk. | [optional] 
 **rules** | [**List[RuleRequest]**](RuleRequest.md) |  | [optional] 
 **webpage_properties** | [**List[WebpageProperties]**](WebpageProperties.md) |  | [optional] 
 

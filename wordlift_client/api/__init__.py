@@ -58,11 +58,13 @@ from wordlift_client.api.platform_limits_api import PlatformLimitsApi
 from wordlift_client.api.plugin_diagnostics_api import PluginDiagnosticsApi
 from wordlift_client.api.plugin_events_api import PluginEventsApi
 from wordlift_client.api.query_fan_out_api import QueryFanOutApi
+from wordlift_client.api.question_and_answer_sets_api import QuestionAndAnswerSetsApi
 from wordlift_client.api.questions_and_answers_api import QuestionsAndAnswersApi
 from wordlift_client.api.redeem_codes_api import RedeemCodesApi
 from wordlift_client.api.rules_api import RulesApi
 from wordlift_client.api.sitemap_generator_api import SitemapGeneratorApi
 from wordlift_client.api.sitemap_imports_api import SitemapImportsApi
+from wordlift_client.api.smart_contents_api import SmartContentsApi
 from wordlift_client.api.summarizations_api import SummarizationsApi
 from wordlift_client.api.tokens_api import TokensApi
 from wordlift_client.api.vector_search_nodes_api import VectorSearchNodesApi

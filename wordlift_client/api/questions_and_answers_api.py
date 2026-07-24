@@ -17,13 +17,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
-from typing import List, Optional
-from typing_extensions import Annotated
+from pydantic import StrictStr
 from wordlift_client.models.question_and_answer import QuestionAndAnswer
-from wordlift_client.models.question_and_answer_request import QuestionAndAnswerRequest
-from wordlift_client.models.smart_content import SmartContent
-from wordlift_client.models.smart_content_request import SmartContentRequest
 from wordlift_client.models.update_question_and_answer_request import UpdateQuestionAndAnswerRequest
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
@@ -45,9 +40,9 @@ class QuestionsAndAnswersApi:
 
 
     @validate_call
-    async def create_question_and_answer(
+    async def create_question_and_answer_in_set(
         self,
-        question_and_answer_request: QuestionAndAnswerRequest,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -64,8 +59,8 @@ class QuestionsAndAnswersApi:
         """Create
 
 
-        :param question_and_answer_request: (required)
-        :type question_and_answer_request: QuestionAndAnswerRequest
+        :param id: (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -88,8 +83,8 @@ class QuestionsAndAnswersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_question_and_answer_serialize(
-            question_and_answer_request=question_and_answer_request,
+        _param = self._create_question_and_answer_in_set_serialize(
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -112,9 +107,9 @@ class QuestionsAndAnswersApi:
 
 
     @validate_call
-    async def create_question_and_answer_with_http_info(
+    async def create_question_and_answer_in_set_with_http_info(
         self,
-        question_and_answer_request: QuestionAndAnswerRequest,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -131,8 +126,8 @@ class QuestionsAndAnswersApi:
         """Create
 
 
-        :param question_and_answer_request: (required)
-        :type question_and_answer_request: QuestionAndAnswerRequest
+        :param id: (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -155,8 +150,8 @@ class QuestionsAndAnswersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_question_and_answer_serialize(
-            question_and_answer_request=question_and_answer_request,
+        _param = self._create_question_and_answer_in_set_serialize(
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -179,9 +174,9 @@ class QuestionsAndAnswersApi:
 
 
     @validate_call
-    async def create_question_and_answer_without_preload_content(
+    async def create_question_and_answer_in_set_without_preload_content(
         self,
-        question_and_answer_request: QuestionAndAnswerRequest,
+        id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -198,8 +193,8 @@ class QuestionsAndAnswersApi:
         """Create
 
 
-        :param question_and_answer_request: (required)
-        :type question_and_answer_request: QuestionAndAnswerRequest
+        :param id: (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -222,8 +217,8 @@ class QuestionsAndAnswersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_question_and_answer_serialize(
-            question_and_answer_request=question_and_answer_request,
+        _param = self._create_question_and_answer_in_set_serialize(
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -241,552 +236,7 @@ class QuestionsAndAnswersApi:
         return response_data.response
 
 
-    def _create_question_and_answer_serialize(
-        self,
-        question_and_answer_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-        if question_and_answer_request is not None:
-            _body_params = question_and_answer_request
-
-
-        # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'ApiKey'
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/questions-and-answers',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    async def create_questions_and_answers_collection(
-        self,
-        smart_content_request: SmartContentRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> SmartContent:
-        """Create
-
-
-        :param smart_content_request: (required)
-        :type smart_content_request: SmartContentRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._create_questions_and_answers_collection_serialize(
-            smart_content_request=smart_content_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "SmartContent",
-            '401': None,
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        await response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    async def create_questions_and_answers_collection_with_http_info(
-        self,
-        smart_content_request: SmartContentRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[SmartContent]:
-        """Create
-
-
-        :param smart_content_request: (required)
-        :type smart_content_request: SmartContentRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._create_questions_and_answers_collection_serialize(
-            smart_content_request=smart_content_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "SmartContent",
-            '401': None,
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        await response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    async def create_questions_and_answers_collection_without_preload_content(
-        self,
-        smart_content_request: SmartContentRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Create
-
-
-        :param smart_content_request: (required)
-        :type smart_content_request: SmartContentRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._create_questions_and_answers_collection_serialize(
-            smart_content_request=smart_content_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "SmartContent",
-            '401': None,
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _create_questions_and_answers_collection_serialize(
-        self,
-        smart_content_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-        if smart_content_request is not None:
-            _body_params = smart_content_request
-
-
-        # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'ApiKey'
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/questions-and-answers-collection',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    async def delete_question_and_answer(
-        self,
-        id: StrictInt,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Delete
-
-
-        :param id: (required)
-        :type id: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_question_and_answer_serialize(
-            id=id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-            '401': None,
-            '404': None,
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        await response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    async def delete_question_and_answer_with_http_info(
-        self,
-        id: StrictInt,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """Delete
-
-
-        :param id: (required)
-        :type id: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_question_and_answer_serialize(
-            id=id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-            '401': None,
-            '404': None,
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        await response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    async def delete_question_and_answer_without_preload_content(
-        self,
-        id: StrictInt,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Delete
-
-
-        :param id: (required)
-        :type id: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_question_and_answer_serialize(
-            id=id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-            '401': None,
-            '404': None,
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _delete_question_and_answer_serialize(
+    def _create_question_and_answer_in_set_serialize(
         self,
         id,
         _request_auth,
@@ -816,6 +266,12 @@ class QuestionsAndAnswersApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
 
 
         # authentication setting
@@ -824,8 +280,8 @@ class QuestionsAndAnswersApi:
         ]
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/questions-and-answers/{id}',
+            method='POST',
+            resource_path='/content-optimizations/questions-and-answers-sets/{id}/questions-and-answers',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -842,9 +298,10 @@ class QuestionsAndAnswersApi:
 
 
     @validate_call
-    async def delete_questions_and_answers_collection(
+    async def delete_question_and_answer(
         self,
-        smart_content_id: StrictInt,
+        id: StrictStr,
+        question_and_answer_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -861,8 +318,10 @@ class QuestionsAndAnswersApi:
         """Delete
 
 
-        :param smart_content_id: (required)
-        :type smart_content_id: int
+        :param id: (required)
+        :type id: str
+        :param question_and_answer_id: (required)
+        :type question_and_answer_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -885,8 +344,9 @@ class QuestionsAndAnswersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_questions_and_answers_collection_serialize(
-            smart_content_id=smart_content_id,
+        _param = self._delete_question_and_answer_serialize(
+            id=id,
+            question_and_answer_id=question_and_answer_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -896,6 +356,7 @@ class QuestionsAndAnswersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '404': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -909,9 +370,10 @@ class QuestionsAndAnswersApi:
 
 
     @validate_call
-    async def delete_questions_and_answers_collection_with_http_info(
+    async def delete_question_and_answer_with_http_info(
         self,
-        smart_content_id: StrictInt,
+        id: StrictStr,
+        question_and_answer_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -928,8 +390,10 @@ class QuestionsAndAnswersApi:
         """Delete
 
 
-        :param smart_content_id: (required)
-        :type smart_content_id: int
+        :param id: (required)
+        :type id: str
+        :param question_and_answer_id: (required)
+        :type question_and_answer_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -952,8 +416,9 @@ class QuestionsAndAnswersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_questions_and_answers_collection_serialize(
-            smart_content_id=smart_content_id,
+        _param = self._delete_question_and_answer_serialize(
+            id=id,
+            question_and_answer_id=question_and_answer_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -963,6 +428,7 @@ class QuestionsAndAnswersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '404': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -976,9 +442,10 @@ class QuestionsAndAnswersApi:
 
 
     @validate_call
-    async def delete_questions_and_answers_collection_without_preload_content(
+    async def delete_question_and_answer_without_preload_content(
         self,
-        smart_content_id: StrictInt,
+        id: StrictStr,
+        question_and_answer_id: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -995,8 +462,10 @@ class QuestionsAndAnswersApi:
         """Delete
 
 
-        :param smart_content_id: (required)
-        :type smart_content_id: int
+        :param id: (required)
+        :type id: str
+        :param question_and_answer_id: (required)
+        :type question_and_answer_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1019,8 +488,9 @@ class QuestionsAndAnswersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_questions_and_answers_collection_serialize(
-            smart_content_id=smart_content_id,
+        _param = self._delete_question_and_answer_serialize(
+            id=id,
+            question_and_answer_id=question_and_answer_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1030,6 +500,7 @@ class QuestionsAndAnswersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '401': None,
+            '404': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1038,9 +509,10 @@ class QuestionsAndAnswersApi:
         return response_data.response
 
 
-    def _delete_questions_and_answers_collection_serialize(
+    def _delete_question_and_answer_serialize(
         self,
-        smart_content_id,
+        id,
+        question_and_answer_id,
         _request_auth,
         _content_type,
         _headers,
@@ -1060,11 +532,11 @@ class QuestionsAndAnswersApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        if question_and_answer_id is not None:
+            _path_params['questionAndAnswerId'] = question_and_answer_id
         # process the query parameters
-        if smart_content_id is not None:
-            
-            _query_params.append(('smart_content_id', smart_content_id))
-            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -1079,304 +551,7 @@ class QuestionsAndAnswersApi:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/questions-and-answers-collection',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    async def get_questions_and_answers(
-        self,
-        account_id: Annotated[Optional[StrictInt], Field(description="The account id.")] = None,
-        iri: Annotated[Optional[StrictStr], Field(description="The webpage IRI")] = None,
-        smart_content_id: Annotated[Optional[StrictInt], Field(description="The smart content id.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[QuestionAndAnswer]:
-        """Get
-
-
-        :param account_id: The account id.
-        :type account_id: int
-        :param iri: The webpage IRI
-        :type iri: str
-        :param smart_content_id: The smart content id.
-        :type smart_content_id: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_questions_and_answers_serialize(
-            account_id=account_id,
-            iri=iri,
-            smart_content_id=smart_content_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[QuestionAndAnswer]",
-            '401': None,
-            '404': None,
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        await response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    async def get_questions_and_answers_with_http_info(
-        self,
-        account_id: Annotated[Optional[StrictInt], Field(description="The account id.")] = None,
-        iri: Annotated[Optional[StrictStr], Field(description="The webpage IRI")] = None,
-        smart_content_id: Annotated[Optional[StrictInt], Field(description="The smart content id.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[QuestionAndAnswer]]:
-        """Get
-
-
-        :param account_id: The account id.
-        :type account_id: int
-        :param iri: The webpage IRI
-        :type iri: str
-        :param smart_content_id: The smart content id.
-        :type smart_content_id: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_questions_and_answers_serialize(
-            account_id=account_id,
-            iri=iri,
-            smart_content_id=smart_content_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[QuestionAndAnswer]",
-            '401': None,
-            '404': None,
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        await response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    async def get_questions_and_answers_without_preload_content(
-        self,
-        account_id: Annotated[Optional[StrictInt], Field(description="The account id.")] = None,
-        iri: Annotated[Optional[StrictStr], Field(description="The webpage IRI")] = None,
-        smart_content_id: Annotated[Optional[StrictInt], Field(description="The smart content id.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Get
-
-
-        :param account_id: The account id.
-        :type account_id: int
-        :param iri: The webpage IRI
-        :type iri: str
-        :param smart_content_id: The smart content id.
-        :type smart_content_id: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_questions_and_answers_serialize(
-            account_id=account_id,
-            iri=iri,
-            smart_content_id=smart_content_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[QuestionAndAnswer]",
-            '401': None,
-            '404': None,
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _get_questions_and_answers_serialize(
-        self,
-        account_id,
-        iri,
-        smart_content_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        if account_id is not None:
-            
-            _query_params.append(('account_id', account_id))
-            
-        if iri is not None:
-            
-            _query_params.append(('iri', iri))
-            
-        if smart_content_id is not None:
-            
-            _query_params.append(('smart_content_id', smart_content_id))
-            
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'ApiKey'
-        ]
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/questions-and-answers',
+            resource_path='/content-optimizations/questions-and-answers-sets/{id}/questions-and-answers/{questionAndAnswerId}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1395,7 +570,8 @@ class QuestionsAndAnswersApi:
     @validate_call
     async def update_question_and_answer(
         self,
-        id: StrictInt,
+        id: StrictStr,
+        question_and_answer_id: StrictStr,
         update_question_and_answer_request: UpdateQuestionAndAnswerRequest,
         _request_timeout: Union[
             None,
@@ -1414,7 +590,9 @@ class QuestionsAndAnswersApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
+        :param question_and_answer_id: (required)
+        :type question_and_answer_id: str
         :param update_question_and_answer_request: (required)
         :type update_question_and_answer_request: UpdateQuestionAndAnswerRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1441,6 +619,7 @@ class QuestionsAndAnswersApi:
 
         _param = self._update_question_and_answer_serialize(
             id=id,
+            question_and_answer_id=question_and_answer_id,
             update_question_and_answer_request=update_question_and_answer_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1467,7 +646,8 @@ class QuestionsAndAnswersApi:
     @validate_call
     async def update_question_and_answer_with_http_info(
         self,
-        id: StrictInt,
+        id: StrictStr,
+        question_and_answer_id: StrictStr,
         update_question_and_answer_request: UpdateQuestionAndAnswerRequest,
         _request_timeout: Union[
             None,
@@ -1486,7 +666,9 @@ class QuestionsAndAnswersApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
+        :param question_and_answer_id: (required)
+        :type question_and_answer_id: str
         :param update_question_and_answer_request: (required)
         :type update_question_and_answer_request: UpdateQuestionAndAnswerRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1513,6 +695,7 @@ class QuestionsAndAnswersApi:
 
         _param = self._update_question_and_answer_serialize(
             id=id,
+            question_and_answer_id=question_and_answer_id,
             update_question_and_answer_request=update_question_and_answer_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1539,7 +722,8 @@ class QuestionsAndAnswersApi:
     @validate_call
     async def update_question_and_answer_without_preload_content(
         self,
-        id: StrictInt,
+        id: StrictStr,
+        question_and_answer_id: StrictStr,
         update_question_and_answer_request: UpdateQuestionAndAnswerRequest,
         _request_timeout: Union[
             None,
@@ -1558,7 +742,9 @@ class QuestionsAndAnswersApi:
 
 
         :param id: (required)
-        :type id: int
+        :type id: str
+        :param question_and_answer_id: (required)
+        :type question_and_answer_id: str
         :param update_question_and_answer_request: (required)
         :type update_question_and_answer_request: UpdateQuestionAndAnswerRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1585,6 +771,7 @@ class QuestionsAndAnswersApi:
 
         _param = self._update_question_and_answer_serialize(
             id=id,
+            question_and_answer_id=question_and_answer_id,
             update_question_and_answer_request=update_question_and_answer_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1607,6 +794,7 @@ class QuestionsAndAnswersApi:
     def _update_question_and_answer_serialize(
         self,
         id,
+        question_and_answer_id,
         update_question_and_answer_request,
         _request_auth,
         _content_type,
@@ -1629,6 +817,8 @@ class QuestionsAndAnswersApi:
         # process the path parameters
         if id is not None:
             _path_params['id'] = id
+        if question_and_answer_id is not None:
+            _path_params['questionAndAnswerId'] = question_and_answer_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -1665,278 +855,7 @@ class QuestionsAndAnswersApi:
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/questions-and-answers/{id}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    async def update_questions_and_answers_collection(
-        self,
-        question_and_answer_request: QuestionAndAnswerRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[QuestionAndAnswer]:
-        """Update
-
-
-        :param question_and_answer_request: (required)
-        :type question_and_answer_request: QuestionAndAnswerRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._update_questions_and_answers_collection_serialize(
-            question_and_answer_request=question_and_answer_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[QuestionAndAnswer]",
-            '401': None,
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        await response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    async def update_questions_and_answers_collection_with_http_info(
-        self,
-        question_and_answer_request: QuestionAndAnswerRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[QuestionAndAnswer]]:
-        """Update
-
-
-        :param question_and_answer_request: (required)
-        :type question_and_answer_request: QuestionAndAnswerRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._update_questions_and_answers_collection_serialize(
-            question_and_answer_request=question_and_answer_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[QuestionAndAnswer]",
-            '401': None,
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        await response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    async def update_questions_and_answers_collection_without_preload_content(
-        self,
-        question_and_answer_request: QuestionAndAnswerRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Update
-
-
-        :param question_and_answer_request: (required)
-        :type question_and_answer_request: QuestionAndAnswerRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._update_questions_and_answers_collection_serialize(
-            question_and_answer_request=question_and_answer_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[QuestionAndAnswer]",
-            '401': None,
-        }
-        response_data = await self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _update_questions_and_answers_collection_serialize(
-        self,
-        question_and_answer_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-        if question_and_answer_request is not None:
-            _body_params = question_and_answer_request
-
-
-        # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'ApiKey'
-        ]
-
-        return self.api_client.param_serialize(
-            method='PUT',
-            resource_path='/questions-and-answers-collection',
+            resource_path='/content-optimizations/questions-and-answers-sets/{id}/questions-and-answers/{questionAndAnswerId}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

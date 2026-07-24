@@ -18,24 +18,25 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from wordlift_client.models.accepted_answer import AcceptedAnswer
-from wordlift_client.models.validation_result import ValidationResult
+from wordlift_client.models.question_and_answer import QuestionAndAnswer
 from typing import Optional, Set
 from typing_extensions import Self
 
-class QuestionAndAnswer(BaseModel):
+class QuestionAndAnswerSet(BaseModel):
     """
     Generated Q&A content.
     """ # noqa: E501
-    accepted_answer: Optional[AcceptedAnswer] = None
-    answer: Optional[StrictStr] = Field(default=None, description="The generated answer.")
-    errors: List[ValidationResult] = Field(description="The set of errors found for the answer.")
+    created_entity_gaps: Optional[List[StrictStr]] = Field(default=None, description="Entity Gaps created for the Web Page.")
     id: Optional[StrictStr] = Field(default=None, description="The unique id.")
-    question: Optional[StrictStr] = Field(default=None, description="The generated question.")
-    warnings: List[ValidationResult] = Field(description="The set of warnings found for the answer.")
-    __properties: ClassVar[List[str]] = ["accepted_answer", "answer", "errors", "id", "question", "warnings"]
+    is_smart_content_of: Optional[StrictStr] = Field(default=None, description="The Web Page this smart content is created for.")
+    published: Optional[StrictBool] = Field(default=None, description="The published status of the smart content.")
+    questions_and_answers: Optional[List[QuestionAndAnswer]] = Field(default=None, description="The generated questions and answers.")
+    selected_entity_gaps: Optional[List[StrictStr]] = Field(default=None, description="Entity Gaps used to generate the Smart Content.")
+    smart_content_project_id: Optional[StrictInt] = None
+    url: Optional[StrictStr] = Field(default=None, description="The URL of the Web Page this smart content is created for.")
+    __properties: ClassVar[List[str]] = ["created_entity_gaps", "id", "is_smart_content_of", "published", "questions_and_answers", "selected_entity_gaps", "smart_content_project_id", "url"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -55,7 +56,7 @@ class QuestionAndAnswer(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of QuestionAndAnswer from a JSON string"""
+        """Create an instance of QuestionAndAnswerSet from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,12 +70,10 @@ class QuestionAndAnswer(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
-        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
-            "errors",
             "id",
-            "warnings",
+            "published",
         ])
 
         _dict = self.model_dump(
@@ -82,28 +81,18 @@ class QuestionAndAnswer(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of accepted_answer
-        if self.accepted_answer:
-            _dict['accepted_answer'] = self.accepted_answer.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in errors (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in questions_and_answers (list)
         _items = []
-        if self.errors:
-            for _item in self.errors:
+        if self.questions_and_answers:
+            for _item in self.questions_and_answers:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['errors'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in warnings (list)
-        _items = []
-        if self.warnings:
-            for _item in self.warnings:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['warnings'] = _items
+            _dict['questions_and_answers'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of QuestionAndAnswer from a dict"""
+        """Create an instance of QuestionAndAnswerSet from a dict"""
         if obj is None:
             return None
 
@@ -111,12 +100,14 @@ class QuestionAndAnswer(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "accepted_answer": AcceptedAnswer.from_dict(obj["accepted_answer"]) if obj.get("accepted_answer") is not None else None,
-            "answer": obj.get("answer"),
-            "errors": [ValidationResult.from_dict(_item) for _item in obj["errors"]] if obj.get("errors") is not None else None,
+            "created_entity_gaps": obj.get("created_entity_gaps"),
             "id": obj.get("id"),
-            "question": obj.get("question"),
-            "warnings": [ValidationResult.from_dict(_item) for _item in obj["warnings"]] if obj.get("warnings") is not None else None
+            "is_smart_content_of": obj.get("is_smart_content_of"),
+            "published": obj.get("published"),
+            "questions_and_answers": [QuestionAndAnswer.from_dict(_item) for _item in obj["questions_and_answers"]] if obj.get("questions_and_answers") is not None else None,
+            "selected_entity_gaps": obj.get("selected_entity_gaps"),
+            "smart_content_project_id": obj.get("smart_content_project_id"),
+            "url": obj.get("url")
         })
         return _obj
 
