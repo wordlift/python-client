@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **last_heartbeat** | **datetime** |  | 
 **cancellation_reason** | [**CancellationReason**](CancellationReason.md) |  | 
 **failure_reason** | [**FailureReason**](FailureReason.md) |  | 
-**outcome** | **Dict[str, object]** |  | 
+**outcome** | [**BootstrapJobOutcome**](BootstrapJobOutcome.md) |  | 
 **created_at** | **datetime** |  | 
 **started_at** | **datetime** |  | 
 **completed_at** | **datetime** |  | 

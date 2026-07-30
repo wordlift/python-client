@@ -51,6 +51,7 @@ from wordlift_client.models.automation_readiness import AutomationReadiness
 from wordlift_client.models.batch_request import BatchRequest
 from wordlift_client.models.batch_response import BatchResponse
 from wordlift_client.models.batch_status import BatchStatus
+from wordlift_client.models.bootstrap_job_outcome import BootstrapJobOutcome
 from wordlift_client.models.bootstrap_job_response import BootstrapJobResponse
 from wordlift_client.models.bootstrap_job_status import BootstrapJobStatus
 from wordlift_client.models.bot_status import BotStatus

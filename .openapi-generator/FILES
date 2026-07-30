@@ -53,6 +53,7 @@ docs/BatchRequest.md
 docs/BatchResponse.md
 docs/BatchStatus.md
 docs/BootstrapApi.md
+docs/BootstrapJobOutcome.md
 docs/BootstrapJobResponse.md
 docs/BootstrapJobStatus.md
 docs/BotStatus.md
@@ -400,11 +401,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_accepted_answer.py
-test/test_question_and_answer_set.py
-test/test_question_and_answer_sets_api.py
-test/test_smart_content_project.py
-test/test_smart_contents_api.py
+test/test_bootstrap_job_outcome.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -533,6 +530,7 @@ wordlift_client/models/automation_readiness.py
 wordlift_client/models/batch_request.py
 wordlift_client/models/batch_response.py
 wordlift_client/models/batch_status.py
+wordlift_client/models/bootstrap_job_outcome.py
 wordlift_client/models/bootstrap_job_response.py
 wordlift_client/models/bootstrap_job_status.py
 wordlift_client/models/bot_status.py

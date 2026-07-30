@@ -21,6 +21,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wordlift_client.models.bootstrap_job_outcome import BootstrapJobOutcome
 from wordlift_client.models.bootstrap_job_status import BootstrapJobStatus
 from wordlift_client.models.cancellation_reason import CancellationReason
 from wordlift_client.models.failure_reason import FailureReason
@@ -43,7 +44,7 @@ class BootstrapJobResponse(BaseModel):
     last_heartbeat: Optional[datetime]
     cancellation_reason: Optional[CancellationReason]
     failure_reason: Optional[FailureReason]
-    outcome: Optional[Dict[str, Any]]
+    outcome: Optional[BootstrapJobOutcome]
     created_at: datetime
     started_at: Optional[datetime]
     completed_at: Optional[datetime]
@@ -92,6 +93,9 @@ class BootstrapJobResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of outcome
+        if self.outcome:
+            _dict['outcome'] = self.outcome.to_dict()
         # set to None if account_url (nullable) is None
         # and model_fields_set contains the field
         if self.account_url is None and "account_url" in self.model_fields_set:
@@ -156,7 +160,7 @@ class BootstrapJobResponse(BaseModel):
             "last_heartbeat": obj.get("last_heartbeat"),
             "cancellation_reason": obj.get("cancellation_reason"),
             "failure_reason": obj.get("failure_reason"),
-            "outcome": obj.get("outcome"),
+            "outcome": BootstrapJobOutcome.from_dict(obj["outcome"]) if obj.get("outcome") is not None else None,
             "created_at": obj.get("created_at"),
             "started_at": obj.get("started_at"),
             "completed_at": obj.get("completed_at"),

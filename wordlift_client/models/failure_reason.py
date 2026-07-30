@@ -27,7 +27,6 @@ class FailureReason(str, Enum):
     """
     allowed enum values
     """
-    JUDGE_REJECTED = 'judge_rejected'
     EXCEPTION = 'exception'
     RETRIES_EXHAUSTED = 'retries_exhausted'
 
