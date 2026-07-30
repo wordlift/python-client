@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Graph Sync Service
-  version: 0.3.0
+  version: 0.4.0
 paths:
   /accounts/{account_id}/graph-sync/runs:
     post:
@@ -629,6 +629,42 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    BootstrapJobOutcome:
+      properties:
+        succeeded:
+          type: boolean
+          title: Succeeded
+        confidence:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Confidence
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+        blocking_issues:
+          items:
+            type: string
+          type: array
+          title: Blocking Issues
+        narrative:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Narrative
+        token_usage:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Token Usage
+      type: object
+      required:
+      - succeeded
+      title: BootstrapJobOutcome
+      description: The bootstrap judge's verdict on a COMPLETED job, whether accepted
+        or rejected.
     BootstrapJobResponse:
       properties:
         id:
@@ -679,10 +715,8 @@ components:
           - type: 'null'
         outcome:
           anyOf:
-          - additionalProperties: true
-            type: object
+          - $ref: '#/components/schemas/BootstrapJobOutcome'
           - type: 'null'
-          title: Outcome
         created_at:
           type: string
           format: date-time
@@ -791,7 +825,6 @@ components:
     FailureReason:
       type: string
       enum:
-      - judge_rejected
       - exception
       - retries_exhausted
       title: FailureReason
