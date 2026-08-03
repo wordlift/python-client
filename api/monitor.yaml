@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.7.1
+  version: 2.8.0
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -957,14 +957,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ExpectationRequest'
+              oneOf:
+              - $ref: '#/components/schemas/StructuredDataExpectationRequest'
+              discriminator:
+                propertyName: type
+                mapping:
+                  structured_data: '#/components/schemas/StructuredDataExpectationRequest'
+              title: Body
       responses:
         '201':
           description: Successful Response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpectationResponse'
+                oneOf:
+                - $ref: '#/components/schemas/StructuredDataExpectationResponse'
+                discriminator:
+                  propertyName: type
+                  mapping:
+                    structured_data: '#/components/schemas/StructuredDataExpectationResponse'
+                title: Response Create Expectation Accounts  Account Id  Monitoring
+                  Expectations Post
         '422':
           description: Validation Error
           content:
@@ -988,11 +1001,11 @@ paths:
           anyOf:
           - type: string
           - type: 'null'
-          description: Case-insensitive substring search across config entity_type
-            and property_path.
+          description: Case-insensitive substring search across each expectation type's
+            searchable config fields.
           title: Q
-        description: Case-insensitive substring search across config entity_type and
-          property_path.
+        description: Case-insensitive substring search across each expectation type's
+          searchable config fields.
       - name: segment_id
         in: query
         required: false
@@ -1064,7 +1077,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpectationResponse'
+                oneOf:
+                - $ref: '#/components/schemas/StructuredDataExpectationResponse'
+                discriminator:
+                  propertyName: type
+                  mapping:
+                    structured_data: '#/components/schemas/StructuredDataExpectationResponse'
+                title: Response Get Expectation Accounts  Account Id  Monitoring Expectations  Expectation
+                  Id  Get
         '422':
           description: Validation Error
           content:
@@ -1552,47 +1572,6 @@ components:
       - check_name
       - items
       title: CheckTimeseriesResponse
-    ExpectationRequest:
-      properties:
-        check_name:
-          $ref: '#/components/schemas/MonitorCheckName'
-        severity:
-          $ref: '#/components/schemas/ExpectationSeverity'
-        config:
-          $ref: '#/components/schemas/StructuredDataExpectationConfig'
-      type: object
-      required:
-      - check_name
-      - severity
-      - config
-      title: ExpectationRequest
-      description: 'Body for ``POST /expectations``. Segment attachments are managed
-        via
-
-        the dedicated ``/expectations/{e}/segments`` endpoints.'
-    ExpectationResponse:
-      properties:
-        id:
-          type: string
-          title: Id
-        check_name:
-          $ref: '#/components/schemas/MonitorCheckName'
-        severity:
-          $ref: '#/components/schemas/ExpectationSeverity'
-        config:
-          $ref: '#/components/schemas/StructuredDataExpectationConfig'
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-      type: object
-      required:
-      - id
-      - check_name
-      - severity
-      - config
-      - created_at
-      title: ExpectationResponse
     ExpectationSeverity:
       type: string
       enum:
@@ -1612,7 +1591,12 @@ components:
       properties:
         items:
           items:
-            $ref: '#/components/schemas/ExpectationResponse'
+            oneOf:
+            - $ref: '#/components/schemas/StructuredDataExpectationResponse'
+            discriminator:
+              propertyName: type
+              mapping:
+                structured_data: '#/components/schemas/StructuredDataExpectationResponse'
           type: array
           title: Items
         total:
@@ -2120,6 +2104,47 @@ components:
         \ is no cross-field validator; the\nnullability of ``property_path`` does\
         \ the work.\n\nThe domain shape is always the current version; payload-version\n\
         tracking and upgrades live at the storage boundary in\n``expectation_repository``."
+    StructuredDataExpectationRequest:
+      properties:
+        type:
+          type: string
+          const: structured_data
+          title: Type
+        severity:
+          $ref: '#/components/schemas/ExpectationSeverity'
+        config:
+          $ref: '#/components/schemas/StructuredDataExpectationConfig'
+      type: object
+      required:
+      - type
+      - severity
+      - config
+      title: StructuredDataExpectationRequest
+    StructuredDataExpectationResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        severity:
+          $ref: '#/components/schemas/ExpectationSeverity'
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        type:
+          type: string
+          const: structured_data
+          title: Type
+        config:
+          $ref: '#/components/schemas/StructuredDataExpectationConfig'
+      type: object
+      required:
+      - id
+      - severity
+      - created_at
+      - type
+      - config
+      title: StructuredDataExpectationResponse
     ValidationError:
       properties:
         loc:
