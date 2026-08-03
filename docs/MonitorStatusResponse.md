@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **oldest_check_at** | **datetime** |  | [optional] 
 **latest_check_at** | **datetime** |  | [optional] 
 **checks** | **Dict[str, object]** |  | [optional] 
+**segment_ids** | **List[str]** |  | [optional] [default to []]
 
 ## Example
 

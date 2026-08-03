@@ -6987,6 +6987,7 @@ class DefaultApi:
         status: Annotated[Optional[List[MonitorStatusCheckStatus]], Field(description="Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).")] = None,
         score_min: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Minimum score (inclusive).")] = None,
         score_max: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Maximum score (inclusive).")] = None,
+        segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment.")] = None,
         order_by: Annotated[Optional[MonitorStatusOrderBy], Field(description="Field to sort by.")] = None,
         sort: Annotated[Optional[SortDirection], Field(description="Sort direction.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
@@ -7017,6 +7018,8 @@ class DefaultApi:
         :type score_min: float
         :param score_max: Maximum score (inclusive).
         :type score_max: float
+        :param segment_id: Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment.
+        :type segment_id: str
         :param order_by: Field to sort by.
         :type order_by: MonitorStatusOrderBy
         :param sort: Sort direction.
@@ -7053,6 +7056,7 @@ class DefaultApi:
             status=status,
             score_min=score_min,
             score_max=score_max,
+            segment_id=segment_id,
             order_by=order_by,
             sort=sort,
             cursor=cursor,
@@ -7086,6 +7090,7 @@ class DefaultApi:
         status: Annotated[Optional[List[MonitorStatusCheckStatus]], Field(description="Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).")] = None,
         score_min: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Minimum score (inclusive).")] = None,
         score_max: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Maximum score (inclusive).")] = None,
+        segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment.")] = None,
         order_by: Annotated[Optional[MonitorStatusOrderBy], Field(description="Field to sort by.")] = None,
         sort: Annotated[Optional[SortDirection], Field(description="Sort direction.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
@@ -7116,6 +7121,8 @@ class DefaultApi:
         :type score_min: float
         :param score_max: Maximum score (inclusive).
         :type score_max: float
+        :param segment_id: Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment.
+        :type segment_id: str
         :param order_by: Field to sort by.
         :type order_by: MonitorStatusOrderBy
         :param sort: Sort direction.
@@ -7152,6 +7159,7 @@ class DefaultApi:
             status=status,
             score_min=score_min,
             score_max=score_max,
+            segment_id=segment_id,
             order_by=order_by,
             sort=sort,
             cursor=cursor,
@@ -7185,6 +7193,7 @@ class DefaultApi:
         status: Annotated[Optional[List[MonitorStatusCheckStatus]], Field(description="Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).")] = None,
         score_min: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Minimum score (inclusive).")] = None,
         score_max: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Maximum score (inclusive).")] = None,
+        segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment.")] = None,
         order_by: Annotated[Optional[MonitorStatusOrderBy], Field(description="Field to sort by.")] = None,
         sort: Annotated[Optional[SortDirection], Field(description="Sort direction.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
@@ -7215,6 +7224,8 @@ class DefaultApi:
         :type score_min: float
         :param score_max: Maximum score (inclusive).
         :type score_max: float
+        :param segment_id: Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment.
+        :type segment_id: str
         :param order_by: Field to sort by.
         :type order_by: MonitorStatusOrderBy
         :param sort: Sort direction.
@@ -7251,6 +7262,7 @@ class DefaultApi:
             status=status,
             score_min=score_min,
             score_max=score_max,
+            segment_id=segment_id,
             order_by=order_by,
             sort=sort,
             cursor=cursor,
@@ -7279,6 +7291,7 @@ class DefaultApi:
         status,
         score_min,
         score_max,
+        segment_id,
         order_by,
         sort,
         cursor,
@@ -7321,6 +7334,10 @@ class DefaultApi:
         if score_max is not None:
             
             _query_params.append(('score_max', score_max))
+            
+        if segment_id is not None:
+            
+            _query_params.append(('segment_id', segment_id))
             
         if order_by is not None:
             

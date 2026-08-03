@@ -40,7 +40,8 @@ class MonitorStatusResponse(BaseModel):
     oldest_check_at: Optional[datetime] = None
     latest_check_at: Optional[datetime] = None
     checks: Optional[Dict[str, Any]] = None
-    __properties: ClassVar[List[str]] = ["monitor_id", "url", "status", "score", "ttfb_ms", "response_time_ms", "status_code", "last_fetch_success", "oldest_check_at", "latest_check_at", "checks"]
+    segment_ids: Optional[List[StrictStr]] = None
+    __properties: ClassVar[List[str]] = ["monitor_id", "url", "status", "score", "ttfb_ms", "response_time_ms", "status_code", "last_fetch_success", "oldest_check_at", "latest_check_at", "checks", "segment_ids"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -138,7 +139,8 @@ class MonitorStatusResponse(BaseModel):
             "last_fetch_success": obj.get("last_fetch_success"),
             "oldest_check_at": obj.get("oldest_check_at"),
             "latest_check_at": obj.get("latest_check_at"),
-            "checks": obj.get("checks")
+            "checks": obj.get("checks"),
+            "segment_ids": obj.get("segment_ids")
         })
         return _obj
 

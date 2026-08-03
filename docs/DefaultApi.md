@@ -1997,7 +1997,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_monitor_statuses_accounts_account_id_monitoring_status_get**
-> ListMonitorStatusResponse list_monitor_statuses_accounts_account_id_monitoring_status_get(account_id, url=url, status=status, score_min=score_min, score_max=score_max, order_by=order_by, sort=sort, cursor=cursor, limit=limit)
+> ListMonitorStatusResponse list_monitor_statuses_accounts_account_id_monitoring_status_get(account_id, url=url, status=status, score_min=score_min, score_max=score_max, segment_id=segment_id, order_by=order_by, sort=sort, cursor=cursor, limit=limit)
 
 List Monitor Statuses
 
@@ -2040,6 +2040,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     status = [wordlift_client.MonitorStatusCheckStatus()] # List[MonitorStatusCheckStatus] | Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`). (optional)
     score_min = 3.4 # float | Minimum score (inclusive). (optional)
     score_max = 3.4 # float | Maximum score (inclusive). (optional)
+    segment_id = 'segment_id_example' # str | Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. (optional)
     order_by = wordlift_client.MonitorStatusOrderBy() # MonitorStatusOrderBy | Field to sort by. (optional)
     sort = wordlift_client.SortDirection() # SortDirection | Sort direction. (optional)
     cursor = 'cursor_example' # str | Opaque pagination cursor from a previous response. (optional)
@@ -2047,7 +2048,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
     try:
         # List Monitor Statuses
-        api_response = await api_instance.list_monitor_statuses_accounts_account_id_monitoring_status_get(account_id, url=url, status=status, score_min=score_min, score_max=score_max, order_by=order_by, sort=sort, cursor=cursor, limit=limit)
+        api_response = await api_instance.list_monitor_statuses_accounts_account_id_monitoring_status_get(account_id, url=url, status=status, score_min=score_min, score_max=score_max, segment_id=segment_id, order_by=order_by, sort=sort, cursor=cursor, limit=limit)
         print("The response of DefaultApi->list_monitor_statuses_accounts_account_id_monitoring_status_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -2066,6 +2067,7 @@ Name | Type | Description  | Notes
  **status** | [**List[MonitorStatusCheckStatus]**](MonitorStatusCheckStatus.md)| Filter by check status (repeatable, e.g. &#x60;?status&#x3D;ERROR&amp;status&#x3D;WARNING&#x60;). | [optional] 
  **score_min** | **float**| Minimum score (inclusive). | [optional] 
  **score_max** | **float**| Maximum score (inclusive). | [optional] 
+ **segment_id** | **str**| Return only monitor statuses matched by the given segment&#39;s matchers. Pass &#39;unassigned&#39; to match monitor statuses matched by no segment. | [optional] 
  **order_by** | [**MonitorStatusOrderBy**](.md)| Field to sort by. | [optional] 
  **sort** | [**SortDirection**](.md)| Sort direction. | [optional] 
  **cursor** | **str**| Opaque pagination cursor from a previous response. | [optional] 

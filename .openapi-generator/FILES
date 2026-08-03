@@ -405,12 +405,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_body.py
-test/test_items_inner.py
-test/test_response_create_expectation_accounts_account_id_monitoring_expectations_post.py
-test/test_response_get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get.py
-test/test_structured_data_expectation_request.py
-test/test_structured_data_expectation_response.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
