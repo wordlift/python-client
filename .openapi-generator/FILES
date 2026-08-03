@@ -52,6 +52,7 @@ docs/AutomationReadiness.md
 docs/BatchRequest.md
 docs/BatchResponse.md
 docs/BatchStatus.md
+docs/Body.md
 docs/BootstrapApi.md
 docs/BootstrapJobOutcome.md
 docs/BootstrapJobResponse.md
@@ -139,8 +140,6 @@ docs/ErrorResponse.md
 docs/Event.md
 docs/EventsRequest.md
 docs/EventsResponse.md
-docs/ExpectationRequest.md
-docs/ExpectationResponse.md
 docs/ExpectationSeverity.md
 docs/FactCheckApi.md
 docs/FailureCreate.md
@@ -187,6 +186,7 @@ docs/InternalLinkSource.md
 docs/InternalLinking.md
 docs/InternalLinksApi.md
 docs/Item.md
+docs/ItemsInner.md
 docs/JobListResponse.md
 docs/JobResponse.md
 docs/JobStatus.md
@@ -309,6 +309,8 @@ docs/Request.md
 docs/ResetAccountRequest.md
 docs/ResourceType.md
 docs/Response.md
+docs/ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost.md
+docs/ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet.md
 docs/ResponseListWebsitePagesWebsitesHostPagesGet.md
 docs/Rule.md
 docs/RuleRequest.md
@@ -341,6 +343,8 @@ docs/SortDirection.md
 docs/StructuredData.md
 docs/StructuredDataConstraint.md
 docs/StructuredDataExpectationConfig.md
+docs/StructuredDataExpectationRequest.md
+docs/StructuredDataExpectationResponse.md
 docs/SubmitFactCheck200Response.md
 docs/SubmitFactCheckRequest.md
 docs/SubmitJobBody.md
@@ -401,7 +405,12 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_bootstrap_job_outcome.py
+test/test_body.py
+test/test_items_inner.py
+test/test_response_create_expectation_accounts_account_id_monitoring_expectations_post.py
+test/test_response_get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get.py
+test/test_structured_data_expectation_request.py
+test/test_structured_data_expectation_response.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -530,6 +539,7 @@ wordlift_client/models/automation_readiness.py
 wordlift_client/models/batch_request.py
 wordlift_client/models/batch_response.py
 wordlift_client/models/batch_status.py
+wordlift_client/models/body.py
 wordlift_client/models/bootstrap_job_outcome.py
 wordlift_client/models/bootstrap_job_response.py
 wordlift_client/models/bootstrap_job_status.py
@@ -593,8 +603,6 @@ wordlift_client/models/error_response.py
 wordlift_client/models/event.py
 wordlift_client/models/events_request.py
 wordlift_client/models/events_response.py
-wordlift_client/models/expectation_request.py
-wordlift_client/models/expectation_response.py
 wordlift_client/models/expectation_severity.py
 wordlift_client/models/failure_create.py
 wordlift_client/models/failure_reason.py
@@ -630,6 +638,7 @@ wordlift_client/models/internal_link_request.py
 wordlift_client/models/internal_link_source.py
 wordlift_client/models/internal_linking.py
 wordlift_client/models/item.py
+wordlift_client/models/items_inner.py
 wordlift_client/models/job_list_response.py
 wordlift_client/models/job_response.py
 wordlift_client/models/job_status.py
@@ -733,6 +742,8 @@ wordlift_client/models/request.py
 wordlift_client/models/reset_account_request.py
 wordlift_client/models/resource_type.py
 wordlift_client/models/response.py
+wordlift_client/models/response_create_expectation_accounts_account_id_monitoring_expectations_post.py
+wordlift_client/models/response_get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get.py
 wordlift_client/models/response_list_website_pages_websites_host_pages_get.py
 wordlift_client/models/rule.py
 wordlift_client/models/rule_request.py
@@ -759,6 +770,8 @@ wordlift_client/models/sort_direction.py
 wordlift_client/models/structured_data.py
 wordlift_client/models/structured_data_constraint.py
 wordlift_client/models/structured_data_expectation_config.py
+wordlift_client/models/structured_data_expectation_request.py
+wordlift_client/models/structured_data_expectation_response.py
 wordlift_client/models/submit_fact_check200_response.py
 wordlift_client/models/submit_fact_check_request.py
 wordlift_client/models/submit_job_body.py

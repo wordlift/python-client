@@ -25,9 +25,8 @@ from wordlift_client.models.add_resource_request import AddResourceRequest
 from wordlift_client.models.add_segment_glob_request import AddSegmentGlobRequest
 from wordlift_client.models.add_segment_url_request import AddSegmentUrlRequest
 from wordlift_client.models.batch_response import BatchResponse
+from wordlift_client.models.body import Body
 from wordlift_client.models.check_timeseries_response import CheckTimeseriesResponse
-from wordlift_client.models.expectation_request import ExpectationRequest
-from wordlift_client.models.expectation_response import ExpectationResponse
 from wordlift_client.models.list_expectations_response import ListExpectationsResponse
 from wordlift_client.models.list_monitor_status_response import ListMonitorStatusResponse
 from wordlift_client.models.list_monitors_response import ListMonitorsResponse
@@ -46,6 +45,8 @@ from wordlift_client.models.replace_expectation_segments_request import ReplaceE
 from wordlift_client.models.replace_monitors_request import ReplaceMonitorsRequest
 from wordlift_client.models.replace_segment_globs_request import ReplaceSegmentGlobsRequest
 from wordlift_client.models.replace_segment_urls_request import ReplaceSegmentUrlsRequest
+from wordlift_client.models.response_create_expectation_accounts_account_id_monitoring_expectations_post import ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost
+from wordlift_client.models.response_get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get import ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet
 from wordlift_client.models.segment_glob_response import SegmentGlobResponse
 from wordlift_client.models.segment_order_by import SegmentOrderBy
 from wordlift_client.models.segment_request import SegmentRequest
@@ -1826,7 +1827,7 @@ class DefaultApi:
     async def create_expectation_accounts_account_id_monitoring_expectations_post(
         self,
         account_id: StrictStr,
-        expectation_request: ExpectationRequest,
+        body: Body,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1839,15 +1840,15 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ExpectationResponse:
+    ) -> ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost:
         """Create Expectation
 
         Create a rule. Attachments are managed via the segments sub-resource.
 
         :param account_id: (required)
         :type account_id: str
-        :param expectation_request: (required)
-        :type expectation_request: ExpectationRequest
+        :param body: (required)
+        :type body: Body
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1872,7 +1873,7 @@ class DefaultApi:
 
         _param = self._create_expectation_accounts_account_id_monitoring_expectations_post_serialize(
             account_id=account_id,
-            expectation_request=expectation_request,
+            body=body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1880,7 +1881,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "ExpectationResponse",
+            '201': "ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -1898,7 +1899,7 @@ class DefaultApi:
     async def create_expectation_accounts_account_id_monitoring_expectations_post_with_http_info(
         self,
         account_id: StrictStr,
-        expectation_request: ExpectationRequest,
+        body: Body,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1911,15 +1912,15 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ExpectationResponse]:
+    ) -> ApiResponse[ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost]:
         """Create Expectation
 
         Create a rule. Attachments are managed via the segments sub-resource.
 
         :param account_id: (required)
         :type account_id: str
-        :param expectation_request: (required)
-        :type expectation_request: ExpectationRequest
+        :param body: (required)
+        :type body: Body
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1944,7 +1945,7 @@ class DefaultApi:
 
         _param = self._create_expectation_accounts_account_id_monitoring_expectations_post_serialize(
             account_id=account_id,
-            expectation_request=expectation_request,
+            body=body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1952,7 +1953,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "ExpectationResponse",
+            '201': "ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -1970,7 +1971,7 @@ class DefaultApi:
     async def create_expectation_accounts_account_id_monitoring_expectations_post_without_preload_content(
         self,
         account_id: StrictStr,
-        expectation_request: ExpectationRequest,
+        body: Body,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1990,8 +1991,8 @@ class DefaultApi:
 
         :param account_id: (required)
         :type account_id: str
-        :param expectation_request: (required)
-        :type expectation_request: ExpectationRequest
+        :param body: (required)
+        :type body: Body
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2016,7 +2017,7 @@ class DefaultApi:
 
         _param = self._create_expectation_accounts_account_id_monitoring_expectations_post_serialize(
             account_id=account_id,
-            expectation_request=expectation_request,
+            body=body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2024,7 +2025,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "ExpectationResponse",
+            '201': "ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -2037,7 +2038,7 @@ class DefaultApi:
     def _create_expectation_accounts_account_id_monitoring_expectations_post_serialize(
         self,
         account_id,
-        expectation_request,
+        body,
         _request_auth,
         _content_type,
         _headers,
@@ -2063,8 +2064,8 @@ class DefaultApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if expectation_request is not None:
-            _body_params = expectation_request
+        if body is not None:
+            _body_params = body
 
 
         # set the HTTP header `Accept`
@@ -4750,7 +4751,7 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ExpectationResponse:
+    ) -> ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet:
         """Get Expectation
 
 
@@ -4790,7 +4791,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ExpectationResponse",
+            '200': "ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -4821,7 +4822,7 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ExpectationResponse]:
+    ) -> ApiResponse[ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet]:
         """Get Expectation
 
 
@@ -4861,7 +4862,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ExpectationResponse",
+            '200': "ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -4932,7 +4933,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ExpectationResponse",
+            '200': "ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -6655,7 +6656,7 @@ class DefaultApi:
     async def list_expectations_accounts_account_id_monitoring_expectations_get(
         self,
         account_id: StrictStr,
-        q: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring search across config entity_type and property_path.")] = None,
+        q: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring search across each expectation type's searchable config fields.")] = None,
         segment_id: Annotated[Optional[List[StrictStr]], Field(description="Return only expectations attached to at least one of the given segments (repeatable).")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="Maximum number of expectations to return.")] = None,
@@ -6677,7 +6678,7 @@ class DefaultApi:
 
         :param account_id: (required)
         :type account_id: str
-        :param q: Case-insensitive substring search across config entity_type and property_path.
+        :param q: Case-insensitive substring search across each expectation type's searchable config fields.
         :type q: str
         :param segment_id: Return only expectations attached to at least one of the given segments (repeatable).
         :type segment_id: List[str]
@@ -6738,7 +6739,7 @@ class DefaultApi:
     async def list_expectations_accounts_account_id_monitoring_expectations_get_with_http_info(
         self,
         account_id: StrictStr,
-        q: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring search across config entity_type and property_path.")] = None,
+        q: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring search across each expectation type's searchable config fields.")] = None,
         segment_id: Annotated[Optional[List[StrictStr]], Field(description="Return only expectations attached to at least one of the given segments (repeatable).")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="Maximum number of expectations to return.")] = None,
@@ -6760,7 +6761,7 @@ class DefaultApi:
 
         :param account_id: (required)
         :type account_id: str
-        :param q: Case-insensitive substring search across config entity_type and property_path.
+        :param q: Case-insensitive substring search across each expectation type's searchable config fields.
         :type q: str
         :param segment_id: Return only expectations attached to at least one of the given segments (repeatable).
         :type segment_id: List[str]
@@ -6821,7 +6822,7 @@ class DefaultApi:
     async def list_expectations_accounts_account_id_monitoring_expectations_get_without_preload_content(
         self,
         account_id: StrictStr,
-        q: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring search across config entity_type and property_path.")] = None,
+        q: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring search across each expectation type's searchable config fields.")] = None,
         segment_id: Annotated[Optional[List[StrictStr]], Field(description="Return only expectations attached to at least one of the given segments (repeatable).")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="Maximum number of expectations to return.")] = None,
@@ -6843,7 +6844,7 @@ class DefaultApi:
 
         :param account_id: (required)
         :type account_id: str
-        :param q: Case-insensitive substring search across config entity_type and property_path.
+        :param q: Case-insensitive substring search across each expectation type's searchable config fields.
         :type q: str
         :param segment_id: Return only expectations attached to at least one of the given segments (repeatable).
         :type segment_id: List[str]

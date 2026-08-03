@@ -18,20 +18,28 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from wordlift_client.models.items_inner import ItemsInner
+from pydantic import BaseModel, ConfigDict, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List
+from wordlift_client.models.expectation_severity import ExpectationSeverity
+from wordlift_client.models.structured_data_expectation_config import StructuredDataExpectationConfig
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ListExpectationsResponse(BaseModel):
+class StructuredDataExpectationRequest(BaseModel):
     """
-    ListExpectationsResponse
+    StructuredDataExpectationRequest
     """ # noqa: E501
-    items: List[ItemsInner]
-    total: StrictInt
-    next_cursor: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["items", "total", "next_cursor"]
+    type: StrictStr
+    severity: ExpectationSeverity
+    config: StructuredDataExpectationConfig
+    __properties: ClassVar[List[str]] = ["type", "severity", "config"]
+
+    @field_validator('type')
+    def type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['structured_data']):
+            raise ValueError("must be one of enum values ('structured_data')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -51,7 +59,7 @@ class ListExpectationsResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ListExpectationsResponse from a JSON string"""
+        """Create an instance of StructuredDataExpectationRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,23 +80,14 @@ class ListExpectationsResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in items (list)
-        _items = []
-        if self.items:
-            for _item in self.items:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['items'] = _items
-        # set to None if next_cursor (nullable) is None
-        # and model_fields_set contains the field
-        if self.next_cursor is None and "next_cursor" in self.model_fields_set:
-            _dict['next_cursor'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of config
+        if self.config:
+            _dict['config'] = self.config.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ListExpectationsResponse from a dict"""
+        """Create an instance of StructuredDataExpectationRequest from a dict"""
         if obj is None:
             return None
 
@@ -96,9 +95,9 @@ class ListExpectationsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "items": [ItemsInner.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
-            "total": obj.get("total"),
-            "next_cursor": obj.get("next_cursor")
+            "type": obj.get("type"),
+            "severity": obj.get("severity"),
+            "config": StructuredDataExpectationConfig.from_dict(obj["config"]) if obj.get("config") is not None else None
         })
         return _obj
 

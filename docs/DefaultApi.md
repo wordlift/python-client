@@ -543,7 +543,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_expectation_accounts_account_id_monitoring_expectations_post**
-> ExpectationResponse create_expectation_accounts_account_id_monitoring_expectations_post(account_id, expectation_request)
+> ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost create_expectation_accounts_account_id_monitoring_expectations_post(account_id, body)
 
 Create Expectation
 
@@ -555,8 +555,8 @@ Create a rule. Attachments are managed via the segments sub-resource.
 
 ```python
 import wordlift_client
-from wordlift_client.models.expectation_request import ExpectationRequest
-from wordlift_client.models.expectation_response import ExpectationResponse
+from wordlift_client.models.body import Body
+from wordlift_client.models.response_create_expectation_accounts_account_id_monitoring_expectations_post import ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -582,11 +582,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.DefaultApi(api_client)
     account_id = 'account_id_example' # str | 
-    expectation_request = wordlift_client.ExpectationRequest() # ExpectationRequest | 
+    body = wordlift_client.Body() # Body | 
 
     try:
         # Create Expectation
-        api_response = await api_instance.create_expectation_accounts_account_id_monitoring_expectations_post(account_id, expectation_request)
+        api_response = await api_instance.create_expectation_accounts_account_id_monitoring_expectations_post(account_id, body)
         print("The response of DefaultApi->create_expectation_accounts_account_id_monitoring_expectations_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -601,11 +601,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **account_id** | **str**|  | 
- **expectation_request** | [**ExpectationRequest**](ExpectationRequest.md)|  | 
+ **body** | [**Body**](Body.md)|  | 
 
 ### Return type
 
-[**ExpectationResponse**](ExpectationResponse.md)
+[**ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost**](ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost.md)
 
 ### Authorization
 
@@ -1350,7 +1350,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get**
-> ExpectationResponse get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get(expectation_id, account_id)
+> ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get(expectation_id, account_id)
 
 Get Expectation
 
@@ -1360,7 +1360,7 @@ Get Expectation
 
 ```python
 import wordlift_client
-from wordlift_client.models.expectation_response import ExpectationResponse
+from wordlift_client.models.response_get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get import ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -1409,7 +1409,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ExpectationResponse**](ExpectationResponse.md)
+[**ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet**](ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet.md)
 
 ### Authorization
 
@@ -1947,7 +1947,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.DefaultApi(api_client)
     account_id = 'account_id_example' # str | 
-    q = 'q_example' # str | Case-insensitive substring search across config entity_type and property_path. (optional)
+    q = 'q_example' # str | Case-insensitive substring search across each expectation type's searchable config fields. (optional)
     segment_id = ['segment_id_example'] # List[str] | Return only expectations attached to at least one of the given segments (repeatable). (optional)
     cursor = 'cursor_example' # str | Opaque pagination cursor from a previous response. (optional)
     limit = 50 # int | Maximum number of expectations to return. (optional) (default to 50)
@@ -1969,7 +1969,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **account_id** | **str**|  | 
- **q** | **str**| Case-insensitive substring search across config entity_type and property_path. | [optional] 
+ **q** | **str**| Case-insensitive substring search across each expectation type&#39;s searchable config fields. | [optional] 
  **segment_id** | [**List[str]**](str.md)| Return only expectations attached to at least one of the given segments (repeatable). | [optional] 
  **cursor** | **str**| Opaque pagination cursor from a previous response. | [optional] 
  **limit** | **int**| Maximum number of expectations to return. | [optional] [default to 50]

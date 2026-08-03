@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.187.0"
+__version__ = "1.188.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -151,6 +151,7 @@ from wordlift_client.models.automation_readiness import AutomationReadiness
 from wordlift_client.models.batch_request import BatchRequest
 from wordlift_client.models.batch_response import BatchResponse
 from wordlift_client.models.batch_status import BatchStatus
+from wordlift_client.models.body import Body
 from wordlift_client.models.bootstrap_job_outcome import BootstrapJobOutcome
 from wordlift_client.models.bootstrap_job_response import BootstrapJobResponse
 from wordlift_client.models.bootstrap_job_status import BootstrapJobStatus
@@ -214,8 +215,6 @@ from wordlift_client.models.error_response import ErrorResponse
 from wordlift_client.models.event import Event
 from wordlift_client.models.events_request import EventsRequest
 from wordlift_client.models.events_response import EventsResponse
-from wordlift_client.models.expectation_request import ExpectationRequest
-from wordlift_client.models.expectation_response import ExpectationResponse
 from wordlift_client.models.expectation_severity import ExpectationSeverity
 from wordlift_client.models.failure_create import FailureCreate
 from wordlift_client.models.failure_reason import FailureReason
@@ -251,6 +250,7 @@ from wordlift_client.models.internal_link_request import InternalLinkRequest
 from wordlift_client.models.internal_link_source import InternalLinkSource
 from wordlift_client.models.internal_linking import InternalLinking
 from wordlift_client.models.item import Item
+from wordlift_client.models.items_inner import ItemsInner
 from wordlift_client.models.job_list_response import JobListResponse
 from wordlift_client.models.job_response import JobResponse
 from wordlift_client.models.job_status import JobStatus
@@ -354,6 +354,8 @@ from wordlift_client.models.request import Request
 from wordlift_client.models.reset_account_request import ResetAccountRequest
 from wordlift_client.models.resource_type import ResourceType
 from wordlift_client.models.response import Response
+from wordlift_client.models.response_create_expectation_accounts_account_id_monitoring_expectations_post import ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost
+from wordlift_client.models.response_get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get import ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet
 from wordlift_client.models.response_list_website_pages_websites_host_pages_get import ResponseListWebsitePagesWebsitesHostPagesGet
 from wordlift_client.models.rule import Rule
 from wordlift_client.models.rule_request import RuleRequest
@@ -380,6 +382,8 @@ from wordlift_client.models.sort_direction import SortDirection
 from wordlift_client.models.structured_data import StructuredData
 from wordlift_client.models.structured_data_constraint import StructuredDataConstraint
 from wordlift_client.models.structured_data_expectation_config import StructuredDataExpectationConfig
+from wordlift_client.models.structured_data_expectation_request import StructuredDataExpectationRequest
+from wordlift_client.models.structured_data_expectation_response import StructuredDataExpectationResponse
 from wordlift_client.models.submit_fact_check200_response import SubmitFactCheck200Response
 from wordlift_client.models.submit_fact_check_request import SubmitFactCheckRequest
 from wordlift_client.models.submit_job_body import SubmitJobBody

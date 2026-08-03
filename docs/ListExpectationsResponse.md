@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | [**List[ExpectationResponse]**](ExpectationResponse.md) |  | 
+**items** | [**List[ItemsInner]**](ItemsInner.md) |  | 
 **total** | **int** |  | 
 **next_cursor** | **str** |  | [optional] 
 
