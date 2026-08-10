@@ -1911,7 +1911,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_expectations_accounts_account_id_monitoring_expectations_get**
-> ListExpectationsResponse list_expectations_accounts_account_id_monitoring_expectations_get(account_id, q=q, segment_id=segment_id, cursor=cursor, limit=limit)
+> ListExpectationsResponse list_expectations_accounts_account_id_monitoring_expectations_get(account_id, q=q, id=id, segment_id=segment_id, cursor=cursor, limit=limit)
 
 List Expectations
 
@@ -1948,13 +1948,14 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     api_instance = wordlift_client.DefaultApi(api_client)
     account_id = 'account_id_example' # str | 
     q = 'q_example' # str | Case-insensitive substring search across each expectation type's searchable config fields. (optional)
+    id = ['id_example'] # List[str] | Return only expectations with one of the given ids (repeatable). (optional)
     segment_id = ['segment_id_example'] # List[str] | Return only expectations attached to at least one of the given segments (repeatable). (optional)
     cursor = 'cursor_example' # str | Opaque pagination cursor from a previous response. (optional)
     limit = 50 # int | Maximum number of expectations to return. (optional) (default to 50)
 
     try:
         # List Expectations
-        api_response = await api_instance.list_expectations_accounts_account_id_monitoring_expectations_get(account_id, q=q, segment_id=segment_id, cursor=cursor, limit=limit)
+        api_response = await api_instance.list_expectations_accounts_account_id_monitoring_expectations_get(account_id, q=q, id=id, segment_id=segment_id, cursor=cursor, limit=limit)
         print("The response of DefaultApi->list_expectations_accounts_account_id_monitoring_expectations_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -1970,6 +1971,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **account_id** | **str**|  | 
  **q** | **str**| Case-insensitive substring search across each expectation type&#39;s searchable config fields. | [optional] 
+ **id** | [**List[str]**](str.md)| Return only expectations with one of the given ids (repeatable). | [optional] 
  **segment_id** | [**List[str]**](str.md)| Return only expectations attached to at least one of the given segments (repeatable). | [optional] 
  **cursor** | **str**| Opaque pagination cursor from a previous response. | [optional] 
  **limit** | **int**| Maximum number of expectations to return. | [optional] [default to 50]

@@ -6657,6 +6657,7 @@ class DefaultApi:
         self,
         account_id: StrictStr,
         q: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring search across each expectation type's searchable config fields.")] = None,
+        id: Annotated[Optional[List[StrictStr]], Field(description="Return only expectations with one of the given ids (repeatable).")] = None,
         segment_id: Annotated[Optional[List[StrictStr]], Field(description="Return only expectations attached to at least one of the given segments (repeatable).")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="Maximum number of expectations to return.")] = None,
@@ -6680,6 +6681,8 @@ class DefaultApi:
         :type account_id: str
         :param q: Case-insensitive substring search across each expectation type's searchable config fields.
         :type q: str
+        :param id: Return only expectations with one of the given ids (repeatable).
+        :type id: List[str]
         :param segment_id: Return only expectations attached to at least one of the given segments (repeatable).
         :type segment_id: List[str]
         :param cursor: Opaque pagination cursor from a previous response.
@@ -6711,6 +6714,7 @@ class DefaultApi:
         _param = self._list_expectations_accounts_account_id_monitoring_expectations_get_serialize(
             account_id=account_id,
             q=q,
+            id=id,
             segment_id=segment_id,
             cursor=cursor,
             limit=limit,
@@ -6740,6 +6744,7 @@ class DefaultApi:
         self,
         account_id: StrictStr,
         q: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring search across each expectation type's searchable config fields.")] = None,
+        id: Annotated[Optional[List[StrictStr]], Field(description="Return only expectations with one of the given ids (repeatable).")] = None,
         segment_id: Annotated[Optional[List[StrictStr]], Field(description="Return only expectations attached to at least one of the given segments (repeatable).")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="Maximum number of expectations to return.")] = None,
@@ -6763,6 +6768,8 @@ class DefaultApi:
         :type account_id: str
         :param q: Case-insensitive substring search across each expectation type's searchable config fields.
         :type q: str
+        :param id: Return only expectations with one of the given ids (repeatable).
+        :type id: List[str]
         :param segment_id: Return only expectations attached to at least one of the given segments (repeatable).
         :type segment_id: List[str]
         :param cursor: Opaque pagination cursor from a previous response.
@@ -6794,6 +6801,7 @@ class DefaultApi:
         _param = self._list_expectations_accounts_account_id_monitoring_expectations_get_serialize(
             account_id=account_id,
             q=q,
+            id=id,
             segment_id=segment_id,
             cursor=cursor,
             limit=limit,
@@ -6823,6 +6831,7 @@ class DefaultApi:
         self,
         account_id: StrictStr,
         q: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring search across each expectation type's searchable config fields.")] = None,
+        id: Annotated[Optional[List[StrictStr]], Field(description="Return only expectations with one of the given ids (repeatable).")] = None,
         segment_id: Annotated[Optional[List[StrictStr]], Field(description="Return only expectations attached to at least one of the given segments (repeatable).")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="Maximum number of expectations to return.")] = None,
@@ -6846,6 +6855,8 @@ class DefaultApi:
         :type account_id: str
         :param q: Case-insensitive substring search across each expectation type's searchable config fields.
         :type q: str
+        :param id: Return only expectations with one of the given ids (repeatable).
+        :type id: List[str]
         :param segment_id: Return only expectations attached to at least one of the given segments (repeatable).
         :type segment_id: List[str]
         :param cursor: Opaque pagination cursor from a previous response.
@@ -6877,6 +6888,7 @@ class DefaultApi:
         _param = self._list_expectations_accounts_account_id_monitoring_expectations_get_serialize(
             account_id=account_id,
             q=q,
+            id=id,
             segment_id=segment_id,
             cursor=cursor,
             limit=limit,
@@ -6901,6 +6913,7 @@ class DefaultApi:
         self,
         account_id,
         q,
+        id,
         segment_id,
         cursor,
         limit,
@@ -6913,6 +6926,7 @@ class DefaultApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'id': 'multi',
             'segment_id': 'multi',
         }
 
@@ -6930,6 +6944,10 @@ class DefaultApi:
         if q is not None:
             
             _query_params.append(('q', q))
+            
+        if id is not None:
+            
+            _query_params.append(('id', id))
             
         if segment_id is not None:
             
