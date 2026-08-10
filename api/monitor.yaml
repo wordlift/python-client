@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.9.1
+  version: 2.10.0
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -1006,6 +1006,18 @@ paths:
           title: Q
         description: Case-insensitive substring search across each expectation type's
           searchable config fields.
+      - name: id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Return only expectations with one of the given ids (repeatable).
+          title: Id
+        description: Return only expectations with one of the given ids (repeatable).
       - name: segment_id
         in: query
         required: false
