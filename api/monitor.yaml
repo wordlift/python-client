@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.10.0
+  version: 2.17.0
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -943,7 +943,8 @@ paths:
   /accounts/{account_id}/monitoring/expectations:
     post:
       summary: Create Expectation
-      description: Create a rule. Attachments are managed via the segments sub-resource.
+      description: Create a rule. Attachments (and their severity) are managed via
+        the segments sub-resource.
       operationId: create_expectation_accounts__account_id__monitoring_expectations_post
       parameters:
       - name: account_id
@@ -1131,8 +1132,10 @@ paths:
   /accounts/{account_id}/monitoring/expectations/{expectation_id}/segments:
     get:
       summary: List Expectation Segments
-      description: Return a page of segments attached to the rule, ordered by ``(created_at,
-        id)``.
+      description: "Return a page of segment ids attached to the rule, ordered by\
+        \ the\nsegment's own ``(created_at, id)``, each carrying the severity of its\n\
+        attachment. Not hydrated \u2014 pair with the segment catalog you already\n\
+        have (segments are a small, bounded set) to resolve names/descriptions."
       operationId: list_expectation_segments_accounts__account_id__monitoring_expectations__expectation_id__segments_get
       parameters:
       - name: expectation_id
@@ -1174,7 +1177,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListSegmentsResponse'
+                $ref: '#/components/schemas/ListSegmentSeverityResponse'
         '422':
           description: Validation Error
           content:
@@ -1183,8 +1186,9 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     put:
       summary: Replace Expectation Segments
-      description: Replace the rule's set of attached segments wholesale. Returns
-        the new attached set.
+      description: "Replace the rule's set of attached segments (and their severities)\
+        \ wholesale.\nReturns confirmation of the new attached set, not re-fetched\
+        \ segments \u2014\nno endpoint on this resource hydrates the full segment."
       operationId: replace_expectation_segments_accounts__account_id__monitoring_expectations__expectation_id__segments_put
       parameters:
       - name: expectation_id
@@ -1213,7 +1217,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/SegmentResponse'
+                  $ref: '#/components/schemas/SegmentSeverityResponse'
                 title: Response Replace Expectation Segments Accounts  Account Id  Monitoring
                   Expectations  Expectation Id  Segments Put
         '422':
@@ -1225,7 +1229,11 @@ paths:
   /accounts/{account_id}/monitoring/expectations/{expectation_id}/segments/{segment_id}:
     put:
       summary: Attach Expectation Segment
-      description: Attach a segment to a rule. Idempotent. Returns the attached segment.
+      description: "Attach a segment to a rule with the given severity. Idempotent\
+        \ \u2014 a\nrepeated attach updates the severity. Returns confirmation of\
+        \ what was\nwritten \u2014 the caller already has both fields, and no endpoint\
+        \ on this\nresource hydrates the full segment (see the segment catalog for\
+        \ that)."
       operationId: attach_expectation_segment_accounts__account_id__monitoring_expectations__expectation_id__segments__segment_id__put
       parameters:
       - name: expectation_id
@@ -1246,13 +1254,19 @@ paths:
         schema:
           type: string
           title: Account Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachExpectationSegmentRequest'
       responses:
         '200':
           description: Successful Response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SegmentResponse'
+                $ref: '#/components/schemas/SegmentSeverityResponse'
         '422':
           description: Validation Error
           content:
@@ -1374,9 +1388,11 @@ paths:
           - type: 'null'
           description: Return only monitor statuses matched by the given segment's
             matchers. Pass 'unassigned' to match monitor statuses matched by no segment.
+            Omitted or empty returns the aggregate (unscoped) view.
           title: Segment Id
         description: Return only monitor statuses matched by the given segment's matchers.
-          Pass 'unassigned' to match monitor statuses matched by no segment.
+          Pass 'unassigned' to match monitor statuses matched by no segment. Omitted
+          or empty returns the aggregate (unscoped) view.
       - name: order_by
         in: query
         required: false
@@ -1444,6 +1460,18 @@ paths:
         schema:
           type: string
           title: Account Id
+      - name: segment_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Return the monitor's status scoped to this segment instead
+            of the aggregate view. Omitted or empty returns the aggregate view.
+          title: Segment Id
+        description: Return the monitor's status scoped to this segment instead of
+          the aggregate view. Omitted or empty returns the aggregate view.
       responses:
         '200':
           description: Successful Response
@@ -1549,6 +1577,15 @@ components:
       - pattern
       title: AddSegmentGlobRequest
       description: Body for ``POST /segments/{id}/globs``.
+    AttachExpectationSegmentRequest:
+      properties:
+        severity:
+          $ref: '#/components/schemas/ExpectationSeverity'
+      type: object
+      required:
+      - severity
+      title: AttachExpectationSegmentRequest
+      description: Body for ``PUT /expectations/{id}/segments/{segment_id}``.
     CheckResultItem:
       properties:
         created_at:
@@ -1596,6 +1633,35 @@ components:
       - check_name
       - items
       title: CheckTimeseriesResponse
+    ExpectationEvaluationSummary:
+      properties:
+        expectation_id:
+          type: string
+          title: Expectation Id
+        status:
+          $ref: '#/components/schemas/ExpectationOutcome'
+        evaluated_at:
+          type: string
+          format: date-time
+          title: Evaluated At
+        segments_membership:
+          items:
+            $ref: '#/components/schemas/SegmentSeverityResponse'
+          type: array
+          title: Segments Membership
+      type: object
+      required:
+      - expectation_id
+      - status
+      - evaluated_at
+      - segments_membership
+      title: ExpectationEvaluationSummary
+    ExpectationOutcome:
+      type: string
+      enum:
+      - pass
+      - fail
+      title: ExpectationOutcome
     ExpectationSeverity:
       type: string
       enum:
@@ -1726,6 +1792,26 @@ components:
       - items
       - total
       title: ListSegmentGlobsResponse
+    ListSegmentSeverityResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/SegmentSeverityResponse'
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - items
+      - total
+      title: ListSegmentSeverityResponse
     ListSegmentUrlsResponse:
       properties:
         items:
@@ -1851,6 +1937,7 @@ components:
       - latest_check_at
       - score
       - response_time_ms
+      - expectation_success_score
       title: MonitorStatusOrderBy
     MonitorStatusResponse:
       properties:
@@ -1910,6 +1997,22 @@ components:
           type: array
           title: Segment Ids
           default: []
+        segment_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Segment Id
+        expectation_evaluations:
+          items:
+            $ref: '#/components/schemas/ExpectationEvaluationSummary'
+          type: array
+          title: Expectation Evaluations
+          default: []
+        expectation_success_score:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Expectation Success Score
       type: object
       required:
       - monitor_id
@@ -1918,14 +2021,14 @@ components:
       title: MonitorStatusResponse
     ReplaceExpectationSegmentsRequest:
       properties:
-        segment_ids:
+        segments:
           items:
-            type: string
+            $ref: '#/components/schemas/SegmentSeverityRequest'
           type: array
-          title: Segment Ids
+          title: Segments
       type: object
       required:
-      - segment_ids
+      - segments
       title: ReplaceExpectationSegmentsRequest
       description: Body for ``PUT /expectations/{id}/segments``.
     ReplaceSegmentGlobsRequest:
@@ -2066,6 +2169,37 @@ components:
       - created_at
       - updated_at
       title: SegmentResponse
+    SegmentSeverityRequest:
+      properties:
+        segment_id:
+          type: string
+          title: Segment Id
+        severity:
+          $ref: '#/components/schemas/ExpectationSeverity'
+      type: object
+      required:
+      - segment_id
+      - severity
+      title: SegmentSeverityRequest
+      description: One entry of ``ReplaceExpectationSegmentsRequest.segments``.
+    SegmentSeverityResponse:
+      properties:
+        segment_id:
+          type: string
+          title: Segment Id
+        severity:
+          $ref: '#/components/schemas/ExpectationSeverity'
+      type: object
+      required:
+      - segment_id
+      - severity
+      title: SegmentSeverityResponse
+      description: "Response for every segment-attachment endpoint (attach, replace,\
+        \ and\nlist) \u2014 none of them hydrates a full Segment. The frontend already\n\
+        holds the full segment catalog (a small, bounded set fetched on many\npages),\
+        \ so this only needs to report segment_id/severity. Also doubles\nas the segment-membership\
+        \ shape nested in ExpectationEvaluationSummary\nbelow, since both are the\
+        \ same (segment_id, severity) pairing."
     SegmentUrlResponse:
       properties:
         id:
@@ -2140,14 +2274,11 @@ components:
           type: string
           const: structured_data
           title: Type
-        severity:
-          $ref: '#/components/schemas/ExpectationSeverity'
         config:
           $ref: '#/components/schemas/StructuredDataExpectationConfig'
       type: object
       required:
       - type
-      - severity
       - config
       title: StructuredDataExpectationRequest
     StructuredDataExpectationResponse:
@@ -2155,8 +2286,6 @@ components:
         id:
           type: string
           title: Id
-        severity:
-          $ref: '#/components/schemas/ExpectationSeverity'
         created_at:
           type: string
           format: date-time
@@ -2170,7 +2299,6 @@ components:
       type: object
       required:
       - id
-      - severity
       - created_at
       - type
       - config
