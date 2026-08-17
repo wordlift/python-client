@@ -31,10 +31,10 @@ class ExpectationEvaluationSummary(BaseModel):
     ExpectationEvaluationSummary
     """ # noqa: E501
     expectation_id: StrictStr
-    status: ExpectationOutcome
+    outcome: ExpectationOutcome
     evaluated_at: datetime
     segments_membership: List[SegmentSeverityResponse]
-    __properties: ClassVar[List[str]] = ["expectation_id", "status", "evaluated_at", "segments_membership"]
+    __properties: ClassVar[List[str]] = ["expectation_id", "outcome", "evaluated_at", "segments_membership"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,7 +95,7 @@ class ExpectationEvaluationSummary(BaseModel):
 
         _obj = cls.model_validate({
             "expectation_id": obj.get("expectation_id"),
-            "status": obj.get("status"),
+            "outcome": obj.get("outcome"),
             "evaluated_at": obj.get("evaluated_at"),
             "segments_membership": [SegmentSeverityResponse.from_dict(_item) for _item in obj["segments_membership"]] if obj.get("segments_membership") is not None else None
         })

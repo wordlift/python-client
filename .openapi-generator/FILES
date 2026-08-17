@@ -411,12 +411,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_attach_expectation_segment_request.py
-test/test_expectation_evaluation_summary.py
-test/test_expectation_outcome.py
-test/test_list_segment_severity_response.py
-test/test_segment_severity_request.py
-test/test_segment_severity_response.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py

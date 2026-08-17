@@ -42,10 +42,9 @@ class MonitorStatusResponse(BaseModel):
     latest_check_at: Optional[datetime] = None
     checks: Optional[Dict[str, Any]] = None
     segment_ids: Optional[List[StrictStr]] = None
-    segment_id: Optional[StrictStr] = None
     expectation_evaluations: Optional[List[ExpectationEvaluationSummary]] = None
     expectation_success_score: Optional[Union[StrictFloat, StrictInt]] = None
-    __properties: ClassVar[List[str]] = ["monitor_id", "url", "status", "score", "ttfb_ms", "response_time_ms", "status_code", "last_fetch_success", "oldest_check_at", "latest_check_at", "checks", "segment_ids", "segment_id", "expectation_evaluations", "expectation_success_score"]
+    __properties: ClassVar[List[str]] = ["monitor_id", "url", "status", "score", "ttfb_ms", "response_time_ms", "status_code", "last_fetch_success", "oldest_check_at", "latest_check_at", "checks", "segment_ids", "expectation_evaluations", "expectation_success_score"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -128,11 +127,6 @@ class MonitorStatusResponse(BaseModel):
         if self.latest_check_at is None and "latest_check_at" in self.model_fields_set:
             _dict['latest_check_at'] = None
 
-        # set to None if segment_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.segment_id is None and "segment_id" in self.model_fields_set:
-            _dict['segment_id'] = None
-
         # set to None if expectation_success_score (nullable) is None
         # and model_fields_set contains the field
         if self.expectation_success_score is None and "expectation_success_score" in self.model_fields_set:
@@ -162,7 +156,6 @@ class MonitorStatusResponse(BaseModel):
             "latest_check_at": obj.get("latest_check_at"),
             "checks": obj.get("checks"),
             "segment_ids": obj.get("segment_ids"),
-            "segment_id": obj.get("segment_id"),
             "expectation_evaluations": [ExpectationEvaluationSummary.from_dict(_item) for _item in obj["expectation_evaluations"]] if obj.get("expectation_evaluations") is not None else None,
             "expectation_success_score": obj.get("expectation_success_score")
         })

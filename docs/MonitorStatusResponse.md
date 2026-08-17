@@ -17,7 +17,6 @@ Name | Type | Description | Notes
 **latest_check_at** | **datetime** |  | [optional] 
 **checks** | **Dict[str, object]** |  | [optional] 
 **segment_ids** | **List[str]** |  | [optional] [default to []]
-**segment_id** | **str** |  | [optional] 
 **expectation_evaluations** | [**List[ExpectationEvaluationSummary]**](ExpectationEvaluationSummary.md) |  | [optional] [default to []]
 **expectation_success_score** | **float** |  | [optional] 
 

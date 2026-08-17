@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **expectation_id** | **str** |  | 
-**status** | [**ExpectationOutcome**](ExpectationOutcome.md) |  | 
+**outcome** | [**ExpectationOutcome**](ExpectationOutcome.md) |  | 
 **evaluated_at** | **datetime** |  | 
 **segments_membership** | [**List[SegmentSeverityResponse]**](SegmentSeverityResponse.md) |  | 
 
