@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.17.0
+  version: 2.17.1
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -1638,7 +1638,7 @@ components:
         expectation_id:
           type: string
           title: Expectation Id
-        status:
+        outcome:
           $ref: '#/components/schemas/ExpectationOutcome'
         evaluated_at:
           type: string
@@ -1652,7 +1652,7 @@ components:
       type: object
       required:
       - expectation_id
-      - status
+      - outcome
       - evaluated_at
       - segments_membership
       title: ExpectationEvaluationSummary
@@ -1997,11 +1997,6 @@ components:
           type: array
           title: Segment Ids
           default: []
-        segment_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Segment Id
         expectation_evaluations:
           items:
             $ref: '#/components/schemas/ExpectationEvaluationSummary'
