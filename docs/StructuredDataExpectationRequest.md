@@ -6,7 +6,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** |  | 
-**severity** | [**ExpectationSeverity**](ExpectationSeverity.md) |  | 
 **config** | [**StructuredDataExpectationConfig**](StructuredDataExpectationConfig.md) |  | 
 
 ## Example

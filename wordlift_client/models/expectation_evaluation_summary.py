@@ -18,18 +18,23 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List
-from wordlift_client.models.segment_severity_request import SegmentSeverityRequest
+from wordlift_client.models.expectation_outcome import ExpectationOutcome
+from wordlift_client.models.segment_severity_response import SegmentSeverityResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ReplaceExpectationSegmentsRequest(BaseModel):
+class ExpectationEvaluationSummary(BaseModel):
     """
-    Body for ``PUT /expectations/{id}/segments``.
+    ExpectationEvaluationSummary
     """ # noqa: E501
-    segments: List[SegmentSeverityRequest]
-    __properties: ClassVar[List[str]] = ["segments"]
+    expectation_id: StrictStr
+    status: ExpectationOutcome
+    evaluated_at: datetime
+    segments_membership: List[SegmentSeverityResponse]
+    __properties: ClassVar[List[str]] = ["expectation_id", "status", "evaluated_at", "segments_membership"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +54,7 @@ class ReplaceExpectationSegmentsRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ReplaceExpectationSegmentsRequest from a JSON string"""
+        """Create an instance of ExpectationEvaluationSummary from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,18 +75,18 @@ class ReplaceExpectationSegmentsRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in segments (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in segments_membership (list)
         _items = []
-        if self.segments:
-            for _item in self.segments:
+        if self.segments_membership:
+            for _item in self.segments_membership:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['segments'] = _items
+            _dict['segments_membership'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ReplaceExpectationSegmentsRequest from a dict"""
+        """Create an instance of ExpectationEvaluationSummary from a dict"""
         if obj is None:
             return None
 
@@ -89,7 +94,10 @@ class ReplaceExpectationSegmentsRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "segments": [SegmentSeverityRequest.from_dict(_item) for _item in obj["segments"]] if obj.get("segments") is not None else None
+            "expectation_id": obj.get("expectation_id"),
+            "status": obj.get("status"),
+            "evaluated_at": obj.get("evaluated_at"),
+            "segments_membership": [SegmentSeverityResponse.from_dict(_item) for _item in obj["segments_membership"]] if obj.get("segments_membership") is not None else None
         })
         return _obj
 

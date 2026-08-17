@@ -376,11 +376,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **attach_expectation_segment_accounts_account_id_monitoring_expectations_expectation_id_segments_segment_id_put**
-> SegmentResponse attach_expectation_segment_accounts_account_id_monitoring_expectations_expectation_id_segments_segment_id_put(expectation_id, segment_id, account_id)
+> SegmentSeverityResponse attach_expectation_segment_accounts_account_id_monitoring_expectations_expectation_id_segments_segment_id_put(expectation_id, segment_id, account_id, attach_expectation_segment_request)
 
 Attach Expectation Segment
 
-Attach a segment to a rule. Idempotent. Returns the attached segment.
+Attach a segment to a rule with the given severity. Idempotent — a repeated attach updates the severity. Returns confirmation of what was written — the caller already has both fields, and no endpoint on this resource hydrates the full segment (see the segment catalog for that).
 
 ### Example
 
@@ -388,7 +388,8 @@ Attach a segment to a rule. Idempotent. Returns the attached segment.
 
 ```python
 import wordlift_client
-from wordlift_client.models.segment_response import SegmentResponse
+from wordlift_client.models.attach_expectation_segment_request import AttachExpectationSegmentRequest
+from wordlift_client.models.segment_severity_response import SegmentSeverityResponse
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -416,10 +417,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     expectation_id = 'expectation_id_example' # str | 
     segment_id = 'segment_id_example' # str | 
     account_id = 'account_id_example' # str | 
+    attach_expectation_segment_request = wordlift_client.AttachExpectationSegmentRequest() # AttachExpectationSegmentRequest | 
 
     try:
         # Attach Expectation Segment
-        api_response = await api_instance.attach_expectation_segment_accounts_account_id_monitoring_expectations_expectation_id_segments_segment_id_put(expectation_id, segment_id, account_id)
+        api_response = await api_instance.attach_expectation_segment_accounts_account_id_monitoring_expectations_expectation_id_segments_segment_id_put(expectation_id, segment_id, account_id, attach_expectation_segment_request)
         print("The response of DefaultApi->attach_expectation_segment_accounts_account_id_monitoring_expectations_expectation_id_segments_segment_id_put:\n")
         pprint(api_response)
     except Exception as e:
@@ -436,10 +438,11 @@ Name | Type | Description  | Notes
  **expectation_id** | **str**|  | 
  **segment_id** | **str**|  | 
  **account_id** | **str**|  | 
+ **attach_expectation_segment_request** | [**AttachExpectationSegmentRequest**](AttachExpectationSegmentRequest.md)|  | 
 
 ### Return type
 
-[**SegmentResponse**](SegmentResponse.md)
+[**SegmentSeverityResponse**](SegmentSeverityResponse.md)
 
 ### Authorization
 
@@ -447,7 +450,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
@@ -547,7 +550,7 @@ Name | Type | Description  | Notes
 
 Create Expectation
 
-Create a rule. Attachments are managed via the segments sub-resource.
+Create a rule. Attachments (and their severity) are managed via the segments sub-resource.
 
 ### Example
 
@@ -1510,7 +1513,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_monitor_status_accounts_account_id_monitoring_monitors_monitor_id_status_get**
-> MonitorStatusResponse get_monitor_status_accounts_account_id_monitoring_monitors_monitor_id_status_get(monitor_id, account_id)
+> MonitorStatusResponse get_monitor_status_accounts_account_id_monitoring_monitors_monitor_id_status_get(monitor_id, account_id, segment_id=segment_id)
 
 Get Monitor Status
 
@@ -1547,10 +1550,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     api_instance = wordlift_client.DefaultApi(api_client)
     monitor_id = 'monitor_id_example' # str | 
     account_id = 'account_id_example' # str | 
+    segment_id = 'segment_id_example' # str | Return the monitor's status scoped to this segment instead of the aggregate view. Omitted or empty returns the aggregate view. (optional)
 
     try:
         # Get Monitor Status
-        api_response = await api_instance.get_monitor_status_accounts_account_id_monitoring_monitors_monitor_id_status_get(monitor_id, account_id)
+        api_response = await api_instance.get_monitor_status_accounts_account_id_monitoring_monitors_monitor_id_status_get(monitor_id, account_id, segment_id=segment_id)
         print("The response of DefaultApi->get_monitor_status_accounts_account_id_monitoring_monitors_monitor_id_status_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -1566,6 +1570,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **monitor_id** | **str**|  | 
  **account_id** | **str**|  | 
+ **segment_id** | **str**| Return the monitor&#39;s status scoped to this segment instead of the aggregate view. Omitted or empty returns the aggregate view. | [optional] 
 
 ### Return type
 
@@ -1825,11 +1830,11 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_expectation_segments_accounts_account_id_monitoring_expectations_expectation_id_segments_get**
-> ListSegmentsResponse list_expectation_segments_accounts_account_id_monitoring_expectations_expectation_id_segments_get(expectation_id, account_id, cursor=cursor, limit=limit)
+> ListSegmentSeverityResponse list_expectation_segments_accounts_account_id_monitoring_expectations_expectation_id_segments_get(expectation_id, account_id, cursor=cursor, limit=limit)
 
 List Expectation Segments
 
-Return a page of segments attached to the rule, ordered by ``(created_at, id)``.
+Return a page of segment ids attached to the rule, ordered by the segment's own ``(created_at, id)``, each carrying the severity of its attachment. Not hydrated — pair with the segment catalog you already have (segments are a small, bounded set) to resolve names/descriptions.
 
 ### Example
 
@@ -1837,7 +1842,7 @@ Return a page of segments attached to the rule, ordered by ``(created_at, id)``.
 
 ```python
 import wordlift_client
-from wordlift_client.models.list_segments_response import ListSegmentsResponse
+from wordlift_client.models.list_segment_severity_response import ListSegmentSeverityResponse
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -1890,7 +1895,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListSegmentsResponse**](ListSegmentsResponse.md)
+[**ListSegmentSeverityResponse**](ListSegmentSeverityResponse.md)
 
 ### Authorization
 
@@ -2042,7 +2047,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     status = [wordlift_client.MonitorStatusCheckStatus()] # List[MonitorStatusCheckStatus] | Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`). (optional)
     score_min = 3.4 # float | Minimum score (inclusive). (optional)
     score_max = 3.4 # float | Maximum score (inclusive). (optional)
-    segment_id = 'segment_id_example' # str | Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. (optional)
+    segment_id = 'segment_id_example' # str | Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view. (optional)
     order_by = wordlift_client.MonitorStatusOrderBy() # MonitorStatusOrderBy | Field to sort by. (optional)
     sort = wordlift_client.SortDirection() # SortDirection | Sort direction. (optional)
     cursor = 'cursor_example' # str | Opaque pagination cursor from a previous response. (optional)
@@ -2069,7 +2074,7 @@ Name | Type | Description  | Notes
  **status** | [**List[MonitorStatusCheckStatus]**](MonitorStatusCheckStatus.md)| Filter by check status (repeatable, e.g. &#x60;?status&#x3D;ERROR&amp;status&#x3D;WARNING&#x60;). | [optional] 
  **score_min** | **float**| Minimum score (inclusive). | [optional] 
  **score_max** | **float**| Maximum score (inclusive). | [optional] 
- **segment_id** | **str**| Return only monitor statuses matched by the given segment&#39;s matchers. Pass &#39;unassigned&#39; to match monitor statuses matched by no segment. | [optional] 
+ **segment_id** | **str**| Return only monitor statuses matched by the given segment&#39;s matchers. Pass &#39;unassigned&#39; to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view. | [optional] 
  **order_by** | [**MonitorStatusOrderBy**](.md)| Field to sort by. | [optional] 
  **sort** | [**SortDirection**](.md)| Sort direction. | [optional] 
  **cursor** | **str**| Opaque pagination cursor from a previous response. | [optional] 
@@ -2529,11 +2534,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_expectation_segments_accounts_account_id_monitoring_expectations_expectation_id_segments_put**
-> List[SegmentResponse] replace_expectation_segments_accounts_account_id_monitoring_expectations_expectation_id_segments_put(expectation_id, account_id, replace_expectation_segments_request)
+> List[SegmentSeverityResponse] replace_expectation_segments_accounts_account_id_monitoring_expectations_expectation_id_segments_put(expectation_id, account_id, replace_expectation_segments_request)
 
 Replace Expectation Segments
 
-Replace the rule's set of attached segments wholesale. Returns the new attached set.
+Replace the rule's set of attached segments (and their severities) wholesale. Returns confirmation of the new attached set, not re-fetched segments — no endpoint on this resource hydrates the full segment.
 
 ### Example
 
@@ -2542,7 +2547,7 @@ Replace the rule's set of attached segments wholesale. Returns the new attached 
 ```python
 import wordlift_client
 from wordlift_client.models.replace_expectation_segments_request import ReplaceExpectationSegmentsRequest
-from wordlift_client.models.segment_response import SegmentResponse
+from wordlift_client.models.segment_severity_response import SegmentSeverityResponse
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -2593,7 +2598,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[SegmentResponse]**](SegmentResponse.md)
+[**List[SegmentSeverityResponse]**](SegmentSeverityResponse.md)
 
 ### Authorization
 

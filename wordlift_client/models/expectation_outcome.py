@@ -19,23 +19,20 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class MonitorStatusOrderBy(str, Enum):
+class ExpectationOutcome(str, Enum):
     """
-    MonitorStatusOrderBy
+    ExpectationOutcome
     """
 
     """
     allowed enum values
     """
-    STATUS = 'status'
-    LATEST_CHECK_AT = 'latest_check_at'
-    SCORE = 'score'
-    RESPONSE_TIME_MS = 'response_time_ms'
-    EXPECTATION_SUCCESS_SCORE = 'expectation_success_score'
+    PASS = 'pass'
+    FAIL = 'fail'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of MonitorStatusOrderBy from a JSON string"""
+        """Create an instance of ExpectationOutcome from a JSON string"""
         return cls(json.loads(json_str))
 
 

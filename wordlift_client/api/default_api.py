@@ -24,6 +24,7 @@ from typing_extensions import Annotated
 from wordlift_client.models.add_resource_request import AddResourceRequest
 from wordlift_client.models.add_segment_glob_request import AddSegmentGlobRequest
 from wordlift_client.models.add_segment_url_request import AddSegmentUrlRequest
+from wordlift_client.models.attach_expectation_segment_request import AttachExpectationSegmentRequest
 from wordlift_client.models.batch_response import BatchResponse
 from wordlift_client.models.body import Body
 from wordlift_client.models.check_timeseries_response import CheckTimeseriesResponse
@@ -32,6 +33,7 @@ from wordlift_client.models.list_monitor_status_response import ListMonitorStatu
 from wordlift_client.models.list_monitors_response import ListMonitorsResponse
 from wordlift_client.models.list_runs_response import ListRunsResponse
 from wordlift_client.models.list_segment_globs_response import ListSegmentGlobsResponse
+from wordlift_client.models.list_segment_severity_response import ListSegmentSeverityResponse
 from wordlift_client.models.list_segment_urls_response import ListSegmentUrlsResponse
 from wordlift_client.models.list_segments_response import ListSegmentsResponse
 from wordlift_client.models.monitor_check_name import MonitorCheckName
@@ -51,6 +53,7 @@ from wordlift_client.models.segment_glob_response import SegmentGlobResponse
 from wordlift_client.models.segment_order_by import SegmentOrderBy
 from wordlift_client.models.segment_request import SegmentRequest
 from wordlift_client.models.segment_response import SegmentResponse
+from wordlift_client.models.segment_severity_response import SegmentSeverityResponse
 from wordlift_client.models.segment_url_response import SegmentUrlResponse
 from wordlift_client.models.sort_direction import SortDirection
 from wordlift_client.models.web_page_imports_batch_request import WebPageImportsBatchRequest
@@ -1249,6 +1252,7 @@ class DefaultApi:
         expectation_id: StrictStr,
         segment_id: StrictStr,
         account_id: StrictStr,
+        attach_expectation_segment_request: AttachExpectationSegmentRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1261,10 +1265,10 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> SegmentResponse:
+    ) -> SegmentSeverityResponse:
         """Attach Expectation Segment
 
-        Attach a segment to a rule. Idempotent. Returns the attached segment.
+        Attach a segment to a rule with the given severity. Idempotent — a repeated attach updates the severity. Returns confirmation of what was written — the caller already has both fields, and no endpoint on this resource hydrates the full segment (see the segment catalog for that).
 
         :param expectation_id: (required)
         :type expectation_id: str
@@ -1272,6 +1276,8 @@ class DefaultApi:
         :type segment_id: str
         :param account_id: (required)
         :type account_id: str
+        :param attach_expectation_segment_request: (required)
+        :type attach_expectation_segment_request: AttachExpectationSegmentRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1298,6 +1304,7 @@ class DefaultApi:
             expectation_id=expectation_id,
             segment_id=segment_id,
             account_id=account_id,
+            attach_expectation_segment_request=attach_expectation_segment_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1305,7 +1312,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SegmentResponse",
+            '200': "SegmentSeverityResponse",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -1325,6 +1332,7 @@ class DefaultApi:
         expectation_id: StrictStr,
         segment_id: StrictStr,
         account_id: StrictStr,
+        attach_expectation_segment_request: AttachExpectationSegmentRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1337,10 +1345,10 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[SegmentResponse]:
+    ) -> ApiResponse[SegmentSeverityResponse]:
         """Attach Expectation Segment
 
-        Attach a segment to a rule. Idempotent. Returns the attached segment.
+        Attach a segment to a rule with the given severity. Idempotent — a repeated attach updates the severity. Returns confirmation of what was written — the caller already has both fields, and no endpoint on this resource hydrates the full segment (see the segment catalog for that).
 
         :param expectation_id: (required)
         :type expectation_id: str
@@ -1348,6 +1356,8 @@ class DefaultApi:
         :type segment_id: str
         :param account_id: (required)
         :type account_id: str
+        :param attach_expectation_segment_request: (required)
+        :type attach_expectation_segment_request: AttachExpectationSegmentRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1374,6 +1384,7 @@ class DefaultApi:
             expectation_id=expectation_id,
             segment_id=segment_id,
             account_id=account_id,
+            attach_expectation_segment_request=attach_expectation_segment_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1381,7 +1392,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SegmentResponse",
+            '200': "SegmentSeverityResponse",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -1401,6 +1412,7 @@ class DefaultApi:
         expectation_id: StrictStr,
         segment_id: StrictStr,
         account_id: StrictStr,
+        attach_expectation_segment_request: AttachExpectationSegmentRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1416,7 +1428,7 @@ class DefaultApi:
     ) -> RESTResponseType:
         """Attach Expectation Segment
 
-        Attach a segment to a rule. Idempotent. Returns the attached segment.
+        Attach a segment to a rule with the given severity. Idempotent — a repeated attach updates the severity. Returns confirmation of what was written — the caller already has both fields, and no endpoint on this resource hydrates the full segment (see the segment catalog for that).
 
         :param expectation_id: (required)
         :type expectation_id: str
@@ -1424,6 +1436,8 @@ class DefaultApi:
         :type segment_id: str
         :param account_id: (required)
         :type account_id: str
+        :param attach_expectation_segment_request: (required)
+        :type attach_expectation_segment_request: AttachExpectationSegmentRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1450,6 +1464,7 @@ class DefaultApi:
             expectation_id=expectation_id,
             segment_id=segment_id,
             account_id=account_id,
+            attach_expectation_segment_request=attach_expectation_segment_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1457,7 +1472,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SegmentResponse",
+            '200': "SegmentSeverityResponse",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -1472,6 +1487,7 @@ class DefaultApi:
         expectation_id,
         segment_id,
         account_id,
+        attach_expectation_segment_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1501,6 +1517,8 @@ class DefaultApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
+        if attach_expectation_segment_request is not None:
+            _body_params = attach_expectation_segment_request
 
 
         # set the HTTP header `Accept`
@@ -1510,6 +1528,19 @@ class DefaultApi:
             ]
         )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -1843,7 +1874,7 @@ class DefaultApi:
     ) -> ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost:
         """Create Expectation
 
-        Create a rule. Attachments are managed via the segments sub-resource.
+        Create a rule. Attachments (and their severity) are managed via the segments sub-resource.
 
         :param account_id: (required)
         :type account_id: str
@@ -1915,7 +1946,7 @@ class DefaultApi:
     ) -> ApiResponse[ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost]:
         """Create Expectation
 
-        Create a rule. Attachments are managed via the segments sub-resource.
+        Create a rule. Attachments (and their severity) are managed via the segments sub-resource.
 
         :param account_id: (required)
         :type account_id: str
@@ -1987,7 +2018,7 @@ class DefaultApi:
     ) -> RESTResponseType:
         """Create Expectation
 
-        Create a rule. Attachments are managed via the segments sub-resource.
+        Create a rule. Attachments (and their severity) are managed via the segments sub-resource.
 
         :param account_id: (required)
         :type account_id: str
@@ -5285,6 +5316,7 @@ class DefaultApi:
         self,
         monitor_id: StrictStr,
         account_id: StrictStr,
+        segment_id: Annotated[Optional[StrictStr], Field(description="Return the monitor's status scoped to this segment instead of the aggregate view. Omitted or empty returns the aggregate view.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5305,6 +5337,8 @@ class DefaultApi:
         :type monitor_id: str
         :param account_id: (required)
         :type account_id: str
+        :param segment_id: Return the monitor's status scoped to this segment instead of the aggregate view. Omitted or empty returns the aggregate view.
+        :type segment_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5330,6 +5364,7 @@ class DefaultApi:
         _param = self._get_monitor_status_accounts_account_id_monitoring_monitors_monitor_id_status_get_serialize(
             monitor_id=monitor_id,
             account_id=account_id,
+            segment_id=segment_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5356,6 +5391,7 @@ class DefaultApi:
         self,
         monitor_id: StrictStr,
         account_id: StrictStr,
+        segment_id: Annotated[Optional[StrictStr], Field(description="Return the monitor's status scoped to this segment instead of the aggregate view. Omitted or empty returns the aggregate view.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5376,6 +5412,8 @@ class DefaultApi:
         :type monitor_id: str
         :param account_id: (required)
         :type account_id: str
+        :param segment_id: Return the monitor's status scoped to this segment instead of the aggregate view. Omitted or empty returns the aggregate view.
+        :type segment_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5401,6 +5439,7 @@ class DefaultApi:
         _param = self._get_monitor_status_accounts_account_id_monitoring_monitors_monitor_id_status_get_serialize(
             monitor_id=monitor_id,
             account_id=account_id,
+            segment_id=segment_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5427,6 +5466,7 @@ class DefaultApi:
         self,
         monitor_id: StrictStr,
         account_id: StrictStr,
+        segment_id: Annotated[Optional[StrictStr], Field(description="Return the monitor's status scoped to this segment instead of the aggregate view. Omitted or empty returns the aggregate view.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5447,6 +5487,8 @@ class DefaultApi:
         :type monitor_id: str
         :param account_id: (required)
         :type account_id: str
+        :param segment_id: Return the monitor's status scoped to this segment instead of the aggregate view. Omitted or empty returns the aggregate view.
+        :type segment_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5472,6 +5514,7 @@ class DefaultApi:
         _param = self._get_monitor_status_accounts_account_id_monitoring_monitors_monitor_id_status_get_serialize(
             monitor_id=monitor_id,
             account_id=account_id,
+            segment_id=segment_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5493,6 +5536,7 @@ class DefaultApi:
         self,
         monitor_id,
         account_id,
+        segment_id,
         _request_auth,
         _content_type,
         _headers,
@@ -5517,6 +5561,10 @@ class DefaultApi:
         if account_id is not None:
             _path_params['account_id'] = account_id
         # process the query parameters
+        if segment_id is not None:
+            
+            _query_params.append(('segment_id', segment_id))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -6361,10 +6409,10 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ListSegmentsResponse:
+    ) -> ListSegmentSeverityResponse:
         """List Expectation Segments
 
-        Return a page of segments attached to the rule, ordered by ``(created_at, id)``.
+        Return a page of segment ids attached to the rule, ordered by the segment's own ``(created_at, id)``, each carrying the severity of its attachment. Not hydrated — pair with the segment catalog you already have (segments are a small, bounded set) to resolve names/descriptions.
 
         :param expectation_id: (required)
         :type expectation_id: str
@@ -6408,7 +6456,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListSegmentsResponse",
+            '200': "ListSegmentSeverityResponse",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -6441,10 +6489,10 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ListSegmentsResponse]:
+    ) -> ApiResponse[ListSegmentSeverityResponse]:
         """List Expectation Segments
 
-        Return a page of segments attached to the rule, ordered by ``(created_at, id)``.
+        Return a page of segment ids attached to the rule, ordered by the segment's own ``(created_at, id)``, each carrying the severity of its attachment. Not hydrated — pair with the segment catalog you already have (segments are a small, bounded set) to resolve names/descriptions.
 
         :param expectation_id: (required)
         :type expectation_id: str
@@ -6488,7 +6536,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListSegmentsResponse",
+            '200': "ListSegmentSeverityResponse",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -6524,7 +6572,7 @@ class DefaultApi:
     ) -> RESTResponseType:
         """List Expectation Segments
 
-        Return a page of segments attached to the rule, ordered by ``(created_at, id)``.
+        Return a page of segment ids attached to the rule, ordered by the segment's own ``(created_at, id)``, each carrying the severity of its attachment. Not hydrated — pair with the segment catalog you already have (segments are a small, bounded set) to resolve names/descriptions.
 
         :param expectation_id: (required)
         :type expectation_id: str
@@ -6568,7 +6616,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListSegmentsResponse",
+            '200': "ListSegmentSeverityResponse",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -7005,7 +7053,7 @@ class DefaultApi:
         status: Annotated[Optional[List[MonitorStatusCheckStatus]], Field(description="Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).")] = None,
         score_min: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Minimum score (inclusive).")] = None,
         score_max: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Maximum score (inclusive).")] = None,
-        segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment.")] = None,
+        segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view.")] = None,
         order_by: Annotated[Optional[MonitorStatusOrderBy], Field(description="Field to sort by.")] = None,
         sort: Annotated[Optional[SortDirection], Field(description="Sort direction.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
@@ -7036,7 +7084,7 @@ class DefaultApi:
         :type score_min: float
         :param score_max: Maximum score (inclusive).
         :type score_max: float
-        :param segment_id: Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment.
+        :param segment_id: Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view.
         :type segment_id: str
         :param order_by: Field to sort by.
         :type order_by: MonitorStatusOrderBy
@@ -7108,7 +7156,7 @@ class DefaultApi:
         status: Annotated[Optional[List[MonitorStatusCheckStatus]], Field(description="Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).")] = None,
         score_min: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Minimum score (inclusive).")] = None,
         score_max: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Maximum score (inclusive).")] = None,
-        segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment.")] = None,
+        segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view.")] = None,
         order_by: Annotated[Optional[MonitorStatusOrderBy], Field(description="Field to sort by.")] = None,
         sort: Annotated[Optional[SortDirection], Field(description="Sort direction.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
@@ -7139,7 +7187,7 @@ class DefaultApi:
         :type score_min: float
         :param score_max: Maximum score (inclusive).
         :type score_max: float
-        :param segment_id: Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment.
+        :param segment_id: Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view.
         :type segment_id: str
         :param order_by: Field to sort by.
         :type order_by: MonitorStatusOrderBy
@@ -7211,7 +7259,7 @@ class DefaultApi:
         status: Annotated[Optional[List[MonitorStatusCheckStatus]], Field(description="Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).")] = None,
         score_min: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Minimum score (inclusive).")] = None,
         score_max: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Maximum score (inclusive).")] = None,
-        segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment.")] = None,
+        segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view.")] = None,
         order_by: Annotated[Optional[MonitorStatusOrderBy], Field(description="Field to sort by.")] = None,
         sort: Annotated[Optional[SortDirection], Field(description="Sort direction.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
@@ -7242,7 +7290,7 @@ class DefaultApi:
         :type score_min: float
         :param score_max: Maximum score (inclusive).
         :type score_max: float
-        :param segment_id: Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment.
+        :param segment_id: Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view.
         :type segment_id: str
         :param order_by: Field to sort by.
         :type order_by: MonitorStatusOrderBy
@@ -9008,10 +9056,10 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[SegmentResponse]:
+    ) -> List[SegmentSeverityResponse]:
         """Replace Expectation Segments
 
-        Replace the rule's set of attached segments wholesale. Returns the new attached set.
+        Replace the rule's set of attached segments (and their severities) wholesale. Returns confirmation of the new attached set, not re-fetched segments — no endpoint on this resource hydrates the full segment.
 
         :param expectation_id: (required)
         :type expectation_id: str
@@ -9052,7 +9100,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[SegmentResponse]",
+            '200': "List[SegmentSeverityResponse]",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -9084,10 +9132,10 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[SegmentResponse]]:
+    ) -> ApiResponse[List[SegmentSeverityResponse]]:
         """Replace Expectation Segments
 
-        Replace the rule's set of attached segments wholesale. Returns the new attached set.
+        Replace the rule's set of attached segments (and their severities) wholesale. Returns confirmation of the new attached set, not re-fetched segments — no endpoint on this resource hydrates the full segment.
 
         :param expectation_id: (required)
         :type expectation_id: str
@@ -9128,7 +9176,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[SegmentResponse]",
+            '200': "List[SegmentSeverityResponse]",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -9163,7 +9211,7 @@ class DefaultApi:
     ) -> RESTResponseType:
         """Replace Expectation Segments
 
-        Replace the rule's set of attached segments wholesale. Returns the new attached set.
+        Replace the rule's set of attached segments (and their severities) wholesale. Returns confirmation of the new attached set, not re-fetched segments — no endpoint on this resource hydrates the full segment.
 
         :param expectation_id: (required)
         :type expectation_id: str
@@ -9204,7 +9252,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[SegmentResponse]",
+            '200': "List[SegmentSeverityResponse]",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(

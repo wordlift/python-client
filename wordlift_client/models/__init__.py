@@ -39,6 +39,7 @@ from wordlift_client.models.anchor_text import AnchorText
 from wordlift_client.models.annotation import Annotation
 from wordlift_client.models.ask_request import AskRequest
 from wordlift_client.models.ask_response import AskResponse
+from wordlift_client.models.attach_expectation_segment_request import AttachExpectationSegmentRequest
 from wordlift_client.models.audit_data import AuditData
 from wordlift_client.models.audit_request import AuditRequest
 from wordlift_client.models.audit_response import AuditResponse
@@ -115,6 +116,8 @@ from wordlift_client.models.error_response import ErrorResponse
 from wordlift_client.models.event import Event
 from wordlift_client.models.events_request import EventsRequest
 from wordlift_client.models.events_response import EventsResponse
+from wordlift_client.models.expectation_evaluation_summary import ExpectationEvaluationSummary
+from wordlift_client.models.expectation_outcome import ExpectationOutcome
 from wordlift_client.models.expectation_severity import ExpectationSeverity
 from wordlift_client.models.failure_create import FailureCreate
 from wordlift_client.models.failure_reason import FailureReason
@@ -169,6 +172,7 @@ from wordlift_client.models.list_monitor_status_response import ListMonitorStatu
 from wordlift_client.models.list_monitors_response import ListMonitorsResponse
 from wordlift_client.models.list_runs_response import ListRunsResponse
 from wordlift_client.models.list_segment_globs_response import ListSegmentGlobsResponse
+from wordlift_client.models.list_segment_severity_response import ListSegmentSeverityResponse
 from wordlift_client.models.list_segment_urls_response import ListSegmentUrlsResponse
 from wordlift_client.models.list_segments_response import ListSegmentsResponse
 from wordlift_client.models.location_inner import LocationInner
@@ -270,6 +274,8 @@ from wordlift_client.models.segment_glob_response import SegmentGlobResponse
 from wordlift_client.models.segment_order_by import SegmentOrderBy
 from wordlift_client.models.segment_request import SegmentRequest
 from wordlift_client.models.segment_response import SegmentResponse
+from wordlift_client.models.segment_severity_request import SegmentSeverityRequest
+from wordlift_client.models.segment_severity_response import SegmentSeverityResponse
 from wordlift_client.models.segment_url_response import SegmentUrlResponse
 from wordlift_client.models.seo_fundamentals import SeoFundamentals
 from wordlift_client.models.site_files import SiteFiles

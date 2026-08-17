@@ -21,6 +21,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from wordlift_client.models.expectation_evaluation_summary import ExpectationEvaluationSummary
 from wordlift_client.models.monitor_status_check_status import MonitorStatusCheckStatus
 from typing import Optional, Set
 from typing_extensions import Self
@@ -41,7 +42,10 @@ class MonitorStatusResponse(BaseModel):
     latest_check_at: Optional[datetime] = None
     checks: Optional[Dict[str, Any]] = None
     segment_ids: Optional[List[StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["monitor_id", "url", "status", "score", "ttfb_ms", "response_time_ms", "status_code", "last_fetch_success", "oldest_check_at", "latest_check_at", "checks", "segment_ids"]
+    segment_id: Optional[StrictStr] = None
+    expectation_evaluations: Optional[List[ExpectationEvaluationSummary]] = None
+    expectation_success_score: Optional[Union[StrictFloat, StrictInt]] = None
+    __properties: ClassVar[List[str]] = ["monitor_id", "url", "status", "score", "ttfb_ms", "response_time_ms", "status_code", "last_fetch_success", "oldest_check_at", "latest_check_at", "checks", "segment_ids", "segment_id", "expectation_evaluations", "expectation_success_score"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,6 +86,13 @@ class MonitorStatusResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in expectation_evaluations (list)
+        _items = []
+        if self.expectation_evaluations:
+            for _item in self.expectation_evaluations:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['expectation_evaluations'] = _items
         # set to None if score (nullable) is None
         # and model_fields_set contains the field
         if self.score is None and "score" in self.model_fields_set:
@@ -117,6 +128,16 @@ class MonitorStatusResponse(BaseModel):
         if self.latest_check_at is None and "latest_check_at" in self.model_fields_set:
             _dict['latest_check_at'] = None
 
+        # set to None if segment_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.segment_id is None and "segment_id" in self.model_fields_set:
+            _dict['segment_id'] = None
+
+        # set to None if expectation_success_score (nullable) is None
+        # and model_fields_set contains the field
+        if self.expectation_success_score is None and "expectation_success_score" in self.model_fields_set:
+            _dict['expectation_success_score'] = None
+
         return _dict
 
     @classmethod
@@ -140,7 +161,10 @@ class MonitorStatusResponse(BaseModel):
             "oldest_check_at": obj.get("oldest_check_at"),
             "latest_check_at": obj.get("latest_check_at"),
             "checks": obj.get("checks"),
-            "segment_ids": obj.get("segment_ids")
+            "segment_ids": obj.get("segment_ids"),
+            "segment_id": obj.get("segment_id"),
+            "expectation_evaluations": [ExpectationEvaluationSummary.from_dict(_item) for _item in obj["expectation_evaluations"]] if obj.get("expectation_evaluations") is not None else None,
+            "expectation_success_score": obj.get("expectation_success_score")
         })
         return _obj
 

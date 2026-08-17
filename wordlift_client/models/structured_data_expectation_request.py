@@ -20,7 +20,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List
-from wordlift_client.models.expectation_severity import ExpectationSeverity
 from wordlift_client.models.structured_data_expectation_config import StructuredDataExpectationConfig
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,9 +29,8 @@ class StructuredDataExpectationRequest(BaseModel):
     StructuredDataExpectationRequest
     """ # noqa: E501
     type: StrictStr
-    severity: ExpectationSeverity
     config: StructuredDataExpectationConfig
-    __properties: ClassVar[List[str]] = ["type", "severity", "config"]
+    __properties: ClassVar[List[str]] = ["type", "config"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -96,7 +94,6 @@ class StructuredDataExpectationRequest(BaseModel):
 
         _obj = cls.model_validate({
             "type": obj.get("type"),
-            "severity": obj.get("severity"),
             "config": StructuredDataExpectationConfig.from_dict(obj["config"]) if obj.get("config") is not None else None
         })
         return _obj

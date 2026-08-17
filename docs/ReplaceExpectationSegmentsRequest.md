@@ -6,7 +6,7 @@ Body for ``PUT /expectations/{id}/segments``.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**segment_ids** | **List[str]** |  | 
+**segments** | [**List[SegmentSeverityRequest]**](SegmentSeverityRequest.md) |  | 
 
 ## Example
 

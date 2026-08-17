@@ -37,6 +37,7 @@ docs/AnchorText.md
 docs/Annotation.md
 docs/AskRequest.md
 docs/AskResponse.md
+docs/AttachExpectationSegmentRequest.md
 docs/AuditApi.md
 docs/AuditData.md
 docs/AuditRequest.md
@@ -140,6 +141,8 @@ docs/ErrorResponse.md
 docs/Event.md
 docs/EventsRequest.md
 docs/EventsResponse.md
+docs/ExpectationEvaluationSummary.md
+docs/ExpectationOutcome.md
 docs/ExpectationSeverity.md
 docs/FactCheckApi.md
 docs/FailureCreate.md
@@ -209,6 +212,7 @@ docs/ListMonitorStatusResponse.md
 docs/ListMonitorsResponse.md
 docs/ListRunsResponse.md
 docs/ListSegmentGlobsResponse.md
+docs/ListSegmentSeverityResponse.md
 docs/ListSegmentUrlsResponse.md
 docs/ListSegmentsResponse.md
 docs/LocationInner.md
@@ -327,6 +331,8 @@ docs/SegmentGlobResponse.md
 docs/SegmentOrderBy.md
 docs/SegmentRequest.md
 docs/SegmentResponse.md
+docs/SegmentSeverityRequest.md
+docs/SegmentSeverityResponse.md
 docs/SegmentUrlResponse.md
 docs/SeoFundamentals.md
 docs/SiteFiles.md
@@ -405,6 +411,12 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_attach_expectation_segment_request.py
+test/test_expectation_evaluation_summary.py
+test/test_expectation_outcome.py
+test/test_list_segment_severity_response.py
+test/test_segment_severity_request.py
+test/test_segment_severity_response.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -521,6 +533,7 @@ wordlift_client/models/anchor_text.py
 wordlift_client/models/annotation.py
 wordlift_client/models/ask_request.py
 wordlift_client/models/ask_response.py
+wordlift_client/models/attach_expectation_segment_request.py
 wordlift_client/models/audit_data.py
 wordlift_client/models/audit_request.py
 wordlift_client/models/audit_response.py
@@ -597,6 +610,8 @@ wordlift_client/models/error_response.py
 wordlift_client/models/event.py
 wordlift_client/models/events_request.py
 wordlift_client/models/events_response.py
+wordlift_client/models/expectation_evaluation_summary.py
+wordlift_client/models/expectation_outcome.py
 wordlift_client/models/expectation_severity.py
 wordlift_client/models/failure_create.py
 wordlift_client/models/failure_reason.py
@@ -651,6 +666,7 @@ wordlift_client/models/list_monitor_status_response.py
 wordlift_client/models/list_monitors_response.py
 wordlift_client/models/list_runs_response.py
 wordlift_client/models/list_segment_globs_response.py
+wordlift_client/models/list_segment_severity_response.py
 wordlift_client/models/list_segment_urls_response.py
 wordlift_client/models/list_segments_response.py
 wordlift_client/models/location_inner.py
@@ -752,6 +768,8 @@ wordlift_client/models/segment_glob_response.py
 wordlift_client/models/segment_order_by.py
 wordlift_client/models/segment_request.py
 wordlift_client/models/segment_response.py
+wordlift_client/models/segment_severity_request.py
+wordlift_client/models/segment_severity_response.py
 wordlift_client/models/segment_url_response.py
 wordlift_client/models/seo_fundamentals.py
 wordlift_client/models/site_files.py
