@@ -36,6 +36,8 @@ from wordlift_client.api.embedding_api import EmbeddingApi
 from wordlift_client.api.embeddings_api import EmbeddingsApi
 from wordlift_client.api.entities_api import EntitiesApi
 from wordlift_client.api.entity_gaps_api import EntityGapsApi
+from wordlift_client.api.expectation_summary_api import ExpectationSummaryApi
+from wordlift_client.api.expectations_api import ExpectationsApi
 from wordlift_client.api.fact_check_api import FactCheckApi
 from wordlift_client.api.fetch_api import FetchApi
 from wordlift_client.api.google_merchants_api import GoogleMerchantsApi
@@ -51,6 +53,10 @@ from wordlift_client.api.long_tails_api import LongTailsApi
 from wordlift_client.api.merchant_syncs_api import MerchantSyncsApi
 from wordlift_client.api.merchants_api import MerchantsApi
 from wordlift_client.api.microdata_api import MicrodataApi
+from wordlift_client.api.monitor_checks_api import MonitorChecksApi
+from wordlift_client.api.monitor_runs_api import MonitorRunsApi
+from wordlift_client.api.monitor_status_api import MonitorStatusApi
+from wordlift_client.api.monitors_api import MonitorsApi
 from wordlift_client.api.o_auth2_authorized_clients_api import OAuth2AuthorizedClientsApi
 from wordlift_client.api.pages_explorer_api import PagesExplorerApi
 from wordlift_client.api.platform_consumptions_api import PlatformConsumptionsApi
@@ -62,6 +68,9 @@ from wordlift_client.api.question_and_answer_sets_api import QuestionAndAnswerSe
 from wordlift_client.api.questions_and_answers_api import QuestionsAndAnswersApi
 from wordlift_client.api.redeem_codes_api import RedeemCodesApi
 from wordlift_client.api.rules_api import RulesApi
+from wordlift_client.api.segment_globs_api import SegmentGlobsApi
+from wordlift_client.api.segment_urls_api import SegmentURLsApi
+from wordlift_client.api.segments_api import SegmentsApi
 from wordlift_client.api.sitemap_generator_api import SitemapGeneratorApi
 from wordlift_client.api.sitemap_imports_api import SitemapImportsApi
 from wordlift_client.api.smart_contents_api import SmartContentsApi

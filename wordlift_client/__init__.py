@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.193.0"
+__version__ = "1.194.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -53,6 +53,8 @@ from wordlift_client.api.embedding_api import EmbeddingApi
 from wordlift_client.api.embeddings_api import EmbeddingsApi
 from wordlift_client.api.entities_api import EntitiesApi
 from wordlift_client.api.entity_gaps_api import EntityGapsApi
+from wordlift_client.api.expectation_summary_api import ExpectationSummaryApi
+from wordlift_client.api.expectations_api import ExpectationsApi
 from wordlift_client.api.fact_check_api import FactCheckApi
 from wordlift_client.api.fetch_api import FetchApi
 from wordlift_client.api.google_merchants_api import GoogleMerchantsApi
@@ -68,6 +70,10 @@ from wordlift_client.api.long_tails_api import LongTailsApi
 from wordlift_client.api.merchant_syncs_api import MerchantSyncsApi
 from wordlift_client.api.merchants_api import MerchantsApi
 from wordlift_client.api.microdata_api import MicrodataApi
+from wordlift_client.api.monitor_checks_api import MonitorChecksApi
+from wordlift_client.api.monitor_runs_api import MonitorRunsApi
+from wordlift_client.api.monitor_status_api import MonitorStatusApi
+from wordlift_client.api.monitors_api import MonitorsApi
 from wordlift_client.api.o_auth2_authorized_clients_api import OAuth2AuthorizedClientsApi
 from wordlift_client.api.pages_explorer_api import PagesExplorerApi
 from wordlift_client.api.platform_consumptions_api import PlatformConsumptionsApi
@@ -79,6 +85,9 @@ from wordlift_client.api.question_and_answer_sets_api import QuestionAndAnswerSe
 from wordlift_client.api.questions_and_answers_api import QuestionsAndAnswersApi
 from wordlift_client.api.redeem_codes_api import RedeemCodesApi
 from wordlift_client.api.rules_api import RulesApi
+from wordlift_client.api.segment_globs_api import SegmentGlobsApi
+from wordlift_client.api.segment_urls_api import SegmentURLsApi
+from wordlift_client.api.segments_api import SegmentsApi
 from wordlift_client.api.sitemap_generator_api import SitemapGeneratorApi
 from wordlift_client.api.sitemap_imports_api import SitemapImportsApi
 from wordlift_client.api.smart_contents_api import SmartContentsApi
@@ -219,6 +228,12 @@ from wordlift_client.models.events_response import EventsResponse
 from wordlift_client.models.expectation_evaluation_summary import ExpectationEvaluationSummary
 from wordlift_client.models.expectation_outcome import ExpectationOutcome
 from wordlift_client.models.expectation_severity import ExpectationSeverity
+from wordlift_client.models.expectation_summary_by_expectation_item import ExpectationSummaryByExpectationItem
+from wordlift_client.models.expectation_summary_by_type_item import ExpectationSummaryByTypeItem
+from wordlift_client.models.expectation_summary_outcome import ExpectationSummaryOutcome
+from wordlift_client.models.expectation_summary_outcome_stat import ExpectationSummaryOutcomeStat
+from wordlift_client.models.expectation_summary_type_stat import ExpectationSummaryTypeStat
+from wordlift_client.models.expectation_type import ExpectationType
 from wordlift_client.models.failure_create import FailureCreate
 from wordlift_client.models.failure_reason import FailureReason
 from wordlift_client.models.failure_response import FailureResponse
@@ -267,6 +282,8 @@ from wordlift_client.models.kpi_totals import KpiTotals
 from wordlift_client.models.level_enum import LevelEnum
 from wordlift_client.models.link_group import LinkGroup
 from wordlift_client.models.link_group_response import LinkGroupResponse
+from wordlift_client.models.list_expectation_summary_by_expectation_response import ListExpectationSummaryByExpectationResponse
+from wordlift_client.models.list_expectation_summary_by_type_response import ListExpectationSummaryByTypeResponse
 from wordlift_client.models.list_expectations_response import ListExpectationsResponse
 from wordlift_client.models.list_monitor_status_response import ListMonitorStatusResponse
 from wordlift_client.models.list_monitors_response import ListMonitorsResponse
