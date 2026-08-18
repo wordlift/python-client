@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.192.0"
+__version__ = "1.193.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -358,6 +358,7 @@ from wordlift_client.models.request import Request
 from wordlift_client.models.reset_account_request import ResetAccountRequest
 from wordlift_client.models.resource_type import ResourceType
 from wordlift_client.models.response import Response
+from wordlift_client.models.response200_create_expectation_accounts_account_id_monitoring_expectations_post import Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost
 from wordlift_client.models.response_create_expectation_accounts_account_id_monitoring_expectations_post import ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost
 from wordlift_client.models.response_get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get import ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet
 from wordlift_client.models.response_list_website_pages_websites_host_pages_get import ResponseListWebsitePagesWebsitesHostPagesGet

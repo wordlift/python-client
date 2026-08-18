@@ -47,7 +47,7 @@ from wordlift_client.models.replace_expectation_segments_request import ReplaceE
 from wordlift_client.models.replace_monitors_request import ReplaceMonitorsRequest
 from wordlift_client.models.replace_segment_globs_request import ReplaceSegmentGlobsRequest
 from wordlift_client.models.replace_segment_urls_request import ReplaceSegmentUrlsRequest
-from wordlift_client.models.response_create_expectation_accounts_account_id_monitoring_expectations_post import ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost
+from wordlift_client.models.response200_create_expectation_accounts_account_id_monitoring_expectations_post import Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost
 from wordlift_client.models.response_get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get import ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet
 from wordlift_client.models.segment_glob_response import SegmentGlobResponse
 from wordlift_client.models.segment_order_by import SegmentOrderBy
@@ -1871,10 +1871,10 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost:
+    ) -> Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost:
         """Create Expectation
 
-        Create a rule. Attachments (and their severity) are managed via the segments sub-resource.
+        Create a rule. Idempotent on conflict: an identical (type, config) rule returns the existing rule with 200; a new rule returns 201. Attachments (and their severity) are managed via the segments sub-resource.
 
         :param account_id: (required)
         :type account_id: str
@@ -1912,6 +1912,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost",
             '201': "ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost",
             '422': "MonitorHTTPValidationError",
         }
@@ -1943,10 +1944,10 @@ class DefaultApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost]:
+    ) -> ApiResponse[Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost]:
         """Create Expectation
 
-        Create a rule. Attachments (and their severity) are managed via the segments sub-resource.
+        Create a rule. Idempotent on conflict: an identical (type, config) rule returns the existing rule with 200; a new rule returns 201. Attachments (and their severity) are managed via the segments sub-resource.
 
         :param account_id: (required)
         :type account_id: str
@@ -1984,6 +1985,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost",
             '201': "ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost",
             '422': "MonitorHTTPValidationError",
         }
@@ -2018,7 +2020,7 @@ class DefaultApi:
     ) -> RESTResponseType:
         """Create Expectation
 
-        Create a rule. Attachments (and their severity) are managed via the segments sub-resource.
+        Create a rule. Idempotent on conflict: an identical (type, config) rule returns the existing rule with 200; a new rule returns 201. Attachments (and their severity) are managed via the segments sub-resource.
 
         :param account_id: (required)
         :type account_id: str
@@ -2056,6 +2058,7 @@ class DefaultApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost",
             '201': "ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost",
             '422': "MonitorHTTPValidationError",
         }

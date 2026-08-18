@@ -313,6 +313,7 @@ docs/Request.md
 docs/ResetAccountRequest.md
 docs/ResourceType.md
 docs/Response.md
+docs/Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost.md
 docs/ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost.md
 docs/ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet.md
 docs/ResponseListWebsitePagesWebsitesHostPagesGet.md
@@ -411,6 +412,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_response200_create_expectation_accounts_account_id_monitoring_expectations_post.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -746,6 +748,7 @@ wordlift_client/models/request.py
 wordlift_client/models/reset_account_request.py
 wordlift_client/models/resource_type.py
 wordlift_client/models/response.py
+wordlift_client/models/response200_create_expectation_accounts_account_id_monitoring_expectations_post.py
 wordlift_client/models/response_create_expectation_accounts_account_id_monitoring_expectations_post.py
 wordlift_client/models/response_get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get.py
 wordlift_client/models/response_list_website_pages_websites_host_pages_get.py

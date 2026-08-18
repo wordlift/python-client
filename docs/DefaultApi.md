@@ -546,11 +546,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_expectation_accounts_account_id_monitoring_expectations_post**
-> ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost create_expectation_accounts_account_id_monitoring_expectations_post(account_id, body)
+> Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost create_expectation_accounts_account_id_monitoring_expectations_post(account_id, body)
 
 Create Expectation
 
-Create a rule. Attachments (and their severity) are managed via the segments sub-resource.
+Create a rule. Idempotent on conflict: an identical (type, config) rule returns the existing rule with 200; a new rule returns 201. Attachments (and their severity) are managed via the segments sub-resource.
 
 ### Example
 
@@ -559,7 +559,7 @@ Create a rule. Attachments (and their severity) are managed via the segments sub
 ```python
 import wordlift_client
 from wordlift_client.models.body import Body
-from wordlift_client.models.response_create_expectation_accounts_account_id_monitoring_expectations_post import ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost
+from wordlift_client.models.response200_create_expectation_accounts_account_id_monitoring_expectations_post import Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -608,7 +608,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost**](ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost.md)
+[**Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost**](Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost.md)
 
 ### Authorization
 
@@ -623,6 +623,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+**200** | An identical (type, config) rule already existed |  -  |
 **201** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 
