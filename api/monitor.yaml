@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.17.1
+  version: 2.18.1
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -943,8 +943,13 @@ paths:
   /accounts/{account_id}/monitoring/expectations:
     post:
       summary: Create Expectation
-      description: Create a rule. Attachments (and their severity) are managed via
-        the segments sub-resource.
+      description: 'Create a rule. Idempotent on conflict: an identical (type, config)
+
+        rule returns the existing rule with 200; a new rule returns 201.
+
+        Attachments (and their severity) are managed via the segments
+
+        sub-resource.'
       operationId: create_expectation_accounts__account_id__monitoring_expectations_post
       parameters:
       - name: account_id
@@ -978,6 +983,19 @@ paths:
                   mapping:
                     structured_data: '#/components/schemas/StructuredDataExpectationResponse'
                 title: Response Create Expectation Accounts  Account Id  Monitoring
+                  Expectations Post
+        '200':
+          description: An identical (type, config) rule already existed
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/StructuredDataExpectationResponse'
+                discriminator:
+                  propertyName: type
+                  mapping:
+                    structured_data: '#/components/schemas/StructuredDataExpectationResponse'
+                title: Response 200 Create Expectation Accounts  Account Id  Monitoring
                   Expectations Post
         '422':
           description: Validation Error
