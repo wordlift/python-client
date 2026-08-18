@@ -1,10 +1,12 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.18.1
+  version: 2.19.0
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
+      tags:
+      - Monitors
       summary: Add Monitor
       description: Adds a URL to the monitoring list for the given account.
       operationId: add_monitor_accounts__account_id__monitoring_monitors_post
@@ -53,6 +55,8 @@ paths:
               title: AddResourceRequest
               type: object
     get:
+      tags:
+      - Monitors
       summary: List Monitors
       operationId: list_monitors_accounts__account_id__monitoring_monitors_get
       parameters:
@@ -117,6 +121,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
     put:
+      tags:
+      - Monitors
       summary: Replace Monitors
       operationId: replace_monitors_accounts__account_id__monitoring_monitors_put
       parameters:
@@ -178,6 +184,8 @@ paths:
               type: object
   /accounts/{account_id}/monitoring/monitors/{monitor_id}:
     get:
+      tags:
+      - Monitors
       summary: Get Monitor
       operationId: get_monitor_accounts__account_id__monitoring_monitors__monitor_id__get
       parameters:
@@ -207,6 +215,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
     put:
+      tags:
+      - Monitors
       summary: Update Monitor
       operationId: update_monitor_accounts__account_id__monitoring_monitors__monitor_id__put
       parameters:
@@ -260,6 +270,8 @@ paths:
               title: AddResourceRequest
               type: object
     delete:
+      tags:
+      - Monitors
       summary: Delete Monitor
       operationId: delete_monitor_accounts__account_id__monitoring_monitors__monitor_id__delete
       parameters:
@@ -286,6 +298,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
   /accounts/{account_id}/monitoring/runs:
     get:
+      tags:
+      - Monitor Runs
       summary: List Runs
       operationId: list_runs_accounts__account_id__monitoring_runs_get
       parameters:
@@ -331,6 +345,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
   /accounts/{account_id}/monitoring/runs/{run_id}:
     get:
+      tags:
+      - Monitor Runs
       summary: Get Run
       operationId: get_run_accounts__account_id__monitoring_runs__run_id__get
       parameters:
@@ -360,6 +376,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
+      tags:
+      - Monitor Runs
       summary: Abort Run
       operationId: abort_run_accounts__account_id__monitoring_runs__run_id__delete
       parameters:
@@ -390,6 +408,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
   /accounts/{account_id}/monitoring/segments:
     post:
+      tags:
+      - Segments
       summary: Create Segment
       description: Create a segment for the account.
       operationId: create_segment_accounts__account_id__monitoring_segments_post
@@ -420,6 +440,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
     get:
+      tags:
+      - Segments
       summary: List Segments
       operationId: list_segments_accounts__account_id__monitoring_segments_get
       parameters:
@@ -491,6 +513,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
   /accounts/{account_id}/monitoring/segments/{segment_id}:
     get:
+      tags:
+      - Segments
       summary: Get Segment
       operationId: get_segment_accounts__account_id__monitoring_segments__segment_id__get
       parameters:
@@ -520,6 +544,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
     put:
+      tags:
+      - Segments
       summary: Update Segment
       description: "Replace the segment's mutable fields.\n\nPUT replaces *every*\
         \ mutable field; an omitted field is reset to its\ndefault. For ``description``,\
@@ -560,6 +586,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
+      tags:
+      - Segments
       summary: Delete Segment
       operationId: delete_segment_accounts__account_id__monitoring_segments__segment_id__delete
       parameters:
@@ -586,6 +614,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
   /accounts/{account_id}/monitoring/segments/{segment_id}/globs:
     get:
+      tags:
+      - Segment Globs
       summary: List Segment Globs
       description: Return a page of glob matchers, ordered by ``(created_at, id)``.
       operationId: list_segment_globs_accounts__account_id__monitoring_segments__segment_id__globs_get
@@ -637,6 +667,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
+      tags:
+      - Segment Globs
       summary: Add Segment Glob
       description: Add a single glob matcher; idempotent on duplicate.
       operationId: add_segment_glob_accounts__account_id__monitoring_segments__segment_id__globs_post
@@ -673,6 +705,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
     put:
+      tags:
+      - Segment Globs
       summary: Replace Segment Globs
       description: Wholesale replace all glob matchers for the segment.
       operationId: replace_segment_globs_accounts__account_id__monitoring_segments__segment_id__globs_put
@@ -714,6 +748,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
   /accounts/{account_id}/monitoring/segments/{segment_id}/globs/{glob_id}:
     delete:
+      tags:
+      - Segment Globs
       summary: Delete Segment Glob
       operationId: delete_segment_glob_accounts__account_id__monitoring_segments__segment_id__globs__glob_id__delete
       parameters:
@@ -746,6 +782,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
   /accounts/{account_id}/monitoring/segments/{segment_id}/urls:
     get:
+      tags:
+      - Segment URLs
       summary: List Segment Urls
       description: Return a page of URL matchers, ordered by ``(created_at, id)``.
       operationId: list_segment_urls_accounts__account_id__monitoring_segments__segment_id__urls_get
@@ -797,6 +835,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
+      tags:
+      - Segment URLs
       summary: Add Segment Url
       description: Add a single URL matcher; idempotent on duplicate.
       operationId: add_segment_url_accounts__account_id__monitoring_segments__segment_id__urls_post
@@ -849,6 +889,8 @@ paths:
               title: AddSegmentUrlRequest
               type: object
     put:
+      tags:
+      - Segment URLs
       summary: Replace Segment Urls
       description: Wholesale replace all URL matchers for the segment.
       operationId: replace_segment_urls_accounts__account_id__monitoring_segments__segment_id__urls_put
@@ -910,6 +952,8 @@ paths:
               type: object
   /accounts/{account_id}/monitoring/segments/{segment_id}/urls/{url_id}:
     delete:
+      tags:
+      - Segment URLs
       summary: Delete Segment Url
       operationId: delete_segment_url_accounts__account_id__monitoring_segments__segment_id__urls__url_id__delete
       parameters:
@@ -942,6 +986,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
   /accounts/{account_id}/monitoring/expectations:
     post:
+      tags:
+      - Expectations
       summary: Create Expectation
       description: 'Create a rule. Idempotent on conflict: an identical (type, config)
 
@@ -1004,6 +1050,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
     get:
+      tags:
+      - Expectations
       summary: List Expectations
       operationId: list_expectations_accounts__account_id__monitoring_expectations_get
       parameters:
@@ -1087,6 +1135,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
   /accounts/{account_id}/monitoring/expectations/{expectation_id}:
     get:
+      tags:
+      - Expectations
       summary: Get Expectation
       operationId: get_expectation_accounts__account_id__monitoring_expectations__expectation_id__get
       parameters:
@@ -1123,6 +1173,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
+      tags:
+      - Expectations
       summary: Delete Expectation
       operationId: delete_expectation_accounts__account_id__monitoring_expectations__expectation_id__delete
       parameters:
@@ -1149,6 +1201,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
   /accounts/{account_id}/monitoring/expectations/{expectation_id}/segments:
     get:
+      tags:
+      - Expectations
       summary: List Expectation Segments
       description: "Return a page of segment ids attached to the rule, ordered by\
         \ the\nsegment's own ``(created_at, id)``, each carrying the severity of its\n\
@@ -1203,6 +1257,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
     put:
+      tags:
+      - Expectations
       summary: Replace Expectation Segments
       description: "Replace the rule's set of attached segments (and their severities)\
         \ wholesale.\nReturns confirmation of the new attached set, not re-fetched\
@@ -1246,6 +1302,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
   /accounts/{account_id}/monitoring/expectations/{expectation_id}/segments/{segment_id}:
     put:
+      tags:
+      - Expectations
       summary: Attach Expectation Segment
       description: "Attach a segment to a rule with the given severity. Idempotent\
         \ \u2014 a\nrepeated attach updates the severity. Returns confirmation of\
@@ -1292,6 +1350,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
+      tags:
+      - Expectations
       summary: Detach Expectation Segment
       description: Detach a segment from a rule. Idempotent.
       operationId: detach_expectation_segment_accounts__account_id__monitoring_expectations__expectation_id__segments__segment_id__delete
@@ -1323,8 +1383,154 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/monitoring/expectations/summary/by-type:
+    get:
+      tags:
+      - Expectation Summary
+      summary: List Expectation Summary By Type
+      description: 'Account-wide expectation rollup grouped by (segment, expectation
+        type),
+
+        broken down by (severity, outcome). Omitting both filters returns every
+
+        segment together with the account-wide aggregate (`segment_id: null`).'
+      operationId: list_expectation_summary_by_type_accounts__account_id__monitoring_expectations_summary_by_type_get
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: expectation_type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/ExpectationType'
+          - type: 'null'
+          description: Filter by expectation type (repeatable). Omitted returns every
+            type.
+          title: Expectation Type
+        description: Filter by expectation type (repeatable). Omitted returns every
+          type.
+      - name: segment_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: 'Filter by segment id (repeatable). Omitted returns every segment
+            together with the account-wide aggregate row (`segment_id: null`).'
+          title: Segment Id
+        description: 'Filter by segment id (repeatable). Omitted returns every segment
+          together with the account-wide aggregate row (`segment_id: null`).'
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Opaque pagination cursor from a previous response.
+          title: Cursor
+        description: Opaque pagination cursor from a previous response.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          description: Maximum number of items to return.
+          default: 50
+          title: Limit
+        description: Maximum number of items to return.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListExpectationSummaryByTypeResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/monitoring/expectations/summary/by-expectation:
+    get:
+      tags:
+      - Expectation Summary
+      summary: List Expectation Summary By Expectation
+      description: "Account-wide expectation rollup grouped by (segment, expectation),\
+        \ broken\ndown by outcome only \u2014 severity and expectation type are derivable\
+        \ from the\nexpectation itself. Omitted or empty `segment_id` returns the\
+        \ account-wide\naggregate (`segment_id: null`)."
+      operationId: list_expectation_summary_by_expectation_accounts__account_id__monitoring_expectations_summary_by_expectation_get
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: segment_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'Scope to this segment. Omitted or empty returns the account-wide
+            aggregate (`segment_id: null`).'
+          title: Segment Id
+        description: 'Scope to this segment. Omitted or empty returns the account-wide
+          aggregate (`segment_id: null`).'
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Opaque pagination cursor from a previous response.
+          title: Cursor
+        description: Opaque pagination cursor from a previous response.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          description: Maximum number of items to return.
+          default: 50
+          title: Limit
+        description: Maximum number of items to return.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListExpectationSummaryByExpectationResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /checks:
     get:
+      tags:
+      - Monitor Checks
       summary: List Checks
       description: "List check identifiers \u2014 stable ids, not display labels;\
         \ the UI maps\nthem to its own labels/i18n. Deployment metadata, not tenant\
@@ -1342,6 +1548,8 @@ paths:
                 title: Response List Checks Checks Get
   /accounts/{account_id}/monitoring/status:
     get:
+      tags:
+      - Monitor Status
       summary: List Monitor Statuses
       operationId: list_monitor_statuses_accounts__account_id__monitoring_status_get
       parameters:
@@ -1463,6 +1671,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
   /accounts/{account_id}/monitoring/monitors/{monitor_id}/status:
     get:
+      tags:
+      - Monitor Status
       summary: Get Monitor Status
       operationId: get_monitor_status_accounts__account_id__monitoring_monitors__monitor_id__status_get
       parameters:
@@ -1505,6 +1715,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
   /accounts/{account_id}/monitoring/monitors/{monitor_id}/checks/{check_name}:
     get:
+      tags:
+      - Monitor Status
       summary: Get Check Timeseries
       operationId: get_check_timeseries_accounts__account_id__monitoring_monitors__monitor_id__checks__check_name__get
       parameters:
@@ -1686,6 +1898,106 @@ components:
       - required
       - recommended
       title: ExpectationSeverity
+    ExpectationSummaryByExpectationItem:
+      properties:
+        segment_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Segment Id
+        expectation_id:
+          type: string
+          title: Expectation Id
+        stats:
+          items:
+            $ref: '#/components/schemas/ExpectationSummaryOutcomeStat'
+          type: array
+          title: Stats
+      type: object
+      required:
+      - segment_id
+      - expectation_id
+      - stats
+      title: ExpectationSummaryByExpectationItem
+    ExpectationSummaryByTypeItem:
+      properties:
+        segment_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Segment Id
+        expectation_type:
+          $ref: '#/components/schemas/ExpectationType'
+        monitor_count:
+          type: integer
+          title: Monitor Count
+        expectation_count:
+          type: integer
+          title: Expectation Count
+        stats:
+          items:
+            $ref: '#/components/schemas/ExpectationSummaryTypeStat'
+          type: array
+          title: Stats
+      type: object
+      required:
+      - segment_id
+      - expectation_type
+      - monitor_count
+      - expectation_count
+      - stats
+      title: ExpectationSummaryByTypeItem
+    ExpectationSummaryOutcome:
+      type: string
+      enum:
+      - pass
+      - fail
+      - pending
+      title: ExpectationSummaryOutcome
+      description: "Outcome as stored in monitor_expectation_summary \u2014 a superset\
+        \ of\nExpectationOutcome that also covers a link matched but not yet evaluated\n\
+        (see monitor_expectation_summary_refresh.run_once)."
+    ExpectationSummaryOutcomeStat:
+      properties:
+        outcome:
+          $ref: '#/components/schemas/ExpectationSummaryOutcome'
+        monitor_count:
+          type: integer
+          title: Monitor Count
+      type: object
+      required:
+      - outcome
+      - monitor_count
+      title: ExpectationSummaryOutcomeStat
+    ExpectationSummaryTypeStat:
+      properties:
+        severity:
+          $ref: '#/components/schemas/ExpectationSeverity'
+        outcome:
+          $ref: '#/components/schemas/ExpectationSummaryOutcome'
+        monitor_count:
+          type: integer
+          title: Monitor Count
+        expectation_count:
+          type: integer
+          title: Expectation Count
+        expectation_evaluation_count:
+          type: integer
+          title: Expectation Evaluation Count
+      type: object
+      required:
+      - severity
+      - outcome
+      - monitor_count
+      - expectation_count
+      - expectation_evaluation_count
+      title: ExpectationSummaryTypeStat
+      description: One (severity, outcome) slice of a by-type rollup item.
+    ExpectationType:
+      type: string
+      enum:
+      - structured_data
+      title: ExpectationType
     HTTPValidationError:
       properties:
         detail:
@@ -1695,6 +2007,46 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    ListExpectationSummaryByExpectationResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/ExpectationSummaryByExpectationItem'
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - items
+      - total
+      title: ListExpectationSummaryByExpectationResponse
+    ListExpectationSummaryByTypeResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/ExpectationSummaryByTypeItem'
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - items
+      - total
+      title: ListExpectationSummaryByTypeResponse
     ListExpectationsResponse:
       properties:
         items:
