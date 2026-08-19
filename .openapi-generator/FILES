@@ -62,7 +62,11 @@ docs/BotStatus.md
 docs/BotifyCrawlImportRequest.md
 docs/BotifyCrawlImportsApi.md
 docs/CancellationReason.md
+docs/CheckNameFilterValue.md
 docs/CheckResultItem.md
+docs/CheckSummaryByCheckItem.md
+docs/CheckSummaryState.md
+docs/CheckSummaryStateStat.md
 docs/CheckTimeseriesResponse.md
 docs/ChunksetListResponse.md
 docs/ChunksetRequest.md
@@ -215,6 +219,7 @@ docs/LevelEnum.md
 docs/LinkGroup.md
 docs/LinkGroupResponse.md
 docs/LinkGroupsApi.md
+docs/ListCheckSummaryByCheckResponse.md
 docs/ListExpectationSummaryByExpectationResponse.md
 docs/ListExpectationSummaryByTypeResponse.md
 docs/ListExpectationsResponse.md
@@ -245,6 +250,7 @@ docs/MicrodataApi.md
 docs/Model.md
 docs/ModelField.md
 docs/MonitorCheckName.md
+docs/MonitorCheckSummaryApi.md
 docs/MonitorChecksApi.md
 docs/MonitorHTTPValidationError.md
 docs/MonitorResponse.md
@@ -430,7 +436,12 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_structured_data_expectation_config_request.py
+test/test_check_name_filter_value.py
+test/test_check_summary_by_check_item.py
+test/test_check_summary_state.py
+test/test_check_summary_state_stat.py
+test/test_list_check_summary_by_check_response.py
+test/test_monitor_check_summary_api.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -494,6 +505,7 @@ wordlift_client/api/long_tails_api.py
 wordlift_client/api/merchant_syncs_api.py
 wordlift_client/api/merchants_api.py
 wordlift_client/api/microdata_api.py
+wordlift_client/api/monitor_check_summary_api.py
 wordlift_client/api/monitor_checks_api.py
 wordlift_client/api/monitor_runs_api.py
 wordlift_client/api/monitor_status_api.py
@@ -576,7 +588,11 @@ wordlift_client/models/bootstrap_job_status.py
 wordlift_client/models/bot_status.py
 wordlift_client/models/botify_crawl_import_request.py
 wordlift_client/models/cancellation_reason.py
+wordlift_client/models/check_name_filter_value.py
 wordlift_client/models/check_result_item.py
+wordlift_client/models/check_summary_by_check_item.py
+wordlift_client/models/check_summary_state.py
+wordlift_client/models/check_summary_state_stat.py
 wordlift_client/models/check_timeseries_response.py
 wordlift_client/models/chunkset_list_response.py
 wordlift_client/models/chunkset_request.py
@@ -690,6 +706,7 @@ wordlift_client/models/kpi_totals.py
 wordlift_client/models/level_enum.py
 wordlift_client/models/link_group.py
 wordlift_client/models/link_group_response.py
+wordlift_client/models/list_check_summary_by_check_response.py
 wordlift_client/models/list_expectation_summary_by_expectation_response.py
 wordlift_client/models/list_expectation_summary_by_type_response.py
 wordlift_client/models/list_expectations_response.py

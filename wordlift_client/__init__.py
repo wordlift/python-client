@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.195.0"
+__version__ = "1.196.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -70,6 +70,7 @@ from wordlift_client.api.long_tails_api import LongTailsApi
 from wordlift_client.api.merchant_syncs_api import MerchantSyncsApi
 from wordlift_client.api.merchants_api import MerchantsApi
 from wordlift_client.api.microdata_api import MicrodataApi
+from wordlift_client.api.monitor_check_summary_api import MonitorCheckSummaryApi
 from wordlift_client.api.monitor_checks_api import MonitorChecksApi
 from wordlift_client.api.monitor_runs_api import MonitorRunsApi
 from wordlift_client.api.monitor_status_api import MonitorStatusApi
@@ -168,7 +169,11 @@ from wordlift_client.models.bootstrap_job_status import BootstrapJobStatus
 from wordlift_client.models.bot_status import BotStatus
 from wordlift_client.models.botify_crawl_import_request import BotifyCrawlImportRequest
 from wordlift_client.models.cancellation_reason import CancellationReason
+from wordlift_client.models.check_name_filter_value import CheckNameFilterValue
 from wordlift_client.models.check_result_item import CheckResultItem
+from wordlift_client.models.check_summary_by_check_item import CheckSummaryByCheckItem
+from wordlift_client.models.check_summary_state import CheckSummaryState
+from wordlift_client.models.check_summary_state_stat import CheckSummaryStateStat
 from wordlift_client.models.check_timeseries_response import CheckTimeseriesResponse
 from wordlift_client.models.chunkset_list_response import ChunksetListResponse
 from wordlift_client.models.chunkset_request import ChunksetRequest
@@ -282,6 +287,7 @@ from wordlift_client.models.kpi_totals import KpiTotals
 from wordlift_client.models.level_enum import LevelEnum
 from wordlift_client.models.link_group import LinkGroup
 from wordlift_client.models.link_group_response import LinkGroupResponse
+from wordlift_client.models.list_check_summary_by_check_response import ListCheckSummaryByCheckResponse
 from wordlift_client.models.list_expectation_summary_by_expectation_response import ListExpectationSummaryByExpectationResponse
 from wordlift_client.models.list_expectation_summary_by_type_response import ListExpectationSummaryByTypeResponse
 from wordlift_client.models.list_expectations_response import ListExpectationsResponse

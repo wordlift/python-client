@@ -359,7 +359,7 @@ class ExpectationSummaryApi:
         self,
         account_id: StrictStr,
         expectation_type: Annotated[Optional[List[ExpectationType]], Field(description="Filter by expectation type (repeatable). Omitted returns every type.")] = None,
-        segment_id: Annotated[Optional[List[StrictStr]], Field(description="Filter by segment id (repeatable). Omitted returns every segment together with the account-wide aggregate row (`segment_id: null`).")] = None,
+        segment_id: Annotated[Optional[List[StrictStr]], Field(description="Filter by segment id (repeatable), or the reserved value `overall` to match only the account-wide aggregate row. Omitted returns every segment together with that aggregate.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
         _request_timeout: Union[
@@ -377,13 +377,13 @@ class ExpectationSummaryApi:
     ) -> ListExpectationSummaryByTypeResponse:
         """List Expectation Summary By Type
 
-        Account-wide expectation rollup grouped by (segment, expectation type), broken down by (severity, outcome). Omitting both filters returns every segment together with the account-wide aggregate (`segment_id: null`).
+        Account-wide expectation rollup grouped by (segment, expectation type), broken down by (severity, outcome). Omitting both filters returns every segment together with the account-wide aggregate (`segment_id: null`); passing the reserved `segment_id=overall` isolates just that aggregate instead of requiring a full scan to find it.
 
         :param account_id: (required)
         :type account_id: str
         :param expectation_type: Filter by expectation type (repeatable). Omitted returns every type.
         :type expectation_type: List[ExpectationType]
-        :param segment_id: Filter by segment id (repeatable). Omitted returns every segment together with the account-wide aggregate row (`segment_id: null`).
+        :param segment_id: Filter by segment id (repeatable), or the reserved value `overall` to match only the account-wide aggregate row. Omitted returns every segment together with that aggregate.
         :type segment_id: List[str]
         :param cursor: Opaque pagination cursor from a previous response.
         :type cursor: str
@@ -443,7 +443,7 @@ class ExpectationSummaryApi:
         self,
         account_id: StrictStr,
         expectation_type: Annotated[Optional[List[ExpectationType]], Field(description="Filter by expectation type (repeatable). Omitted returns every type.")] = None,
-        segment_id: Annotated[Optional[List[StrictStr]], Field(description="Filter by segment id (repeatable). Omitted returns every segment together with the account-wide aggregate row (`segment_id: null`).")] = None,
+        segment_id: Annotated[Optional[List[StrictStr]], Field(description="Filter by segment id (repeatable), or the reserved value `overall` to match only the account-wide aggregate row. Omitted returns every segment together with that aggregate.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
         _request_timeout: Union[
@@ -461,13 +461,13 @@ class ExpectationSummaryApi:
     ) -> ApiResponse[ListExpectationSummaryByTypeResponse]:
         """List Expectation Summary By Type
 
-        Account-wide expectation rollup grouped by (segment, expectation type), broken down by (severity, outcome). Omitting both filters returns every segment together with the account-wide aggregate (`segment_id: null`).
+        Account-wide expectation rollup grouped by (segment, expectation type), broken down by (severity, outcome). Omitting both filters returns every segment together with the account-wide aggregate (`segment_id: null`); passing the reserved `segment_id=overall` isolates just that aggregate instead of requiring a full scan to find it.
 
         :param account_id: (required)
         :type account_id: str
         :param expectation_type: Filter by expectation type (repeatable). Omitted returns every type.
         :type expectation_type: List[ExpectationType]
-        :param segment_id: Filter by segment id (repeatable). Omitted returns every segment together with the account-wide aggregate row (`segment_id: null`).
+        :param segment_id: Filter by segment id (repeatable), or the reserved value `overall` to match only the account-wide aggregate row. Omitted returns every segment together with that aggregate.
         :type segment_id: List[str]
         :param cursor: Opaque pagination cursor from a previous response.
         :type cursor: str
@@ -527,7 +527,7 @@ class ExpectationSummaryApi:
         self,
         account_id: StrictStr,
         expectation_type: Annotated[Optional[List[ExpectationType]], Field(description="Filter by expectation type (repeatable). Omitted returns every type.")] = None,
-        segment_id: Annotated[Optional[List[StrictStr]], Field(description="Filter by segment id (repeatable). Omitted returns every segment together with the account-wide aggregate row (`segment_id: null`).")] = None,
+        segment_id: Annotated[Optional[List[StrictStr]], Field(description="Filter by segment id (repeatable), or the reserved value `overall` to match only the account-wide aggregate row. Omitted returns every segment together with that aggregate.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
         _request_timeout: Union[
@@ -545,13 +545,13 @@ class ExpectationSummaryApi:
     ) -> RESTResponseType:
         """List Expectation Summary By Type
 
-        Account-wide expectation rollup grouped by (segment, expectation type), broken down by (severity, outcome). Omitting both filters returns every segment together with the account-wide aggregate (`segment_id: null`).
+        Account-wide expectation rollup grouped by (segment, expectation type), broken down by (severity, outcome). Omitting both filters returns every segment together with the account-wide aggregate (`segment_id: null`); passing the reserved `segment_id=overall` isolates just that aggregate instead of requiring a full scan to find it.
 
         :param account_id: (required)
         :type account_id: str
         :param expectation_type: Filter by expectation type (repeatable). Omitted returns every type.
         :type expectation_type: List[ExpectationType]
-        :param segment_id: Filter by segment id (repeatable). Omitted returns every segment together with the account-wide aggregate row (`segment_id: null`).
+        :param segment_id: Filter by segment id (repeatable), or the reserved value `overall` to match only the account-wide aggregate row. Omitted returns every segment together with that aggregate.
         :type segment_id: List[str]
         :param cursor: Opaque pagination cursor from a previous response.
         :type cursor: str

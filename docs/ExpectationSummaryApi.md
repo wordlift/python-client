@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 
 List Expectation Summary By Type
 
-Account-wide expectation rollup grouped by (segment, expectation type), broken down by (severity, outcome). Omitting both filters returns every segment together with the account-wide aggregate (`segment_id: null`).
+Account-wide expectation rollup grouped by (segment, expectation type), broken down by (severity, outcome). Omitting both filters returns every segment together with the account-wide aggregate (`segment_id: null`); passing the reserved `segment_id=overall` isolates just that aggregate instead of requiring a full scan to find it.
 
 ### Example
 
@@ -135,7 +135,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     api_instance = wordlift_client.ExpectationSummaryApi(api_client)
     account_id = 'account_id_example' # str | 
     expectation_type = [wordlift_client.ExpectationType()] # List[ExpectationType] | Filter by expectation type (repeatable). Omitted returns every type. (optional)
-    segment_id = ['segment_id_example'] # List[str] | Filter by segment id (repeatable). Omitted returns every segment together with the account-wide aggregate row (`segment_id: null`). (optional)
+    segment_id = ['segment_id_example'] # List[str] | Filter by segment id (repeatable), or the reserved value `overall` to match only the account-wide aggregate row. Omitted returns every segment together with that aggregate. (optional)
     cursor = 'cursor_example' # str | Opaque pagination cursor from a previous response. (optional)
     limit = 50 # int | Maximum number of items to return. (optional) (default to 50)
 
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **account_id** | **str**|  | 
  **expectation_type** | [**List[ExpectationType]**](ExpectationType.md)| Filter by expectation type (repeatable). Omitted returns every type. | [optional] 
- **segment_id** | [**List[str]**](str.md)| Filter by segment id (repeatable). Omitted returns every segment together with the account-wide aggregate row (&#x60;segment_id: null&#x60;). | [optional] 
+ **segment_id** | [**List[str]**](str.md)| Filter by segment id (repeatable), or the reserved value &#x60;overall&#x60; to match only the account-wide aggregate row. Omitted returns every segment together with that aggregate. | [optional] 
  **cursor** | **str**| Opaque pagination cursor from a previous response. | [optional] 
  **limit** | **int**| Maximum number of items to return. | [optional] [default to 50]
 

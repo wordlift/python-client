@@ -53,6 +53,7 @@ from wordlift_client.api.long_tails_api import LongTailsApi
 from wordlift_client.api.merchant_syncs_api import MerchantSyncsApi
 from wordlift_client.api.merchants_api import MerchantsApi
 from wordlift_client.api.microdata_api import MicrodataApi
+from wordlift_client.api.monitor_check_summary_api import MonitorCheckSummaryApi
 from wordlift_client.api.monitor_checks_api import MonitorChecksApi
 from wordlift_client.api.monitor_runs_api import MonitorRunsApi
 from wordlift_client.api.monitor_status_api import MonitorStatusApi
