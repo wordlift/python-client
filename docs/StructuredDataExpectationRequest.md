@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** |  | 
-**config** | [**StructuredDataExpectationConfig**](StructuredDataExpectationConfig.md) |  | 
+**config** | [**StructuredDataExpectationConfigRequest**](StructuredDataExpectationConfigRequest.md) |  | 
 
 ## Example
 

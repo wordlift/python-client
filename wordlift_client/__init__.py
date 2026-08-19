@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.194.0"
+__version__ = "1.195.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -406,6 +406,7 @@ from wordlift_client.models.sort_direction import SortDirection
 from wordlift_client.models.structured_data import StructuredData
 from wordlift_client.models.structured_data_constraint import StructuredDataConstraint
 from wordlift_client.models.structured_data_expectation_config import StructuredDataExpectationConfig
+from wordlift_client.models.structured_data_expectation_config_request import StructuredDataExpectationConfigRequest
 from wordlift_client.models.structured_data_expectation_request import StructuredDataExpectationRequest
 from wordlift_client.models.structured_data_expectation_response import StructuredDataExpectationResponse
 from wordlift_client.models.submit_fact_check200_response import SubmitFactCheck200Response
