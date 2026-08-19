@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.19.3
+  version: 2.20.0
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -1393,7 +1393,11 @@ paths:
 
         broken down by (severity, outcome). Omitting both filters returns every
 
-        segment together with the account-wide aggregate (`segment_id: null`).'
+        segment together with the account-wide aggregate (`segment_id: null`);
+
+        passing the reserved `segment_id=overall` isolates just that aggregate
+
+        instead of requiring a full scan to find it.'
       operationId: list_expectation_summary_by_type_accounts__account_id__monitoring_expectations_summary_by_type_get
       parameters:
       - name: account_id
@@ -1425,11 +1429,13 @@ paths:
             items:
               type: string
           - type: 'null'
-          description: 'Filter by segment id (repeatable). Omitted returns every segment
-            together with the account-wide aggregate row (`segment_id: null`).'
+          description: Filter by segment id (repeatable), or the reserved value `overall`
+            to match only the account-wide aggregate row. Omitted returns every segment
+            together with that aggregate.
           title: Segment Id
-        description: 'Filter by segment id (repeatable). Omitted returns every segment
-          together with the account-wide aggregate row (`segment_id: null`).'
+        description: Filter by segment id (repeatable), or the reserved value `overall`
+          to match only the account-wide aggregate row. Omitted returns every segment
+          together with that aggregate.
       - name: cursor
         in: query
         required: false
@@ -1546,6 +1552,91 @@ paths:
                   $ref: '#/components/schemas/MonitorCheckName'
                 type: array
                 title: Response List Checks Checks Get
+  /accounts/{account_id}/monitoring/checks/summary/by-check:
+    get:
+      tags:
+      - Monitor Check Summary
+      summary: List Check Summary By Check
+      description: "Account-wide check rollup grouped by (segment, check name), broken\
+        \ down\nby state (``CheckSummaryState`` \u2014 OK/WARN/FAIL/PENDING). Omitting\
+        \ both\nfilters returns every segment and check together with the account-wide,\n\
+        all-checks-combined aggregate (`segment_id: null`, `check_name: null`);\n\
+        passing the reserved `overall` value isolates just that aggregate on\neither\
+        \ dimension instead of requiring a full scan to find it."
+      operationId: list_check_summary_by_check_accounts__account_id__monitoring_checks_summary_by_check_get
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: check_name
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/CheckNameFilterValue'
+          - type: 'null'
+          description: Filter by check name (repeatable), or the reserved value `overall`
+            to match only the all-checks-combined aggregate row. Omitted returns every
+            check together with that aggregate.
+          title: Check Name
+        description: Filter by check name (repeatable), or the reserved value `overall`
+          to match only the all-checks-combined aggregate row. Omitted returns every
+          check together with that aggregate.
+      - name: segment_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Filter by segment id (repeatable), or the reserved value `overall`
+            to match only the account-wide aggregate row. Omitted returns every segment
+            together with that aggregate.
+          title: Segment Id
+        description: Filter by segment id (repeatable), or the reserved value `overall`
+          to match only the account-wide aggregate row. Omitted returns every segment
+          together with that aggregate.
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Opaque pagination cursor from a previous response.
+          title: Cursor
+        description: Opaque pagination cursor from a previous response.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          description: Maximum number of items to return.
+          default: 50
+          title: Limit
+        description: Maximum number of items to return.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCheckSummaryByCheckResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /accounts/{account_id}/monitoring/status:
     get:
       tags:
@@ -1816,6 +1907,20 @@ components:
       - severity
       title: AttachExpectationSegmentRequest
       description: Body for ``PUT /expectations/{id}/segments/{segment_id}``.
+    CheckNameFilterValue:
+      type: string
+      enum:
+      - structured_data_check
+      - title_check
+      - canonical_check
+      - page_meta_check
+      - status_check
+      - performance_check
+      - robots_check
+      - resource_404_check
+      - wordlift_bootstrap_check
+      - overall
+      title: CheckNameFilterValue
     CheckResultItem:
       properties:
         created_at:
@@ -1848,6 +1953,64 @@ components:
       - state
       - execution_ms
       title: CheckResultItem
+    CheckSummaryByCheckItem:
+      properties:
+        segment_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Segment Id
+        check_name:
+          anyOf:
+          - $ref: '#/components/schemas/MonitorCheckName'
+          - type: 'null'
+        monitor_count:
+          type: integer
+          title: Monitor Count
+        check_result_count:
+          type: integer
+          title: Check Result Count
+        stats:
+          items:
+            $ref: '#/components/schemas/CheckSummaryStateStat'
+          type: array
+          title: Stats
+      type: object
+      required:
+      - segment_id
+      - check_name
+      - monitor_count
+      - check_result_count
+      - stats
+      title: CheckSummaryByCheckItem
+    CheckSummaryState:
+      type: string
+      enum:
+      - OK
+      - WARN
+      - FAIL
+      - pending
+      title: CheckSummaryState
+      description: "State as stored in monitor_check_summary \u2014 a superset of\
+        \ MonitorState that also\ncovers a check currently expected for a monitor\
+        \ but not yet run\n(see monitor_check_summary_refresh.run_once)."
+    CheckSummaryStateStat:
+      properties:
+        state:
+          $ref: '#/components/schemas/CheckSummaryState'
+        monitor_count:
+          type: integer
+          title: Monitor Count
+        check_result_count:
+          type: integer
+          title: Check Result Count
+      type: object
+      required:
+      - state
+      - monitor_count
+      - check_result_count
+      title: CheckSummaryStateStat
+      description: One state slice of a by-check rollup item.
     CheckTimeseriesResponse:
       properties:
         check_name:
@@ -2007,6 +2170,26 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    ListCheckSummaryByCheckResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/CheckSummaryByCheckItem'
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - items
+      - total
+      title: ListCheckSummaryByCheckResponse
     ListExpectationSummaryByExpectationResponse:
       properties:
         items:
