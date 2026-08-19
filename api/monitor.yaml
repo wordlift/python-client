@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.19.0
+  version: 2.19.3
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -2633,6 +2633,26 @@ components:
         \ is no cross-field validator; the\nnullability of ``property_path`` does\
         \ the work.\n\nThe domain shape is always the current version; payload-version\n\
         tracking and upgrades live at the storage boundary in\n``expectation_repository``."
+    StructuredDataExpectationConfigRequest:
+      properties:
+        entity_type:
+          type: string
+          minLength: 1
+          title: Entity Type
+        property_path:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Property Path
+        constraint:
+          $ref: '#/components/schemas/StructuredDataConstraint'
+      additionalProperties: false
+      type: object
+      required:
+      - entity_type
+      - constraint
+      title: StructuredDataExpectationConfigRequest
     StructuredDataExpectationRequest:
       properties:
         type:
@@ -2640,7 +2660,7 @@ components:
           const: structured_data
           title: Type
         config:
-          $ref: '#/components/schemas/StructuredDataExpectationConfig'
+          $ref: '#/components/schemas/StructuredDataExpectationConfigRequest'
       type: object
       required:
       - type
