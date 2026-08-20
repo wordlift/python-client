@@ -253,7 +253,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_monitors_accounts_account_id_monitoring_monitors_get**
-> ListMonitorsResponse list_monitors_accounts_account_id_monitoring_monitors_get(account_id, status=status, segment_id=segment_id, limit=limit, offset=offset)
+> ListMonitorsResponse list_monitors_accounts_account_id_monitoring_monitors_get(account_id, status=status, segment_id=segment_id, cursor=cursor, limit=limit)
 
 List Monitors
 
@@ -292,12 +292,12 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     account_id = 'account_id_example' # str | 
     status = wordlift_client.MonitorStatus() # MonitorStatus | Filter by monitor status. (optional)
     segment_id = 'segment_id_example' # str | Return only monitors whose URL is matched by the given segment's matchers. (optional)
+    cursor = 'cursor_example' # str | Opaque pagination cursor from a previous response. (optional)
     limit = 100 # int | Maximum number of items to return. (optional) (default to 100)
-    offset = 0 # int | Number of items to skip. (optional) (default to 0)
 
     try:
         # List Monitors
-        api_response = await api_instance.list_monitors_accounts_account_id_monitoring_monitors_get(account_id, status=status, segment_id=segment_id, limit=limit, offset=offset)
+        api_response = await api_instance.list_monitors_accounts_account_id_monitoring_monitors_get(account_id, status=status, segment_id=segment_id, cursor=cursor, limit=limit)
         print("The response of MonitorsApi->list_monitors_accounts_account_id_monitoring_monitors_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -314,8 +314,8 @@ Name | Type | Description  | Notes
  **account_id** | **str**|  | 
  **status** | [**MonitorStatus**](.md)| Filter by monitor status. | [optional] 
  **segment_id** | **str**| Return only monitors whose URL is matched by the given segment&#39;s matchers. | [optional] 
+ **cursor** | **str**| Opaque pagination cursor from a previous response. | [optional] 
  **limit** | **int**| Maximum number of items to return. | [optional] [default to 100]
- **offset** | **int**| Number of items to skip. | [optional] [default to 0]
 
 ### Return type
 

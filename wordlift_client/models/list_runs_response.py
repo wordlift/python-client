@@ -18,8 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.monitor_run_response import MonitorRunResponse
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,9 +30,8 @@ class ListRunsResponse(BaseModel):
     """ # noqa: E501
     items: List[MonitorRunResponse]
     total: StrictInt
-    limit: StrictInt
-    offset: StrictInt
-    __properties: ClassVar[List[str]] = ["items", "total", "limit", "offset"]
+    next_cursor: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["items", "total", "next_cursor"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,6 +79,11 @@ class ListRunsResponse(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['items'] = _items
+        # set to None if next_cursor (nullable) is None
+        # and model_fields_set contains the field
+        if self.next_cursor is None and "next_cursor" in self.model_fields_set:
+            _dict['next_cursor'] = None
+
         return _dict
 
     @classmethod
@@ -94,8 +98,7 @@ class ListRunsResponse(BaseModel):
         _obj = cls.model_validate({
             "items": [MonitorRunResponse.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
             "total": obj.get("total"),
-            "limit": obj.get("limit"),
-            "offset": obj.get("offset")
+            "next_cursor": obj.get("next_cursor")
         })
         return _obj
 

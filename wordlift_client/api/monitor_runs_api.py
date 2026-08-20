@@ -591,8 +591,8 @@ class MonitorRunsApi:
     async def list_runs_accounts_account_id_monitoring_runs_get(
         self,
         account_id: StrictStr,
+        cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=20, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
-        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Number of items to skip.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -611,10 +611,10 @@ class MonitorRunsApi:
 
         :param account_id: (required)
         :type account_id: str
+        :param cursor: Opaque pagination cursor from a previous response.
+        :type cursor: str
         :param limit: Maximum number of items to return.
         :type limit: int
-        :param offset: Number of items to skip.
-        :type offset: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -639,8 +639,8 @@ class MonitorRunsApi:
 
         _param = self._list_runs_accounts_account_id_monitoring_runs_get_serialize(
             account_id=account_id,
+            cursor=cursor,
             limit=limit,
-            offset=offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -666,8 +666,8 @@ class MonitorRunsApi:
     async def list_runs_accounts_account_id_monitoring_runs_get_with_http_info(
         self,
         account_id: StrictStr,
+        cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=20, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
-        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Number of items to skip.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -686,10 +686,10 @@ class MonitorRunsApi:
 
         :param account_id: (required)
         :type account_id: str
+        :param cursor: Opaque pagination cursor from a previous response.
+        :type cursor: str
         :param limit: Maximum number of items to return.
         :type limit: int
-        :param offset: Number of items to skip.
-        :type offset: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -714,8 +714,8 @@ class MonitorRunsApi:
 
         _param = self._list_runs_accounts_account_id_monitoring_runs_get_serialize(
             account_id=account_id,
+            cursor=cursor,
             limit=limit,
-            offset=offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -741,8 +741,8 @@ class MonitorRunsApi:
     async def list_runs_accounts_account_id_monitoring_runs_get_without_preload_content(
         self,
         account_id: StrictStr,
+        cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=20, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
-        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Number of items to skip.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -761,10 +761,10 @@ class MonitorRunsApi:
 
         :param account_id: (required)
         :type account_id: str
+        :param cursor: Opaque pagination cursor from a previous response.
+        :type cursor: str
         :param limit: Maximum number of items to return.
         :type limit: int
-        :param offset: Number of items to skip.
-        :type offset: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -789,8 +789,8 @@ class MonitorRunsApi:
 
         _param = self._list_runs_accounts_account_id_monitoring_runs_get_serialize(
             account_id=account_id,
+            cursor=cursor,
             limit=limit,
-            offset=offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -811,8 +811,8 @@ class MonitorRunsApi:
     def _list_runs_accounts_account_id_monitoring_runs_get_serialize(
         self,
         account_id,
+        cursor,
         limit,
-        offset,
         _request_auth,
         _content_type,
         _headers,
@@ -835,13 +835,13 @@ class MonitorRunsApi:
         if account_id is not None:
             _path_params['account_id'] = account_id
         # process the query parameters
+        if cursor is not None:
+            
+            _query_params.append(('cursor', cursor))
+            
         if limit is not None:
             
             _query_params.append(('limit', limit))
-            
-        if offset is not None:
-            
-            _query_params.append(('offset', offset))
             
         # process the header parameters
         # process the form parameters

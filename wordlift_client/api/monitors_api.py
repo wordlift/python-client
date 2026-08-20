@@ -885,8 +885,8 @@ class MonitorsApi:
         account_id: StrictStr,
         status: Annotated[Optional[MonitorStatus], Field(description="Filter by monitor status.")] = None,
         segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitors whose URL is matched by the given segment's matchers.")] = None,
+        cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
-        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Number of items to skip.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -909,10 +909,10 @@ class MonitorsApi:
         :type status: MonitorStatus
         :param segment_id: Return only monitors whose URL is matched by the given segment's matchers.
         :type segment_id: str
+        :param cursor: Opaque pagination cursor from a previous response.
+        :type cursor: str
         :param limit: Maximum number of items to return.
         :type limit: int
-        :param offset: Number of items to skip.
-        :type offset: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -939,8 +939,8 @@ class MonitorsApi:
             account_id=account_id,
             status=status,
             segment_id=segment_id,
+            cursor=cursor,
             limit=limit,
-            offset=offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -968,8 +968,8 @@ class MonitorsApi:
         account_id: StrictStr,
         status: Annotated[Optional[MonitorStatus], Field(description="Filter by monitor status.")] = None,
         segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitors whose URL is matched by the given segment's matchers.")] = None,
+        cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
-        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Number of items to skip.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -992,10 +992,10 @@ class MonitorsApi:
         :type status: MonitorStatus
         :param segment_id: Return only monitors whose URL is matched by the given segment's matchers.
         :type segment_id: str
+        :param cursor: Opaque pagination cursor from a previous response.
+        :type cursor: str
         :param limit: Maximum number of items to return.
         :type limit: int
-        :param offset: Number of items to skip.
-        :type offset: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1022,8 +1022,8 @@ class MonitorsApi:
             account_id=account_id,
             status=status,
             segment_id=segment_id,
+            cursor=cursor,
             limit=limit,
-            offset=offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1051,8 +1051,8 @@ class MonitorsApi:
         account_id: StrictStr,
         status: Annotated[Optional[MonitorStatus], Field(description="Filter by monitor status.")] = None,
         segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitors whose URL is matched by the given segment's matchers.")] = None,
+        cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
-        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Number of items to skip.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1075,10 +1075,10 @@ class MonitorsApi:
         :type status: MonitorStatus
         :param segment_id: Return only monitors whose URL is matched by the given segment's matchers.
         :type segment_id: str
+        :param cursor: Opaque pagination cursor from a previous response.
+        :type cursor: str
         :param limit: Maximum number of items to return.
         :type limit: int
-        :param offset: Number of items to skip.
-        :type offset: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1105,8 +1105,8 @@ class MonitorsApi:
             account_id=account_id,
             status=status,
             segment_id=segment_id,
+            cursor=cursor,
             limit=limit,
-            offset=offset,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1129,8 +1129,8 @@ class MonitorsApi:
         account_id,
         status,
         segment_id,
+        cursor,
         limit,
-        offset,
         _request_auth,
         _content_type,
         _headers,
@@ -1161,13 +1161,13 @@ class MonitorsApi:
             
             _query_params.append(('segment_id', segment_id))
             
+        if cursor is not None:
+            
+            _query_params.append(('cursor', cursor))
+            
         if limit is not None:
             
             _query_params.append(('limit', limit))
-            
-        if offset is not None:
-            
-            _query_params.append(('offset', offset))
             
         # process the header parameters
         # process the form parameters

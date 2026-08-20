@@ -7,8 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **items** | [**List[MonitorRunResponse]**](MonitorRunResponse.md) |  | 
 **total** | **int** |  | 
-**limit** | **int** |  | 
-**offset** | **int** |  | 
+**next_cursor** | **str** |  | [optional] 
 
 ## Example
 

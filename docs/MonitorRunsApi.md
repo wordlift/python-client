@@ -170,7 +170,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_runs_accounts_account_id_monitoring_runs_get**
-> ListRunsResponse list_runs_accounts_account_id_monitoring_runs_get(account_id, limit=limit, offset=offset)
+> ListRunsResponse list_runs_accounts_account_id_monitoring_runs_get(account_id, cursor=cursor, limit=limit)
 
 List Runs
 
@@ -206,12 +206,12 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.MonitorRunsApi(api_client)
     account_id = 'account_id_example' # str | 
+    cursor = 'cursor_example' # str | Opaque pagination cursor from a previous response. (optional)
     limit = 5 # int | Maximum number of items to return. (optional) (default to 5)
-    offset = 0 # int | Number of items to skip. (optional) (default to 0)
 
     try:
         # List Runs
-        api_response = await api_instance.list_runs_accounts_account_id_monitoring_runs_get(account_id, limit=limit, offset=offset)
+        api_response = await api_instance.list_runs_accounts_account_id_monitoring_runs_get(account_id, cursor=cursor, limit=limit)
         print("The response of MonitorRunsApi->list_runs_accounts_account_id_monitoring_runs_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -226,8 +226,8 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **account_id** | **str**|  | 
+ **cursor** | **str**| Opaque pagination cursor from a previous response. | [optional] 
  **limit** | **int**| Maximum number of items to return. | [optional] [default to 5]
- **offset** | **int**| Number of items to skip. | [optional] [default to 0]
 
 ### Return type
 
