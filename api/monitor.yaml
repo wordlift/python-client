@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.20.0
+  version: 2.21.0
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -1637,6 +1637,71 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/monitoring/summary/by-segment:
+    get:
+      tags:
+      - Monitoring Summary
+      summary: List Segment Summary
+      description: "Account-wide monitor/expectation counters grouped by segment \u2014\
+        \ replaces\nthe N+1 pattern of paginated `monitors`/`expectations` list calls\
+        \ with\n`segment_id` + `limit=1` just to read their totals. One request returns\n\
+        every segment's counters regardless of how many segments the account has."
+      operationId: list_segment_summary_accounts__account_id__monitoring_summary_by_segment_get
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: segment_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Filter by segment id (repeatable). Omitted returns every segment
+            for the account.
+          title: Segment Id
+        description: Filter by segment id (repeatable). Omitted returns every segment
+          for the account.
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Opaque pagination cursor from a previous response.
+          title: Cursor
+        description: Opaque pagination cursor from a previous response.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          description: Maximum number of segments to return.
+          default: 100
+          title: Limit
+        description: Maximum number of segments to return.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSegmentSummaryResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /accounts/{account_id}/monitoring/status:
     get:
       tags:
@@ -2365,6 +2430,26 @@ components:
       - items
       - total
       title: ListSegmentSeverityResponse
+    ListSegmentSummaryResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/SegmentSummaryItem'
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - items
+      - total
+      title: ListSegmentSummaryResponse
     ListSegmentUrlsResponse:
       properties:
         items:
@@ -2748,6 +2833,23 @@ components:
         \ so this only needs to report segment_id/severity. Also doubles\nas the segment-membership\
         \ shape nested in ExpectationEvaluationSummary\nbelow, since both are the\
         \ same (segment_id, severity) pairing."
+    SegmentSummaryItem:
+      properties:
+        segment_id:
+          type: string
+          title: Segment Id
+        monitor_count:
+          type: integer
+          title: Monitor Count
+        expectation_count:
+          type: integer
+          title: Expectation Count
+      type: object
+      required:
+      - segment_id
+      - monitor_count
+      - expectation_count
+      title: SegmentSummaryItem
     SegmentUrlResponse:
       properties:
         id:
