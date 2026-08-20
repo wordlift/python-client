@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.21.0
+  version: 2.22.0
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -86,6 +86,16 @@ paths:
           title: Segment Id
         description: Return only monitors whose URL is matched by the given segment's
           matchers.
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Opaque pagination cursor from a previous response.
+          title: Cursor
+        description: Opaque pagination cursor from a previous response.
       - name: limit
         in: query
         required: false
@@ -97,16 +107,6 @@ paths:
           default: 100
           title: Limit
         description: Maximum number of items to return.
-      - name: offset
-        in: query
-        required: false
-        schema:
-          type: integer
-          minimum: 0
-          description: Number of items to skip.
-          default: 0
-          title: Offset
-        description: Number of items to skip.
       responses:
         '200':
           description: Successful Response
@@ -309,6 +309,16 @@ paths:
         schema:
           type: string
           title: Account Id
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Opaque pagination cursor from a previous response.
+          title: Cursor
+        description: Opaque pagination cursor from a previous response.
       - name: limit
         in: query
         required: false
@@ -320,16 +330,6 @@ paths:
           default: 5
           title: Limit
         description: Maximum number of items to return.
-      - name: offset
-        in: query
-        required: false
-        schema:
-          type: integer
-          minimum: 0
-          description: Number of items to skip.
-          default: 0
-          title: Offset
-        description: Number of items to skip.
       responses:
         '200':
           description: Successful Response
@@ -2354,18 +2354,15 @@ components:
         total:
           type: integer
           title: Total
-        limit:
-          type: integer
-          title: Limit
-        offset:
-          type: integer
-          title: Offset
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
       type: object
       required:
       - items
       - total
-      - limit
-      - offset
       title: ListMonitorsResponse
     ListRunsResponse:
       properties:
@@ -2377,18 +2374,15 @@ components:
         total:
           type: integer
           title: Total
-        limit:
-          type: integer
-          title: Limit
-        offset:
-          type: integer
-          title: Offset
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
       type: object
       required:
       - items
       - total
-      - limit
-      - offset
       title: ListRunsResponse
     ListSegmentGlobsResponse:
       properties:
