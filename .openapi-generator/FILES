@@ -228,6 +228,7 @@ docs/ListMonitorsResponse.md
 docs/ListRunsResponse.md
 docs/ListSegmentGlobsResponse.md
 docs/ListSegmentSeverityResponse.md
+docs/ListSegmentSummaryResponse.md
 docs/ListSegmentUrlsResponse.md
 docs/ListSegmentsResponse.md
 docs/LocationInner.md
@@ -263,6 +264,7 @@ docs/MonitorStatusCheckStatus.md
 docs/MonitorStatusOrderBy.md
 docs/MonitorStatusResponse.md
 docs/MonitorValidationError.md
+docs/MonitoringSummaryApi.md
 docs/MonitorsApi.md
 docs/NetworkAccountInfo.md
 docs/NodeRequest.md
@@ -355,6 +357,7 @@ docs/SegmentRequest.md
 docs/SegmentResponse.md
 docs/SegmentSeverityRequest.md
 docs/SegmentSeverityResponse.md
+docs/SegmentSummaryItem.md
 docs/SegmentURLsApi.md
 docs/SegmentUrlResponse.md
 docs/SegmentsApi.md
@@ -436,12 +439,9 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_check_name_filter_value.py
-test/test_check_summary_by_check_item.py
-test/test_check_summary_state.py
-test/test_check_summary_state_stat.py
-test/test_list_check_summary_by_check_response.py
-test/test_monitor_check_summary_api.py
+test/test_list_segment_summary_response.py
+test/test_monitoring_summary_api.py
+test/test_segment_summary_item.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -509,6 +509,7 @@ wordlift_client/api/monitor_check_summary_api.py
 wordlift_client/api/monitor_checks_api.py
 wordlift_client/api/monitor_runs_api.py
 wordlift_client/api/monitor_status_api.py
+wordlift_client/api/monitoring_summary_api.py
 wordlift_client/api/monitors_api.py
 wordlift_client/api/o_auth2_authorized_clients_api.py
 wordlift_client/api/o_auth2_connector_controller_api.py
@@ -715,6 +716,7 @@ wordlift_client/models/list_monitors_response.py
 wordlift_client/models/list_runs_response.py
 wordlift_client/models/list_segment_globs_response.py
 wordlift_client/models/list_segment_severity_response.py
+wordlift_client/models/list_segment_summary_response.py
 wordlift_client/models/list_segment_urls_response.py
 wordlift_client/models/list_segments_response.py
 wordlift_client/models/location_inner.py
@@ -819,6 +821,7 @@ wordlift_client/models/segment_request.py
 wordlift_client/models/segment_response.py
 wordlift_client/models/segment_severity_request.py
 wordlift_client/models/segment_severity_response.py
+wordlift_client/models/segment_summary_item.py
 wordlift_client/models/segment_url_response.py
 wordlift_client/models/seo_fundamentals.py
 wordlift_client/models/site_files.py

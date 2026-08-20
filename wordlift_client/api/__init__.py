@@ -57,6 +57,7 @@ from wordlift_client.api.monitor_check_summary_api import MonitorCheckSummaryApi
 from wordlift_client.api.monitor_checks_api import MonitorChecksApi
 from wordlift_client.api.monitor_runs_api import MonitorRunsApi
 from wordlift_client.api.monitor_status_api import MonitorStatusApi
+from wordlift_client.api.monitoring_summary_api import MonitoringSummaryApi
 from wordlift_client.api.monitors_api import MonitorsApi
 from wordlift_client.api.o_auth2_authorized_clients_api import OAuth2AuthorizedClientsApi
 from wordlift_client.api.pages_explorer_api import PagesExplorerApi

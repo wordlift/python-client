@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.196.0"
+__version__ = "1.197.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -74,6 +74,7 @@ from wordlift_client.api.monitor_check_summary_api import MonitorCheckSummaryApi
 from wordlift_client.api.monitor_checks_api import MonitorChecksApi
 from wordlift_client.api.monitor_runs_api import MonitorRunsApi
 from wordlift_client.api.monitor_status_api import MonitorStatusApi
+from wordlift_client.api.monitoring_summary_api import MonitoringSummaryApi
 from wordlift_client.api.monitors_api import MonitorsApi
 from wordlift_client.api.o_auth2_authorized_clients_api import OAuth2AuthorizedClientsApi
 from wordlift_client.api.pages_explorer_api import PagesExplorerApi
@@ -296,6 +297,7 @@ from wordlift_client.models.list_monitors_response import ListMonitorsResponse
 from wordlift_client.models.list_runs_response import ListRunsResponse
 from wordlift_client.models.list_segment_globs_response import ListSegmentGlobsResponse
 from wordlift_client.models.list_segment_severity_response import ListSegmentSeverityResponse
+from wordlift_client.models.list_segment_summary_response import ListSegmentSummaryResponse
 from wordlift_client.models.list_segment_urls_response import ListSegmentUrlsResponse
 from wordlift_client.models.list_segments_response import ListSegmentsResponse
 from wordlift_client.models.location_inner import LocationInner
@@ -400,6 +402,7 @@ from wordlift_client.models.segment_request import SegmentRequest
 from wordlift_client.models.segment_response import SegmentResponse
 from wordlift_client.models.segment_severity_request import SegmentSeverityRequest
 from wordlift_client.models.segment_severity_response import SegmentSeverityResponse
+from wordlift_client.models.segment_summary_item import SegmentSummaryItem
 from wordlift_client.models.segment_url_response import SegmentUrlResponse
 from wordlift_client.models.seo_fundamentals import SeoFundamentals
 from wordlift_client.models.site_files import SiteFiles
