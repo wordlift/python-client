@@ -19,7 +19,7 @@ from typing_extensions import Annotated
 
 from datetime import datetime
 from pydantic import Field, StrictStr
-from typing import List, Optional, Union
+from typing import List, Optional
 from typing_extensions import Annotated
 from wordlift_client.models.check_timeseries_response import CheckTimeseriesResponse
 from wordlift_client.models.list_monitor_status_response import ListMonitorStatusResponse
@@ -716,8 +716,6 @@ class MonitorStatusApi:
         account_id: StrictStr,
         url: Annotated[Optional[StrictStr], Field(description="Glob pattern to filter by URL (e.g. `*example.com*`).")] = None,
         status: Annotated[Optional[List[MonitorStatusCheckStatus]], Field(description="Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).")] = None,
-        score_min: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Minimum score (inclusive).")] = None,
-        score_max: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Maximum score (inclusive).")] = None,
         segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view.")] = None,
         order_by: Annotated[Optional[MonitorStatusOrderBy], Field(description="Field to sort by.")] = None,
         sort: Annotated[Optional[SortDirection], Field(description="Sort direction.")] = None,
@@ -745,10 +743,6 @@ class MonitorStatusApi:
         :type url: str
         :param status: Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).
         :type status: List[MonitorStatusCheckStatus]
-        :param score_min: Minimum score (inclusive).
-        :type score_min: float
-        :param score_max: Maximum score (inclusive).
-        :type score_max: float
         :param segment_id: Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view.
         :type segment_id: str
         :param order_by: Field to sort by.
@@ -785,8 +779,6 @@ class MonitorStatusApi:
             account_id=account_id,
             url=url,
             status=status,
-            score_min=score_min,
-            score_max=score_max,
             segment_id=segment_id,
             order_by=order_by,
             sort=sort,
@@ -819,8 +811,6 @@ class MonitorStatusApi:
         account_id: StrictStr,
         url: Annotated[Optional[StrictStr], Field(description="Glob pattern to filter by URL (e.g. `*example.com*`).")] = None,
         status: Annotated[Optional[List[MonitorStatusCheckStatus]], Field(description="Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).")] = None,
-        score_min: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Minimum score (inclusive).")] = None,
-        score_max: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Maximum score (inclusive).")] = None,
         segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view.")] = None,
         order_by: Annotated[Optional[MonitorStatusOrderBy], Field(description="Field to sort by.")] = None,
         sort: Annotated[Optional[SortDirection], Field(description="Sort direction.")] = None,
@@ -848,10 +838,6 @@ class MonitorStatusApi:
         :type url: str
         :param status: Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).
         :type status: List[MonitorStatusCheckStatus]
-        :param score_min: Minimum score (inclusive).
-        :type score_min: float
-        :param score_max: Maximum score (inclusive).
-        :type score_max: float
         :param segment_id: Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view.
         :type segment_id: str
         :param order_by: Field to sort by.
@@ -888,8 +874,6 @@ class MonitorStatusApi:
             account_id=account_id,
             url=url,
             status=status,
-            score_min=score_min,
-            score_max=score_max,
             segment_id=segment_id,
             order_by=order_by,
             sort=sort,
@@ -922,8 +906,6 @@ class MonitorStatusApi:
         account_id: StrictStr,
         url: Annotated[Optional[StrictStr], Field(description="Glob pattern to filter by URL (e.g. `*example.com*`).")] = None,
         status: Annotated[Optional[List[MonitorStatusCheckStatus]], Field(description="Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).")] = None,
-        score_min: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Minimum score (inclusive).")] = None,
-        score_max: Annotated[Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]], Field(description="Maximum score (inclusive).")] = None,
         segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view.")] = None,
         order_by: Annotated[Optional[MonitorStatusOrderBy], Field(description="Field to sort by.")] = None,
         sort: Annotated[Optional[SortDirection], Field(description="Sort direction.")] = None,
@@ -951,10 +933,6 @@ class MonitorStatusApi:
         :type url: str
         :param status: Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).
         :type status: List[MonitorStatusCheckStatus]
-        :param score_min: Minimum score (inclusive).
-        :type score_min: float
-        :param score_max: Maximum score (inclusive).
-        :type score_max: float
         :param segment_id: Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view.
         :type segment_id: str
         :param order_by: Field to sort by.
@@ -991,8 +969,6 @@ class MonitorStatusApi:
             account_id=account_id,
             url=url,
             status=status,
-            score_min=score_min,
-            score_max=score_max,
             segment_id=segment_id,
             order_by=order_by,
             sort=sort,
@@ -1020,8 +996,6 @@ class MonitorStatusApi:
         account_id,
         url,
         status,
-        score_min,
-        score_max,
         segment_id,
         order_by,
         sort,
@@ -1057,14 +1031,6 @@ class MonitorStatusApi:
         if status is not None:
             
             _query_params.append(('status', status))
-            
-        if score_min is not None:
-            
-            _query_params.append(('score_min', score_min))
-            
-        if score_max is not None:
-            
-            _query_params.append(('score_max', score_max))
             
         if segment_id is not None:
             
