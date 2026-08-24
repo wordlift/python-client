@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.23.0
+  version: 2.24.0
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -1813,30 +1813,6 @@ paths:
           description: Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).
           title: Status
         description: Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).
-      - name: score_min
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: number
-            maximum: 1.0
-            minimum: 0.0
-          - type: 'null'
-          description: Minimum score (inclusive).
-          title: Score Min
-        description: Minimum score (inclusive).
-      - name: score_max
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: number
-            maximum: 1.0
-            minimum: 0.0
-          - type: 'null'
-          description: Maximum score (inclusive).
-          title: Score Max
-        description: Maximum score (inclusive).
       - name: segment_id
         in: query
         required: false
