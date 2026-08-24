@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.22.0
+  version: 2.22.2
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -2635,11 +2635,6 @@ components:
           type: array
           title: Expectation Evaluations
           default: []
-        expectation_success_score:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Expectation Success Score
       type: object
       required:
       - monitor_id
