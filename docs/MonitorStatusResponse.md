@@ -18,7 +18,6 @@ Name | Type | Description | Notes
 **checks** | **Dict[str, object]** |  | [optional] 
 **segment_ids** | **List[str]** |  | [optional] [default to []]
 **expectation_evaluations** | [**List[ExpectationEvaluationSummary]**](ExpectationEvaluationSummary.md) |  | [optional] [default to []]
-**expectation_success_score** | **float** |  | [optional] 
 
 ## Example
 
