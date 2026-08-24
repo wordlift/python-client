@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.22.2
+  version: 2.23.0
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -1533,6 +1533,82 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/monitoring/segments/{segment_id}/expectations:
+    get:
+      tags:
+      - Expectations
+      summary: List Segment Expectations
+      description: "Return a page of expectation ids attached to the segment, ordered\
+        \ by\nthe expectation's own ``(created_at, id)``, each carrying the severity\
+        \ of\nits attachment \u2014 the reverse of ``GET /expectations/{id}/segments``.\n\
+        \nPass ``expectation_id`` (repeatable) to batch a known, bounded set of\n\
+        severity lookups in one call instead of one request per expectation:\nsince\
+        \ the junction key is ``(expectation_id, segment_id)``, a filtered\npage can\
+        \ never return more rows than ids supplied. Not hydrated \u2014 pair\nwith\
+        \ the expectation catalog you already have (or fetch via\n``GET /expectations?id=...``)\
+        \ to resolve type/config."
+      operationId: list_segment_expectations_accounts__account_id__monitoring_segments__segment_id__expectations_get
+      parameters:
+      - name: segment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Segment Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: expectation_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Filter to these expectation ids (repeatable). Omitted returns
+            every expectation attached to the segment.
+          title: Expectation Id
+        description: Filter to these expectation ids (repeatable). Omitted returns
+          every expectation attached to the segment.
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Opaque pagination cursor from a previous response.
+          title: Cursor
+        description: Opaque pagination cursor from a previous response.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          description: Maximum number of expectations to return.
+          default: 50
+          title: Limit
+        description: Maximum number of expectations to return.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListExpectationSeverityResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /checks:
     get:
       tags:
@@ -2126,6 +2202,22 @@ components:
       - required
       - recommended
       title: ExpectationSeverity
+    ExpectationSeverityResponse:
+      properties:
+        expectation_id:
+          type: string
+          title: Expectation Id
+        severity:
+          $ref: '#/components/schemas/ExpectationSeverity'
+      type: object
+      required:
+      - expectation_id
+      - severity
+      title: ExpectationSeverityResponse
+      description: "Response for ``GET /segments/{id}/expectations`` \u2014 the reverse\
+        \ of\n``SegmentSeverityResponse``. Doesn't hydrate a full ``Expectation``;\
+        \ the\ncaller either already holds the expectation catalog it needs or fetches\n\
+        it separately via ``GET /expectations?id=...``."
     ExpectationSummaryByExpectationItem:
       properties:
         segment_id:
@@ -2255,6 +2347,26 @@ components:
       - items
       - total
       title: ListCheckSummaryByCheckResponse
+    ListExpectationSeverityResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/ExpectationSeverityResponse'
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - items
+      - total
+      title: ListExpectationSeverityResponse
     ListExpectationSummaryByExpectationResponse:
       properties:
         items:
