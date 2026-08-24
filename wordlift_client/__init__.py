@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.199.0"
+__version__ = "1.200.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -234,6 +234,7 @@ from wordlift_client.models.events_response import EventsResponse
 from wordlift_client.models.expectation_evaluation_summary import ExpectationEvaluationSummary
 from wordlift_client.models.expectation_outcome import ExpectationOutcome
 from wordlift_client.models.expectation_severity import ExpectationSeverity
+from wordlift_client.models.expectation_severity_response import ExpectationSeverityResponse
 from wordlift_client.models.expectation_summary_by_expectation_item import ExpectationSummaryByExpectationItem
 from wordlift_client.models.expectation_summary_by_type_item import ExpectationSummaryByTypeItem
 from wordlift_client.models.expectation_summary_outcome import ExpectationSummaryOutcome
@@ -289,6 +290,7 @@ from wordlift_client.models.level_enum import LevelEnum
 from wordlift_client.models.link_group import LinkGroup
 from wordlift_client.models.link_group_response import LinkGroupResponse
 from wordlift_client.models.list_check_summary_by_check_response import ListCheckSummaryByCheckResponse
+from wordlift_client.models.list_expectation_severity_response import ListExpectationSeverityResponse
 from wordlift_client.models.list_expectation_summary_by_expectation_response import ListExpectationSummaryByExpectationResponse
 from wordlift_client.models.list_expectation_summary_by_type_response import ListExpectationSummaryByTypeResponse
 from wordlift_client.models.list_expectations_response import ListExpectationsResponse

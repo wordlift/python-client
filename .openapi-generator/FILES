@@ -148,6 +148,7 @@ docs/EventsResponse.md
 docs/ExpectationEvaluationSummary.md
 docs/ExpectationOutcome.md
 docs/ExpectationSeverity.md
+docs/ExpectationSeverityResponse.md
 docs/ExpectationSummaryApi.md
 docs/ExpectationSummaryByExpectationItem.md
 docs/ExpectationSummaryByTypeItem.md
@@ -220,6 +221,7 @@ docs/LinkGroup.md
 docs/LinkGroupResponse.md
 docs/LinkGroupsApi.md
 docs/ListCheckSummaryByCheckResponse.md
+docs/ListExpectationSeverityResponse.md
 docs/ListExpectationSummaryByExpectationResponse.md
 docs/ListExpectationSummaryByTypeResponse.md
 docs/ListExpectationsResponse.md
@@ -439,6 +441,8 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_expectation_severity_response.py
+test/test_list_expectation_severity_response.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -650,6 +654,7 @@ wordlift_client/models/events_response.py
 wordlift_client/models/expectation_evaluation_summary.py
 wordlift_client/models/expectation_outcome.py
 wordlift_client/models/expectation_severity.py
+wordlift_client/models/expectation_severity_response.py
 wordlift_client/models/expectation_summary_by_expectation_item.py
 wordlift_client/models/expectation_summary_by_type_item.py
 wordlift_client/models/expectation_summary_outcome.py
@@ -705,6 +710,7 @@ wordlift_client/models/level_enum.py
 wordlift_client/models/link_group.py
 wordlift_client/models/link_group_response.py
 wordlift_client/models/list_check_summary_by_check_response.py
+wordlift_client/models/list_expectation_severity_response.py
 wordlift_client/models/list_expectation_summary_by_expectation_response.py
 wordlift_client/models/list_expectation_summary_by_type_response.py
 wordlift_client/models/list_expectations_response.py
