@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.24.0
+  version: 2.27.0
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -2740,7 +2740,11 @@ components:
       required:
       - segments
       title: ReplaceExpectationSegmentsRequest
-      description: Body for ``PUT /expectations/{id}/segments``.
+      description: "Body for ``PUT /expectations/{id}/segments``.\n\nThe per-segment\
+        \ expectation cap (``MAX_EXPECTATIONS_PER_SEGMENT``) can't be\nchecked from\
+        \ this payload alone \u2014 it depends on how many *other*\nexpectations each\
+        \ target segment already has attached. That's enforced\nwith a 409 in ``ExpectationService``\
+        \ instead (see ``_assert_segment_has_capacity``)."
     ReplaceSegmentGlobsRequest:
       properties:
         patterns:
