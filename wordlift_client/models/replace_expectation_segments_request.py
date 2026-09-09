@@ -26,7 +26,7 @@ from typing_extensions import Self
 
 class ReplaceExpectationSegmentsRequest(BaseModel):
     """
-    Body for ``PUT /expectations/{id}/segments``.
+    Body for ``PUT /expectations/{id}/segments``.  The per-segment expectation cap (``MAX_EXPECTATIONS_PER_SEGMENT``) can't be checked from this payload alone — it depends on how many *other* expectations each target segment already has attached. That's enforced with a 409 in ``ExpectationService`` instead (see ``_assert_segment_has_capacity``).
     """ # noqa: E501
     segments: List[SegmentSeverityRequest]
     __properties: ClassVar[List[str]] = ["segments"]
