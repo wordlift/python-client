@@ -4,7 +4,7 @@ info:
   summary: WordLift crawler API
   description: API for creating, listing, and inspecting crawl jobs. This schema is
     generated from FastAPI route/model annotations.
-  version: 0.11.9
+  version: 0.12.0
 paths:
   /crawl-jobs:
     post:
@@ -506,6 +506,16 @@ paths:
           description: Proxy mode to use for this fetch.
           default: disabled
         description: Proxy mode to use for this fetch.
+      - name: target_load_event
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/FetchTargetLoadEvent'
+          description: Playwright load event to wait for before capture. 'networkidle'
+            is only valid with js_render_mode='enabled' and proxy_mode='disabled'.
+          default: domcontentloaded
+        description: Playwright load event to wait for before capture. 'networkidle'
+          is only valid with js_render_mode='enabled' and proxy_mode='disabled'.
       responses:
         '200':
           description: Successful Response
@@ -1053,6 +1063,13 @@ components:
           title: Response Time Ms
           description: Total response time in milliseconds (from request sent to body
             received).
+        networkidle_response_time_ms:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Networkidle Response Time Ms
+          description: Time in milliseconds from request sent until Playwright's 'networkidle'
+            load event, when target_load_event='networkidle' was requested.
         fetched_at:
           anyOf:
           - type: string
@@ -1075,12 +1092,25 @@ components:
           title: Har
           description: HAR 1.2 log of all network activity captured during the fetch.
             Null when not available for the given fetch strategy.
+        har_truncated:
+          type: boolean
+          title: Har Truncated
+          description: True when the HAR log was truncated after hitting the size
+            cap, so it covers only part of the page's network activity.
+          readOnly: true
       type: object
       required:
       - success
       - url_requested
       - url_final
+      - har_truncated
       title: FetchResponse
+    FetchTargetLoadEvent:
+      type: string
+      enum:
+      - domcontentloaded
+      - networkidle
+      title: FetchTargetLoadEvent
     HTTPValidationError:
       properties:
         detail:
