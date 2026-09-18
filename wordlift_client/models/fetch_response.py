@@ -43,10 +43,12 @@ class FetchResponse(BaseModel):
     error_message: Optional[StrictStr] = None
     ttfb_ms: Optional[StrictInt] = None
     response_time_ms: Optional[StrictInt] = None
+    networkidle_response_time_ms: Optional[StrictInt] = None
     fetched_at: Optional[datetime] = None
     from_cache: Optional[StrictBool] = Field(default=False, description="True when the response was served from a previously stored fetch result.")
     har: Optional[Dict[str, Any]] = None
-    __properties: ClassVar[List[str]] = ["success", "url_requested", "url_final", "status_code", "content_type", "html", "original_charset", "markdown", "title", "description", "text", "error_code", "error_message", "ttfb_ms", "response_time_ms", "fetched_at", "from_cache", "har"]
+    har_truncated: StrictBool = Field(description="True when the HAR log was truncated after hitting the size cap, so it covers only part of the page's network activity.")
+    __properties: ClassVar[List[str]] = ["success", "url_requested", "url_final", "status_code", "content_type", "html", "original_charset", "markdown", "title", "description", "text", "error_code", "error_message", "ttfb_ms", "response_time_ms", "networkidle_response_time_ms", "fetched_at", "from_cache", "har", "har_truncated"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,8 +80,10 @@ class FetchResponse(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "har_truncated",
         ])
 
         _dict = self.model_dump(
@@ -147,6 +151,11 @@ class FetchResponse(BaseModel):
         if self.response_time_ms is None and "response_time_ms" in self.model_fields_set:
             _dict['response_time_ms'] = None
 
+        # set to None if networkidle_response_time_ms (nullable) is None
+        # and model_fields_set contains the field
+        if self.networkidle_response_time_ms is None and "networkidle_response_time_ms" in self.model_fields_set:
+            _dict['networkidle_response_time_ms'] = None
+
         # set to None if fetched_at (nullable) is None
         # and model_fields_set contains the field
         if self.fetched_at is None and "fetched_at" in self.model_fields_set:
@@ -184,9 +193,11 @@ class FetchResponse(BaseModel):
             "error_message": obj.get("error_message"),
             "ttfb_ms": obj.get("ttfb_ms"),
             "response_time_ms": obj.get("response_time_ms"),
+            "networkidle_response_time_ms": obj.get("networkidle_response_time_ms"),
             "fetched_at": obj.get("fetched_at"),
             "from_cache": obj.get("from_cache") if obj.get("from_cache") is not None else False,
-            "har": obj.get("har")
+            "har": obj.get("har"),
+            "har_truncated": obj.get("har_truncated")
         })
         return _obj
 

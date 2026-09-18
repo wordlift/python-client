@@ -20,9 +20,11 @@ Name | Type | Description | Notes
 **error_message** | **str** |  | [optional] 
 **ttfb_ms** | **int** |  | [optional] 
 **response_time_ms** | **int** |  | [optional] 
+**networkidle_response_time_ms** | **int** |  | [optional] 
 **fetched_at** | **datetime** |  | [optional] 
 **from_cache** | **bool** | True when the response was served from a previously stored fetch result. | [optional] [default to False]
 **har** | **Dict[str, object]** |  | [optional] 
+**har_truncated** | **bool** | True when the HAR log was truncated after hitting the size cap, so it covers only part of the page&#39;s network activity. | [readonly] 
 
 ## Example
 

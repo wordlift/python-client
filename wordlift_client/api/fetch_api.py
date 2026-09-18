@@ -22,6 +22,7 @@ from typing import Optional
 from typing_extensions import Annotated
 from wordlift_client.models.fetch_js_render_mode import FetchJsRenderMode
 from wordlift_client.models.fetch_response import FetchResponse
+from wordlift_client.models.fetch_target_load_event import FetchTargetLoadEvent
 from wordlift_client.models.proxy_mode import ProxyMode
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
@@ -49,6 +50,7 @@ class FetchApi:
         js_render_mode: Annotated[Optional[FetchJsRenderMode], Field(description="JS rendering mode: auto lets the system decide, disabled forces static fetch, enabled forces JS rendering.")] = None,
         force: Annotated[Optional[StrictBool], Field(description="When true, bypasses the result cache and forces a fresh fetch.")] = None,
         proxy_mode: Annotated[Optional[ProxyMode], Field(description="Proxy mode to use for this fetch.")] = None,
+        target_load_event: Annotated[Optional[FetchTargetLoadEvent], Field(description="Playwright load event to wait for before capture. 'networkidle' is only valid with js_render_mode='enabled' and proxy_mode='disabled'.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -74,6 +76,8 @@ class FetchApi:
         :type force: bool
         :param proxy_mode: Proxy mode to use for this fetch.
         :type proxy_mode: ProxyMode
+        :param target_load_event: Playwright load event to wait for before capture. 'networkidle' is only valid with js_render_mode='enabled' and proxy_mode='disabled'.
+        :type target_load_event: FetchTargetLoadEvent
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -101,6 +105,7 @@ class FetchApi:
             js_render_mode=js_render_mode,
             force=force,
             proxy_mode=proxy_mode,
+            target_load_event=target_load_event,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -130,6 +135,7 @@ class FetchApi:
         js_render_mode: Annotated[Optional[FetchJsRenderMode], Field(description="JS rendering mode: auto lets the system decide, disabled forces static fetch, enabled forces JS rendering.")] = None,
         force: Annotated[Optional[StrictBool], Field(description="When true, bypasses the result cache and forces a fresh fetch.")] = None,
         proxy_mode: Annotated[Optional[ProxyMode], Field(description="Proxy mode to use for this fetch.")] = None,
+        target_load_event: Annotated[Optional[FetchTargetLoadEvent], Field(description="Playwright load event to wait for before capture. 'networkidle' is only valid with js_render_mode='enabled' and proxy_mode='disabled'.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -155,6 +161,8 @@ class FetchApi:
         :type force: bool
         :param proxy_mode: Proxy mode to use for this fetch.
         :type proxy_mode: ProxyMode
+        :param target_load_event: Playwright load event to wait for before capture. 'networkidle' is only valid with js_render_mode='enabled' and proxy_mode='disabled'.
+        :type target_load_event: FetchTargetLoadEvent
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -182,6 +190,7 @@ class FetchApi:
             js_render_mode=js_render_mode,
             force=force,
             proxy_mode=proxy_mode,
+            target_load_event=target_load_event,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -211,6 +220,7 @@ class FetchApi:
         js_render_mode: Annotated[Optional[FetchJsRenderMode], Field(description="JS rendering mode: auto lets the system decide, disabled forces static fetch, enabled forces JS rendering.")] = None,
         force: Annotated[Optional[StrictBool], Field(description="When true, bypasses the result cache and forces a fresh fetch.")] = None,
         proxy_mode: Annotated[Optional[ProxyMode], Field(description="Proxy mode to use for this fetch.")] = None,
+        target_load_event: Annotated[Optional[FetchTargetLoadEvent], Field(description="Playwright load event to wait for before capture. 'networkidle' is only valid with js_render_mode='enabled' and proxy_mode='disabled'.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -236,6 +246,8 @@ class FetchApi:
         :type force: bool
         :param proxy_mode: Proxy mode to use for this fetch.
         :type proxy_mode: ProxyMode
+        :param target_load_event: Playwright load event to wait for before capture. 'networkidle' is only valid with js_render_mode='enabled' and proxy_mode='disabled'.
+        :type target_load_event: FetchTargetLoadEvent
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -263,6 +275,7 @@ class FetchApi:
             js_render_mode=js_render_mode,
             force=force,
             proxy_mode=proxy_mode,
+            target_load_event=target_load_event,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -287,6 +300,7 @@ class FetchApi:
         js_render_mode,
         force,
         proxy_mode,
+        target_load_event,
         _request_auth,
         _content_type,
         _headers,
@@ -322,6 +336,10 @@ class FetchApi:
         if proxy_mode is not None:
             
             _query_params.append(('proxy_mode', proxy_mode.value))
+            
+        if target_load_event is not None:
+            
+            _query_params.append(('target_load_event', target_load_event.value))
             
         # process the header parameters
         # process the form parameters

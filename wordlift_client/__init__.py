@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.202.0"
+__version__ = "1.203.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -246,6 +246,7 @@ from wordlift_client.models.failure_reason import FailureReason
 from wordlift_client.models.failure_response import FailureResponse
 from wordlift_client.models.fetch_js_render_mode import FetchJsRenderMode
 from wordlift_client.models.fetch_response import FetchResponse
+from wordlift_client.models.fetch_target_load_event import FetchTargetLoadEvent
 from wordlift_client.models.field_value_request import FieldValueRequest
 from wordlift_client.models.filter import Filter
 from wordlift_client.models.filter_value import FilterValue

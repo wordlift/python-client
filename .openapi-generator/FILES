@@ -165,6 +165,7 @@ docs/FailuresApi.md
 docs/FetchApi.md
 docs/FetchJsRenderMode.md
 docs/FetchResponse.md
+docs/FetchTargetLoadEvent.md
 docs/FieldValueRequest.md
 docs/Filter.md
 docs/FilterValue.md
@@ -441,6 +442,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_fetch_target_load_event.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -664,6 +666,7 @@ wordlift_client/models/failure_reason.py
 wordlift_client/models/failure_response.py
 wordlift_client/models/fetch_js_render_mode.py
 wordlift_client/models/fetch_response.py
+wordlift_client/models/fetch_target_load_event.py
 wordlift_client/models/field_value_request.py
 wordlift_client/models/filter.py
 wordlift_client/models/filter_value.py

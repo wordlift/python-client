@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **fetch_page_fetch_get**
-> FetchResponse fetch_page_fetch_get(url, js_render_mode=js_render_mode, force=force, proxy_mode=proxy_mode)
+> FetchResponse fetch_page_fetch_get(url, js_render_mode=js_render_mode, force=force, proxy_mode=proxy_mode, target_load_event=target_load_event)
 
 Fetch a single page
 
@@ -22,6 +22,7 @@ Fetches a URL synchronously and returns its content.
 import wordlift_client
 from wordlift_client.models.fetch_js_render_mode import FetchJsRenderMode
 from wordlift_client.models.fetch_response import FetchResponse
+from wordlift_client.models.fetch_target_load_event import FetchTargetLoadEvent
 from wordlift_client.models.proxy_mode import ProxyMode
 from wordlift_client.rest import ApiException
 from pprint import pprint
@@ -51,10 +52,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     js_render_mode = wordlift_client.FetchJsRenderMode() # FetchJsRenderMode | JS rendering mode: auto lets the system decide, disabled forces static fetch, enabled forces JS rendering. (optional)
     force = False # bool | When true, bypasses the result cache and forces a fresh fetch. (optional) (default to False)
     proxy_mode = wordlift_client.ProxyMode() # ProxyMode | Proxy mode to use for this fetch. (optional)
+    target_load_event = wordlift_client.FetchTargetLoadEvent() # FetchTargetLoadEvent | Playwright load event to wait for before capture. 'networkidle' is only valid with js_render_mode='enabled' and proxy_mode='disabled'. (optional)
 
     try:
         # Fetch a single page
-        api_response = await api_instance.fetch_page_fetch_get(url, js_render_mode=js_render_mode, force=force, proxy_mode=proxy_mode)
+        api_response = await api_instance.fetch_page_fetch_get(url, js_render_mode=js_render_mode, force=force, proxy_mode=proxy_mode, target_load_event=target_load_event)
         print("The response of FetchApi->fetch_page_fetch_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -72,6 +74,7 @@ Name | Type | Description  | Notes
  **js_render_mode** | [**FetchJsRenderMode**](.md)| JS rendering mode: auto lets the system decide, disabled forces static fetch, enabled forces JS rendering. | [optional] 
  **force** | **bool**| When true, bypasses the result cache and forces a fresh fetch. | [optional] [default to False]
  **proxy_mode** | [**ProxyMode**](.md)| Proxy mode to use for this fetch. | [optional] 
+ **target_load_event** | [**FetchTargetLoadEvent**](.md)| Playwright load event to wait for before capture. &#39;networkidle&#39; is only valid with js_render_mode&#x3D;&#39;enabled&#39; and proxy_mode&#x3D;&#39;disabled&#39;. | [optional] 
 
 ### Return type
 
