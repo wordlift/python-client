@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **access_token** | **str** | The Google merchant access token | 
 **account_id** | **int** | The account id | [optional] [readonly] 
 **automatic_synchronization** | **bool** | Whether the Merchant data will be synchronized automatically | [optional] 
+**countries** | **List[str]** | ISO 3166-1 alpha-2 codes of the countries the merchant ships to. When empty, no account-level shipping is published. | [optional] 
 **created_at** | **datetime** | The create date-time | [optional] [readonly] 
 **custom_seller** | **str** | Custom seller entity - if applicable. | [optional] 
 **default_products_filter_action** | **str** | Default Products filter action to apply during sync process. | [default to 'PROCESS']

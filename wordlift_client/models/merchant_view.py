@@ -32,6 +32,7 @@ class MerchantView(BaseModel):
     access_token: StrictStr = Field(description="The Google merchant access token")
     account_id: Optional[StrictInt] = Field(default=None, description="The account id")
     automatic_synchronization: Optional[StrictBool] = Field(default=None, description="Whether the Merchant data will be synchronized automatically")
+    countries: Optional[List[StrictStr]] = Field(default=None, description="ISO 3166-1 alpha-2 codes of the countries the merchant ships to. When empty, no account-level shipping is published.")
     created_at: Optional[datetime] = Field(default=None, description="The create date-time")
     custom_seller: Optional[StrictStr] = Field(default=None, description="Custom seller entity - if applicable.")
     default_products_filter_action: StrictStr = Field(description="Default Products filter action to apply during sync process.")
@@ -59,7 +60,7 @@ class MerchantView(BaseModel):
     url: Optional[StrictStr] = Field(default=None, description="The website URL")
     url_strategy: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default='canonicalLinkAndLink', description="Which strategy to use to write the url schema.")
     writer_service: Optional[StrictStr] = Field(default=None, description="How to write the merchant data to the graph, if unsure, do not set anything (by default `wordpressMerchantWriter`).")
-    __properties: ClassVar[List[str]] = ["access_token", "account_id", "automatic_synchronization", "created_at", "custom_seller", "default_products_filter_action", "deleted", "deleted_at", "google_merchant_id", "id", "ignore_brand", "ignore_image", "modified_at", "publisher_name", "refresh_token", "sid", "sync_has_errors", "sync_id", "sync_products_created", "sync_products_deleted", "sync_products_errored", "sync_products_skipped", "sync_products_total", "sync_products_unchanged", "sync_products_updated", "sync_started_at", "sync_stopped_at", "url", "url_strategy", "writer_service"]
+    __properties: ClassVar[List[str]] = ["access_token", "account_id", "automatic_synchronization", "countries", "created_at", "custom_seller", "default_products_filter_action", "deleted", "deleted_at", "google_merchant_id", "id", "ignore_brand", "ignore_image", "modified_at", "publisher_name", "refresh_token", "sid", "sync_has_errors", "sync_id", "sync_products_created", "sync_products_deleted", "sync_products_errored", "sync_products_skipped", "sync_products_total", "sync_products_unchanged", "sync_products_updated", "sync_started_at", "sync_stopped_at", "url", "url_strategy", "writer_service"]
 
     @field_validator('default_products_filter_action')
     def default_products_filter_action_validate_enum(cls, value):
@@ -146,6 +147,7 @@ class MerchantView(BaseModel):
             "access_token": obj.get("access_token"),
             "account_id": obj.get("account_id"),
             "automatic_synchronization": obj.get("automatic_synchronization"),
+            "countries": obj.get("countries"),
             "created_at": obj.get("created_at"),
             "custom_seller": obj.get("custom_seller"),
             "default_products_filter_action": obj.get("default_products_filter_action") if obj.get("default_products_filter_action") is not None else 'PROCESS',

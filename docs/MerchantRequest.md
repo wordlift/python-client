@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **access_token** | **str** | Google Merchant access token | [optional] 
 **account_id** | **int** | The Knowledge Graph to use for the Merchant. Please note that the Knowledge Graph will be reset. When not provided, this method will use the first available Knowledge Graph. | [optional] 
+**countries** | **List[str]** | ISO 3166-1 alpha-2 codes of the countries the merchant ships to. When omitted on an update, the existing value is preserved. | [optional] 
 **deleted** | **bool** | True if the merchant has been deleted. When omitted on an update, the existing value is preserved. | [optional] [default to False]
 **google_merchant_id** | **int** | The Google Merchant id | 
 **ignore_brand** | **bool** | Whether to ignore the &#x60;brand&#x60; property during validation. When omitted on an update, the existing value is preserved. | [optional] 
