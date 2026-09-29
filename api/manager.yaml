@@ -3664,6 +3664,14 @@ components:
         automatic_synchronization:
           type: boolean
           description: Whether the Merchant data will be synchronized automatically
+        countries:
+          type: array
+          description: "ISO 3166-1 alpha-2 codes of the countries the merchant ships\
+            \ to. When empty, no account-level shipping is published."
+          items:
+            type: string
+            description: "ISO 3166-1 alpha-2 codes of the countries the merchant ships\
+              \ to. When empty, no account-level shipping is published."
         created_at:
           type: string
           format: date-time
@@ -3764,6 +3772,14 @@ components:
           description: "The Knowledge Graph to use for the Merchant. Please note that\
             \ the Knowledge Graph will be reset. When not provided, this method will\
             \ use the first available Knowledge Graph."
+        countries:
+          type: array
+          description: "ISO 3166-1 alpha-2 codes of the countries the merchant ships\
+            \ to. When omitted on an update, the existing value is preserved."
+          items:
+            type: string
+            description: "ISO 3166-1 alpha-2 codes of the countries the merchant ships\
+              \ to. When omitted on an update, the existing value is preserved."
         deleted:
           type: boolean
           default: false
@@ -3920,6 +3936,14 @@ components:
         automatic_synchronization:
           type: boolean
           description: Whether the Merchant data will be synchronized automatically
+        countries:
+          type: array
+          description: "ISO 3166-1 alpha-2 codes of the countries the merchant ships\
+            \ to. When empty, no account-level shipping is published."
+          items:
+            type: string
+            description: "ISO 3166-1 alpha-2 codes of the countries the merchant ships\
+              \ to. When empty, no account-level shipping is published."
         created_at:
           type: string
           format: date-time
