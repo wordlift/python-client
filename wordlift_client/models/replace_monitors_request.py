@@ -20,7 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List
-from wordlift_client.models.replace_monitor_item import ReplaceMonitorItem
+from wordlift_client.models.items_inner import ItemsInner
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +28,7 @@ class ReplaceMonitorsRequest(BaseModel):
     """
     ReplaceMonitorsRequest
     """ # noqa: E501
-    items: List[ReplaceMonitorItem]
+    items: List[ItemsInner]
     __properties: ClassVar[List[str]] = ["items"]
 
     model_config = ConfigDict(
@@ -89,7 +89,7 @@ class ReplaceMonitorsRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "items": [ReplaceMonitorItem.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None
+            "items": [ItemsInner.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None
         })
         return _obj
 

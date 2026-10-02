@@ -5,10 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | 
-**created_at** | **datetime** |  | 
+**url** | **str** |  | 
 **type** | **str** |  | 
-**config** | [**StructuredDataExpectationConfig**](StructuredDataExpectationConfig.md) |  | 
 
 ## Example
 

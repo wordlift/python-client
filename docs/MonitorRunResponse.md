@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **fetched_pages** | **int** |  | 
 **failed_fetches** | **int** |  | 
 **checked_pages** | **int** |  | 
+**progress** | [**List[MonitorTypeProgress]**](MonitorTypeProgress.md) |  | 
 **end_at** | **datetime** |  | [optional] 
 **last_progress_at** | **datetime** |  | 
 **created_at** | **datetime** |  | 

@@ -4,9 +4,11 @@ All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**attach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_put**](ExpectationsApi.md#attach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_put) | **PUT** /accounts/{account_id}/monitoring/expectations/{expectation_id}/monitors/{monitor_id} | Attach Expectation Monitor
 [**attach_expectation_segment_accounts_account_id_monitoring_expectations_expectation_id_segments_segment_id_put**](ExpectationsApi.md#attach_expectation_segment_accounts_account_id_monitoring_expectations_expectation_id_segments_segment_id_put) | **PUT** /accounts/{account_id}/monitoring/expectations/{expectation_id}/segments/{segment_id} | Attach Expectation Segment
 [**create_expectation_accounts_account_id_monitoring_expectations_post**](ExpectationsApi.md#create_expectation_accounts_account_id_monitoring_expectations_post) | **POST** /accounts/{account_id}/monitoring/expectations | Create Expectation
 [**delete_expectation_accounts_account_id_monitoring_expectations_expectation_id_delete**](ExpectationsApi.md#delete_expectation_accounts_account_id_monitoring_expectations_expectation_id_delete) | **DELETE** /accounts/{account_id}/monitoring/expectations/{expectation_id} | Delete Expectation
+[**detach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_delete**](ExpectationsApi.md#detach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_delete) | **DELETE** /accounts/{account_id}/monitoring/expectations/{expectation_id}/monitors/{monitor_id} | Detach Expectation Monitor
 [**detach_expectation_segment_accounts_account_id_monitoring_expectations_expectation_id_segments_segment_id_delete**](ExpectationsApi.md#detach_expectation_segment_accounts_account_id_monitoring_expectations_expectation_id_segments_segment_id_delete) | **DELETE** /accounts/{account_id}/monitoring/expectations/{expectation_id}/segments/{segment_id} | Detach Expectation Segment
 [**get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get**](ExpectationsApi.md#get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get) | **GET** /accounts/{account_id}/monitoring/expectations/{expectation_id} | Get Expectation
 [**list_expectation_segments_accounts_account_id_monitoring_expectations_expectation_id_segments_get**](ExpectationsApi.md#list_expectation_segments_accounts_account_id_monitoring_expectations_expectation_id_segments_get) | **GET** /accounts/{account_id}/monitoring/expectations/{expectation_id}/segments | List Expectation Segments
@@ -14,6 +16,93 @@ Method | HTTP request | Description
 [**list_segment_expectations_accounts_account_id_monitoring_segments_segment_id_expectations_get**](ExpectationsApi.md#list_segment_expectations_accounts_account_id_monitoring_segments_segment_id_expectations_get) | **GET** /accounts/{account_id}/monitoring/segments/{segment_id}/expectations | List Segment Expectations
 [**replace_expectation_segments_accounts_account_id_monitoring_expectations_expectation_id_segments_put**](ExpectationsApi.md#replace_expectation_segments_accounts_account_id_monitoring_expectations_expectation_id_segments_put) | **PUT** /accounts/{account_id}/monitoring/expectations/{expectation_id}/segments | Replace Expectation Segments
 
+
+# **attach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_put**
+> MonitorSeverityResponse attach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_put(expectation_id, monitor_id, account_id, attach_expectation_monitor_request)
+
+Attach Expectation Monitor
+
+Attach a monitor directly to a rule with the given severity — the account-scoped (URL-less) analog of ``attach_expectation_segment``. Idempotent — a repeated attach updates the severity.
+
+### Example
+
+* Api Key Authentication (ApiKey):
+
+```python
+import wordlift_client
+from wordlift_client.models.attach_expectation_monitor_request import AttachExpectationMonitorRequest
+from wordlift_client.models.monitor_severity_response import MonitorSeverityResponse
+from wordlift_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.wordlift.io
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wordlift_client.Configuration(
+    host = "https://api.wordlift.io"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with wordlift_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wordlift_client.ExpectationsApi(api_client)
+    expectation_id = 'expectation_id_example' # str | 
+    monitor_id = 'monitor_id_example' # str | 
+    account_id = 'account_id_example' # str | 
+    attach_expectation_monitor_request = wordlift_client.AttachExpectationMonitorRequest() # AttachExpectationMonitorRequest | 
+
+    try:
+        # Attach Expectation Monitor
+        api_response = await api_instance.attach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_put(expectation_id, monitor_id, account_id, attach_expectation_monitor_request)
+        print("The response of ExpectationsApi->attach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_put:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ExpectationsApi->attach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_put: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **expectation_id** | **str**|  | 
+ **monitor_id** | **str**|  | 
+ **account_id** | **str**|  | 
+ **attach_expectation_monitor_request** | [**AttachExpectationMonitorRequest**](AttachExpectationMonitorRequest.md)|  | 
+
+### Return type
+
+[**MonitorSeverityResponse**](MonitorSeverityResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **attach_expectation_segment_accounts_account_id_monitoring_expectations_expectation_id_segments_segment_id_put**
 > SegmentSeverityResponse attach_expectation_segment_accounts_account_id_monitoring_expectations_expectation_id_segments_segment_id_put(expectation_id, segment_id, account_id, attach_expectation_segment_request)
@@ -239,6 +328,87 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **expectation_id** | **str**|  | 
+ **account_id** | **str**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **detach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_delete**
+> detach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_delete(expectation_id, monitor_id, account_id)
+
+Detach Expectation Monitor
+
+Detach a monitor from a rule. Idempotent.
+
+### Example
+
+* Api Key Authentication (ApiKey):
+
+```python
+import wordlift_client
+from wordlift_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.wordlift.io
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wordlift_client.Configuration(
+    host = "https://api.wordlift.io"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKey
+configuration.api_key['ApiKey'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKey'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with wordlift_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wordlift_client.ExpectationsApi(api_client)
+    expectation_id = 'expectation_id_example' # str | 
+    monitor_id = 'monitor_id_example' # str | 
+    account_id = 'account_id_example' # str | 
+
+    try:
+        # Detach Expectation Monitor
+        await api_instance.detach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_delete(expectation_id, monitor_id, account_id)
+    except Exception as e:
+        print("Exception when calling ExpectationsApi->detach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_delete: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **expectation_id** | **str**|  | 
+ **monitor_id** | **str**|  | 
  **account_id** | **str**|  | 
 
 ### Return type

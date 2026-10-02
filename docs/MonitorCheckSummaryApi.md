@@ -8,11 +8,11 @@ Method | HTTP request | Description
 
 
 # **list_check_summary_by_check_accounts_account_id_monitoring_checks_summary_by_check_get**
-> ListCheckSummaryByCheckResponse list_check_summary_by_check_accounts_account_id_monitoring_checks_summary_by_check_get(account_id, check_name=check_name, segment_id=segment_id, cursor=cursor, limit=limit)
+> ListCheckSummaryByCheckResponse list_check_summary_by_check_accounts_account_id_monitoring_checks_summary_by_check_get(account_id, check_name=check_name, segment_id=segment_id, monitor_type=monitor_type, cursor=cursor, limit=limit)
 
 List Check Summary By Check
 
-Account-wide check rollup grouped by (segment, check name), broken down by state (``CheckSummaryState`` — OK/WARN/FAIL/PENDING). Omitting both filters returns every segment and check together with the account-wide, all-checks-combined aggregate (`segment_id: null`, `check_name: null`); passing the reserved `overall` value isolates just that aggregate on either dimension instead of requiring a full scan to find it.
+Account-wide check rollup grouped by (segment, check name), broken down by state (``CheckSummaryState`` — OK/WARN/FAIL/PENDING). Omitting both filters returns every segment and check together with the account-wide, all-checks-combined aggregate (`segment_id: null`, `check_name: null`); passing the reserved `overall` value isolates just that aggregate on either dimension instead of requiring a full scan to find it. `monitor_type` scopes every count to one monitor type; omitted, counts span all types.
 
 ### Example
 
@@ -22,6 +22,7 @@ Account-wide check rollup grouped by (segment, check name), broken down by state
 import wordlift_client
 from wordlift_client.models.check_name_filter_value import CheckNameFilterValue
 from wordlift_client.models.list_check_summary_by_check_response import ListCheckSummaryByCheckResponse
+from wordlift_client.models.resource_type import ResourceType
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -49,12 +50,13 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     account_id = 'account_id_example' # str | 
     check_name = [wordlift_client.CheckNameFilterValue()] # List[CheckNameFilterValue] | Filter by check name (repeatable), or the reserved value `overall` to match only the all-checks-combined aggregate row. Omitted returns every check together with that aggregate. (optional)
     segment_id = ['segment_id_example'] # List[str] | Filter by segment id (repeatable), or the reserved value `overall` to match only the account-wide aggregate row. Omitted returns every segment together with that aggregate. (optional)
+    monitor_type = wordlift_client.ResourceType() # ResourceType | Scope every count to monitors of this type (e.g. `page` vs `account` for page vs site-wide health). Omitted returns totals across all monitor types. (optional)
     cursor = 'cursor_example' # str | Opaque pagination cursor from a previous response. (optional)
     limit = 50 # int | Maximum number of items to return. (optional) (default to 50)
 
     try:
         # List Check Summary By Check
-        api_response = await api_instance.list_check_summary_by_check_accounts_account_id_monitoring_checks_summary_by_check_get(account_id, check_name=check_name, segment_id=segment_id, cursor=cursor, limit=limit)
+        api_response = await api_instance.list_check_summary_by_check_accounts_account_id_monitoring_checks_summary_by_check_get(account_id, check_name=check_name, segment_id=segment_id, monitor_type=monitor_type, cursor=cursor, limit=limit)
         print("The response of MonitorCheckSummaryApi->list_check_summary_by_check_accounts_account_id_monitoring_checks_summary_by_check_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -71,6 +73,7 @@ Name | Type | Description  | Notes
  **account_id** | **str**|  | 
  **check_name** | [**List[CheckNameFilterValue]**](CheckNameFilterValue.md)| Filter by check name (repeatable), or the reserved value &#x60;overall&#x60; to match only the all-checks-combined aggregate row. Omitted returns every check together with that aggregate. | [optional] 
  **segment_id** | [**List[str]**](str.md)| Filter by segment id (repeatable), or the reserved value &#x60;overall&#x60; to match only the account-wide aggregate row. Omitted returns every segment together with that aggregate. | [optional] 
+ **monitor_type** | [**ResourceType**](.md)| Scope every count to monitors of this type (e.g. &#x60;page&#x60; vs &#x60;account&#x60; for page vs site-wide health). Omitted returns totals across all monitor types. | [optional] 
  **cursor** | **str**| Opaque pagination cursor from a previous response. | [optional] 
  **limit** | **int**| Maximum number of items to return. | [optional] [default to 50]
 

@@ -31,7 +31,7 @@ class MonitorStatusResponse(BaseModel):
     MonitorStatusResponse
     """ # noqa: E501
     monitor_id: StrictStr
-    url: StrictStr
+    url: Optional[StrictStr] = None
     status: MonitorStatusCheckStatus
     score: Optional[Union[StrictFloat, StrictInt]] = None
     ttfb_ms: Optional[Union[StrictFloat, StrictInt]] = None
@@ -91,6 +91,11 @@ class MonitorStatusResponse(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['expectation_evaluations'] = _items
+        # set to None if url (nullable) is None
+        # and model_fields_set contains the field
+        if self.url is None and "url" in self.model_fields_set:
+            _dict['url'] = None
+
         # set to None if score (nullable) is None
         # and model_fields_set contains the field
         if self.score is None and "score" in self.model_fields_set:

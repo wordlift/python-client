@@ -1,6 +1,6 @@
 # SegmentSeverityResponse
 
-Response for every segment-attachment endpoint (attach, replace, and list) — none of them hydrates a full Segment. The frontend already holds the full segment catalog (a small, bounded set fetched on many pages), so this only needs to report segment_id/severity. Also doubles as the segment-membership shape nested in ExpectationEvaluationSummary below, since both are the same (segment_id, severity) pairing.
+Response for every segment-attachment endpoint (attach, replace, and list) — none of them hydrates a full Segment. The frontend already holds the full segment catalog (a small, bounded set fetched on many pages), so this only needs to report segment_id/severity.
 
 ## Properties
 

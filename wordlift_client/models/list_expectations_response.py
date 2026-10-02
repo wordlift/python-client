@@ -20,7 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from wordlift_client.models.items_inner import ItemsInner
+from wordlift_client.models.items_inner1 import ItemsInner1
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +28,7 @@ class ListExpectationsResponse(BaseModel):
     """
     ListExpectationsResponse
     """ # noqa: E501
-    items: List[ItemsInner]
+    items: List[ItemsInner1]
     total: StrictInt
     next_cursor: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["items", "total", "next_cursor"]
@@ -96,7 +96,7 @@ class ListExpectationsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "items": [ItemsInner.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
+            "items": [ItemsInner1.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
             "total": obj.get("total"),
             "next_cursor": obj.get("next_cursor")
         })

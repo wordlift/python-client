@@ -22,6 +22,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.monitor_run_status import MonitorRunStatus
+from wordlift_client.models.monitor_type_progress import MonitorTypeProgress
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -35,10 +36,11 @@ class MonitorRunResponse(BaseModel):
     fetched_pages: StrictInt
     failed_fetches: StrictInt
     checked_pages: StrictInt
+    progress: List[MonitorTypeProgress]
     end_at: Optional[datetime] = None
     last_progress_at: datetime
     created_at: datetime
-    __properties: ClassVar[List[str]] = ["id", "status", "dispatched_pages", "fetched_pages", "failed_fetches", "checked_pages", "end_at", "last_progress_at", "created_at"]
+    __properties: ClassVar[List[str]] = ["id", "status", "dispatched_pages", "fetched_pages", "failed_fetches", "checked_pages", "progress", "end_at", "last_progress_at", "created_at"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -79,6 +81,13 @@ class MonitorRunResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in progress (list)
+        _items = []
+        if self.progress:
+            for _item in self.progress:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['progress'] = _items
         # set to None if end_at (nullable) is None
         # and model_fields_set contains the field
         if self.end_at is None and "end_at" in self.model_fields_set:
@@ -102,6 +111,7 @@ class MonitorRunResponse(BaseModel):
             "fetched_pages": obj.get("fetched_pages"),
             "failed_fetches": obj.get("failed_fetches"),
             "checked_pages": obj.get("checked_pages"),
+            "progress": [MonitorTypeProgress.from_dict(_item) for _item in obj["progress"]] if obj.get("progress") is not None else None,
             "end_at": obj.get("end_at"),
             "last_progress_at": obj.get("last_progress_at"),
             "created_at": obj.get("created_at")

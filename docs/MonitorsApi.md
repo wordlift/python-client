@@ -9,15 +9,14 @@ Method | HTTP request | Description
 [**get_monitor_accounts_account_id_monitoring_monitors_monitor_id_get**](MonitorsApi.md#get_monitor_accounts_account_id_monitoring_monitors_monitor_id_get) | **GET** /accounts/{account_id}/monitoring/monitors/{monitor_id} | Get Monitor
 [**list_monitors_accounts_account_id_monitoring_monitors_get**](MonitorsApi.md#list_monitors_accounts_account_id_monitoring_monitors_get) | **GET** /accounts/{account_id}/monitoring/monitors | List Monitors
 [**replace_monitors_accounts_account_id_monitoring_monitors_put**](MonitorsApi.md#replace_monitors_accounts_account_id_monitoring_monitors_put) | **PUT** /accounts/{account_id}/monitoring/monitors | Replace Monitors
-[**update_monitor_accounts_account_id_monitoring_monitors_monitor_id_put**](MonitorsApi.md#update_monitor_accounts_account_id_monitoring_monitors_monitor_id_put) | **PUT** /accounts/{account_id}/monitoring/monitors/{monitor_id} | Update Monitor
 
 
 # **add_monitor_accounts_account_id_monitoring_monitors_post**
-> MonitorResponse add_monitor_accounts_account_id_monitoring_monitors_post(account_id, add_resource_request)
+> MonitorResponse add_monitor_accounts_account_id_monitoring_monitors_post(account_id, add_monitor_accounts_account_id_monitoring_monitors_post_request)
 
 Add Monitor
 
-Adds a URL to the monitoring list for the given account.
+Adds a URL to the monitoring list for the given account, or the account itself (type=\"account\", no url) as a single sitewide monitor.
 
 ### Example
 
@@ -25,7 +24,7 @@ Adds a URL to the monitoring list for the given account.
 
 ```python
 import wordlift_client
-from wordlift_client.models.add_resource_request import AddResourceRequest
+from wordlift_client.models.add_monitor_accounts_account_id_monitoring_monitors_post_request import AddMonitorAccountsAccountIdMonitoringMonitorsPostRequest
 from wordlift_client.models.monitor_response import MonitorResponse
 from wordlift_client.rest import ApiException
 from pprint import pprint
@@ -52,11 +51,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.MonitorsApi(api_client)
     account_id = 'account_id_example' # str | 
-    add_resource_request = wordlift_client.AddResourceRequest() # AddResourceRequest | 
+    add_monitor_accounts_account_id_monitoring_monitors_post_request = wordlift_client.AddMonitorAccountsAccountIdMonitoringMonitorsPostRequest() # AddMonitorAccountsAccountIdMonitoringMonitorsPostRequest | 
 
     try:
         # Add Monitor
-        api_response = await api_instance.add_monitor_accounts_account_id_monitoring_monitors_post(account_id, add_resource_request)
+        api_response = await api_instance.add_monitor_accounts_account_id_monitoring_monitors_post(account_id, add_monitor_accounts_account_id_monitoring_monitors_post_request)
         print("The response of MonitorsApi->add_monitor_accounts_account_id_monitoring_monitors_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -71,7 +70,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **account_id** | **str**|  | 
- **add_resource_request** | [**AddResourceRequest**](AddResourceRequest.md)|  | 
+ **add_monitor_accounts_account_id_monitoring_monitors_post_request** | [**AddMonitorAccountsAccountIdMonitoringMonitorsPostRequest**](AddMonitorAccountsAccountIdMonitoringMonitorsPostRequest.md)|  | 
 
 ### Return type
 
@@ -401,89 +400,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**List[MonitorResponse]**](MonitorResponse.md)
-
-### Authorization
-
-[ApiKey](../README.md#ApiKey)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_monitor_accounts_account_id_monitoring_monitors_monitor_id_put**
-> MonitorResponse update_monitor_accounts_account_id_monitoring_monitors_monitor_id_put(monitor_id, account_id, add_resource_request)
-
-Update Monitor
-
-### Example
-
-* Api Key Authentication (ApiKey):
-
-```python
-import wordlift_client
-from wordlift_client.models.add_resource_request import AddResourceRequest
-from wordlift_client.models.monitor_response import MonitorResponse
-from wordlift_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.wordlift.io
-# See configuration.py for a list of all supported configuration parameters.
-configuration = wordlift_client.Configuration(
-    host = "https://api.wordlift.io"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: ApiKey
-configuration.api_key['ApiKey'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKey'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-async with wordlift_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = wordlift_client.MonitorsApi(api_client)
-    monitor_id = 'monitor_id_example' # str | 
-    account_id = 'account_id_example' # str | 
-    add_resource_request = wordlift_client.AddResourceRequest() # AddResourceRequest | 
-
-    try:
-        # Update Monitor
-        api_response = await api_instance.update_monitor_accounts_account_id_monitoring_monitors_monitor_id_put(monitor_id, account_id, add_resource_request)
-        print("The response of MonitorsApi->update_monitor_accounts_account_id_monitoring_monitors_monitor_id_put:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling MonitorsApi->update_monitor_accounts_account_id_monitoring_monitors_monitor_id_put: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **monitor_id** | **str**|  | 
- **account_id** | **str**|  | 
- **add_resource_request** | [**AddResourceRequest**](AddResourceRequest.md)|  | 
-
-### Return type
-
-[**MonitorResponse**](MonitorResponse.md)
 
 ### Authorization
 

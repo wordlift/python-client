@@ -20,7 +20,7 @@ import json
 
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from wordlift_client.models.resource_type import ResourceType
 from typing import Optional, Set
@@ -31,7 +31,7 @@ class MonitorResponse(BaseModel):
     MonitorResponse
     """ # noqa: E501
     id: StrictStr
-    url: Annotated[str, Field(min_length=1, strict=True, max_length=2083)]
+    url: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=2083)]] = None
     type: ResourceType
     is_enabled: StrictBool
     created_at: datetime
@@ -77,6 +77,11 @@ class MonitorResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if url (nullable) is None
+        # and model_fields_set contains the field
+        if self.url is None and "url" in self.model_fields_set:
+            _dict['url'] = None
+
         return _dict
 
     @classmethod

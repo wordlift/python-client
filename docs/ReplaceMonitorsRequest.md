@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | [**List[ReplaceMonitorItem]**](ReplaceMonitorItem.md) |  | 
+**items** | [**List[ItemsInner]**](ItemsInner.md) |  | 
 
 ## Example
 

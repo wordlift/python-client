@@ -18,21 +18,24 @@ import json
 import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
-from wordlift_client.models.structured_data_expectation_response import StructuredDataExpectationResponse
+from wordlift_client.models.replace_account_monitor_item import ReplaceAccountMonitorItem
+from wordlift_client.models.replace_page_monitor_item import ReplacePageMonitorItem
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-ITEMSINNER_ONE_OF_SCHEMAS = ["StructuredDataExpectationResponse"]
+ITEMSINNER_ONE_OF_SCHEMAS = ["ReplaceAccountMonitorItem", "ReplacePageMonitorItem"]
 
 class ItemsInner(BaseModel):
     """
     ItemsInner
     """
-    # data type: StructuredDataExpectationResponse
-    oneof_schema_1_validator: Optional[StructuredDataExpectationResponse] = None
-    actual_instance: Optional[Union[StructuredDataExpectationResponse]] = None
-    one_of_schemas: Set[str] = { "StructuredDataExpectationResponse" }
+    # data type: ReplacePageMonitorItem
+    oneof_schema_1_validator: Optional[ReplacePageMonitorItem] = None
+    # data type: ReplaceAccountMonitorItem
+    oneof_schema_2_validator: Optional[ReplaceAccountMonitorItem] = None
+    actual_instance: Optional[Union[ReplaceAccountMonitorItem, ReplacePageMonitorItem]] = None
+    one_of_schemas: Set[str] = { "ReplaceAccountMonitorItem", "ReplacePageMonitorItem" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -58,17 +61,22 @@ class ItemsInner(BaseModel):
         instance = ItemsInner.model_construct()
         error_messages = []
         match = 0
-        # validate data type: StructuredDataExpectationResponse
-        if not isinstance(v, StructuredDataExpectationResponse):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `StructuredDataExpectationResponse`")
+        # validate data type: ReplacePageMonitorItem
+        if not isinstance(v, ReplacePageMonitorItem):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ReplacePageMonitorItem`")
+        else:
+            match += 1
+        # validate data type: ReplaceAccountMonitorItem
+        if not isinstance(v, ReplaceAccountMonitorItem):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ReplaceAccountMonitorItem`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ItemsInner with oneOf schemas: StructuredDataExpectationResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in ItemsInner with oneOf schemas: ReplaceAccountMonitorItem, ReplacePageMonitorItem. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ItemsInner with oneOf schemas: StructuredDataExpectationResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in ItemsInner with oneOf schemas: ReplaceAccountMonitorItem, ReplacePageMonitorItem. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -83,19 +91,25 @@ class ItemsInner(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into StructuredDataExpectationResponse
+        # deserialize data into ReplacePageMonitorItem
         try:
-            instance.actual_instance = StructuredDataExpectationResponse.from_json(json_str)
+            instance.actual_instance = ReplacePageMonitorItem.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into ReplaceAccountMonitorItem
+        try:
+            instance.actual_instance = ReplaceAccountMonitorItem.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ItemsInner with oneOf schemas: StructuredDataExpectationResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into ItemsInner with oneOf schemas: ReplaceAccountMonitorItem, ReplacePageMonitorItem. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ItemsInner with oneOf schemas: StructuredDataExpectationResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into ItemsInner with oneOf schemas: ReplaceAccountMonitorItem, ReplacePageMonitorItem. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -109,7 +123,7 @@ class ItemsInner(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], StructuredDataExpectationResponse]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], ReplaceAccountMonitorItem, ReplacePageMonitorItem]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

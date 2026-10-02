@@ -21,6 +21,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List
+from wordlift_client.models.expectation_attachment import ExpectationAttachment
 from wordlift_client.models.expectation_outcome import ExpectationOutcome
 from wordlift_client.models.segment_severity_response import SegmentSeverityResponse
 from typing import Optional, Set
@@ -34,7 +35,8 @@ class ExpectationEvaluationSummary(BaseModel):
     outcome: ExpectationOutcome
     evaluated_at: datetime
     segments_membership: List[SegmentSeverityResponse]
-    __properties: ClassVar[List[str]] = ["expectation_id", "outcome", "evaluated_at", "segments_membership"]
+    attachments: List[ExpectationAttachment]
+    __properties: ClassVar[List[str]] = ["expectation_id", "outcome", "evaluated_at", "segments_membership", "attachments"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,6 +84,13 @@ class ExpectationEvaluationSummary(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['segments_membership'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in attachments (list)
+        _items = []
+        if self.attachments:
+            for _item in self.attachments:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['attachments'] = _items
         return _dict
 
     @classmethod
@@ -97,7 +106,8 @@ class ExpectationEvaluationSummary(BaseModel):
             "expectation_id": obj.get("expectation_id"),
             "outcome": obj.get("outcome"),
             "evaluated_at": obj.get("evaluated_at"),
-            "segments_membership": [SegmentSeverityResponse.from_dict(_item) for _item in obj["segments_membership"]] if obj.get("segments_membership") is not None else None
+            "segments_membership": [SegmentSeverityResponse.from_dict(_item) for _item in obj["segments_membership"]] if obj.get("segments_membership") is not None else None,
+            "attachments": [ExpectationAttachment.from_dict(_item) for _item in obj["attachments"]] if obj.get("attachments") is not None else None
         })
         return _obj
 

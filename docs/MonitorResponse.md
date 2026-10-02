@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** |  | 
-**url** | **str** |  | 
+**url** | **str** |  | [optional] 
 **type** | [**ResourceType**](ResourceType.md) |  | 
 **is_enabled** | **bool** |  | 
 **created_at** | **datetime** |  | 

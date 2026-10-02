@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | [**List[ItemsInner]**](ItemsInner.md) |  | 
+**items** | [**List[ItemsInner1]**](ItemsInner1.md) |  | 
 **total** | **int** |  | 
 **next_cursor** | **str** |  | [optional] 
 

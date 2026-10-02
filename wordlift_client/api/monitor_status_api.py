@@ -26,6 +26,7 @@ from wordlift_client.models.list_monitor_status_response import ListMonitorStatu
 from wordlift_client.models.monitor_status_check_status import MonitorStatusCheckStatus
 from wordlift_client.models.monitor_status_order_by import MonitorStatusOrderBy
 from wordlift_client.models.monitor_status_response import MonitorStatusResponse
+from wordlift_client.models.resource_type import ResourceType
 from wordlift_client.models.sort_direction import SortDirection
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
@@ -716,6 +717,7 @@ class MonitorStatusApi:
         account_id: StrictStr,
         url: Annotated[Optional[StrictStr], Field(description="Glob pattern to filter by URL (e.g. `*example.com*`).")] = None,
         status: Annotated[Optional[List[MonitorStatusCheckStatus]], Field(description="Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).")] = None,
+        monitor_type: Annotated[Optional[ResourceType], Field(description="Return only statuses of monitors of this type (e.g. `page` to exclude site-wide `account` monitors). Omitted returns every monitor type.")] = None,
         segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view.")] = None,
         order_by: Annotated[Optional[MonitorStatusOrderBy], Field(description="Field to sort by.")] = None,
         sort: Annotated[Optional[SortDirection], Field(description="Sort direction.")] = None,
@@ -743,6 +745,8 @@ class MonitorStatusApi:
         :type url: str
         :param status: Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).
         :type status: List[MonitorStatusCheckStatus]
+        :param monitor_type: Return only statuses of monitors of this type (e.g. `page` to exclude site-wide `account` monitors). Omitted returns every monitor type.
+        :type monitor_type: ResourceType
         :param segment_id: Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view.
         :type segment_id: str
         :param order_by: Field to sort by.
@@ -779,6 +783,7 @@ class MonitorStatusApi:
             account_id=account_id,
             url=url,
             status=status,
+            monitor_type=monitor_type,
             segment_id=segment_id,
             order_by=order_by,
             sort=sort,
@@ -811,6 +816,7 @@ class MonitorStatusApi:
         account_id: StrictStr,
         url: Annotated[Optional[StrictStr], Field(description="Glob pattern to filter by URL (e.g. `*example.com*`).")] = None,
         status: Annotated[Optional[List[MonitorStatusCheckStatus]], Field(description="Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).")] = None,
+        monitor_type: Annotated[Optional[ResourceType], Field(description="Return only statuses of monitors of this type (e.g. `page` to exclude site-wide `account` monitors). Omitted returns every monitor type.")] = None,
         segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view.")] = None,
         order_by: Annotated[Optional[MonitorStatusOrderBy], Field(description="Field to sort by.")] = None,
         sort: Annotated[Optional[SortDirection], Field(description="Sort direction.")] = None,
@@ -838,6 +844,8 @@ class MonitorStatusApi:
         :type url: str
         :param status: Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).
         :type status: List[MonitorStatusCheckStatus]
+        :param monitor_type: Return only statuses of monitors of this type (e.g. `page` to exclude site-wide `account` monitors). Omitted returns every monitor type.
+        :type monitor_type: ResourceType
         :param segment_id: Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view.
         :type segment_id: str
         :param order_by: Field to sort by.
@@ -874,6 +882,7 @@ class MonitorStatusApi:
             account_id=account_id,
             url=url,
             status=status,
+            monitor_type=monitor_type,
             segment_id=segment_id,
             order_by=order_by,
             sort=sort,
@@ -906,6 +915,7 @@ class MonitorStatusApi:
         account_id: StrictStr,
         url: Annotated[Optional[StrictStr], Field(description="Glob pattern to filter by URL (e.g. `*example.com*`).")] = None,
         status: Annotated[Optional[List[MonitorStatusCheckStatus]], Field(description="Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).")] = None,
+        monitor_type: Annotated[Optional[ResourceType], Field(description="Return only statuses of monitors of this type (e.g. `page` to exclude site-wide `account` monitors). Omitted returns every monitor type.")] = None,
         segment_id: Annotated[Optional[StrictStr], Field(description="Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view.")] = None,
         order_by: Annotated[Optional[MonitorStatusOrderBy], Field(description="Field to sort by.")] = None,
         sort: Annotated[Optional[SortDirection], Field(description="Sort direction.")] = None,
@@ -933,6 +943,8 @@ class MonitorStatusApi:
         :type url: str
         :param status: Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).
         :type status: List[MonitorStatusCheckStatus]
+        :param monitor_type: Return only statuses of monitors of this type (e.g. `page` to exclude site-wide `account` monitors). Omitted returns every monitor type.
+        :type monitor_type: ResourceType
         :param segment_id: Return only monitor statuses matched by the given segment's matchers. Pass 'unassigned' to match monitor statuses matched by no segment. Omitted or empty returns the aggregate (unscoped) view.
         :type segment_id: str
         :param order_by: Field to sort by.
@@ -969,6 +981,7 @@ class MonitorStatusApi:
             account_id=account_id,
             url=url,
             status=status,
+            monitor_type=monitor_type,
             segment_id=segment_id,
             order_by=order_by,
             sort=sort,
@@ -996,6 +1009,7 @@ class MonitorStatusApi:
         account_id,
         url,
         status,
+        monitor_type,
         segment_id,
         order_by,
         sort,
@@ -1031,6 +1045,10 @@ class MonitorStatusApi:
         if status is not None:
             
             _query_params.append(('status', status))
+            
+        if monitor_type is not None:
+            
+            _query_params.append(('monitor_type', monitor_type.value))
             
         if segment_id is not None:
             

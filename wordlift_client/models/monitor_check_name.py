@@ -36,6 +36,12 @@ class MonitorCheckName(str, Enum):
     ROBOTS_CHECK = 'robots_check'
     RESOURCE_404_CHECK = 'resource_404_check'
     WORDLIFT_BOOTSTRAP_CHECK = 'wordlift_bootstrap_check'
+    ACCOUNT_ROBOTS_CHECK = 'account_robots_check'
+    AI_BOT_ACCESS_CHECK = 'ai_bot_access_check'
+    ACCOUNT_LLMS_TXT_CHECK = 'account_llms_txt_check'
+    ACCOUNT_SKILL_MD_CHECK = 'account_skill_md_check'
+    ACCOUNT_MCP_CHECK = 'account_mcp_check'
+    ACCOUNT_WEBMCP_CHECK = 'account_webmcp_check'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

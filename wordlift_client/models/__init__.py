@@ -22,8 +22,10 @@ from wordlift_client.models.account_info import AccountInfo
 from wordlift_client.models.account_stats import AccountStats
 from wordlift_client.models.account_subscription import AccountSubscription
 from wordlift_client.models.active_account import ActiveAccount
+from wordlift_client.models.add_account_resource_request import AddAccountResourceRequest
+from wordlift_client.models.add_monitor_accounts_account_id_monitoring_monitors_post_request import AddMonitorAccountsAccountIdMonitoringMonitorsPostRequest
 from wordlift_client.models.add_on_configuration import AddOnConfiguration
-from wordlift_client.models.add_resource_request import AddResourceRequest
+from wordlift_client.models.add_page_resource_request import AddPageResourceRequest
 from wordlift_client.models.add_segment_glob_request import AddSegmentGlobRequest
 from wordlift_client.models.add_segment_url_request import AddSegmentUrlRequest
 from wordlift_client.models.ai_visibility_audits_http_validation_error import AiVisibilityAuditsHTTPValidationError
@@ -39,6 +41,7 @@ from wordlift_client.models.anchor_text import AnchorText
 from wordlift_client.models.annotation import Annotation
 from wordlift_client.models.ask_request import AskRequest
 from wordlift_client.models.ask_response import AskResponse
+from wordlift_client.models.attach_expectation_monitor_request import AttachExpectationMonitorRequest
 from wordlift_client.models.attach_expectation_segment_request import AttachExpectationSegmentRequest
 from wordlift_client.models.audit_data import AuditData
 from wordlift_client.models.audit_request import AuditRequest
@@ -120,6 +123,7 @@ from wordlift_client.models.error_response import ErrorResponse
 from wordlift_client.models.event import Event
 from wordlift_client.models.events_request import EventsRequest
 from wordlift_client.models.events_response import EventsResponse
+from wordlift_client.models.expectation_attachment import ExpectationAttachment
 from wordlift_client.models.expectation_evaluation_summary import ExpectationEvaluationSummary
 from wordlift_client.models.expectation_outcome import ExpectationOutcome
 from wordlift_client.models.expectation_severity import ExpectationSeverity
@@ -166,6 +170,7 @@ from wordlift_client.models.internal_link_source import InternalLinkSource
 from wordlift_client.models.internal_linking import InternalLinking
 from wordlift_client.models.item import Item
 from wordlift_client.models.items_inner import ItemsInner
+from wordlift_client.models.items_inner1 import ItemsInner1
 from wordlift_client.models.job_list_response import JobListResponse
 from wordlift_client.models.job_response import JobResponse
 from wordlift_client.models.job_status import JobStatus
@@ -212,10 +217,12 @@ from wordlift_client.models.monitor_http_validation_error import MonitorHTTPVali
 from wordlift_client.models.monitor_response import MonitorResponse
 from wordlift_client.models.monitor_run_response import MonitorRunResponse
 from wordlift_client.models.monitor_run_status import MonitorRunStatus
+from wordlift_client.models.monitor_severity_response import MonitorSeverityResponse
 from wordlift_client.models.monitor_status import MonitorStatus
 from wordlift_client.models.monitor_status_check_status import MonitorStatusCheckStatus
 from wordlift_client.models.monitor_status_order_by import MonitorStatusOrderBy
 from wordlift_client.models.monitor_status_response import MonitorStatusResponse
+from wordlift_client.models.monitor_type_progress import MonitorTypeProgress
 from wordlift_client.models.monitor_validation_error import MonitorValidationError
 from wordlift_client.models.network_account_info import NetworkAccountInfo
 from wordlift_client.models.node_request import NodeRequest
@@ -266,9 +273,10 @@ from wordlift_client.models.rank_entities import RankEntities
 from wordlift_client.models.record import Record
 from wordlift_client.models.render_request import RenderRequest
 from wordlift_client.models.render_wait_until import RenderWaitUntil
+from wordlift_client.models.replace_account_monitor_item import ReplaceAccountMonitorItem
 from wordlift_client.models.replace_expectation_segments_request import ReplaceExpectationSegmentsRequest
-from wordlift_client.models.replace_monitor_item import ReplaceMonitorItem
 from wordlift_client.models.replace_monitors_request import ReplaceMonitorsRequest
+from wordlift_client.models.replace_page_monitor_item import ReplacePageMonitorItem
 from wordlift_client.models.replace_segment_globs_request import ReplaceSegmentGlobsRequest
 from wordlift_client.models.replace_segment_urls_request import ReplaceSegmentUrlsRequest
 from wordlift_client.models.request import Request

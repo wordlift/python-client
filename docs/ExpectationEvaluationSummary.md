@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **outcome** | [**ExpectationOutcome**](ExpectationOutcome.md) |  | 
 **evaluated_at** | **datetime** |  | 
 **segments_membership** | [**List[SegmentSeverityResponse]**](SegmentSeverityResponse.md) |  | 
+**attachments** | [**List[ExpectationAttachment]**](ExpectationAttachment.md) |  | 
 
 ## Example
 

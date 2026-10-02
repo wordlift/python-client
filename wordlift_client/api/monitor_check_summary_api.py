@@ -22,6 +22,7 @@ from typing import List, Optional
 from typing_extensions import Annotated
 from wordlift_client.models.check_name_filter_value import CheckNameFilterValue
 from wordlift_client.models.list_check_summary_by_check_response import ListCheckSummaryByCheckResponse
+from wordlift_client.models.resource_type import ResourceType
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
 from wordlift_client.api_response import ApiResponse
@@ -47,6 +48,7 @@ class MonitorCheckSummaryApi:
         account_id: StrictStr,
         check_name: Annotated[Optional[List[CheckNameFilterValue]], Field(description="Filter by check name (repeatable), or the reserved value `overall` to match only the all-checks-combined aggregate row. Omitted returns every check together with that aggregate.")] = None,
         segment_id: Annotated[Optional[List[StrictStr]], Field(description="Filter by segment id (repeatable), or the reserved value `overall` to match only the account-wide aggregate row. Omitted returns every segment together with that aggregate.")] = None,
+        monitor_type: Annotated[Optional[ResourceType], Field(description="Scope every count to monitors of this type (e.g. `page` vs `account` for page vs site-wide health). Omitted returns totals across all monitor types.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
         _request_timeout: Union[
@@ -64,7 +66,7 @@ class MonitorCheckSummaryApi:
     ) -> ListCheckSummaryByCheckResponse:
         """List Check Summary By Check
 
-        Account-wide check rollup grouped by (segment, check name), broken down by state (``CheckSummaryState`` — OK/WARN/FAIL/PENDING). Omitting both filters returns every segment and check together with the account-wide, all-checks-combined aggregate (`segment_id: null`, `check_name: null`); passing the reserved `overall` value isolates just that aggregate on either dimension instead of requiring a full scan to find it.
+        Account-wide check rollup grouped by (segment, check name), broken down by state (``CheckSummaryState`` — OK/WARN/FAIL/PENDING). Omitting both filters returns every segment and check together with the account-wide, all-checks-combined aggregate (`segment_id: null`, `check_name: null`); passing the reserved `overall` value isolates just that aggregate on either dimension instead of requiring a full scan to find it. `monitor_type` scopes every count to one monitor type; omitted, counts span all types.
 
         :param account_id: (required)
         :type account_id: str
@@ -72,6 +74,8 @@ class MonitorCheckSummaryApi:
         :type check_name: List[CheckNameFilterValue]
         :param segment_id: Filter by segment id (repeatable), or the reserved value `overall` to match only the account-wide aggregate row. Omitted returns every segment together with that aggregate.
         :type segment_id: List[str]
+        :param monitor_type: Scope every count to monitors of this type (e.g. `page` vs `account` for page vs site-wide health). Omitted returns totals across all monitor types.
+        :type monitor_type: ResourceType
         :param cursor: Opaque pagination cursor from a previous response.
         :type cursor: str
         :param limit: Maximum number of items to return.
@@ -102,6 +106,7 @@ class MonitorCheckSummaryApi:
             account_id=account_id,
             check_name=check_name,
             segment_id=segment_id,
+            monitor_type=monitor_type,
             cursor=cursor,
             limit=limit,
             _request_auth=_request_auth,
@@ -131,6 +136,7 @@ class MonitorCheckSummaryApi:
         account_id: StrictStr,
         check_name: Annotated[Optional[List[CheckNameFilterValue]], Field(description="Filter by check name (repeatable), or the reserved value `overall` to match only the all-checks-combined aggregate row. Omitted returns every check together with that aggregate.")] = None,
         segment_id: Annotated[Optional[List[StrictStr]], Field(description="Filter by segment id (repeatable), or the reserved value `overall` to match only the account-wide aggregate row. Omitted returns every segment together with that aggregate.")] = None,
+        monitor_type: Annotated[Optional[ResourceType], Field(description="Scope every count to monitors of this type (e.g. `page` vs `account` for page vs site-wide health). Omitted returns totals across all monitor types.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
         _request_timeout: Union[
@@ -148,7 +154,7 @@ class MonitorCheckSummaryApi:
     ) -> ApiResponse[ListCheckSummaryByCheckResponse]:
         """List Check Summary By Check
 
-        Account-wide check rollup grouped by (segment, check name), broken down by state (``CheckSummaryState`` — OK/WARN/FAIL/PENDING). Omitting both filters returns every segment and check together with the account-wide, all-checks-combined aggregate (`segment_id: null`, `check_name: null`); passing the reserved `overall` value isolates just that aggregate on either dimension instead of requiring a full scan to find it.
+        Account-wide check rollup grouped by (segment, check name), broken down by state (``CheckSummaryState`` — OK/WARN/FAIL/PENDING). Omitting both filters returns every segment and check together with the account-wide, all-checks-combined aggregate (`segment_id: null`, `check_name: null`); passing the reserved `overall` value isolates just that aggregate on either dimension instead of requiring a full scan to find it. `monitor_type` scopes every count to one monitor type; omitted, counts span all types.
 
         :param account_id: (required)
         :type account_id: str
@@ -156,6 +162,8 @@ class MonitorCheckSummaryApi:
         :type check_name: List[CheckNameFilterValue]
         :param segment_id: Filter by segment id (repeatable), or the reserved value `overall` to match only the account-wide aggregate row. Omitted returns every segment together with that aggregate.
         :type segment_id: List[str]
+        :param monitor_type: Scope every count to monitors of this type (e.g. `page` vs `account` for page vs site-wide health). Omitted returns totals across all monitor types.
+        :type monitor_type: ResourceType
         :param cursor: Opaque pagination cursor from a previous response.
         :type cursor: str
         :param limit: Maximum number of items to return.
@@ -186,6 +194,7 @@ class MonitorCheckSummaryApi:
             account_id=account_id,
             check_name=check_name,
             segment_id=segment_id,
+            monitor_type=monitor_type,
             cursor=cursor,
             limit=limit,
             _request_auth=_request_auth,
@@ -215,6 +224,7 @@ class MonitorCheckSummaryApi:
         account_id: StrictStr,
         check_name: Annotated[Optional[List[CheckNameFilterValue]], Field(description="Filter by check name (repeatable), or the reserved value `overall` to match only the all-checks-combined aggregate row. Omitted returns every check together with that aggregate.")] = None,
         segment_id: Annotated[Optional[List[StrictStr]], Field(description="Filter by segment id (repeatable), or the reserved value `overall` to match only the account-wide aggregate row. Omitted returns every segment together with that aggregate.")] = None,
+        monitor_type: Annotated[Optional[ResourceType], Field(description="Scope every count to monitors of this type (e.g. `page` vs `account` for page vs site-wide health). Omitted returns totals across all monitor types.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Opaque pagination cursor from a previous response.")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="Maximum number of items to return.")] = None,
         _request_timeout: Union[
@@ -232,7 +242,7 @@ class MonitorCheckSummaryApi:
     ) -> RESTResponseType:
         """List Check Summary By Check
 
-        Account-wide check rollup grouped by (segment, check name), broken down by state (``CheckSummaryState`` — OK/WARN/FAIL/PENDING). Omitting both filters returns every segment and check together with the account-wide, all-checks-combined aggregate (`segment_id: null`, `check_name: null`); passing the reserved `overall` value isolates just that aggregate on either dimension instead of requiring a full scan to find it.
+        Account-wide check rollup grouped by (segment, check name), broken down by state (``CheckSummaryState`` — OK/WARN/FAIL/PENDING). Omitting both filters returns every segment and check together with the account-wide, all-checks-combined aggregate (`segment_id: null`, `check_name: null`); passing the reserved `overall` value isolates just that aggregate on either dimension instead of requiring a full scan to find it. `monitor_type` scopes every count to one monitor type; omitted, counts span all types.
 
         :param account_id: (required)
         :type account_id: str
@@ -240,6 +250,8 @@ class MonitorCheckSummaryApi:
         :type check_name: List[CheckNameFilterValue]
         :param segment_id: Filter by segment id (repeatable), or the reserved value `overall` to match only the account-wide aggregate row. Omitted returns every segment together with that aggregate.
         :type segment_id: List[str]
+        :param monitor_type: Scope every count to monitors of this type (e.g. `page` vs `account` for page vs site-wide health). Omitted returns totals across all monitor types.
+        :type monitor_type: ResourceType
         :param cursor: Opaque pagination cursor from a previous response.
         :type cursor: str
         :param limit: Maximum number of items to return.
@@ -270,6 +282,7 @@ class MonitorCheckSummaryApi:
             account_id=account_id,
             check_name=check_name,
             segment_id=segment_id,
+            monitor_type=monitor_type,
             cursor=cursor,
             limit=limit,
             _request_auth=_request_auth,
@@ -294,6 +307,7 @@ class MonitorCheckSummaryApi:
         account_id,
         check_name,
         segment_id,
+        monitor_type,
         cursor,
         limit,
         _request_auth,
@@ -327,6 +341,10 @@ class MonitorCheckSummaryApi:
         if segment_id is not None:
             
             _query_params.append(('segment_id', segment_id))
+            
+        if monitor_type is not None:
+            
+            _query_params.append(('monitor_type', monitor_type.value))
             
         if cursor is not None:
             

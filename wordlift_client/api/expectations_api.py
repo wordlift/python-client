@@ -20,11 +20,13 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from wordlift_client.models.attach_expectation_monitor_request import AttachExpectationMonitorRequest
 from wordlift_client.models.attach_expectation_segment_request import AttachExpectationSegmentRequest
 from wordlift_client.models.body import Body
 from wordlift_client.models.list_expectation_severity_response import ListExpectationSeverityResponse
 from wordlift_client.models.list_expectations_response import ListExpectationsResponse
 from wordlift_client.models.list_segment_severity_response import ListSegmentSeverityResponse
+from wordlift_client.models.monitor_severity_response import MonitorSeverityResponse
 from wordlift_client.models.replace_expectation_segments_request import ReplaceExpectationSegmentsRequest
 from wordlift_client.models.response200_create_expectation_accounts_account_id_monitoring_expectations_post import Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost
 from wordlift_client.models.response_get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get import ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet
@@ -46,6 +48,325 @@ class ExpectationsApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+
+    @validate_call
+    async def attach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_put(
+        self,
+        expectation_id: StrictStr,
+        monitor_id: StrictStr,
+        account_id: StrictStr,
+        attach_expectation_monitor_request: AttachExpectationMonitorRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> MonitorSeverityResponse:
+        """Attach Expectation Monitor
+
+        Attach a monitor directly to a rule with the given severity — the account-scoped (URL-less) analog of ``attach_expectation_segment``. Idempotent — a repeated attach updates the severity.
+
+        :param expectation_id: (required)
+        :type expectation_id: str
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param attach_expectation_monitor_request: (required)
+        :type attach_expectation_monitor_request: AttachExpectationMonitorRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._attach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_put_serialize(
+            expectation_id=expectation_id,
+            monitor_id=monitor_id,
+            account_id=account_id,
+            attach_expectation_monitor_request=attach_expectation_monitor_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MonitorSeverityResponse",
+            '422': "MonitorHTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def attach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_put_with_http_info(
+        self,
+        expectation_id: StrictStr,
+        monitor_id: StrictStr,
+        account_id: StrictStr,
+        attach_expectation_monitor_request: AttachExpectationMonitorRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[MonitorSeverityResponse]:
+        """Attach Expectation Monitor
+
+        Attach a monitor directly to a rule with the given severity — the account-scoped (URL-less) analog of ``attach_expectation_segment``. Idempotent — a repeated attach updates the severity.
+
+        :param expectation_id: (required)
+        :type expectation_id: str
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param attach_expectation_monitor_request: (required)
+        :type attach_expectation_monitor_request: AttachExpectationMonitorRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._attach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_put_serialize(
+            expectation_id=expectation_id,
+            monitor_id=monitor_id,
+            account_id=account_id,
+            attach_expectation_monitor_request=attach_expectation_monitor_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MonitorSeverityResponse",
+            '422': "MonitorHTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def attach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_put_without_preload_content(
+        self,
+        expectation_id: StrictStr,
+        monitor_id: StrictStr,
+        account_id: StrictStr,
+        attach_expectation_monitor_request: AttachExpectationMonitorRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Attach Expectation Monitor
+
+        Attach a monitor directly to a rule with the given severity — the account-scoped (URL-less) analog of ``attach_expectation_segment``. Idempotent — a repeated attach updates the severity.
+
+        :param expectation_id: (required)
+        :type expectation_id: str
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param attach_expectation_monitor_request: (required)
+        :type attach_expectation_monitor_request: AttachExpectationMonitorRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._attach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_put_serialize(
+            expectation_id=expectation_id,
+            monitor_id=monitor_id,
+            account_id=account_id,
+            attach_expectation_monitor_request=attach_expectation_monitor_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MonitorSeverityResponse",
+            '422': "MonitorHTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _attach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_put_serialize(
+        self,
+        expectation_id,
+        monitor_id,
+        account_id,
+        attach_expectation_monitor_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if expectation_id is not None:
+            _path_params['expectation_id'] = expectation_id
+        if monitor_id is not None:
+            _path_params['monitor_id'] = monitor_id
+        if account_id is not None:
+            _path_params['account_id'] = account_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if attach_expectation_monitor_request is not None:
+            _body_params = attach_expectation_monitor_request
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/accounts/{account_id}/monitoring/expectations/{expectation_id}/monitors/{monitor_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
 
 
     @validate_call
@@ -917,6 +1238,297 @@ class ExpectationsApi:
         return self.api_client.param_serialize(
             method='DELETE',
             resource_path='/accounts/{account_id}/monitoring/expectations/{expectation_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def detach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_delete(
+        self,
+        expectation_id: StrictStr,
+        monitor_id: StrictStr,
+        account_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Detach Expectation Monitor
+
+        Detach a monitor from a rule. Idempotent.
+
+        :param expectation_id: (required)
+        :type expectation_id: str
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._detach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_delete_serialize(
+            expectation_id=expectation_id,
+            monitor_id=monitor_id,
+            account_id=account_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '422': "MonitorHTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def detach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_delete_with_http_info(
+        self,
+        expectation_id: StrictStr,
+        monitor_id: StrictStr,
+        account_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Detach Expectation Monitor
+
+        Detach a monitor from a rule. Idempotent.
+
+        :param expectation_id: (required)
+        :type expectation_id: str
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._detach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_delete_serialize(
+            expectation_id=expectation_id,
+            monitor_id=monitor_id,
+            account_id=account_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '422': "MonitorHTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def detach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_delete_without_preload_content(
+        self,
+        expectation_id: StrictStr,
+        monitor_id: StrictStr,
+        account_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Detach Expectation Monitor
+
+        Detach a monitor from a rule. Idempotent.
+
+        :param expectation_id: (required)
+        :type expectation_id: str
+        :param monitor_id: (required)
+        :type monitor_id: str
+        :param account_id: (required)
+        :type account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._detach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_delete_serialize(
+            expectation_id=expectation_id,
+            monitor_id=monitor_id,
+            account_id=account_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '422': "MonitorHTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _detach_expectation_monitor_accounts_account_id_monitoring_expectations_expectation_id_monitors_monitor_id_delete_serialize(
+        self,
+        expectation_id,
+        monitor_id,
+        account_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if expectation_id is not None:
+            _path_params['expectation_id'] = expectation_id
+        if monitor_id is not None:
+            _path_params['monitor_id'] = monitor_id
+        if account_id is not None:
+            _path_params['account_id'] = account_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path='/accounts/{account_id}/monitoring/expectations/{expectation_id}/monitors/{monitor_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
