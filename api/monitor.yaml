@@ -1,14 +1,17 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 2.27.0
+  version: 3.0.1
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
       tags:
       - Monitors
       summary: Add Monitor
-      description: Adds a URL to the monitoring list for the given account.
+      description: 'Adds a URL to the monitoring list for the given account, or the
+        account itself
+
+        (type="account", no url) as a single sitewide monitor.'
       operationId: add_monitor_accounts__account_id__monitoring_monitors_post
       parameters:
       - name: account_id
@@ -35,25 +38,14 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                url:
-                  format: uri
-                  maxLength: 2083
-                  minLength: 1
-                  title: Url
-                  type: string
-                type:
-                  enum:
-                  - page
-                  - sitemap
-                  - config
-                  - asset
-                  title: ResourceType
-                  type: string
-              required:
-              - url
-              title: AddResourceRequest
-              type: object
+              discriminator:
+                mapping:
+                  account: '#/components/schemas/AddAccountResourceRequest'
+                  page: '#/components/schemas/AddPageResourceRequest'
+                propertyName: type
+              oneOf:
+              - $ref: '#/components/schemas/AddPageResourceRequest'
+              - $ref: '#/components/schemas/AddAccountResourceRequest'
     get:
       tags:
       - Monitors
@@ -157,25 +149,14 @@ paths:
               properties:
                 items:
                   items:
-                    properties:
-                      url:
-                        format: uri
-                        maxLength: 2083
-                        minLength: 1
-                        title: Url
-                        type: string
-                      type:
-                        enum:
-                        - page
-                        - sitemap
-                        - config
-                        - asset
-                        title: ResourceType
-                        type: string
-                    required:
-                    - url
-                    title: ReplaceMonitorItem
-                    type: object
+                    discriminator:
+                      mapping:
+                        account: '#/components/schemas/ReplaceAccountMonitorItem'
+                        page: '#/components/schemas/ReplacePageMonitorItem'
+                      propertyName: type
+                    oneOf:
+                    - $ref: '#/components/schemas/ReplacePageMonitorItem'
+                    - $ref: '#/components/schemas/ReplaceAccountMonitorItem'
                   title: Items
                   type: array
               required:
@@ -214,61 +195,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    put:
-      tags:
-      - Monitors
-      summary: Update Monitor
-      operationId: update_monitor_accounts__account_id__monitoring_monitors__monitor_id__put
-      parameters:
-      - name: monitor_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: Monitor Id
-      - name: account_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: Account Id
-      responses:
-        '200':
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MonitorResponse'
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              properties:
-                url:
-                  format: uri
-                  maxLength: 2083
-                  minLength: 1
-                  title: Url
-                  type: string
-                type:
-                  enum:
-                  - page
-                  - sitemap
-                  - config
-                  - asset
-                  title: ResourceType
-                  type: string
-              required:
-              - url
-              title: AddResourceRequest
-              type: object
     delete:
       tags:
       - Monitors
@@ -1383,6 +1309,87 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /accounts/{account_id}/monitoring/expectations/{expectation_id}/monitors/{monitor_id}:
+    put:
+      tags:
+      - Expectations
+      summary: Attach Expectation Monitor
+      description: "Attach a monitor directly to a rule with the given severity \u2014\
+        \ the\naccount-scoped (URL-less) analog of ``attach_expectation_segment``.\n\
+        Idempotent \u2014 a repeated attach updates the severity."
+      operationId: attach_expectation_monitor_accounts__account_id__monitoring_expectations__expectation_id__monitors__monitor_id__put
+      parameters:
+      - name: expectation_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Expectation Id
+      - name: monitor_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Monitor Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachExpectationMonitorRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorSeverityResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Expectations
+      summary: Detach Expectation Monitor
+      description: Detach a monitor from a rule. Idempotent.
+      operationId: detach_expectation_monitor_accounts__account_id__monitoring_expectations__expectation_id__monitors__monitor_id__delete
+      parameters:
+      - name: expectation_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Expectation Id
+      - name: monitor_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Monitor Id
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /accounts/{account_id}/monitoring/expectations/summary/by-type:
     get:
       tags:
@@ -1638,7 +1645,8 @@ paths:
         \ both\nfilters returns every segment and check together with the account-wide,\n\
         all-checks-combined aggregate (`segment_id: null`, `check_name: null`);\n\
         passing the reserved `overall` value isolates just that aggregate on\neither\
-        \ dimension instead of requiring a full scan to find it."
+        \ dimension instead of requiring a full scan to find it.\n`monitor_type` scopes\
+        \ every count to one monitor type; omitted, counts\nspan all types."
       operationId: list_check_summary_by_check_accounts__account_id__monitoring_checks_summary_by_check_get
       parameters:
       - name: account_id
@@ -1679,6 +1687,20 @@ paths:
         description: Filter by segment id (repeatable), or the reserved value `overall`
           to match only the account-wide aggregate row. Omitted returns every segment
           together with that aggregate.
+      - name: monitor_type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/ResourceType'
+          - type: 'null'
+          description: Scope every count to monitors of this type (e.g. `page` vs
+            `account` for page vs site-wide health). Omitted returns totals across
+            all monitor types.
+          title: Monitor Type
+        description: Scope every count to monitors of this type (e.g. `page` vs `account`
+          for page vs site-wide health). Omitted returns totals across all monitor
+          types.
       - name: cursor
         in: query
         required: false
@@ -1813,6 +1835,19 @@ paths:
           description: Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).
           title: Status
         description: Filter by check status (repeatable, e.g. `?status=ERROR&status=WARNING`).
+      - name: monitor_type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/ResourceType'
+          - type: 'null'
+          description: Return only statuses of monitors of this type (e.g. `page`
+            to exclude site-wide `account` monitors). Omitted returns every monitor
+            type.
+          title: Monitor Type
+        description: Return only statuses of monitors of this type (e.g. `page` to
+          exclude site-wide `account` monitors). Omitted returns every monitor type.
       - name: segment_id
         in: query
         required: false
@@ -2015,6 +2050,15 @@ components:
       - pattern
       title: AddSegmentGlobRequest
       description: Body for ``POST /segments/{id}/globs``.
+    AttachExpectationMonitorRequest:
+      properties:
+        severity:
+          $ref: '#/components/schemas/ExpectationSeverity'
+      type: object
+      required:
+      - severity
+      title: AttachExpectationMonitorRequest
+      description: Body for ``PUT /expectations/{id}/monitors/{monitor_id}``.
     AttachExpectationSegmentRequest:
       properties:
         severity:
@@ -2036,6 +2080,12 @@ components:
       - robots_check
       - resource_404_check
       - wordlift_bootstrap_check
+      - account_robots_check
+      - ai_bot_access_check
+      - account_llms_txt_check
+      - account_skill_md_check
+      - account_mcp_check
+      - account_webmcp_check
       - overall
       title: CheckNameFilterValue
     CheckResultItem:
@@ -2143,6 +2193,24 @@ components:
       - check_name
       - items
       title: CheckTimeseriesResponse
+    ExpectationAttachment:
+      properties:
+        segment_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Segment Id
+        severity:
+          $ref: '#/components/schemas/ExpectationSeverity'
+      type: object
+      required:
+      - segment_id
+      - severity
+      title: ExpectationAttachment
+      description: "One expectation's attachment to a segment, or directly to the\
+        \ monitor \u2014\nsegment_id is null for a direct (account-scoped) attachment,\
+        \ matching the\nsame null-means-account-scoped convention MonitorStatusResponse.url\
+        \ uses."
     ExpectationEvaluationSummary:
       properties:
         expectation_id:
@@ -2159,12 +2227,18 @@ components:
             $ref: '#/components/schemas/SegmentSeverityResponse'
           type: array
           title: Segments Membership
+        attachments:
+          items:
+            $ref: '#/components/schemas/ExpectationAttachment'
+          type: array
+          title: Attachments
       type: object
       required:
       - expectation_id
       - outcome
       - evaluated_at
       - segments_membership
+      - attachments
       title: ExpectationEvaluationSummary
     ExpectationOutcome:
       type: string
@@ -2584,6 +2658,12 @@ components:
       - robots_check
       - resource_404_check
       - wordlift_bootstrap_check
+      - account_robots_check
+      - ai_bot_access_check
+      - account_llms_txt_check
+      - account_skill_md_check
+      - account_mcp_check
+      - account_webmcp_check
       title: MonitorCheckName
       description: 'Identifier of a monitor check plugin.
 
@@ -2599,10 +2679,12 @@ components:
           type: string
           title: Id
         url:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
+          anyOf:
+          - type: string
+            maxLength: 2083
+            minLength: 1
+            format: uri
+          - type: 'null'
           title: Url
         type:
           $ref: '#/components/schemas/ResourceType'
@@ -2620,7 +2702,6 @@ components:
       type: object
       required:
       - id
-      - url
       - type
       - is_enabled
       - created_at
@@ -2635,6 +2716,21 @@ components:
       - aborted
       - cancelled
       title: MonitorRunStatus
+    MonitorSeverityResponse:
+      properties:
+        monitor_id:
+          type: string
+          title: Monitor Id
+        severity:
+          $ref: '#/components/schemas/ExpectationSeverity'
+      type: object
+      required:
+      - monitor_id
+      - severity
+      title: MonitorSeverityResponse
+      description: "Response for the monitor-attachment endpoint \u2014 the account-scoped\n\
+        (URL-less) analog of ``SegmentSeverityResponse``. No hydration of the full\n\
+        Monitor, matching that precedent."
     MonitorStatus:
       type: string
       enum:
@@ -2665,7 +2761,9 @@ components:
           type: string
           title: Monitor Id
         url:
-          type: string
+          anyOf:
+          - type: string
+          - type: 'null'
           title: Url
         status:
           $ref: '#/components/schemas/MonitorStatusCheckStatus'
@@ -2726,9 +2824,37 @@ components:
       type: object
       required:
       - monitor_id
-      - url
       - status
       title: MonitorStatusResponse
+    MonitorTypeProgress:
+      properties:
+        type:
+          $ref: '#/components/schemas/ResourceType'
+        dispatched:
+          type: integer
+          title: Dispatched
+        fetched:
+          type: integer
+          title: Fetched
+        checked:
+          type: integer
+          title: Checked
+        failed:
+          type: integer
+          title: Failed
+      type: object
+      required:
+      - type
+      - dispatched
+      - fetched
+      - checked
+      - failed
+      title: MonitorTypeProgress
+      description: "One monitor type's progress within a run. fetched isn't literally\
+        \ \"fetched\"\nfor every type \u2014 it means \"reached a terminal, resolved\
+        \ outcome\" (mirrors how\nfetched_pages already counts both successful and\
+        \ failed fetches, not just\nsuccesses). checked/failed are the disjoint subsets\
+        \ of fetched that resolved\nas checked vs. failed outright."
     ReplaceExpectationSegmentsRequest:
       properties:
         segments:
@@ -2764,6 +2890,7 @@ components:
       - sitemap
       - config
       - asset
+      - account
       title: ResourceType
     RunResponse:
       properties:
@@ -2784,6 +2911,11 @@ components:
         checked_pages:
           type: integer
           title: Checked Pages
+        progress:
+          items:
+            $ref: '#/components/schemas/MonitorTypeProgress'
+          type: array
+          title: Progress
         end_at:
           anyOf:
           - type: string
@@ -2806,6 +2938,7 @@ components:
       - fetched_pages
       - failed_fetches
       - checked_pages
+      - progress
       - last_progress_at
       - created_at
       title: RunResponse
@@ -2911,9 +3044,7 @@ components:
       description: "Response for every segment-attachment endpoint (attach, replace,\
         \ and\nlist) \u2014 none of them hydrates a full Segment. The frontend already\n\
         holds the full segment catalog (a small, bounded set fetched on many\npages),\
-        \ so this only needs to report segment_id/severity. Also doubles\nas the segment-membership\
-        \ shape nested in ExpectationEvaluationSummary\nbelow, since both are the\
-        \ same (segment_id, severity) pairing."
+        \ so this only needs to report segment_id/severity."
     SegmentSummaryItem:
       properties:
         segment_id:
@@ -3080,6 +3211,62 @@ components:
       - msg
       - type
       title: ValidationError
+    AddAccountResourceRequest:
+      additionalProperties: false
+      properties:
+        type:
+          const: account
+          title: Type
+          type: string
+      required:
+      - type
+      title: AddAccountResourceRequest
+      type: object
+    AddPageResourceRequest:
+      properties:
+        url:
+          format: uri
+          maxLength: 2083
+          minLength: 1
+          title: Url
+          type: string
+        type:
+          const: page
+          title: Type
+          type: string
+      required:
+      - url
+      - type
+      title: AddPageResourceRequest
+      type: object
+    ReplaceAccountMonitorItem:
+      additionalProperties: false
+      properties:
+        type:
+          const: account
+          title: Type
+          type: string
+      required:
+      - type
+      title: ReplaceAccountMonitorItem
+      type: object
+    ReplacePageMonitorItem:
+      properties:
+        url:
+          format: uri
+          maxLength: 2083
+          minLength: 1
+          title: Url
+          type: string
+        type:
+          const: page
+          title: Type
+          type: string
+      required:
+      - url
+      - type
+      title: ReplacePageMonitorItem
+      type: object
   securitySchemes:
     WordliftApiKey:
       type: apiKey
