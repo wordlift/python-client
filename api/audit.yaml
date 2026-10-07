@@ -1,15 +1,17 @@
 openapi: 3.1.0
 info:
   title: WordLift Audit API
-  description: |
+  description: |-
     The WordLift Audit API provides comprehensive SEO and AI-readiness analysis for websites.
     It evaluates site files (including .well-known directory), SEO fundamentals, structured data,
     content structure, image accessibility, automation readiness, and JavaScript rendering to provide
     actionable insights for improving both search engine and AI agent discoverability.
-  version: 1.2.0
+  version: 1.6.0
 servers:
   - url: https://api.wordlift.io
-    description: Production server
+tags:
+  - name: Audit
+    description: Programmatic audit API
 paths:
   /audit:
     post:
@@ -36,6 +38,8 @@ paths:
         - Internal linking (legacy field, status Unknown)
         - HTML semantics (legacy field, status Unknown)
 
+        Every file the audit fetched or detected is reported in `resources`, which tells a missing file apart from one that could not be fetched.
+
         Returns an overall score (0-100) and detailed recommendations for improvement. The overall score is
         the clamped sum of the per-criterion scores emitted by the LLM plus post-hoc bonuses:
         +1 for `<link rel="mcp">`, +1 for WebMCP `tools.json`, +1 for legacy `mcp.json` or `mcp/server-card.json`,
@@ -51,10 +55,10 @@ paths:
               basic:
                 summary: Basic audit request
                 value:
-                  url: "https://example.com"
+                  url: https://example.com
       responses:
         '200':
-          description: Successful audit response
+          description: Audit completed successfully
           content:
             application/json:
               schema:
@@ -65,27 +69,45 @@ paths:
                   value:
                     success: true
                     data:
-                      url: "https://www.wordlift.io/"
-                      domain: "https://www.wordlift.io"
-                      timestamp: "2026-01-27T16:55:07.918Z"
+                      url: https://www.wordlift.io/
+                      domain: https://www.wordlift.io
+                      timestamp: '2026-01-27T16:55:07.918Z'
                       overallScore: 55
                       score: 55
-                      summary: "Wordlift.io presents itself as an AI-powered SEO platform..."
+                      summary: Wordlift.io presents itself as an AI-powered SEO platform...
+                      resources:
+                        robotsTxt:
+                          status: found
+                        llmsTxt:
+                          status: found
+                        skillMd:
+                          status: not_found
+                        mcpJson:
+                          status: not_found
+                        mcpServerCard:
+                          status: not_found
+                        webmcpToolsJson:
+                          status: not_found
+                        agentSkillsIndex:
+                          status: unknown
+                          reason: rate_limited
+                        mcpLinkTag:
+                          status: not_found
                       siteFiles:
                         score: 7
-                        status: "Needs Improvement"
-                        explanation: "The site provides a robots.txt and llms.txt file..."
-                        robotsTxt: "found"
-                        llmsTxt: "found"
+                        status: Needs Improvement
+                        explanation: The site provides a robots.txt and llms.txt file...
+                        robotsTxt: found
+                        llmsTxt: found
                         hasLlmsTxt: true
                         hasSkillMd: false
                         botStatus:
-                          - name: "GPTBot"
-                            vendor: "OpenAI"
-                            status: "Allowed"
-                          - name: "Claude-Web"
-                            vendor: "Anthropic"
-                            status: "Allowed"
+                          - name: GPTBot
+                            vendor: OpenAI
+                            status: Allowed
+                          - name: Claude-Web
+                            vendor: Anthropic
+                            status: Allowed
                         wellKnown:
                           mcpJson: false
                           mcpServerCard: false
@@ -96,102 +118,107 @@ paths:
                           agentSkillsCount: 0
                       seoFundamentals:
                         score: 15
-                        status: "Needs Improvement"
-                        explanation: "The site has a title tag and meta description..."
-                        title: "Home - AI-Powered SEO • WordLift"
-                        description: "WordLift is the AI-powered SEO platform..."
+                        status: Needs Improvement
+                        explanation: The site has a title tag and meta description...
+                        title: Home - AI-Powered SEO • WordLift
+                        description: WordLift is the AI-powered SEO platform...
                         h1Count: 0
                       structuredData:
                         score: 8
-                        status: "Needs Improvement"
-                        explanation: "Structured data presence is not clearly identifiable..."
+                        status: Needs Improvement
+                        explanation: Structured data presence is not clearly identifiable...
                         hasSchema: false
                         hasJsonLd: false
                         hasMicrodata: false
                         detectedSchemas: []
                         recommendations:
-                          - title: "Implement JSON-LD Schema Markup"
-                            description: "Add schema.org markup using JSON-LD..."
+                          - title: Implement JSON-LD Schema Markup
+                            description: Add schema.org markup using JSON-LD...
                       contentStructure:
                         score: 10
-                        status: "Needs Improvement"
-                        explanation: "The site likely uses semantic HTML elements..."
+                        status: Needs Improvement
+                        explanation: The site likely uses semantic HTML elements...
                         hasSemanticElements: true
                         hasLandmarks: true
                         tokenCount: 18342
-                        tokenBudgetStatus: "Good"
+                        tokenBudgetStatus: Good
                       imageAccessibility:
                         score: 3
-                        status: "Needs Improvement"
-                        explanation: "Insufficient data. Image accessibility requires alt text..."
+                        status: Needs Improvement
+                        explanation: Insufficient data. Image accessibility requires alt text...
                         totalImages: 0
                         imagesWithoutAlt: 0
                         missingAltTextImages: []
                       automationReadiness:
                         score: 4
-                        status: "Poor"
-                        explanation: "The provided HTML lacks identifiable form elements..."
+                        status: Poor
+                        explanation: The provided HTML lacks identifiable form elements...
                         issues:
-                          - priority: "P1"
-                            criterion: "WCAG 4.1.2 Name, Role, Value"
-                            what: "Many HTML elements are dynamically created..."
-                            where: "Dynamically generated sections of the site..."
-                            why: "Assistive technologies, like screen readers..."
-                            how: "Ensure every interactive element has appropriate ARIA..."
-                            compliance: "Severe impact on WCAG compliance..."
+                          - priority: P1
+                            criterion: WCAG 4.1.2 Name, Role, Value
+                            what: Many HTML elements are dynamically created...
+                            where: Dynamically generated sections of the site...
+                            why: Assistive technologies, like screen readers...
+                            how: Ensure every interactive element has appropriate ARIA...
+                            compliance: Severe impact on WCAG compliance...
                       jsRendering:
                         score: 6
-                        status: "Poor"
-                        explanation: "The presence of Rocket Lazy Load Scripts..."
-                        frameworkDetected: "Other"
-                        renderingType: "CSR"
-                        contentAvailability: "Partially in JS"
+                        status: Poor
+                        explanation: The presence of Rocket Lazy Load Scripts...
+                        frameworkDetected: None
+                        renderingType: CSR
+                        contentAvailability: Partially in JS
                         recommendations:
-                          - "Implement Server-Side Rendering (SSR)..."
+                          - Implement Server-Side Rendering (SSR)...
                       quickWins:
-                        status: "Needs Improvement"
-                        explanation: "4 quick wins identified"
+                        status: Needs Improvement
+                        explanation: 2 quick wins identified
                         wins:
-                          - title: "Implement JSON-LD Schema Markup"
-                            description: "Add relevant schema markup..."
-                            impact: "High"
-                          - title: "Add Alt Text to All Images"
-                            description: "Ensure all images have descriptive alt text..."
-                            impact: "Medium"
+                          - title: Implement JSON-LD Schema Markup
+                            description: Add relevant schema markup...
+                            impact: High
+                          - title: Add Alt Text to All Images
+                            description: Ensure all images have descriptive alt text...
+                            impact: Medium
                       htmlSemantics:
-                        status: "Unknown"
-                        explanation: "HTML semantics analysis integrated into Content Structure criterion"
+                        status: Unknown
+                        explanation: HTML semantics analysis integrated into Content Structure criterion
                       contentFreshness:
-                        status: "Unknown"
-                        explanation: "Content freshness not currently analyzed"
-                        category: "N/A"
-                        publicationDate: "N/A"
-                        lastUpdatedDate: "N/A"
+                        status: Unknown
+                        explanation: Content freshness not currently analyzed
+                        category: N/A
+                        publicationDate: N/A
+                        lastUpdatedDate: N/A
                       internalLinking:
-                        status: "Unknown"
-                        explanation: "Internal linking analysis integrated into Content Structure criterion"
-                      status: "completed"
+                        status: Unknown
+                        explanation: Internal linking analysis integrated into Content Structure criterion
+                      status: completed
                       accountId: 216
-                      accountUrl: "https://wordlift.io/blog/en"
+                      accountUrl: https://wordlift.io/blog/en
         '400':
-          description: Bad Request - Invalid URL format or domain
+          description: Missing/invalid URL or invalid domain
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
               examples:
+                missing_url:
+                  summary: Missing URL
+                  value:
+                    error: URL is required
+                    message: Please provide a URL to audit in the request body
                 invalid_url:
                   summary: Invalid URL format
                   value:
-                    error: "Invalid URL format"
-                    message: "Please provide a valid URL"
+                    error: Invalid URL format
+                    message: Please provide a valid URL
                 invalid_domain:
                   summary: Invalid domain
                   value:
-                    error: "Invalid domain"
-                    message: "The URL's domain name appears to be invalid or is not a public domain"
+                    error: Invalid domain
+                    message: The URL's domain name appears to be invalid or is not a public domain. Please check for typos.
         '401':
-          description: Unauthorized - Invalid or missing API key
+          description: Missing or invalid WordLift key
           content:
             application/json:
               schema:
@@ -200,15 +227,20 @@ paths:
                 missing_auth:
                   summary: Missing authorization
                   value:
-                    error: "Authentication required"
-                    message: "Please provide Authorization header with WordLift Key"
+                    error: Authentication required
+                    message: Please provide Authorization header with WordLift Key
+                invalid_format:
+                  summary: Malformed authorization
+                  value:
+                    error: Invalid authorization format
+                    message: 'Authorization header must be in format: Key [your-wordlift-key]'
                 invalid_key:
                   summary: Invalid key
                   value:
-                    error: "Invalid WordLift key"
-                    message: "The provided key is not valid or has expired"
+                    error: Invalid WordLift key
+                    message: The provided key is not valid or has expired
         '403':
-          description: Forbidden - Bot protection detected
+          description: Bot protection detected on the target site
           content:
             application/json:
               schema:
@@ -217,10 +249,10 @@ paths:
                 bot_protection:
                   summary: Bot protection
                   value:
-                    error: "Bot protection detected"
-                    message: "Bot protection detected for: https://example.com"
+                    error: Bot protection detected
+                    message: 'Bot protection detected for: https://example.com'
         '404':
-          description: Not Found - Page not found
+          description: Target page not found
           content:
             application/json:
               schema:
@@ -229,16 +261,32 @@ paths:
                 page_not_found:
                   summary: Page not found
                   value:
-                    error: "Page not found"
-                    message: "Page not found: https://example.com/missing"
-        '422':
-          description: Validation Error - Invalid request format
+                    error: Page not found
+                    message: 'Page not found: https://example.com/missing'
+        '429':
+          description: Per-account audit cap, failed-auth cap, or global rate limit exceeded
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationError'
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                account_cap:
+                  summary: Per-account cap
+                  value:
+                    error: Too many requests
+                    message: Too many audit requests for this account, please try again later
+                auth_failures:
+                  summary: Failed-auth cap
+                  value:
+                    error: Too many requests
+                    message: Too many failed authentication attempts from this IP, please try again later
+                global:
+                  summary: Global limit
+                  value:
+                    error: Too many requests
+                    message: Service is busy, please try again shortly.
         '500':
-          description: Internal Server Error
+          description: Internal server error
           content:
             application/json:
               schema:
@@ -247,59 +295,67 @@ paths:
                 server_error:
                   summary: Internal error
                   value:
-                    error: "Internal server error"
-                    message: "An unexpected error occurred"
-      security:
-        - ApiKey: []
+                    error: Internal server error
+                    message: An unexpected error occurred
+                    requestId: 3f2b8c1e-9a4d-4e7f-b6a2-1c5d8e9f0a3b
+        '502':
+          description: WordLift accepted the key but returned an unusable account, so the key could not be verified. Retry later; not caused by the key or the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                unusable_account:
+                  summary: Unusable account
+                  value:
+                    error: Authentication service error
+                    message: Unable to verify WordLift key
 components:
   schemas:
     AuditRequest:
       type: object
-      required:
-        - url
       properties:
         url:
           type: string
-          format: uri
           title: URL
-          description: The full URL of the website to audit
-          example: "https://example.com"
-
+          description: 'The URL of the website to audit. The scheme is optional: ''example.com'' is audited as ''https://example.com'''
+          examples:
+            - https://example.com
+      required:
+        - url
     AuditResponse:
       type: object
       properties:
         success:
           type: boolean
-          description: Indicates if the audit was successful
+          enum:
+            - true
+          description: 'Always true: a failed audit is returned as an error response'
         data:
           $ref: '#/components/schemas/AuditData'
-
+      required:
+        - success
+        - data
     AuditData:
       type: object
+      description: Full audit result returned by POST /api/audit (nested under `data`).
+      additionalProperties: false
       properties:
         url:
           type: string
           description: The audited URL (may include trailing slash)
         domain:
           type: string
-          description: The base domain of the audited URL
+          description: Origin of the audited URL (scheme and host), e.g. 'https://www.wordlift.io'
         timestamp:
           type: string
           format: date-time
           description: ISO 8601 timestamp of when the audit was performed
-        overallScore:
-          type: integer
-          minimum: 0
-          maximum: 100
-          description: Overall SEO and AI-readiness score (0-100)
-        score:
-          type: integer
-          minimum: 0
-          maximum: 100
-          description: Legacy field - same as overallScore
         summary:
           type: string
           description: High-level summary of the audit findings in markdown format
+        resources:
+          $ref: '#/components/schemas/Resources'
         siteFiles:
           $ref: '#/components/schemas/SiteFiles'
         seoFundamentals:
@@ -310,167 +366,164 @@ components:
           $ref: '#/components/schemas/ContentStructure'
         imageAccessibility:
           $ref: '#/components/schemas/ImageAccessibility'
-        htmlSemantics:
-          $ref: '#/components/schemas/HtmlSemantics'
-        contentFreshness:
-          $ref: '#/components/schemas/ContentFreshness'
-        internalLinking:
-          $ref: '#/components/schemas/InternalLinking'
         automationReadiness:
           $ref: '#/components/schemas/AutomationReadiness'
         jsRendering:
           $ref: '#/components/schemas/JsRendering'
         quickWins:
           $ref: '#/components/schemas/QuickWinsResult'
-        status:
-          type: string
-          enum: [completed, pending, failed]
-          description: Status of the audit process
-        accountId:
-          type: integer
-          description: Account ID associated with the audit
-        accountUrl:
-          type: string
-          description: Account URL associated with the audit
-
-    BotStatus:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the bot (e.g., GPTBot, Claude-Web, Googlebot)
-        vendor:
-          type: string
-          description: Vendor of the bot (e.g., OpenAI, Anthropic, Google)
-        status:
-          type: string
-          enum: [Allowed, Blocked]
-          description: Access status for this bot
-
-    WellKnownFiles:
-      type: object
-      description: MCP / WebMCP / Agent Skills discovery surfaces detected under .well-known and in the page HTML.
-      properties:
-        mcpJson:
-          type: boolean
-          description: Whether `/.well-known/mcp.json` exists (legacy MCP server manifest path)
-        mcpServerCard:
-          type: boolean
-          description: Whether `/.well-known/mcp/server-card.json` exists (MCP server card, SEP-1649 draft)
-        webmcpToolsJson:
-          type: boolean
-          description: Whether `/.well-known/webmcp/tools.json` exists (Chrome Labs WebMCP tools manifest)
-        mcpLinkTag:
-          type: boolean
-          description: Whether a `<link rel="mcp">` discovery tag was detected in the page HTML
-        mcpEndpoint:
-          type: string
-          nullable: true
-          description: The href value of the `<link rel="mcp">` tag, if present; null otherwise
-        agentSkillsIndex:
-          type: boolean
-          description: Whether `/.well-known/agent-skills/index.json` exists (Agent Skills Discovery, Cloudflare RFC v0.2.0)
-        agentSkillsCount:
+        htmlSemantics:
+          $ref: '#/components/schemas/HtmlSemantics'
+        contentFreshness:
+          $ref: '#/components/schemas/ContentFreshness'
+        internalLinking:
+          $ref: '#/components/schemas/InternalLinking'
+        overallScore:
           type: integer
           minimum: 0
-          description: Number of skills listed in the Agent Skills Discovery index (0 when the index is absent or empty)
-
+          maximum: 100
+          description: Overall SEO and AI-readiness score (0-100)
+        score:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Legacy field - same as overallScore
+        status:
+          type: string
+          enum:
+            - completed
+          description: 'Always completed: a failed audit is returned as an error response'
+        accountId:
+          type: integer
+          description: WordLift account ID resolved from the Authorization key.
+        accountUrl:
+          type: string
+          format: uri
+          description: URL of the WordLift account the key belongs to
+      required:
+        - url
+        - domain
+        - timestamp
+        - summary
+        - resources
+        - siteFiles
+        - seoFundamentals
+        - structuredData
+        - contentStructure
+        - imageAccessibility
+        - automationReadiness
+        - jsRendering
+        - quickWins
+        - htmlSemantics
+        - contentFreshness
+        - internalLinking
+        - overallScore
+        - score
+        - status
+        - accountId
+        - accountUrl
     SiteFiles:
       type: object
       properties:
         score:
           type: integer
+          description: Numeric score for site files (0-10). MCP / WebMCP / Agent Skills / SKILL.md signals are applied as post-hoc bonuses on `overallScore`, not on this per-criterion score.
           minimum: 0
           maximum: 10
-          description: |
-            Numeric score for site files (0-10). MCP / WebMCP / Agent Skills / SKILL.md signals are
-            applied as post-hoc bonuses on `overallScore`, not on this per-criterion score.
-        status:
-          type: string
-          enum: [Good, Needs Improvement, Poor, Unknown]
-          description: Overall status of site files
         explanation:
           type: string
           description: Detailed explanation of site files evaluation
         robotsTxt:
           type: string
-          enum: [found, not_found, error]
-          description: Status of robots.txt file
+          enum:
+            - found
+            - not_found
+            - error
+          deprecated: true
+          description: 'Deprecated: use resources.robotsTxt.status'
         llmsTxt:
           type: string
-          enum: [found, not_found, error]
-          description: Status of llms.txt file (AI model instructions)
+          enum:
+            - found
+            - not_found
+            - error
+          deprecated: true
+          description: 'Deprecated: use resources.llmsTxt.status'
         hasLlmsTxt:
           type: boolean
-          description: Whether llms.txt file exists
-        hasSkillMd:
-          type: boolean
-          description: Whether a top-level `SKILL.md` file exists (Agent Skills convention)
+          description: 'Deprecated: use resources.llmsTxt. false both when llms.txt is missing and when its fetch failed'
+          deprecated: true
         botStatus:
           type: array
+          description: 'Empty when robots.txt could not be fetched (resources.robotsTxt.status: "unknown")'
           items:
             $ref: '#/components/schemas/BotStatus'
-          description: Access status for various bots
+        status:
+          type: string
+          enum:
+            - Good
+            - Needs Improvement
+            - Poor
+          description: Overall status of site files
+        hasSkillMd:
+          type: boolean
+          deprecated: true
+          description: 'Deprecated: use resources.skillMd'
         wellKnown:
           $ref: '#/components/schemas/WellKnownFiles'
-
+          deprecated: true
+          description: 'Deprecated: use resources.mcpJson, mcpServerCard, webmcpToolsJson, mcpLinkTag and agentSkillsIndex'
+      required:
+        - score
+        - explanation
+        - robotsTxt
+        - llmsTxt
+        - hasLlmsTxt
+        - botStatus
+        - status
+        - hasSkillMd
+        - wellKnown
     SeoFundamentals:
       type: object
       properties:
         score:
           type: integer
+          description: Numeric score for SEO fundamentals (0-20)
           minimum: 0
           maximum: 20
-          description: Numeric score for SEO fundamentals (0-20)
-        status:
-          type: string
-          enum: [Good, Needs Improvement, Poor, Unknown]
         explanation:
           type: string
         title:
           type: string
-          nullable: true
-          description: Page title tag content
+          description: Page title tag content; 'Not Found' when the page has none
         description:
           type: string
-          nullable: true
-          description: Meta description content
+          description: Meta description content; 'Not Found' when the page has none
         h1Count:
           type: integer
+          minimum: 0
           description: Number of H1 headings on the page
-
-    SchemaRecommendation:
-      type: object
-      properties:
-        title:
+        status:
           type: string
-          description: Title of the schema recommendation
-        description:
-          type: string
-          description: Detailed description of the recommendation
-
-    DetectedSchema:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Schema.org type (e.g., Organization, WebSite, Article)
-        format:
-          type: string
-          enum: [JSON-LD, Microdata]
-          description: Format of the structured data
-
+          enum:
+            - Good
+            - Needs Improvement
+            - Poor
+      required:
+        - score
+        - explanation
+        - title
+        - description
+        - h1Count
+        - status
     StructuredData:
       type: object
       properties:
         score:
           type: integer
+          description: Numeric score for structured data (0-15)
           minimum: 0
           maximum: 15
-          description: Numeric score for structured data (0-15)
-        status:
-          type: string
-          enum: [Good, Needs Improvement, Poor, Unknown]
         explanation:
           type: string
         hasSchema:
@@ -492,85 +545,118 @@ components:
           items:
             $ref: '#/components/schemas/SchemaRecommendation'
           description: Recommendations for improving structured data
-
+        status:
+          type: string
+          enum:
+            - Good
+            - Needs Improvement
+            - Poor
+      required:
+        - score
+        - explanation
+        - hasSchema
+        - hasJsonLd
+        - hasMicrodata
+        - detectedSchemas
+        - recommendations
+        - status
     ContentStructure:
       type: object
       properties:
         score:
           type: integer
+          description: Numeric score for content structure (0-15)
           minimum: 0
           maximum: 15
-          description: Numeric score for content structure (0-15)
-        status:
-          type: string
-          enum: [Good, Needs Improvement, Poor, Unknown]
         explanation:
           type: string
         hasSemanticElements:
           type: boolean
-          description: Whether semantic HTML elements are used
+          description: Whether the page uses any of header, nav, main, article, section, aside or footer
         hasLandmarks:
           type: boolean
-          description: Whether ARIA landmarks are present
+          description: Whether the page has a header, nav, main or footer element
+        status:
+          type: string
+          enum:
+            - Good
+            - Needs Improvement
+            - Poor
         tokenCount:
           type: integer
           minimum: 0
-          description: |
-            Deterministic token-budget estimate for the main content. Computed by running Mozilla
-            Readability on the page, converting the extracted article to Markdown via Turndown, and
-            dividing the character count by 4 (coarse tokens≈chars/4 heuristic).
+          description: Deterministic token-budget estimate for the main content. Computed by running Mozilla Readability on the page, converting the extracted article to Markdown via Turndown, and dividing the character count by 4 (coarse tokens≈chars/4 heuristic).
         tokenBudgetStatus:
           type: string
-          enum: [Good, Fair, Exceeded]
-          description: |
-            Qualitative bucket for `tokenCount` relative to typical LLM context budgets
-            (Good ≤ 20 000, Fair ≤ 30 000, Exceeded otherwise). The `overallScore`
-            receives a +2 bonus when `tokenCount ≤ 30 000`.
-
+          enum:
+            - Good
+            - Fair
+            - Exceeded
+          description: Qualitative bucket for `tokenCount` relative to typical LLM context budgets (Good ≤ 20 000, Fair ≤ 30 000, Exceeded otherwise). The `overallScore` receives a +2 bonus when `tokenCount ≤ 30 000`.
+      required:
+        - score
+        - explanation
+        - hasSemanticElements
+        - hasLandmarks
+        - status
     ImageAccessibility:
       type: object
       properties:
         score:
           type: integer
+          description: Numeric score for image accessibility (0-5)
           minimum: 0
           maximum: 5
-          description: Numeric score for image accessibility (0-5)
-        status:
-          type: string
-          enum: [Good, Needs Improvement, Poor, Unknown]
         explanation:
           type: string
         totalImages:
           type: integer
-          description: Total number of images on the page
+          minimum: 0
+          description: Total number of images on the page (img elements outside noscript and template)
         imagesWithoutAlt:
           type: integer
-          description: Number of images without alt text
+          minimum: 0
+          description: Number of images with no alt attribute (alt="", for decorative images, is not counted)
         missingAltTextImages:
           type: array
           items:
             type: string
-          description: Sample URLs or descriptions of images missing alt text
-
+          description: src of up to 10 images with no alt attribute ('No src' when the image has none)
+        status:
+          type: string
+          enum:
+            - Good
+            - Needs Improvement
+            - Poor
+      required:
+        - score
+        - explanation
+        - totalImages
+        - imagesWithoutAlt
+        - missingAltTextImages
+        - status
     HtmlSemantics:
       type: object
-      description: Legacy field - always returns status Unknown
       properties:
         status:
           type: string
-          enum: [Unknown]
+          enum:
+            - Unknown
           description: Always returns Unknown as this analysis is integrated into Content Structure
         explanation:
           type: string
           description: Explanation that this is integrated into Content Structure
-
+      required:
+        - status
+        - explanation
+      description: Legacy field - always returns status Unknown
     ContentFreshness:
       type: object
-      description: Legacy field - always returns status Unknown
       properties:
         status:
           type: string
-          enum: [Unknown]
+          enum:
+            - Unknown
           description: Always returns Unknown as this is not currently analyzed
         explanation:
           type: string
@@ -584,25 +670,412 @@ components:
         lastUpdatedDate:
           type: string
           description: Always returns "N/A"
-
+      required:
+        - status
+        - explanation
+        - category
+        - publicationDate
+        - lastUpdatedDate
+      description: Legacy field - always returns status Unknown
     InternalLinking:
       type: object
-      description: Legacy field - always returns status Unknown
       properties:
         status:
           type: string
-          enum: [Unknown]
+          enum:
+            - Unknown
           description: Always returns Unknown as this analysis is integrated into Content Structure
         explanation:
           type: string
           description: Explanation that this is integrated into Content Structure
-
+      required:
+        - status
+        - explanation
+      description: Legacy field - always returns status Unknown
+    AutomationReadiness:
+      type: object
+      properties:
+        score:
+          type: integer
+          description: Numeric score for automation readiness (0-10)
+          minimum: 0
+          maximum: 10
+        explanation:
+          type: string
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationIssue'
+          description: List of structured automation readiness issues
+        status:
+          type: string
+          enum:
+            - Good
+            - Needs Improvement
+            - Poor
+      required:
+        - score
+        - explanation
+        - issues
+        - status
+    JsRendering:
+      type: object
+      properties:
+        score:
+          type: integer
+          description: Numeric score for JavaScript rendering (0-15)
+          minimum: 0
+          maximum: 15
+        explanation:
+          type: string
+        frameworkDetected:
+          type: string
+          description: Detected JavaScript framework (None, React, Vue, Angular, Next.js, Nuxt, Gatsby)
+        renderingType:
+          type: string
+          enum:
+            - Static
+            - SSR
+            - SSG
+            - CSR
+            - Hybrid
+          description: Type of rendering used by the site
+        contentAvailability:
+          type: string
+          enum:
+            - All content in HTML
+            - Mostly in HTML
+            - Partially in JS
+            - Mostly in JS
+          description: How much of the content is available in the HTML
+        recommendations:
+          type: array
+          items:
+            type: string
+          description: Recommendations for improving JS rendering
+        status:
+          type: string
+          enum:
+            - Good
+            - Needs Improvement
+            - Poor
+      required:
+        - score
+        - explanation
+        - frameworkDetected
+        - renderingType
+        - contentAvailability
+        - recommendations
+        - status
+    QuickWinsResult:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - Good
+            - Needs Improvement
+            - Poor
+          description: Overall quick wins status
+        explanation:
+          type: string
+          description: Explanation of quick wins findings
+        wins:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuickWin'
+          description: List of quick win recommendations
+      required:
+        - status
+        - explanation
+        - wins
+    Resources:
+      type: object
+      description: What the audit fetched or detected, one entry per resource. Supersedes the file facts in siteFiles
+      properties:
+        robotsTxt:
+          type: object
+          description: /robots.txt
+          properties:
+            status:
+              type: string
+              enum:
+                - found
+                - not_found
+                - invalid
+                - unknown
+              description: 'not_found: missing, empty, or an HTML/error page; invalid: the file exists but can''t be used (JSON that doesn''t parse, or an agent-skills index without a skills list; JSON resources only); unknown: the fetch failed, so whether the file exists is not known, see reason'
+            reason:
+              type: string
+              enum:
+                - blocked
+                - rate_limited
+                - site_error
+                - unreachable
+              description: 'Only when status is "unknown". blocked: the site refused the request (401/403); rate_limited: the site throttled the request (429), possibly because of the audit''s own parallel requests; site_error: the site answered with another error status; unreachable: the site never answered (timeout, network or proxy failure)'
+          required:
+            - status
+        llmsTxt:
+          type: object
+          description: /llms.txt
+          properties:
+            status:
+              type: string
+              enum:
+                - found
+                - not_found
+                - invalid
+                - unknown
+              description: 'not_found: missing, empty, or an HTML/error page; invalid: the file exists but can''t be used (JSON that doesn''t parse, or an agent-skills index without a skills list; JSON resources only); unknown: the fetch failed, so whether the file exists is not known, see reason'
+            reason:
+              type: string
+              enum:
+                - blocked
+                - rate_limited
+                - site_error
+                - unreachable
+              description: 'Only when status is "unknown". blocked: the site refused the request (401/403); rate_limited: the site throttled the request (429), possibly because of the audit''s own parallel requests; site_error: the site answered with another error status; unreachable: the site never answered (timeout, network or proxy failure)'
+          required:
+            - status
+        skillMd:
+          type: object
+          description: /skill.md
+          properties:
+            status:
+              type: string
+              enum:
+                - found
+                - not_found
+                - invalid
+                - unknown
+              description: 'not_found: missing, empty, or an HTML/error page; invalid: the file exists but can''t be used (JSON that doesn''t parse, or an agent-skills index without a skills list; JSON resources only); unknown: the fetch failed, so whether the file exists is not known, see reason'
+            reason:
+              type: string
+              enum:
+                - blocked
+                - rate_limited
+                - site_error
+                - unreachable
+              description: 'Only when status is "unknown". blocked: the site refused the request (401/403); rate_limited: the site throttled the request (429), possibly because of the audit''s own parallel requests; site_error: the site answered with another error status; unreachable: the site never answered (timeout, network or proxy failure)'
+          required:
+            - status
+        mcpJson:
+          type: object
+          description: /.well-known/mcp.json (legacy MCP server manifest)
+          properties:
+            status:
+              type: string
+              enum:
+                - found
+                - not_found
+                - invalid
+                - unknown
+              description: 'not_found: missing, empty, or an HTML/error page; invalid: the file exists but can''t be used (JSON that doesn''t parse, or an agent-skills index without a skills list; JSON resources only); unknown: the fetch failed, so whether the file exists is not known, see reason'
+            reason:
+              type: string
+              enum:
+                - blocked
+                - rate_limited
+                - site_error
+                - unreachable
+              description: 'Only when status is "unknown". blocked: the site refused the request (401/403); rate_limited: the site throttled the request (429), possibly because of the audit''s own parallel requests; site_error: the site answered with another error status; unreachable: the site never answered (timeout, network or proxy failure)'
+          required:
+            - status
+        mcpServerCard:
+          type: object
+          description: /.well-known/mcp/server-card.json (MCP SEP-1649 server card)
+          properties:
+            status:
+              type: string
+              enum:
+                - found
+                - not_found
+                - invalid
+                - unknown
+              description: 'not_found: missing, empty, or an HTML/error page; invalid: the file exists but can''t be used (JSON that doesn''t parse, or an agent-skills index without a skills list; JSON resources only); unknown: the fetch failed, so whether the file exists is not known, see reason'
+            reason:
+              type: string
+              enum:
+                - blocked
+                - rate_limited
+                - site_error
+                - unreachable
+              description: 'Only when status is "unknown". blocked: the site refused the request (401/403); rate_limited: the site throttled the request (429), possibly because of the audit''s own parallel requests; site_error: the site answered with another error status; unreachable: the site never answered (timeout, network or proxy failure)'
+          required:
+            - status
+        webmcpToolsJson:
+          type: object
+          description: /.well-known/webmcp/tools.json (WebMCP tools manifest)
+          properties:
+            status:
+              type: string
+              enum:
+                - found
+                - not_found
+                - invalid
+                - unknown
+              description: 'not_found: missing, empty, or an HTML/error page; invalid: the file exists but can''t be used (JSON that doesn''t parse, or an agent-skills index without a skills list; JSON resources only); unknown: the fetch failed, so whether the file exists is not known, see reason'
+            reason:
+              type: string
+              enum:
+                - blocked
+                - rate_limited
+                - site_error
+                - unreachable
+              description: 'Only when status is "unknown". blocked: the site refused the request (401/403); rate_limited: the site throttled the request (429), possibly because of the audit''s own parallel requests; site_error: the site answered with another error status; unreachable: the site never answered (timeout, network or proxy failure)'
+          required:
+            - status
+        agentSkillsIndex:
+          type: object
+          description: /.well-known/agent-skills/index.json (Agent Skills Discovery RFC)
+          properties:
+            status:
+              type: string
+              enum:
+                - found
+                - not_found
+                - invalid
+                - unknown
+              description: 'not_found: missing, empty, or an HTML/error page; invalid: the file exists but can''t be used (JSON that doesn''t parse, or an agent-skills index without a skills list; JSON resources only); unknown: the fetch failed, so whether the file exists is not known, see reason'
+            reason:
+              type: string
+              enum:
+                - blocked
+                - rate_limited
+                - site_error
+                - unreachable
+              description: 'Only when status is "unknown". blocked: the site refused the request (401/403); rate_limited: the site throttled the request (429), possibly because of the audit''s own parallel requests; site_error: the site answered with another error status; unreachable: the site never answered (timeout, network or proxy failure)'
+            skillsCount:
+              type: integer
+              description: Only when status is "found"
+          required:
+            - status
+        mcpLinkTag:
+          type: object
+          description: '`<link rel="mcp">` in the audited page. Never "unknown": the audit fails without the page'
+          properties:
+            status:
+              type: string
+              enum:
+                - found
+                - not_found
+                - invalid
+                - unknown
+              description: 'not_found: missing, empty, or an HTML/error page; invalid: the file exists but can''t be used (JSON that doesn''t parse, or an agent-skills index without a skills list; JSON resources only); unknown: the fetch failed, so whether the file exists is not known, see reason'
+            reason:
+              type: string
+              enum:
+                - blocked
+                - rate_limited
+                - site_error
+                - unreachable
+              description: 'Only when status is "unknown". blocked: the site refused the request (401/403); rate_limited: the site throttled the request (429), possibly because of the audit''s own parallel requests; site_error: the site answered with another error status; unreachable: the site never answered (timeout, network or proxy failure)'
+            href:
+              type: string
+              description: The resolved href, when the tag has one
+          required:
+            - status
+      required:
+        - robotsTxt
+        - llmsTxt
+        - skillMd
+        - mcpJson
+        - mcpServerCard
+        - webmcpToolsJson
+        - agentSkillsIndex
+        - mcpLinkTag
+    BotStatus:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the bot (e.g., GPTBot, Claude-Web, Googlebot)
+        vendor:
+          type: string
+          description: Vendor of the bot (e.g., OpenAI, Anthropic, Google)
+        status:
+          type: string
+          enum:
+            - Allowed
+            - Blocked
+          description: Access status for this bot
+      required:
+        - name
+        - vendor
+        - status
+    WellKnownFiles:
+      type: object
+      properties:
+        mcpJson:
+          type: boolean
+          description: Whether `/.well-known/mcp.json` exists (legacy MCP server manifest path)
+        mcpServerCard:
+          type: boolean
+          description: Whether `/.well-known/mcp/server-card.json` exists (MCP server card, SEP-1649 draft)
+        webmcpToolsJson:
+          type: boolean
+          description: Whether `/.well-known/webmcp/tools.json` exists (Chrome Labs WebMCP tools manifest)
+        mcpLinkTag:
+          type: boolean
+          description: Whether a `<link rel="mcp">` discovery tag was detected in the page HTML
+        mcpEndpoint:
+          type:
+            - string
+            - 'null'
+          description: The href value of the `<link rel="mcp">` tag, if present; null otherwise
+        agentSkillsIndex:
+          type: boolean
+          description: Whether `/.well-known/agent-skills/index.json` exists (Agent Skills Discovery, Cloudflare RFC v0.2.0)
+        agentSkillsCount:
+          type: integer
+          minimum: 0
+          description: Number of skills listed in the Agent Skills Discovery index (0 when the index is absent or empty)
+      required:
+        - mcpJson
+        - mcpServerCard
+        - webmcpToolsJson
+        - mcpLinkTag
+        - mcpEndpoint
+        - agentSkillsIndex
+        - agentSkillsCount
+      description: MCP / WebMCP / Agent Skills discovery surfaces detected under .well-known and in the page HTML.
+    DetectedSchema:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Schema.org type (e.g., Organization, WebSite, Article)
+        format:
+          type: string
+          enum:
+            - JSON-LD
+            - Microdata
+          description: Format of the structured data
+      required:
+        - type
+        - format
+    SchemaRecommendation:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of the schema recommendation
+        description:
+          type: string
+          description: Detailed description of the recommendation
+      required:
+        - title
+        - description
     AutomationIssue:
       type: object
       properties:
         priority:
           type: string
-          enum: [P1, P2, P3, P4]
+          enum:
+            - P1
+            - P2
+            - P3
+            - P4
           description: Priority level of the issue
         criterion:
           type: string
@@ -622,55 +1095,14 @@ components:
         compliance:
           type: string
           description: Compliance impact description
-
-    AutomationReadiness:
-      type: object
-      properties:
-        score:
-          type: integer
-          minimum: 0
-          maximum: 10
-          description: Numeric score for automation readiness (0-10)
-        status:
-          type: string
-          enum: [Good, Needs Improvement, Poor, Unknown]
-        explanation:
-          type: string
-        issues:
-          type: array
-          items:
-            $ref: '#/components/schemas/AutomationIssue'
-          description: List of structured automation readiness issues
-
-    JsRendering:
-      type: object
-      properties:
-        score:
-          type: integer
-          minimum: 0
-          maximum: 15
-          description: Numeric score for JavaScript rendering (0-15)
-        status:
-          type: string
-          enum: [Good, Needs Improvement, Poor, Unknown]
-        explanation:
-          type: string
-        frameworkDetected:
-          type: string
-          description: Detected JavaScript framework (None, React, Vue, Angular, Next.js, Nuxt, Gatsby, Other)
-        renderingType:
-          type: string
-          enum: [Static, SSR, SSG, CSR, Hybrid]
-          description: Type of rendering used by the site
-        contentAvailability:
-          type: string
-          description: Description of content availability in HTML (e.g., "All content in HTML", "Mostly in HTML", "Partially in JS", "Mostly in JS")
-        recommendations:
-          type: array
-          items:
-            type: string
-          description: Recommendations for improving JS rendering
-
+      required:
+        - priority
+        - criterion
+        - what
+        - where
+        - why
+        - how
+        - compliance
     QuickWin:
       type: object
       properties:
@@ -682,61 +1114,35 @@ components:
           description: Detailed description of the recommendation
         impact:
           type: string
-          enum: [High, Medium, Low]
+          enum:
+            - High
+            - Medium
+            - Low
           description: Expected impact of implementing this recommendation
-
-    QuickWinsResult:
-      type: object
-      properties:
-        status:
-          type: string
-          enum: [Good, Needs Improvement, Poor, Unknown]
-          description: Overall quick wins status
-        explanation:
-          type: string
-          description: Explanation of quick wins findings
-        wins:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuickWin'
-          description: List of quick win recommendations
-
+      required:
+        - title
+        - description
+        - impact
     ErrorResponse:
       type: object
       properties:
-        success:
-          type: boolean
-          example: false
         error:
           type: string
           description: Error type/category
         message:
           type: string
           description: Detailed error message
-
-    ValidationError:
-      type: object
-      properties:
-        detail:
-          type: array
-          items:
-            type: object
-            properties:
-              loc:
-                type: array
-                items:
-                  type: string
-              msg:
-                type: string
-              type:
-                type: string
-
+        requestId:
+          type: string
+          format: uuid
+          description: Present on 500 responses; quote it when reporting a problem
+      required:
+        - error
   securitySchemes:
     ApiKey:
       type: apiKey
       in: header
       name: Authorization
-      description: |
-        API Key authentication. Use the format: `Key [your-wordlift-key]`
-
-        Example: `Authorization: Key wl_abc123def456`
+      description: 'Use ''Authorization: Key <WORDLIFT_API_KEY>''.'
+security:
+  - ApiKey: []
