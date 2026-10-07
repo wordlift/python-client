@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**score** | **int** | Numeric score for image accessibility (0-5) | [optional] 
-**status** | **str** |  | [optional] 
-**explanation** | **str** |  | [optional] 
-**total_images** | **int** | Total number of images on the page | [optional] 
-**images_without_alt** | **int** | Number of images without alt text | [optional] 
-**missing_alt_text_images** | **List[str]** | Sample URLs or descriptions of images missing alt text | [optional] 
+**score** | **int** | Numeric score for image accessibility (0-5) | 
+**explanation** | **str** |  | 
+**total_images** | **int** | Total number of images on the page (img elements outside noscript and template) | 
+**images_without_alt** | **int** | Number of images with no alt attribute (alt&#x3D;\&quot;\&quot;, for decorative images, is not counted) | 
+**missing_alt_text_images** | **List[str]** | src of up to 10 images with no alt attribute (&#39;No src&#39; when the image has none) | 
+**status** | **str** |  | 
 
 ## Example
 

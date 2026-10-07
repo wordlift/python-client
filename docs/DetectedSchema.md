@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** | Schema.org type (e.g., Organization, WebSite, Article) | [optional] 
-**format** | **str** | Format of the structured data | [optional] 
+**type** | **str** | Schema.org type (e.g., Organization, WebSite, Article) | 
+**format** | **str** | Format of the structured data | 
 
 ## Example
 

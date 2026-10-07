@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,8 +27,8 @@ class SchemaRecommendation(BaseModel):
     """
     SchemaRecommendation
     """ # noqa: E501
-    title: Optional[StrictStr] = Field(default=None, description="Title of the schema recommendation")
-    description: Optional[StrictStr] = Field(default=None, description="Detailed description of the recommendation")
+    title: StrictStr = Field(description="Title of the schema recommendation")
+    description: StrictStr = Field(description="Detailed description of the recommendation")
     __properties: ClassVar[List[str]] = ["title", "description"]
 
     model_config = ConfigDict(

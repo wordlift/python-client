@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**score** | **int** | Numeric score for automation readiness (0-10) | [optional] 
-**status** | **str** |  | [optional] 
-**explanation** | **str** |  | [optional] 
-**issues** | [**List[AutomationIssue]**](AutomationIssue.md) | List of structured automation readiness issues | [optional] 
+**score** | **int** | Numeric score for automation readiness (0-10) | 
+**explanation** | **str** |  | 
+**issues** | [**List[AutomationIssue]**](AutomationIssue.md) | List of structured automation readiness issues | 
+**status** | **str** |  | 
 
 ## Example
 

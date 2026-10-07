@@ -6,13 +6,13 @@ MCP / WebMCP / Agent Skills discovery surfaces detected under .well-known and in
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**mcp_json** | **bool** | Whether &#x60;/.well-known/mcp.json&#x60; exists (legacy MCP server manifest path) | [optional] 
-**mcp_server_card** | **bool** | Whether &#x60;/.well-known/mcp/server-card.json&#x60; exists (MCP server card, SEP-1649 draft) | [optional] 
-**webmcp_tools_json** | **bool** | Whether &#x60;/.well-known/webmcp/tools.json&#x60; exists (Chrome Labs WebMCP tools manifest) | [optional] 
-**mcp_link_tag** | **bool** | Whether a &#x60;&lt;link rel&#x3D;\&quot;mcp\&quot;&gt;&#x60; discovery tag was detected in the page HTML | [optional] 
-**mcp_endpoint** | **str** | The href value of the &#x60;&lt;link rel&#x3D;\&quot;mcp\&quot;&gt;&#x60; tag, if present; null otherwise | [optional] 
-**agent_skills_index** | **bool** | Whether &#x60;/.well-known/agent-skills/index.json&#x60; exists (Agent Skills Discovery, Cloudflare RFC v0.2.0) | [optional] 
-**agent_skills_count** | **int** | Number of skills listed in the Agent Skills Discovery index (0 when the index is absent or empty) | [optional] 
+**mcp_json** | **bool** | Whether &#x60;/.well-known/mcp.json&#x60; exists (legacy MCP server manifest path) | 
+**mcp_server_card** | **bool** | Whether &#x60;/.well-known/mcp/server-card.json&#x60; exists (MCP server card, SEP-1649 draft) | 
+**webmcp_tools_json** | **bool** | Whether &#x60;/.well-known/webmcp/tools.json&#x60; exists (Chrome Labs WebMCP tools manifest) | 
+**mcp_link_tag** | **bool** | Whether a &#x60;&lt;link rel&#x3D;\&quot;mcp\&quot;&gt;&#x60; discovery tag was detected in the page HTML | 
+**mcp_endpoint** | **str** | The href value of the &#x60;&lt;link rel&#x3D;\&quot;mcp\&quot;&gt;&#x60; tag, if present; null otherwise | 
+**agent_skills_index** | **bool** | Whether &#x60;/.well-known/agent-skills/index.json&#x60; exists (Agent Skills Discovery, Cloudflare RFC v0.2.0) | 
+**agent_skills_count** | **int** | Number of skills listed in the Agent Skills Discovery index (0 when the index is absent or empty) | 
 
 ## Example
 

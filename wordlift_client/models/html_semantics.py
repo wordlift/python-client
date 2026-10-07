@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,16 +27,13 @@ class HtmlSemantics(BaseModel):
     """
     Legacy field - always returns status Unknown
     """ # noqa: E501
-    status: Optional[StrictStr] = Field(default=None, description="Always returns Unknown as this analysis is integrated into Content Structure")
-    explanation: Optional[StrictStr] = Field(default=None, description="Explanation that this is integrated into Content Structure")
+    status: StrictStr = Field(description="Always returns Unknown as this analysis is integrated into Content Structure")
+    explanation: StrictStr = Field(description="Explanation that this is integrated into Content Structure")
     __properties: ClassVar[List[str]] = ["status", "explanation"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
         if value not in set(['Unknown']):
             raise ValueError("must be one of enum values ('Unknown')")
         return value

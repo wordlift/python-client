@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,16 +27,13 @@ class DetectedSchema(BaseModel):
     """
     DetectedSchema
     """ # noqa: E501
-    type: Optional[StrictStr] = Field(default=None, description="Schema.org type (e.g., Organization, WebSite, Article)")
-    format: Optional[StrictStr] = Field(default=None, description="Format of the structured data")
+    type: StrictStr = Field(description="Schema.org type (e.g., Organization, WebSite, Article)")
+    format: StrictStr = Field(description="Format of the structured data")
     __properties: ClassVar[List[str]] = ["type", "format"]
 
     @field_validator('format')
     def format_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
         if value not in set(['JSON-LD', 'Microdata']):
             raise ValueError("must be one of enum values ('JSON-LD', 'Microdata')")
         return value

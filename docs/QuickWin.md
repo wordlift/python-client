@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **str** | Title of the quick win recommendation | [optional] 
-**description** | **str** | Detailed description of the recommendation | [optional] 
-**impact** | **str** | Expected impact of implementing this recommendation | [optional] 
+**title** | **str** | Title of the quick win recommendation | 
+**description** | **str** | Detailed description of the recommendation | 
+**impact** | **str** | Expected impact of implementing this recommendation | 
 
 ## Example
 

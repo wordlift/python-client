@@ -1,30 +1,32 @@
 # AuditData
 
+Full audit result returned by POST /api/audit (nested under `data`).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **str** | The audited URL (may include trailing slash) | [optional] 
-**domain** | **str** | The base domain of the audited URL | [optional] 
-**timestamp** | **datetime** | ISO 8601 timestamp of when the audit was performed | [optional] 
-**overall_score** | **int** | Overall SEO and AI-readiness score (0-100) | [optional] 
-**score** | **int** | Legacy field - same as overallScore | [optional] 
-**summary** | **str** | High-level summary of the audit findings in markdown format | [optional] 
-**site_files** | [**SiteFiles**](SiteFiles.md) |  | [optional] 
-**seo_fundamentals** | [**SeoFundamentals**](SeoFundamentals.md) |  | [optional] 
-**structured_data** | [**StructuredData**](StructuredData.md) |  | [optional] 
-**content_structure** | [**ContentStructure**](ContentStructure.md) |  | [optional] 
-**image_accessibility** | [**ImageAccessibility**](ImageAccessibility.md) |  | [optional] 
-**html_semantics** | [**HtmlSemantics**](HtmlSemantics.md) |  | [optional] 
-**content_freshness** | [**ContentFreshness**](ContentFreshness.md) |  | [optional] 
-**internal_linking** | [**InternalLinking**](InternalLinking.md) |  | [optional] 
-**automation_readiness** | [**AutomationReadiness**](AutomationReadiness.md) |  | [optional] 
-**js_rendering** | [**JsRendering**](JsRendering.md) |  | [optional] 
-**quick_wins** | [**QuickWinsResult**](QuickWinsResult.md) |  | [optional] 
-**status** | **str** | Status of the audit process | [optional] 
-**account_id** | **int** | Account ID associated with the audit | [optional] 
-**account_url** | **str** | Account URL associated with the audit | [optional] 
+**url** | **str** | The audited URL (may include trailing slash) | 
+**domain** | **str** | Origin of the audited URL (scheme and host), e.g. &#39;https://www.wordlift.io&#39; | 
+**timestamp** | **datetime** | ISO 8601 timestamp of when the audit was performed | 
+**summary** | **str** | High-level summary of the audit findings in markdown format | 
+**resources** | [**Resources**](Resources.md) |  | 
+**site_files** | [**SiteFiles**](SiteFiles.md) |  | 
+**seo_fundamentals** | [**SeoFundamentals**](SeoFundamentals.md) |  | 
+**structured_data** | [**StructuredData**](StructuredData.md) |  | 
+**content_structure** | [**ContentStructure**](ContentStructure.md) |  | 
+**image_accessibility** | [**ImageAccessibility**](ImageAccessibility.md) |  | 
+**automation_readiness** | [**AutomationReadiness**](AutomationReadiness.md) |  | 
+**js_rendering** | [**JsRendering**](JsRendering.md) |  | 
+**quick_wins** | [**QuickWinsResult**](QuickWinsResult.md) |  | 
+**html_semantics** | [**HtmlSemantics**](HtmlSemantics.md) |  | 
+**content_freshness** | [**ContentFreshness**](ContentFreshness.md) |  | 
+**internal_linking** | [**InternalLinking**](InternalLinking.md) |  | 
+**overall_score** | **int** | Overall SEO and AI-readiness score (0-100) | 
+**score** | **int** | Legacy field - same as overallScore | 
+**status** | **str** | Always completed: a failed audit is returned as an error response | 
+**account_id** | **int** | WordLift account ID resolved from the Authorization key. | 
+**account_url** | **str** | URL of the WordLift account the key belongs to | 
 
 ## Example
 

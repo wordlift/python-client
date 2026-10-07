@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,33 +28,34 @@ class JsRendering(BaseModel):
     """
     JsRendering
     """ # noqa: E501
-    score: Optional[Annotated[int, Field(le=15, strict=True, ge=0)]] = Field(default=None, description="Numeric score for JavaScript rendering (0-15)")
-    status: Optional[StrictStr] = None
-    explanation: Optional[StrictStr] = None
-    framework_detected: Optional[StrictStr] = Field(default=None, description="Detected JavaScript framework (None, React, Vue, Angular, Next.js, Nuxt, Gatsby, Other)", alias="frameworkDetected")
-    rendering_type: Optional[StrictStr] = Field(default=None, description="Type of rendering used by the site", alias="renderingType")
-    content_availability: Optional[StrictStr] = Field(default=None, description="Description of content availability in HTML (e.g., \"All content in HTML\", \"Mostly in HTML\", \"Partially in JS\", \"Mostly in JS\")", alias="contentAvailability")
-    recommendations: Optional[List[StrictStr]] = Field(default=None, description="Recommendations for improving JS rendering")
-    __properties: ClassVar[List[str]] = ["score", "status", "explanation", "frameworkDetected", "renderingType", "contentAvailability", "recommendations"]
-
-    @field_validator('status')
-    def status_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['Good', 'Needs Improvement', 'Poor', 'Unknown']):
-            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor', 'Unknown')")
-        return value
+    score: Annotated[int, Field(le=15, strict=True, ge=0)] = Field(description="Numeric score for JavaScript rendering (0-15)")
+    explanation: StrictStr
+    framework_detected: StrictStr = Field(description="Detected JavaScript framework (None, React, Vue, Angular, Next.js, Nuxt, Gatsby)", alias="frameworkDetected")
+    rendering_type: StrictStr = Field(description="Type of rendering used by the site", alias="renderingType")
+    content_availability: StrictStr = Field(description="How much of the content is available in the HTML", alias="contentAvailability")
+    recommendations: List[StrictStr] = Field(description="Recommendations for improving JS rendering")
+    status: StrictStr
+    __properties: ClassVar[List[str]] = ["score", "explanation", "frameworkDetected", "renderingType", "contentAvailability", "recommendations", "status"]
 
     @field_validator('rendering_type')
     def rendering_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
         if value not in set(['Static', 'SSR', 'SSG', 'CSR', 'Hybrid']):
             raise ValueError("must be one of enum values ('Static', 'SSR', 'SSG', 'CSR', 'Hybrid')")
+        return value
+
+    @field_validator('content_availability')
+    def content_availability_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['All content in HTML', 'Mostly in HTML', 'Partially in JS', 'Mostly in JS']):
+            raise ValueError("must be one of enum values ('All content in HTML', 'Mostly in HTML', 'Partially in JS', 'Mostly in JS')")
+        return value
+
+    @field_validator('status')
+    def status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['Good', 'Needs Improvement', 'Poor']):
+            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor')")
         return value
 
     model_config = ConfigDict(
@@ -109,12 +110,12 @@ class JsRendering(BaseModel):
 
         _obj = cls.model_validate({
             "score": obj.get("score"),
-            "status": obj.get("status"),
             "explanation": obj.get("explanation"),
             "frameworkDetected": obj.get("frameworkDetected"),
             "renderingType": obj.get("renderingType"),
             "contentAvailability": obj.get("contentAvailability"),
-            "recommendations": obj.get("recommendations")
+            "recommendations": obj.get("recommendations"),
+            "status": obj.get("status")
         })
         return _obj
 

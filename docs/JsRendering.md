@@ -5,13 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**score** | **int** | Numeric score for JavaScript rendering (0-15) | [optional] 
-**status** | **str** |  | [optional] 
-**explanation** | **str** |  | [optional] 
-**framework_detected** | **str** | Detected JavaScript framework (None, React, Vue, Angular, Next.js, Nuxt, Gatsby, Other) | [optional] 
-**rendering_type** | **str** | Type of rendering used by the site | [optional] 
-**content_availability** | **str** | Description of content availability in HTML (e.g., \&quot;All content in HTML\&quot;, \&quot;Mostly in HTML\&quot;, \&quot;Partially in JS\&quot;, \&quot;Mostly in JS\&quot;) | [optional] 
-**recommendations** | **List[str]** | Recommendations for improving JS rendering | [optional] 
+**score** | **int** | Numeric score for JavaScript rendering (0-15) | 
+**explanation** | **str** |  | 
+**framework_detected** | **str** | Detected JavaScript framework (None, React, Vue, Angular, Next.js, Nuxt, Gatsby) | 
+**rendering_type** | **str** | Type of rendering used by the site | 
+**content_availability** | **str** | How much of the content is available in the HTML | 
+**recommendations** | **List[str]** | Recommendations for improving JS rendering | 
+**status** | **str** |  | 
 
 ## Example
 

@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 Website Audit
 
-Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt, SKILL.md, .well-known directory) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD, Microdata) - Content structure, semantic HTML, and token budget - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility - MCP / WebMCP discovery surfaces:   - `<link rel=\"mcp\">` HTML discovery tag   - `/.well-known/mcp.json` (legacy MCP manifest)   - `/.well-known/mcp/server-card.json` (MCP server card, SEP-1649 draft)   - `/.well-known/webmcp/tools.json` (Chrome Labs WebMCP tools manifest) - Agent Skills Discovery (`/.well-known/agent-skills/index.json`, Cloudflare RFC v0.2.0) and top-level `SKILL.md` - Deterministic token budget (Readability + Turndown, chars/4 heuristic) - Content freshness (legacy field, status Unknown) - Internal linking (legacy field, status Unknown) - HTML semantics (legacy field, status Unknown)  Returns an overall score (0-100) and detailed recommendations for improvement. The overall score is the clamped sum of the per-criterion scores emitted by the LLM plus post-hoc bonuses: +1 for `<link rel=\"mcp\">`, +1 for WebMCP `tools.json`, +1 for legacy `mcp.json` or `mcp/server-card.json`, +2 for Agent Skills Discovery or top-level `SKILL.md`, and +2 when the estimated token budget is ≤ 30 000. 
+Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt, SKILL.md, .well-known directory) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD, Microdata) - Content structure, semantic HTML, and token budget - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility - MCP / WebMCP discovery surfaces:   - `<link rel=\"mcp\">` HTML discovery tag   - `/.well-known/mcp.json` (legacy MCP manifest)   - `/.well-known/mcp/server-card.json` (MCP server card, SEP-1649 draft)   - `/.well-known/webmcp/tools.json` (Chrome Labs WebMCP tools manifest) - Agent Skills Discovery (`/.well-known/agent-skills/index.json`, Cloudflare RFC v0.2.0) and top-level `SKILL.md` - Deterministic token budget (Readability + Turndown, chars/4 heuristic) - Content freshness (legacy field, status Unknown) - Internal linking (legacy field, status Unknown) - HTML semantics (legacy field, status Unknown)  Every file the audit fetched or detected is reported in `resources`, which tells a missing file apart from one that could not be fetched.  Returns an overall score (0-100) and detailed recommendations for improvement. The overall score is the clamped sum of the per-criterion scores emitted by the LLM plus post-hoc bonuses: +1 for `<link rel=\"mcp\">`, +1 for WebMCP `tools.json`, +1 for legacy `mcp.json` or `mcp/server-card.json`, +2 for Agent Skills Discovery or top-level `SKILL.md`, and +2 when the estimated token budget is ≤ 30 000. 
 
 ### Example
 
@@ -83,13 +83,14 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful audit response |  -  |
-**400** | Bad Request - Invalid URL format or domain |  -  |
-**401** | Unauthorized - Invalid or missing API key |  -  |
-**403** | Forbidden - Bot protection detected |  -  |
-**404** | Not Found - Page not found |  -  |
-**422** | Validation Error - Invalid request format |  -  |
-**500** | Internal Server Error |  -  |
+**200** | Audit completed successfully |  -  |
+**400** | Missing/invalid URL or invalid domain |  -  |
+**401** | Missing or invalid WordLift key |  -  |
+**403** | Bot protection detected on the target site |  -  |
+**404** | Target page not found |  -  |
+**429** | Per-account audit cap, failed-auth cap, or global rate limit exceeded |  -  |
+**500** | Internal server error |  -  |
+**502** | WordLift accepted the key but returned an unusable account, so the key could not be verified. Retry later; not caused by the key or the request |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

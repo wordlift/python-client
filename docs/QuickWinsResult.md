@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **str** | Overall quick wins status | [optional] 
-**explanation** | **str** | Explanation of quick wins findings | [optional] 
-**wins** | [**List[QuickWin]**](QuickWin.md) | List of quick win recommendations | [optional] 
+**status** | **str** | Overall quick wins status | 
+**explanation** | **str** | Explanation of quick wins findings | 
+**wins** | [**List[QuickWin]**](QuickWin.md) | List of quick win recommendations | 
 
 ## Example
 

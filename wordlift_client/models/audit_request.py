@@ -27,7 +27,7 @@ class AuditRequest(BaseModel):
     """
     AuditRequest
     """ # noqa: E501
-    url: StrictStr = Field(description="The full URL of the website to audit")
+    url: StrictStr = Field(description="The URL of the website to audit. The scheme is optional: 'example.com' is audited as 'https://example.com'")
     __properties: ClassVar[List[str]] = ["url"]
 
     model_config = ConfigDict(

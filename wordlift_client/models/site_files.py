@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing_extensions import Annotated
 from wordlift_client.models.bot_status import BotStatus
 from wordlift_client.models.well_known_files import WellKnownFiles
@@ -30,33 +30,20 @@ class SiteFiles(BaseModel):
     """
     SiteFiles
     """ # noqa: E501
-    score: Optional[Annotated[int, Field(le=10, strict=True, ge=0)]] = Field(default=None, description="Numeric score for site files (0-10). MCP / WebMCP / Agent Skills / SKILL.md signals are applied as post-hoc bonuses on `overallScore`, not on this per-criterion score. ")
-    status: Optional[StrictStr] = Field(default=None, description="Overall status of site files")
-    explanation: Optional[StrictStr] = Field(default=None, description="Detailed explanation of site files evaluation")
-    robots_txt: Optional[StrictStr] = Field(default=None, description="Status of robots.txt file", alias="robotsTxt")
-    llms_txt: Optional[StrictStr] = Field(default=None, description="Status of llms.txt file (AI model instructions)", alias="llmsTxt")
-    has_llms_txt: Optional[StrictBool] = Field(default=None, description="Whether llms.txt file exists", alias="hasLlmsTxt")
-    has_skill_md: Optional[StrictBool] = Field(default=None, description="Whether a top-level `SKILL.md` file exists (Agent Skills convention)", alias="hasSkillMd")
-    bot_status: Optional[List[BotStatus]] = Field(default=None, description="Access status for various bots", alias="botStatus")
-    well_known: Optional[WellKnownFiles] = Field(default=None, alias="wellKnown")
-    __properties: ClassVar[List[str]] = ["score", "status", "explanation", "robotsTxt", "llmsTxt", "hasLlmsTxt", "hasSkillMd", "botStatus", "wellKnown"]
-
-    @field_validator('status')
-    def status_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['Good', 'Needs Improvement', 'Poor', 'Unknown']):
-            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor', 'Unknown')")
-        return value
+    score: Annotated[int, Field(le=10, strict=True, ge=0)] = Field(description="Numeric score for site files (0-10). MCP / WebMCP / Agent Skills / SKILL.md signals are applied as post-hoc bonuses on `overallScore`, not on this per-criterion score.")
+    explanation: StrictStr = Field(description="Detailed explanation of site files evaluation")
+    robots_txt: StrictStr = Field(description="Deprecated: use resources.robotsTxt.status", alias="robotsTxt")
+    llms_txt: StrictStr = Field(description="Deprecated: use resources.llmsTxt.status", alias="llmsTxt")
+    has_llms_txt: StrictBool = Field(description="Deprecated: use resources.llmsTxt. false both when llms.txt is missing and when its fetch failed", alias="hasLlmsTxt")
+    bot_status: List[BotStatus] = Field(description="Empty when robots.txt could not be fetched (resources.robotsTxt.status: \"unknown\")", alias="botStatus")
+    status: StrictStr = Field(description="Overall status of site files")
+    has_skill_md: StrictBool = Field(description="Deprecated: use resources.skillMd", alias="hasSkillMd")
+    well_known: WellKnownFiles = Field(alias="wellKnown")
+    __properties: ClassVar[List[str]] = ["score", "explanation", "robotsTxt", "llmsTxt", "hasLlmsTxt", "botStatus", "status", "hasSkillMd", "wellKnown"]
 
     @field_validator('robots_txt')
     def robots_txt_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
         if value not in set(['found', 'not_found', 'error']):
             raise ValueError("must be one of enum values ('found', 'not_found', 'error')")
         return value
@@ -64,11 +51,15 @@ class SiteFiles(BaseModel):
     @field_validator('llms_txt')
     def llms_txt_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
         if value not in set(['found', 'not_found', 'error']):
             raise ValueError("must be one of enum values ('found', 'not_found', 'error')")
+        return value
+
+    @field_validator('status')
+    def status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['Good', 'Needs Improvement', 'Poor']):
+            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor')")
         return value
 
     model_config = ConfigDict(
@@ -133,13 +124,13 @@ class SiteFiles(BaseModel):
 
         _obj = cls.model_validate({
             "score": obj.get("score"),
-            "status": obj.get("status"),
             "explanation": obj.get("explanation"),
             "robotsTxt": obj.get("robotsTxt"),
             "llmsTxt": obj.get("llmsTxt"),
             "hasLlmsTxt": obj.get("hasLlmsTxt"),
-            "hasSkillMd": obj.get("hasSkillMd"),
             "botStatus": [BotStatus.from_dict(_item) for _item in obj["botStatus"]] if obj.get("botStatus") is not None else None,
+            "status": obj.get("status"),
+            "hasSkillMd": obj.get("hasSkillMd"),
             "wellKnown": WellKnownFiles.from_dict(obj["wellKnown"]) if obj.get("wellKnown") is not None else None
         })
         return _obj

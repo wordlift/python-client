@@ -5,13 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**priority** | **str** | Priority level of the issue | [optional] 
-**criterion** | **str** | WCAG or accessibility criterion reference | [optional] 
-**what** | **str** | Description of the issue | [optional] 
-**where** | **str** | Location of the issue on the page | [optional] 
-**why** | **str** | Why this issue matters | [optional] 
-**how** | **str** | How to fix the issue | [optional] 
-**compliance** | **str** | Compliance impact description | [optional] 
+**priority** | **str** | Priority level of the issue | 
+**criterion** | **str** | WCAG or accessibility criterion reference | 
+**what** | **str** | Description of the issue | 
+**where** | **str** | Location of the issue on the page | 
+**why** | **str** | Why this issue matters | 
+**how** | **str** | How to fix the issue | 
+**compliance** | **str** | Compliance impact description | 
 
 ## Example
 

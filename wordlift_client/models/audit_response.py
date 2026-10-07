@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from wordlift_client.models.audit_data import AuditData
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,8 +28,8 @@ class AuditResponse(BaseModel):
     """
     AuditResponse
     """ # noqa: E501
-    success: Optional[StrictBool] = Field(default=None, description="Indicates if the audit was successful")
-    data: Optional[AuditData] = None
+    success: StrictBool = Field(description="Always true: a failed audit is returned as an error response")
+    data: AuditData
     __properties: ClassVar[List[str]] = ["success", "data"]
 
     model_config = ConfigDict(

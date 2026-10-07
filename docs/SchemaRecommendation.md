@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **str** | Title of the schema recommendation | [optional] 
-**description** | **str** | Detailed description of the recommendation | [optional] 
+**title** | **str** | Title of the schema recommendation | 
+**description** | **str** | Detailed description of the recommendation | 
 
 ## Example
 

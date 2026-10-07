@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**success** | **bool** | Indicates if the audit was successful | [optional] 
-**data** | [**AuditData**](AuditData.md) |  | [optional] 
+**success** | **bool** | Always true: a failed audit is returned as an error response | 
+**data** | [**AuditData**](AuditData.md) |  | 
 
 ## Example
 

@@ -6,8 +6,8 @@ Legacy field - always returns status Unknown
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **str** | Always returns Unknown as this analysis is integrated into Content Structure | [optional] 
-**explanation** | **str** | Explanation that this is integrated into Content Structure | [optional] 
+**status** | **str** | Always returns Unknown as this analysis is integrated into Content Structure | 
+**explanation** | **str** | Explanation that this is integrated into Content Structure | 
 
 ## Example
 

@@ -5,14 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**score** | **int** | Numeric score for structured data (0-15) | [optional] 
-**status** | **str** |  | [optional] 
-**explanation** | **str** |  | [optional] 
-**has_schema** | **bool** | Whether schema.org markup is present | [optional] 
-**has_json_ld** | **bool** | Whether JSON-LD structured data is present | [optional] 
-**has_microdata** | **bool** | Whether Microdata structured data is present | [optional] 
-**detected_schemas** | [**List[DetectedSchema]**](DetectedSchema.md) | List of detected schema types with their formats | [optional] 
-**recommendations** | [**List[SchemaRecommendation]**](SchemaRecommendation.md) | Recommendations for improving structured data | [optional] 
+**score** | **int** | Numeric score for structured data (0-15) | 
+**explanation** | **str** |  | 
+**has_schema** | **bool** | Whether schema.org markup is present | 
+**has_json_ld** | **bool** | Whether JSON-LD structured data is present | 
+**has_microdata** | **bool** | Whether Microdata structured data is present | 
+**detected_schemas** | [**List[DetectedSchema]**](DetectedSchema.md) | List of detected schema types with their formats | 
+**recommendations** | [**List[SchemaRecommendation]**](SchemaRecommendation.md) | Recommendations for improving structured data | 
+**status** | **str** |  | 
 
 ## Example
 

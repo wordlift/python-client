@@ -18,8 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,22 +28,19 @@ class ImageAccessibility(BaseModel):
     """
     ImageAccessibility
     """ # noqa: E501
-    score: Optional[Annotated[int, Field(le=5, strict=True, ge=0)]] = Field(default=None, description="Numeric score for image accessibility (0-5)")
-    status: Optional[StrictStr] = None
-    explanation: Optional[StrictStr] = None
-    total_images: Optional[StrictInt] = Field(default=None, description="Total number of images on the page", alias="totalImages")
-    images_without_alt: Optional[StrictInt] = Field(default=None, description="Number of images without alt text", alias="imagesWithoutAlt")
-    missing_alt_text_images: Optional[List[StrictStr]] = Field(default=None, description="Sample URLs or descriptions of images missing alt text", alias="missingAltTextImages")
-    __properties: ClassVar[List[str]] = ["score", "status", "explanation", "totalImages", "imagesWithoutAlt", "missingAltTextImages"]
+    score: Annotated[int, Field(le=5, strict=True, ge=0)] = Field(description="Numeric score for image accessibility (0-5)")
+    explanation: StrictStr
+    total_images: Annotated[int, Field(strict=True, ge=0)] = Field(description="Total number of images on the page (img elements outside noscript and template)", alias="totalImages")
+    images_without_alt: Annotated[int, Field(strict=True, ge=0)] = Field(description="Number of images with no alt attribute (alt=\"\", for decorative images, is not counted)", alias="imagesWithoutAlt")
+    missing_alt_text_images: List[StrictStr] = Field(description="src of up to 10 images with no alt attribute ('No src' when the image has none)", alias="missingAltTextImages")
+    status: StrictStr
+    __properties: ClassVar[List[str]] = ["score", "explanation", "totalImages", "imagesWithoutAlt", "missingAltTextImages", "status"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['Good', 'Needs Improvement', 'Poor', 'Unknown']):
-            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor', 'Unknown')")
+        if value not in set(['Good', 'Needs Improvement', 'Poor']):
+            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor')")
         return value
 
     model_config = ConfigDict(
@@ -98,11 +95,11 @@ class ImageAccessibility(BaseModel):
 
         _obj = cls.model_validate({
             "score": obj.get("score"),
-            "status": obj.get("status"),
             "explanation": obj.get("explanation"),
             "totalImages": obj.get("totalImages"),
             "imagesWithoutAlt": obj.get("imagesWithoutAlt"),
-            "missingAltTextImages": obj.get("missingAltTextImages")
+            "missingAltTextImages": obj.get("missingAltTextImages"),
+            "status": obj.get("status")
         })
         return _obj
 

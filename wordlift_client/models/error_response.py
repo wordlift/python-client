@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,10 +27,10 @@ class ErrorResponse(BaseModel):
     """
     ErrorResponse
     """ # noqa: E501
-    success: Optional[StrictBool] = None
-    error: Optional[StrictStr] = Field(default=None, description="Error type/category")
+    error: StrictStr = Field(description="Error type/category")
     message: Optional[StrictStr] = Field(default=None, description="Detailed error message")
-    __properties: ClassVar[List[str]] = ["success", "error", "message"]
+    request_id: Optional[StrictStr] = Field(default=None, description="Present on 500 responses; quote it when reporting a problem", alias="requestId")
+    __properties: ClassVar[List[str]] = ["error", "message", "requestId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,9 +83,9 @@ class ErrorResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "success": obj.get("success"),
             "error": obj.get("error"),
-            "message": obj.get("message")
+            "message": obj.get("message"),
+            "requestId": obj.get("requestId")
         })
         return _obj
 

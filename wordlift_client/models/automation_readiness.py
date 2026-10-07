@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing_extensions import Annotated
 from wordlift_client.models.automation_issue import AutomationIssue
 from typing import Optional, Set
@@ -29,20 +29,17 @@ class AutomationReadiness(BaseModel):
     """
     AutomationReadiness
     """ # noqa: E501
-    score: Optional[Annotated[int, Field(le=10, strict=True, ge=0)]] = Field(default=None, description="Numeric score for automation readiness (0-10)")
-    status: Optional[StrictStr] = None
-    explanation: Optional[StrictStr] = None
-    issues: Optional[List[AutomationIssue]] = Field(default=None, description="List of structured automation readiness issues")
-    __properties: ClassVar[List[str]] = ["score", "status", "explanation", "issues"]
+    score: Annotated[int, Field(le=10, strict=True, ge=0)] = Field(description="Numeric score for automation readiness (0-10)")
+    explanation: StrictStr
+    issues: List[AutomationIssue] = Field(description="List of structured automation readiness issues")
+    status: StrictStr
+    __properties: ClassVar[List[str]] = ["score", "explanation", "issues", "status"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['Good', 'Needs Improvement', 'Poor', 'Unknown']):
-            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor', 'Unknown')")
+        if value not in set(['Good', 'Needs Improvement', 'Poor']):
+            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor')")
         return value
 
     model_config = ConfigDict(
@@ -104,9 +101,9 @@ class AutomationReadiness(BaseModel):
 
         _obj = cls.model_validate({
             "score": obj.get("score"),
-            "status": obj.get("status"),
             "explanation": obj.get("explanation"),
-            "issues": [AutomationIssue.from_dict(_item) for _item in obj["issues"]] if obj.get("issues") is not None else None
+            "issues": [AutomationIssue.from_dict(_item) for _item in obj["issues"]] if obj.get("issues") is not None else None,
+            "status": obj.get("status")
         })
         return _obj
 

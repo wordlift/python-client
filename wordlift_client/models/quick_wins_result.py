@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from wordlift_client.models.quick_win import QuickWin
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,19 +28,16 @@ class QuickWinsResult(BaseModel):
     """
     QuickWinsResult
     """ # noqa: E501
-    status: Optional[StrictStr] = Field(default=None, description="Overall quick wins status")
-    explanation: Optional[StrictStr] = Field(default=None, description="Explanation of quick wins findings")
-    wins: Optional[List[QuickWin]] = Field(default=None, description="List of quick win recommendations")
+    status: StrictStr = Field(description="Overall quick wins status")
+    explanation: StrictStr = Field(description="Explanation of quick wins findings")
+    wins: List[QuickWin] = Field(description="List of quick win recommendations")
     __properties: ClassVar[List[str]] = ["status", "explanation", "wins"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['Good', 'Needs Improvement', 'Poor', 'Unknown']):
-            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor', 'Unknown')")
+        if value not in set(['Good', 'Needs Improvement', 'Poor']):
+            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor')")
         return value
 
     model_config = ConfigDict(

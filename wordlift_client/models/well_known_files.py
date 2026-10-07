@@ -28,13 +28,13 @@ class WellKnownFiles(BaseModel):
     """
     MCP / WebMCP / Agent Skills discovery surfaces detected under .well-known and in the page HTML.
     """ # noqa: E501
-    mcp_json: Optional[StrictBool] = Field(default=None, description="Whether `/.well-known/mcp.json` exists (legacy MCP server manifest path)", alias="mcpJson")
-    mcp_server_card: Optional[StrictBool] = Field(default=None, description="Whether `/.well-known/mcp/server-card.json` exists (MCP server card, SEP-1649 draft)", alias="mcpServerCard")
-    webmcp_tools_json: Optional[StrictBool] = Field(default=None, description="Whether `/.well-known/webmcp/tools.json` exists (Chrome Labs WebMCP tools manifest)", alias="webmcpToolsJson")
-    mcp_link_tag: Optional[StrictBool] = Field(default=None, description="Whether a `<link rel=\"mcp\">` discovery tag was detected in the page HTML", alias="mcpLinkTag")
-    mcp_endpoint: Optional[StrictStr] = Field(default=None, description="The href value of the `<link rel=\"mcp\">` tag, if present; null otherwise", alias="mcpEndpoint")
-    agent_skills_index: Optional[StrictBool] = Field(default=None, description="Whether `/.well-known/agent-skills/index.json` exists (Agent Skills Discovery, Cloudflare RFC v0.2.0)", alias="agentSkillsIndex")
-    agent_skills_count: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="Number of skills listed in the Agent Skills Discovery index (0 when the index is absent or empty)", alias="agentSkillsCount")
+    mcp_json: StrictBool = Field(description="Whether `/.well-known/mcp.json` exists (legacy MCP server manifest path)", alias="mcpJson")
+    mcp_server_card: StrictBool = Field(description="Whether `/.well-known/mcp/server-card.json` exists (MCP server card, SEP-1649 draft)", alias="mcpServerCard")
+    webmcp_tools_json: StrictBool = Field(description="Whether `/.well-known/webmcp/tools.json` exists (Chrome Labs WebMCP tools manifest)", alias="webmcpToolsJson")
+    mcp_link_tag: StrictBool = Field(description="Whether a `<link rel=\"mcp\">` discovery tag was detected in the page HTML", alias="mcpLinkTag")
+    mcp_endpoint: Optional[StrictStr] = Field(description="The href value of the `<link rel=\"mcp\">` tag, if present; null otherwise", alias="mcpEndpoint")
+    agent_skills_index: StrictBool = Field(description="Whether `/.well-known/agent-skills/index.json` exists (Agent Skills Discovery, Cloudflare RFC v0.2.0)", alias="agentSkillsIndex")
+    agent_skills_count: Annotated[int, Field(strict=True, ge=0)] = Field(description="Number of skills listed in the Agent Skills Discovery index (0 when the index is absent or empty)", alias="agentSkillsCount")
     __properties: ClassVar[List[str]] = ["mcpJson", "mcpServerCard", "webmcpToolsJson", "mcpLinkTag", "mcpEndpoint", "agentSkillsIndex", "agentSkillsCount"]
 
     model_config = ConfigDict(

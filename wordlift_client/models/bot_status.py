@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,17 +27,14 @@ class BotStatus(BaseModel):
     """
     BotStatus
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="Name of the bot (e.g., GPTBot, Claude-Web, Googlebot)")
-    vendor: Optional[StrictStr] = Field(default=None, description="Vendor of the bot (e.g., OpenAI, Anthropic, Google)")
-    status: Optional[StrictStr] = Field(default=None, description="Access status for this bot")
+    name: StrictStr = Field(description="Name of the bot (e.g., GPTBot, Claude-Web, Googlebot)")
+    vendor: StrictStr = Field(description="Vendor of the bot (e.g., OpenAI, Anthropic, Google)")
+    status: StrictStr = Field(description="Access status for this bot")
     __properties: ClassVar[List[str]] = ["name", "vendor", "status"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
         if value not in set(['Allowed', 'Blocked']):
             raise ValueError("must be one of enum values ('Allowed', 'Blocked')")
         return value

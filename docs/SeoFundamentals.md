@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**score** | **int** | Numeric score for SEO fundamentals (0-20) | [optional] 
-**status** | **str** |  | [optional] 
-**explanation** | **str** |  | [optional] 
-**title** | **str** | Page title tag content | [optional] 
-**description** | **str** | Meta description content | [optional] 
-**h1_count** | **int** | Number of H1 headings on the page | [optional] 
+**score** | **int** | Numeric score for SEO fundamentals (0-20) | 
+**explanation** | **str** |  | 
+**title** | **str** | Page title tag content; &#39;Not Found&#39; when the page has none | 
+**description** | **str** | Meta description content; &#39;Not Found&#39; when the page has none | 
+**h1_count** | **int** | Number of H1 headings on the page | 
+**status** | **str** |  | 
 
 ## Example
 

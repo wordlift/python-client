@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,19 +27,16 @@ class ContentFreshness(BaseModel):
     """
     Legacy field - always returns status Unknown
     """ # noqa: E501
-    status: Optional[StrictStr] = Field(default=None, description="Always returns Unknown as this is not currently analyzed")
-    explanation: Optional[StrictStr] = Field(default=None, description="Explanation that this is not currently analyzed")
-    category: Optional[StrictStr] = Field(default=None, description="Always returns \"N/A\"")
-    publication_date: Optional[StrictStr] = Field(default=None, description="Always returns \"N/A\"", alias="publicationDate")
-    last_updated_date: Optional[StrictStr] = Field(default=None, description="Always returns \"N/A\"", alias="lastUpdatedDate")
+    status: StrictStr = Field(description="Always returns Unknown as this is not currently analyzed")
+    explanation: StrictStr = Field(description="Explanation that this is not currently analyzed")
+    category: StrictStr = Field(description="Always returns \"N/A\"")
+    publication_date: StrictStr = Field(description="Always returns \"N/A\"", alias="publicationDate")
+    last_updated_date: StrictStr = Field(description="Always returns \"N/A\"", alias="lastUpdatedDate")
     __properties: ClassVar[List[str]] = ["status", "explanation", "category", "publicationDate", "lastUpdatedDate"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
         if value not in set(['Unknown']):
             raise ValueError("must be one of enum values ('Unknown')")
         return value

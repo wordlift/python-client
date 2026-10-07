@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**success** | **bool** |  | [optional] 
-**error** | **str** | Error type/category | [optional] 
+**error** | **str** | Error type/category | 
 **message** | **str** | Detailed error message | [optional] 
+**request_id** | **str** | Present on 500 responses; quote it when reporting a problem | [optional] 
 
 ## Example
 

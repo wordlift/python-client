@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,21 +27,18 @@ class AutomationIssue(BaseModel):
     """
     AutomationIssue
     """ # noqa: E501
-    priority: Optional[StrictStr] = Field(default=None, description="Priority level of the issue")
-    criterion: Optional[StrictStr] = Field(default=None, description="WCAG or accessibility criterion reference")
-    what: Optional[StrictStr] = Field(default=None, description="Description of the issue")
-    where: Optional[StrictStr] = Field(default=None, description="Location of the issue on the page")
-    why: Optional[StrictStr] = Field(default=None, description="Why this issue matters")
-    how: Optional[StrictStr] = Field(default=None, description="How to fix the issue")
-    compliance: Optional[StrictStr] = Field(default=None, description="Compliance impact description")
+    priority: StrictStr = Field(description="Priority level of the issue")
+    criterion: StrictStr = Field(description="WCAG or accessibility criterion reference")
+    what: StrictStr = Field(description="Description of the issue")
+    where: StrictStr = Field(description="Location of the issue on the page")
+    why: StrictStr = Field(description="Why this issue matters")
+    how: StrictStr = Field(description="How to fix the issue")
+    compliance: StrictStr = Field(description="Compliance impact description")
     __properties: ClassVar[List[str]] = ["priority", "criterion", "what", "where", "why", "how", "compliance"]
 
     @field_validator('priority')
     def priority_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
         if value not in set(['P1', 'P2', 'P3', 'P4']):
             raise ValueError("must be one of enum values ('P1', 'P2', 'P3', 'P4')")
         return value

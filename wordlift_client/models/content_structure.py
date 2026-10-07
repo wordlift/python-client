@@ -28,23 +28,20 @@ class ContentStructure(BaseModel):
     """
     ContentStructure
     """ # noqa: E501
-    score: Optional[Annotated[int, Field(le=15, strict=True, ge=0)]] = Field(default=None, description="Numeric score for content structure (0-15)")
-    status: Optional[StrictStr] = None
-    explanation: Optional[StrictStr] = None
-    has_semantic_elements: Optional[StrictBool] = Field(default=None, description="Whether semantic HTML elements are used", alias="hasSemanticElements")
-    has_landmarks: Optional[StrictBool] = Field(default=None, description="Whether ARIA landmarks are present", alias="hasLandmarks")
-    token_count: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="Deterministic token-budget estimate for the main content. Computed by running Mozilla Readability on the page, converting the extracted article to Markdown via Turndown, and dividing the character count by 4 (coarse tokens≈chars/4 heuristic). ", alias="tokenCount")
-    token_budget_status: Optional[StrictStr] = Field(default=None, description="Qualitative bucket for `tokenCount` relative to typical LLM context budgets (Good ≤ 20 000, Fair ≤ 30 000, Exceeded otherwise). The `overallScore` receives a +2 bonus when `tokenCount ≤ 30 000`. ", alias="tokenBudgetStatus")
-    __properties: ClassVar[List[str]] = ["score", "status", "explanation", "hasSemanticElements", "hasLandmarks", "tokenCount", "tokenBudgetStatus"]
+    score: Annotated[int, Field(le=15, strict=True, ge=0)] = Field(description="Numeric score for content structure (0-15)")
+    explanation: StrictStr
+    has_semantic_elements: StrictBool = Field(description="Whether the page uses any of header, nav, main, article, section, aside or footer", alias="hasSemanticElements")
+    has_landmarks: StrictBool = Field(description="Whether the page has a header, nav, main or footer element", alias="hasLandmarks")
+    status: StrictStr
+    token_count: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="Deterministic token-budget estimate for the main content. Computed by running Mozilla Readability on the page, converting the extracted article to Markdown via Turndown, and dividing the character count by 4 (coarse tokens≈chars/4 heuristic).", alias="tokenCount")
+    token_budget_status: Optional[StrictStr] = Field(default=None, description="Qualitative bucket for `tokenCount` relative to typical LLM context budgets (Good ≤ 20 000, Fair ≤ 30 000, Exceeded otherwise). The `overallScore` receives a +2 bonus when `tokenCount ≤ 30 000`.", alias="tokenBudgetStatus")
+    __properties: ClassVar[List[str]] = ["score", "explanation", "hasSemanticElements", "hasLandmarks", "status", "tokenCount", "tokenBudgetStatus"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['Good', 'Needs Improvement', 'Poor', 'Unknown']):
-            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor', 'Unknown')")
+        if value not in set(['Good', 'Needs Improvement', 'Poor']):
+            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor')")
         return value
 
     @field_validator('token_budget_status')
@@ -109,10 +106,10 @@ class ContentStructure(BaseModel):
 
         _obj = cls.model_validate({
             "score": obj.get("score"),
-            "status": obj.get("status"),
             "explanation": obj.get("explanation"),
             "hasSemanticElements": obj.get("hasSemanticElements"),
             "hasLandmarks": obj.get("hasLandmarks"),
+            "status": obj.get("status"),
             "tokenCount": obj.get("tokenCount"),
             "tokenBudgetStatus": obj.get("tokenBudgetStatus")
         })

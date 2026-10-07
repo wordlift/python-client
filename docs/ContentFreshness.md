@@ -6,11 +6,11 @@ Legacy field - always returns status Unknown
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **str** | Always returns Unknown as this is not currently analyzed | [optional] 
-**explanation** | **str** | Explanation that this is not currently analyzed | [optional] 
-**category** | **str** | Always returns \&quot;N/A\&quot; | [optional] 
-**publication_date** | **str** | Always returns \&quot;N/A\&quot; | [optional] 
-**last_updated_date** | **str** | Always returns \&quot;N/A\&quot; | [optional] 
+**status** | **str** | Always returns Unknown as this is not currently analyzed | 
+**explanation** | **str** | Explanation that this is not currently analyzed | 
+**category** | **str** | Always returns \&quot;N/A\&quot; | 
+**publication_date** | **str** | Always returns \&quot;N/A\&quot; | 
+**last_updated_date** | **str** | Always returns \&quot;N/A\&quot; | 
 
 ## Example
 

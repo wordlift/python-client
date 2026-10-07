@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | Name of the bot (e.g., GPTBot, Claude-Web, Googlebot) | [optional] 
-**vendor** | **str** | Vendor of the bot (e.g., OpenAI, Anthropic, Google) | [optional] 
-**status** | **str** | Access status for this bot | [optional] 
+**name** | **str** | Name of the bot (e.g., GPTBot, Claude-Web, Googlebot) | 
+**vendor** | **str** | Vendor of the bot (e.g., OpenAI, Anthropic, Google) | 
+**status** | **str** | Access status for this bot | 
 
 ## Example
 

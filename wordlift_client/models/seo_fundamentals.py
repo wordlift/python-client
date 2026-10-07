@@ -18,8 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,22 +28,19 @@ class SeoFundamentals(BaseModel):
     """
     SeoFundamentals
     """ # noqa: E501
-    score: Optional[Annotated[int, Field(le=20, strict=True, ge=0)]] = Field(default=None, description="Numeric score for SEO fundamentals (0-20)")
-    status: Optional[StrictStr] = None
-    explanation: Optional[StrictStr] = None
-    title: Optional[StrictStr] = Field(default=None, description="Page title tag content")
-    description: Optional[StrictStr] = Field(default=None, description="Meta description content")
-    h1_count: Optional[StrictInt] = Field(default=None, description="Number of H1 headings on the page", alias="h1Count")
-    __properties: ClassVar[List[str]] = ["score", "status", "explanation", "title", "description", "h1Count"]
+    score: Annotated[int, Field(le=20, strict=True, ge=0)] = Field(description="Numeric score for SEO fundamentals (0-20)")
+    explanation: StrictStr
+    title: StrictStr = Field(description="Page title tag content; 'Not Found' when the page has none")
+    description: StrictStr = Field(description="Meta description content; 'Not Found' when the page has none")
+    h1_count: Annotated[int, Field(strict=True, ge=0)] = Field(description="Number of H1 headings on the page", alias="h1Count")
+    status: StrictStr
+    __properties: ClassVar[List[str]] = ["score", "explanation", "title", "description", "h1Count", "status"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['Good', 'Needs Improvement', 'Poor', 'Unknown']):
-            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor', 'Unknown')")
+        if value not in set(['Good', 'Needs Improvement', 'Poor']):
+            raise ValueError("must be one of enum values ('Good', 'Needs Improvement', 'Poor')")
         return value
 
     model_config = ConfigDict(
@@ -85,16 +82,6 @@ class SeoFundamentals(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if title (nullable) is None
-        # and model_fields_set contains the field
-        if self.title is None and "title" in self.model_fields_set:
-            _dict['title'] = None
-
-        # set to None if description (nullable) is None
-        # and model_fields_set contains the field
-        if self.description is None and "description" in self.model_fields_set:
-            _dict['description'] = None
-
         return _dict
 
     @classmethod
@@ -108,11 +95,11 @@ class SeoFundamentals(BaseModel):
 
         _obj = cls.model_validate({
             "score": obj.get("score"),
-            "status": obj.get("status"),
             "explanation": obj.get("explanation"),
             "title": obj.get("title"),
             "description": obj.get("description"),
-            "h1Count": obj.get("h1Count")
+            "h1Count": obj.get("h1Count"),
+            "status": obj.get("status")
         })
         return _obj
 

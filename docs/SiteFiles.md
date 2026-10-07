@@ -5,15 +5,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**score** | **int** | Numeric score for site files (0-10). MCP / WebMCP / Agent Skills / SKILL.md signals are applied as post-hoc bonuses on &#x60;overallScore&#x60;, not on this per-criterion score.  | [optional] 
-**status** | **str** | Overall status of site files | [optional] 
-**explanation** | **str** | Detailed explanation of site files evaluation | [optional] 
-**robots_txt** | **str** | Status of robots.txt file | [optional] 
-**llms_txt** | **str** | Status of llms.txt file (AI model instructions) | [optional] 
-**has_llms_txt** | **bool** | Whether llms.txt file exists | [optional] 
-**has_skill_md** | **bool** | Whether a top-level &#x60;SKILL.md&#x60; file exists (Agent Skills convention) | [optional] 
-**bot_status** | [**List[BotStatus]**](BotStatus.md) | Access status for various bots | [optional] 
-**well_known** | [**WellKnownFiles**](WellKnownFiles.md) |  | [optional] 
+**score** | **int** | Numeric score for site files (0-10). MCP / WebMCP / Agent Skills / SKILL.md signals are applied as post-hoc bonuses on &#x60;overallScore&#x60;, not on this per-criterion score. | 
+**explanation** | **str** | Detailed explanation of site files evaluation | 
+**robots_txt** | **str** | Deprecated: use resources.robotsTxt.status | 
+**llms_txt** | **str** | Deprecated: use resources.llmsTxt.status | 
+**has_llms_txt** | **bool** | Deprecated: use resources.llmsTxt. false both when llms.txt is missing and when its fetch failed | 
+**bot_status** | [**List[BotStatus]**](BotStatus.md) | Empty when robots.txt could not be fetched (resources.robotsTxt.status: \&quot;unknown\&quot;) | 
+**status** | **str** | Overall status of site files | 
+**has_skill_md** | **bool** | Deprecated: use resources.skillMd | 
+**well_known** | [**WellKnownFiles**](WellKnownFiles.md) |  | 
 
 ## Example
 

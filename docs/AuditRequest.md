@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **str** | The full URL of the website to audit | 
+**url** | **str** | The URL of the website to audit. The scheme is optional: &#39;example.com&#39; is audited as &#39;https://example.com&#39; | 
 
 ## Example
 

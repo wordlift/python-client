@@ -57,7 +57,7 @@ class AuditApi:
     ) -> AuditResponse:
         """Website Audit
 
-        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt, SKILL.md, .well-known directory) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD, Microdata) - Content structure, semantic HTML, and token budget - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility - MCP / WebMCP discovery surfaces:   - `<link rel=\"mcp\">` HTML discovery tag   - `/.well-known/mcp.json` (legacy MCP manifest)   - `/.well-known/mcp/server-card.json` (MCP server card, SEP-1649 draft)   - `/.well-known/webmcp/tools.json` (Chrome Labs WebMCP tools manifest) - Agent Skills Discovery (`/.well-known/agent-skills/index.json`, Cloudflare RFC v0.2.0) and top-level `SKILL.md` - Deterministic token budget (Readability + Turndown, chars/4 heuristic) - Content freshness (legacy field, status Unknown) - Internal linking (legacy field, status Unknown) - HTML semantics (legacy field, status Unknown)  Returns an overall score (0-100) and detailed recommendations for improvement. The overall score is the clamped sum of the per-criterion scores emitted by the LLM plus post-hoc bonuses: +1 for `<link rel=\"mcp\">`, +1 for WebMCP `tools.json`, +1 for legacy `mcp.json` or `mcp/server-card.json`, +2 for Agent Skills Discovery or top-level `SKILL.md`, and +2 when the estimated token budget is ≤ 30 000. 
+        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt, SKILL.md, .well-known directory) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD, Microdata) - Content structure, semantic HTML, and token budget - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility - MCP / WebMCP discovery surfaces:   - `<link rel=\"mcp\">` HTML discovery tag   - `/.well-known/mcp.json` (legacy MCP manifest)   - `/.well-known/mcp/server-card.json` (MCP server card, SEP-1649 draft)   - `/.well-known/webmcp/tools.json` (Chrome Labs WebMCP tools manifest) - Agent Skills Discovery (`/.well-known/agent-skills/index.json`, Cloudflare RFC v0.2.0) and top-level `SKILL.md` - Deterministic token budget (Readability + Turndown, chars/4 heuristic) - Content freshness (legacy field, status Unknown) - Internal linking (legacy field, status Unknown) - HTML semantics (legacy field, status Unknown)  Every file the audit fetched or detected is reported in `resources`, which tells a missing file apart from one that could not be fetched.  Returns an overall score (0-100) and detailed recommendations for improvement. The overall score is the clamped sum of the per-criterion scores emitted by the LLM plus post-hoc bonuses: +1 for `<link rel=\"mcp\">`, +1 for WebMCP `tools.json`, +1 for legacy `mcp.json` or `mcp/server-card.json`, +2 for Agent Skills Discovery or top-level `SKILL.md`, and +2 when the estimated token budget is ≤ 30 000. 
 
         :param audit_request: (required)
         :type audit_request: AuditRequest
@@ -97,8 +97,9 @@ class AuditApi:
             '401': "ErrorResponse",
             '403': "ErrorResponse",
             '404': "ErrorResponse",
-            '422': "AuditValidationError",
+            '429': "ErrorResponse",
             '500': "ErrorResponse",
+            '502': "ErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -130,7 +131,7 @@ class AuditApi:
     ) -> ApiResponse[AuditResponse]:
         """Website Audit
 
-        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt, SKILL.md, .well-known directory) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD, Microdata) - Content structure, semantic HTML, and token budget - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility - MCP / WebMCP discovery surfaces:   - `<link rel=\"mcp\">` HTML discovery tag   - `/.well-known/mcp.json` (legacy MCP manifest)   - `/.well-known/mcp/server-card.json` (MCP server card, SEP-1649 draft)   - `/.well-known/webmcp/tools.json` (Chrome Labs WebMCP tools manifest) - Agent Skills Discovery (`/.well-known/agent-skills/index.json`, Cloudflare RFC v0.2.0) and top-level `SKILL.md` - Deterministic token budget (Readability + Turndown, chars/4 heuristic) - Content freshness (legacy field, status Unknown) - Internal linking (legacy field, status Unknown) - HTML semantics (legacy field, status Unknown)  Returns an overall score (0-100) and detailed recommendations for improvement. The overall score is the clamped sum of the per-criterion scores emitted by the LLM plus post-hoc bonuses: +1 for `<link rel=\"mcp\">`, +1 for WebMCP `tools.json`, +1 for legacy `mcp.json` or `mcp/server-card.json`, +2 for Agent Skills Discovery or top-level `SKILL.md`, and +2 when the estimated token budget is ≤ 30 000. 
+        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt, SKILL.md, .well-known directory) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD, Microdata) - Content structure, semantic HTML, and token budget - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility - MCP / WebMCP discovery surfaces:   - `<link rel=\"mcp\">` HTML discovery tag   - `/.well-known/mcp.json` (legacy MCP manifest)   - `/.well-known/mcp/server-card.json` (MCP server card, SEP-1649 draft)   - `/.well-known/webmcp/tools.json` (Chrome Labs WebMCP tools manifest) - Agent Skills Discovery (`/.well-known/agent-skills/index.json`, Cloudflare RFC v0.2.0) and top-level `SKILL.md` - Deterministic token budget (Readability + Turndown, chars/4 heuristic) - Content freshness (legacy field, status Unknown) - Internal linking (legacy field, status Unknown) - HTML semantics (legacy field, status Unknown)  Every file the audit fetched or detected is reported in `resources`, which tells a missing file apart from one that could not be fetched.  Returns an overall score (0-100) and detailed recommendations for improvement. The overall score is the clamped sum of the per-criterion scores emitted by the LLM plus post-hoc bonuses: +1 for `<link rel=\"mcp\">`, +1 for WebMCP `tools.json`, +1 for legacy `mcp.json` or `mcp/server-card.json`, +2 for Agent Skills Discovery or top-level `SKILL.md`, and +2 when the estimated token budget is ≤ 30 000. 
 
         :param audit_request: (required)
         :type audit_request: AuditRequest
@@ -170,8 +171,9 @@ class AuditApi:
             '401': "ErrorResponse",
             '403': "ErrorResponse",
             '404': "ErrorResponse",
-            '422': "AuditValidationError",
+            '429': "ErrorResponse",
             '500': "ErrorResponse",
+            '502': "ErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -203,7 +205,7 @@ class AuditApi:
     ) -> RESTResponseType:
         """Website Audit
 
-        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt, SKILL.md, .well-known directory) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD, Microdata) - Content structure, semantic HTML, and token budget - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility - MCP / WebMCP discovery surfaces:   - `<link rel=\"mcp\">` HTML discovery tag   - `/.well-known/mcp.json` (legacy MCP manifest)   - `/.well-known/mcp/server-card.json` (MCP server card, SEP-1649 draft)   - `/.well-known/webmcp/tools.json` (Chrome Labs WebMCP tools manifest) - Agent Skills Discovery (`/.well-known/agent-skills/index.json`, Cloudflare RFC v0.2.0) and top-level `SKILL.md` - Deterministic token budget (Readability + Turndown, chars/4 heuristic) - Content freshness (legacy field, status Unknown) - Internal linking (legacy field, status Unknown) - HTML semantics (legacy field, status Unknown)  Returns an overall score (0-100) and detailed recommendations for improvement. The overall score is the clamped sum of the per-criterion scores emitted by the LLM plus post-hoc bonuses: +1 for `<link rel=\"mcp\">`, +1 for WebMCP `tools.json`, +1 for legacy `mcp.json` or `mcp/server-card.json`, +2 for Agent Skills Discovery or top-level `SKILL.md`, and +2 when the estimated token budget is ≤ 30 000. 
+        Performs a comprehensive SEO and AI-readiness audit of a specified URL. The audit analyzes: - Site files (robots.txt, llms.txt, SKILL.md, .well-known directory) - SEO fundamentals (title, description, headings) - Structured data (Schema.org, JSON-LD, Microdata) - Content structure, semantic HTML, and token budget - Image accessibility - Automation readiness for AI agents - JavaScript rendering and bot accessibility - MCP / WebMCP discovery surfaces:   - `<link rel=\"mcp\">` HTML discovery tag   - `/.well-known/mcp.json` (legacy MCP manifest)   - `/.well-known/mcp/server-card.json` (MCP server card, SEP-1649 draft)   - `/.well-known/webmcp/tools.json` (Chrome Labs WebMCP tools manifest) - Agent Skills Discovery (`/.well-known/agent-skills/index.json`, Cloudflare RFC v0.2.0) and top-level `SKILL.md` - Deterministic token budget (Readability + Turndown, chars/4 heuristic) - Content freshness (legacy field, status Unknown) - Internal linking (legacy field, status Unknown) - HTML semantics (legacy field, status Unknown)  Every file the audit fetched or detected is reported in `resources`, which tells a missing file apart from one that could not be fetched.  Returns an overall score (0-100) and detailed recommendations for improvement. The overall score is the clamped sum of the per-criterion scores emitted by the LLM plus post-hoc bonuses: +1 for `<link rel=\"mcp\">`, +1 for WebMCP `tools.json`, +1 for legacy `mcp.json` or `mcp/server-card.json`, +2 for Agent Skills Discovery or top-level `SKILL.md`, and +2 when the estimated token budget is ≤ 30 000. 
 
         :param audit_request: (required)
         :type audit_request: AuditRequest
@@ -243,8 +245,9 @@ class AuditApi:
             '401': "ErrorResponse",
             '403': "ErrorResponse",
             '404': "ErrorResponse",
-            '422': "AuditValidationError",
+            '429': "ErrorResponse",
             '500': "ErrorResponse",
+            '502': "ErrorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

@@ -20,7 +20,7 @@ import json
 
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing_extensions import Annotated
 from wordlift_client.models.automation_readiness import AutomationReadiness
 from wordlift_client.models.content_freshness import ContentFreshness
@@ -30,6 +30,7 @@ from wordlift_client.models.image_accessibility import ImageAccessibility
 from wordlift_client.models.internal_linking import InternalLinking
 from wordlift_client.models.js_rendering import JsRendering
 from wordlift_client.models.quick_wins_result import QuickWinsResult
+from wordlift_client.models.resources import Resources
 from wordlift_client.models.seo_fundamentals import SeoFundamentals
 from wordlift_client.models.site_files import SiteFiles
 from wordlift_client.models.structured_data import StructuredData
@@ -38,38 +39,36 @@ from typing_extensions import Self
 
 class AuditData(BaseModel):
     """
-    AuditData
+    Full audit result returned by POST /api/audit (nested under `data`).
     """ # noqa: E501
-    url: Optional[StrictStr] = Field(default=None, description="The audited URL (may include trailing slash)")
-    domain: Optional[StrictStr] = Field(default=None, description="The base domain of the audited URL")
-    timestamp: Optional[datetime] = Field(default=None, description="ISO 8601 timestamp of when the audit was performed")
-    overall_score: Optional[Annotated[int, Field(le=100, strict=True, ge=0)]] = Field(default=None, description="Overall SEO and AI-readiness score (0-100)", alias="overallScore")
-    score: Optional[Annotated[int, Field(le=100, strict=True, ge=0)]] = Field(default=None, description="Legacy field - same as overallScore")
-    summary: Optional[StrictStr] = Field(default=None, description="High-level summary of the audit findings in markdown format")
-    site_files: Optional[SiteFiles] = Field(default=None, alias="siteFiles")
-    seo_fundamentals: Optional[SeoFundamentals] = Field(default=None, alias="seoFundamentals")
-    structured_data: Optional[StructuredData] = Field(default=None, alias="structuredData")
-    content_structure: Optional[ContentStructure] = Field(default=None, alias="contentStructure")
-    image_accessibility: Optional[ImageAccessibility] = Field(default=None, alias="imageAccessibility")
-    html_semantics: Optional[HtmlSemantics] = Field(default=None, alias="htmlSemantics")
-    content_freshness: Optional[ContentFreshness] = Field(default=None, alias="contentFreshness")
-    internal_linking: Optional[InternalLinking] = Field(default=None, alias="internalLinking")
-    automation_readiness: Optional[AutomationReadiness] = Field(default=None, alias="automationReadiness")
-    js_rendering: Optional[JsRendering] = Field(default=None, alias="jsRendering")
-    quick_wins: Optional[QuickWinsResult] = Field(default=None, alias="quickWins")
-    status: Optional[StrictStr] = Field(default=None, description="Status of the audit process")
-    account_id: Optional[StrictInt] = Field(default=None, description="Account ID associated with the audit", alias="accountId")
-    account_url: Optional[StrictStr] = Field(default=None, description="Account URL associated with the audit", alias="accountUrl")
-    __properties: ClassVar[List[str]] = ["url", "domain", "timestamp", "overallScore", "score", "summary", "siteFiles", "seoFundamentals", "structuredData", "contentStructure", "imageAccessibility", "htmlSemantics", "contentFreshness", "internalLinking", "automationReadiness", "jsRendering", "quickWins", "status", "accountId", "accountUrl"]
+    url: StrictStr = Field(description="The audited URL (may include trailing slash)")
+    domain: StrictStr = Field(description="Origin of the audited URL (scheme and host), e.g. 'https://www.wordlift.io'")
+    timestamp: datetime = Field(description="ISO 8601 timestamp of when the audit was performed")
+    summary: StrictStr = Field(description="High-level summary of the audit findings in markdown format")
+    resources: Resources
+    site_files: SiteFiles = Field(alias="siteFiles")
+    seo_fundamentals: SeoFundamentals = Field(alias="seoFundamentals")
+    structured_data: StructuredData = Field(alias="structuredData")
+    content_structure: ContentStructure = Field(alias="contentStructure")
+    image_accessibility: ImageAccessibility = Field(alias="imageAccessibility")
+    automation_readiness: AutomationReadiness = Field(alias="automationReadiness")
+    js_rendering: JsRendering = Field(alias="jsRendering")
+    quick_wins: QuickWinsResult = Field(alias="quickWins")
+    html_semantics: HtmlSemantics = Field(alias="htmlSemantics")
+    content_freshness: ContentFreshness = Field(alias="contentFreshness")
+    internal_linking: InternalLinking = Field(alias="internalLinking")
+    overall_score: Annotated[int, Field(le=100, strict=True, ge=0)] = Field(description="Overall SEO and AI-readiness score (0-100)", alias="overallScore")
+    score: Annotated[int, Field(le=100, strict=True, ge=0)] = Field(description="Legacy field - same as overallScore")
+    status: StrictStr = Field(description="Always completed: a failed audit is returned as an error response")
+    account_id: StrictInt = Field(description="WordLift account ID resolved from the Authorization key.", alias="accountId")
+    account_url: StrictStr = Field(description="URL of the WordLift account the key belongs to", alias="accountUrl")
+    __properties: ClassVar[List[str]] = ["url", "domain", "timestamp", "summary", "resources", "siteFiles", "seoFundamentals", "structuredData", "contentStructure", "imageAccessibility", "automationReadiness", "jsRendering", "quickWins", "htmlSemantics", "contentFreshness", "internalLinking", "overallScore", "score", "status", "accountId", "accountUrl"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['completed', 'pending', 'failed']):
-            raise ValueError("must be one of enum values ('completed', 'pending', 'failed')")
+        if value not in set(['completed']):
+            raise ValueError("must be one of enum values ('completed')")
         return value
 
     model_config = ConfigDict(
@@ -111,6 +110,9 @@ class AuditData(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of resources
+        if self.resources:
+            _dict['resources'] = self.resources.to_dict()
         # override the default output from pydantic by calling `to_dict()` of site_files
         if self.site_files:
             _dict['siteFiles'] = self.site_files.to_dict()
@@ -126,15 +128,6 @@ class AuditData(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of image_accessibility
         if self.image_accessibility:
             _dict['imageAccessibility'] = self.image_accessibility.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of html_semantics
-        if self.html_semantics:
-            _dict['htmlSemantics'] = self.html_semantics.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of content_freshness
-        if self.content_freshness:
-            _dict['contentFreshness'] = self.content_freshness.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of internal_linking
-        if self.internal_linking:
-            _dict['internalLinking'] = self.internal_linking.to_dict()
         # override the default output from pydantic by calling `to_dict()` of automation_readiness
         if self.automation_readiness:
             _dict['automationReadiness'] = self.automation_readiness.to_dict()
@@ -144,6 +137,15 @@ class AuditData(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of quick_wins
         if self.quick_wins:
             _dict['quickWins'] = self.quick_wins.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of html_semantics
+        if self.html_semantics:
+            _dict['htmlSemantics'] = self.html_semantics.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of content_freshness
+        if self.content_freshness:
+            _dict['contentFreshness'] = self.content_freshness.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of internal_linking
+        if self.internal_linking:
+            _dict['internalLinking'] = self.internal_linking.to_dict()
         return _dict
 
     @classmethod
@@ -159,20 +161,21 @@ class AuditData(BaseModel):
             "url": obj.get("url"),
             "domain": obj.get("domain"),
             "timestamp": obj.get("timestamp"),
-            "overallScore": obj.get("overallScore"),
-            "score": obj.get("score"),
             "summary": obj.get("summary"),
+            "resources": Resources.from_dict(obj["resources"]) if obj.get("resources") is not None else None,
             "siteFiles": SiteFiles.from_dict(obj["siteFiles"]) if obj.get("siteFiles") is not None else None,
             "seoFundamentals": SeoFundamentals.from_dict(obj["seoFundamentals"]) if obj.get("seoFundamentals") is not None else None,
             "structuredData": StructuredData.from_dict(obj["structuredData"]) if obj.get("structuredData") is not None else None,
             "contentStructure": ContentStructure.from_dict(obj["contentStructure"]) if obj.get("contentStructure") is not None else None,
             "imageAccessibility": ImageAccessibility.from_dict(obj["imageAccessibility"]) if obj.get("imageAccessibility") is not None else None,
-            "htmlSemantics": HtmlSemantics.from_dict(obj["htmlSemantics"]) if obj.get("htmlSemantics") is not None else None,
-            "contentFreshness": ContentFreshness.from_dict(obj["contentFreshness"]) if obj.get("contentFreshness") is not None else None,
-            "internalLinking": InternalLinking.from_dict(obj["internalLinking"]) if obj.get("internalLinking") is not None else None,
             "automationReadiness": AutomationReadiness.from_dict(obj["automationReadiness"]) if obj.get("automationReadiness") is not None else None,
             "jsRendering": JsRendering.from_dict(obj["jsRendering"]) if obj.get("jsRendering") is not None else None,
             "quickWins": QuickWinsResult.from_dict(obj["quickWins"]) if obj.get("quickWins") is not None else None,
+            "htmlSemantics": HtmlSemantics.from_dict(obj["htmlSemantics"]) if obj.get("htmlSemantics") is not None else None,
+            "contentFreshness": ContentFreshness.from_dict(obj["contentFreshness"]) if obj.get("contentFreshness") is not None else None,
+            "internalLinking": InternalLinking.from_dict(obj["internalLinking"]) if obj.get("internalLinking") is not None else None,
+            "overallScore": obj.get("overallScore"),
+            "score": obj.get("score"),
             "status": obj.get("status"),
             "accountId": obj.get("accountId"),
             "accountUrl": obj.get("accountUrl")
