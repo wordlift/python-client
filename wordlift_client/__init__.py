@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.206.0"
+__version__ = "1.207.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -86,6 +86,7 @@ from wordlift_client.api.query_fan_out_api import QueryFanOutApi
 from wordlift_client.api.question_and_answer_sets_api import QuestionAndAnswerSetsApi
 from wordlift_client.api.questions_and_answers_api import QuestionsAndAnswersApi
 from wordlift_client.api.redeem_codes_api import RedeemCodesApi
+from wordlift_client.api.resolve_api import ResolveApi
 from wordlift_client.api.rules_api import RulesApi
 from wordlift_client.api.segment_globs_api import SegmentGlobsApi
 from wordlift_client.api.segment_urls_api import SegmentURLsApi
@@ -218,6 +219,7 @@ from wordlift_client.models.crawler_validation_error import CrawlerValidationErr
 from wordlift_client.models.create_embeddings_input import CreateEmbeddingsInput
 from wordlift_client.models.create_url_inspection_request import CreateUrlInspectionRequest
 from wordlift_client.models.cursor_page import CursorPage
+from wordlift_client.models.decision_signals import DecisionSignals
 from wordlift_client.models.detected_schema import DetectedSchema
 from wordlift_client.models.diagnostic_plugin import DiagnosticPlugin
 from wordlift_client.models.diagnostic_plugin_request import DiagnosticPluginRequest
@@ -228,6 +230,7 @@ from wordlift_client.models.entity import Entity
 from wordlift_client.models.entity_gap_request import EntityGapRequest
 from wordlift_client.models.entity_match import EntityMatch
 from wordlift_client.models.entity_patch_request import EntityPatchRequest
+from wordlift_client.models.error_detail import ErrorDetail
 from wordlift_client.models.error_response import ErrorResponse
 from wordlift_client.models.event import Event
 from wordlift_client.models.events_request import EventsRequest
@@ -271,6 +274,7 @@ from wordlift_client.models.image import Image
 from wordlift_client.models.image_accessibility import ImageAccessibility
 from wordlift_client.models.include_exclude import IncludeExclude
 from wordlift_client.models.include_exclude_request import IncludeExcludeRequest
+from wordlift_client.models.inline_dataset import InlineDataset
 from wordlift_client.models.inspect_response import InspectResponse
 from wordlift_client.models.internal_link import InternalLink
 from wordlift_client.models.internal_link_destination import InternalLinkDestination
@@ -314,6 +318,7 @@ from wordlift_client.models.long_tail_properties import LongTailProperties
 from wordlift_client.models.longtail_response import LongtailResponse
 from wordlift_client.models.manager_request import ManagerRequest
 from wordlift_client.models.manager_response import ManagerResponse
+from wordlift_client.models.mention_resolution import MentionResolution
 from wordlift_client.models.merchant import Merchant
 from wordlift_client.models.merchant_entry import MerchantEntry
 from wordlift_client.models.merchant_request import MerchantRequest
@@ -390,6 +395,14 @@ from wordlift_client.models.replace_segment_globs_request import ReplaceSegmentG
 from wordlift_client.models.replace_segment_urls_request import ReplaceSegmentUrlsRequest
 from wordlift_client.models.request import Request
 from wordlift_client.models.reset_account_request import ResetAccountRequest
+from wordlift_client.models.resolve_candidate import ResolveCandidate
+from wordlift_client.models.resolve_http_validation_error import ResolveHTTPValidationError
+from wordlift_client.models.resolve_mention import ResolveMention
+from wordlift_client.models.resolve_mentions503_response import ResolveMentions503Response
+from wordlift_client.models.resolve_request import ResolveRequest
+from wordlift_client.models.resolve_response import ResolveResponse
+from wordlift_client.models.resolve_validation_error import ResolveValidationError
+from wordlift_client.models.resolved_entity import ResolvedEntity
 from wordlift_client.models.resource_type import ResourceType
 from wordlift_client.models.resources import Resources
 from wordlift_client.models.resources_agent_skills_index import ResourcesAgentSkillsIndex
@@ -446,6 +459,7 @@ from wordlift_client.models.update_account_request import UpdateAccountRequest
 from wordlift_client.models.update_question_and_answer_request import UpdateQuestionAndAnswerRequest
 from wordlift_client.models.update_record_request import UpdateRecordRequest
 from wordlift_client.models.update_records_request import UpdateRecordsRequest
+from wordlift_client.models.user_entity import UserEntity
 from wordlift_client.models.validation_error import ValidationError
 from wordlift_client.models.validation_fix import ValidationFix
 from wordlift_client.models.validation_result import ValidationResult

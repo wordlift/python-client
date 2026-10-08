@@ -69,6 +69,7 @@ from wordlift_client.api.query_fan_out_api import QueryFanOutApi
 from wordlift_client.api.question_and_answer_sets_api import QuestionAndAnswerSetsApi
 from wordlift_client.api.questions_and_answers_api import QuestionsAndAnswersApi
 from wordlift_client.api.redeem_codes_api import RedeemCodesApi
+from wordlift_client.api.resolve_api import ResolveApi
 from wordlift_client.api.rules_api import RulesApi
 from wordlift_client.api.segment_globs_api import SegmentGlobsApi
 from wordlift_client.api.segment_urls_api import SegmentURLsApi
