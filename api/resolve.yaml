@@ -1,0 +1,470 @@
+openapi: 3.0.3
+info:
+  title: Resolve API
+  version: 1.0.0
+  description: Resolve mentions in a text to identities in Wikidata, your WordLift knowledge graph or
+    an inline vocabulary, or get `unresolved` with a reason. A resolver may abstain; it never returns
+    the least-bad candidate as a match.
+  license:
+    name: Apache-2.0
+  contact:
+    name: WordLift
+    url: https://wordlift.io/contact-us/
+    email: hello@wordlift.io
+  x-api-id: wordlift-resolve
+  x-audience: external-public
+  termsOfService: https://wordlift.io/terms-of-service/
+servers:
+- url: https://api.wordlift.io
+security:
+- WordLiftKey: []
+paths:
+  /resolve:
+    post:
+      tags:
+      - Resolve
+      summary: Resolve mentions
+      description: Resolve mentions to identities in `dataset_uri`, or return unresolved.
+      operationId: resolveMentions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResolveRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResolveResponse'
+          headers:
+            X-Wordlift-Consumption:
+              description: 'The request''s cost in smart credits: one per request plus one per 1,000 characters
+                of text.'
+              schema:
+                type: integer
+            X-RateLimit-Limit:
+              description: Monthly allowance of the account for resolve().
+              schema:
+                type: integer
+            X-RateLimit-Remaining:
+              description: Credits left in the current period.
+              schema:
+                type: integer
+            X-RateLimit-Reset:
+              description: Seconds until the allowance resets.
+              schema:
+                type: integer
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '401':
+          description: Missing or invalid WordLift API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+        '429':
+          description: The account's monthly allowance for resolve() is spent. Nothing was resolved.
+          headers:
+            X-RateLimit-Limit:
+              description: Monthly allowance.
+              schema:
+                type: integer
+            X-RateLimit-Remaining:
+              description: Always 0 here.
+              schema:
+                type: integer
+            X-RateLimit-Reset:
+              description: Seconds until the allowance resets.
+              schema:
+                type: integer
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: A sentence naming the limit, the resource and the seconds until reset.
+        '503':
+          description: The engine is loading the account's knowledge graph (`dataset_warming`); retry
+            after the seconds given.
+          headers:
+            Retry-After:
+              description: Seconds to wait before retrying.
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  dataset_uri:
+                    type: string
+                  retry_after_s:
+                    type: integer
+                  detail:
+                    type: string
+      security:
+      - WordLiftKey: []
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    MentionResolution:
+      properties:
+        text:
+          type: string
+          title: Text
+        start:
+          type: integer
+          title: Start
+        end:
+          type: integer
+          title: End
+        type:
+          anyOf:
+          - type: string
+          - nullable: true
+          title: Type
+        status:
+          type: string
+          title: Status
+          description: resolved | unresolved
+        entity:
+          anyOf:
+          - $ref: '#/components/schemas/ResolvedEntity'
+          - nullable: true
+        score:
+          anyOf:
+          - type: number
+          - nullable: true
+          title: Score
+          description: Decision score; not a calibrated probability
+        reason:
+          anyOf:
+          - type: string
+          - nullable: true
+          title: Reason
+        candidates:
+          anyOf:
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          - nullable: true
+          title: Candidates
+        evidence:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - nullable: true
+          title: Evidence
+        dataset_uri:
+          type: string
+          description: The world that answered this mention, e.g. `wordlift://dataset/me` or `wikidata://public`.
+          nullable: true
+        signals:
+          anyOf:
+          - $ref: '#/components/schemas/DecisionSignals'
+          - nullable: true
+      type: object
+      required:
+      - text
+      - start
+      - end
+      - status
+      title: MentionResolution
+    ResolveCandidate:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: 'Identity in the dataset: Q312, wd:Q312 or a Wikidata entity URI'
+        label:
+          anyOf:
+          - type: string
+          - nullable: true
+          title: Label
+        description:
+          anyOf:
+          - type: string
+          - nullable: true
+          title: Description
+        types:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - nullable: true
+          title: Types
+        score:
+          anyOf:
+          - type: number
+          - nullable: true
+          title: Score
+          description: Caller's retrieval score; informational
+          format: double
+      type: object
+      required:
+      - id
+      title: ResolveCandidate
+    ResolveMention:
+      properties:
+        text:
+          type: string
+          minLength: 1
+          title: Text
+        start:
+          type: integer
+          minimum: 0.0
+          title: Start
+        end:
+          type: integer
+          minimum: 1.0
+          title: End
+        type:
+          anyOf:
+          - type: string
+          - nullable: true
+          title: Type
+          description: Caller's type hint, e.g. Person, Organization
+        candidates:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ResolveCandidate'
+            type: array
+          - nullable: true
+          title: Candidates
+          description: Identities retrieved by the caller; if omitted the engine retrieves against dataset_uri
+      type: object
+      required:
+      - text
+      - start
+      - end
+      title: ResolveMention
+    ResolveRequest:
+      properties:
+        text:
+          type: string
+          maxLength: 100000
+          minLength: 1
+          title: Text
+        dataset_uri:
+          type: string
+          title: Dataset Uri
+          description: 'The world to resolve against: `wikidata://public` (default), `wordlift://dataset/me`
+            (your WordLift graph, read with your key), `inline` (with `dataset`), or a comma-separated
+            ordered list such as `wordlift://dataset/me,wikidata://public` (your entities first, Wikidata
+            for the rest).'
+          default: wikidata://public
+        language:
+          anyOf:
+          - type: string
+          - nullable: true
+          title: Language
+          description: ISO 639-1; auto-detected if omitted
+        mentions:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ResolveMention'
+            type: array
+          - nullable: true
+          title: Mentions
+          description: Explicit spans; if omitted the engine detects mentions
+        include:
+          items:
+            type: string
+          type: array
+          title: Include
+          description: 'Diagnostics: candidates, evidence'
+        confidence:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Confidence
+          description: NER threshold when the engine detects mentions
+          default: 0.5
+          format: double
+        dataset:
+          anyOf:
+          - $ref: '#/components/schemas/InlineDataset'
+          - nullable: true
+          description: 'An inline vocabulary (up to 5,000 entities): the answer is one of these ids or
+            unresolved. Implies dataset_uri `inline`.'
+      type: object
+      required:
+      - text
+      title: ResolveRequest
+    ResolveResponse:
+      properties:
+        mentions:
+          items:
+            $ref: '#/components/schemas/MentionResolution'
+          type: array
+          title: Mentions
+        dataset_uri:
+          type: string
+          title: Dataset Uri
+        language:
+          type: string
+          title: Language
+        processing_time_ms:
+          type: number
+          title: Processing Time Ms
+          format: double
+        engine:
+          type: string
+          title: Engine
+          default: content-analysis-v3
+      type: object
+      required:
+      - mentions
+      - dataset_uri
+      - language
+      - processing_time_ms
+      title: ResolveResponse
+    ResolvedEntity:
+      properties:
+        id:
+          type: string
+          title: Id
+        label:
+          type: string
+          title: Label
+        description:
+          anyOf:
+          - type: string
+          - nullable: true
+          title: Description
+        types:
+          items:
+            type: string
+          type: array
+          title: Types
+        same_as:
+          items:
+            type: string
+          type: array
+          title: Same As
+      type: object
+      required:
+      - id
+      - label
+      title: ResolvedEntity
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    UserEntity:
+      type: object
+      title: UserEntity
+      description: An entity of your own vocabulary. `id` is echoed back as given.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        aliases:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+          nullable: true
+        types:
+          type: array
+          items:
+            type: string
+          description: schema.org types, e.g. Organization, Person, Place
+        same_as:
+          type: array
+          items:
+            type: string
+      required:
+      - id
+      - name
+    InlineDataset:
+      type: object
+      title: InlineDataset
+      properties:
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserEntity'
+          maxItems: 5000
+      required:
+      - entities
+    DecisionSignals:
+      type: object
+      title: DecisionSignals
+      description: How the decision was reached; present whenever the engine ranked candidates.
+      properties:
+        path:
+          type: string
+          description: '`fast` (exact dictionary hit, model skipped), `reranked` (public world), `vocabulary`
+            (your dataset)'
+        retrieval_prior:
+          type: number
+          format: double
+          nullable: true
+        match_probability:
+          type: number
+          format: double
+          nullable: true
+        rescued:
+          type: boolean
+      required:
+      - path
+      - rescued
+    ErrorDetail:
+      type: object
+      title: ErrorDetail
+      description: 'The engine''s error body: a `detail` that is a message or a structured error.'
+      properties:
+        detail: {}
+      required:
+      - detail
+  securitySchemes:
+    WordLiftKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'WordLift API key, sent as `Authorization: Key <your_key>`'
+tags:
+- name: Resolve
+  description: Resolve mentions to identities, or abstain.
