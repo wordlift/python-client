@@ -307,7 +307,7 @@ class IncludeExcludesApi:
     ) -> List[IncludeExclude]:
         """Update
 
-        Update the include and exclude configurations.
+        Replace the include and exclude configurations. URLs are normalized to a percent-encoded form when saved; rules saved before this may still be in their original form. Rules whose URLs are equal once normalized are merged into one.
 
         :param include_exclude_request: (required)
         :type include_exclude_request: List[IncludeExcludeRequest]
@@ -345,6 +345,7 @@ class IncludeExcludesApi:
             '200': "List[IncludeExclude]",
             '401': "List[IncludeExclude]",
             '404': "List[IncludeExclude]",
+            '422': "ProblemDetail",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -376,7 +377,7 @@ class IncludeExcludesApi:
     ) -> ApiResponse[List[IncludeExclude]]:
         """Update
 
-        Update the include and exclude configurations.
+        Replace the include and exclude configurations. URLs are normalized to a percent-encoded form when saved; rules saved before this may still be in their original form. Rules whose URLs are equal once normalized are merged into one.
 
         :param include_exclude_request: (required)
         :type include_exclude_request: List[IncludeExcludeRequest]
@@ -414,6 +415,7 @@ class IncludeExcludesApi:
             '200': "List[IncludeExclude]",
             '401': "List[IncludeExclude]",
             '404': "List[IncludeExclude]",
+            '422': "ProblemDetail",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -445,7 +447,7 @@ class IncludeExcludesApi:
     ) -> RESTResponseType:
         """Update
 
-        Update the include and exclude configurations.
+        Replace the include and exclude configurations. URLs are normalized to a percent-encoded form when saved; rules saved before this may still be in their original form. Rules whose URLs are equal once normalized are merged into one.
 
         :param include_exclude_request: (required)
         :type include_exclude_request: List[IncludeExcludeRequest]
@@ -483,6 +485,7 @@ class IncludeExcludesApi:
             '200': "List[IncludeExclude]",
             '401': "List[IncludeExclude]",
             '404': "List[IncludeExclude]",
+            '422': "ProblemDetail",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -525,7 +528,8 @@ class IncludeExcludesApi:
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(
             [
-                'application/json'
+                'application/json', 
+                'application/problem+json'
             ]
         )
 

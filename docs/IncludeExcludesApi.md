@@ -90,7 +90,7 @@ This endpoint does not need any parameter.
 
 Update
 
-Update the include and exclude configurations.
+Replace the include and exclude configurations. URLs are normalized to a percent-encoded form when saved; rules saved before this may still be in their original form. Rules whose URLs are equal once normalized are merged into one.
 
 ### Example
 
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: application/json
+ - **Accept**: application/json, application/problem+json
 
 ### HTTP response details
 
@@ -164,6 +164,7 @@ Name | Type | Description  | Notes
 **200** | Success |  -  |
 **401** | Unauthorized |  -  |
 **404** | Not Found |  -  |
+**422** | Unprocessable Entity. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
