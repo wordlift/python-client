@@ -289,7 +289,10 @@ paths:
       tags:
       - Include Excludes
     put:
-      description: Update the include and exclude configurations.
+      description: Replace the include and exclude configurations. URLs are normalized
+        to a percent-encoded form when saved; rules saved before this may still be
+        in their original form. Rules whose URLs are equal once normalized are merged
+        into one.
       operationId: updateIncludeExcludes
       requestBody:
         content:
@@ -324,6 +327,12 @@ paths:
                 items:
                   $ref: '#/components/schemas/IncludeExclude'
           description: Not Found
+        "422":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Unprocessable Entity.
       security:
       - ApiKey: []
       summary: Update
