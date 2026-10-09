@@ -58,17 +58,19 @@ paths:
               schema:
                 type: integer
         '422':
-          description: Validation Error
+          description: 'The body fails validation (`invalid_request`, with `errors`) or the request is
+            refused: `invalid_span`, `invalid_identity`, `dataset_not_supported`, `dataset_required`,
+            `invalid_dataset`, `unknown_include`, `candidates_not_supported`.'
           content:
-            application/json:
+            application/problem+json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/Problem'
         '401':
-          description: Missing or invalid WordLift API key.
+          description: Missing or invalid WordLift API key (`unauthorized`).
           content:
-            application/json:
+            application/problem+json:
               schema:
-                $ref: '#/components/schemas/ErrorDetail'
+                $ref: '#/components/schemas/Problem'
         '429':
           description: The account's monthly allowance for resolve() is spent. Nothing was resolved.
           headers:
@@ -90,39 +92,28 @@ paths:
                 type: string
                 description: A sentence naming the limit, the resource and the seconds until reset.
         '503':
-          description: The engine is loading the account's knowledge graph (`dataset_warming`); retry
-            after the seconds given.
+          description: The engine is loading the account's knowledge graph (`dataset_warming`, retry after
+            the seconds given) or has no index (`dataset_unavailable`).
           headers:
             Retry-After:
               description: Seconds to wait before retrying.
               schema:
                 type: integer
+                format: int64
           content:
-            application/json:
+            application/problem+json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                  dataset_uri:
-                    type: string
-                  retry_after_s:
-                    type: integer
-                  detail:
-                    type: string
+                $ref: '#/components/schemas/Problem'
+        '502':
+          description: The account's knowledge graph could not be read (`dataset_unavailable`).
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
       security:
       - WordLiftKey: []
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     MentionResolution:
       properties:
         text:
@@ -451,14 +442,44 @@ components:
       required:
       - path
       - rescued
-    ErrorDetail:
+    Problem:
       type: object
-      title: ErrorDetail
-      description: 'The engine''s error body: a `detail` that is a message or a structured error.'
+      title: Problem
+      description: RFC 9457 Problem Details, Content-Type application/problem+json. `code` is the engine's
+        stable error code and `type` is derived from it; extension members carry what the route knows
+        (dataset_uri, mention, accepted, retry_after_s, errors).
       properties:
-        detail: {}
+        type:
+          type: string
+          format: uri
+          description: https://docs.wordlift.io/problems/<code>
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+          description: A human-readable sentence, when the engine has one.
+        instance:
+          type: string
+          description: The request path.
+        code:
+          type: string
+          description: 'Stable error code: unauthorized, invalid_request, invalid_span, invalid_identity,
+            dataset_not_supported, dataset_required, invalid_dataset, unknown_include, candidates_not_supported,
+            dataset_warming, dataset_unavailable.'
+        errors:
+          type: array
+          description: 'On invalid_request: one entry per failing field.'
+          items:
+            $ref: '#/components/schemas/ValidationError'
       required:
-      - detail
+      - type
+      - title
+      - status
+      - code
+      additionalProperties: true
   securitySchemes:
     WordLiftKey:
       type: apiKey
