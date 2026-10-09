@@ -93,10 +93,11 @@ class ResolveApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ResolveResponse",
-            '401': "ErrorDetail",
-            '422': "ResolveHTTPValidationError",
+            '401': "ResolveProblem",
+            '422': "ResolveProblem",
             '429': "str",
-            '503': "ResolveMentions503Response",
+            '502': "ResolveProblem",
+            '503': "ResolveProblem",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -164,10 +165,11 @@ class ResolveApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ResolveResponse",
-            '401': "ErrorDetail",
-            '422': "ResolveHTTPValidationError",
+            '401': "ResolveProblem",
+            '422': "ResolveProblem",
             '429': "str",
-            '503': "ResolveMentions503Response",
+            '502': "ResolveProblem",
+            '503': "ResolveProblem",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -235,10 +237,11 @@ class ResolveApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ResolveResponse",
-            '401': "ErrorDetail",
-            '422': "ResolveHTTPValidationError",
+            '401': "ResolveProblem",
+            '422': "ResolveProblem",
             '429': "str",
-            '503': "ResolveMentions503Response",
+            '502': "ResolveProblem",
+            '503': "ResolveProblem",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -281,6 +284,7 @@ class ResolveApi:
         _header_params['Accept'] = self.api_client.select_header_accept(
             [
                 'application/json', 
+                'application/problem+json', 
                 'text/plain'
             ]
         )

@@ -143,7 +143,6 @@ docs/EntityGapRequest.md
 docs/EntityGapsApi.md
 docs/EntityMatch.md
 docs/EntityPatchRequest.md
-docs/ErrorDetail.md
 docs/ErrorResponse.md
 docs/Event.md
 docs/EventsRequest.md
@@ -348,9 +347,8 @@ docs/Request.md
 docs/ResetAccountRequest.md
 docs/ResolveApi.md
 docs/ResolveCandidate.md
-docs/ResolveHTTPValidationError.md
 docs/ResolveMention.md
-docs/ResolveMentions503Response.md
+docs/ResolveProblem.md
 docs/ResolveRequest.md
 docs/ResolveResponse.md
 docs/ResolveValidationError.md
@@ -471,6 +469,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_resolve_problem.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -678,7 +677,6 @@ wordlift_client/models/entity.py
 wordlift_client/models/entity_gap_request.py
 wordlift_client/models/entity_match.py
 wordlift_client/models/entity_patch_request.py
-wordlift_client/models/error_detail.py
 wordlift_client/models/error_response.py
 wordlift_client/models/event.py
 wordlift_client/models/events_request.py
@@ -844,9 +842,8 @@ wordlift_client/models/replace_segment_urls_request.py
 wordlift_client/models/request.py
 wordlift_client/models/reset_account_request.py
 wordlift_client/models/resolve_candidate.py
-wordlift_client/models/resolve_http_validation_error.py
 wordlift_client/models/resolve_mention.py
-wordlift_client/models/resolve_mentions503_response.py
+wordlift_client/models/resolve_problem.py
 wordlift_client/models/resolve_request.py
 wordlift_client/models/resolve_response.py
 wordlift_client/models/resolve_validation_error.py

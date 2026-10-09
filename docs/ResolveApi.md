@@ -77,17 +77,18 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: application/json, text/plain
+ - **Accept**: application/json, application/problem+json, text/plain
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  * X-Wordlift-Consumption - The request&#39;s cost in smart credits: one per request plus one per 1,000 characters of text. <br>  * X-RateLimit-Limit - Monthly allowance of the account for resolve(). <br>  * X-RateLimit-Remaining - Credits left in the current period. <br>  * X-RateLimit-Reset - Seconds until the allowance resets. <br>  |
-**401** | Missing or invalid WordLift API key. |  -  |
-**422** | Validation Error |  -  |
+**401** | Missing or invalid WordLift API key (&#x60;unauthorized&#x60;). |  -  |
+**422** | The body fails validation (&#x60;invalid_request&#x60;, with &#x60;errors&#x60;) or the request is refused: &#x60;invalid_span&#x60;, &#x60;invalid_identity&#x60;, &#x60;dataset_not_supported&#x60;, &#x60;dataset_required&#x60;, &#x60;invalid_dataset&#x60;, &#x60;unknown_include&#x60;, &#x60;candidates_not_supported&#x60;. |  -  |
 **429** | The account&#39;s monthly allowance for resolve() is spent. Nothing was resolved. |  * X-RateLimit-Limit - Monthly allowance of the account for resolve(). <br>  * X-RateLimit-Remaining - Credits left in the current period. <br>  * X-RateLimit-Reset - Seconds until the allowance resets. <br>  |
-**503** | The engine is loading the account&#39;s knowledge graph (&#x60;dataset_warming&#x60;); retry after the seconds given. |  * Retry-After - Seconds to wait before retrying. <br>  |
+**502** | The account&#39;s knowledge graph could not be read (&#x60;dataset_unavailable&#x60;). |  -  |
+**503** | The engine is loading the account&#39;s knowledge graph (&#x60;dataset_warming&#x60;, retry after the seconds given) or has no index (&#x60;dataset_unavailable&#x60;). |  * Retry-After - Seconds to wait before retrying. <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
