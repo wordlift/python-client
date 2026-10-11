@@ -17,6 +17,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from pydantic import Field, StrictInt
+from typing_extensions import Annotated
 from wordlift_client.models.resolve_request import ResolveRequest
 from wordlift_client.models.resolve_response import ResolveResponse
 
@@ -41,6 +43,7 @@ class ResolveApi:
     @validate_call
     async def resolve_mentions(
         self,
+        account_id: Annotated[StrictInt, Field(description="Your WordLift account id, the `accountId` of `GET /accounts/me` with the same key. A key used with another account's id is answered 403.")],
         resolve_request: ResolveRequest,
         _request_timeout: Union[
             None,
@@ -57,8 +60,10 @@ class ResolveApi:
     ) -> ResolveResponse:
         """Resolve mentions
 
-        Resolve mentions to identities in `dataset_uri`, or return unresolved.
+        Resolve mentions to identities in `dataset_uri`, or return unresolved. The route is metered against the account; `accountId` is the `accountId` field of `GET /accounts/me` called with the same key.
 
+        :param account_id: Your WordLift account id, the `accountId` of `GET /accounts/me` with the same key. A key used with another account's id is answered 403. (required)
+        :type account_id: int
         :param resolve_request: (required)
         :type resolve_request: ResolveRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -84,6 +89,7 @@ class ResolveApi:
         """ # noqa: E501
 
         _param = self._resolve_mentions_serialize(
+            account_id=account_id,
             resolve_request=resolve_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -94,6 +100,7 @@ class ResolveApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ResolveResponse",
             '401': "ResolveProblem",
+            '403': "str",
             '422': "ResolveProblem",
             '429': "str",
             '502': "ResolveProblem",
@@ -113,6 +120,7 @@ class ResolveApi:
     @validate_call
     async def resolve_mentions_with_http_info(
         self,
+        account_id: Annotated[StrictInt, Field(description="Your WordLift account id, the `accountId` of `GET /accounts/me` with the same key. A key used with another account's id is answered 403.")],
         resolve_request: ResolveRequest,
         _request_timeout: Union[
             None,
@@ -129,8 +137,10 @@ class ResolveApi:
     ) -> ApiResponse[ResolveResponse]:
         """Resolve mentions
 
-        Resolve mentions to identities in `dataset_uri`, or return unresolved.
+        Resolve mentions to identities in `dataset_uri`, or return unresolved. The route is metered against the account; `accountId` is the `accountId` field of `GET /accounts/me` called with the same key.
 
+        :param account_id: Your WordLift account id, the `accountId` of `GET /accounts/me` with the same key. A key used with another account's id is answered 403. (required)
+        :type account_id: int
         :param resolve_request: (required)
         :type resolve_request: ResolveRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -156,6 +166,7 @@ class ResolveApi:
         """ # noqa: E501
 
         _param = self._resolve_mentions_serialize(
+            account_id=account_id,
             resolve_request=resolve_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -166,6 +177,7 @@ class ResolveApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ResolveResponse",
             '401': "ResolveProblem",
+            '403': "str",
             '422': "ResolveProblem",
             '429': "str",
             '502': "ResolveProblem",
@@ -185,6 +197,7 @@ class ResolveApi:
     @validate_call
     async def resolve_mentions_without_preload_content(
         self,
+        account_id: Annotated[StrictInt, Field(description="Your WordLift account id, the `accountId` of `GET /accounts/me` with the same key. A key used with another account's id is answered 403.")],
         resolve_request: ResolveRequest,
         _request_timeout: Union[
             None,
@@ -201,8 +214,10 @@ class ResolveApi:
     ) -> RESTResponseType:
         """Resolve mentions
 
-        Resolve mentions to identities in `dataset_uri`, or return unresolved.
+        Resolve mentions to identities in `dataset_uri`, or return unresolved. The route is metered against the account; `accountId` is the `accountId` field of `GET /accounts/me` called with the same key.
 
+        :param account_id: Your WordLift account id, the `accountId` of `GET /accounts/me` with the same key. A key used with another account's id is answered 403. (required)
+        :type account_id: int
         :param resolve_request: (required)
         :type resolve_request: ResolveRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -228,6 +243,7 @@ class ResolveApi:
         """ # noqa: E501
 
         _param = self._resolve_mentions_serialize(
+            account_id=account_id,
             resolve_request=resolve_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -238,6 +254,7 @@ class ResolveApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ResolveResponse",
             '401': "ResolveProblem",
+            '403': "str",
             '422': "ResolveProblem",
             '429': "str",
             '502': "ResolveProblem",
@@ -252,6 +269,7 @@ class ResolveApi:
 
     def _resolve_mentions_serialize(
         self,
+        account_id,
         resolve_request,
         _request_auth,
         _content_type,
@@ -272,6 +290,8 @@ class ResolveApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
+        if account_id is not None:
+            _path_params['accountId'] = account_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -310,7 +330,7 @@ class ResolveApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/resolve',
+            resource_path='/accounts/{accountId}/resolve',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

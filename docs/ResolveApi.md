@@ -4,15 +4,15 @@ All URIs are relative to *https://api.wordlift.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**resolve_mentions**](ResolveApi.md#resolve_mentions) | **POST** /resolve | Resolve mentions
+[**resolve_mentions**](ResolveApi.md#resolve_mentions) | **POST** /accounts/{accountId}/resolve | Resolve mentions
 
 
 # **resolve_mentions**
-> ResolveResponse resolve_mentions(resolve_request)
+> ResolveResponse resolve_mentions(account_id, resolve_request)
 
 Resolve mentions
 
-Resolve mentions to identities in `dataset_uri`, or return unresolved.
+Resolve mentions to identities in `dataset_uri`, or return unresolved. The route is metered against the account; `accountId` is the `accountId` field of `GET /accounts/me` called with the same key.
 
 ### Example
 
@@ -46,11 +46,12 @@ configuration.api_key['ApiKey'] = os.environ["API_KEY"]
 async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.ResolveApi(api_client)
+    account_id = 56 # int | Your WordLift account id, the `accountId` of `GET /accounts/me` with the same key. A key used with another account's id is answered 403.
     resolve_request = wordlift_client.ResolveRequest() # ResolveRequest | 
 
     try:
         # Resolve mentions
-        api_response = await api_instance.resolve_mentions(resolve_request)
+        api_response = await api_instance.resolve_mentions(account_id, resolve_request)
         print("The response of ResolveApi->resolve_mentions:\n")
         pprint(api_response)
     except Exception as e:
@@ -64,6 +65,7 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **account_id** | **int**| Your WordLift account id, the &#x60;accountId&#x60; of &#x60;GET /accounts/me&#x60; with the same key. A key used with another account&#39;s id is answered 403. | 
  **resolve_request** | [**ResolveRequest**](ResolveRequest.md)|  | 
 
 ### Return type
@@ -85,6 +87,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  * X-Wordlift-Consumption - The request&#39;s cost in smart credits: one per request plus one per 1,000 characters of text. <br>  * X-RateLimit-Limit - Monthly allowance of the account for resolve(). <br>  * X-RateLimit-Remaining - Credits left in the current period. <br>  * X-RateLimit-Reset - Seconds until the allowance resets. <br>  |
 **401** | Missing or invalid WordLift API key (&#x60;unauthorized&#x60;). |  -  |
+**403** | The key does not belong to this account. |  -  |
 **422** | The body fails validation (&#x60;invalid_request&#x60;, with &#x60;errors&#x60;) or the request is refused: &#x60;invalid_span&#x60;, &#x60;invalid_identity&#x60;, &#x60;dataset_not_supported&#x60;, &#x60;dataset_required&#x60;, &#x60;invalid_dataset&#x60;, &#x60;unknown_include&#x60;, &#x60;candidates_not_supported&#x60;. |  -  |
 **429** | The account&#39;s monthly allowance for resolve() is spent. Nothing was resolved. |  * X-RateLimit-Limit - Monthly allowance of the account for resolve(). <br>  * X-RateLimit-Remaining - Credits left in the current period. <br>  * X-RateLimit-Reset - Seconds until the allowance resets. <br>  |
 **502** | The account&#39;s knowledge graph could not be read (&#x60;dataset_unavailable&#x60;). |  -  |
