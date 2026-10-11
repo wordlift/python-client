@@ -19,13 +19,24 @@ servers:
 security:
 - WordLiftKey: []
 paths:
-  /resolve:
+  /accounts/{accountId}/resolve:
     post:
       tags:
       - Resolve
       summary: Resolve mentions
-      description: Resolve mentions to identities in `dataset_uri`, or return unresolved.
+      description: Resolve mentions to identities in `dataset_uri`, or return unresolved. The route is
+        metered against the account; `accountId` is the `accountId` field of `GET /accounts/me` called
+        with the same key.
       operationId: resolveMentions
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        description: Your WordLift account id, the `accountId` of `GET /accounts/me` with the same key.
+          A key used with another account's id is answered 403.
+        schema:
+          type: integer
+          format: int64
       requestBody:
         content:
           application/json:
@@ -57,6 +68,12 @@ paths:
               description: Seconds until the allowance resets.
               schema:
                 type: integer
+        '403':
+          description: The key does not belong to this account.
+          content:
+            text/plain:
+              schema:
+                type: string
         '422':
           description: 'The body fails validation (`invalid_request`, with `errors`) or the request is
             refused: `invalid_span`, `invalid_identity`, `dataset_not_supported`, `dataset_required`,
