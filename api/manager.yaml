@@ -4793,6 +4793,8 @@ components:
     ProvisionedSubscription:
       type: object
       properties:
+        account_id:
+          type: string
         ends_at:
           type: string
           format: date-time
