@@ -52,8 +52,7 @@ paths:
                 $ref: '#/components/schemas/ResolveResponse'
           headers:
             X-Wordlift-Cost:
-              description: 'The request''s cost in smart credits: one per request plus one per 1,000 characters
-                of text.'
+              description: 'What the call counts against the monthly allowance of requests: one, plus one per 1,000 characters of text.'
               schema:
                 type: integer
             X-RateLimit-Limit:
@@ -61,7 +60,7 @@ paths:
               schema:
                 type: integer
             X-RateLimit-Remaining:
-              description: Credits left in the current period.
+              description: Requests left in the current period.
               schema:
                 type: integer
             X-RateLimit-Reset:
