@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**account_id** | **str** |  | [optional] 
 **ends_at** | **datetime** |  | [optional] 
 **id** | **str** |  | [optional] 
 **sku** | **str** |  | [optional] 

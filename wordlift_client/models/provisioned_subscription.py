@@ -28,12 +28,13 @@ class ProvisionedSubscription(BaseModel):
     """
     ProvisionedSubscription
     """ # noqa: E501
+    account_id: Optional[StrictStr] = None
     ends_at: Optional[datetime] = None
     id: Optional[StrictStr] = None
     sku: Optional[StrictStr] = None
     status: Optional[StrictStr] = None
     wordlift_key: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["ends_at", "id", "sku", "status", "wordlift_key"]
+    __properties: ClassVar[List[str]] = ["account_id", "ends_at", "id", "sku", "status", "wordlift_key"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,6 +87,7 @@ class ProvisionedSubscription(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "account_id": obj.get("account_id"),
             "ends_at": obj.get("ends_at"),
             "id": obj.get("id"),
             "sku": obj.get("sku"),
