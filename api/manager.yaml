@@ -2542,6 +2542,42 @@ paths:
       summary: Create
       tags:
       - Sitemap Imports
+  /subscriptions:
+    post:
+      operationId: provision
+      parameters:
+      - description: A UUID generated once per submission; retries with the same key
+          replay the response.
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: securityContext
+        required: true
+        schema:
+          $ref: '#/components/schemas/SecurityContext'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProvisionSubscriptionRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedSubscription'
+          description: OK
+      security:
+      - ClientCredentials:
+        - subscriptions.write
+      summary: Provision a subscription and its key for a SKU the client is allowed
+        to provision.
+      tags:
+      - Subscriptions
   /tokens:
     get:
       description: Get a token
@@ -4731,6 +4767,43 @@ components:
         type:
           type: string
           format: uri
+    ProvisionSubscriptionRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          maxLength: 255
+          minLength: 0
+        first_name:
+          type: string
+          maxLength: 255
+          minLength: 0
+        last_name:
+          type: string
+          maxLength: 255
+          minLength: 0
+        sku:
+          type: string
+          maxLength: 255
+          minLength: 0
+      required:
+      - email
+      - first_name
+      - sku
+    ProvisionedSubscription:
+      type: object
+      properties:
+        ends_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+        sku:
+          type: string
+        status:
+          type: string
+        wordlift_key:
+          type: string
     Request:
       type: object
       properties:
@@ -4750,6 +4823,8 @@ components:
       properties:
         key:
           type: string
+    SecurityContext:
+      type: object
     SitemapImportRequest:
       type: object
       description: The Sitemap Import request
@@ -5196,22 +5271,10 @@ components:
       - reference_id
       - reference_type
   securitySchemes:
-    ApiKey:
-      description: "`Key {your key}`"
-      in: header
-      name: Authorization
-      type: apiKey
-    BasicAuth:
-      description: "`Basic {encoded username:password}`"
-      in: header
-      name: Authorization
-      scheme: basic
-      type: http
-    OAuth2:
+    ClientCredentials:
       flows:
-        authorizationCode:
-          authorizationUrl: https://s.wordlift.io/oauth/authorize/
+        clientCredentials:
           scopes:
-            basic: basic scope
-          tokenUrl: https://s.wordlift.io/oauth/token/
+            subscriptions.write: Provision subscriptions
+          tokenUrl: https://auth.wordlift.io/oauth2/token
       type: oauth2
