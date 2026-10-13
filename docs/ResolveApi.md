@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  * X-Wordlift-Consumption - The request&#39;s cost in smart credits: one per request plus one per 1,000 characters of text. <br>  * X-RateLimit-Limit - Monthly allowance of the account for resolve(). <br>  * X-RateLimit-Remaining - Credits left in the current period. <br>  * X-RateLimit-Reset - Seconds until the allowance resets. <br>  |
+**200** | Successful Response |  * X-Wordlift-Cost - The request&#39;s cost in smart credits: one per request plus one per 1,000 characters of text. <br>  * X-RateLimit-Limit - Monthly allowance of the account for resolve(). <br>  * X-RateLimit-Remaining - Credits left in the current period. <br>  * X-RateLimit-Reset - Seconds until the allowance resets. <br>  |
 **401** | Missing or invalid WordLift API key (&#x60;unauthorized&#x60;). |  -  |
 **403** | The key does not belong to this account. |  -  |
 **422** | The body fails validation (&#x60;invalid_request&#x60;, with &#x60;errors&#x60;) or the request is refused: &#x60;invalid_span&#x60;, &#x60;invalid_identity&#x60;, &#x60;dataset_not_supported&#x60;, &#x60;dataset_required&#x60;, &#x60;invalid_dataset&#x60;, &#x60;unknown_include&#x60;, &#x60;candidates_not_supported&#x60;. |  -  |
