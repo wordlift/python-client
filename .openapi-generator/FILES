@@ -323,6 +323,8 @@ docs/Problem.md
 docs/ProblemDetail.md
 docs/ProjectType.md
 docs/Properties.md
+docs/ProvisionSubscriptionRequest.md
+docs/ProvisionedSubscription.md
 docs/ProxyMode.md
 docs/QueryCoverageOutput.md
 docs/QueryFanOutApi.md
@@ -411,6 +413,7 @@ docs/StructuredDataExpectationResponse.md
 docs/SubmitFactCheck200Response.md
 docs/SubmitFactCheckRequest.md
 docs/SubmitJobBody.md
+docs/SubscriptionsApi.md
 docs/SummarizationsApi.md
 docs/TokenResponse.md
 docs/Tokens.md
@@ -469,6 +472,9 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_provision_subscription_request.py
+test/test_provisioned_subscription.py
+test/test_subscriptions_api.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -559,6 +565,7 @@ wordlift_client/api/sitemap_generator_api.py
 wordlift_client/api/sitemap_imports_api.py
 wordlift_client/api/smart_contents_api.py
 wordlift_client/api/snapshots_api.py
+wordlift_client/api/subscriptions_api.py
 wordlift_client/api/summarizations_api.py
 wordlift_client/api/tokens_api.py
 wordlift_client/api/vector_search_nodes_api.py
@@ -822,6 +829,8 @@ wordlift_client/models/problem.py
 wordlift_client/models/problem_detail.py
 wordlift_client/models/project_type.py
 wordlift_client/models/properties.py
+wordlift_client/models/provision_subscription_request.py
+wordlift_client/models/provisioned_subscription.py
 wordlift_client/models/proxy_mode.py
 wordlift_client/models/query_coverage_output.py
 wordlift_client/models/question_and_answer.py

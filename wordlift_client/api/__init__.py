@@ -77,6 +77,7 @@ from wordlift_client.api.segments_api import SegmentsApi
 from wordlift_client.api.sitemap_generator_api import SitemapGeneratorApi
 from wordlift_client.api.sitemap_imports_api import SitemapImportsApi
 from wordlift_client.api.smart_contents_api import SmartContentsApi
+from wordlift_client.api.subscriptions_api import SubscriptionsApi
 from wordlift_client.api.summarizations_api import SummarizationsApi
 from wordlift_client.api.tokens_api import TokensApi
 from wordlift_client.api.vector_search_nodes_api import VectorSearchNodesApi

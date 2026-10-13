@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.210.0"
+__version__ = "1.211.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -94,6 +94,7 @@ from wordlift_client.api.segments_api import SegmentsApi
 from wordlift_client.api.sitemap_generator_api import SitemapGeneratorApi
 from wordlift_client.api.sitemap_imports_api import SitemapImportsApi
 from wordlift_client.api.smart_contents_api import SmartContentsApi
+from wordlift_client.api.subscriptions_api import SubscriptionsApi
 from wordlift_client.api.summarizations_api import SummarizationsApi
 from wordlift_client.api.tokens_api import TokensApi
 from wordlift_client.api.vector_search_nodes_api import VectorSearchNodesApi
@@ -376,6 +377,8 @@ from wordlift_client.models.problem import Problem
 from wordlift_client.models.problem_detail import ProblemDetail
 from wordlift_client.models.project_type import ProjectType
 from wordlift_client.models.properties import Properties
+from wordlift_client.models.provision_subscription_request import ProvisionSubscriptionRequest
+from wordlift_client.models.provisioned_subscription import ProvisionedSubscription
 from wordlift_client.models.proxy_mode import ProxyMode
 from wordlift_client.models.query_coverage_output import QueryCoverageOutput
 from wordlift_client.models.question_and_answer import QuestionAndAnswer

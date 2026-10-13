@@ -264,6 +264,8 @@ from wordlift_client.models.problem import Problem
 from wordlift_client.models.problem_detail import ProblemDetail
 from wordlift_client.models.project_type import ProjectType
 from wordlift_client.models.properties import Properties
+from wordlift_client.models.provision_subscription_request import ProvisionSubscriptionRequest
+from wordlift_client.models.provisioned_subscription import ProvisionedSubscription
 from wordlift_client.models.proxy_mode import ProxyMode
 from wordlift_client.models.query_coverage_output import QueryCoverageOutput
 from wordlift_client.models.question_and_answer import QuestionAndAnswer
