@@ -331,6 +331,7 @@ class AccountApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AccountInfo",
             '401': None,
+            '403': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -395,6 +396,7 @@ class AccountApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AccountInfo",
             '401': None,
+            '403': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -459,6 +461,7 @@ class AccountApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AccountInfo",
             '401': None,
+            '403': None,
         }
         response_data = await self.api_client.call_api(
             *_param,

@@ -155,6 +155,7 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 **200** | Found |  -  |
 **401** | Authentication Failure |  -  |
+**403** | The account&#39;s subscription is missing or not active |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
