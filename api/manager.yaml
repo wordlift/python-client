@@ -170,6 +170,8 @@ paths:
           description: Found
         "401":
           description: Authentication Failure
+        "403":
+          description: The account's subscription is missing or not active
       security:
       - ApiKey: []
       summary: Get
