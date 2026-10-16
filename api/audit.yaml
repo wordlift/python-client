@@ -6,7 +6,7 @@ info:
     It evaluates site files (including .well-known directory), SEO fundamentals, structured data,
     content structure, image accessibility, automation readiness, and JavaScript rendering to provide
     actionable insights for improving both search engine and AI agent discoverability.
-  version: 1.6.0
+  version: 1.7.0
 servers:
   - url: https://api.wordlift.io
 tags:
@@ -218,7 +218,7 @@ paths:
                     error: Invalid domain
                     message: The URL's domain name appears to be invalid or is not a public domain. Please check for typos.
         '401':
-          description: Missing or invalid WordLift key
+          description: Missing or invalid WordLift key. For a rejected key, the gateway checks `/accounts/me` and passes WordLift's own `application/problem+json` response (RFC 7807) through as-is and no audit is run, so the wording may differ from the example
           content:
             application/json:
               schema:
@@ -234,23 +234,33 @@ paths:
                   value:
                     error: Invalid authorization format
                     message: 'Authorization header must be in format: Key [your-wordlift-key]'
-                invalid_key:
-                  summary: Invalid key
-                  value:
-                    error: Invalid WordLift key
-                    message: The provided key is not valid or has expired
-        '403':
-          description: Bot protection detected on the target site
-          content:
-            application/json:
+            application/problem+json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: '#/components/schemas/WordLiftProblem'
               examples:
-                bot_protection:
-                  summary: Bot protection
+                invalid_key:
+                  summary: Invalid key (WordLift response)
                   value:
-                    error: Bot protection detected
-                    message: 'Bot protection detected for: https://example.com'
+                    type: about:blank
+                    title: Unauthorized
+                    status: 401
+                    detail: Invalid API key
+                    instance: /accounts/me
+        '403':
+          description: Missing or inactive subscription. Returned by the gateway from its WordLift `/accounts/me` check, passed through as-is as `application/problem+json`; no audit is run. Every 401/403 the audit service returns for a rejected key counts toward the failed-auth cap
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/WordLiftProblem'
+              examples:
+                inactive_subscription:
+                  summary: Missing or inactive subscription
+                  value:
+                    type: about:blank
+                    title: Forbidden
+                    status: 403
+                    detail: Subscription missing or not active
+                    instance: /accounts/me
         '404':
           description: Target page not found
           content:
@@ -286,12 +296,17 @@ paths:
                     error: Too many requests
                     message: Service is busy, please try again shortly.
         '500':
-          description: Internal server error
+          description: Internal server error, or the WordLift key check itself failed (WordLift unreachable, or a 401/403 that is not WordLift's problem+json, such as a Cloudflare page). The latter says nothing about the key and does not count toward the failed-auth cap
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
               examples:
+                auth_service_error:
+                  summary: Key check failed
+                  value:
+                    error: Authentication service error
+                    message: Unable to verify WordLift key
                 server_error:
                   summary: Internal error
                   value:
@@ -299,7 +314,7 @@ paths:
                     message: An unexpected error occurred
                     requestId: 3f2b8c1e-9a4d-4e7f-b6a2-1c5d8e9f0a3b
         '502':
-          description: WordLift accepted the key but returned an unusable account, so the key could not be verified. Retry later; not caused by the key or the request
+          description: 'The request could not be completed because of an upstream problem: WordLift returned an unusable account so the key could not be verified, or the target site blocks the audit with bot protection. Identify the case with `code`. Not caused by the key or the request, and not worth retrying automatically'
           content:
             application/json:
               schema:
@@ -309,7 +324,14 @@ paths:
                   summary: Unusable account
                   value:
                     error: Authentication service error
+                    code: unusable_account
                     message: Unable to verify WordLift key
+                bot_protection:
+                  summary: Bot protection
+                  value:
+                    error: Bot protection detected
+                    code: bot_protection
+                    message: 'Bot protection detected for: https://example.com'
 components:
   schemas:
     AuditRequest:
@@ -1138,6 +1160,20 @@ components:
           description: Present on 500 responses; quote it when reporting a problem
       required:
         - error
+    WordLiftProblem:
+      type: object
+      description: WordLift's own RFC 7807 problem-details answer, passed through as-is when it rejects the key
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
   securitySchemes:
     ApiKey:
       type: apiKey
