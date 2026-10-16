@@ -463,6 +463,7 @@ docs/WhatOperator.md
 docs/WhenOperator.md
 docs/WithLimits.md
 docs/Word.md
+docs/WordLiftProblem.md
 docs/WordRepetitionData.md
 docs/WordRequest.md
 git_push.sh
@@ -472,6 +473,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_word_lift_problem.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -942,6 +944,7 @@ wordlift_client/models/what_operator.py
 wordlift_client/models/when_operator.py
 wordlift_client/models/with_limits.py
 wordlift_client/models/word.py
+wordlift_client/models/word_lift_problem.py
 wordlift_client/models/word_repetition_data.py
 wordlift_client/models/word_request.py
 wordlift_client/py.typed

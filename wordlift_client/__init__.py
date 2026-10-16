@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.215.0"
+__version__ = "1.216.0"
 
 # import apis into sdk package
 from wordlift_client.api.account_api import AccountApi
@@ -493,5 +493,6 @@ from wordlift_client.models.what_operator import WhatOperator
 from wordlift_client.models.when_operator import WhenOperator
 from wordlift_client.models.with_limits import WithLimits
 from wordlift_client.models.word import Word
+from wordlift_client.models.word_lift_problem import WordLiftProblem
 from wordlift_client.models.word_repetition_data import WordRepetitionData
 from wordlift_client.models.word_request import WordRequest

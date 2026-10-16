@@ -77,7 +77,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: application/json
+ - **Accept**: application/json, application/problem+json
 
 ### HTTP response details
 
@@ -85,12 +85,12 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Audit completed successfully |  -  |
 **400** | Missing/invalid URL or invalid domain |  -  |
-**401** | Missing or invalid WordLift key |  -  |
-**403** | Bot protection detected on the target site |  -  |
+**401** | Missing or invalid WordLift key. For a rejected key, the gateway checks &#x60;/accounts/me&#x60; and passes WordLift&#39;s own &#x60;application/problem+json&#x60; response (RFC 7807) through as-is and no audit is run, so the wording may differ from the example |  -  |
+**403** | Missing or inactive subscription. Returned by the gateway from its WordLift &#x60;/accounts/me&#x60; check, passed through as-is as &#x60;application/problem+json&#x60;; no audit is run. Every 401/403 the audit service returns for a rejected key counts toward the failed-auth cap |  -  |
 **404** | Target page not found |  -  |
 **429** | Per-account audit cap, failed-auth cap, or global rate limit exceeded |  -  |
-**500** | Internal server error |  -  |
-**502** | WordLift accepted the key but returned an unusable account, so the key could not be verified. Retry later; not caused by the key or the request |  -  |
+**500** | Internal server error, or the WordLift key check itself failed (WordLift unreachable, or a 401/403 that is not WordLift&#39;s problem+json, such as a Cloudflare page). The latter says nothing about the key and does not count toward the failed-auth cap |  -  |
+**502** | The request could not be completed because of an upstream problem: WordLift returned an unusable account so the key could not be verified, or the target site blocks the audit with bot protection. Identify the case with &#x60;code&#x60;. Not caused by the key or the request, and not worth retrying automatically |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

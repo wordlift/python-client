@@ -95,7 +95,7 @@ class AuditApi:
             '200': "AuditResponse",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '403': "WordLiftProblem",
             '404': "ErrorResponse",
             '429': "ErrorResponse",
             '500': "ErrorResponse",
@@ -169,7 +169,7 @@ class AuditApi:
             '200': "AuditResponse",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '403': "WordLiftProblem",
             '404': "ErrorResponse",
             '429': "ErrorResponse",
             '500': "ErrorResponse",
@@ -243,7 +243,7 @@ class AuditApi:
             '200': "AuditResponse",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
-            '403': "ErrorResponse",
+            '403': "WordLiftProblem",
             '404': "ErrorResponse",
             '429': "ErrorResponse",
             '500': "ErrorResponse",
@@ -289,7 +289,8 @@ class AuditApi:
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(
             [
-                'application/json'
+                'application/json', 
+                'application/problem+json'
             ]
         )
 
