@@ -326,6 +326,7 @@ docs/Properties.md
 docs/ProvisionSubscriptionRequest.md
 docs/ProvisionedSubscription.md
 docs/ProxyMode.md
+docs/ProxyTier.md
 docs/QueryCoverageOutput.md
 docs/QueryFanOutApi.md
 docs/QuestionAndAnswer.md
@@ -473,7 +474,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_word_lift_problem.py
+test/test_proxy_tier.py
 tox.ini
 wordlift_client/__init__.py
 wordlift_client/api/__init__.py
@@ -831,6 +832,7 @@ wordlift_client/models/properties.py
 wordlift_client/models/provision_subscription_request.py
 wordlift_client/models/provisioned_subscription.py
 wordlift_client/models/proxy_mode.py
+wordlift_client/models/proxy_tier.py
 wordlift_client/models/query_coverage_output.py
 wordlift_client/models/question_and_answer.py
 wordlift_client/models/question_and_answer_set.py

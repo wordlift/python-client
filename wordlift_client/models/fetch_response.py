@@ -21,6 +21,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wordlift_client.models.proxy_tier import ProxyTier
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -47,8 +48,9 @@ class FetchResponse(BaseModel):
     fetched_at: Optional[datetime] = None
     from_cache: Optional[StrictBool] = Field(default=False, description="True when the response was served from a previously stored fetch result.")
     har: Optional[Dict[str, Any]] = None
+    effective_proxy_mode: Optional[ProxyTier] = None
     har_truncated: StrictBool = Field(description="True when the HAR log was truncated after hitting the size cap, so it covers only part of the page's network activity.")
-    __properties: ClassVar[List[str]] = ["success", "url_requested", "url_final", "status_code", "content_type", "html", "original_charset", "markdown", "title", "description", "text", "error_code", "error_message", "ttfb_ms", "response_time_ms", "networkidle_response_time_ms", "fetched_at", "from_cache", "har", "har_truncated"]
+    __properties: ClassVar[List[str]] = ["success", "url_requested", "url_final", "status_code", "content_type", "html", "original_charset", "markdown", "title", "description", "text", "error_code", "error_message", "ttfb_ms", "response_time_ms", "networkidle_response_time_ms", "fetched_at", "from_cache", "har", "effective_proxy_mode", "har_truncated"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -166,6 +168,11 @@ class FetchResponse(BaseModel):
         if self.har is None and "har" in self.model_fields_set:
             _dict['har'] = None
 
+        # set to None if effective_proxy_mode (nullable) is None
+        # and model_fields_set contains the field
+        if self.effective_proxy_mode is None and "effective_proxy_mode" in self.model_fields_set:
+            _dict['effective_proxy_mode'] = None
+
         return _dict
 
     @classmethod
@@ -197,6 +204,7 @@ class FetchResponse(BaseModel):
             "fetched_at": obj.get("fetched_at"),
             "from_cache": obj.get("from_cache") if obj.get("from_cache") is not None else False,
             "har": obj.get("har"),
+            "effective_proxy_mode": obj.get("effective_proxy_mode"),
             "har_truncated": obj.get("har_truncated")
         })
         return _obj

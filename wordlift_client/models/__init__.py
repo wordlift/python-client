@@ -267,6 +267,7 @@ from wordlift_client.models.properties import Properties
 from wordlift_client.models.provision_subscription_request import ProvisionSubscriptionRequest
 from wordlift_client.models.provisioned_subscription import ProvisionedSubscription
 from wordlift_client.models.proxy_mode import ProxyMode
+from wordlift_client.models.proxy_tier import ProxyTier
 from wordlift_client.models.query_coverage_output import QueryCoverageOutput
 from wordlift_client.models.question_and_answer import QuestionAndAnswer
 from wordlift_client.models.question_and_answer_set import QuestionAndAnswerSet
