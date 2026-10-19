@@ -4,7 +4,7 @@ info:
   summary: WordLift crawler API
   description: API for creating, listing, and inspecting crawl jobs. This schema is
     generated from FastAPI route/model annotations.
-  version: 0.12.0
+  version: 0.13.0
 paths:
   /crawl-jobs:
     post:
@@ -1092,6 +1092,14 @@ components:
           title: Har
           description: HAR 1.2 log of all network activity captured during the fetch.
             Null when not available for the given fetch strategy.
+        effective_proxy_mode:
+          anyOf:
+          - $ref: '#/components/schemas/ProxyTier'
+          - type: 'null'
+          description: Proxy tier of the final fetch attempt, after any proxy_mode='auto'
+            escalation. For cache hits, the tier of the fetch that produced the cached
+            content. Null when the fetch worker did not respond, or for cache entries
+            stored before the tier was recorded.
         har_truncated:
           type: boolean
           title: Har Truncated
@@ -1246,6 +1254,16 @@ components:
       - premium
       - auto
       title: ProxyMode
+    ProxyTier:
+      type: string
+      enum:
+      - disabled
+      - simple
+      - standard
+      - premium
+      title: ProxyTier
+      description: 'A concrete proxy tier: ProxyMode without AUTO, which is a strategy,
+        not a tier.'
     RenderWaitUntil:
       type: string
       enum:
