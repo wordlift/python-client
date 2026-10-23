@@ -67,7 +67,7 @@ class PagesExplorerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> WebsitePageArtifactResponse:
-        """Get page artifact
+        """(Deprecated) Get page artifact
 
         Returns a single page artifact payload (`xhtml` or `markdown`).
 
@@ -102,6 +102,7 @@ class PagesExplorerApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /websites/{host}/pages/{page_id}/artifacts/{artifact_type} is deprecated.", DeprecationWarning)
 
         _param = self._get_page_artifact_websites_host_pages_page_id_artifacts_artifact_type_get_serialize(
             host=host,
@@ -151,7 +152,7 @@ class PagesExplorerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[WebsitePageArtifactResponse]:
-        """Get page artifact
+        """(Deprecated) Get page artifact
 
         Returns a single page artifact payload (`xhtml` or `markdown`).
 
@@ -186,6 +187,7 @@ class PagesExplorerApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /websites/{host}/pages/{page_id}/artifacts/{artifact_type} is deprecated.", DeprecationWarning)
 
         _param = self._get_page_artifact_websites_host_pages_page_id_artifacts_artifact_type_get_serialize(
             host=host,
@@ -235,7 +237,7 @@ class PagesExplorerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get page artifact
+        """(Deprecated) Get page artifact
 
         Returns a single page artifact payload (`xhtml` or `markdown`).
 
@@ -270,6 +272,7 @@ class PagesExplorerApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /websites/{host}/pages/{page_id}/artifacts/{artifact_type} is deprecated.", DeprecationWarning)
 
         _param = self._get_page_artifact_websites_host_pages_page_id_artifacts_artifact_type_get_serialize(
             host=host,
@@ -400,7 +403,7 @@ class PagesExplorerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> WebsitePageResponse:
-        """Get crawled page by host and page id
+        """(Deprecated) Get crawled page by host and page id
 
         Returns page metadata and artifact availability flags.
 
@@ -433,6 +436,7 @@ class PagesExplorerApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /websites/{host}/pages/{page_id} is deprecated.", DeprecationWarning)
 
         _param = self._get_website_page_websites_host_pages_page_id_get_serialize(
             host=host,
@@ -480,7 +484,7 @@ class PagesExplorerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[WebsitePageResponse]:
-        """Get crawled page by host and page id
+        """(Deprecated) Get crawled page by host and page id
 
         Returns page metadata and artifact availability flags.
 
@@ -513,6 +517,7 @@ class PagesExplorerApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /websites/{host}/pages/{page_id} is deprecated.", DeprecationWarning)
 
         _param = self._get_website_page_websites_host_pages_page_id_get_serialize(
             host=host,
@@ -560,7 +565,7 @@ class PagesExplorerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get crawled page by host and page id
+        """(Deprecated) Get crawled page by host and page id
 
         Returns page metadata and artifact availability flags.
 
@@ -593,6 +598,7 @@ class PagesExplorerApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /websites/{host}/pages/{page_id} is deprecated.", DeprecationWarning)
 
         _param = self._get_website_page_websites_host_pages_page_id_get_serialize(
             host=host,
@@ -724,7 +730,7 @@ class PagesExplorerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ResponseListWebsitePagesWebsitesHostPagesGet:
-        """List crawled pages by host
+        """(Deprecated) List crawled pages by host
 
         Returns crawled pages for a host with optional status, run, time and URL filters. When `url` is provided, returns direct page data in a single response.
 
@@ -767,6 +773,7 @@ class PagesExplorerApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /websites/{host}/pages is deprecated.", DeprecationWarning)
 
         _param = self._list_website_pages_websites_host_pages_get_serialize(
             host=host,
@@ -824,7 +831,7 @@ class PagesExplorerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ResponseListWebsitePagesWebsitesHostPagesGet]:
-        """List crawled pages by host
+        """(Deprecated) List crawled pages by host
 
         Returns crawled pages for a host with optional status, run, time and URL filters. When `url` is provided, returns direct page data in a single response.
 
@@ -867,6 +874,7 @@ class PagesExplorerApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /websites/{host}/pages is deprecated.", DeprecationWarning)
 
         _param = self._list_website_pages_websites_host_pages_get_serialize(
             host=host,
@@ -924,7 +932,7 @@ class PagesExplorerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """List crawled pages by host
+        """(Deprecated) List crawled pages by host
 
         Returns crawled pages for a host with optional status, run, time and URL filters. When `url` is provided, returns direct page data in a single response.
 
@@ -967,6 +975,7 @@ class PagesExplorerApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /websites/{host}/pages is deprecated.", DeprecationWarning)
 
         _param = self._list_website_pages_websites_host_pages_get_serialize(
             host=host,
@@ -1123,7 +1132,7 @@ class PagesExplorerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PageArtifactQueryResponse:
-        """Batch query page artifacts
+        """(Deprecated) Batch query page artifacts
 
         Returns artifacts for multiple page ids in one request.
 
@@ -1152,6 +1161,7 @@ class PagesExplorerApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /websites/{host}/artifacts:query is deprecated.", DeprecationWarning)
 
         _param = self._query_page_artifacts_websites_host_artifacts_query_post_serialize(
             host=host,
@@ -1195,7 +1205,7 @@ class PagesExplorerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[PageArtifactQueryResponse]:
-        """Batch query page artifacts
+        """(Deprecated) Batch query page artifacts
 
         Returns artifacts for multiple page ids in one request.
 
@@ -1224,6 +1234,7 @@ class PagesExplorerApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /websites/{host}/artifacts:query is deprecated.", DeprecationWarning)
 
         _param = self._query_page_artifacts_websites_host_artifacts_query_post_serialize(
             host=host,
@@ -1267,7 +1278,7 @@ class PagesExplorerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Batch query page artifacts
+        """(Deprecated) Batch query page artifacts
 
         Returns artifacts for multiple page ids in one request.
 
@@ -1296,6 +1307,7 @@ class PagesExplorerApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /websites/{host}/artifacts:query is deprecated.", DeprecationWarning)
 
         _param = self._query_page_artifacts_websites_host_artifacts_query_post_serialize(
             host=host,
