@@ -4,7 +4,7 @@ info:
   summary: WordLift crawler API
   description: API for creating, listing, and inspecting crawl jobs. This schema is
     generated from FastAPI route/model annotations.
-  version: 0.13.0
+  version: 0.15.0
 paths:
   /crawl-jobs:
     post:
@@ -14,6 +14,7 @@ paths:
       description: Creates a crawl job and triggers asynchronous execution. The endpoint
         returns immediately with accepted job metadata.
       operationId: create_crawl_job_crawl_jobs_post
+      deprecated: true
       requestBody:
         required: true
         content:
@@ -58,6 +59,7 @@ paths:
       description: Returns crawl jobs ordered by creation time descending (newest
         first).
       operationId: list_crawl_jobs_crawl_jobs_get
+      deprecated: true
       parameters:
       - name: limit
         in: query
@@ -112,6 +114,7 @@ paths:
       description: Returns a single crawl job metadata record (without embedded page
         payloads).
       operationId: get_crawl_job_crawl_jobs__job_id__get
+      deprecated: true
       parameters:
       - name: job_id
         in: path
@@ -165,6 +168,7 @@ paths:
       description: Returns paginated page summaries for a crawl job without large
         page artifacts.
       operationId: list_crawl_job_pages_crawl_jobs__job_id__pages_get
+      deprecated: true
       parameters:
       - name: job_id
         in: path
@@ -231,6 +235,7 @@ paths:
         and URL filters. When `url` is provided, returns direct page data in a single
         response.
       operationId: list_website_pages_websites__host__pages_get
+      deprecated: true
       parameters:
       - name: host
         in: path
@@ -326,6 +331,7 @@ paths:
       summary: Get crawled page by host and page id
       description: Returns page metadata and artifact availability flags.
       operationId: get_website_page_websites__host__pages__page_id__get
+      deprecated: true
       parameters:
       - name: host
         in: path
@@ -376,6 +382,7 @@ paths:
       summary: Get page artifact
       description: Returns a single page artifact payload (`xhtml` or `markdown`).
       operationId: get_page_artifact_websites__host__pages__page_id__artifacts__artifact_type__get
+      deprecated: true
       parameters:
       - name: host
         in: path
@@ -432,6 +439,7 @@ paths:
       summary: Batch query page artifacts
       description: Returns artifacts for multiple page ids in one request.
       operationId: query_page_artifacts_websites__host__artifacts_query_post
+      deprecated: true
       parameters:
       - name: host
         in: path
