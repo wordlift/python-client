@@ -4,7 +4,7 @@ info:
   summary: WordLift crawler API
   description: API for creating, listing, and inspecting crawl jobs. This schema is
     generated from FastAPI route/model annotations.
-  version: 0.15.0
+  version: 0.16.0
 paths:
   /crawl-jobs:
     post:
@@ -1009,43 +1009,51 @@ components:
           - type: 'null'
           title: Content Type
           description: Response Content-Type header value.
-        html:
+        body:
           anyOf:
           - type: string
           - type: 'null'
-          title: Html
-          description: Raw HTML of the fetched page.
+          title: Body
+          description: 'The fetched document as UTF-8 text: HTML with its <meta charset>
+            rewritten to UTF-8, or a plain text, Markdown, JSON or XML body unchanged
+            except for the XML declaration''s encoding, rewritten to UTF-8.'
         original_charset:
           anyOf:
           - type: string
           - type: 'null'
           title: Original Charset
-          description: Original charset declared by the page before normalization
-            to UTF-8.
+          description: 'Charset the body was decoded with before normalization to
+            UTF-8, as a browser picks it, under its WHATWG Encoding Standard name:
+            Latin-1 and ASCII labels report windows-1252, gb2312 reports gbk. Labels
+            browsers don''t know are skipped; utf-8 when none is declared.'
         markdown:
           anyOf:
           - type: string
           - type: 'null'
           title: Markdown
-          description: Page content extracted as Markdown.
+          description: Page content extracted as Markdown. For a Markdown response,
+            the body itself; null for plain text, JSON and XML responses.
         title:
           anyOf:
           - type: string
           - type: 'null'
           title: Title
-          description: Page title extracted by trafilatura.
+          description: Page title extracted by trafilatura. Null for plain text, Markdown,
+            JSON and XML responses.
         description:
           anyOf:
           - type: string
           - type: 'null'
           title: Description
-          description: Page description/abstract extracted by trafilatura.
+          description: Page description/abstract extracted by trafilatura. Null for
+            plain text, Markdown, JSON and XML responses.
         text:
           anyOf:
           - type: string
           - type: 'null'
           title: Text
-          description: Plain text content extracted by trafilatura.
+          description: Plain text content extracted by trafilatura. Null for plain
+            text, Markdown, JSON and XML responses.
         error_code:
           anyOf:
           - type: string
@@ -1108,6 +1116,15 @@ components:
             escalation. For cache hits, the tier of the fetch that produced the cached
             content. Null when the fetch worker did not respond, or for cache entries
             stored before the tier was recorded.
+        html:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Html
+          description: 'Deprecated: same value as `body`, which also carries non-HTML
+            bodies.'
+          deprecated: true
+          readOnly: true
         har_truncated:
           type: boolean
           title: Har Truncated
@@ -1119,6 +1136,7 @@ components:
       - success
       - url_requested
       - url_final
+      - html
       - har_truncated
       title: FetchResponse
     FetchTargetLoadEvent:
