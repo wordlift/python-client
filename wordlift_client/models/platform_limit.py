@@ -43,8 +43,8 @@ class PlatformLimit(BaseModel):
     @field_validator('based_on')
     def based_on_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['SKU']):
-            raise ValueError("must be one of enum values ('SKU')")
+        if value not in set(['SKU', 'SUBSCRIPTION_ID']):
+            raise ValueError("must be one of enum values ('SKU', 'SUBSCRIPTION_ID')")
         return value
 
     @field_validator('scope')

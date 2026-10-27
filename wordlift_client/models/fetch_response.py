@@ -34,7 +34,7 @@ class FetchResponse(BaseModel):
     url_final: StrictStr = Field(description="The final URL after any redirects.")
     status_code: Optional[StrictInt] = None
     content_type: Optional[StrictStr] = None
-    html: Optional[StrictStr] = None
+    body: Optional[StrictStr] = None
     original_charset: Optional[StrictStr] = None
     markdown: Optional[StrictStr] = None
     title: Optional[StrictStr] = None
@@ -49,8 +49,9 @@ class FetchResponse(BaseModel):
     from_cache: Optional[StrictBool] = Field(default=False, description="True when the response was served from a previously stored fetch result.")
     har: Optional[Dict[str, Any]] = None
     effective_proxy_mode: Optional[ProxyTier] = None
+    html: Optional[StrictStr]
     har_truncated: StrictBool = Field(description="True when the HAR log was truncated after hitting the size cap, so it covers only part of the page's network activity.")
-    __properties: ClassVar[List[str]] = ["success", "url_requested", "url_final", "status_code", "content_type", "html", "original_charset", "markdown", "title", "description", "text", "error_code", "error_message", "ttfb_ms", "response_time_ms", "networkidle_response_time_ms", "fetched_at", "from_cache", "har", "effective_proxy_mode", "har_truncated"]
+    __properties: ClassVar[List[str]] = ["success", "url_requested", "url_final", "status_code", "content_type", "body", "original_charset", "markdown", "title", "description", "text", "error_code", "error_message", "ttfb_ms", "response_time_ms", "networkidle_response_time_ms", "fetched_at", "from_cache", "har", "effective_proxy_mode", "html", "har_truncated"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,10 +104,10 @@ class FetchResponse(BaseModel):
         if self.content_type is None and "content_type" in self.model_fields_set:
             _dict['content_type'] = None
 
-        # set to None if html (nullable) is None
+        # set to None if body (nullable) is None
         # and model_fields_set contains the field
-        if self.html is None and "html" in self.model_fields_set:
-            _dict['html'] = None
+        if self.body is None and "body" in self.model_fields_set:
+            _dict['body'] = None
 
         # set to None if original_charset (nullable) is None
         # and model_fields_set contains the field
@@ -173,6 +174,11 @@ class FetchResponse(BaseModel):
         if self.effective_proxy_mode is None and "effective_proxy_mode" in self.model_fields_set:
             _dict['effective_proxy_mode'] = None
 
+        # set to None if html (nullable) is None
+        # and model_fields_set contains the field
+        if self.html is None and "html" in self.model_fields_set:
+            _dict['html'] = None
+
         return _dict
 
     @classmethod
@@ -190,7 +196,7 @@ class FetchResponse(BaseModel):
             "url_final": obj.get("url_final"),
             "status_code": obj.get("status_code"),
             "content_type": obj.get("content_type"),
-            "html": obj.get("html"),
+            "body": obj.get("body"),
             "original_charset": obj.get("original_charset"),
             "markdown": obj.get("markdown"),
             "title": obj.get("title"),
@@ -205,6 +211,7 @@ class FetchResponse(BaseModel):
             "from_cache": obj.get("from_cache") if obj.get("from_cache") is not None else False,
             "har": obj.get("har"),
             "effective_proxy_mode": obj.get("effective_proxy_mode"),
+            "html": obj.get("html"),
             "har_truncated": obj.get("har_truncated")
         })
         return _obj

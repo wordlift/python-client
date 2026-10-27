@@ -99,6 +99,7 @@ class PlatformLimitsApi:
             '200': "PlatformLimit",
             '401': None,
             '404': None,
+            '422': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -168,6 +169,7 @@ class PlatformLimitsApi:
             '200': "PlatformLimit",
             '401': None,
             '404': None,
+            '422': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -237,6 +239,7 @@ class PlatformLimitsApi:
             '200': "PlatformLimit",
             '401': None,
             '404': None,
+            '422': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1223,6 +1226,7 @@ class PlatformLimitsApi:
             '200': "PlatformLimit",
             '401': None,
             '404': None,
+            '422': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1296,6 +1300,7 @@ class PlatformLimitsApi:
             '200': "PlatformLimit",
             '401': None,
             '404': None,
+            '422': None,
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1369,6 +1374,7 @@ class PlatformLimitsApi:
             '200': "PlatformLimit",
             '401': None,
             '404': None,
+            '422': None,
         }
         response_data = await self.api_client.call_api(
             *_param,

@@ -29,23 +29,29 @@ class PlatformLimitRequest(BaseModel):
     Platform Limit request
     """ # noqa: E501
     applies_to: StrictStr
-    based_on: StrictStr
+    based_on: Optional[StrictStr] = Field(default=None, description="`SKU` if omitted on create; kept if omitted on update.")
     based_on_value: StrictStr
     description: Optional[StrictStr] = None
     limits: Annotated[int, Field(strict=True, ge=1)]
-    scope: StrictStr
+    scope: Optional[StrictStr] = Field(default=None, description="`SUBSCRIPTION` if omitted on create; kept if omitted on update.")
     __properties: ClassVar[List[str]] = ["applies_to", "based_on", "based_on_value", "description", "limits", "scope"]
 
     @field_validator('based_on')
     def based_on_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['SKU']):
-            raise ValueError("must be one of enum values ('SKU')")
+        if value is None:
+            return value
+
+        if value not in set(['SKU', 'SUBSCRIPTION_ID']):
+            raise ValueError("must be one of enum values ('SKU', 'SUBSCRIPTION_ID')")
         return value
 
     @field_validator('scope')
     def scope_validate_enum(cls, value):
         """Validates the enum"""
+        if value is None:
+            return value
+
         if value not in set(['ACCOUNT', 'SUBSCRIPTION']):
             raise ValueError("must be one of enum values ('ACCOUNT', 'SUBSCRIPTION')")
         return value

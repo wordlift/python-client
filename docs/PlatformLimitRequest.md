@@ -7,11 +7,11 @@ Platform Limit request
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **applies_to** | **str** |  | 
-**based_on** | **str** |  | 
+**based_on** | **str** | &#x60;SKU&#x60; if omitted on create; kept if omitted on update. | [optional] 
 **based_on_value** | **str** |  | 
 **description** | **str** |  | [optional] 
 **limits** | **int** |  | 
-**scope** | **str** |  | 
+**scope** | **str** | &#x60;SUBSCRIPTION&#x60; if omitted on create; kept if omitted on update. | [optional] 
 
 ## Example
 
