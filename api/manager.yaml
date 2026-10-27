@@ -2317,6 +2317,7 @@ paths:
             type: string
             enum:
             - SKU
+            - SUBSCRIPTION_ID
           uniqueItems: true
       - description: The based on values.
         in: query
@@ -2384,6 +2385,8 @@ paths:
           description: Authentication Failure
         "404":
           description: Not Found
+        "422":
+          description: Invalid Platform Limit
       security:
       - BasicAuth: []
       summary: Create Platform Limit
@@ -2468,6 +2471,8 @@ paths:
           description: Authentication Failure
         "404":
           description: Not Found
+        "422":
+          description: Invalid Platform Limit
       security:
       - BasicAuth: []
       summary: Update Platform Limit
@@ -4688,6 +4693,7 @@ components:
           type: string
           enum:
           - SKU
+          - SUBSCRIPTION_ID
         based_on_value:
           type: string
         created_at:
@@ -4728,8 +4734,10 @@ components:
           type: string
         based_on:
           type: string
+          description: '`SKU` if omitted on create; kept if omitted on update.'
           enum:
           - SKU
+          - SUBSCRIPTION_ID
         based_on_value:
           type: string
         description:
@@ -4740,15 +4748,14 @@ components:
           minimum: 1
         scope:
           type: string
+          description: '`SUBSCRIPTION` if omitted on create; kept if omitted on update.'
           enum:
           - ACCOUNT
           - SUBSCRIPTION
       required:
       - applies_to
-      - based_on
       - based_on_value
       - limits
-      - scope
     ProblemDetail:
       type: object
       properties:
