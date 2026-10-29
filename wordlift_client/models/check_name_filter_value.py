@@ -42,6 +42,7 @@ class CheckNameFilterValue(str, Enum):
     ACCOUNT_SKILL_MD_CHECK = 'account_skill_md_check'
     ACCOUNT_MCP_CHECK = 'account_mcp_check'
     ACCOUNT_WEBMCP_CHECK = 'account_webmcp_check'
+    WORDLIFT_INTEGRATION_CHECK = 'wordlift_integration_check'
     OVERALL = 'overall'
 
     @classmethod

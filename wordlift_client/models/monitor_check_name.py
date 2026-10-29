@@ -42,6 +42,7 @@ class MonitorCheckName(str, Enum):
     ACCOUNT_SKILL_MD_CHECK = 'account_skill_md_check'
     ACCOUNT_MCP_CHECK = 'account_mcp_check'
     ACCOUNT_WEBMCP_CHECK = 'account_webmcp_check'
+    WORDLIFT_INTEGRATION_CHECK = 'wordlift_integration_check'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
