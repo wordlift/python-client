@@ -4,7 +4,7 @@ info:
   summary: WordLift crawler API
   description: API for creating, listing, and inspecting crawl jobs. This schema is
     generated from FastAPI route/model annotations.
-  version: 0.16.0
+  version: 0.17.1
 paths:
   /crawl-jobs:
     post:
@@ -1136,7 +1136,6 @@ components:
       - success
       - url_requested
       - url_final
-      - html
       - har_truncated
       title: FetchResponse
     FetchTargetLoadEvent:
