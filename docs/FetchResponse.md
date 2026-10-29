@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 **from_cache** | **bool** | True when the response was served from a previously stored fetch result. | [optional] [default to False]
 **har** | **Dict[str, object]** |  | [optional] 
 **effective_proxy_mode** | [**ProxyTier**](ProxyTier.md) |  | [optional] 
-**html** | **str** |  | 
+**html** | **str** |  | [optional] 
 **har_truncated** | **bool** | True when the HAR log was truncated after hitting the size cap, so it covers only part of the page&#39;s network activity. | [readonly] 
 
 ## Example

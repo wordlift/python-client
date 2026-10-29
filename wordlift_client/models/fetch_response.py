@@ -49,7 +49,7 @@ class FetchResponse(BaseModel):
     from_cache: Optional[StrictBool] = Field(default=False, description="True when the response was served from a previously stored fetch result.")
     har: Optional[Dict[str, Any]] = None
     effective_proxy_mode: Optional[ProxyTier] = None
-    html: Optional[StrictStr]
+    html: Optional[StrictStr] = None
     har_truncated: StrictBool = Field(description="True when the HAR log was truncated after hitting the size cap, so it covers only part of the page's network activity.")
     __properties: ClassVar[List[str]] = ["success", "url_requested", "url_final", "status_code", "content_type", "body", "original_charset", "markdown", "title", "description", "text", "error_code", "error_message", "ttfb_ms", "response_time_ms", "networkidle_response_time_ms", "fetched_at", "from_cache", "har", "effective_proxy_mode", "html", "har_truncated"]
 
