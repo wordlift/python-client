@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 3.0.1
+  version: 3.3.0
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -2086,6 +2086,7 @@ components:
       - account_skill_md_check
       - account_mcp_check
       - account_webmcp_check
+      - wordlift_integration_check
       - overall
       title: CheckNameFilterValue
     CheckResultItem:
@@ -2664,6 +2665,7 @@ components:
       - account_skill_md_check
       - account_mcp_check
       - account_webmcp_check
+      - wordlift_integration_check
       title: MonitorCheckName
       description: 'Identifier of a monitor check plugin.
 
