@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 3.3.0
+  version: 4.0.0
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -2079,7 +2079,6 @@ components:
       - performance_check
       - robots_check
       - resource_404_check
-      - wordlift_bootstrap_check
       - account_robots_check
       - ai_bot_access_check
       - account_llms_txt_check
@@ -2658,7 +2657,6 @@ components:
       - performance_check
       - robots_check
       - resource_404_check
-      - wordlift_bootstrap_check
       - account_robots_check
       - ai_bot_access_check
       - account_llms_txt_check
