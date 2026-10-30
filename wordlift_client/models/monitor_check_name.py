@@ -35,7 +35,6 @@ class MonitorCheckName(str, Enum):
     PERFORMANCE_CHECK = 'performance_check'
     ROBOTS_CHECK = 'robots_check'
     RESOURCE_404_CHECK = 'resource_404_check'
-    WORDLIFT_BOOTSTRAP_CHECK = 'wordlift_bootstrap_check'
     ACCOUNT_ROBOTS_CHECK = 'account_robots_check'
     AI_BOT_ACCESS_CHECK = 'ai_bot_access_check'
     ACCOUNT_LLMS_TXT_CHECK = 'account_llms_txt_check'
