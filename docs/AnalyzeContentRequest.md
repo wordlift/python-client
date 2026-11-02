@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **str** |  | [optional] 
-**text** | **str** |  | [optional] 
+**url** | **str** | URL to analyze | [optional] 
+**text** | **str** | Raw text to analyze | [optional] 
 **num_queries** | **int** | Number of synthetic queries to generate | [optional] [default to 10]
 **coverage_threshold** | **float** | The threshold for answering synthetic queries | [optional] [default to 0.65]
 

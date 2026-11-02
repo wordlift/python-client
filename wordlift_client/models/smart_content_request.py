@@ -25,6 +25,7 @@ from wordlift_client.models.rule_request import RuleRequest
 from wordlift_client.models.webpage_properties import WebpageProperties
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class SmartContentRequest(BaseModel):
     """
@@ -37,7 +38,8 @@ class SmartContentRequest(BaseModel):
     __properties: ClassVar[List[str]] = ["model_id", "name", "rules", "webpage_properties"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -49,8 +51,7 @@ class SmartContentRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -78,16 +79,14 @@ class SmartContentRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in rules (list)
         _items = []
         if self.rules:
-            for _item in self.rules:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_rules in self.rules:
+                _items.append(_item_rules.to_dict() if _item_rules is not None else None)
             _dict['rules'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in webpage_properties (list)
         _items = []
         if self.webpage_properties:
-            for _item in self.webpage_properties:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_webpage_properties in self.webpage_properties:
+                _items.append(_item_webpage_properties.to_dict() if _item_webpage_properties is not None else None)
             _dict['webpage_properties'] = _items
         return _dict
 

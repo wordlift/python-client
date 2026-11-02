@@ -24,6 +24,7 @@ from wordlift_client.models.internal_link_destination import InternalLinkDestina
 from wordlift_client.models.internal_link_source import InternalLinkSource
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class InternalLink(BaseModel):
     """
@@ -34,7 +35,8 @@ class InternalLink(BaseModel):
     __properties: ClassVar[List[str]] = ["destinations", "source"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -46,8 +48,7 @@ class InternalLink(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -75,9 +76,8 @@ class InternalLink(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in destinations (list)
         _items = []
         if self.destinations:
-            for _item in self.destinations:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_destinations in self.destinations:
+                _items.append(_item_destinations.to_dict() if _item_destinations is not None else None)
             _dict['destinations'] = _items
         # override the default output from pydantic by calling `to_dict()` of source
         if self.source:

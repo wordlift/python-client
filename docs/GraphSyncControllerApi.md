@@ -13,8 +13,6 @@ Method | HTTP request | Description
 # **create1**
 > GraphSyncResponse create1(account_id, graph_sync_request)
 
-
-
 ### Example
 
 * Api Key Authentication (ApiKey):
@@ -92,8 +90,6 @@ Name | Type | Description  | Notes
 # **delete**
 > delete(account_id, delete_project=delete_project)
 
-
-
 ### Example
 
 * Api Key Authentication (ApiKey):
@@ -166,8 +162,6 @@ void (empty response body)
 
 # **get3**
 > GraphSyncResponse get3(account_id)
-
-
 
 ### Example
 
@@ -242,8 +236,6 @@ Name | Type | Description  | Notes
 
 # **update**
 > GraphSyncResponse update(account_id, graph_sync_request)
-
-
 
 ### Example
 

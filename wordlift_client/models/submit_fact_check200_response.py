@@ -18,20 +18,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class SubmitFactCheck200Response(BaseModel):
     """
     SubmitFactCheck200Response
     """ # noqa: E501
-    response: Optional[StrictStr] = None
+    response: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["{\n  \"@context\": \"http://schema.org\",\n  \"@type\": \"ClaimReview\",\n  \"claimReviewed\": \"Aristotle quote 'It is the mark of an educated mind to be able to entertain a thought without accepting it.'\",\n  \"author\": { \"@type\": \"Organization\", \"name\": \"WordLift\" },\n  \"datePublished\": \"2024-01-17\",\n  \"reviewRating\": {\n    \"@type\": \"Rating\",\n    \"ratingValue\": \"5\",\n    \"alternateName\": \"True\",\n    \"bestRating\": \"5\",\n    \"worstRating\": \"1\"\n  },\n  \"url\": \"https://fact-check.wordlift.io/review/aristotle-quote\",\n  \"reviewBody\": \"The quote 'It is the mark of an educated mind to be able to entertain a thought without accepting it.' is correctly attributable to Aristotle. It has been found in multiple credible sources, including publications of academic texts, reputable quote repositories, and philosophical discussions.\",\n  \"itemReviewed\": {\n    \"@type\": \"CreativeWork\",\n    \"url\": [\"https://www.azquotes.com/quote/10261\", \"https://philosiblog.com/2012/03/07/it-is-the-mark-of-an-educated-mind-to-be-able-to-entertain-a-thought-without-accepting-it/\", \"https://www.brainyquote.com/quotes/aristotle_100584\", \"https://www.goodreads.com/quotes/1629-it-is-the-mark-of-an-educated-mind-to-be\", \"https://www.socratic-method.com/philosophy-quote-meanings/aristotle-it-is-the-mark-of-an-educated-mind-to-be-able-to-entertain-a-thought-without-accepting-it\"]\n  }\n}"]})
     __properties: ClassVar[List[str]] = ["response"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -43,8 +45,7 @@ class SubmitFactCheck200Response(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **text** | **str** |  | 
 **start** | **int** |  | 
 **end** | **int** |  | 
-**type** | **str** |  | [optional] 
-**candidates** | [**List[ResolveCandidate]**](ResolveCandidate.md) |  | [optional] 
+**type** | **str** | Caller&#39;s type hint, e.g. Person, Organization | [optional] 
+**candidates** | [**List[ResolveCandidate]**](ResolveCandidate.md) | Identities retrieved by the caller; if omitted the engine retrieves against dataset_uri | [optional] 
 
 ## Example
 

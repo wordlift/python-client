@@ -12,7 +12,10 @@ Method | HTTP request | Description
 
 List Segment Summary
 
-Account-wide monitor/expectation counters grouped by segment — replaces the N+1 pattern of paginated `monitors`/`expectations` list calls with `segment_id` + `limit=1` just to read their totals. One request returns every segment's counters regardless of how many segments the account has.
+Account-wide monitor/expectation counters grouped by segment — replaces
+the N+1 pattern of paginated `monitors`/`expectations` list calls with
+`segment_id` + `limit=1` just to read their totals. One request returns
+every segment's counters regardless of how many segments the account has.
 
 ### Example
 

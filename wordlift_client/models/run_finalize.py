@@ -25,19 +25,21 @@ from typing_extensions import Annotated
 from wordlift_client.models.run_status import RunStatus
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class RunFinalize(BaseModel):
     """
     RunFinalize
     """ # noqa: E501
     status: RunStatus
-    url_count: Optional[Annotated[int, Field(strict=True, ge=0)]] = None
-    failure_count: Optional[Annotated[int, Field(strict=True, ge=0)]] = None
-    ended_at: Optional[datetime] = None
+    url_count: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="Total URLs in this run.")
+    failure_count: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="Total URL failures.")
+    ended_at: Optional[datetime] = Field(default=None, description="Client-side wall-clock time when the run ended.")
     __properties: ClassVar[List[str]] = ["status", "url_count", "failure_count", "ended_at"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -49,8 +51,7 @@ class RunFinalize(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

@@ -24,6 +24,7 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class ContentGeneration(BaseModel):
     """
@@ -48,7 +49,8 @@ class ContentGeneration(BaseModel):
     __properties: ClassVar[List[str]] = ["account_id", "created_at", "deleted", "deleted_at", "graphql_query", "id", "max_tokens", "min_words", "model_id", "modified_at", "name", "penalty", "prompt_template", "stop", "temperature", "words_to_ignore"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -60,8 +62,7 @@ class ContentGeneration(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

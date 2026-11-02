@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from wordlift_client.models.node_request_metadata_value import NodeRequestMetadataValue
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class NodeRequest(BaseModel):
     """
@@ -36,7 +37,8 @@ class NodeRequest(BaseModel):
     __properties: ClassVar[List[str]] = ["embeddings", "entity_id", "metadata", "node_id", "text"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -48,8 +50,7 @@ class NodeRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -77,9 +78,8 @@ class NodeRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
         _field_dict = {}
         if self.metadata:
-            for _key in self.metadata:
-                if self.metadata[_key]:
-                    _field_dict[_key] = self.metadata[_key].to_dict()
+            for _key_metadata in self.metadata:
+                _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict() if self.metadata[_key_metadata] is not None else None
             _dict['metadata'] = _field_dict
         return _dict
 

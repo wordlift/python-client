@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.segment_response import SegmentResponse
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class ListSegmentsResponse(BaseModel):
     """
@@ -34,7 +35,8 @@ class ListSegmentsResponse(BaseModel):
     __properties: ClassVar[List[str]] = ["items", "total", "next_cursor"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -46,8 +48,7 @@ class ListSegmentsResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -75,9 +76,8 @@ class ListSegmentsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in items (list)
         _items = []
         if self.items:
-            for _item in self.items:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_items in self.items:
+                _items.append(_item_items.to_dict() if _item_items is not None else None)
             _dict['items'] = _items
         # set to None if next_cursor (nullable) is None
         # and model_fields_set contains the field

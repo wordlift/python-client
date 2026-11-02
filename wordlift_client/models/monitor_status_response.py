@@ -25,6 +25,7 @@ from wordlift_client.models.expectation_evaluation_summary import ExpectationEva
 from wordlift_client.models.monitor_status_check_status import MonitorStatusCheckStatus
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class MonitorStatusResponse(BaseModel):
     """
@@ -46,7 +47,8 @@ class MonitorStatusResponse(BaseModel):
     __properties: ClassVar[List[str]] = ["monitor_id", "url", "status", "score", "ttfb_ms", "response_time_ms", "status_code", "last_fetch_success", "oldest_check_at", "latest_check_at", "checks", "segment_ids", "expectation_evaluations"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -58,8 +60,7 @@ class MonitorStatusResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -87,9 +88,8 @@ class MonitorStatusResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in expectation_evaluations (list)
         _items = []
         if self.expectation_evaluations:
-            for _item in self.expectation_evaluations:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_expectation_evaluations in self.expectation_evaluations:
+                _items.append(_item_expectation_evaluations.to_dict() if _item_expectation_evaluations is not None else None)
             _dict['expectation_evaluations'] = _items
         # set to None if url (nullable) is None
         # and model_fields_set contains the field

@@ -12,7 +12,9 @@ Method | HTTP request | Description
 
 List Checks
 
-List check identifiers — stable ids, not display labels; the UI maps them to its own labels/i18n. Deployment metadata, not tenant data, so the endpoint is unauthenticated like ``/health``.
+List check identifiers — stable ids, not display labels; the UI maps
+them to its own labels/i18n. Deployment metadata, not tenant data, so the
+endpoint is unauthenticated like ``/health``.
 
 ### Example
 

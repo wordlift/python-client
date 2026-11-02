@@ -23,22 +23,24 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class SubmitJobBody(BaseModel):
     """
     SubmitJobBody
     """ # noqa: E501
-    snapshot_date: StrictStr = Field(description="Logical KPI day to calculate in `YYYY-MM-DD` format.")
+    snapshot_date: StrictStr = Field(description="Logical KPI day to calculate in `YYYY-MM-DD` format.", json_schema_extra={"examples": ["2026-03-13"]})
     force_rerun: Optional[StrictBool] = Field(default=False, description="If `true`, ignore the 24-hour freshness rule and replace a currently active job.")
     stage_retries: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=1, description="Number of retries allowed for each stage before the job fails.")
-    limit_documents: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
-    limit_urls: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    limit_documents: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=None, description="Optional source document cap for bounded testing and smoke jobs.")
+    limit_urls: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=None, description="Optional URL validation cap for bounded testing and smoke jobs.")
     skip_validation: Optional[StrictBool] = Field(default=False, description="If `true`, skip the SHACL/rich-snippet validation stage.")
     replace_validation: Optional[StrictBool] = Field(default=False, description="If `true`, replace previously persisted validation output for the same graph/day.")
     __properties: ClassVar[List[str]] = ["snapshot_date", "force_rerun", "stage_retries", "limit_documents", "limit_urls", "skip_validation", "replace_validation"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -50,8 +52,7 @@ class SubmitJobBody(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

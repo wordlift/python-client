@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.link_group import LinkGroup
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class LinkGroupResponse(BaseModel):
     """
@@ -32,7 +33,8 @@ class LinkGroupResponse(BaseModel):
     __properties: ClassVar[List[str]] = ["link_groups"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -44,8 +46,7 @@ class LinkGroupResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -73,9 +74,8 @@ class LinkGroupResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in link_groups (list)
         _items = []
         if self.link_groups:
-            for _item in self.link_groups:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_link_groups in self.link_groups:
+                _items.append(_item_link_groups.to_dict() if _item_link_groups is not None else None)
             _dict['link_groups'] = _items
         return _dict
 

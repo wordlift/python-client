@@ -22,7 +22,9 @@ Method | HTTP request | Description
 
 Attach Expectation Monitor
 
-Attach a monitor directly to a rule with the given severity — the account-scoped (URL-less) analog of ``attach_expectation_segment``. Idempotent — a repeated attach updates the severity.
+Attach a monitor directly to a rule with the given severity — the
+account-scoped (URL-less) analog of ``attach_expectation_segment``.
+Idempotent — a repeated attach updates the severity.
 
 ### Example
 
@@ -109,7 +111,10 @@ Name | Type | Description  | Notes
 
 Attach Expectation Segment
 
-Attach a segment to a rule with the given severity. Idempotent — a repeated attach updates the severity. Returns confirmation of what was written — the caller already has both fields, and no endpoint on this resource hydrates the full segment (see the segment catalog for that).
+Attach a segment to a rule with the given severity. Idempotent — a
+repeated attach updates the severity. Returns confirmation of what was
+written — the caller already has both fields, and no endpoint on this
+resource hydrates the full segment (see the segment catalog for that).
 
 ### Example
 
@@ -192,11 +197,14 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_expectation_accounts_account_id_monitoring_expectations_post**
-> Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost create_expectation_accounts_account_id_monitoring_expectations_post(account_id, body)
+> StructuredDataExpectationResponse create_expectation_accounts_account_id_monitoring_expectations_post(account_id, structured_data_expectation_request)
 
 Create Expectation
 
-Create a rule. Idempotent on conflict: an identical (type, config) rule returns the existing rule with 200; a new rule returns 201. Attachments (and their severity) are managed via the segments sub-resource.
+Create a rule. Idempotent on conflict: an identical (type, config)
+rule returns the existing rule with 200; a new rule returns 201.
+Attachments (and their severity) are managed via the segments
+sub-resource.
 
 ### Example
 
@@ -204,8 +212,8 @@ Create a rule. Idempotent on conflict: an identical (type, config) rule returns 
 
 ```python
 import wordlift_client
-from wordlift_client.models.body import Body
-from wordlift_client.models.response200_create_expectation_accounts_account_id_monitoring_expectations_post import Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost
+from wordlift_client.models.structured_data_expectation_request import StructuredDataExpectationRequest
+from wordlift_client.models.structured_data_expectation_response import StructuredDataExpectationResponse
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -231,11 +239,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wordlift_client.ExpectationsApi(api_client)
     account_id = 'account_id_example' # str | 
-    body = wordlift_client.Body() # Body | 
+    structured_data_expectation_request = wordlift_client.StructuredDataExpectationRequest() # StructuredDataExpectationRequest | 
 
     try:
         # Create Expectation
-        api_response = await api_instance.create_expectation_accounts_account_id_monitoring_expectations_post(account_id, body)
+        api_response = await api_instance.create_expectation_accounts_account_id_monitoring_expectations_post(account_id, structured_data_expectation_request)
         print("The response of ExpectationsApi->create_expectation_accounts_account_id_monitoring_expectations_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -250,11 +258,11 @@ async with wordlift_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **account_id** | **str**|  | 
- **body** | [**Body**](Body.md)|  | 
+ **structured_data_expectation_request** | [**StructuredDataExpectationRequest**](StructuredDataExpectationRequest.md)|  | 
 
 ### Return type
 
-[**Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost**](Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost.md)
+[**StructuredDataExpectationResponse**](StructuredDataExpectationResponse.md)
 
 ### Authorization
 
@@ -515,7 +523,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get**
-> ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get(expectation_id, account_id)
+> StructuredDataExpectationResponse get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get(expectation_id, account_id)
 
 Get Expectation
 
@@ -525,7 +533,7 @@ Get Expectation
 
 ```python
 import wordlift_client
-from wordlift_client.models.response_get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get import ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet
+from wordlift_client.models.structured_data_expectation_response import StructuredDataExpectationResponse
 from wordlift_client.rest import ApiException
 from pprint import pprint
 
@@ -574,7 +582,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet**](ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet.md)
+[**StructuredDataExpectationResponse**](StructuredDataExpectationResponse.md)
 
 ### Authorization
 
@@ -599,7 +607,10 @@ Name | Type | Description  | Notes
 
 List Expectation Segments
 
-Return a page of segment ids attached to the rule, ordered by the segment's own ``(created_at, id)``, each carrying the severity of its attachment. Not hydrated — pair with the segment catalog you already have (segments are a small, bounded set) to resolve names/descriptions.
+Return a page of segment ids attached to the rule, ordered by the
+segment's own ``(created_at, id)``, each carrying the severity of its
+attachment. Not hydrated — pair with the segment catalog you already
+have (segments are a small, bounded set) to resolve names/descriptions.
 
 ### Example
 
@@ -773,7 +784,16 @@ Name | Type | Description  | Notes
 
 List Segment Expectations
 
-Return a page of expectation ids attached to the segment, ordered by the expectation's own ``(created_at, id)``, each carrying the severity of its attachment — the reverse of ``GET /expectations/{id}/segments``.  Pass ``expectation_id`` (repeatable) to batch a known, bounded set of severity lookups in one call instead of one request per expectation: since the junction key is ``(expectation_id, segment_id)``, a filtered page can never return more rows than ids supplied. Not hydrated — pair with the expectation catalog you already have (or fetch via ``GET /expectations?id=...``) to resolve type/config.
+Return a page of expectation ids attached to the segment, ordered by
+the expectation's own ``(created_at, id)``, each carrying the severity of
+its attachment — the reverse of ``GET /expectations/{id}/segments``.
+
+Pass ``expectation_id`` (repeatable) to batch a known, bounded set of
+severity lookups in one call instead of one request per expectation:
+since the junction key is ``(expectation_id, segment_id)``, a filtered
+page can never return more rows than ids supplied. Not hydrated — pair
+with the expectation catalog you already have (or fetch via
+``GET /expectations?id=...``) to resolve type/config.
 
 ### Example
 
@@ -861,7 +881,9 @@ Name | Type | Description  | Notes
 
 Replace Expectation Segments
 
-Replace the rule's set of attached segments (and their severities) wholesale. Returns confirmation of the new attached set, not re-fetched segments — no endpoint on this resource hydrates the full segment.
+Replace the rule's set of attached segments (and their severities) wholesale.
+Returns confirmation of the new attached set, not re-fetched segments —
+no endpoint on this resource hydrates the full segment.
 
 ### Example
 

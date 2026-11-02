@@ -12,7 +12,8 @@ Method | HTTP request | Description
 
 Get the Web Data URI for a Web Page URL.
 
-The service will return a Web Data URI only for existing datasets. The Web Data URI is not guaranteed to exist (i.e. it may return 404). 
+The service will return a Web Data URI only for existing datasets. The Web Data URI is not guaranteed to exist (i.e. it may return 404).
+
 
 ### Example
 

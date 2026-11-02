@@ -24,6 +24,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.proxy_tier import ProxyTier
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class FetchResponse(BaseModel):
     """
@@ -32,29 +33,30 @@ class FetchResponse(BaseModel):
     success: StrictBool = Field(description="Whether the fetch completed successfully.")
     url_requested: StrictStr = Field(description="The URL originally requested.")
     url_final: StrictStr = Field(description="The final URL after any redirects.")
-    status_code: Optional[StrictInt] = None
-    content_type: Optional[StrictStr] = None
-    body: Optional[StrictStr] = None
-    original_charset: Optional[StrictStr] = None
-    markdown: Optional[StrictStr] = None
-    title: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
-    text: Optional[StrictStr] = None
-    error_code: Optional[StrictStr] = None
-    error_message: Optional[StrictStr] = None
-    ttfb_ms: Optional[StrictInt] = None
-    response_time_ms: Optional[StrictInt] = None
-    networkidle_response_time_ms: Optional[StrictInt] = None
-    fetched_at: Optional[datetime] = None
+    status_code: Optional[StrictInt] = Field(default=None, description="HTTP response status code.")
+    content_type: Optional[StrictStr] = Field(default=None, description="Response Content-Type header value.")
+    body: Optional[StrictStr] = Field(default=None, description="The fetched document as UTF-8 text: HTML with its <meta charset> rewritten to UTF-8, or a plain text, Markdown, JSON or XML body unchanged except for the XML declaration's encoding, rewritten to UTF-8.")
+    original_charset: Optional[StrictStr] = Field(default=None, description="Charset the body was decoded with before normalization to UTF-8, as a browser picks it, under its WHATWG Encoding Standard name: Latin-1 and ASCII labels report windows-1252, gb2312 reports gbk. Labels browsers don't know are skipped; utf-8 when none is declared.")
+    markdown: Optional[StrictStr] = Field(default=None, description="Page content extracted as Markdown. For a Markdown response, the body itself; null for plain text, JSON and XML responses.")
+    title: Optional[StrictStr] = Field(default=None, description="Page title extracted by trafilatura. Null for plain text, Markdown, JSON and XML responses.")
+    description: Optional[StrictStr] = Field(default=None, description="Page description/abstract extracted by trafilatura. Null for plain text, Markdown, JSON and XML responses.")
+    text: Optional[StrictStr] = Field(default=None, description="Plain text content extracted by trafilatura. Null for plain text, Markdown, JSON and XML responses.")
+    error_code: Optional[StrictStr] = Field(default=None, description="Machine-readable error code if the fetch failed.")
+    error_message: Optional[StrictStr] = Field(default=None, description="Human-readable error detail if the fetch failed.")
+    ttfb_ms: Optional[StrictInt] = Field(default=None, description="Time to first byte in milliseconds.")
+    response_time_ms: Optional[StrictInt] = Field(default=None, description="Total response time in milliseconds (from request sent to body received).")
+    networkidle_response_time_ms: Optional[StrictInt] = Field(default=None, description="Time in milliseconds from request sent until Playwright's 'networkidle' load event, when target_load_event='networkidle' was requested.")
+    fetched_at: Optional[datetime] = Field(default=None, description="When the page was fetched. Significantly older than now means the result was served from cache.")
     from_cache: Optional[StrictBool] = Field(default=False, description="True when the response was served from a previously stored fetch result.")
-    har: Optional[Dict[str, Any]] = None
-    effective_proxy_mode: Optional[ProxyTier] = None
-    html: Optional[StrictStr] = None
+    har: Optional[Dict[str, Any]] = Field(default=None, description="HAR 1.2 log of all network activity captured during the fetch. Null when not available for the given fetch strategy.")
+    effective_proxy_mode: Optional[ProxyTier] = Field(default=None, description="Proxy tier of the final fetch attempt, after any proxy_mode='auto' escalation. For cache hits, the tier of the fetch that produced the cached content. Null when the fetch worker did not respond, or for cache entries stored before the tier was recorded.")
+    html: Optional[StrictStr] = Field(default=None, description="Deprecated: same value as `body`, which also carries non-HTML bodies.")
     har_truncated: StrictBool = Field(description="True when the HAR log was truncated after hitting the size cap, so it covers only part of the page's network activity.")
     __properties: ClassVar[List[str]] = ["success", "url_requested", "url_final", "status_code", "content_type", "body", "original_charset", "markdown", "title", "description", "text", "error_code", "error_message", "ttfb_ms", "response_time_ms", "networkidle_response_time_ms", "fetched_at", "from_cache", "har", "effective_proxy_mode", "html", "har_truncated"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -66,8 +68,7 @@ class FetchResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -84,8 +85,10 @@ class FetchResponse(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "html",
             "har_truncated",
         ])
 

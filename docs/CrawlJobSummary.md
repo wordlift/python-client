@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **run_id** | **str** | Execution run identifier. | 
 **status** | [**JobStatus**](JobStatus.md) |  | 
 **created_at** | **datetime** | Job creation timestamp (UTC). | 
-**started_at** | **datetime** |  | [optional] 
-**finished_at** | **datetime** |  | [optional] 
+**started_at** | **datetime** | Job start timestamp (UTC). | [optional] 
+**finished_at** | **datetime** | Job completion timestamp (UTC). | [optional] 
 **website_url** | **str** | Canonical website URL used as crawl boundary. | 
 **sitemaps** | **List[str]** | Sitemap URLs configured for this crawl job. | 
 **pages_count** | **int** | Number of persisted page results for this job. | [optional] [default to 0]

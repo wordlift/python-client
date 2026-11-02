@@ -25,6 +25,7 @@ from wordlift_client.models.monitor_run_status import MonitorRunStatus
 from wordlift_client.models.monitor_type_progress import MonitorTypeProgress
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class MonitorRunResponse(BaseModel):
     """
@@ -43,7 +44,8 @@ class MonitorRunResponse(BaseModel):
     __properties: ClassVar[List[str]] = ["id", "status", "dispatched_pages", "fetched_pages", "failed_fetches", "checked_pages", "progress", "end_at", "last_progress_at", "created_at"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -55,8 +57,7 @@ class MonitorRunResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -84,9 +85,8 @@ class MonitorRunResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in progress (list)
         _items = []
         if self.progress:
-            for _item in self.progress:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_progress in self.progress:
+                _items.append(_item_progress.to_dict() if _item_progress is not None else None)
             _dict['progress'] = _items
         # set to None if end_at (nullable) is None
         # and model_fields_set contains the field

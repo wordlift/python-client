@@ -23,19 +23,21 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class AnalyzeContentRequest(BaseModel):
     """
     AnalyzeContentRequest
     """ # noqa: E501
-    url: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=2083)]] = None
-    text: Optional[StrictStr] = None
+    url: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=2083)]] = Field(default=None, description="URL to analyze")
+    text: Optional[StrictStr] = Field(default=None, description="Raw text to analyze")
     num_queries: Optional[Annotated[int, Field(le=20, strict=True, ge=1)]] = Field(default=10, description="Number of synthetic queries to generate")
     coverage_threshold: Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]] = Field(default=0.65, description="The threshold for answering synthetic queries")
     __properties: ClassVar[List[str]] = ["url", "text", "num_queries", "coverage_threshold"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -47,8 +49,7 @@ class AnalyzeContentRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

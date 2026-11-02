@@ -25,6 +25,7 @@ from wordlift_client.models.inline_dataset import InlineDataset
 from wordlift_client.models.resolve_mention import ResolveMention
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class ResolveRequest(BaseModel):
     """
@@ -32,15 +33,16 @@ class ResolveRequest(BaseModel):
     """ # noqa: E501
     text: Annotated[str, Field(min_length=1, strict=True, max_length=100000)]
     dataset_uri: Optional[StrictStr] = Field(default='wikidata://public', description="The world to resolve against: `wikidata://public` (default), `wordlift://dataset/me` (your WordLift graph, read with your key), `inline` (with `dataset`), or a comma-separated ordered list such as `wordlift://dataset/me,wikidata://public` (your entities first, Wikidata for the rest).")
-    language: Optional[StrictStr] = None
-    mentions: Optional[List[ResolveMention]] = None
+    language: Optional[StrictStr] = Field(default=None, description="ISO 639-1; auto-detected if omitted")
+    mentions: Optional[List[ResolveMention]] = Field(default=None, description="Explicit spans; if omitted the engine detects mentions")
     include: Optional[List[StrictStr]] = Field(default=None, description="Diagnostics: candidates, evidence")
     confidence: Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]] = Field(default=0.5, description="NER threshold when the engine detects mentions")
-    dataset: Optional[InlineDataset] = None
+    dataset: Optional[InlineDataset] = Field(default=None, description="An inline vocabulary (up to 5,000 entities): the answer is one of these ids or unresolved. Implies dataset_uri `inline`.")
     __properties: ClassVar[List[str]] = ["text", "dataset_uri", "language", "mentions", "include", "confidence", "dataset"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -52,8 +54,7 @@ class ResolveRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -81,9 +82,8 @@ class ResolveRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in mentions (list)
         _items = []
         if self.mentions:
-            for _item in self.mentions:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_mentions in self.mentions:
+                _items.append(_item_mentions.to_dict() if _item_mentions is not None else None)
             _dict['mentions'] = _items
         # override the default output from pydantic by calling `to_dict()` of dataset
         if self.dataset:

@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     WordLift API
 
@@ -23,13 +21,12 @@ from setuptools import setup, find_packages  # noqa: H301
 # http://pypi.python.org/pypi/setuptools
 NAME = "wordlift-client"
 VERSION = "1.223.0"
-PYTHON_REQUIRES = ">=3.7"
+PYTHON_REQUIRES = ">= 3.11"
 REQUIRES = [
-    "urllib3 >= 1.25.3, < 2.1.0",
-    "python-dateutil",
-    "aiohttp >= 3.0.0",
+    "python-dateutil >= 2.8.2",
+    "aiohttp >= 3.14.1",
     "aiohttp-retry >= 2.8.3",
-    "pydantic >= 2",
+    "pydantic >= 2.11",
     "typing-extensions >= 4.7.1",
 ]
 

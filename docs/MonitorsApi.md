@@ -16,7 +16,8 @@ Method | HTTP request | Description
 
 Add Monitor
 
-Adds a URL to the monitoring list for the given account, or the account itself (type=\"account\", no url) as a single sitewide monitor.
+Adds a URL to the monitoring list for the given account, or the account itself
+(type="account", no url) as a single sitewide monitor.
 
 ### Example
 

@@ -12,7 +12,8 @@ Method | HTTP request | Description
 
 Generate Sitemap
 
-Generates a sitemap from a GraphQL query to WordLift KG. You must provide a valid GraphQL query as the request body. 
+Generates a sitemap from a GraphQL query to WordLift KG. You must provide a valid GraphQL query as the request body.
+
 
 ### Example
 

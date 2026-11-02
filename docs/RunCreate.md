@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **profile** | **str** | Graph sync profile name. | 
 **sdk_version** | **str** | wordlift-sdk version used for this run. | 
-**worai_version** | **str** |  | [optional] 
+**worai_version** | **str** | worai version, if the run was triggered via worai. Null when SDK is called directly. | [optional] 
 **started_at** | **datetime** | Client-side wall-clock time when the run started. | 
 
 ## Example

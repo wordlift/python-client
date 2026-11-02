@@ -36,7 +36,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.8"
+          python-version: "3.12"
 
       # Step 5: Install Python dependencies
       - name: Install dependencies
@@ -70,13 +70,18 @@ jobs:
       - name: Normalize security scheme aliases
         run: python3 ./utils/normalize_security_schemes.py
 
+      # Step 9b: Keep generator >= 7.25 output API-compatible with earlier releases
+      # (unify case-variant tags, keep format: uuid fields typed as str)
+      - name: Normalize spec for client compatibility
+        run: python3 ./utils/normalize_compat.py
+
       # Step 10: Bump version in config.json
       - name: Bump version in config.json
         run: python3 ./utils/bump.py
 
       # Step 11: Generate the SDK
       - name: Generate the SDK
-        run: npx @openapitools/openapi-generator-cli generate -i ./wordliftApiSpec.yaml -g python -c config.json --package-name 'wordlift_client' --library 'asyncio' --additional-properties=pythonVersion=3.8
+        run: npx @openapitools/openapi-generator-cli generate -i ./wordliftApiSpec.yaml -g python -c config.json --package-name 'wordlift_client' --library 'asyncio' --additional-properties=pythonVersion=3.11,lazyImports=true
 
       # Step 12: Validate auth settings — fail on regressions vs previous release
       - name: Validate auth settings
@@ -84,7 +89,7 @@ jobs:
 
       - name: Patch generated files
         run: |
-          git apply -p1 .patches/1-add-str.patch
+          git apply -p1 .patches/1-lenient-content-type.patch
           cp -f requirements.pinned.txt requirements.txt
 
       # Step 3: Get version from setup
@@ -135,7 +140,7 @@ jobs:
     runs-on: ubuntu-24.04
     strategy:
       matrix:
-        python-version: [ "3.8", "3.9", "3.10", "3.11", "3.12" ]
+        python-version: [ "3.11", "3.12", "3.13" ]
 
     steps:
       # Step 1: Download the package

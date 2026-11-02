@@ -1,0 +1,20 @@
+--- a/wordlift_client/api_client.py
++++ b/wordlift_client/api_client.py
+@@ -443,10 +443,13 @@
+         elif re.match(r'^text\/[a-z.+-]+\s*(;|$)', content_type, re.IGNORECASE):
+             data = response_text
+         else:
+-            raise ApiException(
+-                status=0,
+-                reason="Unsupported content type: {0}".format(content_type)
+-            )
++            # Lenient fallback (generator <= 7.6 behaviour): the WordLift APIs also
++            # answer with e.g. application/x-ndjson or application/rdf+xml, which
++            # must not turn a successful response into an ApiException.
++            try:
++                data = json.loads(response_text)
++            except ValueError:
++                data = response_text
+ 
+         return self.__deserialize(data, response_type)
+ 

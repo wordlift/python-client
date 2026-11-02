@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **type** | **str** |  | [optional] 
 **status** | **str** | resolved | unresolved | 
 **entity** | [**ResolvedEntity**](ResolvedEntity.md) |  | [optional] 
-**score** | **float** |  | [optional] 
+**score** | **float** | Decision score; not a calibrated probability | [optional] 
 **reason** | **str** |  | [optional] 
 **candidates** | **List[Dict[str, object]]** |  | [optional] 
 **evidence** | **Dict[str, object]** |  | [optional] 

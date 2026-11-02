@@ -12,8 +12,6 @@ Method | HTTP request | Description
 # **delete_field**
 > delete_field(account_id, connector_id, field_name)
 
-
-
 ### Example
 
 * Api Key Authentication (ApiKey):
@@ -89,8 +87,6 @@ void (empty response body)
 # **fields**
 > Dict[str, str] fields(account_id, connector_id)
 
-
-
 ### Example
 
 * Api Key Authentication (ApiKey):
@@ -165,8 +161,6 @@ Name | Type | Description  | Notes
 
 # **put_field**
 > put_field(account_id, connector_id, field_name, field_value_request)
-
-
 
 ### Example
 

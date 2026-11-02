@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     WordLift API
 
@@ -12,6 +10,7 @@
     Do not edit the class manually.
 """  # noqa: E501
 
+
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -22,15 +21,14 @@ from typing import List, Optional
 from typing_extensions import Annotated
 from wordlift_client.models.attach_expectation_monitor_request import AttachExpectationMonitorRequest
 from wordlift_client.models.attach_expectation_segment_request import AttachExpectationSegmentRequest
-from wordlift_client.models.body import Body
 from wordlift_client.models.list_expectation_severity_response import ListExpectationSeverityResponse
 from wordlift_client.models.list_expectations_response import ListExpectationsResponse
 from wordlift_client.models.list_segment_severity_response import ListSegmentSeverityResponse
 from wordlift_client.models.monitor_severity_response import MonitorSeverityResponse
 from wordlift_client.models.replace_expectation_segments_request import ReplaceExpectationSegmentsRequest
-from wordlift_client.models.response200_create_expectation_accounts_account_id_monitoring_expectations_post import Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost
-from wordlift_client.models.response_get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get import ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet
 from wordlift_client.models.segment_severity_response import SegmentSeverityResponse
+from wordlift_client.models.structured_data_expectation_request import StructuredDataExpectationRequest
+from wordlift_client.models.structured_data_expectation_response import StructuredDataExpectationResponse
 
 from wordlift_client.api_client import ApiClient, RequestSerialized
 from wordlift_client.api_response import ApiResponse
@@ -305,9 +303,11 @@ class ExpectationsApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -326,15 +326,16 @@ class ExpectationsApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -344,7 +345,7 @@ class ExpectationsApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -624,9 +625,11 @@ class ExpectationsApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -645,15 +648,16 @@ class ExpectationsApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -663,7 +667,7 @@ class ExpectationsApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -692,7 +696,7 @@ class ExpectationsApi:
     async def create_expectation_accounts_account_id_monitoring_expectations_post(
         self,
         account_id: StrictStr,
-        body: Body,
+        structured_data_expectation_request: StructuredDataExpectationRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -705,15 +709,15 @@ class ExpectationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost:
+    ) -> StructuredDataExpectationResponse:
         """Create Expectation
 
         Create a rule. Idempotent on conflict: an identical (type, config) rule returns the existing rule with 200; a new rule returns 201. Attachments (and their severity) are managed via the segments sub-resource.
 
         :param account_id: (required)
         :type account_id: str
-        :param body: (required)
-        :type body: Body
+        :param structured_data_expectation_request: (required)
+        :type structured_data_expectation_request: StructuredDataExpectationRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -738,7 +742,7 @@ class ExpectationsApi:
 
         _param = self._create_expectation_accounts_account_id_monitoring_expectations_post_serialize(
             account_id=account_id,
-            body=body,
+            structured_data_expectation_request=structured_data_expectation_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -746,8 +750,8 @@ class ExpectationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost",
-            '201': "ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost",
+            '200': "StructuredDataExpectationResponse",
+            '201': "StructuredDataExpectationResponse",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -765,7 +769,7 @@ class ExpectationsApi:
     async def create_expectation_accounts_account_id_monitoring_expectations_post_with_http_info(
         self,
         account_id: StrictStr,
-        body: Body,
+        structured_data_expectation_request: StructuredDataExpectationRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -778,15 +782,15 @@ class ExpectationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost]:
+    ) -> ApiResponse[StructuredDataExpectationResponse]:
         """Create Expectation
 
         Create a rule. Idempotent on conflict: an identical (type, config) rule returns the existing rule with 200; a new rule returns 201. Attachments (and their severity) are managed via the segments sub-resource.
 
         :param account_id: (required)
         :type account_id: str
-        :param body: (required)
-        :type body: Body
+        :param structured_data_expectation_request: (required)
+        :type structured_data_expectation_request: StructuredDataExpectationRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -811,7 +815,7 @@ class ExpectationsApi:
 
         _param = self._create_expectation_accounts_account_id_monitoring_expectations_post_serialize(
             account_id=account_id,
-            body=body,
+            structured_data_expectation_request=structured_data_expectation_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -819,8 +823,8 @@ class ExpectationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost",
-            '201': "ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost",
+            '200': "StructuredDataExpectationResponse",
+            '201': "StructuredDataExpectationResponse",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -838,7 +842,7 @@ class ExpectationsApi:
     async def create_expectation_accounts_account_id_monitoring_expectations_post_without_preload_content(
         self,
         account_id: StrictStr,
-        body: Body,
+        structured_data_expectation_request: StructuredDataExpectationRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -858,8 +862,8 @@ class ExpectationsApi:
 
         :param account_id: (required)
         :type account_id: str
-        :param body: (required)
-        :type body: Body
+        :param structured_data_expectation_request: (required)
+        :type structured_data_expectation_request: StructuredDataExpectationRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -884,7 +888,7 @@ class ExpectationsApi:
 
         _param = self._create_expectation_accounts_account_id_monitoring_expectations_post_serialize(
             account_id=account_id,
-            body=body,
+            structured_data_expectation_request=structured_data_expectation_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -892,8 +896,8 @@ class ExpectationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost",
-            '201': "ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost",
+            '200': "StructuredDataExpectationResponse",
+            '201': "StructuredDataExpectationResponse",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -906,7 +910,7 @@ class ExpectationsApi:
     def _create_expectation_accounts_account_id_monitoring_expectations_post_serialize(
         self,
         account_id,
-        body,
+        structured_data_expectation_request,
         _request_auth,
         _content_type,
         _headers,
@@ -920,9 +924,11 @@ class ExpectationsApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -932,20 +938,21 @@ class ExpectationsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if body is not None:
-            _body_params = body
+        if structured_data_expectation_request is not None:
+            _body_params = structured_data_expectation_request
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -955,7 +962,7 @@ class ExpectationsApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -1206,9 +1213,11 @@ class ExpectationsApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1223,11 +1232,12 @@ class ExpectationsApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1495,9 +1505,11 @@ class ExpectationsApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1514,11 +1526,12 @@ class ExpectationsApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1786,9 +1799,11 @@ class ExpectationsApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1805,11 +1820,12 @@ class ExpectationsApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1852,7 +1868,7 @@ class ExpectationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet:
+    ) -> StructuredDataExpectationResponse:
         """Get Expectation
 
 
@@ -1892,7 +1908,7 @@ class ExpectationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet",
+            '200': "StructuredDataExpectationResponse",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -1923,7 +1939,7 @@ class ExpectationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet]:
+    ) -> ApiResponse[StructuredDataExpectationResponse]:
         """Get Expectation
 
 
@@ -1963,7 +1979,7 @@ class ExpectationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet",
+            '200': "StructuredDataExpectationResponse",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -2034,7 +2050,7 @@ class ExpectationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet",
+            '200': "StructuredDataExpectationResponse",
             '422': "MonitorHTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -2061,9 +2077,11 @@ class ExpectationsApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2078,11 +2096,12 @@ class ExpectationsApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -2363,9 +2382,11 @@ class ExpectationsApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2388,11 +2409,12 @@ class ExpectationsApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -2698,9 +2720,11 @@ class ExpectationsApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2733,11 +2757,12 @@ class ExpectationsApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -3032,9 +3057,11 @@ class ExpectationsApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3061,11 +3088,12 @@ class ExpectationsApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -3333,9 +3361,11 @@ class ExpectationsApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3352,15 +3382,16 @@ class ExpectationsApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -3370,7 +3401,7 @@ class ExpectationsApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [

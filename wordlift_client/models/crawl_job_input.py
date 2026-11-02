@@ -26,6 +26,7 @@ from wordlift_client.models.js_render_mode import JsRenderMode
 from wordlift_client.models.render_wait_until import RenderWaitUntil
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class CrawlJobInput(BaseModel):
     """
@@ -33,25 +34,26 @@ class CrawlJobInput(BaseModel):
     """ # noqa: E501
     website_url: Annotated[str, Field(min_length=1, strict=True, max_length=2083)] = Field(description="Canonical website URL used as crawl boundary.")
     sitemaps: Annotated[List[Annotated[str, Field(min_length=1, strict=True, max_length=2083)]], Field(min_length=1)] = Field(description="One or more sitemap URLs used as seed sources.")
-    max_concurrent_requests: Optional[StrictInt] = None
-    max_pages: Optional[StrictInt] = None
+    max_concurrent_requests: Optional[StrictInt] = Field(default=None, description="Per-job cap for concurrent URL processing.")
+    max_pages: Optional[StrictInt] = Field(default=None, description="Maximum number of pages to crawl before stopping.")
     request_timeout_ms: Optional[StrictInt] = Field(default=10000, description="HTTP request timeout in milliseconds.")
     render_timeout_ms: Optional[StrictInt] = Field(default=7000, description="Browser navigation timeout in milliseconds.")
     request_handler_timeout_ms: Optional[StrictInt] = Field(default=18000, description="Per-request handler timeout in milliseconds.")
     max_retries: Optional[StrictInt] = Field(default=2, description="Maximum retry attempts per URL.")
     respect_robots: Optional[StrictBool] = Field(default=True, description="Whether to enforce robots.txt directives.")
-    crawl_delay_override: Optional[Union[StrictFloat, StrictInt]] = None
+    crawl_delay_override: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional delay (seconds) before processing each page.")
     js_render_mode: Optional[JsRenderMode] = None
     discovery_sources: Optional[DiscoverySources] = None
     render_wait_until: Optional[RenderWaitUntil] = None
-    render_wait_for_selector: Optional[StrictStr] = None
+    render_wait_for_selector: Optional[StrictStr] = Field(default=None, description="Optional CSS selector to wait for before capture.")
     render_wait_for_timeout_ms: Optional[StrictInt] = Field(default=1500, description="Additional fixed wait after navigation in milliseconds.")
-    render_wait_for_js: Optional[StrictStr] = None
+    render_wait_for_js: Optional[StrictStr] = Field(default=None, description="Optional JavaScript condition evaluated until truthy.")
     render_max_total_wait_ms: Optional[StrictInt] = Field(default=11000, description="Absolute cap for total render wait budget in milliseconds.")
     __properties: ClassVar[List[str]] = ["website_url", "sitemaps", "max_concurrent_requests", "max_pages", "request_timeout_ms", "render_timeout_ms", "request_handler_timeout_ms", "max_retries", "respect_robots", "crawl_delay_override", "js_render_mode", "discovery_sources", "render_wait_until", "render_wait_for_selector", "render_wait_for_timeout_ms", "render_wait_for_js", "render_max_total_wait_ms"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -63,8 +65,7 @@ class CrawlJobInput(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

@@ -24,6 +24,7 @@ from wordlift_client.models.decision_signals import DecisionSignals
 from wordlift_client.models.resolved_entity import ResolvedEntity
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class MentionResolution(BaseModel):
     """
@@ -35,7 +36,7 @@ class MentionResolution(BaseModel):
     type: Optional[StrictStr] = None
     status: StrictStr = Field(description="resolved | unresolved")
     entity: Optional[ResolvedEntity] = None
-    score: Optional[Union[StrictFloat, StrictInt]] = None
+    score: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Decision score; not a calibrated probability")
     reason: Optional[StrictStr] = None
     candidates: Optional[List[Dict[str, Any]]] = None
     evidence: Optional[Dict[str, Any]] = None
@@ -44,7 +45,8 @@ class MentionResolution(BaseModel):
     __properties: ClassVar[List[str]] = ["text", "start", "end", "type", "status", "entity", "score", "reason", "candidates", "evidence", "dataset_uri", "signals"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -56,8 +58,7 @@ class MentionResolution(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

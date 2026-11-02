@@ -346,7 +346,12 @@ Name | Type | Description  | Notes
 
 Update Segment
 
-Replace the segment's mutable fields.  PUT replaces *every* mutable field; an omitted field is reset to its default. For ``description``, the default is ``null`` — so a body that omits ``description`` clears any existing value. Clients that want to preserve a field must send it explicitly.
+Replace the segment's mutable fields.
+
+PUT replaces *every* mutable field; an omitted field is reset to its
+default. For ``description``, the default is ``null`` — so a body
+that omits ``description`` clears any existing value. Clients that
+want to preserve a field must send it explicitly.
 
 ### Example
 

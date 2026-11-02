@@ -22,35 +22,37 @@ from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, Stric
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class JobResponse(BaseModel):
     """
     JobResponse
     """ # noqa: E501
-    job_id: StrictStr = Field(description="Unique job identifier.")
-    graph_id: StrictStr = Field(description="Public WordLift graph identifier.")
-    snapshot_date: StrictStr = Field(description="Logical KPI day targeted by the job.")
-    status: StrictStr = Field(description="Current job status.")
-    stage: StrictStr = Field(description="Current or last completed job stage. Cloned snapshots use `clone`.")
-    started_at: Optional[StrictStr] = None
-    finished_at: Optional[StrictStr] = None
-    heartbeat_at: Optional[StrictStr] = None
-    documents_seen: Optional[StrictInt] = None
-    documents_transformed: Optional[StrictInt] = None
-    triple_rows_written: Optional[StrictInt] = None
-    issues_written: Optional[StrictInt] = None
-    retry_count: Optional[StrictInt] = None
-    error_code: Optional[StrictStr] = None
-    error_message: Optional[StrictStr] = None
-    account_dataset_id: Optional[StrictStr] = None
-    website_url: Optional[StrictStr] = None
-    stage_timings_json: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = None
-    runtime_profile_json: Optional[Dict[str, Any]] = None
+    job_id: StrictStr = Field(description="Unique job identifier.", json_schema_extra={"examples": ["job_20260313_5bdaac21"]})
+    graph_id: StrictStr = Field(description="Public WordLift graph identifier.", json_schema_extra={"examples": ["1506805"]})
+    snapshot_date: StrictStr = Field(description="Logical KPI day targeted by the job.", json_schema_extra={"examples": ["2026-03-13"]})
+    status: StrictStr = Field(description="Current job status.", json_schema_extra={"examples": ["completed"]})
+    stage: StrictStr = Field(description="Current or last completed job stage. Cloned snapshots use `clone`.", json_schema_extra={"examples": ["validate"]})
+    started_at: Optional[StrictStr] = Field(default=None, description="Timestamp when the job started.")
+    finished_at: Optional[StrictStr] = Field(default=None, description="Timestamp when the job finished, if complete.")
+    heartbeat_at: Optional[StrictStr] = Field(default=None, description="Last heartbeat timestamp emitted by the worker.")
+    documents_seen: Optional[StrictInt] = Field(default=None, description="Number of source documents scanned so far.")
+    documents_transformed: Optional[StrictInt] = Field(default=None, description="Number of source documents transformed so far.")
+    triple_rows_written: Optional[StrictInt] = Field(default=None, description="Number of helper/assertion rows materialized so far.")
+    issues_written: Optional[StrictInt] = Field(default=None, description="Number of validation issue rows persisted so far.")
+    retry_count: Optional[StrictInt] = Field(default=None, description="How many stage retries were used.")
+    error_code: Optional[StrictStr] = Field(default=None, description="Machine-readable failure code, if any.")
+    error_message: Optional[StrictStr] = Field(default=None, description="Human-readable failure message, if any.")
+    account_dataset_id: Optional[StrictStr] = Field(default=None, description="Resolved internal dataset identifier used for Mongo access.")
+    website_url: Optional[StrictStr] = Field(default=None, description="Configured website URL resolved for the graph.")
+    stage_timings_json: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="Per-stage elapsed time in seconds.")
+    runtime_profile_json: Optional[Dict[str, Any]] = Field(default=None, description="Structured calculate-stage runtime profile including fetch/analyze/flush timings and Mongo batch latency stats.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["job_id", "graph_id", "snapshot_date", "status", "stage", "started_at", "finished_at", "heartbeat_at", "documents_seen", "documents_transformed", "triple_rows_written", "issues_written", "retry_count", "error_code", "error_message", "account_dataset_id", "website_url", "stage_timings_json", "runtime_profile_json"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -62,8 +64,7 @@ class JobResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
