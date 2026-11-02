@@ -25,6 +25,7 @@ from wordlift_client.models.crawl_job_input import CrawlJobInput
 from wordlift_client.models.job_status import JobStatus
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class CrawlJobResponse(BaseModel):
     """
@@ -34,17 +35,18 @@ class CrawlJobResponse(BaseModel):
     run_id: StrictStr = Field(description="Execution run identifier.")
     status: JobStatus
     created_at: datetime = Field(description="Job creation timestamp (UTC).")
-    started_at: Optional[datetime] = None
-    finished_at: Optional[datetime] = None
+    started_at: Optional[datetime] = Field(default=None, description="Job start timestamp (UTC).")
+    finished_at: Optional[datetime] = Field(default=None, description="Job completion timestamp (UTC).")
     input: CrawlJobInput
     pages_total: Optional[StrictInt] = Field(default=0, description="Total number of persisted page results for this job.")
     pages_with_error: Optional[StrictInt] = Field(default=0, description="Number of persisted page results with crawl/HTTP errors.")
-    error_message: Optional[StrictStr] = None
+    error_message: Optional[StrictStr] = Field(default=None, description="Terminal error message when the job fails.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "run_id", "status", "created_at", "started_at", "finished_at", "input", "pages_total", "pages_with_error", "error_message"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -56,8 +58,7 @@ class CrawlJobResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

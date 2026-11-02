@@ -26,6 +26,7 @@ from wordlift_client.models.image import Image
 from wordlift_client.models.topic import Topic
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class Response(BaseModel):
     """
@@ -40,7 +41,8 @@ class Response(BaseModel):
     __properties: ClassVar[List[str]] = ["entities", "annotations", "images", "languages", "topics", "content"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -52,8 +54,7 @@ class Response(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -81,30 +82,26 @@ class Response(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each value in entities (dict)
         _field_dict = {}
         if self.entities:
-            for _key in self.entities:
-                if self.entities[_key]:
-                    _field_dict[_key] = self.entities[_key].to_dict()
+            for _key_entities in self.entities:
+                _field_dict[_key_entities] = self.entities[_key_entities].to_dict() if self.entities[_key_entities] is not None else None
             _dict['entities'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each value in annotations (dict)
         _field_dict = {}
         if self.annotations:
-            for _key in self.annotations:
-                if self.annotations[_key]:
-                    _field_dict[_key] = self.annotations[_key].to_dict()
+            for _key_annotations in self.annotations:
+                _field_dict[_key_annotations] = self.annotations[_key_annotations].to_dict() if self.annotations[_key_annotations] is not None else None
             _dict['annotations'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each item in images (list)
         _items = []
         if self.images:
-            for _item in self.images:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_images in self.images:
+                _items.append(_item_images.to_dict() if _item_images is not None else None)
             _dict['images'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in topics (list)
         _items = []
         if self.topics:
-            for _item in self.topics:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_topics in self.topics:
+                _items.append(_item_topics.to_dict() if _item_topics is not None else None)
             _dict['topics'] = _items
         return _dict
 

@@ -54,7 +54,6 @@ docs/AutomationReadiness.md
 docs/BatchRequest.md
 docs/BatchResponse.md
 docs/BatchStatus.md
-docs/Body.md
 docs/BootstrapApi.md
 docs/BootstrapJobOutcome.md
 docs/BootstrapJobResponse.md
@@ -213,7 +212,6 @@ docs/JobListResponse.md
 docs/JobResponse.md
 docs/JobStatus.md
 docs/JobsApi.md
-docs/JobsApi.md
 docs/JsRenderMode.md
 docs/JsRendering.md
 docs/KgEmbeddingRequest.md
@@ -367,9 +365,6 @@ docs/ResourcesRobotsTxt.md
 docs/ResourcesSkillMd.md
 docs/ResourcesWebmcpToolsJson.md
 docs/Response.md
-docs/Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost.md
-docs/ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost.md
-docs/ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet.md
 docs/ResponseListWebsitePagesWebsitesHostPagesGet.md
 docs/Rule.md
 docs/RuleRequest.md
@@ -530,7 +525,6 @@ wordlift_client/api/include_excludes_api.py
 wordlift_client/api/inspector_api.py
 wordlift_client/api/internal_links_api.py
 wordlift_client/api/jobs_api.py
-wordlift_client/api/jobs_api.py
 wordlift_client/api/kpis_api.py
 wordlift_client/api/link_groups_api.py
 wordlift_client/api/long_tails_api.py
@@ -617,7 +611,6 @@ wordlift_client/models/automation_readiness.py
 wordlift_client/models/batch_request.py
 wordlift_client/models/batch_response.py
 wordlift_client/models/batch_status.py
-wordlift_client/models/body.py
 wordlift_client/models/bootstrap_job_outcome.py
 wordlift_client/models/bootstrap_job_response.py
 wordlift_client/models/bootstrap_job_status.py
@@ -867,9 +860,6 @@ wordlift_client/models/resources_robots_txt.py
 wordlift_client/models/resources_skill_md.py
 wordlift_client/models/resources_webmcp_tools_json.py
 wordlift_client/models/response.py
-wordlift_client/models/response200_create_expectation_accounts_account_id_monitoring_expectations_post.py
-wordlift_client/models/response_create_expectation_accounts_account_id_monitoring_expectations_post.py
-wordlift_client/models/response_get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get.py
 wordlift_client/models/response_list_website_pages_websites_host_pages_get.py
 wordlift_client/models/rule.py
 wordlift_client/models/rule_request.py

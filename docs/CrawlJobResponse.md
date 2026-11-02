@@ -9,12 +9,12 @@ Name | Type | Description | Notes
 **run_id** | **str** | Execution run identifier. | 
 **status** | [**JobStatus**](JobStatus.md) |  | 
 **created_at** | **datetime** | Job creation timestamp (UTC). | 
-**started_at** | **datetime** |  | [optional] 
-**finished_at** | **datetime** |  | [optional] 
+**started_at** | **datetime** | Job start timestamp (UTC). | [optional] 
+**finished_at** | **datetime** | Job completion timestamp (UTC). | [optional] 
 **input** | [**CrawlJobInput**](CrawlJobInput.md) |  | 
 **pages_total** | **int** | Total number of persisted page results for this job. | [optional] [default to 0]
 **pages_with_error** | **int** | Number of persisted page results with crawl/HTTP errors. | [optional] [default to 0]
-**error_message** | **str** |  | [optional] 
+**error_message** | **str** | Terminal error message when the job fails. | [optional] 
 
 ## Example
 

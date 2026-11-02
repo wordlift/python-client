@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **label** | **str** |  | [optional] 
 **description** | **str** |  | [optional] 
 **types** | **List[str]** |  | [optional] 
-**score** | **float** |  | [optional] 
+**score** | **float** | Caller&#39;s retrieval score; informational | [optional] 
 
 ## Example
 

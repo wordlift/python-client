@@ -24,18 +24,20 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class GraphKpiSnapshotRequest(BaseModel):
     """
     Graph KPI snapshot write payload. The account id is provided in the path. For `POST`, `snapshot_date` is required in the body. For `PUT`, `snapshot_date` may be omitted; when provided it must match the path date. KPI metrics are additional top-level JSON properties whose values are non-negative numbers or nested objects of non-negative numbers. 
     """ # noqa: E501
-    calculated_at: datetime = Field(description="UTC instant when the snapshot was calculated.")
+    calculated_at: datetime = Field(description="UTC instant when the snapshot was calculated.", json_schema_extra={"examples": ["2026-06-23T10:00:00Z"]})
     snapshot_date: Optional[date] = Field(default=None, description="Snapshot date. Required for POST; optional for PUT and must match the path date when present.")
-    snapshot_origin: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=32)]] = Field(default=None, description="Origin of the snapshot, for example `calculated`.")
+    snapshot_origin: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=32)]] = Field(default=None, description="Origin of the snapshot, for example `calculated`.", json_schema_extra={"examples": ["calculated"]})
     __properties: ClassVar[List[str]] = ["calculated_at", "snapshot_date", "snapshot_origin"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -47,8 +49,7 @@ class GraphKpiSnapshotRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

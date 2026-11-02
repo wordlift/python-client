@@ -17,483 +17,1441 @@
 
 __version__ = "1.223.0"
 
-# import apis into sdk package
-from wordlift_client.api.account_api import AccountApi
-from wordlift_client.api.account_chunksets_api import AccountChunksetsApi
-from wordlift_client.api.account_graph_kpis_api import AccountGraphKPIsApi
-from wordlift_client.api.account_stats_api import AccountStatsApi
-from wordlift_client.api.accounts_api import AccountsApi
-from wordlift_client.api.add_ons_api import AddOnsApi
-from wordlift_client.api.agent_api import AgentApi
-from wordlift_client.api.analyses_api import AnalysesApi
-from wordlift_client.api.analytics_imports_api import AnalyticsImportsApi
-from wordlift_client.api.analytics_syncs_api import AnalyticsSyncsApi
-from wordlift_client.api.audit_api import AuditApi
-from wordlift_client.api.authors_api import AuthorsApi
-from wordlift_client.api.autocomplete_api import AutocompleteApi
-from wordlift_client.api.botify_crawl_imports_api import BotifyCrawlImportsApi
-from wordlift_client.api.classifications_api import ClassificationsApi
-from wordlift_client.api.content_evaluations_api import ContentEvaluationsApi
-from wordlift_client.api.content_expansions_api import ContentExpansionsApi
-from wordlift_client.api.content_generation_completion_api import ContentGenerationCompletionApi
-from wordlift_client.api.content_generation_fields_api import ContentGenerationFieldsApi
-from wordlift_client.api.content_generation_models_api import ContentGenerationModelsApi
-from wordlift_client.api.content_generation_presets_api import ContentGenerationPresetsApi
-from wordlift_client.api.content_generation_records_api import ContentGenerationRecordsApi
-from wordlift_client.api.content_generation_records_export_api import ContentGenerationRecordsExportApi
-from wordlift_client.api.content_generation_renders_api import ContentGenerationRendersApi
-from wordlift_client.api.content_generation_stats_api import ContentGenerationStatsApi
-from wordlift_client.api.content_generation_syncs_api import ContentGenerationSyncsApi
-from wordlift_client.api.content_generation_word_biases_api import ContentGenerationWordBiasesApi
-from wordlift_client.api.content_generations_api import ContentGenerationsApi
-from wordlift_client.api.custom_domains_api import CustomDomainsApi
-from wordlift_client.api.data_uri_api import DataURIApi
-from wordlift_client.api.dataset_api import DatasetApi
-from wordlift_client.api.embedding_api import EmbeddingApi
-from wordlift_client.api.embeddings_api import EmbeddingsApi
-from wordlift_client.api.entities_api import EntitiesApi
-from wordlift_client.api.entity_gaps_api import EntityGapsApi
-from wordlift_client.api.expectation_summary_api import ExpectationSummaryApi
-from wordlift_client.api.expectations_api import ExpectationsApi
-from wordlift_client.api.fact_check_api import FactCheckApi
-from wordlift_client.api.fetch_api import FetchApi
-from wordlift_client.api.google_merchants_api import GoogleMerchantsApi
-from wordlift_client.api.google_search_console_api import GoogleSearchConsoleApi
-from wordlift_client.api.google_search_console_searches_api import GoogleSearchConsoleSearchesApi
-from wordlift_client.api.graph_ql_api import GraphQLApi
-from wordlift_client.api.include_excludes_api import IncludeExcludesApi
-from wordlift_client.api.inspector_api import InspectorApi
-from wordlift_client.api.internal_links_api import InternalLinksApi
-from wordlift_client.api.jobs_api import JobsApi
-from wordlift_client.api.link_groups_api import LinkGroupsApi
-from wordlift_client.api.long_tails_api import LongTailsApi
-from wordlift_client.api.merchant_syncs_api import MerchantSyncsApi
-from wordlift_client.api.merchants_api import MerchantsApi
-from wordlift_client.api.microdata_api import MicrodataApi
-from wordlift_client.api.monitor_check_summary_api import MonitorCheckSummaryApi
-from wordlift_client.api.monitor_checks_api import MonitorChecksApi
-from wordlift_client.api.monitor_runs_api import MonitorRunsApi
-from wordlift_client.api.monitor_status_api import MonitorStatusApi
-from wordlift_client.api.monitoring_summary_api import MonitoringSummaryApi
-from wordlift_client.api.monitors_api import MonitorsApi
-from wordlift_client.api.o_auth2_authorized_clients_api import OAuth2AuthorizedClientsApi
-from wordlift_client.api.pages_explorer_api import PagesExplorerApi
-from wordlift_client.api.platform_consumptions_api import PlatformConsumptionsApi
-from wordlift_client.api.platform_limits_api import PlatformLimitsApi
-from wordlift_client.api.plugin_diagnostics_api import PluginDiagnosticsApi
-from wordlift_client.api.plugin_events_api import PluginEventsApi
-from wordlift_client.api.query_fan_out_api import QueryFanOutApi
-from wordlift_client.api.question_and_answer_sets_api import QuestionAndAnswerSetsApi
-from wordlift_client.api.questions_and_answers_api import QuestionsAndAnswersApi
-from wordlift_client.api.redeem_codes_api import RedeemCodesApi
-from wordlift_client.api.resolve_api import ResolveApi
-from wordlift_client.api.rules_api import RulesApi
-from wordlift_client.api.segment_globs_api import SegmentGlobsApi
-from wordlift_client.api.segment_urls_api import SegmentURLsApi
-from wordlift_client.api.segments_api import SegmentsApi
-from wordlift_client.api.sitemap_generator_api import SitemapGeneratorApi
-from wordlift_client.api.sitemap_imports_api import SitemapImportsApi
-from wordlift_client.api.smart_contents_api import SmartContentsApi
-from wordlift_client.api.subscriptions_api import SubscriptionsApi
-from wordlift_client.api.summarizations_api import SummarizationsApi
-from wordlift_client.api.tokens_api import TokensApi
-from wordlift_client.api.vector_search_nodes_api import VectorSearchNodesApi
-from wordlift_client.api.vector_search_queries_api import VectorSearchQueriesApi
-from wordlift_client.api.web_asyncs_metadata_api import WebAsyncsMetadataApi
-from wordlift_client.api.web_asyncs_responses_api import WebAsyncsResponsesApi
-from wordlift_client.api.web_page_scrape_api import WebPageScrapeApi
-from wordlift_client.api.web_pages_imports_api import WebPagesImportsApi
-from wordlift_client.api.web_pages_api import WebPagesApi
-from wordlift_client.api.account_connector_field_controller_api import AccountConnectorFieldControllerApi
-from wordlift_client.api.account_o_auth2_connector_controller_api import AccountOAuth2ConnectorControllerApi
-from wordlift_client.api.bootstrap_api import BootstrapApi
-from wordlift_client.api.default_api import DefaultApi
-from wordlift_client.api.failures_api import FailuresApi
-from wordlift_client.api.graph_sync_controller_api import GraphSyncControllerApi
-from wordlift_client.api.jobs_api import JobsApi
-from wordlift_client.api.kpis_api import KpisApi
-from wordlift_client.api.o_auth2_connector_controller_api import OAuth2ConnectorControllerApi
-from wordlift_client.api.runs_api import RunsApi
-from wordlift_client.api.snapshots_api import SnapshotsApi
+# Define package exports
+__all__ = [
+    "AccountApi",
+    "AccountChunksetsApi",
+    "AccountGraphKPIsApi",
+    "AccountStatsApi",
+    "AccountsApi",
+    "AddOnsApi",
+    "AgentApi",
+    "AnalysesApi",
+    "AnalyticsImportsApi",
+    "AnalyticsSyncsApi",
+    "AuditApi",
+    "AuthorsApi",
+    "AutocompleteApi",
+    "BotifyCrawlImportsApi",
+    "ClassificationsApi",
+    "ContentEvaluationsApi",
+    "ContentExpansionsApi",
+    "ContentGenerationCompletionApi",
+    "ContentGenerationFieldsApi",
+    "ContentGenerationModelsApi",
+    "ContentGenerationPresetsApi",
+    "ContentGenerationRecordsApi",
+    "ContentGenerationRecordsExportApi",
+    "ContentGenerationRendersApi",
+    "ContentGenerationStatsApi",
+    "ContentGenerationSyncsApi",
+    "ContentGenerationWordBiasesApi",
+    "ContentGenerationsApi",
+    "CustomDomainsApi",
+    "DataURIApi",
+    "DatasetApi",
+    "EmbeddingApi",
+    "EmbeddingsApi",
+    "EntitiesApi",
+    "EntityGapsApi",
+    "ExpectationSummaryApi",
+    "ExpectationsApi",
+    "FactCheckApi",
+    "FetchApi",
+    "GoogleMerchantsApi",
+    "GoogleSearchConsoleApi",
+    "GoogleSearchConsoleSearchesApi",
+    "GraphQLApi",
+    "IncludeExcludesApi",
+    "InspectorApi",
+    "InternalLinksApi",
+    "LinkGroupsApi",
+    "LongTailsApi",
+    "MerchantSyncsApi",
+    "MerchantsApi",
+    "MicrodataApi",
+    "MonitorCheckSummaryApi",
+    "MonitorChecksApi",
+    "MonitorRunsApi",
+    "MonitorStatusApi",
+    "MonitoringSummaryApi",
+    "MonitorsApi",
+    "OAuth2AuthorizedClientsApi",
+    "PagesExplorerApi",
+    "PlatformConsumptionsApi",
+    "PlatformLimitsApi",
+    "PluginDiagnosticsApi",
+    "PluginEventsApi",
+    "QueryFanOutApi",
+    "QuestionAndAnswerSetsApi",
+    "QuestionsAndAnswersApi",
+    "RedeemCodesApi",
+    "ResolveApi",
+    "RulesApi",
+    "SegmentGlobsApi",
+    "SegmentURLsApi",
+    "SegmentsApi",
+    "SitemapGeneratorApi",
+    "SitemapImportsApi",
+    "SmartContentsApi",
+    "SubscriptionsApi",
+    "SummarizationsApi",
+    "TokensApi",
+    "VectorSearchNodesApi",
+    "VectorSearchQueriesApi",
+    "WebAsyncsMetadataApi",
+    "WebAsyncsResponsesApi",
+    "WebPageScrapeApi",
+    "WebPagesImportsApi",
+    "WebPagesApi",
+    "AccountConnectorFieldControllerApi",
+    "AccountOAuth2ConnectorControllerApi",
+    "BootstrapApi",
+    "DefaultApi",
+    "FailuresApi",
+    "GraphSyncControllerApi",
+    "JobsApi",
+    "KpisApi",
+    "OAuth2ConnectorControllerApi",
+    "RunsApi",
+    "SnapshotsApi",
+    "ApiResponse",
+    "ApiClient",
+    "Configuration",
+    "OpenApiException",
+    "ApiTypeError",
+    "ApiValueError",
+    "ApiKeyError",
+    "ApiAttributeError",
+    "ApiException",
+    "AIVisibilityAnalysisResult",
+    "AcceptedAnswer",
+    "Account",
+    "AccountInfo",
+    "AccountStats",
+    "AccountSubscription",
+    "ActiveAccount",
+    "AddAccountResourceRequest",
+    "AddMonitorAccountsAccountIdMonitoringMonitorsPostRequest",
+    "AddOnConfiguration",
+    "AddPageResourceRequest",
+    "AddSegmentGlobRequest",
+    "AddSegmentUrlRequest",
+    "AiVisibilityAuditsHTTPValidationError",
+    "AiVisibilityAuditsValidationError",
+    "AnalysesRequest",
+    "AnalysesResponse",
+    "AnalysesResponseItem",
+    "AnalyticsImportRequest",
+    "AnalyticsSync",
+    "AnalyticsSyncRequest",
+    "AnalyzeContentRequest",
+    "AnchorText",
+    "Annotation",
+    "AskRequest",
+    "AskResponse",
+    "AttachExpectationMonitorRequest",
+    "AttachExpectationSegmentRequest",
+    "AuditData",
+    "AuditRequest",
+    "AuditResponse",
+    "AuthorRequest",
+    "AutocompleteResult",
+    "AutomationIssue",
+    "AutomationReadiness",
+    "BatchRequest",
+    "BatchResponse",
+    "BatchStatus",
+    "BootstrapJobOutcome",
+    "BootstrapJobResponse",
+    "BootstrapJobStatus",
+    "BotStatus",
+    "BotifyCrawlImportRequest",
+    "CancellationReason",
+    "CheckNameFilterValue",
+    "CheckResultItem",
+    "CheckSummaryByCheckItem",
+    "CheckSummaryState",
+    "CheckSummaryStateStat",
+    "CheckTimeseriesResponse",
+    "ChunksetListResponse",
+    "ChunksetRequest",
+    "ChunksetResponse",
+    "ClassificationRequest",
+    "ClassificationResponse",
+    "CompletionRequest",
+    "ContentEvaluationRequest",
+    "ContentEvaluationResponse",
+    "ContentEvaluationResponseMetadata",
+    "ContentEvaluationResponseMetadataPerformance",
+    "ContentEvaluationResponseMetadataSentiment",
+    "ContentEvaluationResponseQualityScore",
+    "ContentEvaluationResponseQualityScoreBreakdown",
+    "ContentEvaluationResponseQualityScoreBreakdownContent",
+    "ContentEvaluationResponseQualityScoreBreakdownReadability",
+    "ContentEvaluationResponseQualityScoreBreakdownReadabilityComplexSentences",
+    "ContentEvaluationResponseQualityScoreBreakdownSeo",
+    "ContentEvaluationResponseQualityScoreBreakdownSeoTopEntitiesValueInner",
+    "ContentEvaluationsHTTPValidationError",
+    "ContentEvaluationsValidationError",
+    "ContentExpansionRequest",
+    "ContentExpansionResponse",
+    "ContentFreshness",
+    "ContentGeneration",
+    "ContentGenerationRequest",
+    "ContentGenerationStats",
+    "ContentStructure",
+    "CrawlJobCreateResponse",
+    "CrawlJobInput",
+    "CrawlJobListPaginationInfo",
+    "CrawlJobListResponse",
+    "CrawlJobPageListResponse",
+    "CrawlJobPageSummary",
+    "CrawlJobResponse",
+    "CrawlJobSummary",
+    "CrawlPageStatus",
+    "CrawlerHTTPValidationError",
+    "CrawlerValidationError",
+    "CreateEmbeddingsInput",
+    "CreateUrlInspectionRequest",
+    "CursorPage",
+    "DecisionSignals",
+    "DetectedSchema",
+    "DiagnosticPlugin",
+    "DiagnosticPluginRequest",
+    "DiscoverySources",
+    "DomainValidationRequest",
+    "EmbeddingRequest",
+    "Entity",
+    "EntityGapRequest",
+    "EntityMatch",
+    "EntityPatchRequest",
+    "ErrorResponse",
+    "Event",
+    "EventsRequest",
+    "EventsResponse",
+    "ExpectationAttachment",
+    "ExpectationEvaluationSummary",
+    "ExpectationOutcome",
+    "ExpectationSeverity",
+    "ExpectationSeverityResponse",
+    "ExpectationSummaryByExpectationItem",
+    "ExpectationSummaryByTypeItem",
+    "ExpectationSummaryOutcome",
+    "ExpectationSummaryOutcomeStat",
+    "ExpectationSummaryTypeStat",
+    "ExpectationType",
+    "FailureCreate",
+    "FailureReason",
+    "FailureResponse",
+    "FetchJsRenderMode",
+    "FetchResponse",
+    "FetchTargetLoadEvent",
+    "FieldValueRequest",
+    "Filter",
+    "FilterValue",
+    "GenerateSitemap200Response",
+    "GenerateSitemapRequest",
+    "GraphKpiHTTPValidationError",
+    "GraphKpiSnapshot",
+    "GraphKpiSnapshotPage",
+    "GraphKpiSnapshotRequest",
+    "GraphKpiValidationError",
+    "GraphSyncHTTPValidationError",
+    "GraphSyncRequest",
+    "GraphSyncResponse",
+    "GraphSyncValidationError",
+    "GraphqlRequest",
+    "HTTPValidationError",
+    "Html",
+    "HtmlSemantics",
+    "Image",
+    "ImageAccessibility",
+    "IncludeExclude",
+    "IncludeExcludeRequest",
+    "InlineDataset",
+    "InspectResponse",
+    "InternalLink",
+    "InternalLinkDestination",
+    "InternalLinkRequest",
+    "InternalLinkSource",
+    "InternalLinking",
+    "Item",
+    "ItemsInner",
+    "ItemsInner1",
+    "JobListResponse",
+    "JobResponse",
+    "JobStatus",
+    "JsRenderMode",
+    "JsRendering",
+    "KgEmbeddingRequest",
+    "KgEmbeddingResponse",
+    "KpiCreate",
+    "KpiResponse",
+    "KpiTotals",
+    "LevelEnum",
+    "LinkGroup",
+    "LinkGroupResponse",
+    "ListCheckSummaryByCheckResponse",
+    "ListExpectationSeverityResponse",
+    "ListExpectationSummaryByExpectationResponse",
+    "ListExpectationSummaryByTypeResponse",
+    "ListExpectationsResponse",
+    "ListMonitorStatusResponse",
+    "ListMonitorsResponse",
+    "ListRunsResponse",
+    "ListSegmentGlobsResponse",
+    "ListSegmentSeverityResponse",
+    "ListSegmentSummaryResponse",
+    "ListSegmentUrlsResponse",
+    "ListSegmentsResponse",
+    "LocationInner",
+    "LogEntryResponse",
+    "LogsPage",
+    "LongTailEntity",
+    "LongTailProperties",
+    "LongtailResponse",
+    "ManagerRequest",
+    "ManagerResponse",
+    "MentionResolution",
+    "Merchant",
+    "MerchantEntry",
+    "MerchantRequest",
+    "MerchantSync",
+    "MerchantView",
+    "Model",
+    "ModelField",
+    "MonitorCheckName",
+    "MonitorHTTPValidationError",
+    "MonitorResponse",
+    "MonitorRunResponse",
+    "MonitorRunStatus",
+    "MonitorSeverityResponse",
+    "MonitorStatus",
+    "MonitorStatusCheckStatus",
+    "MonitorStatusOrderBy",
+    "MonitorStatusResponse",
+    "MonitorTypeProgress",
+    "MonitorValidationError",
+    "NetworkAccountInfo",
+    "NodeRequest",
+    "NodeRequestMetadataValue",
+    "OAuth2AuthorizedClient",
+    "OAuth2AuthorizedClientRequest",
+    "OAuth2ConnectorAuthorizationRequest",
+    "OAuth2ConnectorAuthorizationRequestResponse",
+    "OAuth2ConnectorAuthorizationResponse",
+    "OAuth2ConnectorResponse",
+    "PageActiveAccount",
+    "PageAddOnConfiguration",
+    "PageArtifactQueryItem",
+    "PageArtifactQueryRequest",
+    "PageArtifactQueryResponse",
+    "PageArtifactQueryResultItem",
+    "PageContentGeneration",
+    "PageField",
+    "PageMerchantEntry",
+    "PageMerchantSync",
+    "PageMerchantView",
+    "PageModel",
+    "PageOAuth2AuthorizedClient",
+    "PagePlatformLimit",
+    "PagePreset",
+    "PageRecord",
+    "PageRule",
+    "PageVectorSearchQueryResponseItem",
+    "PageWebsite",
+    "PageWebsiteSearch",
+    "PageWithLimits",
+    "PageWord",
+    "PaginationInfo",
+    "PlatformLimit",
+    "PlatformLimitRequest",
+    "Preset",
+    "Problem",
+    "ProblemDetail",
+    "ProjectType",
+    "Properties",
+    "ProvisionSubscriptionRequest",
+    "ProvisionedSubscription",
+    "ProxyMode",
+    "ProxyTier",
+    "QueryCoverageOutput",
+    "QuestionAndAnswer",
+    "QuestionAndAnswerSet",
+    "QuickWin",
+    "QuickWinsResult",
+    "RankEntities",
+    "Record",
+    "RenderRequest",
+    "RenderWaitUntil",
+    "ReplaceAccountMonitorItem",
+    "ReplaceExpectationSegmentsRequest",
+    "ReplaceMonitorsRequest",
+    "ReplacePageMonitorItem",
+    "ReplaceSegmentGlobsRequest",
+    "ReplaceSegmentUrlsRequest",
+    "Request",
+    "ResetAccountRequest",
+    "ResolveCandidate",
+    "ResolveMention",
+    "ResolveProblem",
+    "ResolveRequest",
+    "ResolveResponse",
+    "ResolveValidationError",
+    "ResolvedEntity",
+    "ResourceType",
+    "Resources",
+    "ResourcesAgentSkillsIndex",
+    "ResourcesLlmsTxt",
+    "ResourcesMcpJson",
+    "ResourcesMcpLinkTag",
+    "ResourcesMcpServerCard",
+    "ResourcesRobotsTxt",
+    "ResourcesSkillMd",
+    "ResourcesWebmcpToolsJson",
+    "Response",
+    "ResponseListWebsitePagesWebsitesHostPagesGet",
+    "Rule",
+    "RuleRequest",
+    "RunCreate",
+    "RunFinalize",
+    "RunProgressUpdate",
+    "RunResponse",
+    "RunStatus",
+    "SchemaRecommendation",
+    "Scope",
+    "SegmentGlobResponse",
+    "SegmentOrderBy",
+    "SegmentRequest",
+    "SegmentResponse",
+    "SegmentSeverityRequest",
+    "SegmentSeverityResponse",
+    "SegmentSummaryItem",
+    "SegmentUrlResponse",
+    "SeoFundamentals",
+    "SiteFiles",
+    "SitemapImportRequest",
+    "SmartContentProject",
+    "SmartContentRequest",
+    "SnapshotListResponse",
+    "SnapshotResponse",
+    "SortDirection",
+    "StructuredData",
+    "StructuredDataConstraint",
+    "StructuredDataExpectationConfig",
+    "StructuredDataExpectationConfigRequest",
+    "StructuredDataExpectationRequest",
+    "StructuredDataExpectationResponse",
+    "SubmitFactCheck200Response",
+    "SubmitFactCheckRequest",
+    "SubmitJobBody",
+    "TokenResponse",
+    "Tokens",
+    "Topic",
+    "UpdateAccountRequest",
+    "UpdateQuestionAndAnswerRequest",
+    "UpdateRecordRequest",
+    "UpdateRecordsRequest",
+    "UserEntity",
+    "ValidationError",
+    "ValidationFix",
+    "ValidationResult",
+    "ValidationTypeEnum",
+    "VectorSearchQueryRequest",
+    "VectorSearchQueryResponseItem",
+    "VectorSearchQueryResponseItemFieldsValueInner",
+    "VectorSearchQueryResponseItemMetadataValue",
+    "WebAsync",
+    "WebPage",
+    "WebPageImportFetchOptions",
+    "WebPageImportRequest",
+    "WebPageImportResponse",
+    "WebPageImportsBatchRequest",
+    "WebPageImportsHTTPValidationError",
+    "WebPageImportsValidationError",
+    "WebPageScrapeRequest",
+    "WebPageScrapeResponse",
+    "WebpageProperties",
+    "Website",
+    "WebsitePageArtifactResponse",
+    "WebsitePageListResponse",
+    "WebsitePageResolvedResponse",
+    "WebsitePageResponse",
+    "WebsitePageSummary",
+    "WebsiteSearch",
+    "WellKnownFiles",
+    "WhatOperandLhs",
+    "WhatOperator",
+    "WhenOperator",
+    "WithLimits",
+    "Word",
+    "WordLiftProblem",
+    "WordRepetitionData",
+    "WordRequest",
+]
 
-# import ApiClient
-from wordlift_client.api_response import ApiResponse
-from wordlift_client.api_client import ApiClient
-from wordlift_client.configuration import Configuration
-from wordlift_client.exceptions import OpenApiException
-from wordlift_client.exceptions import ApiTypeError
-from wordlift_client.exceptions import ApiValueError
-from wordlift_client.exceptions import ApiKeyError
-from wordlift_client.exceptions import ApiAttributeError
-from wordlift_client.exceptions import ApiException
+import typing as _typing
 
-# import models into sdk package
-from wordlift_client.models.ai_visibility_analysis_result import AIVisibilityAnalysisResult
-from wordlift_client.models.accepted_answer import AcceptedAnswer
-from wordlift_client.models.account import Account
-from wordlift_client.models.account_info import AccountInfo
-from wordlift_client.models.account_stats import AccountStats
-from wordlift_client.models.account_subscription import AccountSubscription
-from wordlift_client.models.active_account import ActiveAccount
-from wordlift_client.models.add_account_resource_request import AddAccountResourceRequest
-from wordlift_client.models.add_monitor_accounts_account_id_monitoring_monitors_post_request import AddMonitorAccountsAccountIdMonitoringMonitorsPostRequest
-from wordlift_client.models.add_on_configuration import AddOnConfiguration
-from wordlift_client.models.add_page_resource_request import AddPageResourceRequest
-from wordlift_client.models.add_segment_glob_request import AddSegmentGlobRequest
-from wordlift_client.models.add_segment_url_request import AddSegmentUrlRequest
-from wordlift_client.models.ai_visibility_audits_http_validation_error import AiVisibilityAuditsHTTPValidationError
-from wordlift_client.models.ai_visibility_audits_validation_error import AiVisibilityAuditsValidationError
-from wordlift_client.models.analyses_request import AnalysesRequest
-from wordlift_client.models.analyses_response import AnalysesResponse
-from wordlift_client.models.analyses_response_item import AnalysesResponseItem
-from wordlift_client.models.analytics_import_request import AnalyticsImportRequest
-from wordlift_client.models.analytics_sync import AnalyticsSync
-from wordlift_client.models.analytics_sync_request import AnalyticsSyncRequest
-from wordlift_client.models.analyze_content_request import AnalyzeContentRequest
-from wordlift_client.models.anchor_text import AnchorText
-from wordlift_client.models.annotation import Annotation
-from wordlift_client.models.ask_request import AskRequest
-from wordlift_client.models.ask_response import AskResponse
-from wordlift_client.models.attach_expectation_monitor_request import AttachExpectationMonitorRequest
-from wordlift_client.models.attach_expectation_segment_request import AttachExpectationSegmentRequest
-from wordlift_client.models.audit_data import AuditData
-from wordlift_client.models.audit_request import AuditRequest
-from wordlift_client.models.audit_response import AuditResponse
-from wordlift_client.models.author_request import AuthorRequest
-from wordlift_client.models.autocomplete_result import AutocompleteResult
-from wordlift_client.models.automation_issue import AutomationIssue
-from wordlift_client.models.automation_readiness import AutomationReadiness
-from wordlift_client.models.batch_request import BatchRequest
-from wordlift_client.models.batch_response import BatchResponse
-from wordlift_client.models.batch_status import BatchStatus
-from wordlift_client.models.body import Body
-from wordlift_client.models.bootstrap_job_outcome import BootstrapJobOutcome
-from wordlift_client.models.bootstrap_job_response import BootstrapJobResponse
-from wordlift_client.models.bootstrap_job_status import BootstrapJobStatus
-from wordlift_client.models.bot_status import BotStatus
-from wordlift_client.models.botify_crawl_import_request import BotifyCrawlImportRequest
-from wordlift_client.models.cancellation_reason import CancellationReason
-from wordlift_client.models.check_name_filter_value import CheckNameFilterValue
-from wordlift_client.models.check_result_item import CheckResultItem
-from wordlift_client.models.check_summary_by_check_item import CheckSummaryByCheckItem
-from wordlift_client.models.check_summary_state import CheckSummaryState
-from wordlift_client.models.check_summary_state_stat import CheckSummaryStateStat
-from wordlift_client.models.check_timeseries_response import CheckTimeseriesResponse
-from wordlift_client.models.chunkset_list_response import ChunksetListResponse
-from wordlift_client.models.chunkset_request import ChunksetRequest
-from wordlift_client.models.chunkset_response import ChunksetResponse
-from wordlift_client.models.classification_request import ClassificationRequest
-from wordlift_client.models.classification_response import ClassificationResponse
-from wordlift_client.models.completion_request import CompletionRequest
-from wordlift_client.models.content_evaluation_request import ContentEvaluationRequest
-from wordlift_client.models.content_evaluation_response import ContentEvaluationResponse
-from wordlift_client.models.content_evaluation_response_metadata import ContentEvaluationResponseMetadata
-from wordlift_client.models.content_evaluation_response_metadata_performance import ContentEvaluationResponseMetadataPerformance
-from wordlift_client.models.content_evaluation_response_metadata_sentiment import ContentEvaluationResponseMetadataSentiment
-from wordlift_client.models.content_evaluation_response_quality_score import ContentEvaluationResponseQualityScore
-from wordlift_client.models.content_evaluation_response_quality_score_breakdown import ContentEvaluationResponseQualityScoreBreakdown
-from wordlift_client.models.content_evaluation_response_quality_score_breakdown_content import ContentEvaluationResponseQualityScoreBreakdownContent
-from wordlift_client.models.content_evaluation_response_quality_score_breakdown_readability import ContentEvaluationResponseQualityScoreBreakdownReadability
-from wordlift_client.models.content_evaluation_response_quality_score_breakdown_readability_complex_sentences import ContentEvaluationResponseQualityScoreBreakdownReadabilityComplexSentences
-from wordlift_client.models.content_evaluation_response_quality_score_breakdown_seo import ContentEvaluationResponseQualityScoreBreakdownSeo
-from wordlift_client.models.content_evaluation_response_quality_score_breakdown_seo_top_entities_value_inner import ContentEvaluationResponseQualityScoreBreakdownSeoTopEntitiesValueInner
-from wordlift_client.models.content_evaluations_http_validation_error import ContentEvaluationsHTTPValidationError
-from wordlift_client.models.content_evaluations_validation_error import ContentEvaluationsValidationError
-from wordlift_client.models.content_expansion_request import ContentExpansionRequest
-from wordlift_client.models.content_expansion_response import ContentExpansionResponse
-from wordlift_client.models.content_freshness import ContentFreshness
-from wordlift_client.models.content_generation import ContentGeneration
-from wordlift_client.models.content_generation_request import ContentGenerationRequest
-from wordlift_client.models.content_generation_stats import ContentGenerationStats
-from wordlift_client.models.content_structure import ContentStructure
-from wordlift_client.models.crawl_job_create_response import CrawlJobCreateResponse
-from wordlift_client.models.crawl_job_input import CrawlJobInput
-from wordlift_client.models.crawl_job_list_pagination_info import CrawlJobListPaginationInfo
-from wordlift_client.models.crawl_job_list_response import CrawlJobListResponse
-from wordlift_client.models.crawl_job_page_list_response import CrawlJobPageListResponse
-from wordlift_client.models.crawl_job_page_summary import CrawlJobPageSummary
-from wordlift_client.models.crawl_job_response import CrawlJobResponse
-from wordlift_client.models.crawl_job_summary import CrawlJobSummary
-from wordlift_client.models.crawl_page_status import CrawlPageStatus
-from wordlift_client.models.crawler_http_validation_error import CrawlerHTTPValidationError
-from wordlift_client.models.crawler_validation_error import CrawlerValidationError
-from wordlift_client.models.create_embeddings_input import CreateEmbeddingsInput
-from wordlift_client.models.create_url_inspection_request import CreateUrlInspectionRequest
-from wordlift_client.models.cursor_page import CursorPage
-from wordlift_client.models.decision_signals import DecisionSignals
-from wordlift_client.models.detected_schema import DetectedSchema
-from wordlift_client.models.diagnostic_plugin import DiagnosticPlugin
-from wordlift_client.models.diagnostic_plugin_request import DiagnosticPluginRequest
-from wordlift_client.models.discovery_sources import DiscoverySources
-from wordlift_client.models.domain_validation_request import DomainValidationRequest
-from wordlift_client.models.embedding_request import EmbeddingRequest
-from wordlift_client.models.entity import Entity
-from wordlift_client.models.entity_gap_request import EntityGapRequest
-from wordlift_client.models.entity_match import EntityMatch
-from wordlift_client.models.entity_patch_request import EntityPatchRequest
-from wordlift_client.models.error_response import ErrorResponse
-from wordlift_client.models.event import Event
-from wordlift_client.models.events_request import EventsRequest
-from wordlift_client.models.events_response import EventsResponse
-from wordlift_client.models.expectation_attachment import ExpectationAttachment
-from wordlift_client.models.expectation_evaluation_summary import ExpectationEvaluationSummary
-from wordlift_client.models.expectation_outcome import ExpectationOutcome
-from wordlift_client.models.expectation_severity import ExpectationSeverity
-from wordlift_client.models.expectation_severity_response import ExpectationSeverityResponse
-from wordlift_client.models.expectation_summary_by_expectation_item import ExpectationSummaryByExpectationItem
-from wordlift_client.models.expectation_summary_by_type_item import ExpectationSummaryByTypeItem
-from wordlift_client.models.expectation_summary_outcome import ExpectationSummaryOutcome
-from wordlift_client.models.expectation_summary_outcome_stat import ExpectationSummaryOutcomeStat
-from wordlift_client.models.expectation_summary_type_stat import ExpectationSummaryTypeStat
-from wordlift_client.models.expectation_type import ExpectationType
-from wordlift_client.models.failure_create import FailureCreate
-from wordlift_client.models.failure_reason import FailureReason
-from wordlift_client.models.failure_response import FailureResponse
-from wordlift_client.models.fetch_js_render_mode import FetchJsRenderMode
-from wordlift_client.models.fetch_response import FetchResponse
-from wordlift_client.models.fetch_target_load_event import FetchTargetLoadEvent
-from wordlift_client.models.field_value_request import FieldValueRequest
-from wordlift_client.models.filter import Filter
-from wordlift_client.models.filter_value import FilterValue
-from wordlift_client.models.generate_sitemap200_response import GenerateSitemap200Response
-from wordlift_client.models.generate_sitemap_request import GenerateSitemapRequest
-from wordlift_client.models.graph_kpi_http_validation_error import GraphKpiHTTPValidationError
-from wordlift_client.models.graph_kpi_snapshot import GraphKpiSnapshot
-from wordlift_client.models.graph_kpi_snapshot_page import GraphKpiSnapshotPage
-from wordlift_client.models.graph_kpi_snapshot_request import GraphKpiSnapshotRequest
-from wordlift_client.models.graph_kpi_validation_error import GraphKpiValidationError
-from wordlift_client.models.graph_sync_http_validation_error import GraphSyncHTTPValidationError
-from wordlift_client.models.graph_sync_request import GraphSyncRequest
-from wordlift_client.models.graph_sync_response import GraphSyncResponse
-from wordlift_client.models.graph_sync_validation_error import GraphSyncValidationError
-from wordlift_client.models.graphql_request import GraphqlRequest
-from wordlift_client.models.http_validation_error import HTTPValidationError
-from wordlift_client.models.html import Html
-from wordlift_client.models.html_semantics import HtmlSemantics
-from wordlift_client.models.image import Image
-from wordlift_client.models.image_accessibility import ImageAccessibility
-from wordlift_client.models.include_exclude import IncludeExclude
-from wordlift_client.models.include_exclude_request import IncludeExcludeRequest
-from wordlift_client.models.inline_dataset import InlineDataset
-from wordlift_client.models.inspect_response import InspectResponse
-from wordlift_client.models.internal_link import InternalLink
-from wordlift_client.models.internal_link_destination import InternalLinkDestination
-from wordlift_client.models.internal_link_request import InternalLinkRequest
-from wordlift_client.models.internal_link_source import InternalLinkSource
-from wordlift_client.models.internal_linking import InternalLinking
-from wordlift_client.models.item import Item
-from wordlift_client.models.items_inner import ItemsInner
-from wordlift_client.models.items_inner1 import ItemsInner1
-from wordlift_client.models.job_list_response import JobListResponse
-from wordlift_client.models.job_response import JobResponse
-from wordlift_client.models.job_status import JobStatus
-from wordlift_client.models.js_render_mode import JsRenderMode
-from wordlift_client.models.js_rendering import JsRendering
-from wordlift_client.models.kg_embedding_request import KgEmbeddingRequest
-from wordlift_client.models.kg_embedding_response import KgEmbeddingResponse
-from wordlift_client.models.kpi_create import KpiCreate
-from wordlift_client.models.kpi_response import KpiResponse
-from wordlift_client.models.kpi_totals import KpiTotals
-from wordlift_client.models.level_enum import LevelEnum
-from wordlift_client.models.link_group import LinkGroup
-from wordlift_client.models.link_group_response import LinkGroupResponse
-from wordlift_client.models.list_check_summary_by_check_response import ListCheckSummaryByCheckResponse
-from wordlift_client.models.list_expectation_severity_response import ListExpectationSeverityResponse
-from wordlift_client.models.list_expectation_summary_by_expectation_response import ListExpectationSummaryByExpectationResponse
-from wordlift_client.models.list_expectation_summary_by_type_response import ListExpectationSummaryByTypeResponse
-from wordlift_client.models.list_expectations_response import ListExpectationsResponse
-from wordlift_client.models.list_monitor_status_response import ListMonitorStatusResponse
-from wordlift_client.models.list_monitors_response import ListMonitorsResponse
-from wordlift_client.models.list_runs_response import ListRunsResponse
-from wordlift_client.models.list_segment_globs_response import ListSegmentGlobsResponse
-from wordlift_client.models.list_segment_severity_response import ListSegmentSeverityResponse
-from wordlift_client.models.list_segment_summary_response import ListSegmentSummaryResponse
-from wordlift_client.models.list_segment_urls_response import ListSegmentUrlsResponse
-from wordlift_client.models.list_segments_response import ListSegmentsResponse
-from wordlift_client.models.location_inner import LocationInner
-from wordlift_client.models.log_entry_response import LogEntryResponse
-from wordlift_client.models.logs_page import LogsPage
-from wordlift_client.models.long_tail_entity import LongTailEntity
-from wordlift_client.models.long_tail_properties import LongTailProperties
-from wordlift_client.models.longtail_response import LongtailResponse
-from wordlift_client.models.manager_request import ManagerRequest
-from wordlift_client.models.manager_response import ManagerResponse
-from wordlift_client.models.mention_resolution import MentionResolution
-from wordlift_client.models.merchant import Merchant
-from wordlift_client.models.merchant_entry import MerchantEntry
-from wordlift_client.models.merchant_request import MerchantRequest
-from wordlift_client.models.merchant_sync import MerchantSync
-from wordlift_client.models.merchant_view import MerchantView
-from wordlift_client.models.model import Model
-from wordlift_client.models.model_field import ModelField
-from wordlift_client.models.monitor_check_name import MonitorCheckName
-from wordlift_client.models.monitor_http_validation_error import MonitorHTTPValidationError
-from wordlift_client.models.monitor_response import MonitorResponse
-from wordlift_client.models.monitor_run_response import MonitorRunResponse
-from wordlift_client.models.monitor_run_status import MonitorRunStatus
-from wordlift_client.models.monitor_severity_response import MonitorSeverityResponse
-from wordlift_client.models.monitor_status import MonitorStatus
-from wordlift_client.models.monitor_status_check_status import MonitorStatusCheckStatus
-from wordlift_client.models.monitor_status_order_by import MonitorStatusOrderBy
-from wordlift_client.models.monitor_status_response import MonitorStatusResponse
-from wordlift_client.models.monitor_type_progress import MonitorTypeProgress
-from wordlift_client.models.monitor_validation_error import MonitorValidationError
-from wordlift_client.models.network_account_info import NetworkAccountInfo
-from wordlift_client.models.node_request import NodeRequest
-from wordlift_client.models.node_request_metadata_value import NodeRequestMetadataValue
-from wordlift_client.models.o_auth2_authorized_client import OAuth2AuthorizedClient
-from wordlift_client.models.o_auth2_authorized_client_request import OAuth2AuthorizedClientRequest
-from wordlift_client.models.o_auth2_connector_authorization_request import OAuth2ConnectorAuthorizationRequest
-from wordlift_client.models.o_auth2_connector_authorization_request_response import OAuth2ConnectorAuthorizationRequestResponse
-from wordlift_client.models.o_auth2_connector_authorization_response import OAuth2ConnectorAuthorizationResponse
-from wordlift_client.models.o_auth2_connector_response import OAuth2ConnectorResponse
-from wordlift_client.models.page_active_account import PageActiveAccount
-from wordlift_client.models.page_add_on_configuration import PageAddOnConfiguration
-from wordlift_client.models.page_artifact_query_item import PageArtifactQueryItem
-from wordlift_client.models.page_artifact_query_request import PageArtifactQueryRequest
-from wordlift_client.models.page_artifact_query_response import PageArtifactQueryResponse
-from wordlift_client.models.page_artifact_query_result_item import PageArtifactQueryResultItem
-from wordlift_client.models.page_content_generation import PageContentGeneration
-from wordlift_client.models.page_field import PageField
-from wordlift_client.models.page_merchant_entry import PageMerchantEntry
-from wordlift_client.models.page_merchant_sync import PageMerchantSync
-from wordlift_client.models.page_merchant_view import PageMerchantView
-from wordlift_client.models.page_model import PageModel
-from wordlift_client.models.page_o_auth2_authorized_client import PageOAuth2AuthorizedClient
-from wordlift_client.models.page_platform_limit import PagePlatformLimit
-from wordlift_client.models.page_preset import PagePreset
-from wordlift_client.models.page_record import PageRecord
-from wordlift_client.models.page_rule import PageRule
-from wordlift_client.models.page_vector_search_query_response_item import PageVectorSearchQueryResponseItem
-from wordlift_client.models.page_website import PageWebsite
-from wordlift_client.models.page_website_search import PageWebsiteSearch
-from wordlift_client.models.page_with_limits import PageWithLimits
-from wordlift_client.models.page_word import PageWord
-from wordlift_client.models.pagination_info import PaginationInfo
-from wordlift_client.models.platform_limit import PlatformLimit
-from wordlift_client.models.platform_limit_request import PlatformLimitRequest
-from wordlift_client.models.preset import Preset
-from wordlift_client.models.problem import Problem
-from wordlift_client.models.problem_detail import ProblemDetail
-from wordlift_client.models.project_type import ProjectType
-from wordlift_client.models.properties import Properties
-from wordlift_client.models.provision_subscription_request import ProvisionSubscriptionRequest
-from wordlift_client.models.provisioned_subscription import ProvisionedSubscription
-from wordlift_client.models.proxy_mode import ProxyMode
-from wordlift_client.models.proxy_tier import ProxyTier
-from wordlift_client.models.query_coverage_output import QueryCoverageOutput
-from wordlift_client.models.question_and_answer import QuestionAndAnswer
-from wordlift_client.models.question_and_answer_set import QuestionAndAnswerSet
-from wordlift_client.models.quick_win import QuickWin
-from wordlift_client.models.quick_wins_result import QuickWinsResult
-from wordlift_client.models.rank_entities import RankEntities
-from wordlift_client.models.record import Record
-from wordlift_client.models.render_request import RenderRequest
-from wordlift_client.models.render_wait_until import RenderWaitUntil
-from wordlift_client.models.replace_account_monitor_item import ReplaceAccountMonitorItem
-from wordlift_client.models.replace_expectation_segments_request import ReplaceExpectationSegmentsRequest
-from wordlift_client.models.replace_monitors_request import ReplaceMonitorsRequest
-from wordlift_client.models.replace_page_monitor_item import ReplacePageMonitorItem
-from wordlift_client.models.replace_segment_globs_request import ReplaceSegmentGlobsRequest
-from wordlift_client.models.replace_segment_urls_request import ReplaceSegmentUrlsRequest
-from wordlift_client.models.request import Request
-from wordlift_client.models.reset_account_request import ResetAccountRequest
-from wordlift_client.models.resolve_candidate import ResolveCandidate
-from wordlift_client.models.resolve_mention import ResolveMention
-from wordlift_client.models.resolve_problem import ResolveProblem
-from wordlift_client.models.resolve_request import ResolveRequest
-from wordlift_client.models.resolve_response import ResolveResponse
-from wordlift_client.models.resolve_validation_error import ResolveValidationError
-from wordlift_client.models.resolved_entity import ResolvedEntity
-from wordlift_client.models.resource_type import ResourceType
-from wordlift_client.models.resources import Resources
-from wordlift_client.models.resources_agent_skills_index import ResourcesAgentSkillsIndex
-from wordlift_client.models.resources_llms_txt import ResourcesLlmsTxt
-from wordlift_client.models.resources_mcp_json import ResourcesMcpJson
-from wordlift_client.models.resources_mcp_link_tag import ResourcesMcpLinkTag
-from wordlift_client.models.resources_mcp_server_card import ResourcesMcpServerCard
-from wordlift_client.models.resources_robots_txt import ResourcesRobotsTxt
-from wordlift_client.models.resources_skill_md import ResourcesSkillMd
-from wordlift_client.models.resources_webmcp_tools_json import ResourcesWebmcpToolsJson
-from wordlift_client.models.response import Response
-from wordlift_client.models.response200_create_expectation_accounts_account_id_monitoring_expectations_post import Response200CreateExpectationAccountsAccountIdMonitoringExpectationsPost
-from wordlift_client.models.response_create_expectation_accounts_account_id_monitoring_expectations_post import ResponseCreateExpectationAccountsAccountIdMonitoringExpectationsPost
-from wordlift_client.models.response_get_expectation_accounts_account_id_monitoring_expectations_expectation_id_get import ResponseGetExpectationAccountsAccountIdMonitoringExpectationsExpectationIdGet
-from wordlift_client.models.response_list_website_pages_websites_host_pages_get import ResponseListWebsitePagesWebsitesHostPagesGet
-from wordlift_client.models.rule import Rule
-from wordlift_client.models.rule_request import RuleRequest
-from wordlift_client.models.run_create import RunCreate
-from wordlift_client.models.run_finalize import RunFinalize
-from wordlift_client.models.run_progress_update import RunProgressUpdate
-from wordlift_client.models.run_response import RunResponse
-from wordlift_client.models.run_status import RunStatus
-from wordlift_client.models.schema_recommendation import SchemaRecommendation
-from wordlift_client.models.scope import Scope
-from wordlift_client.models.segment_glob_response import SegmentGlobResponse
-from wordlift_client.models.segment_order_by import SegmentOrderBy
-from wordlift_client.models.segment_request import SegmentRequest
-from wordlift_client.models.segment_response import SegmentResponse
-from wordlift_client.models.segment_severity_request import SegmentSeverityRequest
-from wordlift_client.models.segment_severity_response import SegmentSeverityResponse
-from wordlift_client.models.segment_summary_item import SegmentSummaryItem
-from wordlift_client.models.segment_url_response import SegmentUrlResponse
-from wordlift_client.models.seo_fundamentals import SeoFundamentals
-from wordlift_client.models.site_files import SiteFiles
-from wordlift_client.models.sitemap_import_request import SitemapImportRequest
-from wordlift_client.models.smart_content_project import SmartContentProject
-from wordlift_client.models.smart_content_request import SmartContentRequest
-from wordlift_client.models.snapshot_list_response import SnapshotListResponse
-from wordlift_client.models.snapshot_response import SnapshotResponse
-from wordlift_client.models.sort_direction import SortDirection
-from wordlift_client.models.structured_data import StructuredData
-from wordlift_client.models.structured_data_constraint import StructuredDataConstraint
-from wordlift_client.models.structured_data_expectation_config import StructuredDataExpectationConfig
-from wordlift_client.models.structured_data_expectation_config_request import StructuredDataExpectationConfigRequest
-from wordlift_client.models.structured_data_expectation_request import StructuredDataExpectationRequest
-from wordlift_client.models.structured_data_expectation_response import StructuredDataExpectationResponse
-from wordlift_client.models.submit_fact_check200_response import SubmitFactCheck200Response
-from wordlift_client.models.submit_fact_check_request import SubmitFactCheckRequest
-from wordlift_client.models.submit_job_body import SubmitJobBody
-from wordlift_client.models.token_response import TokenResponse
-from wordlift_client.models.tokens import Tokens
-from wordlift_client.models.topic import Topic
-from wordlift_client.models.update_account_request import UpdateAccountRequest
-from wordlift_client.models.update_question_and_answer_request import UpdateQuestionAndAnswerRequest
-from wordlift_client.models.update_record_request import UpdateRecordRequest
-from wordlift_client.models.update_records_request import UpdateRecordsRequest
-from wordlift_client.models.user_entity import UserEntity
-from wordlift_client.models.validation_error import ValidationError
-from wordlift_client.models.validation_fix import ValidationFix
-from wordlift_client.models.validation_result import ValidationResult
-from wordlift_client.models.validation_type_enum import ValidationTypeEnum
-from wordlift_client.models.vector_search_query_request import VectorSearchQueryRequest
-from wordlift_client.models.vector_search_query_response_item import VectorSearchQueryResponseItem
-from wordlift_client.models.vector_search_query_response_item_fields_value_inner import VectorSearchQueryResponseItemFieldsValueInner
-from wordlift_client.models.vector_search_query_response_item_metadata_value import VectorSearchQueryResponseItemMetadataValue
-from wordlift_client.models.web_async import WebAsync
-from wordlift_client.models.web_page import WebPage
-from wordlift_client.models.web_page_import_fetch_options import WebPageImportFetchOptions
-from wordlift_client.models.web_page_import_request import WebPageImportRequest
-from wordlift_client.models.web_page_import_response import WebPageImportResponse
-from wordlift_client.models.web_page_imports_batch_request import WebPageImportsBatchRequest
-from wordlift_client.models.web_page_imports_http_validation_error import WebPageImportsHTTPValidationError
-from wordlift_client.models.web_page_imports_validation_error import WebPageImportsValidationError
-from wordlift_client.models.web_page_scrape_request import WebPageScrapeRequest
-from wordlift_client.models.web_page_scrape_response import WebPageScrapeResponse
-from wordlift_client.models.webpage_properties import WebpageProperties
-from wordlift_client.models.website import Website
-from wordlift_client.models.website_page_artifact_response import WebsitePageArtifactResponse
-from wordlift_client.models.website_page_list_response import WebsitePageListResponse
-from wordlift_client.models.website_page_resolved_response import WebsitePageResolvedResponse
-from wordlift_client.models.website_page_response import WebsitePageResponse
-from wordlift_client.models.website_page_summary import WebsitePageSummary
-from wordlift_client.models.website_search import WebsiteSearch
-from wordlift_client.models.well_known_files import WellKnownFiles
-from wordlift_client.models.what_operand_lhs import WhatOperandLhs
-from wordlift_client.models.what_operator import WhatOperator
-from wordlift_client.models.when_operator import WhenOperator
-from wordlift_client.models.with_limits import WithLimits
-from wordlift_client.models.word import Word
-from wordlift_client.models.word_lift_problem import WordLiftProblem
-from wordlift_client.models.word_repetition_data import WordRepetitionData
-from wordlift_client.models.word_request import WordRequest
+if _typing.TYPE_CHECKING:
+    # import apis into sdk package
+    from wordlift_client.api.account_api import AccountApi as AccountApi
+    from wordlift_client.api.account_chunksets_api import AccountChunksetsApi as AccountChunksetsApi
+    from wordlift_client.api.account_graph_kpis_api import AccountGraphKPIsApi as AccountGraphKPIsApi
+    from wordlift_client.api.account_stats_api import AccountStatsApi as AccountStatsApi
+    from wordlift_client.api.accounts_api import AccountsApi as AccountsApi
+    from wordlift_client.api.add_ons_api import AddOnsApi as AddOnsApi
+    from wordlift_client.api.agent_api import AgentApi as AgentApi
+    from wordlift_client.api.analyses_api import AnalysesApi as AnalysesApi
+    from wordlift_client.api.analytics_imports_api import AnalyticsImportsApi as AnalyticsImportsApi
+    from wordlift_client.api.analytics_syncs_api import AnalyticsSyncsApi as AnalyticsSyncsApi
+    from wordlift_client.api.audit_api import AuditApi as AuditApi
+    from wordlift_client.api.authors_api import AuthorsApi as AuthorsApi
+    from wordlift_client.api.autocomplete_api import AutocompleteApi as AutocompleteApi
+    from wordlift_client.api.botify_crawl_imports_api import BotifyCrawlImportsApi as BotifyCrawlImportsApi
+    from wordlift_client.api.classifications_api import ClassificationsApi as ClassificationsApi
+    from wordlift_client.api.content_evaluations_api import ContentEvaluationsApi as ContentEvaluationsApi
+    from wordlift_client.api.content_expansions_api import ContentExpansionsApi as ContentExpansionsApi
+    from wordlift_client.api.content_generation_completion_api import ContentGenerationCompletionApi as ContentGenerationCompletionApi
+    from wordlift_client.api.content_generation_fields_api import ContentGenerationFieldsApi as ContentGenerationFieldsApi
+    from wordlift_client.api.content_generation_models_api import ContentGenerationModelsApi as ContentGenerationModelsApi
+    from wordlift_client.api.content_generation_presets_api import ContentGenerationPresetsApi as ContentGenerationPresetsApi
+    from wordlift_client.api.content_generation_records_api import ContentGenerationRecordsApi as ContentGenerationRecordsApi
+    from wordlift_client.api.content_generation_records_export_api import ContentGenerationRecordsExportApi as ContentGenerationRecordsExportApi
+    from wordlift_client.api.content_generation_renders_api import ContentGenerationRendersApi as ContentGenerationRendersApi
+    from wordlift_client.api.content_generation_stats_api import ContentGenerationStatsApi as ContentGenerationStatsApi
+    from wordlift_client.api.content_generation_syncs_api import ContentGenerationSyncsApi as ContentGenerationSyncsApi
+    from wordlift_client.api.content_generation_word_biases_api import ContentGenerationWordBiasesApi as ContentGenerationWordBiasesApi
+    from wordlift_client.api.content_generations_api import ContentGenerationsApi as ContentGenerationsApi
+    from wordlift_client.api.custom_domains_api import CustomDomainsApi as CustomDomainsApi
+    from wordlift_client.api.data_uri_api import DataURIApi as DataURIApi
+    from wordlift_client.api.dataset_api import DatasetApi as DatasetApi
+    from wordlift_client.api.embedding_api import EmbeddingApi as EmbeddingApi
+    from wordlift_client.api.embeddings_api import EmbeddingsApi as EmbeddingsApi
+    from wordlift_client.api.entities_api import EntitiesApi as EntitiesApi
+    from wordlift_client.api.entity_gaps_api import EntityGapsApi as EntityGapsApi
+    from wordlift_client.api.expectation_summary_api import ExpectationSummaryApi as ExpectationSummaryApi
+    from wordlift_client.api.expectations_api import ExpectationsApi as ExpectationsApi
+    from wordlift_client.api.fact_check_api import FactCheckApi as FactCheckApi
+    from wordlift_client.api.fetch_api import FetchApi as FetchApi
+    from wordlift_client.api.google_merchants_api import GoogleMerchantsApi as GoogleMerchantsApi
+    from wordlift_client.api.google_search_console_api import GoogleSearchConsoleApi as GoogleSearchConsoleApi
+    from wordlift_client.api.google_search_console_searches_api import GoogleSearchConsoleSearchesApi as GoogleSearchConsoleSearchesApi
+    from wordlift_client.api.graph_ql_api import GraphQLApi as GraphQLApi
+    from wordlift_client.api.include_excludes_api import IncludeExcludesApi as IncludeExcludesApi
+    from wordlift_client.api.inspector_api import InspectorApi as InspectorApi
+    from wordlift_client.api.internal_links_api import InternalLinksApi as InternalLinksApi
+    from wordlift_client.api.link_groups_api import LinkGroupsApi as LinkGroupsApi
+    from wordlift_client.api.long_tails_api import LongTailsApi as LongTailsApi
+    from wordlift_client.api.merchant_syncs_api import MerchantSyncsApi as MerchantSyncsApi
+    from wordlift_client.api.merchants_api import MerchantsApi as MerchantsApi
+    from wordlift_client.api.microdata_api import MicrodataApi as MicrodataApi
+    from wordlift_client.api.monitor_check_summary_api import MonitorCheckSummaryApi as MonitorCheckSummaryApi
+    from wordlift_client.api.monitor_checks_api import MonitorChecksApi as MonitorChecksApi
+    from wordlift_client.api.monitor_runs_api import MonitorRunsApi as MonitorRunsApi
+    from wordlift_client.api.monitor_status_api import MonitorStatusApi as MonitorStatusApi
+    from wordlift_client.api.monitoring_summary_api import MonitoringSummaryApi as MonitoringSummaryApi
+    from wordlift_client.api.monitors_api import MonitorsApi as MonitorsApi
+    from wordlift_client.api.o_auth2_authorized_clients_api import OAuth2AuthorizedClientsApi as OAuth2AuthorizedClientsApi
+    from wordlift_client.api.pages_explorer_api import PagesExplorerApi as PagesExplorerApi
+    from wordlift_client.api.platform_consumptions_api import PlatformConsumptionsApi as PlatformConsumptionsApi
+    from wordlift_client.api.platform_limits_api import PlatformLimitsApi as PlatformLimitsApi
+    from wordlift_client.api.plugin_diagnostics_api import PluginDiagnosticsApi as PluginDiagnosticsApi
+    from wordlift_client.api.plugin_events_api import PluginEventsApi as PluginEventsApi
+    from wordlift_client.api.query_fan_out_api import QueryFanOutApi as QueryFanOutApi
+    from wordlift_client.api.question_and_answer_sets_api import QuestionAndAnswerSetsApi as QuestionAndAnswerSetsApi
+    from wordlift_client.api.questions_and_answers_api import QuestionsAndAnswersApi as QuestionsAndAnswersApi
+    from wordlift_client.api.redeem_codes_api import RedeemCodesApi as RedeemCodesApi
+    from wordlift_client.api.resolve_api import ResolveApi as ResolveApi
+    from wordlift_client.api.rules_api import RulesApi as RulesApi
+    from wordlift_client.api.segment_globs_api import SegmentGlobsApi as SegmentGlobsApi
+    from wordlift_client.api.segment_urls_api import SegmentURLsApi as SegmentURLsApi
+    from wordlift_client.api.segments_api import SegmentsApi as SegmentsApi
+    from wordlift_client.api.sitemap_generator_api import SitemapGeneratorApi as SitemapGeneratorApi
+    from wordlift_client.api.sitemap_imports_api import SitemapImportsApi as SitemapImportsApi
+    from wordlift_client.api.smart_contents_api import SmartContentsApi as SmartContentsApi
+    from wordlift_client.api.subscriptions_api import SubscriptionsApi as SubscriptionsApi
+    from wordlift_client.api.summarizations_api import SummarizationsApi as SummarizationsApi
+    from wordlift_client.api.tokens_api import TokensApi as TokensApi
+    from wordlift_client.api.vector_search_nodes_api import VectorSearchNodesApi as VectorSearchNodesApi
+    from wordlift_client.api.vector_search_queries_api import VectorSearchQueriesApi as VectorSearchQueriesApi
+    from wordlift_client.api.web_asyncs_metadata_api import WebAsyncsMetadataApi as WebAsyncsMetadataApi
+    from wordlift_client.api.web_asyncs_responses_api import WebAsyncsResponsesApi as WebAsyncsResponsesApi
+    from wordlift_client.api.web_page_scrape_api import WebPageScrapeApi as WebPageScrapeApi
+    from wordlift_client.api.web_pages_imports_api import WebPagesImportsApi as WebPagesImportsApi
+    from wordlift_client.api.web_pages_api import WebPagesApi as WebPagesApi
+    from wordlift_client.api.account_connector_field_controller_api import AccountConnectorFieldControllerApi as AccountConnectorFieldControllerApi
+    from wordlift_client.api.account_o_auth2_connector_controller_api import AccountOAuth2ConnectorControllerApi as AccountOAuth2ConnectorControllerApi
+    from wordlift_client.api.bootstrap_api import BootstrapApi as BootstrapApi
+    from wordlift_client.api.default_api import DefaultApi as DefaultApi
+    from wordlift_client.api.failures_api import FailuresApi as FailuresApi
+    from wordlift_client.api.graph_sync_controller_api import GraphSyncControllerApi as GraphSyncControllerApi
+    from wordlift_client.api.jobs_api import JobsApi as JobsApi
+    from wordlift_client.api.kpis_api import KpisApi as KpisApi
+    from wordlift_client.api.o_auth2_connector_controller_api import OAuth2ConnectorControllerApi as OAuth2ConnectorControllerApi
+    from wordlift_client.api.runs_api import RunsApi as RunsApi
+    from wordlift_client.api.snapshots_api import SnapshotsApi as SnapshotsApi
+    
+    # import ApiClient
+    from wordlift_client.api_response import ApiResponse as ApiResponse
+    from wordlift_client.api_client import ApiClient as ApiClient
+    from wordlift_client.configuration import Configuration as Configuration
+    from wordlift_client.exceptions import OpenApiException as OpenApiException
+    from wordlift_client.exceptions import ApiTypeError as ApiTypeError
+    from wordlift_client.exceptions import ApiValueError as ApiValueError
+    from wordlift_client.exceptions import ApiKeyError as ApiKeyError
+    from wordlift_client.exceptions import ApiAttributeError as ApiAttributeError
+    from wordlift_client.exceptions import ApiException as ApiException
+    
+    # import models into sdk package
+    from wordlift_client.models.ai_visibility_analysis_result import AIVisibilityAnalysisResult as AIVisibilityAnalysisResult
+    from wordlift_client.models.accepted_answer import AcceptedAnswer as AcceptedAnswer
+    from wordlift_client.models.account import Account as Account
+    from wordlift_client.models.account_info import AccountInfo as AccountInfo
+    from wordlift_client.models.account_stats import AccountStats as AccountStats
+    from wordlift_client.models.account_subscription import AccountSubscription as AccountSubscription
+    from wordlift_client.models.active_account import ActiveAccount as ActiveAccount
+    from wordlift_client.models.add_account_resource_request import AddAccountResourceRequest as AddAccountResourceRequest
+    from wordlift_client.models.add_monitor_accounts_account_id_monitoring_monitors_post_request import AddMonitorAccountsAccountIdMonitoringMonitorsPostRequest as AddMonitorAccountsAccountIdMonitoringMonitorsPostRequest
+    from wordlift_client.models.add_on_configuration import AddOnConfiguration as AddOnConfiguration
+    from wordlift_client.models.add_page_resource_request import AddPageResourceRequest as AddPageResourceRequest
+    from wordlift_client.models.add_segment_glob_request import AddSegmentGlobRequest as AddSegmentGlobRequest
+    from wordlift_client.models.add_segment_url_request import AddSegmentUrlRequest as AddSegmentUrlRequest
+    from wordlift_client.models.ai_visibility_audits_http_validation_error import AiVisibilityAuditsHTTPValidationError as AiVisibilityAuditsHTTPValidationError
+    from wordlift_client.models.ai_visibility_audits_validation_error import AiVisibilityAuditsValidationError as AiVisibilityAuditsValidationError
+    from wordlift_client.models.analyses_request import AnalysesRequest as AnalysesRequest
+    from wordlift_client.models.analyses_response import AnalysesResponse as AnalysesResponse
+    from wordlift_client.models.analyses_response_item import AnalysesResponseItem as AnalysesResponseItem
+    from wordlift_client.models.analytics_import_request import AnalyticsImportRequest as AnalyticsImportRequest
+    from wordlift_client.models.analytics_sync import AnalyticsSync as AnalyticsSync
+    from wordlift_client.models.analytics_sync_request import AnalyticsSyncRequest as AnalyticsSyncRequest
+    from wordlift_client.models.analyze_content_request import AnalyzeContentRequest as AnalyzeContentRequest
+    from wordlift_client.models.anchor_text import AnchorText as AnchorText
+    from wordlift_client.models.annotation import Annotation as Annotation
+    from wordlift_client.models.ask_request import AskRequest as AskRequest
+    from wordlift_client.models.ask_response import AskResponse as AskResponse
+    from wordlift_client.models.attach_expectation_monitor_request import AttachExpectationMonitorRequest as AttachExpectationMonitorRequest
+    from wordlift_client.models.attach_expectation_segment_request import AttachExpectationSegmentRequest as AttachExpectationSegmentRequest
+    from wordlift_client.models.audit_data import AuditData as AuditData
+    from wordlift_client.models.audit_request import AuditRequest as AuditRequest
+    from wordlift_client.models.audit_response import AuditResponse as AuditResponse
+    from wordlift_client.models.author_request import AuthorRequest as AuthorRequest
+    from wordlift_client.models.autocomplete_result import AutocompleteResult as AutocompleteResult
+    from wordlift_client.models.automation_issue import AutomationIssue as AutomationIssue
+    from wordlift_client.models.automation_readiness import AutomationReadiness as AutomationReadiness
+    from wordlift_client.models.batch_request import BatchRequest as BatchRequest
+    from wordlift_client.models.batch_response import BatchResponse as BatchResponse
+    from wordlift_client.models.batch_status import BatchStatus as BatchStatus
+    from wordlift_client.models.bootstrap_job_outcome import BootstrapJobOutcome as BootstrapJobOutcome
+    from wordlift_client.models.bootstrap_job_response import BootstrapJobResponse as BootstrapJobResponse
+    from wordlift_client.models.bootstrap_job_status import BootstrapJobStatus as BootstrapJobStatus
+    from wordlift_client.models.bot_status import BotStatus as BotStatus
+    from wordlift_client.models.botify_crawl_import_request import BotifyCrawlImportRequest as BotifyCrawlImportRequest
+    from wordlift_client.models.cancellation_reason import CancellationReason as CancellationReason
+    from wordlift_client.models.check_name_filter_value import CheckNameFilterValue as CheckNameFilterValue
+    from wordlift_client.models.check_result_item import CheckResultItem as CheckResultItem
+    from wordlift_client.models.check_summary_by_check_item import CheckSummaryByCheckItem as CheckSummaryByCheckItem
+    from wordlift_client.models.check_summary_state import CheckSummaryState as CheckSummaryState
+    from wordlift_client.models.check_summary_state_stat import CheckSummaryStateStat as CheckSummaryStateStat
+    from wordlift_client.models.check_timeseries_response import CheckTimeseriesResponse as CheckTimeseriesResponse
+    from wordlift_client.models.chunkset_list_response import ChunksetListResponse as ChunksetListResponse
+    from wordlift_client.models.chunkset_request import ChunksetRequest as ChunksetRequest
+    from wordlift_client.models.chunkset_response import ChunksetResponse as ChunksetResponse
+    from wordlift_client.models.classification_request import ClassificationRequest as ClassificationRequest
+    from wordlift_client.models.classification_response import ClassificationResponse as ClassificationResponse
+    from wordlift_client.models.completion_request import CompletionRequest as CompletionRequest
+    from wordlift_client.models.content_evaluation_request import ContentEvaluationRequest as ContentEvaluationRequest
+    from wordlift_client.models.content_evaluation_response import ContentEvaluationResponse as ContentEvaluationResponse
+    from wordlift_client.models.content_evaluation_response_metadata import ContentEvaluationResponseMetadata as ContentEvaluationResponseMetadata
+    from wordlift_client.models.content_evaluation_response_metadata_performance import ContentEvaluationResponseMetadataPerformance as ContentEvaluationResponseMetadataPerformance
+    from wordlift_client.models.content_evaluation_response_metadata_sentiment import ContentEvaluationResponseMetadataSentiment as ContentEvaluationResponseMetadataSentiment
+    from wordlift_client.models.content_evaluation_response_quality_score import ContentEvaluationResponseQualityScore as ContentEvaluationResponseQualityScore
+    from wordlift_client.models.content_evaluation_response_quality_score_breakdown import ContentEvaluationResponseQualityScoreBreakdown as ContentEvaluationResponseQualityScoreBreakdown
+    from wordlift_client.models.content_evaluation_response_quality_score_breakdown_content import ContentEvaluationResponseQualityScoreBreakdownContent as ContentEvaluationResponseQualityScoreBreakdownContent
+    from wordlift_client.models.content_evaluation_response_quality_score_breakdown_readability import ContentEvaluationResponseQualityScoreBreakdownReadability as ContentEvaluationResponseQualityScoreBreakdownReadability
+    from wordlift_client.models.content_evaluation_response_quality_score_breakdown_readability_complex_sentences import ContentEvaluationResponseQualityScoreBreakdownReadabilityComplexSentences as ContentEvaluationResponseQualityScoreBreakdownReadabilityComplexSentences
+    from wordlift_client.models.content_evaluation_response_quality_score_breakdown_seo import ContentEvaluationResponseQualityScoreBreakdownSeo as ContentEvaluationResponseQualityScoreBreakdownSeo
+    from wordlift_client.models.content_evaluation_response_quality_score_breakdown_seo_top_entities_value_inner import ContentEvaluationResponseQualityScoreBreakdownSeoTopEntitiesValueInner as ContentEvaluationResponseQualityScoreBreakdownSeoTopEntitiesValueInner
+    from wordlift_client.models.content_evaluations_http_validation_error import ContentEvaluationsHTTPValidationError as ContentEvaluationsHTTPValidationError
+    from wordlift_client.models.content_evaluations_validation_error import ContentEvaluationsValidationError as ContentEvaluationsValidationError
+    from wordlift_client.models.content_expansion_request import ContentExpansionRequest as ContentExpansionRequest
+    from wordlift_client.models.content_expansion_response import ContentExpansionResponse as ContentExpansionResponse
+    from wordlift_client.models.content_freshness import ContentFreshness as ContentFreshness
+    from wordlift_client.models.content_generation import ContentGeneration as ContentGeneration
+    from wordlift_client.models.content_generation_request import ContentGenerationRequest as ContentGenerationRequest
+    from wordlift_client.models.content_generation_stats import ContentGenerationStats as ContentGenerationStats
+    from wordlift_client.models.content_structure import ContentStructure as ContentStructure
+    from wordlift_client.models.crawl_job_create_response import CrawlJobCreateResponse as CrawlJobCreateResponse
+    from wordlift_client.models.crawl_job_input import CrawlJobInput as CrawlJobInput
+    from wordlift_client.models.crawl_job_list_pagination_info import CrawlJobListPaginationInfo as CrawlJobListPaginationInfo
+    from wordlift_client.models.crawl_job_list_response import CrawlJobListResponse as CrawlJobListResponse
+    from wordlift_client.models.crawl_job_page_list_response import CrawlJobPageListResponse as CrawlJobPageListResponse
+    from wordlift_client.models.crawl_job_page_summary import CrawlJobPageSummary as CrawlJobPageSummary
+    from wordlift_client.models.crawl_job_response import CrawlJobResponse as CrawlJobResponse
+    from wordlift_client.models.crawl_job_summary import CrawlJobSummary as CrawlJobSummary
+    from wordlift_client.models.crawl_page_status import CrawlPageStatus as CrawlPageStatus
+    from wordlift_client.models.crawler_http_validation_error import CrawlerHTTPValidationError as CrawlerHTTPValidationError
+    from wordlift_client.models.crawler_validation_error import CrawlerValidationError as CrawlerValidationError
+    from wordlift_client.models.create_embeddings_input import CreateEmbeddingsInput as CreateEmbeddingsInput
+    from wordlift_client.models.create_url_inspection_request import CreateUrlInspectionRequest as CreateUrlInspectionRequest
+    from wordlift_client.models.cursor_page import CursorPage as CursorPage
+    from wordlift_client.models.decision_signals import DecisionSignals as DecisionSignals
+    from wordlift_client.models.detected_schema import DetectedSchema as DetectedSchema
+    from wordlift_client.models.diagnostic_plugin import DiagnosticPlugin as DiagnosticPlugin
+    from wordlift_client.models.diagnostic_plugin_request import DiagnosticPluginRequest as DiagnosticPluginRequest
+    from wordlift_client.models.discovery_sources import DiscoverySources as DiscoverySources
+    from wordlift_client.models.domain_validation_request import DomainValidationRequest as DomainValidationRequest
+    from wordlift_client.models.embedding_request import EmbeddingRequest as EmbeddingRequest
+    from wordlift_client.models.entity import Entity as Entity
+    from wordlift_client.models.entity_gap_request import EntityGapRequest as EntityGapRequest
+    from wordlift_client.models.entity_match import EntityMatch as EntityMatch
+    from wordlift_client.models.entity_patch_request import EntityPatchRequest as EntityPatchRequest
+    from wordlift_client.models.error_response import ErrorResponse as ErrorResponse
+    from wordlift_client.models.event import Event as Event
+    from wordlift_client.models.events_request import EventsRequest as EventsRequest
+    from wordlift_client.models.events_response import EventsResponse as EventsResponse
+    from wordlift_client.models.expectation_attachment import ExpectationAttachment as ExpectationAttachment
+    from wordlift_client.models.expectation_evaluation_summary import ExpectationEvaluationSummary as ExpectationEvaluationSummary
+    from wordlift_client.models.expectation_outcome import ExpectationOutcome as ExpectationOutcome
+    from wordlift_client.models.expectation_severity import ExpectationSeverity as ExpectationSeverity
+    from wordlift_client.models.expectation_severity_response import ExpectationSeverityResponse as ExpectationSeverityResponse
+    from wordlift_client.models.expectation_summary_by_expectation_item import ExpectationSummaryByExpectationItem as ExpectationSummaryByExpectationItem
+    from wordlift_client.models.expectation_summary_by_type_item import ExpectationSummaryByTypeItem as ExpectationSummaryByTypeItem
+    from wordlift_client.models.expectation_summary_outcome import ExpectationSummaryOutcome as ExpectationSummaryOutcome
+    from wordlift_client.models.expectation_summary_outcome_stat import ExpectationSummaryOutcomeStat as ExpectationSummaryOutcomeStat
+    from wordlift_client.models.expectation_summary_type_stat import ExpectationSummaryTypeStat as ExpectationSummaryTypeStat
+    from wordlift_client.models.expectation_type import ExpectationType as ExpectationType
+    from wordlift_client.models.failure_create import FailureCreate as FailureCreate
+    from wordlift_client.models.failure_reason import FailureReason as FailureReason
+    from wordlift_client.models.failure_response import FailureResponse as FailureResponse
+    from wordlift_client.models.fetch_js_render_mode import FetchJsRenderMode as FetchJsRenderMode
+    from wordlift_client.models.fetch_response import FetchResponse as FetchResponse
+    from wordlift_client.models.fetch_target_load_event import FetchTargetLoadEvent as FetchTargetLoadEvent
+    from wordlift_client.models.field_value_request import FieldValueRequest as FieldValueRequest
+    from wordlift_client.models.filter import Filter as Filter
+    from wordlift_client.models.filter_value import FilterValue as FilterValue
+    from wordlift_client.models.generate_sitemap200_response import GenerateSitemap200Response as GenerateSitemap200Response
+    from wordlift_client.models.generate_sitemap_request import GenerateSitemapRequest as GenerateSitemapRequest
+    from wordlift_client.models.graph_kpi_http_validation_error import GraphKpiHTTPValidationError as GraphKpiHTTPValidationError
+    from wordlift_client.models.graph_kpi_snapshot import GraphKpiSnapshot as GraphKpiSnapshot
+    from wordlift_client.models.graph_kpi_snapshot_page import GraphKpiSnapshotPage as GraphKpiSnapshotPage
+    from wordlift_client.models.graph_kpi_snapshot_request import GraphKpiSnapshotRequest as GraphKpiSnapshotRequest
+    from wordlift_client.models.graph_kpi_validation_error import GraphKpiValidationError as GraphKpiValidationError
+    from wordlift_client.models.graph_sync_http_validation_error import GraphSyncHTTPValidationError as GraphSyncHTTPValidationError
+    from wordlift_client.models.graph_sync_request import GraphSyncRequest as GraphSyncRequest
+    from wordlift_client.models.graph_sync_response import GraphSyncResponse as GraphSyncResponse
+    from wordlift_client.models.graph_sync_validation_error import GraphSyncValidationError as GraphSyncValidationError
+    from wordlift_client.models.graphql_request import GraphqlRequest as GraphqlRequest
+    from wordlift_client.models.http_validation_error import HTTPValidationError as HTTPValidationError
+    from wordlift_client.models.html import Html as Html
+    from wordlift_client.models.html_semantics import HtmlSemantics as HtmlSemantics
+    from wordlift_client.models.image import Image as Image
+    from wordlift_client.models.image_accessibility import ImageAccessibility as ImageAccessibility
+    from wordlift_client.models.include_exclude import IncludeExclude as IncludeExclude
+    from wordlift_client.models.include_exclude_request import IncludeExcludeRequest as IncludeExcludeRequest
+    from wordlift_client.models.inline_dataset import InlineDataset as InlineDataset
+    from wordlift_client.models.inspect_response import InspectResponse as InspectResponse
+    from wordlift_client.models.internal_link import InternalLink as InternalLink
+    from wordlift_client.models.internal_link_destination import InternalLinkDestination as InternalLinkDestination
+    from wordlift_client.models.internal_link_request import InternalLinkRequest as InternalLinkRequest
+    from wordlift_client.models.internal_link_source import InternalLinkSource as InternalLinkSource
+    from wordlift_client.models.internal_linking import InternalLinking as InternalLinking
+    from wordlift_client.models.item import Item as Item
+    from wordlift_client.models.items_inner import ItemsInner as ItemsInner
+    from wordlift_client.models.items_inner1 import ItemsInner1 as ItemsInner1
+    from wordlift_client.models.job_list_response import JobListResponse as JobListResponse
+    from wordlift_client.models.job_response import JobResponse as JobResponse
+    from wordlift_client.models.job_status import JobStatus as JobStatus
+    from wordlift_client.models.js_render_mode import JsRenderMode as JsRenderMode
+    from wordlift_client.models.js_rendering import JsRendering as JsRendering
+    from wordlift_client.models.kg_embedding_request import KgEmbeddingRequest as KgEmbeddingRequest
+    from wordlift_client.models.kg_embedding_response import KgEmbeddingResponse as KgEmbeddingResponse
+    from wordlift_client.models.kpi_create import KpiCreate as KpiCreate
+    from wordlift_client.models.kpi_response import KpiResponse as KpiResponse
+    from wordlift_client.models.kpi_totals import KpiTotals as KpiTotals
+    from wordlift_client.models.level_enum import LevelEnum as LevelEnum
+    from wordlift_client.models.link_group import LinkGroup as LinkGroup
+    from wordlift_client.models.link_group_response import LinkGroupResponse as LinkGroupResponse
+    from wordlift_client.models.list_check_summary_by_check_response import ListCheckSummaryByCheckResponse as ListCheckSummaryByCheckResponse
+    from wordlift_client.models.list_expectation_severity_response import ListExpectationSeverityResponse as ListExpectationSeverityResponse
+    from wordlift_client.models.list_expectation_summary_by_expectation_response import ListExpectationSummaryByExpectationResponse as ListExpectationSummaryByExpectationResponse
+    from wordlift_client.models.list_expectation_summary_by_type_response import ListExpectationSummaryByTypeResponse as ListExpectationSummaryByTypeResponse
+    from wordlift_client.models.list_expectations_response import ListExpectationsResponse as ListExpectationsResponse
+    from wordlift_client.models.list_monitor_status_response import ListMonitorStatusResponse as ListMonitorStatusResponse
+    from wordlift_client.models.list_monitors_response import ListMonitorsResponse as ListMonitorsResponse
+    from wordlift_client.models.list_runs_response import ListRunsResponse as ListRunsResponse
+    from wordlift_client.models.list_segment_globs_response import ListSegmentGlobsResponse as ListSegmentGlobsResponse
+    from wordlift_client.models.list_segment_severity_response import ListSegmentSeverityResponse as ListSegmentSeverityResponse
+    from wordlift_client.models.list_segment_summary_response import ListSegmentSummaryResponse as ListSegmentSummaryResponse
+    from wordlift_client.models.list_segment_urls_response import ListSegmentUrlsResponse as ListSegmentUrlsResponse
+    from wordlift_client.models.list_segments_response import ListSegmentsResponse as ListSegmentsResponse
+    from wordlift_client.models.location_inner import LocationInner as LocationInner
+    from wordlift_client.models.log_entry_response import LogEntryResponse as LogEntryResponse
+    from wordlift_client.models.logs_page import LogsPage as LogsPage
+    from wordlift_client.models.long_tail_entity import LongTailEntity as LongTailEntity
+    from wordlift_client.models.long_tail_properties import LongTailProperties as LongTailProperties
+    from wordlift_client.models.longtail_response import LongtailResponse as LongtailResponse
+    from wordlift_client.models.manager_request import ManagerRequest as ManagerRequest
+    from wordlift_client.models.manager_response import ManagerResponse as ManagerResponse
+    from wordlift_client.models.mention_resolution import MentionResolution as MentionResolution
+    from wordlift_client.models.merchant import Merchant as Merchant
+    from wordlift_client.models.merchant_entry import MerchantEntry as MerchantEntry
+    from wordlift_client.models.merchant_request import MerchantRequest as MerchantRequest
+    from wordlift_client.models.merchant_sync import MerchantSync as MerchantSync
+    from wordlift_client.models.merchant_view import MerchantView as MerchantView
+    from wordlift_client.models.model import Model as Model
+    from wordlift_client.models.model_field import ModelField as ModelField
+    from wordlift_client.models.monitor_check_name import MonitorCheckName as MonitorCheckName
+    from wordlift_client.models.monitor_http_validation_error import MonitorHTTPValidationError as MonitorHTTPValidationError
+    from wordlift_client.models.monitor_response import MonitorResponse as MonitorResponse
+    from wordlift_client.models.monitor_run_response import MonitorRunResponse as MonitorRunResponse
+    from wordlift_client.models.monitor_run_status import MonitorRunStatus as MonitorRunStatus
+    from wordlift_client.models.monitor_severity_response import MonitorSeverityResponse as MonitorSeverityResponse
+    from wordlift_client.models.monitor_status import MonitorStatus as MonitorStatus
+    from wordlift_client.models.monitor_status_check_status import MonitorStatusCheckStatus as MonitorStatusCheckStatus
+    from wordlift_client.models.monitor_status_order_by import MonitorStatusOrderBy as MonitorStatusOrderBy
+    from wordlift_client.models.monitor_status_response import MonitorStatusResponse as MonitorStatusResponse
+    from wordlift_client.models.monitor_type_progress import MonitorTypeProgress as MonitorTypeProgress
+    from wordlift_client.models.monitor_validation_error import MonitorValidationError as MonitorValidationError
+    from wordlift_client.models.network_account_info import NetworkAccountInfo as NetworkAccountInfo
+    from wordlift_client.models.node_request import NodeRequest as NodeRequest
+    from wordlift_client.models.node_request_metadata_value import NodeRequestMetadataValue as NodeRequestMetadataValue
+    from wordlift_client.models.o_auth2_authorized_client import OAuth2AuthorizedClient as OAuth2AuthorizedClient
+    from wordlift_client.models.o_auth2_authorized_client_request import OAuth2AuthorizedClientRequest as OAuth2AuthorizedClientRequest
+    from wordlift_client.models.o_auth2_connector_authorization_request import OAuth2ConnectorAuthorizationRequest as OAuth2ConnectorAuthorizationRequest
+    from wordlift_client.models.o_auth2_connector_authorization_request_response import OAuth2ConnectorAuthorizationRequestResponse as OAuth2ConnectorAuthorizationRequestResponse
+    from wordlift_client.models.o_auth2_connector_authorization_response import OAuth2ConnectorAuthorizationResponse as OAuth2ConnectorAuthorizationResponse
+    from wordlift_client.models.o_auth2_connector_response import OAuth2ConnectorResponse as OAuth2ConnectorResponse
+    from wordlift_client.models.page_active_account import PageActiveAccount as PageActiveAccount
+    from wordlift_client.models.page_add_on_configuration import PageAddOnConfiguration as PageAddOnConfiguration
+    from wordlift_client.models.page_artifact_query_item import PageArtifactQueryItem as PageArtifactQueryItem
+    from wordlift_client.models.page_artifact_query_request import PageArtifactQueryRequest as PageArtifactQueryRequest
+    from wordlift_client.models.page_artifact_query_response import PageArtifactQueryResponse as PageArtifactQueryResponse
+    from wordlift_client.models.page_artifact_query_result_item import PageArtifactQueryResultItem as PageArtifactQueryResultItem
+    from wordlift_client.models.page_content_generation import PageContentGeneration as PageContentGeneration
+    from wordlift_client.models.page_field import PageField as PageField
+    from wordlift_client.models.page_merchant_entry import PageMerchantEntry as PageMerchantEntry
+    from wordlift_client.models.page_merchant_sync import PageMerchantSync as PageMerchantSync
+    from wordlift_client.models.page_merchant_view import PageMerchantView as PageMerchantView
+    from wordlift_client.models.page_model import PageModel as PageModel
+    from wordlift_client.models.page_o_auth2_authorized_client import PageOAuth2AuthorizedClient as PageOAuth2AuthorizedClient
+    from wordlift_client.models.page_platform_limit import PagePlatformLimit as PagePlatformLimit
+    from wordlift_client.models.page_preset import PagePreset as PagePreset
+    from wordlift_client.models.page_record import PageRecord as PageRecord
+    from wordlift_client.models.page_rule import PageRule as PageRule
+    from wordlift_client.models.page_vector_search_query_response_item import PageVectorSearchQueryResponseItem as PageVectorSearchQueryResponseItem
+    from wordlift_client.models.page_website import PageWebsite as PageWebsite
+    from wordlift_client.models.page_website_search import PageWebsiteSearch as PageWebsiteSearch
+    from wordlift_client.models.page_with_limits import PageWithLimits as PageWithLimits
+    from wordlift_client.models.page_word import PageWord as PageWord
+    from wordlift_client.models.pagination_info import PaginationInfo as PaginationInfo
+    from wordlift_client.models.platform_limit import PlatformLimit as PlatformLimit
+    from wordlift_client.models.platform_limit_request import PlatformLimitRequest as PlatformLimitRequest
+    from wordlift_client.models.preset import Preset as Preset
+    from wordlift_client.models.problem import Problem as Problem
+    from wordlift_client.models.problem_detail import ProblemDetail as ProblemDetail
+    from wordlift_client.models.project_type import ProjectType as ProjectType
+    from wordlift_client.models.properties import Properties as Properties
+    from wordlift_client.models.provision_subscription_request import ProvisionSubscriptionRequest as ProvisionSubscriptionRequest
+    from wordlift_client.models.provisioned_subscription import ProvisionedSubscription as ProvisionedSubscription
+    from wordlift_client.models.proxy_mode import ProxyMode as ProxyMode
+    from wordlift_client.models.proxy_tier import ProxyTier as ProxyTier
+    from wordlift_client.models.query_coverage_output import QueryCoverageOutput as QueryCoverageOutput
+    from wordlift_client.models.question_and_answer import QuestionAndAnswer as QuestionAndAnswer
+    from wordlift_client.models.question_and_answer_set import QuestionAndAnswerSet as QuestionAndAnswerSet
+    from wordlift_client.models.quick_win import QuickWin as QuickWin
+    from wordlift_client.models.quick_wins_result import QuickWinsResult as QuickWinsResult
+    from wordlift_client.models.rank_entities import RankEntities as RankEntities
+    from wordlift_client.models.record import Record as Record
+    from wordlift_client.models.render_request import RenderRequest as RenderRequest
+    from wordlift_client.models.render_wait_until import RenderWaitUntil as RenderWaitUntil
+    from wordlift_client.models.replace_account_monitor_item import ReplaceAccountMonitorItem as ReplaceAccountMonitorItem
+    from wordlift_client.models.replace_expectation_segments_request import ReplaceExpectationSegmentsRequest as ReplaceExpectationSegmentsRequest
+    from wordlift_client.models.replace_monitors_request import ReplaceMonitorsRequest as ReplaceMonitorsRequest
+    from wordlift_client.models.replace_page_monitor_item import ReplacePageMonitorItem as ReplacePageMonitorItem
+    from wordlift_client.models.replace_segment_globs_request import ReplaceSegmentGlobsRequest as ReplaceSegmentGlobsRequest
+    from wordlift_client.models.replace_segment_urls_request import ReplaceSegmentUrlsRequest as ReplaceSegmentUrlsRequest
+    from wordlift_client.models.request import Request as Request
+    from wordlift_client.models.reset_account_request import ResetAccountRequest as ResetAccountRequest
+    from wordlift_client.models.resolve_candidate import ResolveCandidate as ResolveCandidate
+    from wordlift_client.models.resolve_mention import ResolveMention as ResolveMention
+    from wordlift_client.models.resolve_problem import ResolveProblem as ResolveProblem
+    from wordlift_client.models.resolve_request import ResolveRequest as ResolveRequest
+    from wordlift_client.models.resolve_response import ResolveResponse as ResolveResponse
+    from wordlift_client.models.resolve_validation_error import ResolveValidationError as ResolveValidationError
+    from wordlift_client.models.resolved_entity import ResolvedEntity as ResolvedEntity
+    from wordlift_client.models.resource_type import ResourceType as ResourceType
+    from wordlift_client.models.resources import Resources as Resources
+    from wordlift_client.models.resources_agent_skills_index import ResourcesAgentSkillsIndex as ResourcesAgentSkillsIndex
+    from wordlift_client.models.resources_llms_txt import ResourcesLlmsTxt as ResourcesLlmsTxt
+    from wordlift_client.models.resources_mcp_json import ResourcesMcpJson as ResourcesMcpJson
+    from wordlift_client.models.resources_mcp_link_tag import ResourcesMcpLinkTag as ResourcesMcpLinkTag
+    from wordlift_client.models.resources_mcp_server_card import ResourcesMcpServerCard as ResourcesMcpServerCard
+    from wordlift_client.models.resources_robots_txt import ResourcesRobotsTxt as ResourcesRobotsTxt
+    from wordlift_client.models.resources_skill_md import ResourcesSkillMd as ResourcesSkillMd
+    from wordlift_client.models.resources_webmcp_tools_json import ResourcesWebmcpToolsJson as ResourcesWebmcpToolsJson
+    from wordlift_client.models.response import Response as Response
+    from wordlift_client.models.response_list_website_pages_websites_host_pages_get import ResponseListWebsitePagesWebsitesHostPagesGet as ResponseListWebsitePagesWebsitesHostPagesGet
+    from wordlift_client.models.rule import Rule as Rule
+    from wordlift_client.models.rule_request import RuleRequest as RuleRequest
+    from wordlift_client.models.run_create import RunCreate as RunCreate
+    from wordlift_client.models.run_finalize import RunFinalize as RunFinalize
+    from wordlift_client.models.run_progress_update import RunProgressUpdate as RunProgressUpdate
+    from wordlift_client.models.run_response import RunResponse as RunResponse
+    from wordlift_client.models.run_status import RunStatus as RunStatus
+    from wordlift_client.models.schema_recommendation import SchemaRecommendation as SchemaRecommendation
+    from wordlift_client.models.scope import Scope as Scope
+    from wordlift_client.models.segment_glob_response import SegmentGlobResponse as SegmentGlobResponse
+    from wordlift_client.models.segment_order_by import SegmentOrderBy as SegmentOrderBy
+    from wordlift_client.models.segment_request import SegmentRequest as SegmentRequest
+    from wordlift_client.models.segment_response import SegmentResponse as SegmentResponse
+    from wordlift_client.models.segment_severity_request import SegmentSeverityRequest as SegmentSeverityRequest
+    from wordlift_client.models.segment_severity_response import SegmentSeverityResponse as SegmentSeverityResponse
+    from wordlift_client.models.segment_summary_item import SegmentSummaryItem as SegmentSummaryItem
+    from wordlift_client.models.segment_url_response import SegmentUrlResponse as SegmentUrlResponse
+    from wordlift_client.models.seo_fundamentals import SeoFundamentals as SeoFundamentals
+    from wordlift_client.models.site_files import SiteFiles as SiteFiles
+    from wordlift_client.models.sitemap_import_request import SitemapImportRequest as SitemapImportRequest
+    from wordlift_client.models.smart_content_project import SmartContentProject as SmartContentProject
+    from wordlift_client.models.smart_content_request import SmartContentRequest as SmartContentRequest
+    from wordlift_client.models.snapshot_list_response import SnapshotListResponse as SnapshotListResponse
+    from wordlift_client.models.snapshot_response import SnapshotResponse as SnapshotResponse
+    from wordlift_client.models.sort_direction import SortDirection as SortDirection
+    from wordlift_client.models.structured_data import StructuredData as StructuredData
+    from wordlift_client.models.structured_data_constraint import StructuredDataConstraint as StructuredDataConstraint
+    from wordlift_client.models.structured_data_expectation_config import StructuredDataExpectationConfig as StructuredDataExpectationConfig
+    from wordlift_client.models.structured_data_expectation_config_request import StructuredDataExpectationConfigRequest as StructuredDataExpectationConfigRequest
+    from wordlift_client.models.structured_data_expectation_request import StructuredDataExpectationRequest as StructuredDataExpectationRequest
+    from wordlift_client.models.structured_data_expectation_response import StructuredDataExpectationResponse as StructuredDataExpectationResponse
+    from wordlift_client.models.submit_fact_check200_response import SubmitFactCheck200Response as SubmitFactCheck200Response
+    from wordlift_client.models.submit_fact_check_request import SubmitFactCheckRequest as SubmitFactCheckRequest
+    from wordlift_client.models.submit_job_body import SubmitJobBody as SubmitJobBody
+    from wordlift_client.models.token_response import TokenResponse as TokenResponse
+    from wordlift_client.models.tokens import Tokens as Tokens
+    from wordlift_client.models.topic import Topic as Topic
+    from wordlift_client.models.update_account_request import UpdateAccountRequest as UpdateAccountRequest
+    from wordlift_client.models.update_question_and_answer_request import UpdateQuestionAndAnswerRequest as UpdateQuestionAndAnswerRequest
+    from wordlift_client.models.update_record_request import UpdateRecordRequest as UpdateRecordRequest
+    from wordlift_client.models.update_records_request import UpdateRecordsRequest as UpdateRecordsRequest
+    from wordlift_client.models.user_entity import UserEntity as UserEntity
+    from wordlift_client.models.validation_error import ValidationError as ValidationError
+    from wordlift_client.models.validation_fix import ValidationFix as ValidationFix
+    from wordlift_client.models.validation_result import ValidationResult as ValidationResult
+    from wordlift_client.models.validation_type_enum import ValidationTypeEnum as ValidationTypeEnum
+    from wordlift_client.models.vector_search_query_request import VectorSearchQueryRequest as VectorSearchQueryRequest
+    from wordlift_client.models.vector_search_query_response_item import VectorSearchQueryResponseItem as VectorSearchQueryResponseItem
+    from wordlift_client.models.vector_search_query_response_item_fields_value_inner import VectorSearchQueryResponseItemFieldsValueInner as VectorSearchQueryResponseItemFieldsValueInner
+    from wordlift_client.models.vector_search_query_response_item_metadata_value import VectorSearchQueryResponseItemMetadataValue as VectorSearchQueryResponseItemMetadataValue
+    from wordlift_client.models.web_async import WebAsync as WebAsync
+    from wordlift_client.models.web_page import WebPage as WebPage
+    from wordlift_client.models.web_page_import_fetch_options import WebPageImportFetchOptions as WebPageImportFetchOptions
+    from wordlift_client.models.web_page_import_request import WebPageImportRequest as WebPageImportRequest
+    from wordlift_client.models.web_page_import_response import WebPageImportResponse as WebPageImportResponse
+    from wordlift_client.models.web_page_imports_batch_request import WebPageImportsBatchRequest as WebPageImportsBatchRequest
+    from wordlift_client.models.web_page_imports_http_validation_error import WebPageImportsHTTPValidationError as WebPageImportsHTTPValidationError
+    from wordlift_client.models.web_page_imports_validation_error import WebPageImportsValidationError as WebPageImportsValidationError
+    from wordlift_client.models.web_page_scrape_request import WebPageScrapeRequest as WebPageScrapeRequest
+    from wordlift_client.models.web_page_scrape_response import WebPageScrapeResponse as WebPageScrapeResponse
+    from wordlift_client.models.webpage_properties import WebpageProperties as WebpageProperties
+    from wordlift_client.models.website import Website as Website
+    from wordlift_client.models.website_page_artifact_response import WebsitePageArtifactResponse as WebsitePageArtifactResponse
+    from wordlift_client.models.website_page_list_response import WebsitePageListResponse as WebsitePageListResponse
+    from wordlift_client.models.website_page_resolved_response import WebsitePageResolvedResponse as WebsitePageResolvedResponse
+    from wordlift_client.models.website_page_response import WebsitePageResponse as WebsitePageResponse
+    from wordlift_client.models.website_page_summary import WebsitePageSummary as WebsitePageSummary
+    from wordlift_client.models.website_search import WebsiteSearch as WebsiteSearch
+    from wordlift_client.models.well_known_files import WellKnownFiles as WellKnownFiles
+    from wordlift_client.models.what_operand_lhs import WhatOperandLhs as WhatOperandLhs
+    from wordlift_client.models.what_operator import WhatOperator as WhatOperator
+    from wordlift_client.models.when_operator import WhenOperator as WhenOperator
+    from wordlift_client.models.with_limits import WithLimits as WithLimits
+    from wordlift_client.models.word import Word as Word
+    from wordlift_client.models.word_lift_problem import WordLiftProblem as WordLiftProblem
+    from wordlift_client.models.word_repetition_data import WordRepetitionData as WordRepetitionData
+    from wordlift_client.models.word_request import WordRequest as WordRequest
+    
+else:
+    from importlib import import_module
+
+    _exports = {
+        "AccountApi": ".api.account_api",
+        "AccountChunksetsApi": ".api.account_chunksets_api",
+        "AccountGraphKPIsApi": ".api.account_graph_kpis_api",
+        "AccountStatsApi": ".api.account_stats_api",
+        "AccountsApi": ".api.accounts_api",
+        "AddOnsApi": ".api.add_ons_api",
+        "AgentApi": ".api.agent_api",
+        "AnalysesApi": ".api.analyses_api",
+        "AnalyticsImportsApi": ".api.analytics_imports_api",
+        "AnalyticsSyncsApi": ".api.analytics_syncs_api",
+        "AuditApi": ".api.audit_api",
+        "AuthorsApi": ".api.authors_api",
+        "AutocompleteApi": ".api.autocomplete_api",
+        "BotifyCrawlImportsApi": ".api.botify_crawl_imports_api",
+        "ClassificationsApi": ".api.classifications_api",
+        "ContentEvaluationsApi": ".api.content_evaluations_api",
+        "ContentExpansionsApi": ".api.content_expansions_api",
+        "ContentGenerationCompletionApi": ".api.content_generation_completion_api",
+        "ContentGenerationFieldsApi": ".api.content_generation_fields_api",
+        "ContentGenerationModelsApi": ".api.content_generation_models_api",
+        "ContentGenerationPresetsApi": ".api.content_generation_presets_api",
+        "ContentGenerationRecordsApi": ".api.content_generation_records_api",
+        "ContentGenerationRecordsExportApi": ".api.content_generation_records_export_api",
+        "ContentGenerationRendersApi": ".api.content_generation_renders_api",
+        "ContentGenerationStatsApi": ".api.content_generation_stats_api",
+        "ContentGenerationSyncsApi": ".api.content_generation_syncs_api",
+        "ContentGenerationWordBiasesApi": ".api.content_generation_word_biases_api",
+        "ContentGenerationsApi": ".api.content_generations_api",
+        "CustomDomainsApi": ".api.custom_domains_api",
+        "DataURIApi": ".api.data_uri_api",
+        "DatasetApi": ".api.dataset_api",
+        "EmbeddingApi": ".api.embedding_api",
+        "EmbeddingsApi": ".api.embeddings_api",
+        "EntitiesApi": ".api.entities_api",
+        "EntityGapsApi": ".api.entity_gaps_api",
+        "ExpectationSummaryApi": ".api.expectation_summary_api",
+        "ExpectationsApi": ".api.expectations_api",
+        "FactCheckApi": ".api.fact_check_api",
+        "FetchApi": ".api.fetch_api",
+        "GoogleMerchantsApi": ".api.google_merchants_api",
+        "GoogleSearchConsoleApi": ".api.google_search_console_api",
+        "GoogleSearchConsoleSearchesApi": ".api.google_search_console_searches_api",
+        "GraphQLApi": ".api.graph_ql_api",
+        "IncludeExcludesApi": ".api.include_excludes_api",
+        "InspectorApi": ".api.inspector_api",
+        "InternalLinksApi": ".api.internal_links_api",
+        "LinkGroupsApi": ".api.link_groups_api",
+        "LongTailsApi": ".api.long_tails_api",
+        "MerchantSyncsApi": ".api.merchant_syncs_api",
+        "MerchantsApi": ".api.merchants_api",
+        "MicrodataApi": ".api.microdata_api",
+        "MonitorCheckSummaryApi": ".api.monitor_check_summary_api",
+        "MonitorChecksApi": ".api.monitor_checks_api",
+        "MonitorRunsApi": ".api.monitor_runs_api",
+        "MonitorStatusApi": ".api.monitor_status_api",
+        "MonitoringSummaryApi": ".api.monitoring_summary_api",
+        "MonitorsApi": ".api.monitors_api",
+        "OAuth2AuthorizedClientsApi": ".api.o_auth2_authorized_clients_api",
+        "PagesExplorerApi": ".api.pages_explorer_api",
+        "PlatformConsumptionsApi": ".api.platform_consumptions_api",
+        "PlatformLimitsApi": ".api.platform_limits_api",
+        "PluginDiagnosticsApi": ".api.plugin_diagnostics_api",
+        "PluginEventsApi": ".api.plugin_events_api",
+        "QueryFanOutApi": ".api.query_fan_out_api",
+        "QuestionAndAnswerSetsApi": ".api.question_and_answer_sets_api",
+        "QuestionsAndAnswersApi": ".api.questions_and_answers_api",
+        "RedeemCodesApi": ".api.redeem_codes_api",
+        "ResolveApi": ".api.resolve_api",
+        "RulesApi": ".api.rules_api",
+        "SegmentGlobsApi": ".api.segment_globs_api",
+        "SegmentURLsApi": ".api.segment_urls_api",
+        "SegmentsApi": ".api.segments_api",
+        "SitemapGeneratorApi": ".api.sitemap_generator_api",
+        "SitemapImportsApi": ".api.sitemap_imports_api",
+        "SmartContentsApi": ".api.smart_contents_api",
+        "SubscriptionsApi": ".api.subscriptions_api",
+        "SummarizationsApi": ".api.summarizations_api",
+        "TokensApi": ".api.tokens_api",
+        "VectorSearchNodesApi": ".api.vector_search_nodes_api",
+        "VectorSearchQueriesApi": ".api.vector_search_queries_api",
+        "WebAsyncsMetadataApi": ".api.web_asyncs_metadata_api",
+        "WebAsyncsResponsesApi": ".api.web_asyncs_responses_api",
+        "WebPageScrapeApi": ".api.web_page_scrape_api",
+        "WebPagesImportsApi": ".api.web_pages_imports_api",
+        "WebPagesApi": ".api.web_pages_api",
+        "AccountConnectorFieldControllerApi": ".api.account_connector_field_controller_api",
+        "AccountOAuth2ConnectorControllerApi": ".api.account_o_auth2_connector_controller_api",
+        "BootstrapApi": ".api.bootstrap_api",
+        "DefaultApi": ".api.default_api",
+        "FailuresApi": ".api.failures_api",
+        "GraphSyncControllerApi": ".api.graph_sync_controller_api",
+        "JobsApi": ".api.jobs_api",
+        "KpisApi": ".api.kpis_api",
+        "OAuth2ConnectorControllerApi": ".api.o_auth2_connector_controller_api",
+        "RunsApi": ".api.runs_api",
+        "SnapshotsApi": ".api.snapshots_api",
+        "ApiResponse": ".api_response",
+        "ApiClient": ".api_client",
+        "Configuration": ".configuration",
+        "OpenApiException": ".exceptions",
+        "ApiTypeError": ".exceptions",
+        "ApiValueError": ".exceptions",
+        "ApiKeyError": ".exceptions",
+        "ApiAttributeError": ".exceptions",
+        "ApiException": ".exceptions",
+        "AIVisibilityAnalysisResult": ".models.ai_visibility_analysis_result",
+        "AcceptedAnswer": ".models.accepted_answer",
+        "Account": ".models.account",
+        "AccountInfo": ".models.account_info",
+        "AccountStats": ".models.account_stats",
+        "AccountSubscription": ".models.account_subscription",
+        "ActiveAccount": ".models.active_account",
+        "AddAccountResourceRequest": ".models.add_account_resource_request",
+        "AddMonitorAccountsAccountIdMonitoringMonitorsPostRequest": ".models.add_monitor_accounts_account_id_monitoring_monitors_post_request",
+        "AddOnConfiguration": ".models.add_on_configuration",
+        "AddPageResourceRequest": ".models.add_page_resource_request",
+        "AddSegmentGlobRequest": ".models.add_segment_glob_request",
+        "AddSegmentUrlRequest": ".models.add_segment_url_request",
+        "AiVisibilityAuditsHTTPValidationError": ".models.ai_visibility_audits_http_validation_error",
+        "AiVisibilityAuditsValidationError": ".models.ai_visibility_audits_validation_error",
+        "AnalysesRequest": ".models.analyses_request",
+        "AnalysesResponse": ".models.analyses_response",
+        "AnalysesResponseItem": ".models.analyses_response_item",
+        "AnalyticsImportRequest": ".models.analytics_import_request",
+        "AnalyticsSync": ".models.analytics_sync",
+        "AnalyticsSyncRequest": ".models.analytics_sync_request",
+        "AnalyzeContentRequest": ".models.analyze_content_request",
+        "AnchorText": ".models.anchor_text",
+        "Annotation": ".models.annotation",
+        "AskRequest": ".models.ask_request",
+        "AskResponse": ".models.ask_response",
+        "AttachExpectationMonitorRequest": ".models.attach_expectation_monitor_request",
+        "AttachExpectationSegmentRequest": ".models.attach_expectation_segment_request",
+        "AuditData": ".models.audit_data",
+        "AuditRequest": ".models.audit_request",
+        "AuditResponse": ".models.audit_response",
+        "AuthorRequest": ".models.author_request",
+        "AutocompleteResult": ".models.autocomplete_result",
+        "AutomationIssue": ".models.automation_issue",
+        "AutomationReadiness": ".models.automation_readiness",
+        "BatchRequest": ".models.batch_request",
+        "BatchResponse": ".models.batch_response",
+        "BatchStatus": ".models.batch_status",
+        "BootstrapJobOutcome": ".models.bootstrap_job_outcome",
+        "BootstrapJobResponse": ".models.bootstrap_job_response",
+        "BootstrapJobStatus": ".models.bootstrap_job_status",
+        "BotStatus": ".models.bot_status",
+        "BotifyCrawlImportRequest": ".models.botify_crawl_import_request",
+        "CancellationReason": ".models.cancellation_reason",
+        "CheckNameFilterValue": ".models.check_name_filter_value",
+        "CheckResultItem": ".models.check_result_item",
+        "CheckSummaryByCheckItem": ".models.check_summary_by_check_item",
+        "CheckSummaryState": ".models.check_summary_state",
+        "CheckSummaryStateStat": ".models.check_summary_state_stat",
+        "CheckTimeseriesResponse": ".models.check_timeseries_response",
+        "ChunksetListResponse": ".models.chunkset_list_response",
+        "ChunksetRequest": ".models.chunkset_request",
+        "ChunksetResponse": ".models.chunkset_response",
+        "ClassificationRequest": ".models.classification_request",
+        "ClassificationResponse": ".models.classification_response",
+        "CompletionRequest": ".models.completion_request",
+        "ContentEvaluationRequest": ".models.content_evaluation_request",
+        "ContentEvaluationResponse": ".models.content_evaluation_response",
+        "ContentEvaluationResponseMetadata": ".models.content_evaluation_response_metadata",
+        "ContentEvaluationResponseMetadataPerformance": ".models.content_evaluation_response_metadata_performance",
+        "ContentEvaluationResponseMetadataSentiment": ".models.content_evaluation_response_metadata_sentiment",
+        "ContentEvaluationResponseQualityScore": ".models.content_evaluation_response_quality_score",
+        "ContentEvaluationResponseQualityScoreBreakdown": ".models.content_evaluation_response_quality_score_breakdown",
+        "ContentEvaluationResponseQualityScoreBreakdownContent": ".models.content_evaluation_response_quality_score_breakdown_content",
+        "ContentEvaluationResponseQualityScoreBreakdownReadability": ".models.content_evaluation_response_quality_score_breakdown_readability",
+        "ContentEvaluationResponseQualityScoreBreakdownReadabilityComplexSentences": ".models.content_evaluation_response_quality_score_breakdown_readability_complex_sentences",
+        "ContentEvaluationResponseQualityScoreBreakdownSeo": ".models.content_evaluation_response_quality_score_breakdown_seo",
+        "ContentEvaluationResponseQualityScoreBreakdownSeoTopEntitiesValueInner": ".models.content_evaluation_response_quality_score_breakdown_seo_top_entities_value_inner",
+        "ContentEvaluationsHTTPValidationError": ".models.content_evaluations_http_validation_error",
+        "ContentEvaluationsValidationError": ".models.content_evaluations_validation_error",
+        "ContentExpansionRequest": ".models.content_expansion_request",
+        "ContentExpansionResponse": ".models.content_expansion_response",
+        "ContentFreshness": ".models.content_freshness",
+        "ContentGeneration": ".models.content_generation",
+        "ContentGenerationRequest": ".models.content_generation_request",
+        "ContentGenerationStats": ".models.content_generation_stats",
+        "ContentStructure": ".models.content_structure",
+        "CrawlJobCreateResponse": ".models.crawl_job_create_response",
+        "CrawlJobInput": ".models.crawl_job_input",
+        "CrawlJobListPaginationInfo": ".models.crawl_job_list_pagination_info",
+        "CrawlJobListResponse": ".models.crawl_job_list_response",
+        "CrawlJobPageListResponse": ".models.crawl_job_page_list_response",
+        "CrawlJobPageSummary": ".models.crawl_job_page_summary",
+        "CrawlJobResponse": ".models.crawl_job_response",
+        "CrawlJobSummary": ".models.crawl_job_summary",
+        "CrawlPageStatus": ".models.crawl_page_status",
+        "CrawlerHTTPValidationError": ".models.crawler_http_validation_error",
+        "CrawlerValidationError": ".models.crawler_validation_error",
+        "CreateEmbeddingsInput": ".models.create_embeddings_input",
+        "CreateUrlInspectionRequest": ".models.create_url_inspection_request",
+        "CursorPage": ".models.cursor_page",
+        "DecisionSignals": ".models.decision_signals",
+        "DetectedSchema": ".models.detected_schema",
+        "DiagnosticPlugin": ".models.diagnostic_plugin",
+        "DiagnosticPluginRequest": ".models.diagnostic_plugin_request",
+        "DiscoverySources": ".models.discovery_sources",
+        "DomainValidationRequest": ".models.domain_validation_request",
+        "EmbeddingRequest": ".models.embedding_request",
+        "Entity": ".models.entity",
+        "EntityGapRequest": ".models.entity_gap_request",
+        "EntityMatch": ".models.entity_match",
+        "EntityPatchRequest": ".models.entity_patch_request",
+        "ErrorResponse": ".models.error_response",
+        "Event": ".models.event",
+        "EventsRequest": ".models.events_request",
+        "EventsResponse": ".models.events_response",
+        "ExpectationAttachment": ".models.expectation_attachment",
+        "ExpectationEvaluationSummary": ".models.expectation_evaluation_summary",
+        "ExpectationOutcome": ".models.expectation_outcome",
+        "ExpectationSeverity": ".models.expectation_severity",
+        "ExpectationSeverityResponse": ".models.expectation_severity_response",
+        "ExpectationSummaryByExpectationItem": ".models.expectation_summary_by_expectation_item",
+        "ExpectationSummaryByTypeItem": ".models.expectation_summary_by_type_item",
+        "ExpectationSummaryOutcome": ".models.expectation_summary_outcome",
+        "ExpectationSummaryOutcomeStat": ".models.expectation_summary_outcome_stat",
+        "ExpectationSummaryTypeStat": ".models.expectation_summary_type_stat",
+        "ExpectationType": ".models.expectation_type",
+        "FailureCreate": ".models.failure_create",
+        "FailureReason": ".models.failure_reason",
+        "FailureResponse": ".models.failure_response",
+        "FetchJsRenderMode": ".models.fetch_js_render_mode",
+        "FetchResponse": ".models.fetch_response",
+        "FetchTargetLoadEvent": ".models.fetch_target_load_event",
+        "FieldValueRequest": ".models.field_value_request",
+        "Filter": ".models.filter",
+        "FilterValue": ".models.filter_value",
+        "GenerateSitemap200Response": ".models.generate_sitemap200_response",
+        "GenerateSitemapRequest": ".models.generate_sitemap_request",
+        "GraphKpiHTTPValidationError": ".models.graph_kpi_http_validation_error",
+        "GraphKpiSnapshot": ".models.graph_kpi_snapshot",
+        "GraphKpiSnapshotPage": ".models.graph_kpi_snapshot_page",
+        "GraphKpiSnapshotRequest": ".models.graph_kpi_snapshot_request",
+        "GraphKpiValidationError": ".models.graph_kpi_validation_error",
+        "GraphSyncHTTPValidationError": ".models.graph_sync_http_validation_error",
+        "GraphSyncRequest": ".models.graph_sync_request",
+        "GraphSyncResponse": ".models.graph_sync_response",
+        "GraphSyncValidationError": ".models.graph_sync_validation_error",
+        "GraphqlRequest": ".models.graphql_request",
+        "HTTPValidationError": ".models.http_validation_error",
+        "Html": ".models.html",
+        "HtmlSemantics": ".models.html_semantics",
+        "Image": ".models.image",
+        "ImageAccessibility": ".models.image_accessibility",
+        "IncludeExclude": ".models.include_exclude",
+        "IncludeExcludeRequest": ".models.include_exclude_request",
+        "InlineDataset": ".models.inline_dataset",
+        "InspectResponse": ".models.inspect_response",
+        "InternalLink": ".models.internal_link",
+        "InternalLinkDestination": ".models.internal_link_destination",
+        "InternalLinkRequest": ".models.internal_link_request",
+        "InternalLinkSource": ".models.internal_link_source",
+        "InternalLinking": ".models.internal_linking",
+        "Item": ".models.item",
+        "ItemsInner": ".models.items_inner",
+        "ItemsInner1": ".models.items_inner1",
+        "JobListResponse": ".models.job_list_response",
+        "JobResponse": ".models.job_response",
+        "JobStatus": ".models.job_status",
+        "JsRenderMode": ".models.js_render_mode",
+        "JsRendering": ".models.js_rendering",
+        "KgEmbeddingRequest": ".models.kg_embedding_request",
+        "KgEmbeddingResponse": ".models.kg_embedding_response",
+        "KpiCreate": ".models.kpi_create",
+        "KpiResponse": ".models.kpi_response",
+        "KpiTotals": ".models.kpi_totals",
+        "LevelEnum": ".models.level_enum",
+        "LinkGroup": ".models.link_group",
+        "LinkGroupResponse": ".models.link_group_response",
+        "ListCheckSummaryByCheckResponse": ".models.list_check_summary_by_check_response",
+        "ListExpectationSeverityResponse": ".models.list_expectation_severity_response",
+        "ListExpectationSummaryByExpectationResponse": ".models.list_expectation_summary_by_expectation_response",
+        "ListExpectationSummaryByTypeResponse": ".models.list_expectation_summary_by_type_response",
+        "ListExpectationsResponse": ".models.list_expectations_response",
+        "ListMonitorStatusResponse": ".models.list_monitor_status_response",
+        "ListMonitorsResponse": ".models.list_monitors_response",
+        "ListRunsResponse": ".models.list_runs_response",
+        "ListSegmentGlobsResponse": ".models.list_segment_globs_response",
+        "ListSegmentSeverityResponse": ".models.list_segment_severity_response",
+        "ListSegmentSummaryResponse": ".models.list_segment_summary_response",
+        "ListSegmentUrlsResponse": ".models.list_segment_urls_response",
+        "ListSegmentsResponse": ".models.list_segments_response",
+        "LocationInner": ".models.location_inner",
+        "LogEntryResponse": ".models.log_entry_response",
+        "LogsPage": ".models.logs_page",
+        "LongTailEntity": ".models.long_tail_entity",
+        "LongTailProperties": ".models.long_tail_properties",
+        "LongtailResponse": ".models.longtail_response",
+        "ManagerRequest": ".models.manager_request",
+        "ManagerResponse": ".models.manager_response",
+        "MentionResolution": ".models.mention_resolution",
+        "Merchant": ".models.merchant",
+        "MerchantEntry": ".models.merchant_entry",
+        "MerchantRequest": ".models.merchant_request",
+        "MerchantSync": ".models.merchant_sync",
+        "MerchantView": ".models.merchant_view",
+        "Model": ".models.model",
+        "ModelField": ".models.model_field",
+        "MonitorCheckName": ".models.monitor_check_name",
+        "MonitorHTTPValidationError": ".models.monitor_http_validation_error",
+        "MonitorResponse": ".models.monitor_response",
+        "MonitorRunResponse": ".models.monitor_run_response",
+        "MonitorRunStatus": ".models.monitor_run_status",
+        "MonitorSeverityResponse": ".models.monitor_severity_response",
+        "MonitorStatus": ".models.monitor_status",
+        "MonitorStatusCheckStatus": ".models.monitor_status_check_status",
+        "MonitorStatusOrderBy": ".models.monitor_status_order_by",
+        "MonitorStatusResponse": ".models.monitor_status_response",
+        "MonitorTypeProgress": ".models.monitor_type_progress",
+        "MonitorValidationError": ".models.monitor_validation_error",
+        "NetworkAccountInfo": ".models.network_account_info",
+        "NodeRequest": ".models.node_request",
+        "NodeRequestMetadataValue": ".models.node_request_metadata_value",
+        "OAuth2AuthorizedClient": ".models.o_auth2_authorized_client",
+        "OAuth2AuthorizedClientRequest": ".models.o_auth2_authorized_client_request",
+        "OAuth2ConnectorAuthorizationRequest": ".models.o_auth2_connector_authorization_request",
+        "OAuth2ConnectorAuthorizationRequestResponse": ".models.o_auth2_connector_authorization_request_response",
+        "OAuth2ConnectorAuthorizationResponse": ".models.o_auth2_connector_authorization_response",
+        "OAuth2ConnectorResponse": ".models.o_auth2_connector_response",
+        "PageActiveAccount": ".models.page_active_account",
+        "PageAddOnConfiguration": ".models.page_add_on_configuration",
+        "PageArtifactQueryItem": ".models.page_artifact_query_item",
+        "PageArtifactQueryRequest": ".models.page_artifact_query_request",
+        "PageArtifactQueryResponse": ".models.page_artifact_query_response",
+        "PageArtifactQueryResultItem": ".models.page_artifact_query_result_item",
+        "PageContentGeneration": ".models.page_content_generation",
+        "PageField": ".models.page_field",
+        "PageMerchantEntry": ".models.page_merchant_entry",
+        "PageMerchantSync": ".models.page_merchant_sync",
+        "PageMerchantView": ".models.page_merchant_view",
+        "PageModel": ".models.page_model",
+        "PageOAuth2AuthorizedClient": ".models.page_o_auth2_authorized_client",
+        "PagePlatformLimit": ".models.page_platform_limit",
+        "PagePreset": ".models.page_preset",
+        "PageRecord": ".models.page_record",
+        "PageRule": ".models.page_rule",
+        "PageVectorSearchQueryResponseItem": ".models.page_vector_search_query_response_item",
+        "PageWebsite": ".models.page_website",
+        "PageWebsiteSearch": ".models.page_website_search",
+        "PageWithLimits": ".models.page_with_limits",
+        "PageWord": ".models.page_word",
+        "PaginationInfo": ".models.pagination_info",
+        "PlatformLimit": ".models.platform_limit",
+        "PlatformLimitRequest": ".models.platform_limit_request",
+        "Preset": ".models.preset",
+        "Problem": ".models.problem",
+        "ProblemDetail": ".models.problem_detail",
+        "ProjectType": ".models.project_type",
+        "Properties": ".models.properties",
+        "ProvisionSubscriptionRequest": ".models.provision_subscription_request",
+        "ProvisionedSubscription": ".models.provisioned_subscription",
+        "ProxyMode": ".models.proxy_mode",
+        "ProxyTier": ".models.proxy_tier",
+        "QueryCoverageOutput": ".models.query_coverage_output",
+        "QuestionAndAnswer": ".models.question_and_answer",
+        "QuestionAndAnswerSet": ".models.question_and_answer_set",
+        "QuickWin": ".models.quick_win",
+        "QuickWinsResult": ".models.quick_wins_result",
+        "RankEntities": ".models.rank_entities",
+        "Record": ".models.record",
+        "RenderRequest": ".models.render_request",
+        "RenderWaitUntil": ".models.render_wait_until",
+        "ReplaceAccountMonitorItem": ".models.replace_account_monitor_item",
+        "ReplaceExpectationSegmentsRequest": ".models.replace_expectation_segments_request",
+        "ReplaceMonitorsRequest": ".models.replace_monitors_request",
+        "ReplacePageMonitorItem": ".models.replace_page_monitor_item",
+        "ReplaceSegmentGlobsRequest": ".models.replace_segment_globs_request",
+        "ReplaceSegmentUrlsRequest": ".models.replace_segment_urls_request",
+        "Request": ".models.request",
+        "ResetAccountRequest": ".models.reset_account_request",
+        "ResolveCandidate": ".models.resolve_candidate",
+        "ResolveMention": ".models.resolve_mention",
+        "ResolveProblem": ".models.resolve_problem",
+        "ResolveRequest": ".models.resolve_request",
+        "ResolveResponse": ".models.resolve_response",
+        "ResolveValidationError": ".models.resolve_validation_error",
+        "ResolvedEntity": ".models.resolved_entity",
+        "ResourceType": ".models.resource_type",
+        "Resources": ".models.resources",
+        "ResourcesAgentSkillsIndex": ".models.resources_agent_skills_index",
+        "ResourcesLlmsTxt": ".models.resources_llms_txt",
+        "ResourcesMcpJson": ".models.resources_mcp_json",
+        "ResourcesMcpLinkTag": ".models.resources_mcp_link_tag",
+        "ResourcesMcpServerCard": ".models.resources_mcp_server_card",
+        "ResourcesRobotsTxt": ".models.resources_robots_txt",
+        "ResourcesSkillMd": ".models.resources_skill_md",
+        "ResourcesWebmcpToolsJson": ".models.resources_webmcp_tools_json",
+        "Response": ".models.response",
+        "ResponseListWebsitePagesWebsitesHostPagesGet": ".models.response_list_website_pages_websites_host_pages_get",
+        "Rule": ".models.rule",
+        "RuleRequest": ".models.rule_request",
+        "RunCreate": ".models.run_create",
+        "RunFinalize": ".models.run_finalize",
+        "RunProgressUpdate": ".models.run_progress_update",
+        "RunResponse": ".models.run_response",
+        "RunStatus": ".models.run_status",
+        "SchemaRecommendation": ".models.schema_recommendation",
+        "Scope": ".models.scope",
+        "SegmentGlobResponse": ".models.segment_glob_response",
+        "SegmentOrderBy": ".models.segment_order_by",
+        "SegmentRequest": ".models.segment_request",
+        "SegmentResponse": ".models.segment_response",
+        "SegmentSeverityRequest": ".models.segment_severity_request",
+        "SegmentSeverityResponse": ".models.segment_severity_response",
+        "SegmentSummaryItem": ".models.segment_summary_item",
+        "SegmentUrlResponse": ".models.segment_url_response",
+        "SeoFundamentals": ".models.seo_fundamentals",
+        "SiteFiles": ".models.site_files",
+        "SitemapImportRequest": ".models.sitemap_import_request",
+        "SmartContentProject": ".models.smart_content_project",
+        "SmartContentRequest": ".models.smart_content_request",
+        "SnapshotListResponse": ".models.snapshot_list_response",
+        "SnapshotResponse": ".models.snapshot_response",
+        "SortDirection": ".models.sort_direction",
+        "StructuredData": ".models.structured_data",
+        "StructuredDataConstraint": ".models.structured_data_constraint",
+        "StructuredDataExpectationConfig": ".models.structured_data_expectation_config",
+        "StructuredDataExpectationConfigRequest": ".models.structured_data_expectation_config_request",
+        "StructuredDataExpectationRequest": ".models.structured_data_expectation_request",
+        "StructuredDataExpectationResponse": ".models.structured_data_expectation_response",
+        "SubmitFactCheck200Response": ".models.submit_fact_check200_response",
+        "SubmitFactCheckRequest": ".models.submit_fact_check_request",
+        "SubmitJobBody": ".models.submit_job_body",
+        "TokenResponse": ".models.token_response",
+        "Tokens": ".models.tokens",
+        "Topic": ".models.topic",
+        "UpdateAccountRequest": ".models.update_account_request",
+        "UpdateQuestionAndAnswerRequest": ".models.update_question_and_answer_request",
+        "UpdateRecordRequest": ".models.update_record_request",
+        "UpdateRecordsRequest": ".models.update_records_request",
+        "UserEntity": ".models.user_entity",
+        "ValidationError": ".models.validation_error",
+        "ValidationFix": ".models.validation_fix",
+        "ValidationResult": ".models.validation_result",
+        "ValidationTypeEnum": ".models.validation_type_enum",
+        "VectorSearchQueryRequest": ".models.vector_search_query_request",
+        "VectorSearchQueryResponseItem": ".models.vector_search_query_response_item",
+        "VectorSearchQueryResponseItemFieldsValueInner": ".models.vector_search_query_response_item_fields_value_inner",
+        "VectorSearchQueryResponseItemMetadataValue": ".models.vector_search_query_response_item_metadata_value",
+        "WebAsync": ".models.web_async",
+        "WebPage": ".models.web_page",
+        "WebPageImportFetchOptions": ".models.web_page_import_fetch_options",
+        "WebPageImportRequest": ".models.web_page_import_request",
+        "WebPageImportResponse": ".models.web_page_import_response",
+        "WebPageImportsBatchRequest": ".models.web_page_imports_batch_request",
+        "WebPageImportsHTTPValidationError": ".models.web_page_imports_http_validation_error",
+        "WebPageImportsValidationError": ".models.web_page_imports_validation_error",
+        "WebPageScrapeRequest": ".models.web_page_scrape_request",
+        "WebPageScrapeResponse": ".models.web_page_scrape_response",
+        "WebpageProperties": ".models.webpage_properties",
+        "Website": ".models.website",
+        "WebsitePageArtifactResponse": ".models.website_page_artifact_response",
+        "WebsitePageListResponse": ".models.website_page_list_response",
+        "WebsitePageResolvedResponse": ".models.website_page_resolved_response",
+        "WebsitePageResponse": ".models.website_page_response",
+        "WebsitePageSummary": ".models.website_page_summary",
+        "WebsiteSearch": ".models.website_search",
+        "WellKnownFiles": ".models.well_known_files",
+        "WhatOperandLhs": ".models.what_operand_lhs",
+        "WhatOperator": ".models.what_operator",
+        "WhenOperator": ".models.when_operator",
+        "WithLimits": ".models.with_limits",
+        "Word": ".models.word",
+        "WordLiftProblem": ".models.word_lift_problem",
+        "WordRepetitionData": ".models.word_repetition_data",
+        "WordRequest": ".models.word_request",
+    }
+
+    def __getattr__(name: str) -> object:
+        if (module_name := _exports.get(name)) is None:
+            raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+        value = getattr(import_module(module_name, __name__), name)
+        globals()[name] = value
+        return value
+
+    def __dir__() -> list[str]:
+        return sorted(globals().keys() | _exports.keys())

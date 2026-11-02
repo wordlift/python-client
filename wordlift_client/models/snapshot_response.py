@@ -22,85 +22,87 @@ from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, Stric
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class SnapshotResponse(BaseModel):
     """
     SnapshotResponse
     """ # noqa: E501
-    graph_id: StrictStr = Field(description="Public WordLift graph identifier.")
-    snapshot_date: StrictStr = Field(description="Logical KPI day for this snapshot in `YYYY-MM-DD` format.")
-    calculated_at: Optional[StrictStr] = None
-    dataset_id: Optional[StrictStr] = None
-    snapshot_origin: Optional[StrictStr] = None
-    cloned_from_snapshot_date: Optional[StrictStr] = None
-    source_watermark: Optional[StrictStr] = None
-    kpi_worker_version: Optional[StrictStr] = None
-    validation_rules_fingerprint: Optional[StrictStr] = None
-    validated_at: Optional[StrictStr] = None
-    all_total_entities: Optional[StrictInt] = None
-    public_total_entities: Optional[StrictInt] = None
-    private_total_entities: Optional[StrictInt] = None
-    all_total_properties: Optional[StrictInt] = None
-    public_total_properties: Optional[StrictInt] = None
-    private_total_properties: Optional[StrictInt] = None
-    all_total_triples: Optional[StrictInt] = None
-    public_total_triples: Optional[StrictInt] = None
-    private_total_triples: Optional[StrictInt] = None
-    all_internal_edges_count: Optional[StrictInt] = None
-    public_internal_edges_count: Optional[StrictInt] = None
-    private_internal_edges_count: Optional[StrictInt] = None
-    all_external_edges_count: Optional[StrictInt] = None
-    public_external_edges_count: Optional[StrictInt] = None
-    private_external_edges_count: Optional[StrictInt] = None
-    all_edges_count: Optional[StrictInt] = None
-    public_edges_count: Optional[StrictInt] = None
-    private_edges_count: Optional[StrictInt] = None
-    all_edge_node_ratio: Optional[Union[StrictFloat, StrictInt]] = None
-    public_edge_node_ratio: Optional[Union[StrictFloat, StrictInt]] = None
-    private_edge_node_ratio: Optional[Union[StrictFloat, StrictInt]] = None
-    all_edge_node_ratio_edges: Optional[StrictInt] = None
-    public_edge_node_ratio_edges: Optional[StrictInt] = None
-    private_edge_node_ratio_edges: Optional[StrictInt] = None
-    all_edge_node_ratio_nodes: Optional[StrictInt] = None
-    public_edge_node_ratio_nodes: Optional[StrictInt] = None
-    private_edge_node_ratio_nodes: Optional[StrictInt] = None
-    all_unique_urls_count: Optional[StrictInt] = None
-    public_unique_urls_count: Optional[StrictInt] = None
-    private_unique_urls_count: Optional[StrictInt] = None
-    all_orphans_count: Optional[StrictInt] = None
-    public_orphans_count: Optional[StrictInt] = None
-    private_orphans_count: Optional[StrictInt] = None
-    all_broken_links_count: Optional[StrictInt] = None
-    public_broken_links_count: Optional[StrictInt] = None
-    private_broken_links_count: Optional[StrictInt] = None
-    all_isolated_graphs_count: Optional[StrictInt] = None
-    public_isolated_graphs_count: Optional[StrictInt] = None
-    private_isolated_graphs_count: Optional[StrictInt] = None
-    all_duplicates_count: Optional[StrictInt] = None
-    public_duplicates_count: Optional[StrictInt] = None
-    private_duplicates_count: Optional[StrictInt] = None
-    all_entity_types: Optional[Dict[str, StrictInt]] = None
-    public_entity_types: Optional[Dict[str, StrictInt]] = None
-    private_entity_types: Optional[Dict[str, StrictInt]] = None
-    all_properties_by_predicate: Optional[Dict[str, StrictInt]] = None
-    public_properties_by_predicate: Optional[Dict[str, StrictInt]] = None
-    private_properties_by_predicate: Optional[Dict[str, StrictInt]] = None
-    rich_snippets_valid_count: Optional[StrictInt] = None
-    rich_snippets_invalid_count: Optional[StrictInt] = None
-    rich_snippets_by_type: Optional[Dict[str, Dict[str, StrictInt]]] = None
-    schema_compliance_errors: Optional[StrictInt] = None
-    schema_compliance_warnings: Optional[StrictInt] = None
-    schema_compliance_urls_checked: Optional[StrictInt] = None
-    graph_health_score: Optional[StrictInt] = None
-    graph_health_validation_health: Optional[StrictInt] = None
-    graph_health_structural_integrity: Optional[StrictInt] = None
-    graph_health_public_footprint_quality: Optional[StrictInt] = None
-    graph_health_freshness_momentum: Optional[StrictInt] = None
+    graph_id: StrictStr = Field(description="Public WordLift graph identifier.", json_schema_extra={"examples": ["1506805"]})
+    snapshot_date: StrictStr = Field(description="Logical KPI day for this snapshot in `YYYY-MM-DD` format.", json_schema_extra={"examples": ["2026-03-13"]})
+    calculated_at: Optional[StrictStr] = Field(default=None, description="Timestamp when the graph-wide KPI calculation finished.")
+    dataset_id: Optional[StrictStr] = Field(default=None, description="Dataset identity used to compute this snapshot. Clone reuse is allowed only when the current dataset identity matches this value.")
+    snapshot_origin: Optional[StrictStr] = Field(default=None, description="How this snapshot was produced: `calculated` for a full worker run or `cloned` when the previous validated snapshot was reused because the graph source watermark and worker policy inputs had not changed.")
+    cloned_from_snapshot_date: Optional[StrictStr] = Field(default=None, description="When `snapshot_origin=cloned`, the source snapshot day copied into this row.")
+    source_watermark: Optional[StrictStr] = Field(default=None, description="Latest source-graph `_modified_` watermark observed for the dataset when this snapshot was produced.")
+    kpi_worker_version: Optional[StrictStr] = Field(default=None, description="Worker package version used for clone eligibility and snapshot provenance.")
+    validation_rules_fingerprint: Optional[StrictStr] = Field(default=None, description="Stable fingerprint of the validation selector and options that affect SHACL/rich-snippet outcomes.")
+    validated_at: Optional[StrictStr] = Field(default=None, description="Timestamp when SHACL/rich-snippet validation finished.")
+    all_total_entities: Optional[StrictInt] = Field(default=None, description="All entities in the graph snapshot.")
+    public_total_entities: Optional[StrictInt] = Field(default=None, description="Entities that have at least one public assertion.")
+    private_total_entities: Optional[StrictInt] = Field(default=None, description="Entities that have no public assertions.")
+    all_total_properties: Optional[StrictInt] = Field(default=None, description="All non-`rdf:type` assertions in the snapshot.")
+    public_total_properties: Optional[StrictInt] = Field(default=None, description="Non-`rdf:type` assertions whose predicate is public.")
+    private_total_properties: Optional[StrictInt] = Field(default=None, description="Non-`rdf:type` assertions whose predicate is private.")
+    all_total_triples: Optional[StrictInt] = Field(default=None, description="All assertions in the snapshot, including `rdf:type`.")
+    public_total_triples: Optional[StrictInt] = Field(default=None, description="Assertions whose predicate is public.")
+    private_total_triples: Optional[StrictInt] = Field(default=None, description="Assertions whose predicate is private.")
+    all_internal_edges_count: Optional[StrictInt] = Field(default=None, description="Internal links across all assertions, excluding literals and `rdf:type`.")
+    public_internal_edges_count: Optional[StrictInt] = Field(default=None, description="Internal links created by public assertions.")
+    private_internal_edges_count: Optional[StrictInt] = Field(default=None, description="Internal links created by private assertions.")
+    all_external_edges_count: Optional[StrictInt] = Field(default=None, description="External links across all assertions, excluding literals and `rdf:type`.")
+    public_external_edges_count: Optional[StrictInt] = Field(default=None, description="External links created by public assertions.")
+    private_external_edges_count: Optional[StrictInt] = Field(default=None, description="External links created by private assertions.")
+    all_edges_count: Optional[StrictInt] = Field(default=None, description="All internal and external links, excluding literals and `rdf:type`.")
+    public_edges_count: Optional[StrictInt] = Field(default=None, description="Edges created by public assertions only.")
+    private_edges_count: Optional[StrictInt] = Field(default=None, description="Edges created by private assertions only.")
+    all_edge_node_ratio: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="All edges divided by all entities.")
+    public_edge_node_ratio: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Public edges divided by public entities.")
+    private_edge_node_ratio: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Private edges divided by private entities.")
+    all_edge_node_ratio_edges: Optional[StrictInt] = Field(default=None, description="Numerator used for `all_edge_node_ratio`.")
+    public_edge_node_ratio_edges: Optional[StrictInt] = Field(default=None, description="Numerator used for `public_edge_node_ratio`.")
+    private_edge_node_ratio_edges: Optional[StrictInt] = Field(default=None, description="Numerator used for `private_edge_node_ratio`.")
+    all_edge_node_ratio_nodes: Optional[StrictInt] = Field(default=None, description="Denominator used for `all_edge_node_ratio`.")
+    public_edge_node_ratio_nodes: Optional[StrictInt] = Field(default=None, description="Denominator used for `public_edge_node_ratio`.")
+    private_edge_node_ratio_nodes: Optional[StrictInt] = Field(default=None, description="Denominator used for `private_edge_node_ratio`.")
+    all_unique_urls_count: Optional[StrictInt] = Field(default=None, description="Distinct `schema:url` values in the snapshot.")
+    public_unique_urls_count: Optional[StrictInt] = Field(default=None, description="Same as `all_unique_urls_count` because `schema:url` is public.")
+    private_unique_urls_count: Optional[StrictInt] = Field(default=None, description="Always `0` because `schema:url` is not private.")
+    all_orphans_count: Optional[StrictInt] = Field(default=None, description="Public orphans plus private orphans.")
+    public_orphans_count: Optional[StrictInt] = Field(default=None, description="Public entities that are never targets of public internal edges.")
+    private_orphans_count: Optional[StrictInt] = Field(default=None, description="Private entities that are never targets of any internal edges.")
+    all_broken_links_count: Optional[StrictInt] = Field(default=None, description="Public broken links plus private broken links.")
+    public_broken_links_count: Optional[StrictInt] = Field(default=None, description="Missing targets referenced by public internal edges.")
+    private_broken_links_count: Optional[StrictInt] = Field(default=None, description="Missing targets referenced by private internal edges.")
+    all_isolated_graphs_count: Optional[StrictInt] = Field(default=None, description="Public isolated graphs plus private isolated graphs.")
+    public_isolated_graphs_count: Optional[StrictInt] = Field(default=None, description="Connected components built from public entities and public internal edges.")
+    private_isolated_graphs_count: Optional[StrictInt] = Field(default=None, description="Connected components for private entities using public internal edges that connect private entities.")
+    all_duplicates_count: Optional[StrictInt] = Field(default=None, description="Duplicate groups sharing the same `schema:url`.")
+    public_duplicates_count: Optional[StrictInt] = Field(default=None, description="Same as `all_duplicates_count` because `schema:url` is public.")
+    private_duplicates_count: Optional[StrictInt] = Field(default=None, description="Always `0` because `schema:url` is not private.")
+    all_entity_types: Optional[Dict[str, StrictInt]] = Field(default=None, description="Counts of all `rdf:type` assertions grouped by type IRI.")
+    public_entity_types: Optional[Dict[str, StrictInt]] = Field(default=None, description="Counts of `rdf:type` assertions whose type IRI is not in a private namespace.")
+    private_entity_types: Optional[Dict[str, StrictInt]] = Field(default=None, description="Counts of `rdf:type` assertions whose type IRI is in a private namespace.")
+    all_properties_by_predicate: Optional[Dict[str, StrictInt]] = Field(default=None, description="Counts of non-`rdf:type` assertions grouped by predicate.")
+    public_properties_by_predicate: Optional[Dict[str, StrictInt]] = Field(default=None, description="Counts of non-`rdf:type` assertions grouped by public predicate.")
+    private_properties_by_predicate: Optional[Dict[str, StrictInt]] = Field(default=None, description="Counts of non-`rdf:type` assertions grouped by private predicate.")
+    rich_snippets_valid_count: Optional[StrictInt] = Field(default=None, description="Public rich-snippet items that passed validation.")
+    rich_snippets_invalid_count: Optional[StrictInt] = Field(default=None, description="Public rich-snippet items that failed validation.")
+    rich_snippets_by_type: Optional[Dict[str, Dict[str, StrictInt]]] = Field(default=None, description="Public rich-snippet counts grouped by type and eligibility bucket.")
+    schema_compliance_errors: Optional[StrictInt] = Field(default=None, description="Schema-compliance errors found in public URL-generated subgraphs.")
+    schema_compliance_warnings: Optional[StrictInt] = Field(default=None, description="Schema-compliance warnings found in public URL-generated subgraphs.")
+    schema_compliance_urls_checked: Optional[StrictInt] = Field(default=None, description="Number of public URLs validated for schema compliance.")
+    graph_health_score: Optional[StrictInt] = Field(default=None, description="Composite graph health score from `0` to `100` based on validation, structure, public footprint, and freshness.")
+    graph_health_validation_health: Optional[StrictInt] = Field(default=None, description="Validation-health subscore used in `graph_health_score`.")
+    graph_health_structural_integrity: Optional[StrictInt] = Field(default=None, description="Structural-integrity subscore used in `graph_health_score`.")
+    graph_health_public_footprint_quality: Optional[StrictInt] = Field(default=None, description="Public-footprint-quality subscore used in `graph_health_score`.")
+    graph_health_freshness_momentum: Optional[StrictInt] = Field(default=None, description="Freshness-and-momentum subscore used in `graph_health_score`.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["graph_id", "snapshot_date", "calculated_at", "dataset_id", "snapshot_origin", "cloned_from_snapshot_date", "source_watermark", "kpi_worker_version", "validation_rules_fingerprint", "validated_at", "all_total_entities", "public_total_entities", "private_total_entities", "all_total_properties", "public_total_properties", "private_total_properties", "all_total_triples", "public_total_triples", "private_total_triples", "all_internal_edges_count", "public_internal_edges_count", "private_internal_edges_count", "all_external_edges_count", "public_external_edges_count", "private_external_edges_count", "all_edges_count", "public_edges_count", "private_edges_count", "all_edge_node_ratio", "public_edge_node_ratio", "private_edge_node_ratio", "all_edge_node_ratio_edges", "public_edge_node_ratio_edges", "private_edge_node_ratio_edges", "all_edge_node_ratio_nodes", "public_edge_node_ratio_nodes", "private_edge_node_ratio_nodes", "all_unique_urls_count", "public_unique_urls_count", "private_unique_urls_count", "all_orphans_count", "public_orphans_count", "private_orphans_count", "all_broken_links_count", "public_broken_links_count", "private_broken_links_count", "all_isolated_graphs_count", "public_isolated_graphs_count", "private_isolated_graphs_count", "all_duplicates_count", "public_duplicates_count", "private_duplicates_count", "all_entity_types", "public_entity_types", "private_entity_types", "all_properties_by_predicate", "public_properties_by_predicate", "private_properties_by_predicate", "rich_snippets_valid_count", "rich_snippets_invalid_count", "rich_snippets_by_type", "schema_compliance_errors", "schema_compliance_warnings", "schema_compliance_urls_checked", "graph_health_score", "graph_health_validation_health", "graph_health_structural_integrity", "graph_health_public_footprint_quality", "graph_health_freshness_momentum"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -112,8 +114,7 @@ class SnapshotResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

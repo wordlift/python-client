@@ -1,10 +1,13 @@
 # JsRenderMode
 
 
-## Properties
+## Enum
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+* `NEVER` (value: `'never'`)
+
+* `AUTO` (value: `'auto'`)
+
+* `ALWAYS` (value: `'always'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

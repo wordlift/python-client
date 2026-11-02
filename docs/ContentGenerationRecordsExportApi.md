@@ -10,8 +10,6 @@ Method | HTTP request | Description
 # **export**
 > List[str] export(content_generation_id)
 
-
-
 ### Example
 
 * Api Key Authentication (ApiKey):

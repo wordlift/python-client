@@ -23,20 +23,22 @@ from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class GraphKpiSnapshot(BaseModel):
     """
     Dated graph KPI snapshot for one WordLift account. KPI metrics are exposed as additional top-level JSON properties; metric values are non-negative numbers or nested objects of non-negative numbers. 
     """ # noqa: E501
-    account_id: Optional[StrictInt] = Field(default=None, description="WordLift account id.")
-    calculated_at: Optional[datetime] = Field(default=None, description="UTC instant when the snapshot was calculated.")
+    account_id: Optional[StrictInt] = Field(default=None, description="WordLift account id.", json_schema_extra={"examples": [1506805]})
+    calculated_at: Optional[datetime] = Field(default=None, description="UTC instant when the snapshot was calculated.", json_schema_extra={"examples": ["2026-06-23T10:00:00Z"]})
     kpis: Optional[Dict[str, Dict[str, Any]]] = None
     snapshot_date: Optional[date] = Field(default=None, description="Date the graph snapshot represents.")
-    snapshot_origin: Optional[StrictStr] = Field(default=None, description="Origin of the snapshot, for example `calculated`.")
+    snapshot_origin: Optional[StrictStr] = Field(default=None, description="Origin of the snapshot, for example `calculated`.", json_schema_extra={"examples": ["calculated"]})
     __properties: ClassVar[List[str]] = ["account_id", "calculated_at", "kpis", "snapshot_date", "snapshot_origin"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -48,8 +50,7 @@ class GraphKpiSnapshot(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

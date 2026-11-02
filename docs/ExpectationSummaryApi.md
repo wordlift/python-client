@@ -13,7 +13,10 @@ Method | HTTP request | Description
 
 List Expectation Summary By Expectation
 
-Account-wide expectation rollup grouped by (segment, expectation), broken down by outcome only — severity and expectation type are derivable from the expectation itself. Omitted or empty `segment_id` returns the account-wide aggregate (`segment_id: null`).
+Account-wide expectation rollup grouped by (segment, expectation), broken
+down by outcome only — severity and expectation type are derivable from the
+expectation itself. Omitted or empty `segment_id` returns the account-wide
+aggregate (`segment_id: null`).
 
 ### Example
 
@@ -99,7 +102,11 @@ Name | Type | Description  | Notes
 
 List Expectation Summary By Type
 
-Account-wide expectation rollup grouped by (segment, expectation type), broken down by (severity, outcome). Omitting both filters returns every segment together with the account-wide aggregate (`segment_id: null`); passing the reserved `segment_id=overall` isolates just that aggregate instead of requiring a full scan to find it.
+Account-wide expectation rollup grouped by (segment, expectation type),
+broken down by (severity, outcome). Omitting both filters returns every
+segment together with the account-wide aggregate (`segment_id: null`);
+passing the reserved `segment_id=overall` isolates just that aggregate
+instead of requiring a full scan to find it.
 
 ### Example
 

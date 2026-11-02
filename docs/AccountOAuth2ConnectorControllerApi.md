@@ -12,8 +12,6 @@ Method | HTTP request | Description
 # **authorization**
 > OAuth2ConnectorAuthorizationResponse authorization(account_id, connector_id)
 
-
-
 ### Example
 
 * Api Key Authentication (ApiKey):
@@ -89,8 +87,6 @@ Name | Type | Description  | Notes
 
 # **create_authorization_request**
 > OAuth2ConnectorAuthorizationRequestResponse create_authorization_request(account_id, connector_id, o_auth2_connector_authorization_request)
-
-
 
 ### Example
 
@@ -170,8 +166,6 @@ Name | Type | Description  | Notes
 
 # **delete_authorization**
 > delete_authorization(account_id, connector_id)
-
-
 
 ### Example
 

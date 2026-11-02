@@ -6,9 +6,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **status** | [**RunStatus**](RunStatus.md) |  | 
-**url_count** | **int** |  | [optional] 
-**failure_count** | **int** |  | [optional] 
-**ended_at** | **datetime** |  | [optional] 
+**url_count** | **int** | Total URLs in this run. | [optional] 
+**failure_count** | **int** | Total URL failures. | [optional] 
+**ended_at** | **datetime** | Client-side wall-clock time when the run ended. | [optional] 
 
 ## Example
 

@@ -7,11 +7,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **text** | **str** |  | 
 **dataset_uri** | **str** | The world to resolve against: &#x60;wikidata://public&#x60; (default), &#x60;wordlift://dataset/me&#x60; (your WordLift graph, read with your key), &#x60;inline&#x60; (with &#x60;dataset&#x60;), or a comma-separated ordered list such as &#x60;wordlift://dataset/me,wikidata://public&#x60; (your entities first, Wikidata for the rest). | [optional] [default to 'wikidata://public']
-**language** | **str** |  | [optional] 
-**mentions** | [**List[ResolveMention]**](ResolveMention.md) |  | [optional] 
+**language** | **str** | ISO 639-1; auto-detected if omitted | [optional] 
+**mentions** | [**List[ResolveMention]**](ResolveMention.md) | Explicit spans; if omitted the engine detects mentions | [optional] 
 **include** | **List[str]** | Diagnostics: candidates, evidence | [optional] 
 **confidence** | **float** | NER threshold when the engine detects mentions | [optional] [default to 0.5]
-**dataset** | [**InlineDataset**](InlineDataset.md) |  | [optional] 
+**dataset** | [**InlineDataset**](InlineDataset.md) | An inline vocabulary (up to 5,000 entities): the answer is one of these ids or unresolved. Implies dataset_uri &#x60;inline&#x60;. | [optional] 
 
 ## Example
 

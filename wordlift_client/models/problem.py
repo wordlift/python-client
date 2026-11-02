@@ -22,19 +22,21 @@ from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class Problem(BaseModel):
     """
     Problem
     """ # noqa: E501
-    type: StrictStr = Field(description="Problem type URI.")
-    title: StrictStr = Field(description="Short, human-readable summary of the problem.")
-    status: StrictInt = Field(description="HTTP status code for this problem response.")
-    detail: StrictStr = Field(description="Human-readable explanation specific to this occurrence of the problem.")
+    type: StrictStr = Field(description="Problem type URI.", json_schema_extra={"examples": ["about:blank"]})
+    title: StrictStr = Field(description="Short, human-readable summary of the problem.", json_schema_extra={"examples": ["Forbidden"]})
+    status: StrictInt = Field(description="HTTP status code for this problem response.", json_schema_extra={"examples": [403]})
+    detail: StrictStr = Field(description="Human-readable explanation specific to this occurrence of the problem.", json_schema_extra={"examples": ["Administrator access is required for this endpoint."]})
     __properties: ClassVar[List[str]] = ["type", "title", "status", "detail"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -46,8 +48,7 @@ class Problem(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

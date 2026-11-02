@@ -24,6 +24,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class MerchantSync(BaseModel):
     """
@@ -50,7 +51,8 @@ class MerchantSync(BaseModel):
     __properties: ClassVar[List[str]] = ["created_at", "error_reason", "has_errors", "id", "merchant_id", "modified_at", "overall_products_in_kg", "products_created", "products_deleted", "products_errored", "products_skipped", "products_total", "products_unchanged", "products_updated", "started_at", "stopped_at", "synced_products_in_kg", "synced_products_in_kg_before_cleanup"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -62,8 +64,7 @@ class MerchantSync(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

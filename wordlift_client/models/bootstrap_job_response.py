@@ -27,6 +27,7 @@ from wordlift_client.models.cancellation_reason import CancellationReason
 from wordlift_client.models.failure_reason import FailureReason
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class BootstrapJobResponse(BaseModel):
     """
@@ -55,7 +56,8 @@ class BootstrapJobResponse(BaseModel):
     __properties: ClassVar[List[str]] = ["id", "account_id", "account_url", "repository_name", "project_url", "profile_name", "status", "attempt_number", "root_job_id", "last_heartbeat", "cancellation_reason", "failure_reason", "outcome", "created_at", "started_at", "completed_at", "worai_version", "codex_version", "bootstrap_md_hash", "service_version"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -67,8 +69,7 @@ class BootstrapJobResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

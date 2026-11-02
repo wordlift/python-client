@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class AnalysesRequest(BaseModel):
     """
@@ -31,16 +32,17 @@ class AnalysesRequest(BaseModel):
     url: Optional[StrictStr] = Field(default=None, description="The URL to analyse.")
     query: Optional[StrictStr] = Field(default=None, description="The query string to analyse.")
     html: Optional[StrictStr] = Field(default=None, description="The html to analyse.")
-    language_code: Optional[StrictStr] = Field(default='en', description="The language code used for content analysis, e.g. `en`.")
-    query_location_name: Optional[StrictStr] = Field(default='United States', description="The location name for the query, e.g. United Kingdom.")
-    query_search_engine: Optional[StrictStr] = Field(default=None, description="The search engine domain for the query, if not set will be chosen according to `query_location_name`")
+    language_code: Optional[StrictStr] = Field(default='en', description="The language code used for content analysis, e.g. `en`.", json_schema_extra={"examples": ["en"]})
+    query_location_name: Optional[StrictStr] = Field(default='United States', description="The location name for the query, e.g. United Kingdom.", json_schema_extra={"examples": ["United Kingdom"]})
+    query_search_engine: Optional[StrictStr] = Field(default=None, description="The search engine domain for the query, if not set will be chosen according to `query_location_name`", json_schema_extra={"examples": ["google.co.uk"]})
     linked_data: Optional[StrictBool] = Field(default=True, description="Whether to include results from Linked Data (e.g. DBpedia), by default true.")
     local_data: Optional[StrictBool] = Field(default=True, description="Whether to include results from the local Knowledge Graph, by default true.")
     network_data: Optional[StrictBool] = Field(default=True, description="Whether to include results from connected Knowledge Graphs, by default true.")
     __properties: ClassVar[List[str]] = ["text", "url", "query", "html", "language_code", "query_location_name", "query_search_engine", "linked_data", "local_data", "network_data"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -52,8 +54,7 @@ class AnalysesRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

@@ -15,7 +15,10 @@ Method | HTTP request | Description
 
 Create a graph KPI snapshot
 
-Creates a graph KPI snapshot. Intended for graph-sync ingestion after a graph-sync run completes. Requires an account key for the same account or a privileged token. The request body must include `snapshot_date`. 
+Creates a graph KPI snapshot. Intended for graph-sync ingestion after a
+graph-sync run completes. Requires an account key for the same account or a
+privileged token. The request body must include `snapshot_date`.
+
 
 ### Example
 
@@ -102,7 +105,9 @@ Name | Type | Description  | Notes
 
 Get a graph KPI snapshot
 
-Gets one graph KPI snapshot by account and snapshot date. Reads support account-owned bearer tokens, account keys, and privileged tokens. 
+Gets one graph KPI snapshot by account and snapshot date. Reads support
+account-owned bearer tokens, account keys, and privileged tokens.
+
 
 ### Example
 
@@ -186,7 +191,9 @@ Name | Type | Description  | Notes
 
 List graph KPI snapshots
 
-Lists dated graph KPI snapshots for the account. Reads support account-owned bearer tokens, account keys, and privileged tokens. 
+Lists dated graph KPI snapshots for the account. Reads support account-owned
+bearer tokens, account keys, and privileged tokens.
+
 
 ### Example
 
@@ -275,7 +282,11 @@ Name | Type | Description  | Notes
 
 Create or replace a graph KPI snapshot
 
-Idempotently creates or replaces the graph KPI snapshot identified by the path account and snapshot date. Intended for graph-sync ingestion. Requires an account key for the same account or a privileged token. If `snapshot_date` is present in the body, it must match the path value. 
+Idempotently creates or replaces the graph KPI snapshot identified by the
+path account and snapshot date. Intended for graph-sync ingestion. Requires
+an account key for the same account or a privileged token. If
+`snapshot_date` is present in the body, it must match the path value.
+
 
 ### Example
 

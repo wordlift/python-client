@@ -23,6 +23,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class RunCreate(BaseModel):
     """
@@ -30,12 +31,13 @@ class RunCreate(BaseModel):
     """ # noqa: E501
     profile: StrictStr = Field(description="Graph sync profile name.")
     sdk_version: StrictStr = Field(description="wordlift-sdk version used for this run.")
-    worai_version: Optional[StrictStr] = None
+    worai_version: Optional[StrictStr] = Field(default=None, description="worai version, if the run was triggered via worai. Null when SDK is called directly.")
     started_at: datetime = Field(description="Client-side wall-clock time when the run started.")
     __properties: ClassVar[List[str]] = ["profile", "sdk_version", "worai_version", "started_at"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -47,8 +49,7 @@ class RunCreate(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

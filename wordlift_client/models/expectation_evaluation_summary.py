@@ -26,6 +26,7 @@ from wordlift_client.models.expectation_outcome import ExpectationOutcome
 from wordlift_client.models.segment_severity_response import SegmentSeverityResponse
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class ExpectationEvaluationSummary(BaseModel):
     """
@@ -39,7 +40,8 @@ class ExpectationEvaluationSummary(BaseModel):
     __properties: ClassVar[List[str]] = ["expectation_id", "outcome", "evaluated_at", "segments_membership", "attachments"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -51,8 +53,7 @@ class ExpectationEvaluationSummary(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -80,16 +81,14 @@ class ExpectationEvaluationSummary(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in segments_membership (list)
         _items = []
         if self.segments_membership:
-            for _item in self.segments_membership:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_segments_membership in self.segments_membership:
+                _items.append(_item_segments_membership.to_dict() if _item_segments_membership is not None else None)
             _dict['segments_membership'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in attachments (list)
         _items = []
         if self.attachments:
-            for _item in self.attachments:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_attachments in self.attachments:
+                _items.append(_item_attachments.to_dict() if _item_attachments is not None else None)
             _dict['attachments'] = _items
         return _dict
 

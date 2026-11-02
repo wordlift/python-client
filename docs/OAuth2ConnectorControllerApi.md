@@ -11,8 +11,6 @@ Method | HTTP request | Description
 # **authorize_error**
 > authorize_error(connector_id, error, state, code)
 
-
-
 ### Example
 
 * Api Key Authentication (ApiKey):
@@ -89,8 +87,6 @@ void (empty response body)
 
 # **connectors**
 > List[OAuth2ConnectorResponse] connectors()
-
-
 
 ### Example
 

@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get1**
-> List[bytearray] get1(id)
+> List[bytes] get1(id)
 
 Get by id
 
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[bytearray]**
+**List[bytes]**
 
 ### Authorization
 

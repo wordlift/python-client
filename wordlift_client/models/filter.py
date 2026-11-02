@@ -24,6 +24,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.filter_value import FilterValue
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class Filter(BaseModel):
     """
@@ -44,7 +45,8 @@ class Filter(BaseModel):
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -56,8 +58,7 @@ class Filter(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -85,9 +86,8 @@ class Filter(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in filters (list)
         _items = []
         if self.filters:
-            for _item in self.filters:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_filters in self.filters:
+                _items.append(_item_filters.to_dict() if _item_filters is not None else None)
             _dict['filters'] = _items
         # override the default output from pydantic by calling `to_dict()` of value
         if self.value:

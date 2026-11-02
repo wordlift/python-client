@@ -24,6 +24,7 @@ from wordlift_client.models.vector_search_query_response_item_fields_value_inner
 from wordlift_client.models.vector_search_query_response_item_metadata_value import VectorSearchQueryResponseItemMetadataValue
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class VectorSearchQueryResponseItem(BaseModel):
     """
@@ -39,7 +40,8 @@ class VectorSearchQueryResponseItem(BaseModel):
     __properties: ClassVar[List[str]] = ["fields", "id", "iri", "metadata", "node_id", "score", "text"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -51,8 +53,7 @@ class VectorSearchQueryResponseItem(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -80,18 +81,16 @@ class VectorSearchQueryResponseItem(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each value in fields (dict of array)
         _field_dict_of_array = {}
         if self.fields:
-            for _key in self.fields:
-                if self.fields[_key] is not None:
-                    _field_dict_of_array[_key] = [
-                        _item.to_dict() for _item in self.fields[_key]
-                    ]
+            for _key_fields in self.fields:
+                _field_dict_of_array[_key_fields] = [
+                    _item.to_dict() if _item is not None else None for _item in self.fields[_key_fields]
+                ] if self.fields[_key_fields] is not None else None
             _dict['fields'] = _field_dict_of_array
         # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
         _field_dict = {}
         if self.metadata:
-            for _key in self.metadata:
-                if self.metadata[_key]:
-                    _field_dict[_key] = self.metadata[_key].to_dict()
+            for _key_metadata in self.metadata:
+                _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict() if self.metadata[_key_metadata] is not None else None
             _dict['metadata'] = _field_dict
         return _dict
 
@@ -105,14 +104,12 @@ class VectorSearchQueryResponseItem(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "fields": dict(
-                (_k,
-                        [VectorSearchQueryResponseItemFieldsValueInner.from_dict(_item) for _item in _v]
-                        if _v is not None
-                        else None
-                )
-                for _k, _v in obj.get("fields", {}).items()
-            ),
+            "fields": {
+                _k: [VectorSearchQueryResponseItemFieldsValueInner.from_dict(_item) for _item in _v] if _v is not None else None
+                for _k, _v in obj["fields"].items()
+            }
+            if obj.get("fields") is not None
+            else None,
             "id": obj.get("id"),
             "iri": obj.get("iri"),
             "metadata": dict(

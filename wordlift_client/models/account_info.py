@@ -24,6 +24,7 @@ from wordlift_client.models.network_account_info import NetworkAccountInfo
 from wordlift_client.models.tokens import Tokens
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class AccountInfo(BaseModel):
     """
@@ -61,7 +62,8 @@ class AccountInfo(BaseModel):
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -73,8 +75,7 @@ class AccountInfo(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -138,16 +139,14 @@ class AccountInfo(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in networks (list)
         _items = []
         if self.networks:
-            for _item in self.networks:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_networks in self.networks:
+                _items.append(_item_networks.to_dict() if _item_networks is not None else None)
             _dict['networks'] = _items
         # override the default output from pydantic by calling `to_dict()` of each value in tokens (dict)
         _field_dict = {}
         if self.tokens:
-            for _key in self.tokens:
-                if self.tokens[_key]:
-                    _field_dict[_key] = self.tokens[_key].to_dict()
+            for _key_tokens in self.tokens:
+                _field_dict[_key_tokens] = self.tokens[_key_tokens].to_dict() if self.tokens[_key_tokens] is not None else None
             _dict['tokens'] = _field_dict
         return _dict
 

@@ -9,11 +9,11 @@ Name | Type | Description | Notes
 **last_crawled_at** | **datetime** | Timestamp when this page record finished processing. | 
 **status** | [**CrawlPageStatus**](CrawlPageStatus.md) |  | 
 **url_requested** | **str** | URL originally requested. | 
-**url_final** | **str** |  | [optional] 
-**canonical_url** | **str** |  | [optional] 
-**status_code** | **int** |  | [optional] 
-**error_code** | **str** |  | [optional] 
-**error_message** | **str** |  | [optional] 
+**url_final** | **str** | Final URL after redirects. | [optional] 
+**canonical_url** | **str** | Canonical URL extracted from the page. | [optional] 
+**status_code** | **int** | HTTP status code captured for the page. | [optional] 
+**error_code** | **str** | Error code when page processing failed. | [optional] 
+**error_message** | **str** | Error details when page processing failed. | [optional] 
 
 ## Example
 

@@ -23,6 +23,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class WebPage(BaseModel):
     """
@@ -30,18 +31,19 @@ class WebPage(BaseModel):
     """ # noqa: E501
     abstract: Optional[StrictStr] = Field(default=None, description="A short abstract or excerpt of the web page content.")
     date_published: Optional[date] = Field(default=None, description="The publication date of the web page.")
-    headline: Optional[StrictStr] = Field(default=None, description="The headline or title of the web page.")
+    headline: Optional[StrictStr] = Field(default=None, description="The headline or title of the web page.", json_schema_extra={"examples": ["WordLift: The AI SEO Tool for Google Search"]})
     html: Optional[StrictStr] = Field(default=None, description="The full HTML content of the web page.")
-    image: Optional[StrictStr] = Field(default=None, description="The URL of the primary image of the web page.")
+    image: Optional[StrictStr] = Field(default=None, description="The URL of the primary image of the web page.", json_schema_extra={"examples": ["https://example.com/image.jpg"]})
     markdown: Optional[StrictStr] = Field(default=None, description="The extracted content of the web page in Markdown format.")
-    status_code: Optional[StrictInt] = Field(default=None, description="The HTTP status code returned when fetching the URL.")
+    status_code: Optional[StrictInt] = Field(default=None, description="The HTTP status code returned when fetching the URL.", json_schema_extra={"examples": [200]})
     text: Optional[StrictStr] = Field(default=None, description="The extracted main text content of the web page.")
     types: Optional[List[StrictStr]] = Field(default=None, description="The RDF types for the web page entity.")
-    url: Optional[StrictStr] = Field(default=None, description="The canonical URL of the web page.")
+    url: Optional[StrictStr] = Field(default=None, description="The canonical URL of the web page.", json_schema_extra={"examples": ["https://example.com/page"]})
     __properties: ClassVar[List[str]] = ["abstract", "date_published", "headline", "html", "image", "markdown", "status_code", "text", "types", "url"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -53,8 +55,7 @@ class WebPage(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

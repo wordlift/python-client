@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**next_cursor** | **str** |  | [optional] 
+**next_cursor** | **str** | Opaque cursor for the next page. &#x60;null&#x60; means there is no next page. | [optional] 
 
 ## Example
 

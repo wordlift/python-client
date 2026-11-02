@@ -23,6 +23,7 @@ from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class OAuth2AuthorizedClient(BaseModel):
     """
@@ -41,7 +42,8 @@ class OAuth2AuthorizedClient(BaseModel):
     __properties: ClassVar[List[str]] = ["access_token_expires_at", "access_token_issued_at", "access_token_scopes", "access_token_type", "access_token_value", "client_registration_id", "id", "principal_name", "refresh_token_issued_at", "refresh_token_value"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -53,8 +55,7 @@ class OAuth2AuthorizedClient(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from wordlift_client.models.content_evaluation_response_quality_score_breakdown_seo_top_entities_value_inner import ContentEvaluationResponseQualityScoreBreakdownSeoTopEntitiesValueInner
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class ContentEvaluationResponseQualityScoreBreakdownSeo(BaseModel):
     """
@@ -34,7 +35,8 @@ class ContentEvaluationResponseQualityScoreBreakdownSeo(BaseModel):
     __properties: ClassVar[List[str]] = ["keyword_density", "top_entities", "score"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -46,8 +48,7 @@ class ContentEvaluationResponseQualityScoreBreakdownSeo(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -75,11 +76,10 @@ class ContentEvaluationResponseQualityScoreBreakdownSeo(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each value in top_entities (dict of array)
         _field_dict_of_array = {}
         if self.top_entities:
-            for _key in self.top_entities:
-                if self.top_entities[_key] is not None:
-                    _field_dict_of_array[_key] = [
-                        _item.to_dict() for _item in self.top_entities[_key]
-                    ]
+            for _key_top_entities in self.top_entities:
+                _field_dict_of_array[_key_top_entities] = [
+                    _item.to_dict() if _item is not None else None for _item in self.top_entities[_key_top_entities]
+                ] if self.top_entities[_key_top_entities] is not None else None
             _dict['top_entities'] = _field_dict_of_array
         # set to None if keyword_density (nullable) is None
         # and model_fields_set contains the field
@@ -99,14 +99,12 @@ class ContentEvaluationResponseQualityScoreBreakdownSeo(BaseModel):
 
         _obj = cls.model_validate({
             "keyword_density": obj.get("keyword_density"),
-            "top_entities": dict(
-                (_k,
-                        [ContentEvaluationResponseQualityScoreBreakdownSeoTopEntitiesValueInner.from_dict(_item) for _item in _v]
-                        if _v is not None
-                        else None
-                )
-                for _k, _v in obj.get("top_entities", {}).items()
-            ),
+            "top_entities": {
+                _k: [ContentEvaluationResponseQualityScoreBreakdownSeoTopEntitiesValueInner.from_dict(_item) for _item in _v] if _v is not None else None
+                for _k, _v in obj["top_entities"].items()
+            }
+            if obj.get("top_entities") is not None
+            else None,
             "score": obj.get("score")
         })
         return _obj

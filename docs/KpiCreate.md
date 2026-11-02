@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**totals** | [**KpiTotals**](KpiTotals.md) |  | [optional] 
-**entities_by_type** | **Dict[str, int]** |  | [optional] 
-**properties_by_predicate** | **Dict[str, int]** |  | [optional] 
-**validation** | **Dict[str, object]** |  | [optional] 
+**totals** | [**KpiTotals**](KpiTotals.md) | Aggregate entity and assertion counts. | [optional] 
+**entities_by_type** | **Dict[str, int]** | Entity count per schema.org type. | [optional] 
+**properties_by_predicate** | **Dict[str, int]** | Property assertion count per predicate. | [optional] 
+**validation** | **Dict[str, object]** | SHACL validation summary, if enabled. | [optional] 
 
 ## Example
 

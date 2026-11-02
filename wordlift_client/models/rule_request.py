@@ -29,6 +29,7 @@ from wordlift_client.models.what_operator import WhatOperator
 from wordlift_client.models.when_operator import WhenOperator
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class RuleRequest(BaseModel):
     """
@@ -52,7 +53,8 @@ class RuleRequest(BaseModel):
     __properties: ClassVar[List[str]] = ["description", "fixes", "is_enabled", "level", "name", "project_id", "project_type", "scope", "type", "what_operand_lhs", "what_operand_rhs", "what_operator", "when_operand_lhs", "when_operand_rhs", "when_operator"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -64,8 +66,7 @@ class RuleRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -93,9 +94,8 @@ class RuleRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in fixes (list)
         _items = []
         if self.fixes:
-            for _item in self.fixes:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_fixes in self.fixes:
+                _items.append(_item_fixes.to_dict() if _item_fixes is not None else None)
             _dict['fixes'] = _items
         return _dict
 

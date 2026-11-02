@@ -24,6 +24,7 @@ from typing_extensions import Annotated
 from wordlift_client.models.resolve_candidate import ResolveCandidate
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class ResolveMention(BaseModel):
     """
@@ -32,12 +33,13 @@ class ResolveMention(BaseModel):
     text: Annotated[str, Field(min_length=1, strict=True)]
     start: Annotated[int, Field(strict=True, ge=0)]
     end: Annotated[int, Field(strict=True, ge=1)]
-    type: Optional[StrictStr] = None
-    candidates: Optional[List[ResolveCandidate]] = None
+    type: Optional[StrictStr] = Field(default=None, description="Caller's type hint, e.g. Person, Organization")
+    candidates: Optional[List[ResolveCandidate]] = Field(default=None, description="Identities retrieved by the caller; if omitted the engine retrieves against dataset_uri")
     __properties: ClassVar[List[str]] = ["text", "start", "end", "type", "candidates"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -49,8 +51,7 @@ class ResolveMention(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -78,9 +79,8 @@ class ResolveMention(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in candidates (list)
         _items = []
         if self.candidates:
-            for _item in self.candidates:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_candidates in self.candidates:
+                _items.append(_item_candidates.to_dict() if _item_candidates is not None else None)
             _dict['candidates'] = _items
         # set to None if type (nullable) is None
         # and model_fields_set contains the field

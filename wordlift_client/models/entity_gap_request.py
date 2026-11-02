@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class EntityGapRequest(BaseModel):
     """
@@ -31,12 +32,13 @@ class EntityGapRequest(BaseModel):
     query: StrictStr = Field(description="The search query to analyze.")
     model: Optional[StrictStr] = Field(default=None, description="The model")
     number_of_entities: Optional[StrictInt] = Field(default=5, description="Number of entities to highlight.")
-    query_location_name: Optional[StrictStr] = Field(default='United States', description="The location name for the query, e.g. United Kingdom.")
-    query_search_engine: Optional[StrictStr] = Field(default='google.com', description="The search engine domain for the query, if not set will be chosen according to `query_location_name`")
+    query_location_name: Optional[StrictStr] = Field(default='United States', description="The location name for the query, e.g. United Kingdom.", json_schema_extra={"examples": ["United Kingdom"]})
+    query_search_engine: Optional[StrictStr] = Field(default='google.com', description="The search engine domain for the query, if not set will be chosen according to `query_location_name`", json_schema_extra={"examples": ["google.co.uk"]})
     __properties: ClassVar[List[str]] = ["url", "query", "model", "number_of_entities", "query_location_name", "query_search_engine"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -48,8 +50,7 @@ class EntityGapRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

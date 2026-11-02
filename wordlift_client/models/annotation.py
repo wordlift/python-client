@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.entity_match import EntityMatch
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class Annotation(BaseModel):
     """
@@ -36,7 +37,8 @@ class Annotation(BaseModel):
     __properties: ClassVar[List[str]] = ["annotationId", "start", "end", "text", "entityMatches"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -48,8 +50,7 @@ class Annotation(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -77,9 +78,8 @@ class Annotation(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in entity_matches (list)
         _items = []
         if self.entity_matches:
-            for _item in self.entity_matches:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_entity_matches in self.entity_matches:
+                _items.append(_item_entity_matches.to_dict() if _item_entity_matches is not None else None)
             _dict['entityMatches'] = _items
         return _dict
 

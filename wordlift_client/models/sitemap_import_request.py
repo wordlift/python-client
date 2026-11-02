@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.embedding_request import EmbeddingRequest
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class SitemapImportRequest(BaseModel):
     """
@@ -32,9 +33,9 @@ class SitemapImportRequest(BaseModel):
     id_generator: Optional[StrictStr] = Field(default='default', description="The entity id generator, by default uses the web page path.")
     output_types: Optional[List[StrictStr]] = Field(default=None, description="The type of the generated entities, by default `http://schema.org/WebPage`.")
     overwrite: Optional[StrictBool] = Field(default=False, description="Whether to overwrite existing entities.")
-    sitemap_url: Optional[StrictStr] = Field(default=None, description="URL of a sitemap to crawl and import. Only http/https scheme and publicly routable addresses are accepted.")
+    sitemap_url: Optional[StrictStr] = Field(default=None, description="URL of a sitemap to crawl and import. Only http/https scheme and publicly routable addresses are accepted.", json_schema_extra={"examples": ["https://example.com/sitemap.xml"]})
     sitemap_url_regex: Optional[StrictStr] = Field(default=None, description="A regex filter to apply to discovered URLs, it only applies to URLs in sitemaps.")
-    urls: Optional[List[StrictStr]] = Field(default=None, description="Explicit list of page URLs to import. Only http/https scheme and publicly routable addresses are accepted.")
+    urls: Optional[List[StrictStr]] = Field(default=None, description="Explicit list of page URLs to import. Only http/https scheme and publicly routable addresses are accepted.", json_schema_extra={"examples": [["https://example.com/page1", "https://example.com/page2"]]})
     __properties: ClassVar[List[str]] = ["embedding", "id_generator", "output_types", "overwrite", "sitemap_url", "sitemap_url_regex", "urls"]
 
     @field_validator('id_generator')
@@ -48,7 +49,8 @@ class SitemapImportRequest(BaseModel):
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -60,8 +62,7 @@ class SitemapImportRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

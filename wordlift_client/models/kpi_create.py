@@ -18,24 +18,26 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from wordlift_client.models.kpi_totals import KpiTotals
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class KpiCreate(BaseModel):
     """
     KpiCreate
     """ # noqa: E501
-    totals: Optional[KpiTotals] = None
-    entities_by_type: Optional[Dict[str, StrictInt]] = None
-    properties_by_predicate: Optional[Dict[str, StrictInt]] = None
-    validation: Optional[Dict[str, Any]] = None
+    totals: Optional[KpiTotals] = Field(default=None, description="Aggregate entity and assertion counts.")
+    entities_by_type: Optional[Dict[str, StrictInt]] = Field(default=None, description="Entity count per schema.org type.")
+    properties_by_predicate: Optional[Dict[str, StrictInt]] = Field(default=None, description="Property assertion count per predicate.")
+    validation: Optional[Dict[str, Any]] = Field(default=None, description="SHACL validation summary, if enabled.")
     __properties: ClassVar[List[str]] = ["totals", "entities_by_type", "properties_by_predicate", "validation"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -47,8 +49,7 @@ class KpiCreate(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
