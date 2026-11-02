@@ -80,6 +80,11 @@ open(merged, "w").write(content)
 PYEOF
 echo
 
+# ── 5b. Normalize for client compatibility (case-variant tags, format: uuid) ─
+echo "==> normalize_compat"
+(cd "$WORK_DIR" && python3 "$REPO/utils/normalize_compat.py")
+echo
+
 # ── 6. Generate SDK into temp output dir ─────────────────────────────────────
 echo "==> openapi-generator-cli"
 npx @openapitools/openapi-generator-cli generate \

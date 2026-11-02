@@ -80,8 +80,16 @@ for fname in sorted(f for f in os.listdir(api_dir) if f.endswith('.yaml')):
     if not renames:
         continue
 
-    # Rename schema definitions
+    # Rename schema definitions. Also rename a `title` that matches the old name:
+    # OpenAPI Generator >= 7.25 drops component schemas that are structural
+    # duplicates of another (title is part of the signature, description is not),
+    # which would otherwise collapse e.g. MonitorValidationError into
+    # CrawlerValidationError and remove the prefixed names from the client.
     old_schemas = spec['components']['schemas']
+    for old, new in renames.items():
+        schema = old_schemas[old]
+        if isinstance(schema, dict) and schema.get('title') == old:
+            schema['title'] = new
     spec['components']['schemas'] = {
         renames.get(k, k): v for k, v in old_schemas.items()
     }
