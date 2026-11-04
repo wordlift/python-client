@@ -29,6 +29,7 @@ class ExpectationOutcome(str, Enum):
     """
     PASS = 'pass'
     FAIL = 'fail'
+    SKIPPED = 'skipped'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 List Check Summary By Check
 
-Account-wide check rollup grouped by (segment, check name), broken down by state (``CheckSummaryState`` — OK/WARN/FAIL/PENDING). Omitting both filters returns every segment and check together with the account-wide, all-checks-combined aggregate (`segment_id: null`, `check_name: null`); passing the reserved `overall` value isolates just that aggregate on either dimension instead of requiring a full scan to find it. `monitor_type` scopes every count to one monitor type; omitted, counts span all types.
+Account-wide check rollup grouped by (segment, check name), broken down by state (``CheckSummaryState`` — OK/WARN/FAIL/SKIPPED/PENDING). Omitting both filters returns every segment and check together with the account-wide, all-checks-combined aggregate (`segment_id: null`, `check_name: null`); passing the reserved `overall` value isolates just that aggregate on either dimension instead of requiring a full scan to find it. `monitor_type` scopes every count to one monitor type; omitted, counts span all types.
 
 ### Example
 

@@ -30,6 +30,7 @@ class CheckSummaryState(str, Enum):
     OK = 'OK'
     WARN = 'WARN'
     FAIL = 'FAIL'
+    SKIPPED = 'SKIPPED'
     PENDING = 'pending'
 
     @classmethod

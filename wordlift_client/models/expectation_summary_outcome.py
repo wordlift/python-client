@@ -29,6 +29,7 @@ class ExpectationSummaryOutcome(str, Enum):
     """
     PASS = 'pass'
     FAIL = 'fail'
+    SKIPPED = 'skipped'
     PENDING = 'pending'
 
     @classmethod
