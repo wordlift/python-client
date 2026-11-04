@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 4.0.0
+  version: 4.2.0
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -1641,12 +1641,12 @@ paths:
       - Monitor Check Summary
       summary: List Check Summary By Check
       description: "Account-wide check rollup grouped by (segment, check name), broken\
-        \ down\nby state (``CheckSummaryState`` \u2014 OK/WARN/FAIL/PENDING). Omitting\
-        \ both\nfilters returns every segment and check together with the account-wide,\n\
-        all-checks-combined aggregate (`segment_id: null`, `check_name: null`);\n\
-        passing the reserved `overall` value isolates just that aggregate on\neither\
-        \ dimension instead of requiring a full scan to find it.\n`monitor_type` scopes\
-        \ every count to one monitor type; omitted, counts\nspan all types."
+        \ down\nby state (``CheckSummaryState`` \u2014 OK/WARN/FAIL/SKIPPED/PENDING).\
+        \ Omitting both\nfilters returns every segment and check together with the\
+        \ account-wide,\nall-checks-combined aggregate (`segment_id: null`, `check_name:\
+        \ null`);\npassing the reserved `overall` value isolates just that aggregate\
+        \ on\neither dimension instead of requiring a full scan to find it.\n`monitor_type`\
+        \ scopes every count to one monitor type; omitted, counts\nspan all types."
       operationId: list_check_summary_by_check_accounts__account_id__monitoring_checks_summary_by_check_get
       parameters:
       - name: account_id
@@ -2156,6 +2156,7 @@ components:
       - OK
       - WARN
       - FAIL
+      - SKIPPED
       - pending
       title: CheckSummaryState
       description: "State as stored in monitor_check_summary \u2014 a superset of\
@@ -2245,6 +2246,7 @@ components:
       enum:
       - pass
       - fail
+      - skipped
       title: ExpectationOutcome
     ExpectationSeverity:
       type: string
@@ -2322,6 +2324,7 @@ components:
       enum:
       - pass
       - fail
+      - skipped
       - pending
       title: ExpectationSummaryOutcome
       description: "Outcome as stored in monitor_expectation_summary \u2014 a superset\
