@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: WordLift Monitor API
-  version: 4.2.0
+  version: 4.3.0
 paths:
   /accounts/{account_id}/monitoring/monitors:
     post:
@@ -2747,6 +2747,7 @@ components:
       - OK
       - WARNING
       - ERROR
+      - SKIPPED
       - PENDING
       title: MonitorStatusCheckStatus
     MonitorStatusOrderBy:
