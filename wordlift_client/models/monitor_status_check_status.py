@@ -30,6 +30,7 @@ class MonitorStatusCheckStatus(str, Enum):
     OK = 'OK'
     WARNING = 'WARNING'
     ERROR = 'ERROR'
+    SKIPPED = 'SKIPPED'
     PENDING = 'PENDING'
 
     @classmethod
